@@ -85,6 +85,16 @@ func _ready() -> void:
 	_construir_castillo()
 	_dar_textura_antorchas()
 	_pintar_banderas()
+	# Modo castillo: solo muralla de ladrillos. El panorama violeta queda
+	# oculto y el fondo es oscuridad cálida tras los boquetes.
+	_fondo_oscuro()
+	for nomb in ["SkyTop", "SkyMid", "SkyLow", "Sun", "Clouds", "Birds", "Castle"]:
+		var nd := get_node_or_null(nomb)
+		if nd != null:
+			nd.visible = false
+	_lejos.visible = false
+	_medias.visible = false
+	_suelo.visible = false
 	# Muralla derruida al frente (última capa, delante del panorama).
 	_ruina = Node2D.new()
 	_ruina.name = "Ruin"
@@ -204,6 +214,17 @@ func _elipse(centro: Vector2, rx: float, ry: float, puntos: int) -> PackedVector
 	return pts
 
 
+func _fondo_oscuro() -> void:
+	# Interior nocturno tras la muralla: se ve por boquetes y sobre el borde.
+	var fondo := ColorRect.new()
+	fondo.name = "MurallaNoche"
+	fondo.color = Color(0.03, 0.025, 0.022)
+	fondo.set_anchors_preset(Control.PRESET_FULL_RECT)
+	fondo.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(fondo)
+	move_child(fondo, 0)
+
+
 func _colina(amp1: float, amp2: float, fase: float) -> PackedVector2Array:
 	# Perfil ondulado entre X0_COLINA y X1_COLINA, cerrado por abajo.
 	var pts := PackedVector2Array()
@@ -274,8 +295,8 @@ func _textura_disco() -> Texture2D:
 
 # ------------------------------------------------------- muralla en ruinas --
 func _construir_ruina() -> void:
-	# Muralla gris derruida a izquierda y derecha; el centro queda libre para
-	# el panel del menú y el panorama se ve por encima del borde roto.
+	# Muralla gris derruida a TODO lo ancho tras el panel: alta en los
+	# bordes y desmoronada al centro. Sin panorama (modo castillo).
 	for c in _ruina.get_children():
 		_ruina.remove_child(c)
 		c.queue_free()
@@ -285,11 +306,10 @@ func _construir_ruina() -> void:
 	var h := _alto
 	if w < 10.0 or h < 10.0:
 		return
-	var abertura := minf(720.0, w * 0.48)
-	_lado_ruina((w - abertura) * 0.5, 0.0, h, -1)
-	_lado_ruina((w + abertura) * 0.5, w, h, 1)
-	_antorcha_muro((w - abertura) * 0.5 - 30.0, h * 0.58, true)
-	_antorcha_muro((w + abertura) * 0.5 + 30.0, h * 0.58, false)
+	_lado_ruina(0.0, w * 0.5, h, -1)
+	_lado_ruina(w * 0.5, w, h, 1)
+	_antorcha_muro(w * 0.5 - 380.0, h * 0.58, true)
+	_antorcha_muro(w * 0.5 + 380.0, h * 0.58, false)
 
 
 func _azar(ix: int, iy: int, semilla: int) -> float:
@@ -298,26 +318,39 @@ func _azar(ix: int, iy: int, semilla: int) -> float:
 
 
 func _lado_ruina(x0: float, x1: float, h: float, lado: int) -> void:
-	# Tramo de muralla: base oscura + ladrillos grises con huecos, merlones
-	# donde sigue en pie, musgo abajo y escombro en la base.
+	# Tramo de muralla: silueta escalonada (sin losa negra) + ladrillos
+	# grises con huecos, merlones donde sigue en pie, musgo y escombro.
 	if x1 - x0 < 40.0:
 		return
 	var semilla := 11 if lado < 0 else 77
-	# Silueta marrón oscura detrás (se ve por los huecos y el mortero).
-	_cuad(_ruina, Rect2(x0, 0.0, x1 - x0, h), Color(0.10, 0.08, 0.07))
 	var lad := 62.0
 	var alt := 30.0
 	var sep := 3.0
 	var ncol := maxi(1, int((x1 - x0) / (lad + sep)))
 	var ancho_real: float = ncol * lad + (ncol - 1) * sep
 	var ox: float = x0 + ((x1 - x0) - ancho_real) * 0.5
+	# Cimas por columna: altas fuera, desmoronadas hacia el centro.
+	var cimas: Array[float] = []
 	for col in ncol:
-		# Borde superior roto: bajo al centro para dejar ver el cielo,
-		# más alto hacia fuera. Nunca tapa el cielo por completo.
-		var borde: float = float(col) / float(maxi(1, ncol - 1)) # 0 dentro, 1 fuera
-		if lado > 0:
-			borde = 1.0 - borde
-		var cima: float = h * 0.34 + borde * h * 0.16 + _azar(col, 3, semilla) * h * 0.08
+		var borde: float = float(col) / float(maxi(1, ncol - 1))
+		if lado < 0:
+			borde = 1.0 - borde # en el tramo izq, fuera está a la izquierda
+		cimas.append(h * 0.34 + borde * h * 0.16 + _azar(col, 3, semilla) * h * 0.08)
+	# Silueta escalonada que sigue las cimas (nada de losa hasta arriba).
+	var sil := PackedVector2Array()
+	sil.append(Vector2(ox, h))
+	for col in ncol:
+		var izq: float = ox + float(col) * (lad + sep)
+		sil.append(Vector2(izq, cimas[col]))
+		sil.append(Vector2(izq + lad, cimas[col]))
+	sil.append(Vector2(ox + ancho_real, h))
+	var pg := Polygon2D.new()
+	pg.polygon = sil
+	pg.color = Color(0.10, 0.08, 0.07)
+	_ruina.add_child(pg)
+	for col in ncol:
+		# Ladrillos desde la cima calculada hasta la base.
+		var cima: float = cimas[col]
 		var y := cima
 		var fila := 0
 		while y < h:
@@ -348,11 +381,11 @@ func _lado_ruina(x0: float, x1: float, h: float, lado: int) -> void:
 		var tri := PackedVector2Array([
 			Vector2(ex - etam, h), Vector2(ex + etam, h),
 			Vector2(ex + (_azar(i, 23, semilla) - 0.5) * etam, h - etam * (0.5 + _azar(i, 24, semilla) * 0.5))])
-		var pg := Polygon2D.new()
-		pg.polygon = tri
+		var escombro := Polygon2D.new()
+		escombro.polygon = tri
 		var g2 := 0.30 + 0.18 * _azar(i, 25, semilla)
-		pg.color = Color(g2, g2 * 0.97, g2 * 0.93)
-		_ruina.add_child(pg)
+		escombro.color = Color(g2, g2 * 0.97, g2 * 0.93)
+		_ruina.add_child(escombro)
 
 
 func _cuad(padre: Node, r: Rect2, c: Color) -> Polygon2D:

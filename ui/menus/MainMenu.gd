@@ -101,12 +101,10 @@ func _estilizar_titulos() -> void:
 func _conectar_y_estilizar_botones() -> void:
 	# Mapea cada botón del TSCN a su ruta existente, sin cambiar destinos.
 	var rutas: Dictionary = {
-		"CenterContainer/MainFrame/Margin/MenuVBox/SingleButton": _on_single,
-		"CenterContainer/MainFrame/Margin/MenuVBox/MultiButton": _on_multi,
+		"CenterContainer/MainFrame/Margin/MenuVBox/PlayButton": _on_new_engine,
 		"CenterContainer/MainFrame/Margin/MenuVBox/CampaignButton": _on_campaign,
 		"CenterContainer/MainFrame/Margin/MenuVBox/EditorButton": _on_editor,
 		"CenterContainer/MainFrame/Margin/MenuVBox/OptionsButton": _on_options,
-		"CenterContainer/MainFrame/Margin/MenuVBox/NewEngineButton": _on_new_engine,
 	}
 	_botones.clear()
 	for ruta: String in rutas.keys():
@@ -118,16 +116,14 @@ func _conectar_y_estilizar_botones() -> void:
 		if not btn.pressed.is_connected(fn):
 			btn.pressed.connect(fn)
 		_botones.append(btn)
-	# Respaldo: si el TSCN viniera vacío, recrea los 6 botones originales.
+	# Respaldo: si el TSCN viniera vacío, recrea los botones del motor nuevo.
 	if _botones.is_empty():
 		var vb := get_node_or_null("CenterContainer/MainFrame/Margin/MenuVBox") as VBoxContainer
 		if vb != null:
-			_add_btn(vb, "Un Jugador (vs IA)", _on_single)
-			_add_btn(vb, "Multijugador LAN (hasta 8)", _on_multi)
+			_add_btn(vb, "Jugar", _on_new_engine)
 			_add_btn(vb, "Campaña", _on_campaign)
 			_add_btn(vb, "Editor Mapas", _on_editor)
 			_add_btn(vb, "Opciones", _on_options)
-			_add_btn(vb, "Partida (nuevo motor, beta)", _on_new_engine)
 
 func _estilo_boton_aoe(btn: Button) -> void:
 	# Delega en MenuStyle: borde hierro y hover dorado brillante.
@@ -210,18 +206,6 @@ func _add_btn(parent: Container, text: String, fn: Callable) -> void:
 	btn.pressed.connect(fn)
 	parent.add_child(btn)
 	_botones.append(btn)
-
-func _on_single() -> void:
-	# Partida local inmediata vs bots (GameWorld usa driver solo-local sin peer).
-	get_tree().change_scene_to_file("res://ui/hud/Game.tscn")
-
-func _on_multi() -> void:
-	# Crea host LAN y avisa cómo unirse antes de entrar al juego.
-	var msg: String = NetManager.host_game("arabia")
-	_status.text = msg + " — tus amigos: Multijugador -> Buscar LAN"
-	# Pequeña espera para que el host ENet quede activo antes del cambio.
-	await get_tree().create_timer(0.5).timeout
-	get_tree().change_scene_to_file("res://ui/hud/Game.tscn")
 
 func _on_campaign() -> void:
 	# Abre la campaña si existe, o muestra aviso en el estado.
