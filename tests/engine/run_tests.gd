@@ -20,6 +20,10 @@ func _initialize() -> void:
 	var failed: Array[String] = []
 	for f in files:
 		var script: GDScript = load(TEST_DIR + "/" + f)
+		if script == null or not script.can_instantiate():
+			failed.append("%s: no carga (error de parseo, ver arriba)" % f)
+			print("FAIL " + f)
+			continue
 		for m in script.get_script_method_list():
 			var mname: String = m["name"]
 			if not mname.begins_with("test_"):
