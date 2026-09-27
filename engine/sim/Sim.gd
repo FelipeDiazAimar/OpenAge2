@@ -12,6 +12,7 @@ const CombatSystem := preload("res://engine/sim/systems/CombatSystem.gd")
 const HerdSystem := preload("res://engine/sim/systems/HerdSystem.gd")
 const SeparationSystem := preload("res://engine/sim/systems/SeparationSystem.gd")
 const BuildSystem := preload("res://engine/sim/systems/BuildSystem.gd")
+const ProductionSystem := preload("res://engine/sim/systems/ProductionSystem.gd")
 
 const INPUT_DELAY := 2
 const START_RES := {"wood": 200, "food": 200, "gold": 100, "stone": 200}
@@ -199,7 +200,11 @@ func spawn(def_id: String, owner: int, tile: Vector2i) -> int:
 	if str(def["type"]) == "building":
 		var size := Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
 		grid.block_rect(tile, size)
-		return world.spawn(def, owner, tile * FP.SCALE + size * (FP.SCALE / 2))
+		var b := world.spawn(def, owner, tile * FP.SCALE + size * (FP.SCALE / 2))
+		var ab: Dictionary = def.get("abilities", {})
+		if ab.has("Train") or ab.has("Research") or ab.has("AgeAdvance"):
+			world.add_component(b, "Queue", ProductionSystem.new_queue())
+		return b
 	if _blocks_tile(def):
 		grid.set_blocked(tile, true)
 	return world.spawn(def, owner, Grid.center_of(tile))
@@ -313,7 +318,7 @@ func state_hash() -> String:
 	var parts := PackedStringArray([world.state_hash()])
 	for p in players:
 		var r: Dictionary = p["res"]
-		parts.append("%d:%d,%d,%d,%d" % [p["id"], r["wood"], r["food"], r["gold"], r["stone"]])
+		parts.append("%d:%d,%d,%d,%d|a%d|%s" % [p["id"], r["wood"], r["food"], r["gold"], r["stone"], p["age"], ",".join(p["defs"].researched)])
 	for p in projectiles:
 		parts.append("P%d:%d,%d,%d" % [p["id"], p["pos"].x, p["pos"].y, p["target"]])
 	var ctx := HashingContext.new()
@@ -342,6 +347,7 @@ func step() -> void:
 	CombatSystem.step(self)
 	GatherSystem.step(self)
 	BuildSystem.step(self)
+	ProductionSystem.step(self)
 	HerdSystem.step(self)
 
 
@@ -380,6 +386,16 @@ func _apply(c: Dictionary) -> void:
 			_cmd_place(int(c["pid"]), c["payload"])
 		"build":
 			_cmd_build(int(c["pid"]), c["payload"])
+		"train":
+			_cmd_train(int(c["pid"]), c["payload"])
+		"research":
+			_cmd_research(int(c["pid"]), c["payload"])
+		"age_up":
+			_cmd_age_up(int(c["pid"]), c["payload"])
+		"cancel":
+			_cmd_cancel(int(c["pid"]), c["payload"])
+		"rally":
+			_cmd_rally(int(c["pid"]), c["payload"])
 		"debug_spawn":
 			_cmd_debug_spawn(c["payload"])
 
@@ -485,6 +501,178 @@ func _cmd_build(pid: int, payload: Dictionary) -> void:
 		return
 	for id in _own_ids(pid, payload.get("ids"), "Build"):
 		BuildSystem.order_build(self, id, t)
+
+
+## Edificio propio, terminado y con cola; si no, -1.
+func _own_queue(pid: int, raw: Variant) -> int:
+	if not _num_ok(raw):
+		return -1
+	var b := int(raw)
+	if not world.has_ability(b, "Queue") or int(world.entities[b]["owner"]) != pid or not is_built(b):
+		return -1
+	return b
+
+
+func _enqueue(pid: int, b: int, kind: String, id: String, cost: Dictionary, seconds: Variant) -> void:
+	pay(pid, cost)
+	(world.comp(b, "Queue")["items"] as Array).append({"kind": kind, "id": id, "cost": cost, "total": ProductionSystem.ticks_of(seconds)})
+	if kind != "unit":
+		players[pid]["pending"][id] = true
+
+
+func _cmd_train(pid: int, payload: Dictionary) -> void:
+	var b := _own_queue(pid, payload.get("id"))
+	var def_id := str(payload.get("def", ""))
+	if b < 0 or train_error(pid, b, def_id) != "":
+		return
+	var def: Dictionary = players[pid]["defs"].get_def(def_id)
+	_enqueue(pid, b, "unit", def_id, def.get("cost", {}), def["train_time"])
+
+
+func _cmd_research(pid: int, payload: Dictionary) -> void:
+	var b := _own_queue(pid, payload.get("id"))
+	var tech := str(payload.get("tech", ""))
+	if b < 0 or research_error(pid, b, tech) != "":
+		return
+	var def: Dictionary = players[pid]["defs"].get_def(tech)
+	_enqueue(pid, b, "tech", tech, def.get("cost", {}), def["research_time"])
+
+
+func _cmd_age_up(pid: int, payload: Dictionary) -> void:
+	var b := _own_queue(pid, payload.get("id"))
+	if b < 0 or age_error(pid, b) != "":
+		return
+	var def := next_age(pid)
+	_enqueue(pid, b, "age", str(def["id"]), def.get("cost", {}), def["research_time"])
+
+
+func _cmd_cancel(pid: int, payload: Dictionary) -> void:
+	var b := _own_queue(pid, payload.get("id"))
+	if b < 0 or not _num_ok(payload.get("index")):
+		return
+	var q: Dictionary = world.comp(b, "Queue")
+	var items: Array = q["items"]
+	var i := int(payload["index"])
+	if i < 0 or i >= items.size():
+		return
+	var it: Dictionary = items[i]
+	items.remove_at(i)
+	if i == 0:
+		q["progress"] = 0
+	refund(pid, it["cost"])
+	players[pid]["pending"].erase(str(it["id"]))
+
+
+func _cmd_rally(pid: int, payload: Dictionary) -> void:
+	var pos: Variant = payload.get("pos")
+	if not (pos is Array) or pos.size() != 2 or not _num_ok(pos[0]) or not _num_ok(pos[1]):
+		return
+	var hi := Vector2i(grid.width * FP.SCALE - 1, grid.height * FP.SCALE - 1)
+	var p := Vector2i(int(pos[0]), int(pos[1])).clamp(Vector2i.ZERO, hi)
+	var t := -1
+	if _num_ok(payload.get("target")) and world.entities.has(int(payload["target"])):
+		t = int(payload["target"])
+	for b in _own_ids(pid, payload.get("ids"), "Queue"):
+		var q: Dictionary = world.comp(b, "Queue")
+		q["rally"] = p
+		q["rally_target"] = t
+
+
+## "" si el edificio b de pid puede entrenar def_id ahora; si no, el motivo.
+func train_error(pid: int, b: int, def_id: String) -> String:
+	var tr: Dictionary = world.comp(b, "Train")
+	if tr.is_empty() or not (tr["params"]["units"] as Array).has(def_id):
+		return "este edificio no la entrena"
+	var def: Dictionary = players[pid]["defs"].get_def(def_id)
+	if def.is_empty() or str(def.get("type", "")) != "unit":
+		return "no es una unidad"
+	return _queue_error(pid, b, def)
+
+
+func research_error(pid: int, b: int, tech: String) -> String:
+	var rs: Dictionary = world.comp(b, "Research")
+	if rs.is_empty() or not (rs["params"]["techs"] as Array).has(tech):
+		return "aquí no se investiga"
+	var def: Dictionary = players[pid]["defs"].get_def(tech)
+	if def.is_empty() or str(def.get("type", "")) != "tech":
+		return "no es una tecnología"
+	if researched(pid).has(tech) or players[pid]["pending"].has(tech):
+		return "ya investigada o en curso"
+	return _queue_error(pid, b, def)
+
+
+## Siguiente edad del jugador ({} si ya está en la última).
+func next_age(pid: int) -> Dictionary:
+	for id in registry.ids_of_type("age"):
+		var a: Dictionary = registry.get_def(id)
+		if int(a.get("index", -1)) == age_of(pid) + 1:
+			return a
+	return {}
+
+
+func age_error(pid: int, b: int) -> String:
+	if not world.has_ability(b, "AgeAdvance"):
+		return "aquí no se avanza de edad"
+	var a := next_age(pid)
+	if a.is_empty():
+		return "última edad"
+	if players[pid]["pending"].has(str(a["id"])):
+		return "ya en curso"
+	var pre: Dictionary = a.get("prerequisite_buildings", {})
+	if not pre.is_empty():
+		var kinds := {}
+		var any_of: Array = pre.get("any_of", [])
+		for id in world.ids_with("Hitpoints"):
+			var e: Dictionary = world.entities[id]
+			if int(e["owner"]) == pid and str(e["type"]) == "building" and any_of.has(e["def_id"]) and is_built(id):
+				kinds[e["def_id"]] = true
+		if kinds.size() < int(pre.get("count", 1)):
+			return "requiere %d edificios de la edad actual" % int(pre.get("count", 1))
+	return _queue_error(pid, b, a)
+
+
+func _queue_error(pid: int, b: int, def: Dictionary) -> String:
+	if str(def.get("type", "")) != "age":
+		var req := requirements_met(pid, def)
+		if req != "":
+			return req
+	if (world.comp(b, "Queue")["items"] as Array).size() >= ProductionSystem.capacity(self, b):
+		return "cola llena"
+	if not can_afford(pid, def.get("cost", {})):
+		return "recursos insuficientes"
+	return ""
+
+
+## Tecnología terminada: parchea la vista del jugador (las entidades vivas
+## leen de ella) y refresca los valores que se guardan precalculados.
+func complete_research(pid: int, tech: String) -> void:
+	players[pid]["pending"].erase(tech)
+	players[pid]["defs"].research(tech)
+	refresh_caches(pid)
+	events.append({"type": "researched", "owner": pid, "id": tech})
+
+
+func complete_age(pid: int, age_id: String) -> void:
+	players[pid]["pending"].erase(age_id)
+	var a: Dictionary = registry.get_def(age_id)
+	players[pid]["age"] = maxi(age_of(pid), int(a.get("index", 0)))
+	events.append({"type": "age", "owner": pid, "id": age_id})
+
+
+func refresh_caches(pid: int) -> void:
+	for id in world.ids_with("Move"):
+		if int(world.entities[id]["owner"]) != pid:
+			continue
+		var m: Dictionary = world.comp(id, "Move")
+		m["step"] = FP.from_data(float(m["params"]["speed"])) / World.TICK_RATE
+	for id in world.ids_with("Hitpoints"):
+		if int(world.entities[id]["owner"]) != pid:
+			continue
+		var hp: Dictionary = world.comp(id, "Hitpoints")
+		var mx := int(round(float(hp["params"]["max"])))
+		if mx != int(hp["max"]):
+			hp["hp"] = maxi(1, int(hp["hp"]) + mx - int(hp["max"]))
+			hp["max"] = mx
 
 
 ## Tropas de prueba (solo con debug_enabled): n unidades cerca de pos.

@@ -101,6 +101,9 @@ func state_hash() -> String:
 			st += "B%s:%d" % [components["Build"][id]["state"], components["Build"][id]["target"]]
 		if has_ability(id, "Foundation"):
 			st += "F%d" % components["Foundation"][id]["progress"]
+		if has_ability(id, "Queue"):
+			var q: Dictionary = components["Queue"][id]
+			st += "Q%d:%d:%s" % [(q["items"] as Array).size(), q["progress"], q["rally"]]
 		parts.append("%d|%s|%d|%d|%d|%d|%s|%d|%s" % [id, e["def_id"], e["owner"], e["pos"].x, e["pos"].y, hp, mv, extra, st])
 	var ctx := HashingContext.new()
 	ctx.start(HashingContext.HASH_SHA256)
