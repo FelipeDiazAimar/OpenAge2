@@ -69,6 +69,9 @@ Proyecto → Configuración → Mapa de entrada, o edita la sección `[input]` d
 
 - Clic izquierdo: seleccionar (arrastrar para seleccionar varias unidades propias).
 - Clic derecho: sobre un enemigo, **atacar**; sobre un recurso, recolectar (aldeanos); en el suelo, mover.
+- Clic derecho sobre un **animal** con aldeanos: cazar (ciervo/jabalí se matan primero y luego se
+  recolecta la carcasa; el jabalí contraataca). Las **ovejas propias** se seleccionan y mueven como
+  unidades; si te alejas, un aldeano enemigo cercano puede quedárselas.
 - **S**: detener. Flechas / borde de pantalla / botón medio: cámara. Rueda: zoom. Esc: menú.
 - **F9** / **Shift+F9**: tropas de prueba (5 milicias + 5 arqueros) propias / enemigas bajo el cursor,
   hasta que exista producción en los edificios.
