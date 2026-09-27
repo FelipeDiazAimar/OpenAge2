@@ -1,0 +1,43 @@
+{
+  "id": "monasterio",
+  "type": "building",
+  "extends": "edificio_base",
+  "name": "Monasterio",
+  "cost": {
+    "wood": 175
+  },
+  "build_time": 60,
+  "footprint": [
+    3,
+    3
+  ],
+  "abilities": {
+    "Hitpoints": {
+      "max": 1200
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
+    },
+    "Train": {
+      "units": [
+        "monje"
+      ],
+      "queue": 5
+    },
+    "RallyPoint": {},
+    "Research": {
+      "techs": [
+        "redencion",
+        "fervor",
+        "santidad",
+        "iluminacion",
+        "teocracia",
+        "herejia",
+        "curacion_mejorada"
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "imperial",
+  "type": "age",
+  "name": "Imperial",
+  "index": 3,
+  "cost": {
+    "food": 1000,
+    "gold": 800
+  },
+  "research_time": 190,
+  "prerequisite_buildings": {
+    "any_of": [
+      "castillo",
+      "monasterio"
+    ],
+    "count": 1
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "muelle",
+  "type": "building",
+  "extends": "edificio_base",
+  "name": "Muelle",
+  "cost": {
+    "wood": 150
+  },
+  "build_time": 50,
+  "footprint": [
+    3,
+    3
+  ],
+  "abilities": {
+    "Hitpoints": {
+      "max": 1200
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
+    },
+    "Train": {
+      "units": [
+        "barco_pesquero",
+        "galera",
+        "drakkar"
+      ],
+      "queue": 5
+    },
+    "RallyPoint": {},
+    "DropSite": {
+      "accepts": [
+        "food"
+      ]
+    }
+  }
+}

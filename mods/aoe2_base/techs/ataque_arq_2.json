@@ -1,0 +1,26 @@
+{
+  "id": "ataque_arq_2",
+  "type": "tech",
+  "name": "Puntas de flecha",
+  "cost": {
+    "food": 200,
+    "gold": 100
+  },
+  "research_time": 40,
+  "at": "herreria",
+  "description": "Arqueros +1 ataque a distancia",
+  "requires": {
+    "age": "castillos",
+    "techs": [
+      "ataque_arq_1"
+    ]
+  },
+  "effects": [
+    {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Attack.damage.pierce",
+      "value": 1
+    }
+  ]
+}

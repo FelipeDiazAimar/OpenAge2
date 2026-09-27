@@ -1,0 +1,22 @@
+{
+  "id": "ataque_cab_1",
+  "type": "tech",
+  "name": "Forja de caballería I",
+  "cost": {
+    "food": 150
+  },
+  "research_time": 30,
+  "at": "herreria",
+  "description": "Caballería +1 ataque cuerpo a cuerpo",
+  "requires": {
+    "age": "feudal"
+  },
+  "effects": [
+    {
+      "target": "tag:caballeria",
+      "op": "add",
+      "path": "abilities.Attack.damage.melee",
+      "value": 1
+    }
+  ]
+}

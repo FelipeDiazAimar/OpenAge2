@@ -1,0 +1,23 @@
+{
+  "id": "hachas_barbas",
+  "type": "tech",
+  "name": "Hachas de barbas (Bearded Axe)",
+  "cost": {
+    "food": 300,
+    "gold": 300
+  },
+  "research_time": 50,
+  "at": "castillo",
+  "description": "Hachero franco +1 alcance, +2 ataque.",
+  "requires": {
+    "age": "castillos"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "alcance_hachero": 1,
+    "ataque_hachero": 2,
+    "aplica_a": [
+      "hachero_franco"
+    ]
+  }
+}

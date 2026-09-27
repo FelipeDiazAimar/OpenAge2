@@ -1,0 +1,38 @@
+{
+  "id": "jinete",
+  "type": "unit",
+  "extends": "caballeria_base",
+  "name": "Jinete (Caballero)",
+  "cost": {
+    "food": 60,
+    "gold": 75
+  },
+  "train_time": 30,
+  "pop_cost": 1,
+  "hotkey": "W",
+  "abilities": {
+    "Hitpoints": {
+      "max": 100
+    },
+    "Armor": {
+      "classes": {
+        "melee": 2,
+        "pierce": 2
+      }
+    },
+    "Move": {
+      "speed": 1.35
+    },
+    "Vision": {
+      "sight": 4.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 10,
+        "arquero": 3
+      },
+      "range": 0,
+      "reload": 2.0
+    }
+  }
+}

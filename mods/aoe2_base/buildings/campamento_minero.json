@@ -1,0 +1,31 @@
+{
+  "id": "campamento_minero",
+  "type": "building",
+  "extends": "edificio_base",
+  "name": "Campamento Minero",
+  "cost": {
+    "wood": 100
+  },
+  "build_time": 35,
+  "footprint": [
+    2,
+    2
+  ],
+  "abilities": {
+    "Hitpoints": {
+      "max": 600
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
+    },
+    "DropSite": {
+      "accepts": [
+        "gold",
+        "stone"
+      ]
+    }
+  }
+}

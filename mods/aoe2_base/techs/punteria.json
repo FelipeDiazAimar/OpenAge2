@@ -1,0 +1,27 @@
+{
+  "id": "punteria",
+  "type": "tech",
+  "name": "Puntería (Yeomen)",
+  "cost": {
+    "wood": 750,
+    "gold": 450
+  },
+  "research_time": 60,
+  "at": "castillo",
+  "description": "Arqueros a pie +2 alcance, +1 ataque. Torres +2 ataque.",
+  "requires": {
+    "age": "castillos"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "alcance_arqueros": 2,
+    "ataque_arqueros": 1,
+    "ataque_torres": 2,
+    "aplica_a": [
+      "arquero",
+      "ballestero",
+      "arquero_tiro_largo",
+      "guerrillero"
+    ]
+  }
+}

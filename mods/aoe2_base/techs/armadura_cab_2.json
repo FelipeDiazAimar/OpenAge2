@@ -1,0 +1,32 @@
+{
+  "id": "armadura_cab_2",
+  "type": "tech",
+  "name": "Barda de malla (caballería)",
+  "cost": {
+    "food": 200,
+    "gold": 100
+  },
+  "research_time": 40,
+  "at": "herreria",
+  "description": "Caballería +1 armadura cuerpo a cuerpo, +1 antiproyectil",
+  "requires": {
+    "age": "castillos",
+    "techs": [
+      "armadura_cab_1"
+    ]
+  },
+  "effects": [
+    {
+      "target": "tag:caballeria",
+      "op": "add",
+      "path": "abilities.Armor.classes.melee",
+      "value": 1
+    },
+    {
+      "target": "tag:caballeria",
+      "op": "add",
+      "path": "abilities.Armor.classes.pierce",
+      "value": 1
+    }
+  ]
+}

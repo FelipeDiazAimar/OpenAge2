@@ -1,0 +1,19 @@
+{
+  "id": "anarquia",
+  "type": "tech",
+  "name": "Anarquía",
+  "cost": {
+    "food": 450,
+    "gold": 250
+  },
+  "research_time": 50,
+  "at": "castillo",
+  "description": "Huscarles entrenables en Cuartel (además del Castillo).",
+  "requires": {
+    "age": "castillos"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "huscarle_en_cuartel": true
+  }
+}

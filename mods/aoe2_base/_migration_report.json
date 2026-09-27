@@ -1,0 +1,285 @@
+{
+  "dropped_train_refs": {
+    "castillo": [
+      "unidad_unica",
+      "trabuquete",
+      "petardo"
+    ],
+    "establo": [
+      "camello"
+    ],
+    "taller_asedio": [
+      "escorpion"
+    ]
+  },
+  "legacy_effects": {
+    "redencion": {
+      "convierte_edificios": true,
+      "convierte_asedio": true
+    },
+    "fervor": {
+      "velocidad_monje_bonus": 0.5,
+      "velocidad_base": 0.7,
+      "velocidad_final": 1.05
+    },
+    "santidad": {
+      "hp_monje": 45
+    },
+    "iluminacion": {
+      "recuperacion_fe_bonus": 0.5,
+      "cooldown_conversion_base": 12,
+      "cooldown_conversion_final": 8
+    },
+    "teocracia": {
+      "teocracia": true
+    },
+    "herejia": {
+      "herejia": true
+    },
+    "curacion_mejorada": {
+      "curacion_bonus_hp_s": 2.5
+    },
+    "balistica": {
+      "balistica": true,
+      "precision_vs_movil": 1.0,
+      "categoria": "arqueros"
+    },
+    "punteria_universidad": {
+      "alcance_torres": 1,
+      "categoria": "arqueros"
+    },
+    "torre_vigilancia": {
+      "desbloquea": "torre_vigilancia",
+      "ataque_torres": 2,
+      "alcance_torres": 1
+    },
+    "torre_guardia": {
+      "desbloquea": "torre_guardia",
+      "ataque_torres": 2
+    },
+    "torre_muralla": {
+      "desbloquea": "torre_muralla",
+      "ataque_torres": 2,
+      "hp_torres": 1000
+    },
+    "arquitectura": {
+      "hp_edificios_bonus": 0.1,
+      "armor_edificios": 1
+    },
+    "muralla_fortificada": {
+      "hp_murallas": 1500
+    },
+    "albanileria": {
+      "hp_torres_castillo_bonus": 0.2,
+      "armor_edificios": 1
+    },
+    "barcos_dragon": {
+      "ataque_drakkar_bonus": 0.2,
+      "alcance_drakkar": 1,
+      "categoria": "barco",
+      "aplica_a": [
+        "drakkar"
+      ]
+    },
+    "fuego_griego": {
+      "alcance_barcos_fuego": 1,
+      "ataque_barcos_fuego": 2,
+      "aplica_a": [
+        "brulote",
+        "dromon"
+      ]
+    },
+    "logistica": {
+      "pisoteo_catafracta": 5,
+      "aplica_a": [
+        "catafracta"
+      ]
+    },
+    "punteria": {
+      "alcance_arqueros": 2,
+      "ataque_arqueros": 1,
+      "ataque_torres": 2,
+      "aplica_a": [
+        "arquero",
+        "ballestero",
+        "arquero_tiro_largo",
+        "guerrillero"
+      ]
+    },
+    "maquina_guerra": {
+      "ataque_trabuquete_bonus": 0.5,
+      "area_trabuquete_bonus": 0.5,
+      "dispersion_reduccion": 0.5
+    },
+    "hachas_barbas": {
+      "alcance_hachero": 1,
+      "ataque_hachero": 2,
+      "aplica_a": [
+        "hachero_franco"
+      ]
+    },
+    "caballerosidad": {
+      "velocidad_establo": 0.4
+    },
+    "anarquia": {
+      "huscarle_en_cuartel": true
+    },
+    "perfusion": {
+      "velocidad_cuartel": 0.5
+    },
+    "bizantinos": [
+      "edificios_hp_20",
+      "monjes_curan_2x",
+      "contra_unidades_baratas",
+      "team_bonus"
+    ],
+    "britones": [
+      "pastores_rapidos",
+      "alcance_civ_arqueros",
+      "team_bonus"
+    ],
+    "francos": [
+      "granjas_gratis",
+      "castillo_barato_25",
+      "team_bonus"
+    ],
+    "godos": [
+      "infanteria_barata",
+      "caza_15",
+      "telar_gratis",
+      "team_bonus"
+    ],
+    "vikingos": [
+      "infanteria_hp_edad",
+      "barcos_baratos",
+      "carretilla_gratis",
+      "team_bonus"
+    ]
+  },
+  "unported_fields": {
+    "aldeano": [
+      "actions",
+      "icon",
+      "model"
+    ],
+    "ariete": [
+      "actions",
+      "model"
+    ],
+    "arquero": [
+      "actions",
+      "model"
+    ],
+    "arquero_tiro_largo": [
+      "actions",
+      "model"
+    ],
+    "ballestero": [
+      "actions",
+      "model"
+    ],
+    "barco_pesquero": [
+      "actions",
+      "model"
+    ],
+    "campeon": [
+      "actions",
+      "model",
+      "upgrade_cost",
+      "upgrade_from",
+      "upgrade_research_time_sec"
+    ],
+    "carreta_comercio": [
+      "actions",
+      "model"
+    ],
+    "catafracta": [
+      "actions",
+      "anti_class",
+      "model"
+    ],
+    "catapulta": [
+      "actions",
+      "model",
+      "projectile_kind"
+    ],
+    "drakkar": [
+      "actions",
+      "model"
+    ],
+    "espadachin_mandoble": [
+      "actions",
+      "model",
+      "upgrade_cost",
+      "upgrade_from",
+      "upgrade_research_time_sec"
+    ],
+    "galera": [
+      "actions",
+      "model"
+    ],
+    "guerrillero": [
+      "actions",
+      "model"
+    ],
+    "hombre_armas": [
+      "actions",
+      "model",
+      "upgrade_cost",
+      "upgrade_from",
+      "upgrade_research_time_sec"
+    ],
+    "huscarle": [
+      "actions",
+      "model",
+      "upgrade_from"
+    ],
+    "invasor_nordico": [
+      "actions",
+      "model",
+      "upgrade_from"
+    ],
+    "jinete": [
+      "actions",
+      "model"
+    ],
+    "lancero": [
+      "actions",
+      "model"
+    ],
+    "milicia": [
+      "actions",
+      "model"
+    ],
+    "monje": [
+      "actions",
+      "model"
+    ],
+    "paladin": [
+      "actions",
+      "model",
+      "upgrade_from"
+    ],
+    "paladin_franco": [
+      "actions",
+      "civ_bonus_hp",
+      "model",
+      "upgrade_from"
+    ],
+    "scout": [
+      "actions",
+      "model"
+    ],
+    "trebuchet": [
+      "actions",
+      "alias",
+      "model",
+      "model_packed",
+      "projectile_kind"
+    ]
+  },
+  "warnings": [
+    "tech jefatura duplicada: se conserva la primera",
+    "tech barcos_dragon duplicada: se conserva la primera"
+  ]
+}

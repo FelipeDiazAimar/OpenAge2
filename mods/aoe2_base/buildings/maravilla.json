@@ -1,0 +1,36 @@
+{
+  "id": "maravilla",
+  "type": "building",
+  "extends": "edificio_base",
+  "name": "Maravilla",
+  "cost": {
+    "wood": 1000,
+    "gold": 1000,
+    "stone": 1000
+  },
+  "build_time": 300,
+  "footprint": [
+    5,
+    5
+  ],
+  "requires": {
+    "age": "imperial"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 5000
+    },
+    "Armor": {
+      "classes": {
+        "melee": 2,
+        "pierce": 8
+      }
+    },
+    "Vision": {
+      "sight": 6.0
+    },
+    "Wonder": {
+      "victory_time": 600
+    }
+  }
+}

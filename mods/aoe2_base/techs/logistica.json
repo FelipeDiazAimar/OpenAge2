@@ -1,0 +1,22 @@
+{
+  "id": "logistica",
+  "type": "tech",
+  "name": "Logística",
+  "cost": {
+    "food": 1000,
+    "gold": 600
+  },
+  "research_time": 70,
+  "at": "castillo",
+  "description": "Catafracta pisoteo 5 daño en área + infantería aliada? (aquí: catafracta 5 área).",
+  "requires": {
+    "age": "imperial"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "pisoteo_catafracta": 5,
+    "aplica_a": [
+      "catafracta"
+    ]
+  }
+}

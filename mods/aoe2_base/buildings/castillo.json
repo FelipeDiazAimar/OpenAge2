@@ -1,0 +1,66 @@
+{
+  "id": "castillo",
+  "type": "building",
+  "extends": "edificio_base",
+  "name": "Castillo",
+  "cost": {
+    "stone": 650
+  },
+  "build_time": 200,
+  "footprint": [
+    4,
+    4
+  ],
+  "requires": {
+    "age": "castillos"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 4800
+    },
+    "Armor": {
+      "classes": {
+        "melee": 2,
+        "pierce": 8
+      }
+    },
+    "Vision": {
+      "sight": 8.0
+    },
+    "Train": {
+      "units": [
+        "catafracta",
+        "trebuchet",
+        "arquero_tiro_largo",
+        "invasor_nordico"
+      ],
+      "queue": 5
+    },
+    "RallyPoint": {},
+    "Research": {
+      "techs": [
+        "jefatura",
+        "barcos_dragon",
+        "fuego_griego",
+        "logistica",
+        "punteria",
+        "maquina_guerra",
+        "hachas_barbas",
+        "caballerosidad",
+        "anarquia",
+        "perfusion"
+      ]
+    },
+    "Garrison": {
+      "capacity": 20,
+      "arrows_per_unit": 1
+    },
+    "Attack": {
+      "damage": {
+        "pierce": 11
+      },
+      "range": 8.0,
+      "reload": 2.0
+    }
+  }
+}

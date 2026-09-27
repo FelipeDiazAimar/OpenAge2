@@ -1,0 +1,15 @@
+{
+  "id": "stone_mine",
+  "type": "resource",
+  "name": "Mina de piedra",
+  "tags": [
+    "recurso"
+  ],
+  "abilities": {
+    "ResourceSource": {
+      "resource": "stone",
+      "amount": 800,
+      "rate_key": "stone"
+    }
+  }
+}

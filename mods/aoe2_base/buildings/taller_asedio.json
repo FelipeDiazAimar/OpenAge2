@@ -1,0 +1,36 @@
+{
+  "id": "taller_asedio",
+  "type": "building",
+  "extends": "edificio_base",
+  "name": "Taller de Asedio",
+  "cost": {
+    "wood": 200
+  },
+  "build_time": 60,
+  "footprint": [
+    3,
+    3
+  ],
+  "requires": {
+    "age": "castillos"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 1200
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
+    },
+    "Train": {
+      "units": [
+        "ariete",
+        "catapulta"
+      ],
+      "queue": 5
+    },
+    "RallyPoint": {}
+  }
+}

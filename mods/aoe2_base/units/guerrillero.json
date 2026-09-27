@@ -1,0 +1,39 @@
+{
+  "id": "guerrillero",
+  "type": "unit",
+  "extends": "arqueros_base",
+  "name": "Guerrillero",
+  "cost": {
+    "wood": 25,
+    "food": 35
+  },
+  "train_time": 22,
+  "pop_cost": 1,
+  "hotkey": "W",
+  "abilities": {
+    "Hitpoints": {
+      "max": 30
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 3
+      }
+    },
+    "Move": {
+      "speed": 0.96
+    },
+    "Vision": {
+      "sight": 5.0
+    },
+    "Attack": {
+      "damage": {
+        "pierce": 2,
+        "arquero": 3
+      },
+      "range": 4.0,
+      "reload": 3.0,
+      "projectile_speed": 12.0
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "arquitectura",
+  "type": "tech",
+  "name": "Arquitectura",
+  "cost": {
+    "wood": 200,
+    "stone": 200
+  },
+  "research_time": 50,
+  "at": "universidad",
+  "description": "Edificios +10% HP, +1 armadura",
+  "requires": {
+    "age": "castillos"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "hp_edificios_bonus": 0.1,
+    "armor_edificios": 1
+  }
+}

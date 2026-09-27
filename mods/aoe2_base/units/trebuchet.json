@@ -1,0 +1,44 @@
+{
+  "id": "trebuchet",
+  "type": "unit",
+  "extends": "asedio_base",
+  "name": "Trebuchet",
+  "cost": {
+    "wood": 200,
+    "gold": 200
+  },
+  "train_time": 50,
+  "pop_cost": 3,
+  "hotkey": "W",
+  "abilities": {
+    "Hitpoints": {
+      "max": 150
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 8
+      }
+    },
+    "Move": {
+      "speed": 0.5
+    },
+    "Vision": {
+      "sight": 9.0
+    },
+    "Attack": {
+      "damage": {
+        "pierce": 200
+      },
+      "range": 16.0,
+      "reload": 10.0,
+      "min_range": 3.0,
+      "projectile_speed": 12.0,
+      "area_radius": 1.0
+    },
+    "Packable": {
+      "pack_time": 3.0,
+      "unpack_time": 3.0
+    }
+  }
+}

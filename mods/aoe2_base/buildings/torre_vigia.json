@@ -1,0 +1,42 @@
+{
+  "id": "torre_vigia",
+  "type": "building",
+  "extends": "edificio_base",
+  "name": "Torre Vigía",
+  "cost": {
+    "stone": 125
+  },
+  "build_time": 80,
+  "footprint": [
+    2,
+    2
+  ],
+  "requires": {
+    "age": "feudal"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 700
+    },
+    "Armor": {
+      "classes": {
+        "melee": 2,
+        "pierce": 8
+      }
+    },
+    "Vision": {
+      "sight": 8.0
+    },
+    "Garrison": {
+      "capacity": 5,
+      "arrows_per_unit": 1
+    },
+    "Attack": {
+      "damage": {
+        "pierce": 5
+      },
+      "range": 8.0,
+      "reload": 2.0
+    }
+  }
+}

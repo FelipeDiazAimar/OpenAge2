@@ -1,0 +1,21 @@
+{
+  "id": "maquina_guerra",
+  "type": "tech",
+  "name": "Máquina de guerra (Warwolf)",
+  "cost": {
+    "wood": 850,
+    "gold": 750
+  },
+  "research_time": 75,
+  "at": "castillo",
+  "description": "Trabuquetes +50% daño, área y precisión (dispersión -50%).",
+  "requires": {
+    "age": "imperial"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "ataque_trabuquete_bonus": 0.5,
+    "area_trabuquete_bonus": 0.5,
+    "dispersion_reduccion": 0.5
+  }
+}

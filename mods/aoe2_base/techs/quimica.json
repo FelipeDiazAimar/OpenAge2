@@ -1,0 +1,29 @@
+{
+  "id": "quimica",
+  "type": "tech",
+  "name": "Química",
+  "cost": {
+    "food": 300,
+    "gold": 200
+  },
+  "research_time": 60,
+  "at": "universidad",
+  "description": "Arqueros y pólvora +1 ataque, +2 vs edificios",
+  "requires": {
+    "age": "imperial"
+  },
+  "effects": [
+    {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Attack.damage.pierce",
+      "value": 1
+    },
+    {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Attack.damage.edificio",
+      "value": 2
+    }
+  ]
+}

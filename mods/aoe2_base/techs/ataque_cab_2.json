@@ -1,0 +1,26 @@
+{
+  "id": "ataque_cab_2",
+  "type": "tech",
+  "name": "Forja de caballería II",
+  "cost": {
+    "food": 220,
+    "gold": 160
+  },
+  "research_time": 40,
+  "at": "herreria",
+  "description": "Caballería +1 ataque cuerpo a cuerpo",
+  "requires": {
+    "age": "castillos",
+    "techs": [
+      "ataque_cab_1"
+    ]
+  },
+  "effects": [
+    {
+      "target": "tag:caballeria",
+      "op": "add",
+      "path": "abilities.Attack.damage.melee",
+      "value": 1
+    }
+  ]
+}

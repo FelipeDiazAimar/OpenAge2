@@ -1,0 +1,10 @@
+{
+  "id": "comercio_base",
+  "type": "unit",
+  "abstract": true,
+  "extends": "unidad_base",
+  "tags": [
+    "comercio"
+  ],
+  "abilities": {}
+}

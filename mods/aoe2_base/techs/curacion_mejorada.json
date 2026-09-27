@@ -1,0 +1,18 @@
+{
+  "id": "curacion_mejorada",
+  "type": "tech",
+  "name": "Bendición (curación mejorada)",
+  "cost": {
+    "gold": 150
+  },
+  "research_time": 40,
+  "at": "monasterio",
+  "description": "Monjes curan +2.5 HP/s extra (2.5 -> 5.0 HP/s, igual que bono bizantino)",
+  "requires": {
+    "age": "castillos"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "curacion_bonus_hp_s": 2.5
+  }
+}

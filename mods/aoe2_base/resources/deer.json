@@ -1,0 +1,17 @@
+{
+  "id": "deer",
+  "type": "resource",
+  "name": "Ciervo",
+  "tags": [
+    "recurso"
+  ],
+  "abilities": {
+    "ResourceSource": {
+      "resource": "food",
+      "amount": 140,
+      "rate_key": "food_forage",
+      "requires_kill": true,
+      "flees": true
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "feudal",
+  "type": "age",
+  "name": "Feudal",
+  "index": 1,
+  "cost": {
+    "food": 500
+  },
+  "research_time": 130
+}

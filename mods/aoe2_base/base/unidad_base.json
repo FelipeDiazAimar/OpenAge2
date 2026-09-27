@@ -1,0 +1,11 @@
+{
+  "id": "unidad_base",
+  "type": "unit",
+  "abstract": true,
+  "tags": [
+    "unidad"
+  ],
+  "abilities": {
+    "Selectable": {}
+  }
+}

@@ -24,3 +24,19 @@ Edita `data/ages/ages.json`, añade coste y nombre.
 Edita `data/actions.json`. Las unidades la referencian por nombre.
 
 Nada hardcodeado: si no está en JSON, no existe en juego.
+
+## Formato nuevo (motor por habilidades) — `mods/`
+
+El motor nuevo lee `mods/<mod>/` (el juego viejo sigue leyendo `data/` hasta la fase F5).
+
+- `mod.json`: `{"id": "mi_mod", "version": "1", "depends": ["aoe2_base"], "priority": 10}`
+- Entidades en `base/ units/ buildings/ resources/ techs/ ages/ civs/`, un JSON por entidad.
+  Archivos que empiezan con `_` se ignoran.
+- Herencia: `"extends": "infanteria_base"` (los `tags` se suman).
+- Parchear algo de otro mod: mismo `id` + `"patch": true` con solo los campos a cambiar.
+- Unidad nueva = copiar `mods/aoe2_base/units/milicia.json`, cambiar `id` y habilidades, y añadir
+  el id a `abilities.Train.units` de un edificio (con un parche).
+- Habilidades disponibles y sus campos: `engine/data/Schemas.gd` (`ABILITIES`).
+- Validar: `godot --headless --path . -s tools/validate_mods.gd` (errores con archivo y campo).
+- `mods/aoe2_base` se genera con `py tools/migrate_data_to_mod.py`; lo no portado está en
+  `mods/aoe2_base/_migration_report.json`.

@@ -1,0 +1,11 @@
+{
+  "id": "edificio_base",
+  "type": "building",
+  "abstract": true,
+  "tags": [
+    "edificio"
+  ],
+  "abilities": {
+    "Selectable": {}
+  }
+}

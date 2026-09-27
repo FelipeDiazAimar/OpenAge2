@@ -1,0 +1,41 @@
+{
+  "id": "arquero_tiro_largo",
+  "type": "unit",
+  "extends": "arqueros_base",
+  "name": "Arquero de Tiro Largo",
+  "cost": {
+    "wood": 35,
+    "gold": 40
+  },
+  "train_time": 19,
+  "pop_cost": 1,
+  "hotkey": "E",
+  "abilities": {
+    "Hitpoints": {
+      "max": 35
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
+    },
+    "Move": {
+      "speed": 0.96
+    },
+    "Vision": {
+      "sight": 8.0
+    },
+    "Attack": {
+      "damage": {
+        "pierce": 6
+      },
+      "range": 8.0,
+      "reload": 2.0,
+      "projectile_speed": 12.0
+    },
+    "Unique": {
+      "civ": "britones"
+    }
+  }
+}

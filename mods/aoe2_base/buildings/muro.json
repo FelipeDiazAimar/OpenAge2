@@ -1,0 +1,28 @@
+{
+  "id": "muro",
+  "type": "building",
+  "extends": "edificio_base",
+  "name": "Muro de Piedra",
+  "cost": {
+    "stone": 5
+  },
+  "build_time": 10,
+  "footprint": [
+    1,
+    1
+  ],
+  "requires": {
+    "age": "feudal"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 1800
+    },
+    "Armor": {
+      "classes": {
+        "melee": 3,
+        "pierce": 8
+      }
+    }
+  }
+}

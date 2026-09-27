@@ -1,0 +1,23 @@
+{
+  "id": "ataque_arq_1",
+  "type": "tech",
+  "name": "Pluma de flecha",
+  "cost": {
+    "food": 100,
+    "gold": 50
+  },
+  "research_time": 30,
+  "at": "herreria",
+  "description": "Arqueros +1 ataque a distancia",
+  "requires": {
+    "age": "feudal"
+  },
+  "effects": [
+    {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Attack.damage.pierce",
+      "value": 1
+    }
+  ]
+}

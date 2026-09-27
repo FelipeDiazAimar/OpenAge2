@@ -1,0 +1,10 @@
+{
+  "id": "asedio_base",
+  "type": "unit",
+  "abstract": true,
+  "extends": "unidad_base",
+  "tags": [
+    "asedio"
+  ],
+  "abilities": {}
+}

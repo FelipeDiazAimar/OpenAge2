@@ -1,0 +1,32 @@
+{
+  "id": "armadura_cab_3",
+  "type": "tech",
+  "name": "Barda de placas (caballería)",
+  "cost": {
+    "food": 300,
+    "gold": 150
+  },
+  "research_time": 60,
+  "at": "herreria",
+  "description": "Caballería +1 armadura cuerpo a cuerpo, +2 antiproyectil",
+  "requires": {
+    "age": "imperial",
+    "techs": [
+      "armadura_cab_2"
+    ]
+  },
+  "effects": [
+    {
+      "target": "tag:caballeria",
+      "op": "add",
+      "path": "abilities.Armor.classes.melee",
+      "value": 1
+    },
+    {
+      "target": "tag:caballeria",
+      "op": "add",
+      "path": "abilities.Armor.classes.pierce",
+      "value": 2
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "arqueria",
+  "type": "building",
+  "extends": "edificio_base",
+  "name": "Arquería",
+  "cost": {
+    "wood": 175
+  },
+  "build_time": 50,
+  "footprint": [
+    3,
+    3
+  ],
+  "requires": {
+    "age": "feudal"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 1200
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
+    },
+    "Train": {
+      "units": [
+        "arquero",
+        "guerrillero",
+        "ballestero"
+      ],
+      "queue": 5
+    },
+    "RallyPoint": {}
+  }
+}

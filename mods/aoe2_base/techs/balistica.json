@@ -1,0 +1,21 @@
+{
+  "id": "balistica",
+  "type": "tech",
+  "name": "Balística",
+  "cost": {
+    "wood": 300,
+    "gold": 175
+  },
+  "research_time": 60,
+  "at": "universidad",
+  "description": "Arqueros y torres disparan con predicción: aciertan a objetivos móviles (anula dispersión por movimiento)",
+  "requires": {
+    "age": "castillos"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "balistica": true,
+    "precision_vs_movil": 1.0,
+    "categoria": "arqueros"
+  }
+}

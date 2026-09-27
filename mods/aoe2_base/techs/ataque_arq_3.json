@@ -1,0 +1,32 @@
+{
+  "id": "ataque_arq_3",
+  "type": "tech",
+  "name": "Brasa (Bracer)",
+  "cost": {
+    "food": 300,
+    "gold": 200
+  },
+  "research_time": 60,
+  "at": "herreria",
+  "description": "Arqueros +1 ataque a distancia, +1 alcance",
+  "requires": {
+    "age": "imperial",
+    "techs": [
+      "ataque_arq_2"
+    ]
+  },
+  "effects": [
+    {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Attack.damage.pierce",
+      "value": 1
+    },
+    {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Attack.range",
+      "value": 1
+    }
+  ]
+}

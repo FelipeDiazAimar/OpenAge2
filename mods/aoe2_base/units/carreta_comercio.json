@@ -1,0 +1,38 @@
+{
+  "id": "carreta_comercio",
+  "type": "unit",
+  "extends": "comercio_base",
+  "name": "Carreta de comercio",
+  "cost": {
+    "wood": 100,
+    "gold": 50
+  },
+  "train_time": 51,
+  "pop_cost": 1,
+  "hotkey": "Q",
+  "graphics": {
+    "idle": "sprite:cart/idle",
+    "walk": "sprite:cart/walk"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 100
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
+    },
+    "Move": {
+      "speed": 1.2
+    },
+    "Vision": {
+      "sight": 4.0
+    },
+    "Trade": {
+      "gold_base": 20,
+      "gold_per_tile": 0.3
+    }
+  }
+}

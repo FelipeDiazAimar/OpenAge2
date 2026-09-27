@@ -1,0 +1,8 @@
+{
+  "id": "alta_edad_media",
+  "type": "age",
+  "name": "Alta Edad Media",
+  "index": 0,
+  "cost": {},
+  "research_time": 0
+}

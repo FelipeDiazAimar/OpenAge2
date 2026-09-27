@@ -1,0 +1,19 @@
+{
+  "id": "perfusion",
+  "type": "tech",
+  "name": "Perfusión (Movilidad)",
+  "cost": {
+    "food": 600,
+    "gold": 400
+  },
+  "research_time": 60,
+  "at": "castillo",
+  "description": "Cuartel trabaja 50% más rápido (acumulable con team bonus 20%).",
+  "requires": {
+    "age": "imperial"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "velocidad_cuartel": 0.5
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "herejia",
+  "type": "tech",
+  "name": "Herejía",
+  "cost": {
+    "gold": 1000
+  },
+  "research_time": 60,
+  "at": "monasterio",
+  "description": "Tus unidades mueren en vez de ser convertidas (anti-monje)",
+  "requires": {
+    "age": "imperial"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "herejia": true
+  }
+}

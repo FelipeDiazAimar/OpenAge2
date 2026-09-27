@@ -1,0 +1,26 @@
+{
+  "id": "hierro_fundido",
+  "type": "tech",
+  "name": "Hierro fundido",
+  "cost": {
+    "food": 220,
+    "gold": 160
+  },
+  "research_time": 40,
+  "at": "herreria",
+  "description": "Infantería +1 ataque cuerpo a cuerpo (acumulable)",
+  "requires": {
+    "age": "castillos",
+    "techs": [
+      "forja"
+    ]
+  },
+  "effects": [
+    {
+      "target": "tag:infanteria",
+      "op": "add",
+      "path": "abilities.Attack.damage.melee",
+      "value": 1
+    }
+  ]
+}

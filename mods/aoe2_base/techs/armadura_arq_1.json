@@ -1,0 +1,28 @@
+{
+  "id": "armadura_arq_1",
+  "type": "tech",
+  "name": "Forro de cuero (arqueros)",
+  "cost": {
+    "food": 150
+  },
+  "research_time": 30,
+  "at": "herreria",
+  "description": "Arqueros +1 armadura cuerpo a cuerpo, +1 antiproyectil",
+  "requires": {
+    "age": "feudal"
+  },
+  "effects": [
+    {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Armor.classes.melee",
+      "value": 1
+    },
+    {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Armor.classes.pierce",
+      "value": 1
+    }
+  ]
+}

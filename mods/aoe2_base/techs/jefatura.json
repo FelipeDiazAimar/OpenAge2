@@ -1,0 +1,23 @@
+{
+  "id": "jefatura",
+  "type": "tech",
+  "name": "Jefatura (Chieftains)",
+  "cost": {
+    "food": 400,
+    "gold": 300
+  },
+  "research_time": 50,
+  "at": "castillo",
+  "description": "Infantería +5 HP (milicia 45->50, invasor nórdico 60->65; acumulable con bonus de HP por edad)",
+  "requires": {
+    "age": "castillos"
+  },
+  "effects": [
+    {
+      "target": "id:milicia|id:hombre_de_armas|id:espadachin_mandoble|id:campeon|id:lancero|id:piquero|id:alabardero|id:invasor_nordico",
+      "op": "add",
+      "path": "abilities.Hitpoints.max",
+      "value": 5
+    }
+  ]
+}

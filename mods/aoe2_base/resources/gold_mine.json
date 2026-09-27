@@ -1,0 +1,15 @@
+{
+  "id": "gold_mine",
+  "type": "resource",
+  "name": "Mina de oro",
+  "tags": [
+    "recurso"
+  ],
+  "abilities": {
+    "ResourceSource": {
+      "resource": "gold",
+      "amount": 800,
+      "rate_key": "gold"
+    }
+  }
+}

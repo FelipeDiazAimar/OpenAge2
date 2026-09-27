@@ -1,0 +1,18 @@
+{
+  "id": "teocracia",
+  "type": "tech",
+  "name": "Teocracia",
+  "cost": {
+    "gold": 200
+  },
+  "research_time": 40,
+  "at": "monasterio",
+  "description": "Solo 1 monje pierde fe al convertir en grupo",
+  "requires": {
+    "age": "imperial"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "teocracia": true
+  }
+}

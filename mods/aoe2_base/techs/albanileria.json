@@ -1,0 +1,23 @@
+{
+  "id": "albanileria",
+  "type": "tech",
+  "name": "Albañilería",
+  "cost": {
+    "wood": 150,
+    "stone": 175
+  },
+  "research_time": 50,
+  "at": "universidad",
+  "description": "Torres y castillos +20% HP, +1 armadura",
+  "requires": {
+    "age": "imperial",
+    "techs": [
+      "arquitectura"
+    ]
+  },
+  "effects": [],
+  "legacy_effects": {
+    "hp_torres_castillo_bonus": 0.2,
+    "armor_edificios": 1
+  }
+}

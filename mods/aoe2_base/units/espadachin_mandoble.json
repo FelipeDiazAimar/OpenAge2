@@ -1,0 +1,42 @@
+{
+  "id": "espadachin_mandoble",
+  "type": "unit",
+  "extends": "infanteria_base",
+  "name": "Espadachín de Mandoble",
+  "requires": {
+    "age": "castillos"
+  },
+  "cost": {
+    "food": 60,
+    "gold": 20
+  },
+  "train_time": 21,
+  "pop_cost": 1,
+  "hotkey": "Q",
+  "upgrades_to": "campeon",
+  "abilities": {
+    "Hitpoints": {
+      "max": 60
+    },
+    "Armor": {
+      "classes": {
+        "melee": 1,
+        "pierce": 1
+      }
+    },
+    "Move": {
+      "speed": 0.9
+    },
+    "Vision": {
+      "sight": 4.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 9,
+        "edificio": 3
+      },
+      "range": 0,
+      "reload": 2.0
+    }
+  }
+}

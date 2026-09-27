@@ -1,0 +1,85 @@
+{
+  "id": "bizantinos",
+  "type": "civ",
+  "name": "Bizantinos",
+  "color": "#c8a02a",
+  "effects": [],
+  "disabled": [
+    "anarquia",
+    "arquero_tiro_largo",
+    "barcos_dragon",
+    "caballerosidad",
+    "drakkar",
+    "hachas_barbas",
+    "huscarle",
+    "invasor_nordico",
+    "jefatura",
+    "maquina_guerra",
+    "paladin",
+    "paladin_franco",
+    "perfusion",
+    "punteria"
+  ],
+  "unique_units": [
+    "catafracta"
+  ],
+  "unique_techs": [
+    "fuego_griego",
+    "logistica"
+  ],
+  "legacy_effects": [
+    {
+      "id": "edificios_hp_20",
+      "descripcion": "Edificios +20% HP (Centro Urbano 2400->2880, Castillo 4800->5760)",
+      "efecto": {
+        "hp_edificios_bonus": 0.2,
+        "aplica_a": [
+          "centro_urbano",
+          "casa",
+          "cuartel",
+          "arqueria",
+          "establo",
+          "castillo",
+          "muralla",
+          "torre"
+        ]
+      }
+    },
+    {
+      "id": "monjes_curan_2x",
+      "descripcion": "Monjes curan 2x: 2.5 -> 5.0 HP/s",
+      "efecto": {
+        "curacion_monje_factor": 2.0,
+        "tasa_base_hp_s": 2.5,
+        "tasa_final_hp_s": 5.0
+      }
+    },
+    {
+      "id": "contra_unidades_baratas",
+      "descripcion": "Contra-unidades 25% más baratas: guerrillero, piquero, camello, monje",
+      "efecto": {
+        "descuento_contra_unidades": 0.25,
+        "aplica_a": [
+          "guerrillero",
+          "lancero",
+          "piquero",
+          "alabardero",
+          "camello",
+          "camello_pesado",
+          "monje"
+        ]
+      }
+    },
+    {
+      "team_bonus": {
+        "id": "monjes_curan_equipo",
+        "descripcion": "Monjes curan +1.5 HP/s extra (aliados): 2.5 -> 4.0 HP/s",
+        "efecto": {
+          "curacion_monje_equipo_hp_s": 1.5,
+          "tasa_base_hp_s": 2.5,
+          "tasa_aliado_hp_s": 4.0
+        }
+      }
+    }
+  ]
+}

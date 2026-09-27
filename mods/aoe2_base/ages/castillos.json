@@ -1,0 +1,18 @@
+{
+  "id": "castillos",
+  "type": "age",
+  "name": "Castillos",
+  "index": 2,
+  "cost": {
+    "food": 800,
+    "gold": 200
+  },
+  "research_time": 160,
+  "prerequisite_buildings": {
+    "any_of": [
+      "herreria",
+      "mercado"
+    ],
+    "count": 1
+  }
+}

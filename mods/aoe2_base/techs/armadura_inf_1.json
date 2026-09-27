@@ -1,0 +1,22 @@
+{
+  "id": "armadura_inf_1",
+  "type": "tech",
+  "name": "Armadura de escamas (infantería)",
+  "cost": {
+    "food": 100
+  },
+  "research_time": 30,
+  "at": "herreria",
+  "description": "Infantería +1 armadura cuerpo a cuerpo",
+  "requires": {
+    "age": "feudal"
+  },
+  "effects": [
+    {
+      "target": "tag:infanteria",
+      "op": "add",
+      "path": "abilities.Armor.classes.melee",
+      "value": 1
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "torre_muralla",
+  "type": "tech",
+  "name": "Torre de muralla (Keep)",
+  "cost": {
+    "food": 200,
+    "stone": 200
+  },
+  "research_time": 60,
+  "at": "universidad",
+  "description": "Desbloquea Torre de muralla: +2 ataque torre, +1000 HP torres",
+  "requires": {
+    "age": "imperial",
+    "techs": [
+      "torre_guardia"
+    ]
+  },
+  "effects": [],
+  "legacy_effects": {
+    "desbloquea": "torre_muralla",
+    "ataque_torres": 2,
+    "hp_torres": 1000
+  }
+}

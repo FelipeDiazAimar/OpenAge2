@@ -1,0 +1,26 @@
+{
+  "id": "alto_horno",
+  "type": "tech",
+  "name": "Alto horno",
+  "cost": {
+    "food": 350,
+    "gold": 250
+  },
+  "research_time": 60,
+  "at": "herreria",
+  "description": "Infantería +2 ataque cuerpo a cuerpo",
+  "requires": {
+    "age": "imperial",
+    "techs": [
+      "hierro_fundido"
+    ]
+  },
+  "effects": [
+    {
+      "target": "tag:infanteria",
+      "op": "add",
+      "path": "abilities.Attack.damage.melee",
+      "value": 2
+    }
+  ]
+}

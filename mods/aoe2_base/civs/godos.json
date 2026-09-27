@@ -1,0 +1,98 @@
+{
+  "id": "godos",
+  "type": "civ",
+  "name": "Godos",
+  "color": "#8a2a2a",
+  "effects": [],
+  "disabled": [
+    "albanileria",
+    "armadura_arq_2",
+    "armadura_arq_3",
+    "armadura_cab_3",
+    "arquero_tiro_largo",
+    "arquitectura",
+    "ataque_arq_2",
+    "ataque_arq_3",
+    "ataque_cab_3",
+    "balistica",
+    "ballestero",
+    "barcos_dragon",
+    "caballerosidad",
+    "catafracta",
+    "drakkar",
+    "fervor",
+    "fuego_griego",
+    "hachas_barbas",
+    "herejia",
+    "iluminacion",
+    "invasor_nordico",
+    "jefatura",
+    "logistica",
+    "maquina_guerra",
+    "muralla_fortificada",
+    "paladin",
+    "paladin_franco",
+    "punteria",
+    "quimica",
+    "redencion",
+    "santidad",
+    "teocracia",
+    "torre_muralla"
+  ],
+  "unique_units": [
+    "huscarle"
+  ],
+  "unique_techs": [
+    "anarquia",
+    "perfusion"
+  ],
+  "legacy_effects": [
+    {
+      "id": "infanteria_barata",
+      "descripcion": "Infantería 20% más barata (35% en Imperial): milicia 60F/20O -> 48F/16O (39F/13O en Imperial)",
+      "efecto": {
+        "descuento_infanteria": 0.2,
+        "descuento_infanteria_imperial": 0.35,
+        "aplica_a": [
+          "milicia",
+          "hombre_de_armas",
+          "espadachin_mandoble",
+          "campeon",
+          "lancero",
+          "piquero",
+          "alabardero",
+          "huscarle"
+        ]
+      }
+    },
+    {
+      "id": "caza_15",
+      "descripcion": "Caza +15 alimento por presa (jabalí 350->365, ciervo 140->155)",
+      "efecto": {
+        "alimento_extra_caza": 15,
+        "aplica_a": [
+          "jabali",
+          "ciervo"
+        ]
+      }
+    },
+    {
+      "id": "telar_gratis",
+      "descripcion": "Telar gratis e instantáneo (ahorro 15 comida, 25s -> 0s)",
+      "efecto": {
+        "telar_coste": 0,
+        "telar_tiempo_sec": 0,
+        "ahorro_comida": 15
+      }
+    },
+    {
+      "team_bonus": {
+        "id": "cuartel_rapido_20",
+        "descripcion": "Cuartel trabaja 20% más rápido (aliados)",
+        "efecto": {
+          "velocidad_cuartel": 0.2
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "mercado",
+  "type": "building",
+  "extends": "edificio_base",
+  "name": "Mercado",
+  "cost": {
+    "wood": 175
+  },
+  "build_time": 60,
+  "footprint": [
+    3,
+    3
+  ],
+  "abilities": {
+    "Hitpoints": {
+      "max": 1200
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
+    },
+    "Train": {
+      "units": [
+        "carreta_comercio"
+      ],
+      "queue": 5
+    },
+    "RallyPoint": {}
+  }
+}

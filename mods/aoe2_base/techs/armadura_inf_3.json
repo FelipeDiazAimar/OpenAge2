@@ -1,0 +1,32 @@
+{
+  "id": "armadura_inf_3",
+  "type": "tech",
+  "name": "Placas (infantería)",
+  "cost": {
+    "food": 300,
+    "gold": 150
+  },
+  "research_time": 60,
+  "at": "herreria",
+  "description": "Infantería +1 armadura cuerpo a cuerpo, +1 antiproyectil",
+  "requires": {
+    "age": "imperial",
+    "techs": [
+      "armadura_inf_2"
+    ]
+  },
+  "effects": [
+    {
+      "target": "tag:infanteria",
+      "op": "add",
+      "path": "abilities.Armor.classes.melee",
+      "value": 1
+    },
+    {
+      "target": "tag:infanteria",
+      "op": "add",
+      "path": "abilities.Armor.classes.pierce",
+      "value": 1
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "fuego_griego",
+  "type": "tech",
+  "name": "Fuego griego",
+  "cost": {
+    "food": 400,
+    "gold": 300
+  },
+  "research_time": 50,
+  "at": "castillo",
+  "description": "Barcos de fuego y dromones +1 alcance, +2 ataque.",
+  "requires": {
+    "age": "castillos"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "alcance_barcos_fuego": 1,
+    "ataque_barcos_fuego": 2,
+    "aplica_a": [
+      "brulote",
+      "dromon"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "tree",
+  "type": "resource",
+  "name": "Árbol",
+  "tags": [
+    "recurso"
+  ],
+  "abilities": {
+    "ResourceSource": {
+      "resource": "wood",
+      "amount": 100,
+      "rate_key": "wood"
+    }
+  }
+}

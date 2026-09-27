@@ -1,0 +1,23 @@
+{
+  "id": "torre_guardia",
+  "type": "tech",
+  "name": "Torre de guardia",
+  "cost": {
+    "food": 100,
+    "stone": 200
+  },
+  "research_time": 40,
+  "at": "universidad",
+  "description": "Desbloquea Torre de guardia: +2 ataque torre",
+  "requires": {
+    "age": "castillos",
+    "techs": [
+      "torre_vigilancia"
+    ]
+  },
+  "effects": [],
+  "legacy_effects": {
+    "desbloquea": "torre_guardia",
+    "ataque_torres": 2
+  }
+}

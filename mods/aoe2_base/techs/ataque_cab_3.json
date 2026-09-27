@@ -1,0 +1,26 @@
+{
+  "id": "ataque_cab_3",
+  "type": "tech",
+  "name": "Forja de caballería III",
+  "cost": {
+    "food": 350,
+    "gold": 250
+  },
+  "research_time": 60,
+  "at": "herreria",
+  "description": "Caballería +2 ataque cuerpo a cuerpo",
+  "requires": {
+    "age": "imperial",
+    "techs": [
+      "ataque_cab_2"
+    ]
+  },
+  "effects": [
+    {
+      "target": "tag:caballeria",
+      "op": "add",
+      "path": "abilities.Attack.damage.melee",
+      "value": 2
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "id": "universidad",
+  "type": "building",
+  "extends": "edificio_base",
+  "name": "Universidad",
+  "cost": {
+    "wood": 200
+  },
+  "build_time": 70,
+  "footprint": [
+    3,
+    3
+  ],
+  "abilities": {
+    "Hitpoints": {
+      "max": 1200
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
+    },
+    "Research": {
+      "techs": [
+        "balistica",
+        "quimica",
+        "punteria_universidad",
+        "torre_vigilancia",
+        "torre_guardia",
+        "torre_muralla",
+        "arquitectura",
+        "muralla_fortificada",
+        "albanileria"
+      ]
+    }
+  }
+}

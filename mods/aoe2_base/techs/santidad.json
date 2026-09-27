@@ -1,0 +1,18 @@
+{
+  "id": "santidad",
+  "type": "tech",
+  "name": "Santidad",
+  "cost": {
+    "gold": 120
+  },
+  "research_time": 40,
+  "at": "monasterio",
+  "description": "Monjes +45 HP (30 -> 75)",
+  "requires": {
+    "age": "castillos"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "hp_monje": 45
+  }
+}

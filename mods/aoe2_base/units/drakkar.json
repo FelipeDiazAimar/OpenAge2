@@ -1,0 +1,47 @@
+{
+  "id": "drakkar",
+  "type": "unit",
+  "extends": "barco_base",
+  "name": "Drakkar",
+  "requires": {
+    "age": "castillos"
+  },
+  "cost": {
+    "wood": 100,
+    "gold": 40
+  },
+  "train_time": 45,
+  "pop_cost": 1,
+  "hotkey": "E",
+  "abilities": {
+    "Hitpoints": {
+      "max": 100
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 6
+      }
+    },
+    "Move": {
+      "speed": 1.65
+    },
+    "Vision": {
+      "sight": 7.0
+    },
+    "Attack": {
+      "damage": {
+        "pierce": 7,
+        "barco_pesquero": 6,
+        "brulote": 4,
+        "galera": 2
+      },
+      "range": 6.0,
+      "reload": 2.5,
+      "projectile_speed": 12.0
+    },
+    "Unique": {
+      "civ": "vikingos"
+    }
+  }
+}

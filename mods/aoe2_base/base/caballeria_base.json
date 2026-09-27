@@ -1,0 +1,12 @@
+{
+  "id": "caballeria_base",
+  "type": "unit",
+  "abstract": true,
+  "extends": "unidad_base",
+  "tags": [
+    "caballeria"
+  ],
+  "abilities": {
+    "Garrisonable": {}
+  }
+}

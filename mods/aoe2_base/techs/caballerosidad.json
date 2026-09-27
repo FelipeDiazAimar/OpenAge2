@@ -1,0 +1,19 @@
+{
+  "id": "caballerosidad",
+  "type": "tech",
+  "name": "Caballerosidad (Chivalry)",
+  "cost": {
+    "food": 400,
+    "gold": 400
+  },
+  "research_time": 60,
+  "at": "castillo",
+  "description": "Establo trabaja 40% más rápido.",
+  "requires": {
+    "age": "imperial"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "velocidad_establo": 0.4
+  }
+}

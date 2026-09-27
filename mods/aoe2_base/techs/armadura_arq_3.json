@@ -1,0 +1,32 @@
+{
+  "id": "armadura_arq_3",
+  "type": "tech",
+  "name": "Anillo de cota (arqueros)",
+  "cost": {
+    "food": 250,
+    "gold": 150
+  },
+  "research_time": 60,
+  "at": "herreria",
+  "description": "Arqueros +1 armadura cuerpo a cuerpo, +2 antiproyectil",
+  "requires": {
+    "age": "imperial",
+    "techs": [
+      "armadura_arq_2"
+    ]
+  },
+  "effects": [
+    {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Armor.classes.melee",
+      "value": 1
+    },
+    {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Armor.classes.pierce",
+      "value": 2
+    }
+  ]
+}

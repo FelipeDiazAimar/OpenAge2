@@ -1,0 +1,38 @@
+{
+  "id": "establo",
+  "type": "building",
+  "extends": "edificio_base",
+  "name": "Establo",
+  "cost": {
+    "wood": 175
+  },
+  "build_time": 50,
+  "footprint": [
+    3,
+    3
+  ],
+  "requires": {
+    "age": "feudal"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 1200
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
+    },
+    "Train": {
+      "units": [
+        "scout",
+        "jinete",
+        "paladin",
+        "paladin_franco"
+      ],
+      "queue": 5
+    },
+    "RallyPoint": {}
+  }
+}

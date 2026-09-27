@@ -1,0 +1,10 @@
+{
+  "id": "barco_base",
+  "type": "unit",
+  "abstract": true,
+  "extends": "unidad_base",
+  "tags": [
+    "barco"
+  ],
+  "abilities": {}
+}

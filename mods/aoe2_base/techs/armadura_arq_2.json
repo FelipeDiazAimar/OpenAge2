@@ -1,0 +1,32 @@
+{
+  "id": "armadura_arq_2",
+  "type": "tech",
+  "name": "Cota de arquero",
+  "cost": {
+    "food": 200,
+    "gold": 100
+  },
+  "research_time": 40,
+  "at": "herreria",
+  "description": "Arqueros +1 armadura cuerpo a cuerpo, +1 antiproyectil",
+  "requires": {
+    "age": "castillos",
+    "techs": [
+      "armadura_arq_1"
+    ]
+  },
+  "effects": [
+    {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Armor.classes.melee",
+      "value": 1
+    },
+    {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Armor.classes.pierce",
+      "value": 1
+    }
+  ]
+}

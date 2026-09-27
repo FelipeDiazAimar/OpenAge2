@@ -1,0 +1,22 @@
+{
+  "id": "forja",
+  "type": "tech",
+  "name": "Forja",
+  "cost": {
+    "food": 150
+  },
+  "research_time": 30,
+  "at": "herreria",
+  "description": "Infantería +1 ataque cuerpo a cuerpo",
+  "requires": {
+    "age": "feudal"
+  },
+  "effects": [
+    {
+      "target": "tag:infanteria",
+      "op": "add",
+      "path": "abilities.Attack.damage.melee",
+      "value": 1
+    }
+  ]
+}

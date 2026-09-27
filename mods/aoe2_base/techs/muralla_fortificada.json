@@ -1,0 +1,19 @@
+{
+  "id": "muralla_fortificada",
+  "type": "tech",
+  "name": "Muralla fortificada",
+  "cost": {
+    "food": 200,
+    "stone": 100
+  },
+  "research_time": 40,
+  "at": "universidad",
+  "description": "Murallas +1500 HP (de 1500 a 3000)",
+  "requires": {
+    "age": "castillos"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "hp_murallas": 1500
+  }
+}

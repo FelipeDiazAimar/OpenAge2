@@ -1,0 +1,32 @@
+{
+  "id": "armadura_inf_2",
+  "type": "tech",
+  "name": "Cota de malla (infantería)",
+  "cost": {
+    "food": 200,
+    "gold": 100
+  },
+  "research_time": 40,
+  "at": "herreria",
+  "description": "Infantería +1 armadura cuerpo a cuerpo, +1 antiproyectil",
+  "requires": {
+    "age": "castillos",
+    "techs": [
+      "armadura_inf_1"
+    ]
+  },
+  "effects": [
+    {
+      "target": "tag:infanteria",
+      "op": "add",
+      "path": "abilities.Armor.classes.melee",
+      "value": 1
+    },
+    {
+      "target": "tag:infanteria",
+      "op": "add",
+      "path": "abilities.Armor.classes.pierce",
+      "value": 1
+    }
+  ]
+}

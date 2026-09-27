@@ -1,0 +1,27 @@
+{
+  "id": "barcos_dragon",
+  "type": "tech",
+  "name": "Barcos dragón (Dragon Ships)",
+  "cost": {
+    "wood": 250,
+    "gold": 250
+  },
+  "research_time": 60,
+  "at": "castillo",
+  "description": "Drakkar +20% ataque (7->8.4) y +1 alcance (6->7)",
+  "requires": {
+    "age": "imperial",
+    "techs": [
+      "jefatura"
+    ]
+  },
+  "effects": [],
+  "legacy_effects": {
+    "ataque_drakkar_bonus": 0.2,
+    "alcance_drakkar": 1,
+    "categoria": "barco",
+    "aplica_a": [
+      "drakkar"
+    ]
+  }
+}

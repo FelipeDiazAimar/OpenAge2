@@ -1,0 +1,19 @@
+{
+  "id": "redencion",
+  "type": "tech",
+  "name": "Redención",
+  "cost": {
+    "gold": 475
+  },
+  "research_time": 60,
+  "at": "monasterio",
+  "description": "Monjes pueden convertir edificios y asedio (antes solo unidades)",
+  "requires": {
+    "age": "castillos"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "convierte_edificios": true,
+    "convierte_asedio": true
+  }
+}

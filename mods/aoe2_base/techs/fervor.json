@@ -1,0 +1,20 @@
+{
+  "id": "fervor",
+  "type": "tech",
+  "name": "Fervor",
+  "cost": {
+    "gold": 140
+  },
+  "research_time": 40,
+  "at": "monasterio",
+  "description": "Monjes +50% velocidad (0.7 -> 1.05 tiles/s)",
+  "requires": {
+    "age": "castillos"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "velocidad_monje_bonus": 0.5,
+    "velocidad_base": 0.7,
+    "velocidad_final": 1.05
+  }
+}

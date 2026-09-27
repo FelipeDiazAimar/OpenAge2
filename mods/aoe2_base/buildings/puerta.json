@@ -1,0 +1,28 @@
+{
+  "id": "puerta",
+  "type": "building",
+  "extends": "edificio_base",
+  "name": "Puerta",
+  "cost": {
+    "stone": 30
+  },
+  "build_time": 30,
+  "footprint": [
+    2,
+    2
+  ],
+  "requires": {
+    "age": "feudal"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 2750
+    },
+    "Armor": {
+      "classes": {
+        "melee": 3,
+        "pierce": 8
+      }
+    }
+  }
+}

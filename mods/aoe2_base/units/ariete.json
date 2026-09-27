@@ -1,0 +1,43 @@
+{
+  "id": "ariete",
+  "type": "unit",
+  "extends": "asedio_base",
+  "name": "Ariete",
+  "cost": {
+    "wood": 160,
+    "gold": 75
+  },
+  "train_time": 36,
+  "pop_cost": 3,
+  "hotkey": "Q",
+  "graphics": {
+    "attack": "sprite:ram/attack",
+    "idle": "sprite:ram/idle",
+    "walk": "sprite:ram/walk"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 175
+    },
+    "Armor": {
+      "classes": {
+        "melee": -3,
+        "pierce": 8
+      }
+    },
+    "Move": {
+      "speed": 0.5
+    },
+    "Vision": {
+      "sight": 3.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 2,
+        "edificio": 125
+      },
+      "range": 0,
+      "reload": 5.0
+    }
+  }
+}

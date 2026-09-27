@@ -1,0 +1,21 @@
+{
+  "id": "torre_vigilancia",
+  "type": "tech",
+  "name": "Torre de vigilancia",
+  "cost": {
+    "food": 50,
+    "stone": 125
+  },
+  "research_time": 30,
+  "at": "universidad",
+  "description": "Desbloquea Torre de vigilancia: +2 ataque torre, +1 alcance",
+  "requires": {
+    "age": "feudal"
+  },
+  "effects": [],
+  "legacy_effects": {
+    "desbloquea": "torre_vigilancia",
+    "ataque_torres": 2,
+    "alcance_torres": 1
+  }
+}
