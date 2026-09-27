@@ -1,5 +1,5 @@
 extends RefCounted
-## Validador de mazos de cartas (20 cartas) para OpenAge-LAN.
+## Validador de mazos de cartas (1-25 cartas) para OpenAge-LAN.
 ## Referencia de ops (diseno 4.3): set/add/mul/append/remove/replace_entity/enable/disable.
 ## Formato carta: {id, name, civ, age 1-4, type, cost, effect{target,op,path,value}, icon, rarity, desc}.
 ## Sin class_name: usar con preload relativo desde el llamante.
@@ -11,8 +11,9 @@ const TIPOS_VALIDOS: Array[String] = ["unidad", "mejora", "recurso", "edificio"]
 const OPS_VALIDAS: Array[String] = ["set", "add", "mul", "append", "remove", "replace_entity", "enable", "disable"]
 # Recursos validos para el coste.
 const RECURSOS_VALIDOS: Array[String] = ["madera", "alimento", "oro", "piedra"]
-# Tamano exacto del mazo.
-const TAMANO_MAZO: int = 20
+# Un mazo lleva de 1 a 25 cartas (estilo Age 3, puede ir corto).
+const MIN_CARTAS: int = 1
+const MAX_CARTAS: int = 25
 # Carpeta con los JSON de cartas del mod base.
 const CARDS_DIR: String = "res://mods/aoe2_base/cards"
 
@@ -20,9 +21,11 @@ const CARDS_DIR: String = "res://mods/aoe2_base/cards"
 ## Valida un mazo y devuelve la lista de errores (vacia si es valido).
 static func validate_deck(cartas: Array, civ: String) -> Array[String]:
 	var errores: Array[String] = []
-	# Regla: el mazo debe tener exactamente 20 cartas.
-	if cartas.size() != TAMANO_MAZO:
-		errores.append("Mazo debe tener exactamente %d cartas (tiene %d)." % [TAMANO_MAZO, cartas.size()])
+	# Regla: entre 1 y 25 cartas (puede ir con menos del máximo).
+	if cartas.size() < MIN_CARTAS:
+		errores.append("Mazo vacío: añade al menos %d carta." % MIN_CARTAS)
+	if cartas.size() > MAX_CARTAS:
+		errores.append("Mazo supera el máximo de %d cartas (tiene %d)." % [MAX_CARTAS, cartas.size()])
 	var vistos := {}
 	# Revisa cada carta una por una.
 	for i in cartas.size():

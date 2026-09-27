@@ -1,10 +1,11 @@
 class_name CardWidget
 extends PanelContainer
-# Tarjeta visual reutilizable de 150x210 para mazos.
-# Solo UI: muestra datos y emite signal, nunca toca la sim.
-# Usa helpers de CardArt (card_frame, icon_for, rarity_color, cost_text).
+# Loseta cuadrada de carta estilo Age 3 (72px): icono grande, sello de edad
+# arriba-izquierda y coste abajo-derecha. Solo UI: emite signal, nunca sim.
+# API compatible con DeckBuilder: setup(card), set_selected(bool),
+# signal card_pressed(card_id: String).
 
-# Se emite al pulsar la tarjeta con clic o Enter/Espacio.
+# Se emite al pulsar la loseta con clic o Enter/Espacio.
 signal card_pressed(card_id: String)
 
 # Arte procedural compartido (marcos, iconos, rarezas, costes).
@@ -21,23 +22,19 @@ var _base_style: StyleBoxFlat = null
 # Ficha pendiente si setup llega antes del _ready.
 var _pending_card: Dictionary = {}
 
-@onready var _cost_label: Label = $Margin/CardVBox/TopBar/CostLabel
-@onready var _age_seal: Label = $Margin/CardVBox/TopBar/AgeSeal
-@onready var _icon_label: Label = $Margin/CardVBox/IconLabel
-@onready var _name_label: Label = $Margin/CardVBox/NameLabel
-@onready var _rarity_label: Label = $Margin/CardVBox/RarityLabel
-@onready var _rarity_bar: ColorRect = $Margin/CardVBox/RarityBar
+@onready var _icon_label: Label = $Margin/TileVBox/IconLabel
+@onready var _age_seal: Label = $Margin/TileVBox/AgeSeal
+@onready var _cost_label: Label = $Margin/TileVBox/CostLabel
 
 
 func _ready() -> void:
-	# La tarjeta recibe foco y clics para emitir el signal.
+	# La loseta recibe foco y clics para emitir el signal.
 	focus_mode = Control.FOCUS_ALL
 	mouse_filter = Control.MOUSE_FILTER_STOP
-	custom_minimum_size = Vector2(150, 210)
+	custom_minimum_size = Vector2(72, 72)
 	if _base_style == null:
 		_base_style = CardArtScript.card_frame(_edad)
 		add_theme_stylebox_override("panel", _base_style)
-	# Aplica la ficha que llego antes de estar lista.
 	if not _pending_card.is_empty():
 		var ficha: Dictionary = _pending_card
 		_pending_card = {}
@@ -61,49 +58,41 @@ func _gui_input(event: InputEvent) -> void:
 
 
 func setup(card: Dictionary) -> void:
-	# Rellena la tarjeta desde una ficha {id, name, icon, age, cost, rarity, desc, effect/effects}.
-	# Si los nodos aun no estan listos, guarda y aplica en _ready.
+	# Rellena la loseta desde una ficha {id, name, icon, age, cost, rarity, desc, effect/effects}.
 	if not is_node_ready():
 		_pending_card = card.duplicate()
-		# Guarda id y edad para el marco aunque no haya nodos.
 		_card_id = str(card.get("id", ""))
 		_edad = _edad_desde(card)
 		return
 	_card_id = str(card.get("id", ""))
 	_edad = _edad_desde(card)
-	# Icono grande desde el campo icon (acepta "icon:xxx" o id directo).
 	var icono_raw := str(card.get("icon", ""))
 	icono_raw = icono_raw.replace("icon:", "").strip_edges()
 	if icono_raw.is_empty():
 		icono_raw = _card_id
 	_icon_label.text = CardArtScript.icon_for(icono_raw)
-	# Nombre visible (puede venir como "@str:clave", se muestra tal cual).
-	var nombre := str(card.get("name", _card_id))
-	_name_label.text = nombre if not nombre.strip_edges().is_empty() else _card_id
-	# Coste corto con el helper ("200O 100M" o "Gratis").
+	_age_seal.text = _romano(_edad)
 	var coste: Dictionary = {}
 	if card.get("cost", null) is Dictionary:
 		coste = card["cost"]
 	elif card.get("coste", null) is Dictionary:
 		coste = card["coste"]
 	_cost_label.text = CardArtScript.cost_text(coste)
-	# Sello de edad en romano I/II/III/IV.
-	_age_seal.text = _romano(_edad)
-	# Borde de rareza: tira inferior + etiqueta con el color.
-	var rareza_raw := str(card.get("rarity", card.get("rareza", "comun")))
-	var color_rareza: Color = CardArtScript.rarity_color(rareza_raw)
-	_rarity_bar.color = color_rareza
-	_rarity_label.text = rareza_raw.strip_edges().capitalize()
-	_rarity_label.add_theme_color_override("font_color", color_rareza)
-	# Marco de madera con ribete segun edad.
 	_base_style = CardArtScript.card_frame(_edad)
-	_aplicar_marco()
-	# Tooltip con descripcion + efecto legible.
+	if _selected:
+		var dorado := _base_style.duplicate() as StyleBoxFlat
+		dorado.border_color = CardArtScript.ORO
+		dorado.border_width_left = 4
+		dorado.border_width_top = 4
+		dorado.border_width_right = 4
+		dorado.border_width_bottom = 4
+		add_theme_stylebox_override("panel", dorado)
+	else:
+		add_theme_stylebox_override("panel", _base_style)
 	var desc := str(card.get("desc", card.get("descripcion", "")))
 	var efecto_txt := _texto_efecto(card.get("effect", card.get("effects", null)))
-	if desc.strip_edges().is_empty():
-		desc = nombre
-	tooltip_text = desc if efecto_txt.is_empty() else "%s\n\nEfecto: %s" % [desc, efecto_txt]
+	var nombre := str(card.get("name", _card_id))
+	tooltip_text = "%s\n%s" % [nombre, desc] if efecto_txt.is_empty() else "%s\n%s\nEfecto: %s" % [nombre, desc, efecto_txt]
 
 
 func set_selected(valor: bool) -> void:
@@ -119,10 +108,10 @@ func _aplicar_marco() -> void:
 	if _selected:
 		var dorado := _base_style.duplicate() as StyleBoxFlat
 		dorado.border_color = CardArtScript.ORO
-		dorado.border_width_left = 5
-		dorado.border_width_top = 5
-		dorado.border_width_right = 5
-		dorado.border_width_bottom = 5
+		dorado.border_width_left = 4
+		dorado.border_width_top = 4
+		dorado.border_width_right = 4
+		dorado.border_width_bottom = 4
 		add_theme_stylebox_override("panel", dorado)
 	else:
 		add_theme_stylebox_override("panel", _base_style)
@@ -147,7 +136,7 @@ func _edad_desde(card: Dictionary) -> int:
 
 
 func _romano(edad: int) -> String:
-	# Sello de edad para la esquina de la tarjeta.
+	# Sello de edad para la esquina de la loseta.
 	match clampi(edad, 1, 4):
 		1:
 			return "I"

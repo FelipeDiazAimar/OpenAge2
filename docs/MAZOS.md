@@ -33,11 +33,11 @@ Ejemplo:
 
 ## 2. Reparto por edades
 
-Mazo = 20 cartas: **5 / 6 / 5 / 4** (I / II / III / IV). Una carta solo se envía si `edad_actual >= carta.age`.
+Mazo = hasta 25 cartas (estilo Age 3, puede ir con menos). Una carta solo se envía si `edad_actual >= carta.age`.
 
 ## 3. Reglas de mazo
 
-- 20 cartas exactas. Validador falla si no.
+- De 1 a 25 cartas. Validador falla si vacío o más de 25.
 - Cada carta: `civ == mi_civ` o `civ == null` (neutral). Nada de otras civs.
 - Sin duplicados de `id`. `limit` controla repetición en partida.
 - Una carta = uno o más `effects` (§4.3). Nada de código.

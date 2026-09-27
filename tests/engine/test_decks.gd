@@ -68,8 +68,10 @@ func test_validador_acepta_mazo_valido_20() -> void:
 
 
 func test_validador_rechaza_19_y_21() -> void:
-	assert_has_error(DeckValidator.validate_deck(_mazo_valido("britones", 19), "britones"), "exactamente 20")
-	assert_has_error(DeckValidator.validate_deck(_mazo_valido("britones", 21), "britones"), "exactamente 20")
+	assert_has_error(DeckValidator.validate_deck([], "britones"), "al menos")
+	assert_has_error(DeckValidator.validate_deck(_mazo_valido("britones", 26), "britones"), "máximo")
+	assert_eq(DeckValidator.validate_deck(_mazo_valido("britones", 5), "britones"), [])
+	assert_eq(DeckValidator.validate_deck(_mazo_valido("britones", 25), "britones"), [])
 
 
 func test_validador_rechaza_duplicados() -> void:
@@ -107,14 +109,14 @@ func test_deck_add_remove_limite_20_e_is_complete() -> void:
 	assert_eq(mazo.add_card(""), "id vacía")
 	assert_eq(mazo.add_card("neut_madera_1"), "")
 	assert_true(mazo.add_card("neut_madera_1").begins_with("carta duplicada"))
-	for i in 19:
+	for i in 24:
 		assert_eq(mazo.add_card("relleno_%02d" % i), "")
-	assert_eq(mazo.count(), 20)
+	assert_eq(mazo.count(), 25)
 	assert_true(mazo.is_complete())
 	assert_true(mazo.add_card("una_mas").begins_with("mazo lleno"))
 	assert_true(mazo.remove_card("relleno_00"))
-	assert_eq(mazo.count(), 19)
-	assert_false(mazo.is_complete())
+	assert_eq(mazo.count(), 24)
+	assert_true(mazo.is_complete())
 	assert_false(mazo.remove_card("no_existe"))
 
 

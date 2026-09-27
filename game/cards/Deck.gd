@@ -4,8 +4,8 @@ extends RefCounted
 ## profunda en DeckValidator.validate_deck(cartas, civ).
 ## Sin class_name: usar con load("res://game/cards/Deck.gd").
 
-# Número máximo de cartas del mazo.
-const MAX_CARDS: int = 20
+# Número máximo de cartas del mazo (estilo Age 3; puede ir con menos).
+const MAX_CARDS: int = 25
 # Carpeta de guardado en user://.
 const DECKS_DIR: String = "user://decks"
 # Validador externo (estático).
@@ -51,9 +51,9 @@ func count() -> int:
 	return card_ids.size()
 
 
-## True cuando el mazo llega a 20 cartas.
+## True cuando el mazo tiene al menos 1 carta (listo para guardar/jugar).
 func is_complete() -> bool:
-	return card_ids.size() == MAX_CARDS
+	return card_ids.size() >= 1 and card_ids.size() <= MAX_CARDS
 
 
 ## Valida el mazo con DeckValidator. Acepta Array (de load_all_cards)
