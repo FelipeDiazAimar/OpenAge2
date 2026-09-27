@@ -11,6 +11,7 @@ const GatherSystem := preload("res://engine/sim/systems/GatherSystem.gd")
 const CombatSystem := preload("res://engine/sim/systems/CombatSystem.gd")
 const HerdSystem := preload("res://engine/sim/systems/HerdSystem.gd")
 const SeparationSystem := preload("res://engine/sim/systems/SeparationSystem.gd")
+const BuildSystem := preload("res://engine/sim/systems/BuildSystem.gd")
 
 const INPUT_DELAY := 2
 const START_RES := {"wood": 200, "food": 200, "gold": 100, "stone": 200}
@@ -340,6 +341,7 @@ func step() -> void:
 	SeparationSystem.step(self)
 	CombatSystem.step(self)
 	GatherSystem.step(self)
+	BuildSystem.step(self)
 	HerdSystem.step(self)
 
 
@@ -376,6 +378,8 @@ func _apply(c: Dictionary) -> void:
 			_cmd_stop(int(c["pid"]), c["payload"])
 		"place":
 			_cmd_place(int(c["pid"]), c["payload"])
+		"build":
+			_cmd_build(int(c["pid"]), c["payload"])
 		"debug_spawn":
 			_cmd_debug_spawn(c["payload"])
 
@@ -417,6 +421,7 @@ func _cmd_move(pid: int, payload: Dictionary) -> void:
 	for i in ids.size():
 		GatherSystem.stop(self, ids[i])
 		CombatSystem.stop(self, ids[i])
+		BuildSystem.stop(self, ids[i])
 		MoveSystem.order_move(world, grid, ids[i], (target + offs[i]).clamp(lo, hi))
 
 
@@ -443,6 +448,7 @@ func _cmd_attack(pid: int, payload: Dictionary) -> void:
 		return
 	for id in _own_ids(pid, payload.get("ids"), "Attack"):
 		GatherSystem.stop(self, id)
+		BuildSystem.stop(self, id)
 		CombatSystem.order_attack(self, id, t)
 
 
@@ -450,6 +456,7 @@ func _cmd_stop(pid: int, payload: Dictionary) -> void:
 	for id in _own_ids(pid, payload.get("ids"), "Move"):
 		GatherSystem.stop(self, id)
 		CombatSystem.stop(self, id)
+		BuildSystem.stop(self, id)
 		var m: Dictionary = world.comp(id, "Move")
 		(m["waypoints"] as Array).clear()
 		m["moving"] = false
@@ -464,7 +471,20 @@ func _cmd_place(pid: int, payload: Dictionary) -> void:
 	if can_place(pid, def_id, tile) != "":
 		return
 	pay(pid, players[pid]["defs"].get_def(def_id).get("cost", {}))
-	place_foundation(pid, def_id, tile)
+	var f := place_foundation(pid, def_id, tile)
+	for id in _own_ids(pid, payload.get("ids"), "Build"):
+		BuildSystem.order_build(self, id, f)
+
+
+func _cmd_build(pid: int, payload: Dictionary) -> void:
+	var raw_t: Variant = payload.get("target")
+	if not _num_ok(raw_t):
+		return
+	var t := int(raw_t)
+	if not world.has_ability(t, "Foundation") or int(world.entities[t]["owner"]) != pid:
+		return
+	for id in _own_ids(pid, payload.get("ids"), "Build"):
+		BuildSystem.order_build(self, id, t)
 
 
 ## Tropas de prueba (solo con debug_enabled): n unidades cerca de pos.

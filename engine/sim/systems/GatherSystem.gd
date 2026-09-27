@@ -30,6 +30,11 @@ static func order_gather(sim, id: int, target: int) -> void:
 		g["carry"] = 0
 	g["carry_res"] = res
 	g["target"] = target
+	var b: Dictionary = w.comp(id, "Build")
+	if not b.is_empty():
+		# Deja de construir (sin preload de BuildSystem: evita el ciclo).
+		b["state"] = "idle"
+		b["target"] = -1
 	g["kind"] = kind
 	if bool(src["params"].get("requires_kill", false)) and not bool(src["killed"]):
 		# Caza: primero matar al animal (CombatSystem); al caer, recolectar.

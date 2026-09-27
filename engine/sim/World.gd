@@ -97,6 +97,8 @@ func state_hash() -> String:
 			st = "k" if components["ResourceSource"][id]["killed"] else ""
 		if has_ability(id, "Attack"):
 			st += "@%d" % components["Attack"][id]["target"]
+		if has_ability(id, "Build"):
+			st += "B%s:%d" % [components["Build"][id]["state"], components["Build"][id]["target"]]
 		if has_ability(id, "Foundation"):
 			st += "F%d" % components["Foundation"][id]["progress"]
 		parts.append("%d|%s|%d|%d|%d|%d|%s|%d|%s" % [id, e["def_id"], e["owner"], e["pos"].x, e["pos"].y, hp, mv, extra, st])
@@ -127,6 +129,9 @@ static func _init_component(ability: String, params: Dictionary) -> Dictionary:
 			c["stuck"] = 0
 			c["ignore"] = -1
 			c["ignore_until"] = 0
+		"Build":
+			c["state"] = "idle"
+			c["target"] = -1
 		"Gather":
 			c["state"] = "idle"
 			c["target"] = -1
