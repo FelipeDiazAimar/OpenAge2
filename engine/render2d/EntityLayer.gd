@@ -78,14 +78,19 @@ func sync(alpha: float, delta: float) -> void:
 		var hp: Dictionary = w.comp(id, "Hitpoints")
 		if not hp.is_empty() and int(hp["max"]) > 0:
 			v.hp_ratio = float(hp["hp"]) / float(hp["max"])
+		var f: Dictionary = w.comp(id, "Foundation")
+		v.progress = 1.0 if f.is_empty() else float(f["progress"]) / float(maxi(1, int(f["total"])))
 		var col: Color = colors.get(e["owner"], Color(0.6, 0.6, 0.6))
 		v.set_color(col)
 		v.owned = str(e["type"]) == "resource" and int(e["owner"]) >= 0 and w.has_ability(id, "Hitpoints")
 		var action := ""
 		var att: Dictionary = w.comp(id, "Attack")
 		var g: Dictionary = w.comp(id, "Gather")
+		var bld: Dictionary = w.comp(id, "Build")
 		if not att.is_empty() and bool(att["attacking"]):
 			action = "attack"
+		elif not bld.is_empty() and str(bld["state"]) == "building":
+			action = "build"
 		elif not g.is_empty() and str(g["state"]) == "gathering":
 			action = "task_" + str(g["kind"])
 		var src: Dictionary = w.comp(id, "ResourceSource")
@@ -97,6 +102,36 @@ func sync(alpha: float, delta: float) -> void:
 			action = "death" if t < DEATH_TIME else "decay"
 			moving = false
 		v.update_view(moving, facing, delta, action)
+
+
+## Vista previa de colocación: el edificio en la casilla, verde si se puede
+## y rojo si no. def vacío la oculta.
+var ghost
+var _ghost_def := ""
+
+
+func show_ghost(def: Dictionary, tile: Vector2i, ok: bool) -> void:
+	if def.is_empty():
+		hide_ghost()
+		return
+	if ghost == null or _ghost_def != str(def["id"]):
+		hide_ghost()
+		ghost = EntityView.new()
+		ghost.setup(-1, def, Color(1, 1, 1), locator)
+		ghost.z_index = 50
+		add_child(ghost)
+		_ghost_def = str(def["id"])
+	var size := Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
+	ghost.position = Iso.to_screen(Vector2(tile) + Vector2(size) * 0.5)
+	ghost.modulate = Color(0.55, 1.0, 0.55, 0.75) if ok else Color(1.0, 0.35, 0.35, 0.75)
+	ghost.update_view(false, Vector2.ZERO, 0.0, "")
+
+
+func hide_ghost() -> void:
+	if ghost != null:
+		ghost.queue_free()
+		ghost = null
+		_ghost_def = ""
 
 
 ## Cadáver: animación de muerte una vez (si hay pack) y fundido.

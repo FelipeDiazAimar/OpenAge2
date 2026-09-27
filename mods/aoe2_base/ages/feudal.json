@@ -6,5 +6,15 @@
   "cost": {
     "food": 500
   },
-  "research_time": 130
+  "research_time": 130,
+  "prerequisite_buildings": {
+    "any_of": [
+      "cuartel",
+      "molino",
+      "campamento_maderero",
+      "campamento_minero",
+      "muelle"
+    ],
+    "count": 2
+  }
 }

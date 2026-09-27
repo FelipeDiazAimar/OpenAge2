@@ -16,6 +16,7 @@ const MapGen := preload("res://engine/sim/MapGen.gd")
 const ResourceBar := preload("res://engine/ui/ResourceBar.gd")
 const TerrainImporter := preload("res://engine/assets/TerrainImporter.gd")
 const ProjectileLayer := preload("res://engine/render2d/ProjectileLayer.gd")
+const CommandPanel := preload("res://engine/ui/CommandPanel.gd")
 
 const MAP_SIZE := 144
 const MAP_SEED := 1234
@@ -40,7 +41,10 @@ var cam
 var overlay
 var bar
 var projectiles
+var panel
 var selected: Array[int] = []
+## Edificio en colocación (def id) o "".
+var placing := ""
 
 var _acc := 0.0
 var _press_pos := Vector2.ZERO
@@ -124,6 +128,8 @@ func tick_once() -> void:
 	sim.step()
 	layer.sync(1.0, 0.0)
 	projectiles.sync(1.0)
+	panel.refresh()
+	_update_rally()
 
 
 ## Solo pruebas locales hasta que exista producción (F4): 5 milicias y
@@ -139,6 +145,82 @@ func select(ids: Array) -> void:
 	for id in ids:
 		selected.append(int(id))
 	layer.set_selected(selected)
+	if panel != null:
+		panel.show_for(selected)
+	_update_rally()
+
+
+## Bandera del punto de reunión del edificio seleccionado.
+func _update_rally() -> void:
+	var b := _selected_building()
+	if b < 0:
+		overlay.set_rally(null)
+		return
+	var r: Vector2i = sim.world.comp(b, "Queue")["rally"]
+	if r.x < 0:
+		overlay.set_rally(null)
+	else:
+		overlay.set_rally(Iso.milli_to_screen(r), Iso.milli_to_screen(sim.world.entities[b]["pos"]))
+
+
+## Un único edificio propio con cola seleccionado; si no, -1.
+func _selected_building() -> int:
+	if selected.size() != 1 or not sim.world.entities.has(selected[0]):
+		return -1
+	var b: int = selected[0]
+	if not sim.world.has_ability(b, "Queue") or int(sim.world.entities[b]["owner"]) != local_pid:
+		return -1
+	return b
+
+
+func _builders() -> Array:
+	return selected.filter(func(s): return sim.world.has_ability(s, "Build") and sim.world.entities.has(s) and int(sim.world.entities[s]["owner"]) == local_pid)
+
+
+func start_placing(def_id: String) -> void:
+	if _builders().is_empty():
+		return
+	placing = def_id
+
+
+func cancel_placing() -> void:
+	placing = ""
+	layer.hide_ghost()
+
+
+## Esquina de la huella con el ratón en el centro del edificio.
+func _place_tile(def: Dictionary, tiles: Vector2) -> Vector2i:
+	var size := Vector2(float(def["footprint"][0]), float(def["footprint"][1]))
+	var c := tiles - size * 0.5
+	return Vector2i(int(floor(c.x + 0.5)), int(floor(c.y + 0.5)))
+
+
+func place_at(tiles: Vector2, keep: bool = false) -> void:
+	var def: Dictionary = sim.players[local_pid]["defs"].get_def(placing)
+	var tile := _place_tile(def, tiles)
+	if sim.can_place(local_pid, placing, tile) == "":
+		sim.queue_command(local_pid, "place", {"ids": _builders(), "def": placing, "tile": [tile.x, tile.y]})
+		if not keep:
+			cancel_placing()
+
+
+func _on_panel_action(kind: String, arg: Variant) -> void:
+	var b := _selected_building()
+	match kind:
+		"build":
+			start_placing(str(arg))
+		"train":
+			if b >= 0:
+				sim.queue_command(local_pid, "train", {"id": b, "def": str(arg)})
+		"research":
+			if b >= 0:
+				sim.queue_command(local_pid, "research", {"id": b, "tech": str(arg)})
+		"age_up":
+			if b >= 0:
+				sim.queue_command(local_pid, "age_up", {"id": b})
+		"cancel":
+			if b >= 0:
+				sim.queue_command(local_pid, "cancel", {"id": b, "index": int(arg)})
 
 
 func issue_move(tiles: Vector2) -> void:
@@ -150,9 +232,21 @@ func issue_move(tiles: Vector2) -> void:
 ## Clic derecho estilo AoE2: sobre un enemigo, atacar; sobre un recurso, los
 ## aldeanos seleccionados lo recolectan; en otro caso, mover.
 func smart_command(world_pos: Vector2) -> void:
+	if placing != "":
+		cancel_placing()
+		return
 	if selected.is_empty():
 		return
 	var id: int = layer.pick(world_pos)
+	var b := _selected_building()
+	if b >= 0:
+		var t := [int(round(Iso.to_tiles(world_pos).x * 1000.0)), int(round(Iso.to_tiles(world_pos).y * 1000.0))]
+		sim.queue_command(local_pid, "rally", {"ids": [b], "pos": t, "target": id})
+		return
+	if id >= 0 and sim.world.has_ability(id, "Foundation") and int(sim.world.entities[id]["owner"]) == local_pid:
+		if not _builders().is_empty():
+			sim.queue_command(local_pid, "build", {"ids": _builders(), "target": id})
+			return
 	if id >= 0 and sim.world.has_ability(id, "Hitpoints") and sim.is_enemy(local_pid, int(sim.world.entities[id]["owner"])):
 		var attackers: Array = selected.filter(func(s): return sim.world.has_ability(s, "Attack"))
 		if not attackers.is_empty():
@@ -181,6 +275,12 @@ func _process(delta: float) -> void:
 	projectiles.sync(_acc / dt)
 	if ticked:
 		bar.refresh() # la economía solo cambia por tick (10 Hz), no por frame
+		panel.refresh()
+		_update_rally()
+	if placing != "":
+		var def: Dictionary = sim.players[local_pid]["defs"].get_def(placing)
+		var tile := _place_tile(def, Iso.to_tiles(get_global_mouse_position()))
+		layer.show_ghost(def, tile, sim.can_place(local_pid, placing, tile) == "")
 	_frames += 1
 	if _shot_path != "" and _frames >= maxi(1, _shot_frames):
 		_save_screenshot(_shot_path)
@@ -200,6 +300,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if sim == null:
 		return
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
+		if placing != "":
+			cancel_placing()
+			return
 		get_tree().change_scene_to_file("res://ui/menus/MainMenu.tscn")
 		return
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -209,9 +312,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.keycode == KEY_S and not selected.is_empty():
 			sim.queue_command(local_pid, "stop", {"ids": selected.duplicate()})
 			return
+		var plain: bool = not (event.ctrl_pressed or event.alt_pressed or event.meta_pressed)
+		if plain and placing == "" and _train_hotkey(OS.get_keycode_string(event.keycode)):
+			return
 	if event is InputEventMouseButton:
 		var wp := get_global_mouse_position()
 		if event.button_index == MOUSE_BUTTON_LEFT:
+			if placing != "":
+				if event.pressed:
+					place_at(Iso.to_tiles(wp), event.shift_pressed)
+				return
 			if event.pressed:
 				_pressing = true
 				_press_pos = wp
@@ -232,6 +342,23 @@ func _unhandled_input(event: InputEvent) -> void:
 		var wp2 := get_global_mouse_position()
 		if wp2.distance_to(_press_pos) >= DRAG_MIN:
 			overlay.show_rect(Rect2(_press_pos, wp2 - _press_pos))
+
+
+## Atajo de la unidad (campo "hotkey" de los datos) con un edificio
+## seleccionado: entrena la primera que se pueda con esa tecla.
+func _train_hotkey(key: String) -> bool:
+	var b := _selected_building()
+	if b < 0 or key == "":
+		return false
+	var tr: Dictionary = sim.world.comp(b, "Train")
+	if tr.is_empty():
+		return false
+	for u in tr["params"]["units"]:
+		var d: Dictionary = sim.players[local_pid]["defs"].get_def(str(u))
+		if str(d.get("hotkey", "")) == key and sim.train_error(local_pid, b, str(u)) == "":
+			sim.queue_command(local_pid, "train", {"id": b, "def": str(u)})
+			return true
+	return false
 
 
 func _start_tile(pid: int) -> Vector2i:
@@ -258,8 +385,14 @@ func _build_help() -> void:
 	bar.setup(sim, local_pid)
 	bar.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
 	ui.add_child(bar)
+	panel = CommandPanel.new()
+	panel.setup(sim, local_pid)
+	panel.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
+	panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	panel.action.connect(_on_panel_action)
+	ui.add_child(panel)
 	var l := Label.new()
-	l.text = "Motor nuevo — clic izq: seleccionar / arrastrar · clic der: atacar / recolectar / mover · S: detener · F9 / Shift+F9: tropas de prueba propias / enemigas · Esc: menú"
+	l.text = "Motor nuevo — clic izq: seleccionar / arrastrar · clic der: atacar / recolectar / construir / mover (con edificio: punto de reunión) · S: detener · F9 / Shift+F9: tropas de prueba · Esc: menú"
 	l.position = Vector2(12, 40)
 	l.add_theme_color_override("font_color", Color(1, 0.92, 0.7))
 	l.add_theme_color_override("font_outline_color", Color.BLACK)

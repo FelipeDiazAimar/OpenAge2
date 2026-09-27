@@ -60,6 +60,16 @@ RESOURCE_SPRITES = {
     "deer": "animals/deer", "boar": "animals/boar", "sheep": "animals/sheep",
 }
 AGE_PREREQS = {"herreria_o_mercado": ["herreria", "mercado"], "castillo_o_monasterio": ["castillo", "monasterio"]}
+# Reglas AoE2 para avanzar de edad: n tipos de edificio de la edad anterior
+# (los datos originales piden solo 1 y no traen la de feudal).
+AGE_BUILDINGS = {
+    "feudal": {"any_of": ["cuartel", "molino", "campamento_maderero", "campamento_minero", "muelle"], "count": 2},
+    "castillos": {"any_of": ["herreria", "mercado", "arqueria", "establo"], "count": 2},
+    "imperial": {"any_of": ["castillo", "monasterio", "universidad", "taller_asedio"], "count": 2},
+}
+# Edad mínima de edificios que los datos originales no traen (AoE2).
+BUILDING_AGE = {"herreria": "feudal", "mercado": "feudal", "universidad": "castillos", "monasterio": "castillos",
+                "centro_urbano": "castillos"}
 HOTKEY_ORDER = "QWERTASDFGZXCVB"
 UNIT_ALIASES = {"hombre_de_armas": "hombre_armas", "trabuquete": "trebuchet"}
 HUNTABLE = {"boar", "deer", "sheep"}
@@ -122,6 +132,9 @@ def graphics_for_unit(unit_id, sprites_root):
     # El aldeano del DE llama "fight" a su animación de ataque.
     if "attack" not in out and "fight" in out:
         out["attack"] = out["fight"]
+    # ...y "builder" a la de construir (render: acción "build").
+    if "build" not in out and "builder" in out:
+        out["build"] = out["builder"]
     return out
 
 
@@ -197,8 +210,9 @@ def derive_trains(units):
 def convert_building(b, trains, research, sprites_root=None):
     e = {"id": b["id"], "type": "building", "extends": "edificio_base", "name": b.get("name", b["id"]),
          "cost": b.get("cost", {}), "build_time": b["build_time_sec"], "footprint": b["size_tiles"]}
-    if b.get("requires_age"):
-        e["requires"] = {"age": b["requires_age"]}
+    age = b.get("requires_age") or BUILDING_AGE.get(b["id"])
+    if age:
+        e["requires"] = {"age": age}
     sp = BUILDING_SPRITES.get(b["id"])
     if sp and sprites_root and os.path.isdir(os.path.join(sprites_root, sp)):
         e["graphics"] = {"idle": f"sprite:{sp}"}
@@ -329,6 +343,8 @@ def convert_age(a, index, report):
             e["prerequisite_buildings"] = {"any_of": AGE_PREREQS[r], "count": 1}
         else:
             report["warnings"].append(f"edad {a['id']}: requisito '{r}' sin mapear")
+    if a["id"] in AGE_BUILDINGS:
+        e["prerequisite_buildings"] = dict(AGE_BUILDINGS[a["id"]])
     return e
 
 

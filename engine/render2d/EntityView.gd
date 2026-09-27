@@ -26,6 +26,13 @@ var hp_ratio := 1.0:
 var one_shot := false
 ## Animal con dueño (oveja propia): lleva la marca de bando.
 var owned := false
+## Obra (cimiento): 0..1. Por debajo de 1 el edificio "crece" desde el
+## suelo sobre una silueta translúcida, con barra de avance.
+var progress := 1.0:
+	set(v):
+		if not is_equal_approx(v, progress):
+			progress = v
+			queue_redraw()
 
 var _graphics: Dictionary = {}
 var _locator
@@ -36,6 +43,7 @@ var _slot := 4
 var _frame := 0
 var _has_mask := false
 var _sprite: Sprite2D
+var _ghost: Sprite2D
 var _mat: ShaderMaterial
 
 
@@ -63,6 +71,11 @@ func setup(id: int, def: Dictionary, p_color: Color, locator) -> void:
 	_mat.shader = PLAYER_SHADER
 	_mat.set_shader_parameter("player_color", p_color)
 	_sprite.material = _mat
+	_ghost = Sprite2D.new()
+	_ghost.centered = false
+	_ghost.visible = false
+	_ghost.modulate = Color(1, 1, 1, 0.3)
+	add_child(_ghost)
 	add_child(_sprite)
 
 
@@ -136,6 +149,7 @@ func update_view(moving: bool, facing_screen: Vector2, delta: float, action: Str
 		queue_redraw()
 	_sprite.texture = fr["tex"]
 	_sprite.offset = -fr["hotspot"]
+	_apply_progress(fr)
 	var masked: bool = fr["mask"] != null
 	if masked != _has_mask:
 		_has_mask = masked
@@ -143,6 +157,27 @@ func update_view(moving: bool, facing_screen: Vector2, delta: float, action: Str
 	_mat.set_shader_parameter("has_mask", masked)
 	if fr["mask"] != null:
 		_mat.set_shader_parameter("mask_tex", fr["mask"])
+
+
+## Cimiento: solo la parte inferior del sprite (proporcional al avance) va
+## sólida; el resto es la silueta translúcida.
+func _apply_progress(fr: Dictionary) -> void:
+	var building := progress < 0.999
+	_ghost.visible = building
+	_sprite.region_enabled = building
+	if not building:
+		return
+	var tex: Texture2D = fr["tex"]
+	var size := tex.get_size()
+	var h := size.y * clampf(0.1 + 0.9 * progress, 0.0, 1.0)
+	_sprite.region_rect = Rect2(0, size.y - h, size.x, h)
+	_sprite.offset = -fr["hotspot"] + Vector2(0, size.y - h)
+	_ghost.texture = tex
+	_ghost.offset = -fr["hotspot"]
+
+
+func is_under_construction() -> bool:
+	return progress < 0.999
 
 
 func _pack(anim: String) -> Dictionary:
@@ -175,6 +210,16 @@ func _draw() -> void:
 		else:
 			draw_circle(Vector2(0, -14), 9.0, color)
 			draw_arc(Vector2(0, -14), 9.0, 0.0, TAU, 20, Color.BLACK, 1.5)
+	if kind == "building" and progress < 0.999:
+		var hw := footprint.x * 0.5
+		var hh := footprint.y * 0.5
+		var pts := PackedVector2Array([
+			Iso.to_screen(Vector2(-hw, -hh)), Iso.to_screen(Vector2(hw, -hh)),
+			Iso.to_screen(Vector2(hw, hh)), Iso.to_screen(Vector2(-hw, hh)), Iso.to_screen(Vector2(-hw, -hh))])
+		draw_polyline(pts, Color(color, 0.8), 2.0)
+		var top := -(footprint.y * Iso.TILE_H + 70.0)
+		draw_rect(Rect2(-24, top, 48, 5), Color(0, 0, 0, 0.7))
+		draw_rect(Rect2(-24, top, 48 * clampf(progress, 0.0, 1.0), 5), Color(0.95, 0.8, 0.3))
 	if selected or (hp_ratio < 0.999 and kind != "resource"):
 		var top := -(footprint.y * Iso.TILE_H + 60.0) if kind == "building" else -70.0
 		draw_rect(Rect2(-16, top, 32, 4), Color(0.6, 0.0, 0.0))

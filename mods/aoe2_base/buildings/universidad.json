@@ -11,6 +11,9 @@
     3,
     3
   ],
+  "requires": {
+    "age": "castillos"
+  },
   "abilities": {
     "Hitpoints": {
       "max": 1200

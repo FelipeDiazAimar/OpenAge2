@@ -11,6 +11,9 @@
     3,
     3
   ],
+  "requires": {
+    "age": "feudal"
+  },
   "graphics": {
     "idle": "sprite:buildings/smith/b_west_blacksmith_age2_x1"
   },

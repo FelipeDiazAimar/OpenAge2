@@ -49,3 +49,12 @@ El motor nuevo lee `mods/<mod>/` (el juego viejo sigue leyendo `data/` hasta la 
   `arquero` vale contra `arqueros`). Con `projectile_speed` dispara un proyectil que puede fallar.
   Las unidades con `Attack` y sin `Gather` (militares) y los edificios con `Attack` atacan solos.
 
+- Construcción: una unidad con `Build` levanta edificios. El edificio necesita `cost`, `build_time`
+  y `footprint`; `requires {age, techs}` limita cuándo se puede colocar. Al colocarlo el motor le
+  añade en tiempo de ejecución un `Foundation` (no va en los datos): hasta terminarlo no es
+  depósito, no da población, no dispara ni produce. Tiempo con n aldeanos = base × 3 / (n + 2).
+- Producción: `Train {units, queue}`, `Research {techs}` y `AgeAdvance {}` en un edificio le dan una
+  cola (componente `Queue`, también de tiempo de ejecución). Las unidades necesitan `train_time` y
+  `pop_cost`; las techs `research_time`, `at` y `effects`; las edades `index`, `research_time` y
+  `prerequisite_buildings {any_of, count}` (tipos distintos de edificio terminados).
+- Población: `ProvidesPop {amount}` en edificios terminados, tope 200.

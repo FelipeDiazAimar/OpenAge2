@@ -30,7 +30,8 @@
     "task_food_fish": "sprite:villager/fisher",
     "task_food_hunt": "sprite:villager/hunter",
     "task_food_herd": "sprite:villager/shepherd",
-    "attack": "sprite:villager/fight"
+    "attack": "sprite:villager/fight",
+    "build": "sprite:villager/builder"
   },
   "abilities": {
     "Hitpoints": {

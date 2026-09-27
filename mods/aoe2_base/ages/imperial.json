@@ -11,8 +11,10 @@
   "prerequisite_buildings": {
     "any_of": [
       "castillo",
-      "monasterio"
+      "monasterio",
+      "universidad",
+      "taller_asedio"
     ],
-    "count": 1
+    "count": 2
   }
 }

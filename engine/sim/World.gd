@@ -37,6 +37,13 @@ func despawn(id: int) -> void:
 	spatial.remove(id)
 
 
+## Componente de estado de ejecución (Foundation, Queue): no viene de la definición.
+func add_component(id: int, ability: String, c: Dictionary) -> void:
+	if not components.has(ability):
+		components[ability] = {}
+	components[ability][id] = c
+
+
 ## Quita una habilidad de una entidad viva (p. ej. animal muerto -> carcasa).
 func remove_component(id: int, ability: String) -> void:
 	if components.has(ability):
@@ -90,6 +97,14 @@ func state_hash() -> String:
 			st = "k" if components["ResourceSource"][id]["killed"] else ""
 		if has_ability(id, "Attack"):
 			st += "@%d" % components["Attack"][id]["target"]
+		if has_ability(id, "Build"):
+			st += "B%s:%d" % [components["Build"][id]["state"], components["Build"][id]["target"]]
+		if has_ability(id, "Foundation"):
+			st += "F%d" % components["Foundation"][id]["progress"]
+		if has_ability(id, "Queue"):
+			var q: Dictionary = components["Queue"][id]
+			st += "Q%d:%d:%s:%d:%s" % [(q["items"] as Array).size(), q["progress"], q["rally"], q["rally_target"],
+				",".join((q["items"] as Array).map(func(it): return str(it["id"])))]
 		parts.append("%d|%s|%d|%d|%d|%d|%s|%d|%s" % [id, e["def_id"], e["owner"], e["pos"].x, e["pos"].y, hp, mv, extra, st])
 	var ctx := HashingContext.new()
 	ctx.start(HashingContext.HASH_SHA256)
@@ -118,6 +133,9 @@ static func _init_component(ability: String, params: Dictionary) -> Dictionary:
 			c["stuck"] = 0
 			c["ignore"] = -1
 			c["ignore_until"] = 0
+		"Build":
+			c["state"] = "idle"
+			c["target"] = -1
 		"Gather":
 			c["state"] = "idle"
 			c["target"] = -1

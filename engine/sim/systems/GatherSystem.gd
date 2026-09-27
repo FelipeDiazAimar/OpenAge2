@@ -30,6 +30,11 @@ static func order_gather(sim, id: int, target: int) -> void:
 		g["carry"] = 0
 	g["carry_res"] = res
 	g["target"] = target
+	var b: Dictionary = w.comp(id, "Build")
+	if not b.is_empty():
+		# Deja de construir (sin preload de BuildSystem: evita el ciclo).
+		b["state"] = "idle"
+		b["target"] = -1
 	g["kind"] = kind
 	if bool(src["params"].get("requires_kill", false)) and not bool(src["killed"]):
 		# Caza: primero matar al animal (CombatSystem); al caer, recolectar.
@@ -216,7 +221,7 @@ static func _nearest_dropsite(sim, owner: int, res: String, pos: Vector2i) -> in
 	var best := -1
 	var best_d := 0
 	for d in w.ids_with("DropSite"):
-		if int(w.entities[d]["owner"]) != owner:
+		if int(w.entities[d]["owner"]) != owner or w.has_ability(d, "Foundation"):
 			continue
 		if not (w.comp(d, "DropSite")["params"]["accepts"] as Array).has(res):
 			continue

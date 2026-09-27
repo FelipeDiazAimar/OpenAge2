@@ -25,7 +25,7 @@ func setup(p_sim, p_pid: int) -> void:
 	var hb := HBoxContainer.new()
 	hb.add_theme_constant_override("separation", 26)
 	add_child(hb)
-	for key in ORDER + ["pop"]:
+	for key in ORDER + ["pop", "age"]:
 		var box := HBoxContainer.new()
 		box.add_theme_constant_override("separation", 6)
 		var icon := ColorRect.new()
@@ -49,6 +49,15 @@ func refresh() -> void:
 		_labels[key].text = "%s %d (%d)" % [NAMES[key], res[key], cnt[key]]
 	var p: Vector2i = sim.population(pid)
 	_labels["pop"].text = "Población %d/%d" % [p.x, p.y]
+	_labels["age"].text = age_name()
+
+
+func age_name() -> String:
+	for id in sim.registry.ids_of_type("age"):
+		var a: Dictionary = sim.registry.get_def(id)
+		if int(a.get("index", -1)) == sim.age_of(pid):
+			return str(a.get("name", id))
+	return ""
 
 
 func text_of(key: String) -> String:
