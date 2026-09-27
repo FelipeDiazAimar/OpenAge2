@@ -70,6 +70,16 @@ AGE_BUILDINGS = {
 # Edad mínima de edificios que los datos originales no traen (AoE2).
 BUILDING_AGE = {"herreria": "feudal", "mercado": "feudal", "universidad": "castillos", "monasterio": "castillos",
                 "centro_urbano": "castillos"}
+# Menú de construcción del aldeano (AoE2 DE): página y tecla de cada edificio.
+BUILD_MENU = {
+    "casa": ("economico", "Q"), "molino": ("economico", "W"), "campamento_minero": ("economico", "E"),
+    "campamento_maderero": ("economico", "R"), "muelle": ("economico", "T"), "granja": ("economico", "A"),
+    "herreria": ("economico", "S"), "mercado": ("economico", "D"), "monasterio": ("economico", "F"),
+    "universidad": ("economico", "G"), "centro_urbano": ("economico", "Z"), "maravilla": ("economico", "X"),
+    "cuartel": ("militar", "Q"), "arqueria": ("militar", "W"), "establo": ("militar", "E"),
+    "taller_asedio": ("militar", "R"), "muro": ("militar", "A"), "puerta": ("militar", "S"),
+    "torre_vigia": ("militar", "D"), "castillo": ("militar", "F"),
+}
 HOTKEY_ORDER = "QWERTASDFGZXCVB"
 UNIT_ALIASES = {"hombre_de_armas": "hombre_armas", "trabuquete": "trebuchet"}
 HUNTABLE = {"boar", "deer", "sheep"}
@@ -213,6 +223,8 @@ def convert_building(b, trains, research, sprites_root=None):
     age = b.get("requires_age") or BUILDING_AGE.get(b["id"])
     if age:
         e["requires"] = {"age": age}
+    if b["id"] in BUILD_MENU:
+        e["build_menu"], e["hotkey"] = BUILD_MENU[b["id"]]
     sp = BUILDING_SPRITES.get(b["id"])
     if sp and sprites_root and os.path.isdir(os.path.join(sprites_root, sp)):
         e["graphics"] = {"idle": f"sprite:{sp}"}

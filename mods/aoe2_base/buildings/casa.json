@@ -11,6 +11,8 @@
     2,
     2
   ],
+  "build_menu": "economico",
+  "hotkey": "Q",
   "graphics": {
     "idle": "sprite:buildings/house/b_west_house_age3_x1"
   },

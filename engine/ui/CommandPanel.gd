@@ -1,6 +1,7 @@
 extends PanelContainer
 ## Panel de órdenes (abajo a la izquierda, estilo AoE2): con aldeanos,
-## edificios para construir; con un edificio propio, unidades, tecnologías y
+## páginas de edificios (Q económicos, W militares; dentro, la tecla de cada
+## edificio viene de su campo "hotkey" y la página de "build_menu"); con un edificio propio, unidades, tecnologías y
 ## edad, y su cola (clic en un puesto = cancelar). Solo lee Sim; las órdenes
 ## salen por la señal `action` (la partida las convierte en comandos).
 ## (Los iconos y la skin del DE llegan en F5.)
@@ -9,6 +10,10 @@ signal action(kind: String, arg: Variant)
 
 const RES_SHORT := {"wood": "M", "food": "A", "gold": "O", "stone": "P"}
 const COLS := 5
+## Páginas del menú de construir: id -> [nombre, tecla]. Edificios sin
+## build_menu van a la económica.
+const MENUS := {"economico": ["Edificios económicos", "Q"], "militar": ["Edificios militares", "W"]}
+const MENU_ORDER := ["economico", "militar"]
 
 var sim
 var pid := 0
@@ -23,6 +28,8 @@ var _ids: Array = []
 var _building := -1
 var _queue_sig := ""
 var _state_sig := ""
+## Página abierta del menú de construir ("" = elegir página).
+var page := ""
 
 
 func setup(p_sim, p_pid: int) -> void:
@@ -73,8 +80,10 @@ func _defs():
 	return sim.players[pid]["defs"]
 
 
-## Selección nueva: reconstruye los botones.
-func show_for(ids: Array) -> void:
+## Selección nueva: reconstruye los botones (keep_page: conserva la página).
+func show_for(ids: Array, keep_page: bool = false) -> void:
+	if not keep_page:
+		page = ""
 	_ids = ids.duplicate()
 	for c in _grid.get_children():
 		c.queue_free()
@@ -96,7 +105,7 @@ func show_for(ids: Array) -> void:
 	_title.text = str(def.get("name", def.get("id", "")))
 	if alive.size() > 1:
 		_title.text += " ×%d" % alive.size()
-	if alive.any(func(i): return w.has_ability(i, "Build")):
+	if alive.any(func(i): return w.has_ability(i, "Build") and int(w.entities[i]["owner"]) == pid):
 		_build_buttons()
 	elif alive.size() == 1 and w.has_ability(first, "Queue") and int(w.entities[first]["owner"]) == pid:
 		_building = first
@@ -105,17 +114,73 @@ func show_for(ids: Array) -> void:
 
 
 func _build_buttons() -> void:
-	var reg = sim.registry
-	for id in reg.ids_of_type("building"):
+	if page == "":
+		for m in MENU_ORDER:
+			_add("menu", m, "%s\n(%s)" % [MENUS[m][0], MENUS[m][1]], func() -> String: return "")
+		return
+	_add("menu", "", "Atrás\n(Esc)", func() -> String: return "")
+	for id in _page_buildings(page):
 		var d: Dictionary = _defs().get_def(id)
-		if d.is_empty() or bool(d.get("abstract", false)) or not _defs().is_available(id):
-			continue
-		_add("build", id, "%s\n%s" % [d.get("name", id), cost_text(d.get("cost", {}))],
+		var hk := str(d.get("hotkey", ""))
+		_add("build", id, "%s%s\n%s" % [d.get("name", id), " (%s)" % hk if hk != "" else "", cost_text(d.get("cost", {}))],
 			func() -> String:
 				var why: String = sim.requirements_met(pid, d)
 				if why == "" and not sim.can_afford(pid, d.get("cost", {})):
 					why = "recursos insuficientes"
 				return why)
+
+
+## Edificios de una página, disponibles para la civilización del jugador.
+func _page_buildings(p: String) -> Array[String]:
+	var out: Array[String] = []
+	for id in sim.registry.ids_of_type("building"):
+		var d: Dictionary = _defs().get_def(id)
+		if d.is_empty() or bool(d.get("abstract", false)) or not _defs().is_available(id):
+			continue
+		var m := str(d.get("build_menu", "economico"))
+		if not MENUS.has(m):
+			m = "economico"
+		if m == p:
+			out.append(id)
+	return out
+
+
+func open_page(p: String) -> void:
+	page = p
+	show_for(_ids, true)
+
+
+## Tecla con aldeanos seleccionados: abre una página o elige un edificio.
+## true si la tecla se usó.
+func press_key(key: String) -> bool:
+	if not visible or _building >= 0 or key == "" or buttons.is_empty():
+		return false
+	if page == "":
+		for m in MENU_ORDER:
+			if MENUS[m][1] == key:
+				open_page(m)
+				return true
+		return false
+	for id in _page_buildings(page):
+		if str(_defs().get_def(id).get("hotkey", "")) == key:
+			var btn: Button = buttons.get("build:" + id)
+			if btn != null and not btn.disabled:
+				_choose_building(id)
+			return true # tecla del menú aunque el edificio esté bloqueado
+	return false
+
+
+## Esc dentro de una página: vuelve a elegir página. true si se usó.
+func back() -> bool:
+	if page == "" or not visible:
+		return false
+	open_page("")
+	return true
+
+
+func _choose_building(id: String) -> void:
+	action.emit("build", id)
+	open_page("")
 
 
 func _production_buttons(b: int) -> void:
@@ -151,7 +216,12 @@ func _add(kind: String, id: String, text: String, check: Callable) -> void:
 	btn.add_theme_font_size_override("font_size", 11)
 	btn.focus_mode = Control.FOCUS_NONE
 	btn.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
-	btn.pressed.connect(func(): action.emit(kind, id))
+	if kind == "menu":
+		btn.pressed.connect(func(): open_page.call_deferred(id))
+	elif kind == "build":
+		btn.pressed.connect(func(): _choose_building.call_deferred(id))
+	else:
+		btn.pressed.connect(func(): action.emit(kind, id))
 	_grid.add_child(btn)
 	buttons["%s:%s" % [kind, id]] = btn
 	_checks[btn] = check
@@ -171,7 +241,7 @@ func refresh() -> void:
 	if not visible:
 		return
 	if _state_signature() != _state_sig:
-		show_for(_ids)
+		show_for(_ids, true)
 		return
 	for btn in _checks:
 		var why: String = _checks[btn].call()

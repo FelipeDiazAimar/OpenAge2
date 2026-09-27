@@ -154,6 +154,14 @@ class TestFiles(unittest.TestCase):
         self.assertEqual(ab["ResourceSource"]["rate_key"], "food_hunt")
         self.assertEqual(sheep["abilities"]["ResourceSource"]["rate_key"], "food_herd")
 
+    def test_buildings_have_build_menu_hotkeys(self):
+        b = {"id": "casa", "hp": 550, "cost": {"wood": 25}, "build_time_sec": 20, "size_tiles": [2, 2]}
+        e = M.convert_building(b, [], [])
+        self.assertEqual((e["build_menu"], e["hotkey"]), ("economico", "Q"))
+        self.assertEqual(M.BUILD_MENU["cuartel"], ("militar", "Q"))
+        keys = [(p, k) for p, k in M.BUILD_MENU.values()]
+        self.assertEqual(len(keys), len(set(keys)), "sin teclas repetidas en una página")
+
     def test_resource_graphics(self):
         rd = {"id": "tree", "resource": "wood", "amount": 100, "gather": {"rate_key": "wood"}}
         self.assertNotIn("graphics", M.convert_resource(rd, {}))

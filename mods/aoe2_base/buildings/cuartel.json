@@ -14,6 +14,8 @@
   "requires": {
     "age": "alta_edad_media"
   },
+  "build_menu": "militar",
+  "hotkey": "Q",
   "graphics": {
     "idle": "sprite:buildings/barracks/b_west_barracks_age3_x1"
   },

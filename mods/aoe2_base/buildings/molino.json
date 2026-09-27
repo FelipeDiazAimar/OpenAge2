@@ -11,6 +11,8 @@
     2,
     2
   ],
+  "build_menu": "economico",
+  "hotkey": "W",
   "abilities": {
     "Hitpoints": {
       "max": 600

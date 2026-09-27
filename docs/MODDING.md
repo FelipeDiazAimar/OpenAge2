@@ -58,3 +58,5 @@ El motor nuevo lee `mods/<mod>/` (el juego viejo sigue leyendo `data/` hasta la 
   `pop_cost`; las techs `research_time`, `at` y `effects`; las edades `index`, `research_time` y
   `prerequisite_buildings {any_of, count}` (tipos distintos de edificio terminados).
 - Población: `ProvidesPop {amount}` en edificios terminados, tope 200.
+- Menú de construir: `"build_menu": "economico" | "militar"` y `"hotkey": "Q"` en el edificio
+  (tecla dentro de su página; sin `build_menu` va a la económica).

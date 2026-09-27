@@ -14,6 +14,8 @@
   "requires": {
     "age": "feudal"
   },
+  "build_menu": "militar",
+  "hotkey": "W",
   "graphics": {
     "idle": "sprite:buildings/archery/b_west_archery_range_age2_x1"
   },

@@ -33,6 +33,7 @@ const BY_TYPE := {
 	"building": {
 		"build_time": {"type": "number", "required": true},
 		"footprint": {"type": "int_pair", "required": true},
+		"build_menu": {"type": "string"},
 	},
 	"resource": {},
 	"terrain": {
