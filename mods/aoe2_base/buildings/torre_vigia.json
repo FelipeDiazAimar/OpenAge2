@@ -14,6 +14,9 @@
   "requires": {
     "age": "feudal"
   },
+  "graphics": {
+    "idle": "sprite:buildings/tower/b_west_tower_age2_x1"
+  },
   "abilities": {
     "Hitpoints": {
       "max": 700
@@ -36,7 +39,8 @@
         "pierce": 5
       },
       "range": 8.0,
-      "reload": 2.0
+      "reload": 2.0,
+      "projectile_speed": 7.0
     }
   }
 }

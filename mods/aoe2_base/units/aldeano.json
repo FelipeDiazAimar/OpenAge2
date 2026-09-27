@@ -27,7 +27,8 @@
     "task_stone": "sprite:villager/miner_gold",
     "task_food_forage": "sprite:villager/forager",
     "task_food_farm": "sprite:villager/task",
-    "task_food_fish": "sprite:villager/fisher"
+    "task_food_fish": "sprite:villager/fisher",
+    "attack": "sprite:villager/fight"
   },
   "abilities": {
     "Hitpoints": {

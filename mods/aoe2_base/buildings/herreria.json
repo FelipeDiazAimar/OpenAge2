@@ -11,6 +11,9 @@
     3,
     3
   ],
+  "graphics": {
+    "idle": "sprite:buildings/smith/b_west_blacksmith_age2_x1"
+  },
   "abilities": {
     "Hitpoints": {
       "max": 1200

@@ -11,6 +11,9 @@
     3,
     3
   ],
+  "graphics": {
+    "idle": "sprite:buildings/monastery/b_west_monastery_age3_x1"
+  },
   "abilities": {
     "Hitpoints": {
       "max": 1200

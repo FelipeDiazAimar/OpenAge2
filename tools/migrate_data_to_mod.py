@@ -40,7 +40,14 @@ BUILDING_SPRITES = {
     "centro_urbano": "buildings/tc/b_west_town_center_age3_x1",
     "casa": "buildings/house/b_west_house_age3_x1",
     "cuartel": "buildings/barracks/b_west_barracks_age3_x1",
+    "arqueria": "buildings/archery/b_west_archery_range_age2_x1",
+    "castillo": "buildings/castle/b_west_castle_age3_x1",
+    "torre_vigia": "buildings/tower/b_west_tower_age2_x1",
+    "mercado": "buildings/market/b_west_market_age2_x1",
+    "monasterio": "buildings/monastery/b_west_monastery_age3_x1",
+    "herreria": "buildings/smith/b_west_blacksmith_age2_x1",
 }
+BUILDING_ARROW_SPEED = 7.0  # casillas/s de las flechas de torres y castillos
 # rate_key -> packs de faena del aldeano, en orden de preferencia.
 VILLAGER_TASKS = {
     "wood": ["lumber"], "gold": ["miner_gold"], "stone": ["miner_stone", "miner_gold"],
@@ -103,6 +110,9 @@ def graphics_for_unit(unit_id, sprites_root):
             if anim in out:
                 out[f"task_{rate_key}"] = out[anim]
                 break
+    # El aldeano del DE llama "fight" a su animación de ataque.
+    if "attack" not in out and "fight" in out:
+        out["attack"] = out["fight"]
     return out
 
 
@@ -197,7 +207,9 @@ def convert_building(b, trains, research, sprites_root=None):
     if b.get("garrison_max"):
         ab["Garrison"] = {"capacity": b["garrison_max"], "arrows_per_unit": 1}
     if b.get("attack", 0) > 0:
-        ab["Attack"] = {"damage": {"pierce": b["attack"]}, "range": b["range"], "reload": DEFAULT_MELEE_RELOAD}
+        # Torres y castillos disparan flechas (proyectil visible, puede fallar).
+        ab["Attack"] = {"damage": {"pierce": b["attack"]}, "range": b["range"], "reload": DEFAULT_MELEE_RELOAD,
+                        "projectile_speed": BUILDING_ARROW_SPEED}
     if "pop_supply" in b:
         ab["ProvidesPop"] = {"amount": b["pop_supply"]}
     if b["id"] == "centro_urbano":

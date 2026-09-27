@@ -119,6 +119,21 @@ class TestFiles(unittest.TestCase):
             self.assertNotIn("task_food_forage", g, "sin pack forager no se inventa")
             self.assertEqual(g["walk"], "sprite:villager/walk")
 
+    def test_villager_attack_alias(self):
+        with tempfile.TemporaryDirectory() as d:
+            for anim in ("idle", "walk", "fight"):
+                os.makedirs(os.path.join(d, "villager", anim))
+            self.assertEqual(M.graphics_for_unit("aldeano", d)["attack"], "sprite:villager/fight")
+
+    def test_more_building_sprites(self):
+        b = {"id": "torre_vigia", "hp": 700, "size_tiles": [1, 1], "build_time_sec": 80, "cost": {}}
+        with tempfile.TemporaryDirectory() as d:
+            os.makedirs(os.path.join(d, "buildings", "tower", "b_west_tower_age2_x1"))
+            e = M.convert_building(b, [], [], d)
+            self.assertEqual(e["graphics"], {"idle": "sprite:buildings/tower/b_west_tower_age2_x1"})
+        b2 = dict(b, attack=5, range=8.0)
+        self.assertEqual(M.convert_building(b2, [], [])["abilities"]["Attack"]["projectile_speed"], 7.0, "las torres disparan flechas")
+
     def test_resource_graphics(self):
         rd = {"id": "tree", "resource": "wood", "amount": 100, "gather": {"rate_key": "wood"}}
         self.assertNotIn("graphics", M.convert_resource(rd, {}))
