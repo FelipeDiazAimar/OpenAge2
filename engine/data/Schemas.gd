@@ -5,7 +5,7 @@ extends RefCounted
 ## class_map {texto: número}, res_map {recurso: número}, int_pair, requires, effects.
 
 const RESOURCES: Array[String] = ["wood", "food", "gold", "stone"]
-const ENTITY_TYPES: Array[String] = ["unit", "building", "resource", "tech", "age", "civ"]
+const ENTITY_TYPES: Array[String] = ["unit", "building", "resource", "tech", "age", "civ", "terrain"]
 const EFFECT_OPS: Array[String] = ["set", "add", "mul", "append", "remove", "enable", "disable", "replace_entity"]
 
 const COMMON := {
@@ -35,6 +35,10 @@ const BY_TYPE := {
 		"footprint": {"type": "int_pair", "required": true},
 	},
 	"resource": {},
+	"terrain": {
+		"texture": {"type": "string", "required": true},
+		"color": {"type": "string", "required": true},
+	},
 	"tech": {
 		"research_time": {"type": "number", "required": true},
 		"at": {"type": "string", "required": true},

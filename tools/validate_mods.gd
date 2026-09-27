@@ -20,7 +20,7 @@ func _initialize() -> void:
 		printerr("[error] " + e)
 	if ok:
 		var counts := []
-		for t in ["unit", "building", "resource", "tech", "age", "civ"]:
+		for t in ["unit", "building", "resource", "tech", "age", "civ", "terrain"]:
 			counts.append("%s=%d" % [t, r.ids_of_type(t).size()])
 		print("[validate_mods] OK  %s" % " ".join(PackedStringArray(counts)))
 		print("[validate_mods] content_hash %s" % r.content_hash)

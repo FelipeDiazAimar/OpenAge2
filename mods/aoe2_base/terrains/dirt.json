@@ -1,0 +1,7 @@
+{
+  "id": "dirt",
+  "type": "terrain",
+  "name": "Tierra",
+  "texture": "terrain:g_ds3",
+  "color": "#c19b59"
+}

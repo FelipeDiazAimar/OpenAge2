@@ -6,7 +6,7 @@ extends RefCounted
 
 const Merge := preload("res://engine/data/Merge.gd")
 const Schemas := preload("res://engine/data/Schemas.gd")
-const ENTITY_DIRS: Array[String] = ["base", "units", "buildings", "resources", "techs", "ages", "civs"]
+const ENTITY_DIRS: Array[String] = ["base", "units", "buildings", "resources", "techs", "ages", "civs", "terrains"]
 
 var mods: Array[Dictionary] = []
 var defs: Dictionary = {}

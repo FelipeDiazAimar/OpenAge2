@@ -42,3 +42,18 @@ func test_missing_pack_returns_empty() -> void:
 	assert_eq(loc.sprite("sprite:nada/walk"), {})
 	assert_eq(loc.sprite("icon:x"), {})
 	assert_eq(loc.sprite(""), {})
+
+
+func test_terrain_textures() -> void:
+	var dir := "user://test_assets/terrain"
+	DirAccess.make_dir_recursive_absolute(dir)
+	var img := Image.create(8, 8, false, Image.FORMAT_RGBA8)
+	img.fill(Color(0.2, 0.6, 0.2))
+	img.save_png(dir + "/g_x.png")
+	var loc := AssetLocator.new([ROOT], [dir])
+	var tex := loc.terrain("terrain:g_x")
+	assert_true(tex != null)
+	assert_eq(tex.get_size(), Vector2(8, 8))
+	assert_true(tex.get_image().has_mipmaps(), "mipmaps para zoom alejado")
+	assert_true(loc.terrain("terrain:g_nada") == null)
+	assert_true(loc.terrain("sprite:x") == null)

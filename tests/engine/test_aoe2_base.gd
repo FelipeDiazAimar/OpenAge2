@@ -51,3 +51,9 @@ func test_civs_and_techs_apply() -> void:
 
 func test_hash_is_stable_between_loads() -> void:
 	assert_eq(_reg().content_hash, _reg().content_hash)
+
+
+func test_terrains_defined() -> void:
+	var r := _reg()
+	assert_eq(r.ids_of_type("terrain"), ["dirt", "forest_floor", "grass", "grass_dry"])
+	assert_eq(r.get_def("grass")["texture"], "terrain:g_gr2")

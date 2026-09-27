@@ -75,3 +75,10 @@ func test_effects() -> void:
 	var tech := {"id": "forja", "type": "tech", "research_time": 50, "at": "herreria",
 		"effects": [{"target": "tag:infanteria", "op": "bad"}]}
 	assert_has_error(Schemas.validate_entity(tech, "t.json"), "forja.effects: efecto 0: op desconocida")
+
+
+func test_terrain_schema() -> void:
+	var t := {"id": "grass", "type": "terrain", "name": "Pasto", "texture": "terrain:g_gr2", "color": "#87a244"}
+	assert_eq(Schemas.validate_entity(t, "t.json"), [])
+	t.erase("texture")
+	assert_has_error(Schemas.validate_entity(t, "t.json"), "grass.texture: falta campo obligatorio")

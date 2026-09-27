@@ -1,0 +1,7 @@
+{
+  "id": "grass_dry",
+  "type": "terrain",
+  "name": "Pasto seco",
+  "texture": "terrain:g_gr3",
+  "color": "#b09955"
+}

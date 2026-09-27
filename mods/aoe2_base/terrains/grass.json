@@ -1,0 +1,7 @@
+{
+  "id": "grass",
+  "type": "terrain",
+  "name": "Pasto",
+  "texture": "terrain:g_gr2",
+  "color": "#87a244"
+}

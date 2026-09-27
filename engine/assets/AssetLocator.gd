@@ -5,13 +5,35 @@ extends RefCounted
 ## render dibuja un placeholder.
 
 const DEFAULT_ROOTS := ["user://aoe2_assets/sprites", "res://assets/sprites"]
+const DEFAULT_TERRAIN_ROOTS := ["user://aoe2_assets/terrain", "res://assets/terrain"]
 
 var roots: Array[String] = []
+var terrain_roots: Array[String] = []
 var _cache: Dictionary = {}
 
 
-func _init(p_roots: Array = DEFAULT_ROOTS) -> void:
+func _init(p_roots: Array = DEFAULT_ROOTS, p_terrain_roots: Array = DEFAULT_TERRAIN_ROOTS) -> void:
 	roots.assign(p_roots)
+	terrain_roots.assign(p_terrain_roots)
+
+
+## "terrain:<nombre>" -> textura con mipmaps (PNG importado del DE); null si falta.
+func terrain(ref: String) -> Texture2D:
+	if not ref.begins_with("terrain:"):
+		return null
+	if _cache.has(ref):
+		return _cache[ref]
+	var tex: Texture2D = null
+	for r in terrain_roots:
+		var path := "%s/%s.png" % [r, ref.substr(8)]
+		if FileAccess.file_exists(path):
+			var img := Image.load_from_file(path)
+			if img != null and not img.is_empty():
+				img.generate_mipmaps()
+				tex = ImageTexture.create_from_image(img)
+				break
+	_cache[ref] = tex
+	return tex
 
 
 func sprite(ref: String) -> Dictionary:
