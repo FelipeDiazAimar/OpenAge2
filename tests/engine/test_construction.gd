@@ -175,3 +175,25 @@ func test_construction_deterministic() -> void:
 		_steps(s, 300)
 		hashes.append(s.state_hash())
 	assert_eq(hashes[0], hashes[1])
+
+
+func test_place_needs_own_builder_and_free_of_enemies() -> void:
+	var s := _sim()
+	var enemy := s.spawn("aldeano", 1, Vector2i(10, 10))
+	s.queue_command(0, "place", {"ids": [], "def": "casa", "tile": [30, 30]})
+	s.queue_command(0, "place", {"ids": [enemy], "def": "casa", "tile": [30, 30]})
+	_steps(s, 3)
+	assert_eq(_find(s, "casa", 0), -1, "sin aldeano propio no se coloca")
+	assert_eq(s.res_of(0)["wood"], 200)
+	assert_eq(s.can_place(0, "casa", Vector2i(9, 9)), "hay unidades de otro jugador")
+
+
+func test_eject_avoids_sealed_pocket() -> void:
+	var s := _sim()
+	var u := s.spawn("aldeano", 0, Vector2i(9, 10))
+	# Hueco cerrado en (8, 10): rodeado de bloqueos salvo por la huella.
+	for t in [Vector2i(7, 9), Vector2i(8, 9), Vector2i(7, 10), Vector2i(7, 11), Vector2i(8, 11)]:
+		s.grid.set_blocked(t, true)
+	s.place_foundation(0, "casa", Vector2i(9, 9))
+	var t := Grid.tile_of(s.world.entities[u]["pos"])
+	assert_true(t != Vector2i(8, 10), "no queda encerrado")

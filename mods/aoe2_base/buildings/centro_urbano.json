@@ -11,6 +11,9 @@
     4,
     4
   ],
+  "requires": {
+    "age": "castillos"
+  },
   "graphics": {
     "idle": "sprite:buildings/tc/b_west_town_center_age3_x1"
   },

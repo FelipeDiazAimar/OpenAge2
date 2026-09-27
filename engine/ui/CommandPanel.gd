@@ -21,6 +21,8 @@ var _queue_box: HBoxContainer
 var _status: Label
 var _ids: Array = []
 var _building := -1
+var _queue_sig := ""
+var _state_sig := ""
 
 
 func setup(p_sim, p_pid: int) -> void:
@@ -76,6 +78,10 @@ func show_for(ids: Array) -> void:
 	_ids = ids.duplicate()
 	for c in _grid.get_children():
 		c.queue_free()
+	for c in _queue_box.get_children():
+		c.queue_free()
+	_queue_sig = ""
+	_state_sig = _state_signature()
 	buttons.clear()
 	_checks.clear()
 	_building = -1
@@ -144,6 +150,7 @@ func _add(kind: String, id: String, text: String, check: Callable) -> void:
 	btn.custom_minimum_size = Vector2(96, 44)
 	btn.add_theme_font_size_override("font_size", 11)
 	btn.focus_mode = Control.FOCUS_NONE
+	btn.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
 	btn.pressed.connect(func(): action.emit(kind, id))
 	_grid.add_child(btn)
 	buttons["%s:%s" % [kind, id]] = btn
@@ -151,15 +158,25 @@ func _add(kind: String, id: String, text: String, check: Callable) -> void:
 
 
 ## Por tick: habilitado/motivo de cada botón, cola y avance de obra.
+## Cambia lo que el panel ofrece (edad, techs investigadas, obra terminada).
+func _state_signature() -> String:
+	var built := 0
+	for i in _ids:
+		if sim.is_built(i):
+			built += 1
+	return "%d|%d|%d" % [sim.age_of(pid), sim.researched(pid).size(), built]
+
+
 func refresh() -> void:
 	if not visible:
+		return
+	if _state_signature() != _state_sig:
+		show_for(_ids)
 		return
 	for btn in _checks:
 		var why: String = _checks[btn].call()
 		btn.disabled = why != ""
 		btn.tooltip_text = why
-	for c in _queue_box.get_children():
-		c.queue_free()
 	_status.text = ""
 	var w = sim.world
 	if _ids.size() == 1 and w.entities.has(_ids[0]):
@@ -170,20 +187,29 @@ func refresh() -> void:
 		return
 	var q: Dictionary = w.comp(_building, "Queue")
 	var items: Array = q["items"]
-	for i in items.size():
+	# Los botones de la cola solo se recrean si cambia su contenido (si no, un
+	# clic que cruza un tick caería sobre un botón ya liberado).
+	var sig := ",".join(items.map(func(it): return str(it["id"])))
+	if sig != _queue_sig:
+		_queue_sig = sig
+		for c in _queue_box.get_children():
+			c.queue_free()
+		for i in items.size():
+			var btn := Button.new()
+			btn.tooltip_text = "Cancelar"
+			btn.focus_mode = Control.FOCUS_NONE
+			btn.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
+			btn.add_theme_font_size_override("font_size", 11)
+			var idx := i
+			btn.pressed.connect(func(): action.emit("cancel", idx))
+			_queue_box.add_child(btn)
+	var kids := _queue_box.get_children().filter(func(c): return not c.is_queued_for_deletion())
+	for i in mini(items.size(), kids.size()):
 		var it: Dictionary = items[i]
-		var d: Dictionary = _defs().get_def(str(it["id"]))
-		var t := str(d.get("name", it["id"]))
+		var t := str(_defs().get_def(str(it["id"])).get("name", it["id"]))
 		if i == 0:
 			t += " %d%%" % (100 * int(q["progress"]) / maxi(1, int(it["total"])))
-		var btn := Button.new()
-		btn.text = t
-		btn.tooltip_text = "Cancelar"
-		btn.focus_mode = Control.FOCUS_NONE
-		btn.add_theme_font_size_override("font_size", 11)
-		var idx := i
-		btn.pressed.connect(func(): action.emit("cancel", idx))
-		_queue_box.add_child(btn)
+		kids[i].text = t
 	if bool(q["housed"]):
 		_status.text = "¡Sin casas! Construye más para seguir entrenando."
 

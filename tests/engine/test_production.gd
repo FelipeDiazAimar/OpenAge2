@@ -230,3 +230,63 @@ func test_economy_cycle_deterministic() -> void:
 		_steps(s, 700)
 		hashes.append(s.state_hash())
 	assert_eq(hashes[0], hashes[1])
+
+
+func test_destroyed_building_releases_pending_age() -> void:
+	var s := _sim()
+	_rich(s, 0)
+	var tc := s.spawn("centro_urbano", 0, Vector2i(4, 4))
+	s.spawn("cuartel", 0, Vector2i(20, 20))
+	s.spawn("molino", 0, Vector2i(30, 20))
+	s.queue_command(0, "age_up", {"id": tc})
+	_steps(s, 3)
+	assert_eq(s.age_error(0, tc), "ya en curso")
+	s.kill(tc)
+	var tc2 := s.spawn("centro_urbano", 0, Vector2i(10, 30))
+	assert_eq(s.age_error(0, tc2), "", "la edad se puede volver a investigar")
+
+
+func test_blocked_exit_keeps_unit() -> void:
+	var s := _sim()
+	var tc := s.spawn("centro_urbano", 0, Vector2i(10, 10))
+	for y in range(0, 40):
+		for x in range(0, 40):
+			var inside := x >= 10 and x < 14 and y >= 10 and y < 14
+			if not inside and maxi(absi(x - 11), absi(y - 11)) <= 12:
+				s.grid.set_blocked(Vector2i(x, y), true)
+	s.queue_command(0, "train", {"id": tc, "def": "aldeano"})
+	_steps(s, 260)
+	assert_eq(_count(s, "aldeano", 0), 0)
+	assert_eq(_items(s, tc).size(), 1, "la unidad espera lista, no se pierde")
+	assert_eq(s.res_of(0)["food"], 150)
+	s.grid.set_blocked(Vector2i(12, 15), false)
+	_steps(s, 2)
+	assert_eq(_count(s, "aldeano", 0), 1, "sale al liberarse una casilla")
+
+
+func test_exit_avoids_sealed_pocket() -> void:
+	var s := _sim()
+	var tc := s.spawn("centro_urbano", 0, Vector2i(10, 10))
+	# Hueco cerrado de una casilla junto a la salida por defecto (12, 14).
+	for t in [Vector2i(11, 14), Vector2i(13, 14), Vector2i(11, 15), Vector2i(12, 15), Vector2i(13, 15)]:
+		s.grid.set_blocked(t, true)
+	s.queue_command(0, "train", {"id": tc, "def": "aldeano"})
+	_steps(s, 205)
+	for id in s.world.ids_with("Gather"):
+		assert_true(Grid.tile_of(s.world.entities[id]["pos"]) != Vector2i(12, 14), "no aparece en el hueco")
+
+
+func test_enemy_payloads_are_inert() -> void:
+	var s := _sim()
+	_rich(s, 1)
+	s.players[0]["age"] = 1
+	var tc := s.spawn("centro_urbano", 0, Vector2i(4, 4))
+	var bs := s.spawn("herreria", 0, Vector2i(20, 20))
+	s.queue_command(1, "train", {"id": tc, "def": "aldeano"})
+	s.queue_command(1, "research", {"id": bs, "tech": "forja"})
+	s.queue_command(1, "rally", {"ids": [tc], "pos": [30000, 30000]})
+	s.queue_command(1, "age_up", {"id": tc})
+	_steps(s, 3)
+	assert_eq(_items(s, tc).size() + _items(s, bs).size(), 0)
+	assert_eq(s.world.comp(tc, "Queue")["rally"], Vector2i(-1, -1))
+	assert_eq(s.res_of(1)["food"], 5000)

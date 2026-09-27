@@ -174,7 +174,7 @@ func _selected_building() -> int:
 
 
 func _builders() -> Array:
-	return selected.filter(func(s): return sim.world.has_ability(s, "Build"))
+	return selected.filter(func(s): return sim.world.has_ability(s, "Build") and sim.world.entities.has(s) and int(sim.world.entities[s]["owner"]) == local_pid)
 
 
 func start_placing(def_id: String) -> void:
@@ -312,7 +312,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.keycode == KEY_S and not selected.is_empty():
 			sim.queue_command(local_pid, "stop", {"ids": selected.duplicate()})
 			return
-		if _train_hotkey(OS.get_keycode_string(event.keycode)):
+		var plain: bool = not (event.ctrl_pressed or event.alt_pressed or event.meta_pressed)
+		if plain and placing == "" and _train_hotkey(OS.get_keycode_string(event.keycode)):
 			return
 	if event is InputEventMouseButton:
 		var wp := get_global_mouse_position()

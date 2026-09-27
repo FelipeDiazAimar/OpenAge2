@@ -97,3 +97,16 @@ func test_match_train_rally_and_hotkey() -> void:
 	assert_true(m.sim.world.comp(tc, "Queue")["rally"].x > tcp.x, "clic derecho con el TC = punto de reunión")
 	assert_true(m.overlay.rally != null, "bandera visible")
 	m.queue_free()
+
+
+func test_panel_rebuilds_after_age_up() -> void:
+	var s := _sim()
+	var tc := s.spawn("centro_urbano", 0, Vector2i(10, 10))
+	var p := CommandPanel.new()
+	p.setup(s, 0)
+	p.show_for([tc])
+	assert_true(p.buttons.has("age_up:feudal"))
+	s.complete_age(0, "feudal")
+	p.refresh()
+	assert_true(p.buttons.has("age_up:castillos"), "ofrece la siguiente edad")
+	p.free()

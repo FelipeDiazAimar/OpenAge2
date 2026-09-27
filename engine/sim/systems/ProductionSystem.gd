@@ -53,19 +53,22 @@ static func step(sim) -> void:
 				q["housed"] = true
 				continue
 			q["housed"] = false
-		q["progress"] = int(q["progress"]) + 1
+		q["progress"] = mini(int(q["progress"]) + 1, int(it["total"]))
 		if int(q["progress"]) < int(it["total"]):
 			continue
-		items.pop_front()
-		q["progress"] = 0
 		match str(it["kind"]):
 			"unit":
-				if _release(sim, id, q, str(it["id"])) >= 0:
-					pops[owner] = pops[owner] + Vector2i(pc, 0)
+				# Sin casilla de salida (edificio rodeado) la unidad espera lista.
+				if _release(sim, id, q, str(it["id"])) < 0:
+					q["housed"] = true
+					continue
+				pops[owner] = pops[owner] + Vector2i(pc, 0)
 			"tech":
 				sim.complete_research(owner, str(it["id"]))
 			"age":
 				sim.complete_age(owner, str(it["id"]))
+		items.pop_front()
+		q["progress"] = 0
 
 
 ## Genera la unidad en la casilla libre junto al edificio más cercana al
@@ -80,7 +83,7 @@ static func _release(sim, b: int, q: Dictionary, def_id: String) -> int:
 	var goal := origin + Vector2i(size.x / 2, size.y)
 	if rally != NO_RALLY:
 		goal = Grid.tile_of(rally)
-	var tile := _exit_tile(sim, origin, size, goal)
+	var tile: Vector2i = sim.exit_tile(origin, size, goal)
 	if tile.x < 0:
 		return -1
 	var unit_id: String = sim.players[owner]["defs"].resolve_unit(def_id)
@@ -99,26 +102,3 @@ static func _release(sim, b: int, q: Dictionary, def_id: String) -> int:
 		MoveSystem.order_move(w, sim.grid, u, rally)
 	return u
 
-
-## Anillos alrededor de la huella; en el primer anillo con casillas libres,
-## la más cercana a goal (desempate y, x).
-static func _exit_tile(sim, origin: Vector2i, size: Vector2i, goal: Vector2i) -> Vector2i:
-	for r in range(1, 10):
-		var best := Vector2i(-1, -1)
-		var best_key := 0
-		for y in range(origin.y - r, origin.y + size.y + r):
-			for x in range(origin.x - r, origin.x + size.x + r):
-				var inner := x >= origin.x - r + 1 and x < origin.x + size.x + r - 1 and y >= origin.y - r + 1 and y < origin.y + size.y + r - 1
-				if inner:
-					continue
-				var t := Vector2i(x, y)
-				if not sim.grid.is_walkable(t):
-					continue
-				var d := t - goal
-				var key: int = (d.x * d.x + d.y * d.y) * 16777216 + y * 4096 + x
-				if best.x < 0 or key < best_key:
-					best = t
-					best_key = key
-		if best.x >= 0:
-			return best
-	return Vector2i(-1, -1)

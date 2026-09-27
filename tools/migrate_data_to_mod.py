@@ -68,7 +68,8 @@ AGE_BUILDINGS = {
     "imperial": {"any_of": ["castillo", "monasterio", "universidad", "taller_asedio"], "count": 2},
 }
 # Edad mínima de edificios que los datos originales no traen (AoE2).
-BUILDING_AGE = {"herreria": "feudal", "mercado": "feudal", "universidad": "castillos", "monasterio": "castillos"}
+BUILDING_AGE = {"herreria": "feudal", "mercado": "feudal", "universidad": "castillos", "monasterio": "castillos",
+                "centro_urbano": "castillos"}
 HOTKEY_ORDER = "QWERTASDFGZXCVB"
 UNIT_ALIASES = {"hombre_de_armas": "hombre_armas", "trabuquete": "trebuchet"}
 HUNTABLE = {"boar", "deer", "sheep"}

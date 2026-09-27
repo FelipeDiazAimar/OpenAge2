@@ -42,9 +42,9 @@ func add_player(pid: int, civ: String, team: int) -> void:
 	var res := {}
 	for k in START_RES:
 		res[k] = int(START_RES[k]) * FP.SCALE
-	# age: índice de la edad actual; pending: techs/edades encoladas (no se repiten).
+	# age: índice de la edad actual.
 	players.append({"id": pid, "civ": civ, "team": team, "defs": PlayerDefs.new(registry.defs, civ), "res": res,
-		"age": 0, "pending": {}})
+		"age": 0})
 
 
 func age_of(pid: int) -> int:
@@ -127,6 +127,9 @@ func can_place(pid: int, def_id: String, tile: Vector2i) -> String:
 	for id in _ids_in_rect(tile, size):
 		if world.has_ability(id, "ResourceSource") and not world.has_ability(id, "Move"):
 			return "lugar ocupado" # carcasas
+		var o := int(world.entities[id]["owner"])
+		if o >= 0 and o != pid:
+			return "hay unidades de otro jugador" # (AoE2) no se las aparta
 	return ""
 
 
@@ -167,16 +170,52 @@ func place_foundation(pid: int, def_id: String, tile: Vector2i) -> int:
 
 
 func _eject(id: int, tile: Vector2i, size: Vector2i) -> void:
-	var from := Grid.tile_of(world.entities[id]["pos"])
-	for off in spread_offsets(400):
-		var t: Vector2i = from + off / FP.SCALE
-		var inside := t.x >= tile.x and t.y >= tile.y and t.x < tile.x + size.x and t.y < tile.y + size.y
-		if not inside and grid.is_walkable(t):
-			world.set_pos(id, Grid.center_of(t))
-			var m: Dictionary = world.comp(id, "Move")
-			(m["waypoints"] as Array).clear()
-			m["moving"] = false
-			return
+	var t := exit_tile(tile, size, Grid.tile_of(world.entities[id]["pos"]))
+	if t.x < 0:
+		return
+	world.set_pos(id, Grid.center_of(t))
+	var m: Dictionary = world.comp(id, "Move")
+	(m["waypoints"] as Array).clear()
+	m["moving"] = false
+
+
+## Casilla libre alrededor de una huella, la más cercana a goal (desempate
+## y, x), dentro de la zona conectada con más casillas libres alrededor: así
+## nadie aparece en un hueco cerrado. (-1, -1) si no hay ninguna.
+func exit_tile(origin: Vector2i, size: Vector2i, goal: Vector2i) -> Vector2i:
+	var cands: Array[Vector2i] = []
+	var count := {}
+	for r in range(1, 10):
+		for y in range(origin.y - r, origin.y + size.y + r):
+			for x in range(origin.x - r, origin.x + size.x + r):
+				var inner := x > origin.x - r and x < origin.x + size.x + r - 1 and y > origin.y - r and y < origin.y + size.y + r - 1
+				var t := Vector2i(x, y)
+				if inner or not grid.is_walkable(t):
+					continue
+				cands.append(t)
+				var rg: int = grid.region_of(t)
+				count[rg] = int(count.get(rg, 0)) + 1
+		if r >= 3 and not cands.is_empty():
+			break
+	if cands.is_empty():
+		return Vector2i(-1, -1)
+	var region := -1
+	var keys: Array = count.keys()
+	keys.sort()
+	for rg in keys:
+		if region < 0 or int(count[rg]) > int(count[region]):
+			region = rg
+	var best := Vector2i(-1, -1)
+	var best_key := 0
+	for t in cands:
+		if grid.region_of(t) != region:
+			continue
+		var d := t - goal
+		var key: int = (d.x * d.x + d.y * d.y) * 16777216 + t.y * 4096 + t.x
+		if best.x < 0 or key < best_key:
+			best = t
+			best_key = key
+	return best
 
 
 func def_for(id: int) -> Dictionary:
@@ -484,11 +523,12 @@ func _cmd_place(pid: int, payload: Dictionary) -> void:
 		return
 	var def_id := str(payload.get("def", ""))
 	var tile := Vector2i(int(t[0]), int(t[1]))
-	if can_place(pid, def_id, tile) != "":
-		return
+	var builders := _own_ids(pid, payload.get("ids"), "Build")
+	if builders.is_empty() or can_place(pid, def_id, tile) != "":
+		return # sin aldeano propio no se coloca nada
 	pay(pid, players[pid]["defs"].get_def(def_id).get("cost", {}))
 	var f := place_foundation(pid, def_id, tile)
-	for id in _own_ids(pid, payload.get("ids"), "Build"):
+	for id in builders:
 		BuildSystem.order_build(self, id, f)
 
 
@@ -515,9 +555,20 @@ func _own_queue(pid: int, raw: Variant) -> int:
 
 func _enqueue(pid: int, b: int, kind: String, id: String, cost: Dictionary, seconds: Variant) -> void:
 	pay(pid, cost)
-	(world.comp(b, "Queue")["items"] as Array).append({"kind": kind, "id": id, "cost": cost, "total": ProductionSystem.ticks_of(seconds)})
-	if kind != "unit":
-		players[pid]["pending"][id] = true
+	# Copia del coste: el reembolso devuelve lo pagado aunque luego se parchee.
+	(world.comp(b, "Queue")["items"] as Array).append({"kind": kind, "id": id, "cost": cost.duplicate(true), "total": ProductionSystem.ticks_of(seconds)})
+
+
+## Tech o edad en alguna cola del jugador. Se deriva de las colas vivas: si el
+## edificio cae, deja de estar "en curso".
+func is_pending(pid: int, id: String) -> bool:
+	for b in world.ids_with("Queue"):
+		if int(world.entities[b]["owner"]) != pid:
+			continue
+		for it in world.comp(b, "Queue")["items"]:
+			if str(it["id"]) == id and str(it["kind"]) != "unit":
+				return true
+	return false
 
 
 func _cmd_train(pid: int, payload: Dictionary) -> void:
@@ -560,7 +611,6 @@ func _cmd_cancel(pid: int, payload: Dictionary) -> void:
 	if i == 0:
 		q["progress"] = 0
 	refund(pid, it["cost"])
-	players[pid]["pending"].erase(str(it["id"]))
 
 
 func _cmd_rally(pid: int, payload: Dictionary) -> void:
@@ -596,7 +646,7 @@ func research_error(pid: int, b: int, tech: String) -> String:
 	var def: Dictionary = players[pid]["defs"].get_def(tech)
 	if def.is_empty() or str(def.get("type", "")) != "tech":
 		return "no es una tecnología"
-	if researched(pid).has(tech) or players[pid]["pending"].has(tech):
+	if researched(pid).has(tech) or is_pending(pid, tech):
 		return "ya investigada o en curso"
 	return _queue_error(pid, b, def)
 
@@ -616,7 +666,7 @@ func age_error(pid: int, b: int) -> String:
 	var a := next_age(pid)
 	if a.is_empty():
 		return "última edad"
-	if players[pid]["pending"].has(str(a["id"])):
+	if is_pending(pid, str(a["id"])):
 		return "ya en curso"
 	var pre: Dictionary = a.get("prerequisite_buildings", {})
 	if not pre.is_empty():
@@ -632,6 +682,8 @@ func age_error(pid: int, b: int) -> String:
 
 
 func _queue_error(pid: int, b: int, def: Dictionary) -> String:
+	if not is_built(b):
+		return "en construcción"
 	if str(def.get("type", "")) != "age":
 		var req := requirements_met(pid, def)
 		if req != "":
@@ -646,14 +698,12 @@ func _queue_error(pid: int, b: int, def: Dictionary) -> String:
 ## Tecnología terminada: parchea la vista del jugador (las entidades vivas
 ## leen de ella) y refresca los valores que se guardan precalculados.
 func complete_research(pid: int, tech: String) -> void:
-	players[pid]["pending"].erase(tech)
 	players[pid]["defs"].research(tech)
 	refresh_caches(pid)
 	events.append({"type": "researched", "owner": pid, "id": tech})
 
 
 func complete_age(pid: int, age_id: String) -> void:
-	players[pid]["pending"].erase(age_id)
 	var a: Dictionary = registry.get_def(age_id)
 	players[pid]["age"] = maxi(age_of(pid), int(a.get("index", 0)))
 	events.append({"type": "age", "owner": pid, "id": age_id})
