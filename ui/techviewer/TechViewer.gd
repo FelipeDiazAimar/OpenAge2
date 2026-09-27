@@ -335,7 +335,7 @@ func _actualizar_info(nombre_civ: String, vetadas: int) -> void:
 
 func _crear_cabecera_edad(indice: int, edad: Dictionary, cantidad: int) -> Control:
 	# Franja de edad: "II · Feudal (6) — Coste de avance: 500 comida".
-	var numero := NUMEROS_EDAD[indice] if indice < NUMEROS_EDAD.size() else "•"
+	var numero: String = NUMEROS_EDAD[indice] if indice < NUMEROS_EDAD.size() else "•"
 	var texto := "%s · %s (%d)" % [numero, str(edad.get("name", "?")), cantidad]
 	var coste: Variant = edad.get("cost", {})
 	if coste is Dictionary and not (coste as Dictionary).is_empty():
