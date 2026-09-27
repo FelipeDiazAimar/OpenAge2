@@ -57,7 +57,11 @@ func sync(alpha: float, delta: float) -> void:
 		var hp: Dictionary = w.comp(id, "Hitpoints")
 		if not hp.is_empty() and int(hp["max"]) > 0:
 			v.hp_ratio = float(hp["hp"]) / float(hp["max"])
-		v.update_view(moving, facing, delta)
+		var action := ""
+		var g: Dictionary = w.comp(id, "Gather")
+		if not g.is_empty() and str(g["state"]) == "gathering":
+			action = "task"
+		v.update_view(moving, facing, delta, action)
 
 
 ## Entidad bajo el punto (coordenadas de mundo del canvas). Prioriza unidades.
@@ -70,6 +74,8 @@ func pick(world_pos: Vector2) -> int:
 		var d: float
 		if v.kind == "building":
 			d = Vector2(local.x, local.y * 2.0).length()
+		elif v.kind == "resource":
+			d = Vector2(local.x, local.y + 30.0).length() * 0.5
 		else:
 			d = Vector2(local.x, local.y + 28.0).length() * 0.5
 		if d <= v.pick_radius() * (1.0 if v.kind == "building" else 1.5) and d < best_score:

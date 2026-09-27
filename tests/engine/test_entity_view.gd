@@ -49,3 +49,48 @@ func test_view_without_sprites_draws_placeholder() -> void:
 	assert_eq(v.footprint, Vector2i(2, 2))
 	assert_true(v.pick_radius() > 40.0)
 	v.free()
+
+
+func _make_variants() -> void:
+	var dir := ROOT + "/arbol/idle"
+	DirAccess.make_dir_recursive_absolute(dir)
+	var frames := []
+	for s in 3:
+		var img := Image.create(6, 9, false, Image.FORMAT_RGBA8)
+		img.fill(Color(0, 0.5, 0, 1))
+		img.save_png("%s/p_%03d.png" % [dir, s])
+		frames.append({"png": "p_%03d.png" % s, "dir": 0, "sub": s, "hotspot": [3, 8]})
+	var f := FileAccess.open(dir + "/manifest.pack.json", FileAccess.WRITE)
+	f.store_string(JSON.stringify({"dirs": 1, "kept_per_dir": 3, "size": [6, 9], "frames": frames}))
+	f.close()
+
+
+func test_resource_variants_are_static() -> void:
+	_make_variants()
+	var loc := AssetLocator.new([ROOT])
+	var def := {"id": "tree", "type": "resource", "graphics": {"idle": "sprite:arbol/idle"}}
+	var a := EntityView.new()
+	a.setup(1, def, Color.WHITE, loc)
+	var b := EntityView.new()
+	b.setup(2, def, Color.WHITE, loc)
+	a.update_view(false, Vector2.ZERO, 0.0)
+	var f0 := a.current_frame()
+	a.update_view(false, Vector2.ZERO, 5.0)
+	assert_eq(a.current_frame(), f0, "no se anima")
+	b.update_view(false, Vector2.ZERO, 0.0)
+	assert_true(a.current_frame() != b.current_frame(), "ids distintos, variantes distintas")
+	assert_eq(a.pick_radius(), 22.0)
+	a.free()
+	b.free()
+
+
+func test_task_action_uses_task_anim() -> void:
+	_make_pack("idle", 16)
+	_make_pack("task", 16)
+	var v := EntityView.new()
+	v.setup(3, {"id": "bar", "type": "unit", "graphics": {"idle": "sprite:bar/idle", "task": "sprite:bar/task"}}, Color.RED, AssetLocator.new([ROOT]))
+	v.update_view(false, Vector2(0, 1), 0.016, "task")
+	assert_eq(v.current_anim(), "task")
+	v.update_view(false, Vector2.ZERO, 0.016, "")
+	assert_eq(v.current_anim(), "idle")
+	v.free()

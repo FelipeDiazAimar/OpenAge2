@@ -25,6 +25,7 @@ var _anims: Dictionary = {}
 var _anim := ""
 var _t := 0.0
 var _slot := 4
+var _frame := 0
 var _sprite: Sprite2D
 var _mat: ShaderMaterial
 
@@ -59,16 +60,27 @@ func current_slot() -> int:
 	return _slot
 
 
+func current_frame() -> int:
+	return _frame
+
+
 func pick_radius() -> float:
 	if kind == "building":
 		return footprint.x * Iso.TILE_W * 0.35
+	if kind == "resource":
+		return 22.0
 	return 18.0
 
 
-func update_view(moving: bool, facing_screen: Vector2, delta: float) -> void:
+## action: animación de tarea pedida por la simulación ("task"...); si el
+## pack no existe se usa walk/idle. Para entidades que no son unidades, un
+## pack de 1 dirección con varios frames son VARIANTES (frame fijo por id).
+func update_view(moving: bool, facing_screen: Vector2, delta: float, action: String = "") -> void:
 	if facing_screen.length_squared() > 0.0001:
 		_slot = Iso.dir16(facing_screen)
 	var want := "walk" if moving else "idle"
+	if action != "" and not _pack(action).is_empty():
+		want = action
 	if _pack(want).is_empty():
 		want = "idle" if not _pack("idle").is_empty() else "walk"
 	var pk := _pack(want)
@@ -84,9 +96,14 @@ func update_view(moving: bool, facing_screen: Vector2, delta: float) -> void:
 	_t += delta
 	var per_dir: int = pk["per_dir"]
 	var dirs: int = pk["dirs"]
-	var sub := int(_t * float(FPS.get(want, 8.0))) % maxi(1, per_dir)
+	var sub: int
+	if kind != "unit" and dirs == 1:
+		sub = posmod(entity_id * 7919, maxi(1, per_dir))
+	else:
+		sub = int(_t * float(FPS.get(want, 8.0))) % maxi(1, per_dir)
 	var d := (_slot * dirs) / 16 if dirs > 1 else 0
-	var fr: Dictionary = pk["frames"][d * per_dir + sub]
+	_frame = d * per_dir + sub
+	var fr: Dictionary = pk["frames"][_frame]
 	if not _sprite.visible:
 		_sprite.visible = true
 		queue_redraw()
