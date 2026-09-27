@@ -41,6 +41,10 @@ BUILDING_SPRITES = {
     "casa": "buildings/house/b_west_house_age3_x1",
     "cuartel": "buildings/barracks/b_west_barracks_age3_x1",
 }
+RESOURCE_SPRITES = {
+    "tree": "nature/oak", "gold_mine": "nature/goldmine",
+    "stone_mine": "nature/stonemine", "berry_bush": "nature/bush",
+}
 AGE_PREREQS = {"herreria_o_mercado": ["herreria", "mercado"], "castillo_o_monasterio": ["castillo", "monasterio"]}
 HOTKEY_ORDER = "QWERTASDFGZXCVB"
 UNIT_ALIASES = {"hombre_de_armas": "hombre_armas", "trabuquete": "trebuchet"}
@@ -295,7 +299,7 @@ def convert_age(a, index, report):
     return e
 
 
-def convert_resource(r, defaults):
+def convert_resource(r, defaults, sprites_root=None):
     rr = {**defaults, **r}
     src = {"resource": rr["resource"], "amount": rr["amount"], "rate_key": rr["gather"]["rate_key"]}
     if rr.get("infinite"):
@@ -305,8 +309,12 @@ def convert_resource(r, defaults):
     for flag in ("hostile", "tame", "flees", "water"):
         if rr.get(flag):
             src[flag] = True
-    return {"id": r["id"], "type": "resource", "name": rr.get("name", r["id"]), "tags": ["recurso"],
-            "abilities": {"ResourceSource": src}}
+    e = {"id": r["id"], "type": "resource", "name": rr.get("name", r["id"]), "tags": ["recurso"]}
+    sp = RESOURCE_SPRITES.get(r["id"])
+    if sp and sprites_root and os.path.isdir(os.path.join(sprites_root, sp)):
+        e["graphics"] = {"idle": f"sprite:{sp}"}
+    e["abilities"] = {"ResourceSource": src}
+    return e
 
 
 def bases():
@@ -398,7 +406,7 @@ def migrate(src, out, sprites_root):
     # Recursos
     rd = load(os.path.join(src, "maps", "resource_defs.json"))
     for r in rd["resources"]:
-        write(os.path.join(out, "resources", r["id"] + ".json"), convert_resource(r, rd.get("defaults", {})))
+        write(os.path.join(out, "resources", r["id"] + ".json"), convert_resource(r, rd.get("defaults", {}), sprites_root))
 
     # Edades
     for i, a in enumerate(load(os.path.join(src, "ages", "ages.json"))["ages"]):

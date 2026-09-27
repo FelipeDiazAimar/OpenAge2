@@ -5,6 +5,9 @@
   "tags": [
     "recurso"
   ],
+  "graphics": {
+    "idle": "sprite:nature/stonemine"
+  },
   "abilities": {
     "ResourceSource": {
       "resource": "stone",

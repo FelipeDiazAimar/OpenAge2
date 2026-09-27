@@ -108,6 +108,13 @@ class TestFiles(unittest.TestCase):
             with open(p, encoding="utf-8") as f:
                 self.assertEqual(json.load(f)["name"], "Torre Vigía")
 
+    def test_resource_graphics(self):
+        rd = {"id": "tree", "resource": "wood", "amount": 100, "gather": {"rate_key": "wood"}}
+        self.assertNotIn("graphics", M.convert_resource(rd, {}))
+        with tempfile.TemporaryDirectory() as d:
+            os.makedirs(os.path.join(d, "nature", "oak"))
+            self.assertEqual(M.convert_resource(rd, {}, d)["graphics"], {"idle": "sprite:nature/oak"})
+
     def test_migrate_real_data(self):
         with tempfile.TemporaryDirectory() as d:
             report = M.migrate(os.path.join(ROOT, "data"), d, os.path.join(ROOT, "assets", "sprites"))
