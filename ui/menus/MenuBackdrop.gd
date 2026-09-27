@@ -44,13 +44,14 @@ var _ancho := 1280.0
 var _alto := 720.0
 # Muralla en ruinas al frente (se reconstruye con el tamaño en _layout).
 var _ruina: Node2D
-var _halo_muro_izq: ColorRect
-var _halo_muro_der: ColorRect
+var _halo_muro_izq: TextureRect
+var _halo_muro_der: TextureRect
 # Bases para el parallax (se recolocan con el tamaño en _layout).
 var _lejos_base := Vector2.ZERO
 var _medias_base := Vector2.ZERO
-var _nubes: Array[ColorRect] = []
+var _nubes: Array[Node2D] = []
 var _nube_vel: Array[float] = []
+var _nube_ancho: Array[float] = []
 # Bandada ocasional: cruza el cielo en formación de V y se esconde.
 var _bandada_activa := false
 var _bandada_t := 3.0
@@ -61,13 +62,21 @@ var _ave_offset: Array[Vector2] = [Vector2.ZERO, Vector2(-44, -28), Vector2(-44,
 
 
 func _ready() -> void:
-	# Recoge nubes y aves hijas para animarlas por código.
+	# Las nubes del TSCN son cajas: se ocultan y se reemplazan por elipses
+	# suaves del mismo tamaño y color para que no se vean recortes.
 	for c in _nubes_nodo.get_children():
 		var r := c as ColorRect
-		if r != null:
-			_nubes.append(r)
-			# Las nubes grandes van "delante": derivan más deprisa.
-			_nube_vel.append(9.0 + r.size.x * 0.05)
+		if r == null:
+			continue
+		var el := Polygon2D.new()
+		el.polygon = _elipse(Vector2.ZERO, r.size.x * 0.5, r.size.y * 0.62, 14)
+		el.color = Color(r.color.r, r.color.g, r.color.b, minf(1.0, r.color.a * 1.6))
+		el.position = r.position + r.size * 0.5
+		_nubes_nodo.add_child(el)
+		_nubes.append(el)
+		_nube_ancho.append(r.size.x)
+		_nube_vel.append(9.0 + r.size.x * 0.05)
+		r.visible = false
 	for b in _pajaros_nodo.get_children():
 		var l := b as Line2D
 		if l != null:
@@ -119,7 +128,7 @@ func _layout() -> void:
 	_castillo.scale = Vector2(k, k)
 	# Nubes repartidas por el cielo (conservan su tamaño de la escena).
 	for i in _nubes.size():
-		var n: ColorRect = _nubes[i]
+		var n: Node2D = _nubes[i]
 		n.position = Vector2(fmod(float(i) * 0.37 + 0.05, 1.0) * w, h * (0.10 + 0.09 * float(i)))
 	# La bandada usa los bordes actuales; empieza oculta.
 	if not _bandada_activa:
@@ -134,10 +143,10 @@ func _process(delta: float) -> void:
 	_medias.position.x = _medias_base.x + sin(_t * 0.08 + 1.7) * 22.0
 	# Nubes a la deriva; al salir por la derecha reentran por la izquierda.
 	for i in _nubes.size():
-		var n: ColorRect = _nubes[i]
+		var n: Node2D = _nubes[i]
 		n.position.x += _nube_vel[i] * delta
-		if n.position.x > _ancho + 60.0:
-			n.position.x = -n.size.x - 60.0
+		if n.position.x - _nube_ancho[i] * 0.5 > _ancho + 60.0:
+			n.position.x = -_nube_ancho[i] * 0.5 - 60.0
 			n.position.y = _alto * randf_range(0.08, 0.42)
 	_actualizar_pajaros(delta)
 	# Banderas ondeando desde el mástil (su origen está en el borde del palo).
@@ -147,9 +156,9 @@ func _process(delta: float) -> void:
 	_halo_izq.modulate.a = 0.70 + 0.30 * (0.5 + 0.5 * sin(_t * 11.0) * sin(_t * 5.3 + 0.7))
 	_halo_der.modulate.a = 0.70 + 0.30 * (0.5 + 0.5 * sin(_t * 12.3 + 2.0) * sin(_t * 4.7 + 1.1))
 	if is_instance_valid(_halo_muro_izq):
-		_halo_muro_izq.modulate.a = 0.65 + 0.35 * (0.5 + 0.5 * sin(_t * 10.2 + 4.0) * sin(_t * 6.1 + 1.9))
+		_halo_muro_izq.modulate.a = 0.38 + 0.22 * (0.5 + 0.5 * sin(_t * 10.2 + 4.0) * sin(_t * 6.1 + 1.9))
 	if is_instance_valid(_halo_muro_der):
-		_halo_muro_der.modulate.a = 0.65 + 0.35 * (0.5 + 0.5 * sin(_t * 9.4 + 0.6) * sin(_t * 5.8 + 3.1))
+		_halo_muro_der.modulate.a = 0.38 + 0.22 * (0.5 + 0.5 * sin(_t * 9.4 + 0.6) * sin(_t * 5.8 + 3.1))
 
 
 func _actualizar_pajaros(delta: float) -> void:
@@ -184,6 +193,15 @@ func _construir_colinas() -> void:
 		Vector2(X0_SUELO, 30.0), Vector2(X1_SUELO, -20.0),
 		Vector2(X1_SUELO, 1000.0), Vector2(X0_SUELO, 1000.0),
 	])
+
+
+func _elipse(centro: Vector2, rx: float, ry: float, puntos: int) -> PackedVector2Array:
+	# Elipse rellena para nubes suaves (sin esquinas).
+	var pts := PackedVector2Array()
+	for i in puntos:
+		var a := TAU * float(i) / float(puntos)
+		pts.append(centro + Vector2(cos(a) * rx, sin(a) * ry))
+	return pts
 
 
 func _colina(amp1: float, amp2: float, fase: float) -> PackedVector2Array:
@@ -267,11 +285,11 @@ func _construir_ruina() -> void:
 	var h := _alto
 	if w < 10.0 or h < 10.0:
 		return
-	var abertura := minf(640.0, w * 0.44)
+	var abertura := minf(720.0, w * 0.48)
 	_lado_ruina((w - abertura) * 0.5, 0.0, h, -1)
 	_lado_ruina((w + abertura) * 0.5, w, h, 1)
-	_antorcha_muro((w - abertura) * 0.5 - 30.0, h * 0.50, true)
-	_antorcha_muro((w + abertura) * 0.5 + 30.0, h * 0.50, false)
+	_antorcha_muro((w - abertura) * 0.5 - 30.0, h * 0.58, true)
+	_antorcha_muro((w + abertura) * 0.5 + 30.0, h * 0.58, false)
 
 
 func _azar(ix: int, iy: int, semilla: int) -> float:
@@ -285,28 +303,29 @@ func _lado_ruina(x0: float, x1: float, h: float, lado: int) -> void:
 	if x1 - x0 < 40.0:
 		return
 	var semilla := 11 if lado < 0 else 77
-	# Silueta oscura detrás (se ve por los huecos y el mortero).
-	_cuad(_ruina, Rect2(x0, 0.0, x1 - x0, h), Color(0.05, 0.04, 0.04))
-	var lad := 76.0
-	var alt := 36.0
-	var sep := 4.0
+	# Silueta marrón oscura detrás (se ve por los huecos y el mortero).
+	_cuad(_ruina, Rect2(x0, 0.0, x1 - x0, h), Color(0.10, 0.08, 0.07))
+	var lad := 62.0
+	var alt := 30.0
+	var sep := 3.0
 	var ncol := maxi(1, int((x1 - x0) / (lad + sep)))
 	var ancho_real: float = ncol * lad + (ncol - 1) * sep
 	var ox: float = x0 + ((x1 - x0) - ancho_real) * 0.5
 	for col in ncol:
-		# Borde superior roto: más alto hacia fuera, desmoronado al centro.
+		# Borde superior roto: bajo al centro para dejar ver el cielo,
+		# más alto hacia fuera. Nunca tapa el cielo por completo.
 		var borde: float = float(col) / float(maxi(1, ncol - 1)) # 0 dentro, 1 fuera
 		if lado > 0:
 			borde = 1.0 - borde
-		var cima: float = h * 0.16 + borde * h * 0.22 + _azar(col, 3, semilla) * h * 0.10
+		var cima: float = h * 0.34 + borde * h * 0.16 + _azar(col, 3, semilla) * h * 0.08
 		var y := cima
 		var fila := 0
 		while y < h:
 			var izq: float = ox + float(col) * (lad + sep)
 			var r := _azar(col, fila, semilla)
 			if r >= 0.055:
-				var g := 0.36 + 0.24 * _azar(col + 40, fila, semilla)
-				var col_lad := Color(g, g * 0.98, g * 0.94)
+				var g := 0.40 + 0.20 * _azar(col + 40, fila, semilla)
+				var col_lad := Color(g, g * 0.97, g * 0.92)
 				# Musgo en la parte baja húmeda.
 				if y > h * 0.68 and _azar(col, fila + 90, semilla) < 0.30:
 					col_lad = col_lad.lerp(Color(0.25, 0.42, 0.20), 0.55)
@@ -317,8 +336,8 @@ func _lado_ruina(x0: float, x1: float, h: float, lado: int) -> void:
 			y += alt + sep
 			fila += 1
 		# Merlones donde el tramo aguanta en pie.
-		if cima < h * 0.30:
-			var nmer := 2 + int(_azar(col, 7, semilla) * 2.0)
+		if cima < h * 0.48:
+			var nmer := 1 + int(_azar(col, 7, semilla) * 2.0)
 			for m in nmer:
 				var mx: float = ox + float(col) * (lad + sep) + 6.0 + float(m) * ((lad - 12.0) / float(maxi(1, nmer - 1)) if nmer > 1 else 0.0)
 				_cuad(_ruina, Rect2(mx, cima - 22.0, 14.0, 22.0), Color(0.42, 0.40, 0.37))
@@ -348,25 +367,30 @@ func _antorcha_muro(x: float, y: float, es_izq: bool) -> void:
 	# Soporte de hierro + llama de partículas + halo. Solo cliente.
 	_cuad(_ruina, Rect2(x - 5.0, y - 6.0, 10.0, 44.0), Color(0.12, 0.11, 0.12))
 	_cuad(_ruina, Rect2(x - 12.0, y - 10.0, 24.0, 8.0), Color(0.16, 0.15, 0.16))
-	var halo := ColorRect.new()
-	halo.color = Color(1.0, 0.55, 0.18, 0.22)
-	halo.size = Vector2(130.0, 130.0)
-	halo.position = Vector2(x - 65.0, y - 80.0)
+	# Halo radial (textura con caída, no rectángulo plano).
+	var halo := TextureRect.new()
+	halo.texture = _textura_disco()
+	halo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	halo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	halo.custom_minimum_size = Vector2(96.0, 96.0)
+	halo.size = Vector2(96.0, 96.0)
+	halo.position = Vector2(x - 48.0, y - 62.0)
+	halo.modulate = Color(1.0, 0.55, 0.18, 0.55)
 	halo.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_ruina.add_child(halo)
 	var fuego := CPUParticles2D.new()
-	fuego.amount = 14
+	fuego.amount = 9
 	fuego.lifetime = 0.8
 	fuego.explosiveness = 0.0
 	fuego.emission_shape = CPUParticles2D.EMISSION_SHAPE_SPHERE
-	fuego.emission_sphere_radius = 5.0
+	fuego.emission_sphere_radius = 3.5
 	fuego.direction = Vector2(0.0, -1.0)
-	fuego.spread = 16.0
+	fuego.spread = 10.0
 	fuego.gravity = Vector2(0.0, -36.0)
 	fuego.initial_velocity_min = 22.0
-	fuego.initial_velocity_max = 44.0
-	fuego.scale_amount_min = 2.0
-	fuego.scale_amount_max = 4.5
+	fuego.initial_velocity_max = 40.0
+	fuego.scale_amount_min = 1.2
+	fuego.scale_amount_max = 2.4
 	fuego.color = Color(1.0, 0.55, 0.16)
 	fuego.texture = _textura_disco()
 	fuego.position = Vector2(x, y - 8.0)

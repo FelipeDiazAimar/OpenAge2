@@ -134,29 +134,50 @@ func _estilo_boton_aoe(btn: Button) -> void:
 	MenuStyle.aplicar_boton(btn)
 
 func _asegurar_estandartes() -> void:
-	# Tiñe los estandartes del TSCN o los crea si faltan.
-	var izq := get_node_or_null("LeftBanner") as ColorRect
-	var der := get_node_or_null("RightBanner") as ColorRect
-	if izq == null:
-		izq = MenuStyle.banner_carmesi(MenuStyle.CARMESI)
-		izq.name = "LeftBanner"
-		izq.set_anchors_preset(Control.PRESET_LEFT_WIDE)
-		izq.offset_right = 72.0
-		add_child(izq)
-		move_child(izq, 1)
+	# Estandartes heráldicos colgados (no pilares): paño oscuro arriba con
+	# dobladillo dorado. Sobrios para no competir con el panel central.
+	_hacer_estandarte("LeftBanner", true, Color(0.36, 0.07, 0.09))
+	_hacer_estandarte("RightBanner", false, Color(0.10, 0.15, 0.33))
+
+
+func _hacer_estandarte(nombre: String, izquierda: bool, color: Color) -> void:
+	# Reutiliza el nodo del TSCN si existe; si no, lo crea colgado arriba.
+	var viejo := get_node_or_null(nombre) as ColorRect
+	if viejo != null:
+		viejo.queue_free()
+	var paño := ColorRect.new()
+	paño.name = nombre
+	paño.color = color
+	paño.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if izquierda:
+		paño.set_anchors_preset(Control.PRESET_TOP_LEFT)
+		paño.offset_left = 26.0
+		paño.offset_right = 72.0
 	else:
-		izq.color = MenuStyle.CARMESI
-		izq.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	if der == null:
-		der = MenuStyle.banner_carmesi(Color(0.12, 0.25, 0.55))
-		der.name = "RightBanner"
-		der.set_anchors_preset(Control.PRESET_RIGHT_WIDE)
-		der.offset_left = -72.0
-		add_child(der)
-		move_child(der, 2)
-	else:
-		der.color = Color(0.12, 0.25, 0.55)
-		der.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		paño.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+		paño.offset_left = -72.0
+		paño.offset_right = -26.0
+	paño.offset_top = 0.0
+	paño.anchor_bottom = 0.40
+	paño.offset_bottom = 0.0
+	add_child(paño)
+	move_child(paño, 1)
+	# Dobladillo dorado abajo + franja central oscura para dar forma.
+	var dob := ColorRect.new()
+	dob.color = Color(0.72, 0.58, 0.30)
+	dob.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+	dob.offset_top = -12.0
+	dob.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	paño.add_child(dob)
+	var faja := ColorRect.new()
+	faja.color = Color(0, 0, 0, 0.25)
+	faja.anchor_left = 0.5
+	faja.anchor_right = 0.5
+	faja.offset_left = -7.0
+	faja.offset_right = 7.0
+	faja.anchor_bottom = 1.0
+	faja.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	paño.add_child(faja)
 
 func _asegurar_version_y_hints() -> void:
 	# Versión abajo a la izquierda, siempre visible.
