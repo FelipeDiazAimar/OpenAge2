@@ -42,6 +42,10 @@ const X1_SUELO := 4000.0
 var _t := 0.0
 var _ancho := 1280.0
 var _alto := 720.0
+# Muralla en ruinas al frente (se reconstruye con el tamaño en _layout).
+var _ruina: Node2D
+var _halo_muro_izq: ColorRect
+var _halo_muro_der: ColorRect
 # Bases para el parallax (se recolocan con el tamaño en _layout).
 var _lejos_base := Vector2.ZERO
 var _medias_base := Vector2.ZERO
@@ -72,6 +76,10 @@ func _ready() -> void:
 	_construir_castillo()
 	_dar_textura_antorchas()
 	_pintar_banderas()
+	# Muralla derruida al frente (última capa, delante del panorama).
+	_ruina = Node2D.new()
+	_ruina.name = "Ruin"
+	add_child(_ruina)
 	# El tamaño real llega tras el primer layout: recolocar entonces y al redimensionar.
 	resized.connect(_layout)
 	call_deferred("_layout")
@@ -116,6 +124,7 @@ func _layout() -> void:
 	# La bandada usa los bordes actuales; empieza oculta.
 	if not _bandada_activa:
 		_pajaros_nodo.visible = false
+	_construir_ruina()
 
 
 func _process(delta: float) -> void:
@@ -137,6 +146,10 @@ func _process(delta: float) -> void:
 	# Halos de antorcha parpadeando con ritmos distintos para no ir al unísono.
 	_halo_izq.modulate.a = 0.70 + 0.30 * (0.5 + 0.5 * sin(_t * 11.0) * sin(_t * 5.3 + 0.7))
 	_halo_der.modulate.a = 0.70 + 0.30 * (0.5 + 0.5 * sin(_t * 12.3 + 2.0) * sin(_t * 4.7 + 1.1))
+	if is_instance_valid(_halo_muro_izq):
+		_halo_muro_izq.modulate.a = 0.65 + 0.35 * (0.5 + 0.5 * sin(_t * 10.2 + 4.0) * sin(_t * 6.1 + 1.9))
+	if is_instance_valid(_halo_muro_der):
+		_halo_muro_der.modulate.a = 0.65 + 0.35 * (0.5 + 0.5 * sin(_t * 9.4 + 0.6) * sin(_t * 5.8 + 3.1))
 
 
 func _actualizar_pajaros(delta: float) -> void:
@@ -225,12 +238,140 @@ func _pintar_banderas() -> void:
 func _dar_textura_antorchas() -> void:
 	# Las partículas necesitan textura: disco blanco procedural, sin archivos.
 	# El tono naranja de la llama lo pone el `color` del emisor en la escena.
+	var tex := _textura_disco()
+	_antorcha_izq.texture = tex
+	_antorcha_der.texture = tex
+
+
+func _textura_disco() -> Texture2D:
+	# Disco blanco con caída radial para llamas y halos. Solo cliente.
 	var img := Image.create(16, 16, false, Image.FORMAT_RGBA8)
 	for y in 16:
 		for x in 16:
 			var d: float = Vector2(float(x) - 7.5, float(y) - 7.5).length() / 7.5
 			var a: float = clampf(1.0 - d, 0.0, 1.0)
 			img.set_pixel(x, y, Color(1, 1, 1, a * a))
-	var tex := ImageTexture.create_from_image(img)
-	_antorcha_izq.texture = tex
-	_antorcha_der.texture = tex
+	return ImageTexture.create_from_image(img)
+
+
+# ------------------------------------------------------- muralla en ruinas --
+func _construir_ruina() -> void:
+	# Muralla gris derruida a izquierda y derecha; el centro queda libre para
+	# el panel del menú y el panorama se ve por encima del borde roto.
+	for c in _ruina.get_children():
+		_ruina.remove_child(c)
+		c.queue_free()
+	_halo_muro_izq = null
+	_halo_muro_der = null
+	var w := _ancho
+	var h := _alto
+	if w < 10.0 or h < 10.0:
+		return
+	var abertura := minf(640.0, w * 0.44)
+	_lado_ruina((w - abertura) * 0.5, 0.0, h, -1)
+	_lado_ruina((w + abertura) * 0.5, w, h, 1)
+	_antorcha_muro((w - abertura) * 0.5 - 30.0, h * 0.50, true)
+	_antorcha_muro((w + abertura) * 0.5 + 30.0, h * 0.50, false)
+
+
+func _azar(ix: int, iy: int, semilla: int) -> float:
+	# Pseudoazar determinista [0,1) para que la ruina no cambie entre arranques.
+	return float(absi(hash(Vector2i(ix * 7 + semilla, iy * 13 + semilla * 2))) % 1000) / 1000.0
+
+
+func _lado_ruina(x0: float, x1: float, h: float, lado: int) -> void:
+	# Tramo de muralla: base oscura + ladrillos grises con huecos, merlones
+	# donde sigue en pie, musgo abajo y escombro en la base.
+	if x1 - x0 < 40.0:
+		return
+	var semilla := 11 if lado < 0 else 77
+	# Silueta oscura detrás (se ve por los huecos y el mortero).
+	_cuad(_ruina, Rect2(x0, 0.0, x1 - x0, h), Color(0.05, 0.04, 0.04))
+	var lad := 76.0
+	var alt := 36.0
+	var sep := 4.0
+	var ncol := maxi(1, int((x1 - x0) / (lad + sep)))
+	var ancho_real: float = ncol * lad + (ncol - 1) * sep
+	var ox: float = x0 + ((x1 - x0) - ancho_real) * 0.5
+	for col in ncol:
+		# Borde superior roto: más alto hacia fuera, desmoronado al centro.
+		var borde: float = float(col) / float(maxi(1, ncol - 1)) # 0 dentro, 1 fuera
+		if lado > 0:
+			borde = 1.0 - borde
+		var cima: float = h * 0.16 + borde * h * 0.22 + _azar(col, 3, semilla) * h * 0.10
+		var y := cima
+		var fila := 0
+		while y < h:
+			var izq: float = ox + float(col) * (lad + sep)
+			var r := _azar(col, fila, semilla)
+			if r >= 0.055:
+				var g := 0.36 + 0.24 * _azar(col + 40, fila, semilla)
+				var col_lad := Color(g, g * 0.98, g * 0.94)
+				# Musgo en la parte baja húmeda.
+				if y > h * 0.68 and _azar(col, fila + 90, semilla) < 0.30:
+					col_lad = col_lad.lerp(Color(0.25, 0.42, 0.20), 0.55)
+				_cuad(_ruina, Rect2(izq, y, lad, alt), col_lad)
+				# Hilada superior del ladrillo más clara (luz del atardecer).
+				_cuad(_ruina, Rect2(izq, y, lad, 3.0), Color(g + 0.10, g + 0.08, g + 0.05))
+			# Los huecos dejan ver la silueta oscura = boquete.
+			y += alt + sep
+			fila += 1
+		# Merlones donde el tramo aguanta en pie.
+		if cima < h * 0.30:
+			var nmer := 2 + int(_azar(col, 7, semilla) * 2.0)
+			for m in nmer:
+				var mx: float = ox + float(col) * (lad + sep) + 6.0 + float(m) * ((lad - 12.0) / float(maxi(1, nmer - 1)) if nmer > 1 else 0.0)
+				_cuad(_ruina, Rect2(mx, cima - 22.0, 14.0, 22.0), Color(0.42, 0.40, 0.37))
+	# Escombro al pie: triángulos de piedra caída.
+	for i in 12:
+		var ex: float = x0 + _azar(i, 21, semilla) * (x1 - x0)
+		var etam: float = 14.0 + _azar(i, 22, semilla) * 26.0
+		var tri := PackedVector2Array([
+			Vector2(ex - etam, h), Vector2(ex + etam, h),
+			Vector2(ex + (_azar(i, 23, semilla) - 0.5) * etam, h - etam * (0.5 + _azar(i, 24, semilla) * 0.5))])
+		var pg := Polygon2D.new()
+		pg.polygon = tri
+		var g2 := 0.30 + 0.18 * _azar(i, 25, semilla)
+		pg.color = Color(g2, g2 * 0.97, g2 * 0.93)
+		_ruina.add_child(pg)
+
+
+func _cuad(padre: Node, r: Rect2, c: Color) -> Polygon2D:
+	var pg := Polygon2D.new()
+	pg.polygon = PackedVector2Array([r.position, r.position + Vector2(r.size.x, 0.0), r.position + r.size, r.position + Vector2(0.0, r.size.y)])
+	pg.color = c
+	padre.add_child(pg)
+	return pg
+
+
+func _antorcha_muro(x: float, y: float, es_izq: bool) -> void:
+	# Soporte de hierro + llama de partículas + halo. Solo cliente.
+	_cuad(_ruina, Rect2(x - 5.0, y - 6.0, 10.0, 44.0), Color(0.12, 0.11, 0.12))
+	_cuad(_ruina, Rect2(x - 12.0, y - 10.0, 24.0, 8.0), Color(0.16, 0.15, 0.16))
+	var halo := ColorRect.new()
+	halo.color = Color(1.0, 0.55, 0.18, 0.22)
+	halo.size = Vector2(130.0, 130.0)
+	halo.position = Vector2(x - 65.0, y - 80.0)
+	halo.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_ruina.add_child(halo)
+	var fuego := CPUParticles2D.new()
+	fuego.amount = 14
+	fuego.lifetime = 0.8
+	fuego.explosiveness = 0.0
+	fuego.emission_shape = CPUParticles2D.EMISSION_SHAPE_SPHERE
+	fuego.emission_sphere_radius = 5.0
+	fuego.direction = Vector2(0.0, -1.0)
+	fuego.spread = 16.0
+	fuego.gravity = Vector2(0.0, -36.0)
+	fuego.initial_velocity_min = 22.0
+	fuego.initial_velocity_max = 44.0
+	fuego.scale_amount_min = 2.0
+	fuego.scale_amount_max = 4.5
+	fuego.color = Color(1.0, 0.55, 0.16)
+	fuego.texture = _textura_disco()
+	fuego.position = Vector2(x, y - 8.0)
+	_ruina.add_child(fuego)
+	if es_izq:
+		_halo_muro_izq = halo
+	else:
+		_halo_muro_der = halo

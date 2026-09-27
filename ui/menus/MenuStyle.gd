@@ -10,6 +10,70 @@ const PIEDRA := Color(0.55, 0.52, 0.47)
 const CARMESI := Color(0.55, 0.10, 0.13)
 const HIERRO := Color(0.25, 0.26, 0.29)
 
+# Caché de texturas de madera por variante (se generan una vez).
+static var _madera_cache := {}
+
+
+static func madera_textura(variante: String = "normal") -> Texture2D:
+	# Tablón de madera procedural 128x64: vetas, nudos, marco de hierro y
+	# remaches en las esquinas. Sin assets externos.
+	if _madera_cache.has(variante):
+		return _madera_cache[variante]
+	var base := Color(0.30, 0.20, 0.12)
+	var hierro := Color(0.22, 0.23, 0.26)
+	var borde := HIERRO
+	if variante == "hover":
+		base = Color(0.45, 0.31, 0.16)
+		borde = ORO
+	elif variante == "pressed":
+		base = Color(0.19, 0.12, 0.07)
+		borde = Color(0.85, 0.68, 0.35)
+	elif variante == "disabled":
+		base = Color(0.16, 0.15, 0.13)
+		borde = Color(0.35, 0.33, 0.30)
+	var img := Image.create(128, 64, false, Image.FORMAT_RGB8)
+	for y in 64:
+		for x in 128:
+			var v := base
+			# Veta horizontal ondulada + tablones cada 16 px.
+			var veta: float = 0.86 + 0.14 * sin(float(x) * 0.25 + float(y) * 0.9 + float(y / 16) * 2.1)
+			v = Color(v.r * veta, v.g * veta, v.b * veta)
+			if y % 16 == 0:
+				v = v.darkened(0.45) # junta entre tablones
+			# Nudos: dos elipses oscuras fijas.
+			var n1: float = Vector2(float(x) - 34.0, (float(y) - 20.0) * 1.6).length()
+			var n2: float = Vector2(float(x) - 96.0, (float(y) - 44.0) * 1.6).length()
+			if n1 < 5.0 or n2 < 4.0:
+				v = v.darkened(0.5)
+			# Marco de hierro de 6 px con remaches en las esquinas.
+			if x < 6 or y < 6 or x >= 122 or y >= 58:
+				v = hierro * (0.85 + 0.3 * veta)
+			var ex := mini(x, 127 - x)
+			var ey := mini(y, 63 - y)
+			if ex < 6 and ey < 6:
+				var dc: float = Vector2(float(ex) - 3.0, float(ey) - 3.0).length()
+				if dc < 2.6:
+					v = Color(0.55, 0.57, 0.62) if dc < 1.4 else hierro
+			img.set_pixel(x, y, v)
+	var tex := ImageTexture.create_from_image(img)
+	_madera_cache[variante] = tex
+	return tex
+
+
+static func _caja_madera(variante: String) -> StyleBoxTexture:
+	# Caja 9-patch sobre la textura: se estira sin deformar marco ni remaches.
+	var caja := StyleBoxTexture.new()
+	caja.texture = madera_textura(variante)
+	caja.texture_margin_left = 14.0
+	caja.texture_margin_top = 14.0
+	caja.texture_margin_right = 14.0
+	caja.texture_margin_bottom = 14.0
+	caja.content_margin_left = 18.0
+	caja.content_margin_top = 10.0
+	caja.content_margin_right = 18.0
+	caja.content_margin_bottom = 10.0
+	return caja
+
 
 static func panel_madera() -> StyleBoxFlat:
 	# Marco de madera para el panel central del menú.
@@ -75,39 +139,15 @@ static func aplicar_boton(btn: Button) -> void:
 	btn.add_theme_color_override("font_hover_color", Color(1.0, 0.95, 0.70))
 	btn.add_theme_color_override("font_pressed_color", Color(1.0, 0.88, 0.55))
 	btn.add_theme_color_override("font_focus_color", Color(1.0, 0.95, 0.70))
-	# Estado normal: madera oscura con borde hierro.
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = MADERA
-	normal.border_width_left = 2
-	normal.border_width_top = 2
-	normal.border_width_right = 2
-	normal.border_width_bottom = 2
-	normal.border_color = HIERRO
-	normal.corner_radius_top_left = 6
-	normal.corner_radius_top_right = 6
-	normal.corner_radius_bottom_right = 6
-	normal.corner_radius_bottom_left = 6
-	normal.shadow_color = Color(0, 0, 0, 0.5)
-	normal.shadow_size = 8
-	btn.add_theme_stylebox_override("normal", normal)
-	# Hover brillante: fondo cálido, borde oro y resplandor dorado.
-	var hover := normal.duplicate() as StyleBoxFlat
-	hover.bg_color = Color(0.52, 0.36, 0.18)
-	hover.border_color = ORO
-	hover.shadow_color = Color(1.0, 0.80, 0.35, 0.35)
-	hover.shadow_size = 12
-	btn.add_theme_stylebox_override("hover", hover)
-	btn.add_theme_stylebox_override("focus", hover)
+	# Estado normal: tablón de madera con marco de hierro y remaches.
+	btn.add_theme_stylebox_override("normal", _caja_madera("normal"))
+	# Hover brillante: madera cálida con marco de oro.
+	btn.add_theme_stylebox_override("hover", _caja_madera("hover"))
+	btn.add_theme_stylebox_override("focus", _caja_madera("hover"))
 	# Pulsado: madera quemada más oscura.
-	var pressed := normal.duplicate() as StyleBoxFlat
-	pressed.bg_color = Color(0.18, 0.12, 0.07)
-	pressed.border_color = Color(0.85, 0.68, 0.35)
-	btn.add_theme_stylebox_override("pressed", pressed)
+	btn.add_theme_stylebox_override("pressed", _caja_madera("pressed"))
 	# Deshabilitado: gris piedra apagado.
-	var disabled := normal.duplicate() as StyleBoxFlat
-	disabled.bg_color = Color(0.16, 0.15, 0.13)
-	disabled.border_color = Color(0.35, 0.33, 0.30)
-	btn.add_theme_stylebox_override("disabled", disabled)
+	btn.add_theme_stylebox_override("disabled", _caja_madera("disabled"))
 
 
 static func boton_medieval(texto: String) -> Button:
