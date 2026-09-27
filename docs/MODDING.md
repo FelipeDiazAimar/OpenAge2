@@ -43,3 +43,9 @@ El motor nuevo lee `mods/<mod>/` (el juego viejo sigue leyendo `data/` hasta la 
 - Recolección: una unidad con `Gather {rates: {rate_key: por_seg}, capacity}` recolecta de
   cualquier entidad con `ResourceSource {resource, amount, rate_key}` cuyo `rate_key` esté en sus
   `rates`, y deposita en edificios propios con `DropSite {accepts: [recursos]}`.
+- Combate: `Attack {damage: {melee|pierce|<clase>: n}, range, reload, attack_delay?, projectile_speed?,
+  area_radius?, min_range?}`. Daño = máx(1, Σ max(0, ataque − armadura)) por clase; las clases
+  distintas de melee/pierce son bonus contra el id o un tag del objetivo (admite plural:
+  `arquero` vale contra `arqueros`). Con `projectile_speed` dispara un proyectil que puede fallar.
+  Las unidades con `Attack` y sin `Gather` (militares) y los edificios con `Attack` atacan solos.
+

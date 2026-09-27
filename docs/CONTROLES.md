@@ -64,3 +64,12 @@ Fuente de verdad: `project.godot` ([input]), `ui/hud/HUD.gd`, `core/AoeCamera.gd
 ## Reasignar teclas
 
 Proyecto → Configuración → Mapa de entrada, o edita la sección `[input]` de `project.godot`. Los nombres de acción (`attack_move`, `patrol`, `stop_action`, `garrison`, `build_menu`, `go_tc`, `bell`, `idle_villager`, `select_single`, `smart_action`) son los que leen `HUD.gd` y `Selection.gd`: no los renombres sin actualizar esos scripts.
+
+## Motor nuevo ("Partida (nuevo motor, beta)")
+
+- Clic izquierdo: seleccionar (arrastrar para seleccionar varias unidades propias).
+- Clic derecho: sobre un enemigo, **atacar**; sobre un recurso, recolectar (aldeanos); en el suelo, mover.
+- **S**: detener. Flechas / borde de pantalla / botón medio: cámara. Rueda: zoom. Esc: menú.
+- **F9** / **Shift+F9**: tropas de prueba (5 milicias + 5 arqueros) propias / enemigas bajo el cursor,
+  hasta que exista producción en los edificios.
+
