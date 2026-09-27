@@ -2,6 +2,6 @@
   "id": "forest_floor",
   "type": "terrain",
   "name": "Suelo de bosque",
-  "texture": "terrain:g_for",
-  "color": "#7a6a38"
+  "texture": "terrain:g_fo2",
+  "color": "#5f6b2e"
 }

@@ -58,13 +58,16 @@ static func build_control(sim, p_seed: int) -> Image:
 			continue
 		var p: Vector2i = sim.world.entities[id]["pos"]
 		var t := Vector2i(p.x / 1000, p.y / 1000)
-		for dy in range(-1, 2):
-			for dx in range(-1, 2):
+		# Núcleo 1.0, primer anillo 0.6 y segundo 0.25: el suelo de bosque se
+		# desvanece en vez de cortar en escalones.
+		for dy in range(-2, 3):
+			for dx in range(-2, 3):
 				var x := t.x + dx
 				var y := t.y + dy
 				if x < 0 or y < 0 or x >= w or y >= h:
 					continue
-				var v := 1.0 if dx == 0 and dy == 0 else 0.6
+				var ring := maxi(absi(dx), absi(dy))
+				var v := 1.0 if ring == 0 else (0.6 if ring == 1 else 0.25)
 				forest[y * w + x] = maxf(forest[y * w + x], v)
 	for y in h:
 		for x in w:

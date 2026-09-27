@@ -14,6 +14,7 @@ const IsoCamera := preload("res://engine/render2d/IsoCamera.gd")
 const SelectionOverlay := preload("res://engine/render2d/SelectionOverlay.gd")
 const MapGen := preload("res://engine/sim/MapGen.gd")
 const ResourceBar := preload("res://engine/ui/ResourceBar.gd")
+const TerrainImporter := preload("res://engine/assets/TerrainImporter.gd")
 
 const MAP_SIZE := 144
 const MAP_SEED := 1234
@@ -56,15 +57,18 @@ func _ready() -> void:
 		sim.add_player(i, SLOTS[i]["civ"], SLOTS[i]["team"])
 	_spawn_start()
 
+	RenderingServer.set_default_clear_color(Color.BLACK)
+	_import_terrain()
+	var locator := AssetLocator.new()
 	var terrain := TerrainLayer.new()
 	add_child(terrain)
-	terrain.setup(MAP_SIZE, MAP_SIZE)
+	terrain.setup(sim, registry, locator, MAP_SEED)
 	layer = EntityLayer.new()
 	add_child(layer)
 	var colors := {}
 	for i in sim.players.size():
 		colors[i] = PLAYER_COLORS[i % PLAYER_COLORS.size()]
-	layer.bind(sim, AssetLocator.new(), colors)
+	layer.bind(sim, locator, colors)
 	overlay = SelectionOverlay.new()
 	add_child(overlay)
 
@@ -90,6 +94,22 @@ func _ready() -> void:
 			cam.set_zoom_now(float(s.get_slice("=", 1)))
 	if _shot_path != "":
 		cam.edge_scroll = false
+
+
+## Primera partida con el DE instalado: exporta las texturas de terreno que
+## usan los terrenos del mod a user://aoe2_assets/terrain (una sola vez).
+func _import_terrain() -> void:
+	var root := TerrainImporter.find_install()
+	if root == "":
+		return
+	var names: Array = []
+	for id in registry.ids_of_type("terrain"):
+		var ref := str(registry.get_def(id)["texture"])
+		if ref.begins_with("terrain:"):
+			names.append(ref.substr(8))
+	var n := TerrainImporter.import(root, names)
+	if n > 0:
+		print("[Match] importadas %d texturas de terreno del AoE2 DE" % n)
 
 
 func tick_once() -> void:
