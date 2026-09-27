@@ -106,3 +106,17 @@ func test_task_per_resource_anim() -> void:
 	v.update_view(false, Vector2(1, 0), 0.016, "task_wood")
 	assert_eq(v.current_anim(), "task_wood")
 	v.free()
+
+
+func test_team_marker_when_sprite_has_no_mask() -> void:
+	_make_pack("idle", 16)
+	var v := EntityView.new()
+	v.setup(5, {"id": "bar", "type": "unit", "graphics": {"idle": "sprite:bar/idle"}}, Color.RED, AssetLocator.new([ROOT]))
+	v.update_view(false, Vector2(0, 1), 0.016)
+	assert_true(v.team_marker(), "sin máscara de color: marca de jugador bajo los pies")
+	var b := EntityView.new()
+	b.setup(6, {"id": "casa", "type": "building", "footprint": [2, 2], "graphics": {}}, Color.RED, AssetLocator.new([ROOT]))
+	b.update_view(false, Vector2.ZERO, 0.016)
+	assert_false(b.team_marker(), "edificios no")
+	v.free()
+	b.free()

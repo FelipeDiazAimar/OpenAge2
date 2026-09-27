@@ -15,6 +15,7 @@ const SelectionOverlay := preload("res://engine/render2d/SelectionOverlay.gd")
 const MapGen := preload("res://engine/sim/MapGen.gd")
 const ResourceBar := preload("res://engine/ui/ResourceBar.gd")
 const TerrainImporter := preload("res://engine/assets/TerrainImporter.gd")
+const ProjectileLayer := preload("res://engine/render2d/ProjectileLayer.gd")
 
 const MAP_SIZE := 144
 const MAP_SEED := 1234
@@ -23,6 +24,7 @@ const START_OFFSETS: Array[Vector2i] = [
 	Vector2i(0, -46), Vector2i(0, 46), Vector2i(-46, 0), Vector2i(46, 0),
 ]
 const VILLAGER_OFFSETS: Array[Vector2i] = [Vector2i(3, -1), Vector2i(-1, 3), Vector2i(3, 3)]
+const SCOUT_OFFSET := Vector2i(-4, -1)
 const SLOTS := [{"civ": "britones", "team": 0}, {"civ": "francos", "team": 1}]
 const PLAYER_COLORS: Array[Color] = [
 	Color("#2a4bff"), Color("#ff2020"), Color("#20c020"), Color("#ffe020"),
@@ -37,6 +39,7 @@ var layer
 var cam
 var overlay
 var bar
+var projectiles
 var selected: Array[int] = []
 
 var _acc := 0.0
@@ -53,6 +56,7 @@ func _ready() -> void:
 		_show_error("Error cargando mods:\n" + "\n".join(PackedStringArray(registry.errors.slice(0, 8))))
 		return
 	sim = Sim.new(registry, MAP_SIZE, MAP_SIZE)
+	sim.debug_enabled = true # partida local: tropas de prueba con F9
 	for i in SLOTS.size():
 		sim.add_player(i, SLOTS[i]["civ"], SLOTS[i]["team"])
 	_spawn_start()
@@ -69,6 +73,9 @@ func _ready() -> void:
 	for i in sim.players.size():
 		colors[i] = PLAYER_COLORS[i % PLAYER_COLORS.size()]
 	layer.bind(sim, locator, colors)
+	projectiles = ProjectileLayer.new()
+	add_child(projectiles)
+	projectiles.bind(sim)
 	overlay = SelectionOverlay.new()
 	add_child(overlay)
 
@@ -116,6 +123,15 @@ func tick_once() -> void:
 	layer.snapshot()
 	sim.step()
 	layer.sync(1.0, 0.0)
+	projectiles.sync(1.0)
+
+
+## Solo pruebas locales hasta que exista producción (F4): 5 milicias y
+## 5 arqueros del jugador pid cerca de `tiles`.
+func debug_troops(pid: int, tiles: Vector2) -> void:
+	var pos := [int(round(tiles.x * 1000.0)), int(round(tiles.y * 1000.0))]
+	sim.queue_command(local_pid, "debug_spawn", {"def": "milicia", "n": 5, "pos": pos, "owner": pid})
+	sim.queue_command(local_pid, "debug_spawn", {"def": "arquero", "n": 5, "pos": pos, "owner": pid})
 
 
 func select(ids: Array) -> void:
@@ -131,12 +147,17 @@ func issue_move(tiles: Vector2) -> void:
 	sim.queue_command(local_pid, "move", {"ids": selected.duplicate(), "pos": [int(round(tiles.x * 1000.0)), int(round(tiles.y * 1000.0))]})
 
 
-## Clic derecho estilo AoE2: sobre un recurso, los aldeanos seleccionados lo
-## recolectan; en otro caso, mover.
+## Clic derecho estilo AoE2: sobre un enemigo, atacar; sobre un recurso, los
+## aldeanos seleccionados lo recolectan; en otro caso, mover.
 func smart_command(world_pos: Vector2) -> void:
 	if selected.is_empty():
 		return
 	var id: int = layer.pick(world_pos)
+	if id >= 0 and sim.world.has_ability(id, "Hitpoints") and sim.is_enemy(local_pid, int(sim.world.entities[id]["owner"])):
+		var attackers: Array = selected.filter(func(s): return sim.world.has_ability(s, "Attack"))
+		if not attackers.is_empty():
+			sim.queue_command(local_pid, "attack", {"ids": attackers, "target": id})
+			return
 	if id >= 0 and sim.world.has_ability(id, "ResourceSource"):
 		var gatherers: Array = selected.filter(func(s): return sim.world.has_ability(s, "Gather"))
 		if not gatherers.is_empty():
@@ -157,6 +178,7 @@ func _process(delta: float) -> void:
 		_acc -= dt
 		ticked = true
 	layer.sync(_acc / dt, delta)
+	projectiles.sync(_acc / dt)
 	if ticked:
 		bar.refresh() # la economía solo cambia por tick (10 Hz), no por frame
 	_frames += 1
@@ -180,6 +202,13 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and event.keycode == KEY_ESCAPE:
 		get_tree().change_scene_to_file("res://ui/menus/MainMenu.tscn")
 		return
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_F9:
+			debug_troops(1 if event.shift_pressed else local_pid, Iso.to_tiles(get_global_mouse_position()))
+			return
+		if event.keycode == KEY_S and not selected.is_empty():
+			sim.queue_command(local_pid, "stop", {"ids": selected.duplicate()})
+			return
 	if event is InputEventMouseButton:
 		var wp := get_global_mouse_position()
 		if event.button_index == MOUSE_BUTTON_LEFT:
@@ -215,6 +244,7 @@ func _spawn_start() -> void:
 		sim.spawn("centro_urbano", i, c - Vector2i(2, 2))
 		for off in VILLAGER_OFFSETS:
 			sim.spawn("aldeano", i, c + off)
+		sim.spawn("scout", i, c + SCOUT_OFFSET)
 	var starts: Array[Vector2i] = []
 	for i in sim.players.size():
 		starts.append(_start_tile(i))
@@ -229,7 +259,7 @@ func _build_help() -> void:
 	bar.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
 	ui.add_child(bar)
 	var l := Label.new()
-	l.text = "Motor nuevo — clic izq: seleccionar / arrastrar · clic der: recolectar / mover · flechas/borde/botón medio: cámara · rueda: zoom · Esc: menú"
+	l.text = "Motor nuevo — clic izq: seleccionar / arrastrar · clic der: atacar / recolectar / mover · S: detener · F9 / Shift+F9: tropas de prueba propias / enemigas · Esc: menú"
 	l.position = Vector2(12, 40)
 	l.add_theme_color_override("font_color", Color(1, 0.92, 0.7))
 	l.add_theme_color_override("font_outline_color", Color.BLACK)

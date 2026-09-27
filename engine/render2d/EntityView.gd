@@ -32,6 +32,7 @@ var _anim := ""
 var _t := 0.0
 var _slot := 4
 var _frame := 0
+var _has_mask := false
 var _sprite: Sprite2D
 var _mat: ShaderMaterial
 
@@ -68,6 +69,12 @@ func current_slot() -> int:
 
 func current_frame() -> int:
 	return _frame
+
+
+## Unidad con sprite sin máscara de color de jugador: se dibuja una elipse del
+## color del jugador bajo los pies para distinguir bandos.
+func team_marker() -> bool:
+	return kind == "unit" and _sprite.visible and not _has_mask
 
 
 func pick_radius() -> float:
@@ -118,7 +125,11 @@ func update_view(moving: bool, facing_screen: Vector2, delta: float, action: Str
 		queue_redraw()
 	_sprite.texture = fr["tex"]
 	_sprite.offset = -fr["hotspot"]
-	_mat.set_shader_parameter("has_mask", fr["mask"] != null)
+	var masked: bool = fr["mask"] != null
+	if masked != _has_mask:
+		_has_mask = masked
+		queue_redraw()
+	_mat.set_shader_parameter("has_mask", masked)
 	if fr["mask"] != null:
 		_mat.set_shader_parameter("mask_tex", fr["mask"])
 
@@ -131,6 +142,11 @@ func _pack(anim: String) -> Dictionary:
 
 func _draw() -> void:
 	var r := pick_radius()
+	if team_marker():
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2(1.0, 0.5))
+		draw_circle(Vector2.ZERO, 11.0, Color(color, 0.55))
+		draw_arc(Vector2.ZERO, 11.0, 0.0, TAU, 24, color.lightened(0.2), 2.0)
+		draw_set_transform(Vector2.ZERO, 0.0, Vector2.ONE)
 	if selected:
 		draw_set_transform(Vector2.ZERO, 0.0, Vector2(1.0, 0.5))
 		draw_arc(Vector2.ZERO, r, 0.0, TAU, 40, Color(1, 1, 1, 0.9), 2.0)

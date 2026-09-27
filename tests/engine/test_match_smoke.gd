@@ -72,3 +72,32 @@ func test_match_has_resources_and_smart_gather() -> void:
 		m.tick_once()
 	assert_true(m.sim.world.comp(v, "Gather")["state"] != "idle", "clic derecho sobre árbol = recolectar")
 	m.queue_free()
+
+
+func test_scout_start_attack_and_debug_troops() -> void:
+	var m = load(MATCH).instantiate()
+	Engine.get_main_loop().root.add_child(m)
+	var scouts := 0
+	for id in m.sim.world.entities:
+		if m.sim.world.entities[id]["def_id"] == "scout":
+			scouts += 1
+	assert_eq(scouts, 2, "un explorador por jugador")
+	var before: int = m.sim.world.entities.size()
+	m.debug_troops(m.local_pid, Vector2(40, 40))
+	for i in 3:
+		m.tick_once()
+	assert_eq(m.sim.world.entities.size(), before + 10, "5 milicias + 5 arqueros")
+	var mine := -1
+	var enemy := -1
+	for id in m.sim.world.entities:
+		var e: Dictionary = m.sim.world.entities[id]
+		if e["def_id"] == "milicia" and e["owner"] == m.local_pid:
+			mine = id
+		elif e["def_id"] == "aldeano" and e["owner"] != m.local_pid:
+			enemy = id
+	m.select([mine])
+	m.smart_command(m.layer.views[enemy].position + Vector2(0, -10))
+	for i in 3:
+		m.tick_once()
+	assert_eq(m.sim.world.comp(mine, "Attack")["target"], enemy, "clic derecho sobre enemigo = atacar")
+	m.queue_free()
