@@ -94,3 +94,19 @@ func test_same_commands_same_hash() -> void:
 			s.step()
 		hashes.append(s.world.state_hash())
 	assert_eq(hashes[0], hashes[1])
+
+
+func test_malformed_move_payloads_are_ignored() -> void:
+	var s := _sim()
+	var v := s.spawn("aldeano", 0, Vector2i(5, 5))
+	s.queue_command(0, "move", {"ids": [v], "pos": "abc"})
+	s.queue_command(0, "move", {"ids": [null, "x", v], "pos": [15500, 5500]})
+	s.queue_command(0, "move", {"ids": 3, "pos": [25500, 5500]})
+	s.queue_command(0, "move", {"ids": [v], "pos": [INF, NAN]})
+	s.queue_command(0, "move", {"ids": [v], "pos": [1e30, 5500]})
+	for i in 3:
+		s.step()
+	var m: Dictionary = s.world.comp(v, "Move")
+	assert_true(m["moving"], "la orden válida (ids con basura + v) se aplicó")
+	var last: Vector2i = m["waypoints"][m["waypoints"].size() - 1]
+	assert_eq(last, Vector2i(15500, 5500), "las órdenes inválidas posteriores no la pisaron")

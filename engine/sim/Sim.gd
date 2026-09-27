@@ -90,18 +90,32 @@ static func spread_offsets(n: int) -> Array[Vector2i]:
 
 
 func _apply(c: Dictionary) -> void:
+	if not (c["payload"] is Dictionary):
+		return
 	match str(c["type"]):
 		"move":
 			_cmd_move(int(c["pid"]), c["payload"])
 
 
+## Número utilizable de un payload (puede venir de JSON: floats, basura).
+static func _num_ok(x: Variant) -> bool:
+	if typeof(x) == TYPE_INT:
+		return true
+	return typeof(x) == TYPE_FLOAT and is_finite(x) and absf(x) < 1.0e9
+
+
 func _cmd_move(pid: int, payload: Dictionary) -> void:
-	var pos: Array = payload.get("pos", [])
-	if pos.size() != 2:
+	var pos: Variant = payload.get("pos")
+	var raw_ids: Variant = payload.get("ids")
+	if not (pos is Array) or pos.size() != 2 or not _num_ok(pos[0]) or not _num_ok(pos[1]):
+		return
+	if not (raw_ids is Array):
 		return
 	var target := Vector2i(int(pos[0]), int(pos[1]))
 	var ids: Array[int] = []
-	for raw in payload.get("ids", []):
+	for raw in raw_ids:
+		if not _num_ok(raw):
+			continue
 		var id := int(raw)
 		if ids.has(id) or not world.entities.has(id):
 			continue
