@@ -102,6 +102,10 @@ static func _init_component(ability: String, params: Dictionary) -> Dictionary:
 			c["windup"] = -1
 			c["attacking"] = false
 			c["repath"] = 0
+			c["aim"] = Vector2i(-1000000, -1000000)
+			c["stuck"] = 0
+			c["ignore"] = -1
+			c["ignore_until"] = 0
 		"Gather":
 			c["state"] = "idle"
 			c["target"] = -1

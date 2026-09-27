@@ -15,6 +15,11 @@ const DEFAULT_DELAY := 3
 const ACQUIRE_EVERY := 5
 const REPATH_EVERY := 10
 const HIT_RADIUS := 500
+const SWING_SLACK := 300 # margen de alcance con el golpe ya iniciado
+const CHASE_DRIFT := 500 # re-planear si el objetivo se movió más de media casilla
+const REPATH_MIN := 3 # ticks mínimos entre re-planeos anticipados
+const STUCK_LIMIT := 20 # ticks quieto sin alcanzar: objetivo inalcanzable
+const IGNORE_TICKS := 100 # cuánto se ignora un objetivo automático inalcanzable
 
 
 static func damage(atk: Dictionary, target_def: Dictionary, armor: Dictionary) -> int:
@@ -39,6 +44,7 @@ static func order_attack(sim, id: int, target: int) -> void:
 	a["explicit"] = true
 	a["windup"] = -1
 	a["repath"] = 0
+	a["stuck"] = 0
 
 
 static func stop(sim, id: int) -> void:
@@ -95,10 +101,11 @@ static func _auto(sim, id: int) -> bool:
 static func _acquire(sim, id: int) -> int:
 	var w = sim.world
 	var e: Dictionary = w.entities[id]
+	var a: Dictionary = w.comp(id, "Attack")
 	var sight := 0
 	if w.has_ability(id, "Vision"):
 		sight = FP.from_data(float(w.comp(id, "Vision")["params"]["sight"]))
-	sight = maxi(sight, FP.from_data(float(w.comp(id, "Attack")["params"]["range"])) + CONTACT)
+	sight = maxi(sight, FP.from_data(float(a["params"]["range"])) + CONTACT)
 	var best := -1
 	var best_score := 0
 	for c in w.spatial.query_radius(e["pos"], sight):
@@ -106,6 +113,10 @@ static func _acquire(sim, id: int) -> int:
 			continue
 		if not sim.is_enemy(int(e["owner"]), int(w.entities[c]["owner"])):
 			continue
+		if c == int(a["ignore"]) and w.tick < int(a["ignore_until"]):
+			continue # inalcanzable hace poco
+		if _too_close(sim, id, c):
+			continue # dentro del alcance mínimo (asedio)
 		var score := FP.dist(e["pos"], w.entities[c]["pos"])
 		if str(w.entities[c]["type"]) == "building":
 			score += 1000000 # AoE2: prefiere unidades
@@ -118,7 +129,9 @@ static func _acquire(sim, id: int) -> int:
 static func _engage(sim, id: int, a: Dictionary, t: int) -> void:
 	var w = sim.world
 	var params: Dictionary = a["params"]
-	if _in_reach(sim, id, t):
+	var slack := SWING_SLACK if int(a["windup"]) >= 0 else 0
+	if _in_reach(sim, id, t, slack):
+		a["stuck"] = 0
 		var m: Dictionary = w.comp(id, "Move")
 		var tpos: Vector2i = w.entities[t]["pos"]
 		if not m.is_empty():
@@ -142,30 +155,69 @@ static func _engage(sim, id: int, a: Dictionary, t: int) -> void:
 		return
 	a["attacking"] = false
 	a["windup"] = -1
-	if not w.has_ability(id, "Move"):
-		a["target"] = -1
+	var m: Dictionary = w.comp(id, "Move")
+	if _too_close(sim, id, t):
+		# Asedio con el objetivo dentro del alcance mínimo: no se acerca más;
+		# si el objetivo era automático, busca otro.
+		if not m.is_empty():
+			(m["waypoints"] as Array).clear()
+			m["moving"] = false
+		if not bool(a["explicit"]):
+			_drop(sim, a, t)
 		return
+	if m.is_empty():
+		a["target"] = -1 # edificio: no persigue
+		return
+	var moving := bool(m["moving"])
+	if not moving:
+		a["stuck"] = int(a["stuck"]) + 1
+		if int(a["stuck"]) > STUCK_LIMIT and not bool(a["explicit"]):
+			_drop(sim, a, t) # automático inalcanzable: lo deja por un rato
+			return
+	var aim := _aim_point(sim, id, t)
 	a["repath"] = int(a["repath"]) - 1
-	if int(a["repath"]) <= 0:
-		a["repath"] = REPATH_EVERY
-		MoveSystem.order_move(w, sim.grid, id, _aim_point(sim, id, t))
+	var drifted := FP.dist(a["aim"], aim) > CHASE_DRIFT
+	var early := (not moving or drifted) and int(a["repath"]) <= REPATH_EVERY - REPATH_MIN
+	if int(a["stuck"]) > STUCK_LIMIT:
+		early = false # orden explícita inalcanzable: reintenta sin saturar el A*
+	if int(a["repath"]) <= 0 or early:
+		a["repath"] = REPATH_EVERY * (3 if int(a["stuck"]) > STUCK_LIMIT else 1)
+		a["aim"] = aim
+		MoveSystem.order_move(w, sim.grid, id, aim)
 
 
-static func _in_reach(sim, id: int, t: int) -> bool:
+static func _drop(sim, a: Dictionary, t: int) -> void:
+	a["target"] = -1
+	a["explicit"] = false
+	a["attacking"] = false
+	a["windup"] = -1
+	a["stuck"] = 0
+	a["ignore"] = t
+	a["ignore_until"] = sim.world.tick + IGNORE_TICKS
+
+
+## [distancia (al borde si es edificio), alcance máximo, alcance mínimo].
+static func _reach_info(sim, id: int, t: int) -> Array:
 	var w = sim.world
 	var params: Dictionary = w.comp(id, "Attack")["params"]
 	var rng := FP.from_data(float(params["range"]))
 	var min_r := FP.from_data(float(params.get("min_range", 0.0)))
 	var p: Vector2i = w.entities[id]["pos"]
-	var d: int
-	var reach: int
 	if str(w.entities[t]["type"]) == "building":
-		d = _rect_dist(p, _rect(sim, t))
-		reach = rng + BUILDING_CONTACT
-	else:
-		d = FP.dist(p, w.entities[t]["pos"])
-		reach = rng + CONTACT
-	return d <= reach and d >= min_r
+		return [_rect_dist(p, _rect(sim, t)), rng + BUILDING_CONTACT, min_r]
+	return [FP.dist(p, w.entities[t]["pos"]), rng + CONTACT, min_r]
+
+
+## slack: margen extra mientras el golpe ya está en curso (no se cancela
+## porque el objetivo se aleje un poco).
+static func _in_reach(sim, id: int, t: int, slack: int = 0) -> bool:
+	var r := _reach_info(sim, id, t)
+	return int(r[0]) <= int(r[1]) + slack and int(r[0]) >= int(r[2])
+
+
+static func _too_close(sim, id: int, t: int) -> bool:
+	var r := _reach_info(sim, id, t)
+	return int(r[0]) < int(r[2])
 
 
 static func _aim_point(sim, id: int, t: int) -> Vector2i:

@@ -194,3 +194,40 @@ func test_combat_deterministic() -> void:
 		_steps(s, 300)
 		hashes.append(s.state_hash())
 	assert_eq(hashes[0], hashes[1])
+
+
+func test_siege_skips_targets_inside_min_range() -> void:
+	var s := _sim()
+	s.spawn("catapulta", 0, Vector2i(10, 10))
+	var near := s.spawn("aldeano", 1, Vector2i(11, 10))
+	var far := s.spawn("aldeano", 1, Vector2i(15, 10))
+	_steps(s, 100)
+	assert_eq(_hp(s, near), 25, "dentro del alcance mínimo: no")
+	assert_true(not s.world.entities.has(far) or _hp(s, far) < 25, "dispara al que sí puede")
+
+
+func test_fast_unit_catches_fleeing_target() -> void:
+	var s := _sim()
+	var m := s.spawn("milicia", 0, Vector2i(10, 10))
+	var v := s.spawn("aldeano", 1, Vector2i(12, 10))
+	s.queue_command(1, "move", {"ids": [v], "pos": [38500, 10500]})
+	s.queue_command(0, "attack", {"ids": [m], "target": v})
+	_steps(s, 300)
+	assert_true(_hp(s, v) < 25, "la milicia (0.9) alcanza y golpea al aldeano (0.8) que huye")
+
+
+func test_unreachable_auto_target_is_dropped() -> void:
+	var s := _sim()
+	var sc := s.spawn("scout", 0, Vector2i(10, 10))
+	var boxed := s.spawn("aldeano", 1, Vector2i(15, 10))
+	for y in range(8, 13):
+		for x in range(13, 18):
+			if maxi(absi(x - 15), absi(y - 10)) == 2:
+				s.grid.set_blocked(Vector2i(x, y), true)
+	# Fuera de la vista inicial; visible desde donde el explorador se detiene
+	# junto al cerco (15,7).
+	var other := s.spawn("aldeano", 1, Vector2i(19, 6))
+	_steps(s, 300)
+	assert_eq(_hp(s, boxed), 25)
+	assert_true(not s.world.entities.has(other) or _hp(s, other) < 25, "abandona el inalcanzable y ataca a otro")
+	assert_true(s.world.entities.has(sc))

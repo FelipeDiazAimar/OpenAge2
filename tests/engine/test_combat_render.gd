@@ -59,3 +59,16 @@ func test_damaged_units_show_hp_ratio() -> void:
 	layer.sync(1.0, 0.0)
 	assert_true(absf(layer.views[v].hp_ratio - 0.4) < 0.001)
 	layer.free()
+
+
+func test_no_ghost_corpse_without_death_anim() -> void:
+	var s := _sim()
+	var m := s.spawn("milicia", 1, Vector2i(10, 10))
+	var layer := EntityLayer.new()
+	layer.bind(s, AssetLocator.new(["user://nada"], ["user://nada"]), {0: Color.BLUE, 1: Color.RED})
+	layer.snapshot()
+	layer.sync(1.0, 0.0)
+	s.kill(m)
+	layer.sync(1.0, 0.1)
+	assert_eq(layer.corpses.size(), 0, "sin animación de muerte no queda una unidad 'fantasma' de pie")
+	layer.free()

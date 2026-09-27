@@ -74,7 +74,7 @@ func current_frame() -> int:
 ## Unidad con sprite sin máscara de color de jugador: se dibuja una elipse del
 ## color del jugador bajo los pies para distinguir bandos.
 func team_marker() -> bool:
-	return kind == "unit" and _sprite.visible and not _has_mask
+	return kind == "unit" and _sprite.visible and not _has_mask and not one_shot
 
 
 func pick_radius() -> float:

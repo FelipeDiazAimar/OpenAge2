@@ -85,11 +85,14 @@ func sync(alpha: float, delta: float) -> void:
 ## Cadáver: animación de muerte una vez (si hay pack) y fundido.
 func _spawn_corpse(ev: Dictionary) -> void:
 	var def: Dictionary = sim.registry.get_def(str(ev["def_id"]))
-	if def.is_empty():
+	# Sin animación de muerte no hay cadáver: si no, la unidad quedaría "de pie"
+	# (fantasma) varios segundos.
+	if def.is_empty() or not (def.get("graphics", {}) as Dictionary).has("death"):
 		return
 	var v := EntityView.new()
 	v.setup(int(ev["id"]), def, colors.get(ev["owner"], Color(0.6, 0.6, 0.6)), locator)
 	v.one_shot = true
+	v.z_index = -1 # bajo las unidades vivas
 	v.position = Iso.milli_to_screen(ev["pos"])
 	add_child(v)
 	v.update_view(false, Iso.to_screen(Vector2(ev["facing"])), 0.0, "death")
