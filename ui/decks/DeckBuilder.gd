@@ -21,8 +21,13 @@ var _todas: Array = []
 var _filtro_edad: int = 0
 var _texto_busqueda: String = ""
 var _listo: bool = false
+# Arrastre manual (drag & drop sin la API de Godot, más predecible).
+var _arrastrando_desde := Vector2.ZERO
+var _arrastrando: Dictionary = {}
+var _fantasma: PanelContainer = null
 var _widget_escena: PackedScene = null
 var _widget_script: Script = null
+var _card_art: Script = null
 
 @onready var _titulo: Label = $MainMargin/MainVBox/TopBar/TopHBox/TitleLabel
 @onready var _etiqueta_civ: Label = $MainMargin/MainVBox/TopBar/TopHBox/CivLabel
@@ -60,6 +65,8 @@ func _ready() -> void:
 		_widget_escena = load(RUTA_WIDGET_TSCN) as PackedScene
 	if ResourceLoader.exists(RUTA_WIDGET_GD):
 		_widget_script = load(RUTA_WIDGET_GD) as Script
+	if ResourceLoader.exists("res://ui/decks/CardArt.gd"):
+		_card_art = load("res://ui/decks/CardArt.gd") as Script
 	_todas = Validador.load_all_cards()
 	if _mazo == null:
 		_mazo = DeckScript.new()
@@ -422,3 +429,125 @@ func _romano(edad: int) -> String:
 		4:
 			return "IV"
 	return "?"
+
+
+## Drag & drop: pulsar loseta, arrastrar >10px y soltar en el otro panel.
+## Clic simple conserva su comportamiento (lo emite la propia loseta).
+func _input(evento: InputEvent) -> void:
+	if evento is InputEventMouseButton:
+		var r := evento as InputEventMouseButton
+		if r.button_index != MOUSE_BUTTON_LEFT:
+			return
+		if r.pressed:
+			var encontrada := _loseta_bajo_raton()
+			if not encontrada.is_empty():
+				_arrastrando = encontrada
+				_arrastrando_desde = get_global_mouse_position()
+		else:
+			if not _arrastrando.is_empty() and _fantasma != null:
+				_soltar_arrastre()
+			_arrastrando = {}
+	elif evento is InputEventMouseMotion and not _arrastrando.is_empty():
+		if _fantasma != null:
+			_mover_fantasma()
+		elif get_global_mouse_position().distance_to(_arrastrando_desde) > 10.0:
+			_crear_fantasma()
+
+
+func _losetas() -> Array:
+	# Todas las losetas con card_id bajo las filas de baraja e inventario.
+	var salida: Array = []
+	for raiz in [_filas_mazo, _filas_inv]:
+		if raiz == null:
+			continue
+		salida.append_array(_con_meta(raiz))
+	return salida
+
+
+func _con_meta(nodo: Node) -> Array:
+	var salida: Array = []
+	for h in nodo.get_children():
+		if h is Control and (h as Control).has_meta("card_id"):
+			salida.append(h)
+		salida.append_array(_con_meta(h))
+	return salida
+
+
+func _loseta_bajo_raton() -> Dictionary:
+	# {control, id, en_mazo} o {} si no hay loseta debajo.
+	var mp := get_global_mouse_position()
+	var en_mazo := _dentro_de(mp, _filas_mazo)
+	var en_inv := _dentro_de(mp, _filas_inv)
+	if not en_mazo and not en_inv:
+		return {}
+	for w in _losetas():
+		var c := w as Control
+		if c != null and c.visible and c.get_global_rect().has_point(mp):
+			return {"control": c, "id": str(c.get_meta("card_id")), "en_mazo": en_mazo}
+	return {}
+
+
+func _dentro_de(mp: Vector2, zona: Control) -> bool:
+	return zona != null and zona.visible and zona.get_global_rect().grow(6.0).has_point(mp)
+
+
+func _crear_fantasma() -> void:
+	# Copia visual que sigue al ratón mientras se arrastra.
+	_fantasma = PanelContainer.new()
+	_fantasma.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_fantasma.custom_minimum_size = Vector2(72, 72)
+	_fantasma.add_theme_stylebox_override("panel", _marco_fantasma())
+	var icono := Label.new()
+	icono.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	icono.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	icono.add_theme_font_size_override("font_size", 36)
+	icono.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var cid := str(_arrastrando.get("id", ""))
+	for c in _cartas_civ():
+		if str(c.get("id", "")) == cid and c is Dictionary:
+			icono.text = _icono_de(c)
+			break
+	_fantasma.add_child(icono)
+	add_child(_fantasma)
+	_mover_fantasma()
+
+
+func _marco_fantasma() -> StyleBoxFlat:
+	var m := StyleBoxFlat.new()
+	m.bg_color = Color(0.13, 0.09, 0.06, 0.85)
+	m.set_border_width_all(3)
+	m.border_color = Color(1.0, 0.84, 0.42)
+	m.set_corner_radius_all(6)
+	return m
+
+
+func _mover_fantasma() -> void:
+	if _fantasma != null:
+		_fantasma.global_position = get_global_mouse_position() - Vector2(36, 36)
+
+
+func _soltar_arrastre() -> void:
+	# Suelta: en el otro panel aplica, en el mismo no hace nada.
+	var mp := get_global_mouse_position()
+	var id := str(_arrastrando.get("id", ""))
+	var venia_mazo := bool(_arrastrando.get("en_mazo", false))
+	_fantasma.queue_free()
+	_fantasma = null
+	get_viewport().set_input_as_handled()
+	if id.is_empty():
+		return
+	if _dentro_de(mp, _filas_mazo) and not venia_mazo:
+		for c in _cartas_civ():
+			if c is Dictionary and str((c as Dictionary).get("id", "")) == id:
+				_on_anadir(c)
+				return
+	elif _dentro_de(mp, _filas_inv) and venia_mazo:
+		_on_quitar(id)
+		return
+	_estado.text = "Arrastra cartas entre baraja e inventario."
+
+
+func _icono_de(carta: Dictionary) -> String:
+	if _card_art != null and _card_art.has_method("icon_for"):
+		return str(_card_art.call("icon_for", str(carta.get("icon", ""))))
+	return "◆"

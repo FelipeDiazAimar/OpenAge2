@@ -7,20 +7,34 @@
       "id": "infanteria_hp_edad",
       "descripcion": "Infantería +10%/+15%/+20% HP en Feudal/Castillos/Imperial (milicia 45 -> 50/52/54 base antes de herrería; invasor nórdico 60 -> 66/69/72)",
       "efecto": {
-        "hp_infanteria_feudal": 0.10,
+        "hp_infanteria_feudal": 0.1,
         "hp_infanteria_castillos": 0.15,
-        "hp_infanteria_imperial": 0.20,
-        "aplica_a": ["milicia", "hombre_de_armas", "espadachin_mandoble", "campeon", "lancero", "piquero", "alabardero", "invasor_nordico"]
+        "hp_infanteria_imperial": 0.2,
+        "aplica_a": [
+          "milicia",
+          "hombre_de_armas",
+          "espadachin_mandoble",
+          "campeon",
+          "lancero",
+          "piquero",
+          "alabardero",
+          "invasor_nordico"
+        ]
       }
     },
     {
       "id": "barcos_baratos",
       "descripcion": "Barcos de guerra 10%/15%/20% más baratos en Feudal/Castillos/Imperial (galera 90M/30O -> 81M/27O en Feudal, 77M/26O en Castillos, 72M/24O en Imperial)",
       "efecto": {
-        "descuento_barcos_feudal": 0.10,
+        "descuento_barcos_feudal": 0.1,
         "descuento_barcos_castillos": 0.15,
-        "descuento_barcos_imperial": 0.20,
-        "aplica_a": ["galera_guerra", "galeon", "brulote", "drakkar"]
+        "descuento_barcos_imperial": 0.2,
+        "aplica_a": [
+          "galera_guerra",
+          "galeon",
+          "brulote",
+          "drakkar"
+        ]
       }
     },
     {
@@ -53,10 +67,16 @@
     "bonus_vs_edificio_elite": 4,
     "range": 1.2,
     "sight": 5.0,
-    "cost": { "food": 65, "gold": 35 },
+    "cost": {
+      "food": 65,
+      "gold": 35
+    },
     "train_time_sec": 16,
     "trained_at": "castillo",
-    "mejora_elite_cost": { "food": 750, "gold": 550 },
+    "mejora_elite_cost": {
+      "food": 750,
+      "gold": 550
+    },
     "mejora_elite_tiempo_sec": 75
   },
   "unique_techs": [
@@ -65,12 +85,24 @@
       "nombre": "Jefatura (Chieftains)",
       "edificio": "castillo",
       "edad": "castillos",
-      "coste": { "food": 400, "gold": 300 },
+      "coste": {
+        "food": 400,
+        "gold": 300
+      },
       "tiempo_sec": 50,
       "descripcion": "Infantería +5 HP (milicia 45->50, invasor nórdico 60->65; acumulable con bonus de HP por edad).",
       "efectos": {
         "hp_infanteria": 5,
-        "aplica_a": ["milicia", "hombre_de_armas", "espadachin_mandoble", "campeon", "lancero", "piquero", "alabardero", "invasor_nordico"]
+        "aplica_a": [
+          "milicia",
+          "hombre_de_armas",
+          "espadachin_mandoble",
+          "campeon",
+          "lancero",
+          "piquero",
+          "alabardero",
+          "invasor_nordico"
+        ]
       }
     },
     {
@@ -78,13 +110,18 @@
       "nombre": "Barcos dragón (Dragon Ships)",
       "edificio": "castillo",
       "edad": "imperial",
-      "coste": { "wood": 250, "gold": 250 },
+      "coste": {
+        "wood": 250,
+        "gold": 250
+      },
       "tiempo_sec": 60,
       "descripcion": "Drakkar +20% ataque (7->8.4) y +1 alcance (6->7).",
       "efectos": {
-        "ataque_drakkar_bonus": 0.20,
+        "ataque_drakkar_bonus": 0.2,
         "alcance_drakkar": 1,
-        "aplica_a": ["drakkar"]
+        "aplica_a": [
+          "drakkar"
+        ]
       }
     }
   ],
@@ -190,6 +227,38 @@
       "brulote": true,
       "drakkar": true
     },
-    "no_disponible_resumen": ["alabardero", "artillero_manual", "arquero_tiro_largo", "husar", "paladin", "paladin_franco", "camello", "camello_pesado", "catafracta", "huscarle", "hachero_franco", "escorpion_pesado", "canon_artillado", "redencion", "fervor", "iluminacion", "torre_muralla", "arquitectura", "muralla_fortificada", "ataque_cab_3", "armadura_cab_3"]
-  }
+    "no_disponible_resumen": [
+      "alabardero",
+      "artillero_manual",
+      "arquero_tiro_largo",
+      "husar",
+      "paladin",
+      "paladin_franco",
+      "camello",
+      "camello_pesado",
+      "catafracta",
+      "huscarle",
+      "hachero_franco",
+      "escorpion_pesado",
+      "canon_artillado",
+      "redencion",
+      "fervor",
+      "iluminacion",
+      "torre_muralla",
+      "arquitectura",
+      "muralla_fortificada",
+      "ataque_cab_3",
+      "armadura_cab_3"
+    ]
+  },
+  "ventajas": [
+    "Infantería con +HP por edad",
+    "Barcos baratos",
+    "Invasor versátil"
+  ],
+  "debilidades": [
+    "Sin pólvora",
+    "Sin caballería",
+    "Sin alabardero"
+  ]
 }

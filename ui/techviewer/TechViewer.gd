@@ -26,6 +26,7 @@ var _edades: Array = []
 var _tecs: Array = []
 var _civs: Array = []
 var _civ_actual: String = "todas"
+var _ocultar_vetadas: bool = false
 
 @onready var _filtro: OptionButton = get_node_or_null("Margen/Columna/Barra/FiltroCiv")
 @onready var _contenido: VBoxContainer = get_node_or_null("Margen/Columna/Scroll/Contenido")
@@ -46,11 +47,22 @@ func _ready() -> void:
 
 
 func _conectar_senales() -> void:
-	# Filtro de civ y botón Volver; nada de research real.
+	# Filtro de civ, interruptor de vetadas y botón Volver; nada de research real.
 	if _filtro != null and not _filtro.item_selected.is_connected(_al_elegir_civ):
 		_filtro.item_selected.connect(_al_elegir_civ)
+		var oculta := CheckButton.new()
+		oculta.text = "Ocultar no disponibles"
+		oculta.button_pressed = _ocultar_vetadas
+		oculta.toggled.connect(_al_cambiar_ocultar)
+		(_filtro.get_parent() as Container).add_child(oculta)
 	if _volver != null and not _volver.pressed.is_connected(_on_volver):
 		_volver.pressed.connect(_on_volver)
+
+
+func _al_cambiar_ocultar(valor: bool) -> void:
+	# Muestra solo lo disponible de la civ o todo atenuado.
+	_ocultar_vetadas = valor
+	_construir_arbol()
 
 
 func _on_volver() -> void:
@@ -317,6 +329,8 @@ func _construir_arbol() -> void:
 				var vetada := _esta_vetada(str(tec["id"]), str(tec["edificio"]))
 				if vetada:
 					total_vetadas += 1
+					if _ocultar_vetadas:
+						continue
 				rejilla.add_child(_crear_tarjeta(tec, vetada, nombre_civ))
 	_actualizar_info(nombre_civ, total_vetadas)
 
@@ -403,12 +417,12 @@ func _crear_tarjeta(tec: Dictionary, vetada: bool, nombre_civ: String) -> Contro
 	caja.add_child(efecto)
 	if vetada:
 		var veto := Label.new()
-		veto.text = "No disponible para %s." % nombre_civ
-		veto.add_theme_font_size_override("font_size", 12)
-		veto.add_theme_color_override("font_color", Color(0.75, 0.45, 0.40))
+		veto.text = "✕ NO DISPONIBLE para %s." % nombre_civ
+		veto.add_theme_font_size_override("font_size", 13)
+		veto.add_theme_color_override("font_color", Color(1.0, 0.40, 0.35))
 		veto.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		caja.add_child(veto)
-		tarjeta.modulate = Color(1, 1, 1, 0.35)
+		tarjeta.modulate = Color(1, 1, 1, 0.25)
 		tarjeta.tooltip_text = "No disponible para %s." % nombre_civ
 	else:
 		tarjeta.tooltip_text = str(tec.get("descripcion", ""))
@@ -458,11 +472,11 @@ func _estilo_seccion() -> StyleBoxFlat:
 
 
 func _estilo_tarjeta(vetada: bool) -> StyleBoxFlat:
-	# Pergamino oscuro para disponibles; gris apagado para vetadas.
+	# Pergamino oscuro para disponibles; gris apagado con borde rojo para vetadas.
 	var caja := StyleBoxFlat.new()
 	if vetada:
-		caja.bg_color = Color(0.12, 0.11, 0.10, 0.95)
-		caja.border_color = Color(0.40, 0.38, 0.35)
+		caja.bg_color = Color(0.10, 0.09, 0.09, 0.95)
+		caja.border_color = Color(0.85, 0.25, 0.20)
 	else:
 		caja.bg_color = Color(0.16, 0.12, 0.08, 0.97)
 		caja.border_color = Color(0.55, 0.44, 0.24)

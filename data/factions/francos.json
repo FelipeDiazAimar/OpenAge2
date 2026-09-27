@@ -7,8 +7,14 @@
       "id": "caballeria_hp_20",
       "descripcion": "Caballería +20% HP (jinete 120->144, caballero 100->120 base antes de mejoras)",
       "efecto": {
-        "hp_caballeria_bonus": 0.20,
-        "aplica_a": ["jinete", "caballeria_ligera", "husar", "caballero", "paladin_franco"]
+        "hp_caballeria_bonus": 0.2,
+        "aplica_a": [
+          "jinete",
+          "caballeria_ligera",
+          "husar",
+          "caballero",
+          "paladin_franco"
+        ]
       }
     },
     {
@@ -18,7 +24,10 @@
         "coste_granja_madera": 0,
         "ahorro_granja_madera": 60,
         "mejoras_molino_coste": 0,
-        "aplica_a": ["molino", "granja"]
+        "aplica_a": [
+          "molino",
+          "granja"
+        ]
       }
     },
     {
@@ -43,10 +52,16 @@
     "armor_pierce": 3,
     "range": 1.2,
     "sight": 6.0,
-    "cost": { "food": 75, "gold": 75 },
+    "cost": {
+      "food": 75,
+      "gold": 75
+    },
     "train_time_sec": 30,
     "trained_at": "castillo",
-    "mejora_elite_cost": { "food": 1000, "gold": 800 },
+    "mejora_elite_cost": {
+      "food": 1000,
+      "gold": 800
+    },
     "mejora_elite_tiempo_sec": 90
   },
   "unique_techs": [
@@ -55,13 +70,18 @@
       "nombre": "Hachas de barbas (Bearded Axe)",
       "edificio": "castillo",
       "edad": "castillos",
-      "coste": { "food": 300, "gold": 300 },
+      "coste": {
+        "food": 300,
+        "gold": 300
+      },
       "tiempo_sec": 50,
       "descripcion": "Hachero franco +1 alcance, +2 ataque.",
       "efectos": {
         "alcance_hachero": 1,
         "ataque_hachero": 2,
-        "aplica_a": ["hachero_franco"]
+        "aplica_a": [
+          "hachero_franco"
+        ]
       }
     },
     {
@@ -69,11 +89,14 @@
       "nombre": "Caballerosidad (Chivalry)",
       "edificio": "castillo",
       "edad": "imperial",
-      "coste": { "food": 400, "gold": 400 },
+      "coste": {
+        "food": 400,
+        "gold": 400
+      },
       "tiempo_sec": 60,
       "descripcion": "Establo trabaja 40% más rápido.",
       "efectos": {
-        "velocidad_establo": 0.40
+        "velocidad_establo": 0.4
       }
     }
   ],
@@ -82,7 +105,14 @@
     "descripcion": "Caballería +2 línea de visión (aliados)",
     "efecto": {
       "vision_caballeria": 2.0,
-      "aplica_a": ["jinete", "caballeria_ligera", "husar", "caballero", "paladin_franco", "camello"]
+      "aplica_a": [
+        "jinete",
+        "caballeria_ligera",
+        "husar",
+        "caballero",
+        "paladin_franco",
+        "camello"
+      ]
     }
   },
   "tech_tree": {
@@ -178,6 +208,29 @@
       "galeon": true,
       "brulote": true
     },
-    "no_disponible_resumen": ["alabardero", "ballestero", "artillero_manual", "arquero_tiro_largo", "catafracta", "huscarle", "escorpion_pesado", "teocracia", "herejia", "balistica", "ataque_arq_3", "armadura_arq_3"]
-  }
+    "no_disponible_resumen": [
+      "alabardero",
+      "ballestero",
+      "artillero_manual",
+      "arquero_tiro_largo",
+      "catafracta",
+      "huscarle",
+      "escorpion_pesado",
+      "teocracia",
+      "herejia",
+      "balistica",
+      "ataque_arq_3",
+      "armadura_arq_3"
+    ]
+  },
+  "ventajas": [
+    "Caballería con +HP",
+    "Granjas gratis",
+    "Paladín franco"
+  ],
+  "debilidades": [
+    "Sin ballestero",
+    "Sin alabardero",
+    "Arqueros básicos"
+  ]
 }

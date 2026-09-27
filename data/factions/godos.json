@@ -7,9 +7,18 @@
       "id": "infanteria_barata",
       "descripcion": "Infantería 20% más barata (35% en Imperial): milicia 60F/20O -> 48F/16O (39F/13O en Imperial)",
       "efecto": {
-        "descuento_infanteria": 0.20,
+        "descuento_infanteria": 0.2,
         "descuento_infanteria_imperial": 0.35,
-        "aplica_a": ["milicia", "hombre_de_armas", "espadachin_mandoble", "campeon", "lancero", "piquero", "alabardero", "huscarle"]
+        "aplica_a": [
+          "milicia",
+          "hombre_de_armas",
+          "espadachin_mandoble",
+          "campeon",
+          "lancero",
+          "piquero",
+          "alabardero",
+          "huscarle"
+        ]
       }
     },
     {
@@ -17,7 +26,10 @@
       "descripcion": "Caza +15 alimento por presa (jabalí 350->365, ciervo 140->155)",
       "efecto": {
         "alimento_extra_caza": 15,
-        "aplica_a": ["jabali", "ciervo"]
+        "aplica_a": [
+          "jabali",
+          "ciervo"
+        ]
       }
     },
     {
@@ -43,11 +55,17 @@
     "armor_pierce_elite": 8,
     "bonus_vs_arquero": 6,
     "bonus_vs_arquero_elite": 8,
-    "cost": { "food": 55, "gold": 25 },
+    "cost": {
+      "food": 55,
+      "gold": 25
+    },
     "train_time_sec": 16,
     "trained_at": "castillo",
     "entrenable_en_cuartel_con_anarquia": true,
-    "mejora_elite_cost": { "food": 1200, "gold": 600 },
+    "mejora_elite_cost": {
+      "food": 1200,
+      "gold": 600
+    },
     "mejora_elite_tiempo_sec": 75
   },
   "unique_techs": [
@@ -56,7 +74,10 @@
       "nombre": "Anarquía",
       "edificio": "castillo",
       "edad": "castillos",
-      "coste": { "food": 450, "gold": 250 },
+      "coste": {
+        "food": 450,
+        "gold": 250
+      },
       "tiempo_sec": 50,
       "descripcion": "Huscarles entrenables en Cuartel (además del Castillo).",
       "efectos": {
@@ -68,11 +89,14 @@
       "nombre": "Perfusión (Movilidad)",
       "edificio": "castillo",
       "edad": "imperial",
-      "coste": { "food": 600, "gold": 400 },
+      "coste": {
+        "food": 600,
+        "gold": 400
+      },
       "tiempo_sec": 60,
       "descripcion": "Cuartel trabaja 50% más rápido (acumulable con team bonus 20%).",
       "efectos": {
-        "velocidad_cuartel": 0.50
+        "velocidad_cuartel": 0.5
       }
     }
   ],
@@ -80,7 +104,7 @@
     "id": "cuartel_rapido_20",
     "descripcion": "Cuartel trabaja 20% más rápido (aliados)",
     "efecto": {
-      "velocidad_cuartel": 0.20
+      "velocidad_cuartel": 0.2
     }
   },
   "tech_tree": {
@@ -175,6 +199,44 @@
       "galeon": false,
       "brulote": true
     },
-    "no_disponible_resumen": ["ballestero", "artillero_manual", "arquero_tiro_largo", "caballero", "paladin", "paladin_franco", "camello", "camello_pesado", "catafracta", "canon_artillado", "hachero_franco", "redencion", "fervor", "santidad", "iluminacion", "teocracia", "herejia", "ataque_arq_2", "ataque_arq_3", "armadura_arq_2", "armadura_arq_3", "balistica", "quimica", "torre_muralla", "arquitectura", "muralla_fortificada", "galeon"]
-  }
+    "no_disponible_resumen": [
+      "ballestero",
+      "artillero_manual",
+      "arquero_tiro_largo",
+      "caballero",
+      "paladin",
+      "paladin_franco",
+      "camello",
+      "camello_pesado",
+      "catafracta",
+      "canon_artillado",
+      "hachero_franco",
+      "redencion",
+      "fervor",
+      "santidad",
+      "iluminacion",
+      "teocracia",
+      "herejia",
+      "ataque_arq_2",
+      "ataque_arq_3",
+      "armadura_arq_2",
+      "armadura_arq_3",
+      "balistica",
+      "quimica",
+      "torre_muralla",
+      "arquitectura",
+      "muralla_fortificada",
+      "galeon"
+    ]
+  },
+  "ventajas": [
+    "Infantería barata",
+    "Huscarle anti-arqueros",
+    "Cuarteles veloces"
+  ],
+  "debilidades": [
+    "Sin pólvora",
+    "Sin caballería pesada",
+    "Defensas flojas"
+  ]
 }

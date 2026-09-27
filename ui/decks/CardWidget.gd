@@ -13,6 +13,9 @@ const CardArtScript := preload("res://ui/decks/CardArt.gd")
 
 # Id de la carta mostrada (se devuelve en el signal).
 var _card_id: String = ""
+# Press para distinguir clic de arrastre (el arrastre lo gestiona DeckBuilder).
+var _press_pos := Vector2.ZERO
+var _pressing := false
 # Edad numerica 1-4 para el marco y el sello.
 var _edad: int = 1
 # Si esta seleccionada (resalte dorado).
@@ -42,13 +45,21 @@ func _ready() -> void:
 
 
 func _gui_input(event: InputEvent) -> void:
-	# Solo UI: clic izquierdo o tecla de confirmacion emiten signal.
+	# Clic (pulsar+soltar sin arrastrar) emite signal. Con arrastre (>10px)
+	# no emite: el DeckBuilder gestiona el drop por su cuenta.
 	if event is InputEventMouseButton:
 		var clic: InputEventMouseButton = event as InputEventMouseButton
-		if clic.button_index == MOUSE_BUTTON_LEFT and clic.pressed:
-			accept_event()
+		if clic.button_index != MOUSE_BUTTON_LEFT:
+			return
+		if clic.pressed:
+			_pressing = true
+			_press_pos = clic.position
 			grab_focus()
-			card_pressed.emit(_card_id)
+		elif _pressing:
+			_pressing = false
+			if _press_pos.distance_to(clic.position) <= 10.0:
+				accept_event()
+				card_pressed.emit(_card_id)
 	elif event is InputEventKey:
 		var tecla: InputEventKey = event as InputEventKey
 		if tecla.pressed and not tecla.echo:

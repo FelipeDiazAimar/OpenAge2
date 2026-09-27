@@ -1,102 +1,74 @@
 extends Control
-# Galería medieval de civilizaciones: parrilla con emblema, bonus y nº de cartas.
-# Lee los bonus de res://data/factions/*.json y cuenta cartas de res://mods/aoe2_base/cards/*.json.
-# Cada tarjeta muestra nombre, color, bonus resumidos, nº de cartas y escudo procedural con la inicial.
-# Al pulsar una tarjeta se abre el detalle y se emite civ_picked(civ) para que otra pantalla la use.
-# Estilo medieval 100 % procedural, sin assets externos. GDScript 4.4 con tabs.
+# Galería de civilizaciones: parrilla con scroll, pros/contras claros,
+# selección simple (detalle) o doble (comparar). Todo construido en código.
+# Lee data/factions/*.json (ventajas, debilidades, unique_unit) y cuenta
+# cartas de mods/aoe2_base/cards/*.json. Emite civ_picked(civ).
 
 signal civ_picked(civ: String)
 
-const FACTIONS_DIR := "res://data/factions"
-const CARDS_DIR := "res://mods/aoe2_base/cards"
+const FACTIONS_DIR := "res://mods/aoe2_base/cards"
+const CIVS_DIR := "res://data/factions"
 const ORO := Color(1.0, 0.84, 0.42)
+const VERDE := Color(0.45, 0.9, 0.45)
+const ROJO := Color(1.0, 0.45, 0.42)
 const PERGAMINO := Color(0.82, 0.76, 0.64)
-const MAX_RESUMEN := 90
+const RUTA_MENU := "res://ui/menus/MainMenu.tscn"
 
 var _civs: Array = []
 var _propias := {}
 var _neutrales := 0
-var _seleccion := ""
-
+var _sel: Array[String] = []
 var _grid: GridContainer
-var _detalle_marco: PanelContainer
-var _detalle_muestra: TextureRect
-var _detalle_inicial: Label
-var _detalle_titulo: Label
-var _detalle_bonus: Label
-var _detalle_cartas: Label
+var _lado_der: VBoxContainer
+var _pista: Label
 
 
 func _ready() -> void:
-	# Ocupa toda la pantalla y monta la galería sobre el TSCN.
 	set_anchors_preset(Control.PRESET_FULL_RECT)
-	_localizar_nodos()
-	_aplicar_estilo_medieval()
 	_cargar_civs()
 	_contar_cartas()
-	_construir_parrilla()
-	if not _civs.is_empty():
-		_mostrar_detalle(str((_civs[0] as Dictionary).get("id", "")))
-	_conectar_volver()
-
-
-func _localizar_nodos() -> void:
-	# Recupera los nodos del TSCN; si falta alguno se sigue sin romper.
-	_grid = get_node_or_null("Margen/Principal/CivGrid") as GridContainer
-	_detalle_marco = get_node_or_null("Margen/Principal/DetalleFrame") as PanelContainer
-	_detalle_muestra = get_node_or_null("Margen/Principal/DetalleFrame/DetalleMargen/DetalleCaja/DetalleEmblema/DetalleMuestra") as TextureRect
-	_detalle_inicial = get_node_or_null("Margen/Principal/DetalleFrame/DetalleMargen/DetalleCaja/DetalleEmblema/DetalleInicial") as Label
-	_detalle_titulo = get_node_or_null("Margen/Principal/DetalleFrame/DetalleMargen/DetalleCaja/DetalleVBox/DetalleTitulo") as Label
-	_detalle_bonus = get_node_or_null("Margen/Principal/DetalleFrame/DetalleMargen/DetalleCaja/DetalleVBox/DetalleBonus") as Label
-	_detalle_cartas = get_node_or_null("Margen/Principal/DetalleFrame/DetalleMargen/DetalleCaja/DetalleVBox/DetalleCartas") as Label
-
-
-func _aplicar_estilo_medieval() -> void:
-	# Título dorado con sombra de antorcha.
-	var titulo := get_node_or_null("Margen/Principal/Titulo") as Label
-	if titulo != null:
-		titulo.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		titulo.add_theme_font_size_override("font_size", 40)
-		titulo.add_theme_color_override("font_color", ORO)
-		titulo.add_theme_color_override("font_outline_color", Color(0.25, 0.12, 0.05))
-		titulo.add_theme_constant_override("outline_size", 6)
-		titulo.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.9))
-		titulo.add_theme_constant_override("shadow_offset_x", 2)
-		titulo.add_theme_constant_override("shadow_offset_y", 2)
-	# Subtítulo color pergamino.
-	var sub := get_node_or_null("Margen/Principal/Subtitulo") as Label
-	if sub != null:
-		sub.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		sub.add_theme_font_size_override("font_size", 15)
-		sub.add_theme_color_override("font_color", PERGAMINO)
-	# Marco de madera del detalle.
-	if _detalle_marco != null:
-		_detalle_marco.add_theme_stylebox_override("panel", _marco_madera())
-	if _detalle_titulo != null:
-		_detalle_titulo.add_theme_font_size_override("font_size", 22)
-		_detalle_titulo.add_theme_color_override("font_color", ORO)
-	if _detalle_bonus != null:
-		_detalle_bonus.add_theme_font_size_override("font_size", 14)
-		_detalle_bonus.add_theme_color_override("font_color", PERGAMINO)
-	if _detalle_cartas != null:
-		_detalle_cartas.add_theme_font_size_override("font_size", 14)
-		_detalle_cartas.add_theme_color_override("font_color", Color(0.95, 0.90, 0.78))
-	if _detalle_inicial != null:
-		_detalle_inicial.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		_detalle_inicial.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-		_detalle_inicial.add_theme_font_size_override("font_size", 40)
-		_detalle_inicial.add_theme_color_override("font_color", ORO)
-		_detalle_inicial.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
-		_detalle_inicial.add_theme_constant_override("outline_size", 6)
-	# Botón volver con madera oscura y hover dorado.
-	var volver := get_node_or_null("Margen/Principal/FilaBotones/BotonVolver") as Button
-	if volver != null:
-		_estilo_boton(volver)
+	_construir()
+	_actualizar_lado()
 
 
 func _cargar_civs() -> void:
-	# Lee cada data/factions/*.json: id, nombre, roof_color y descripciones de bonus.
+	# id, nombre, color, bonus, ventajas, debilidades, unique_unit.
 	_civs.clear()
+	var dir := DirAccess.open(CIVS_DIR)
+	if dir == null:
+		return
+	var archivos: Array[String] = []
+	dir.list_dir_begin()
+	var f := dir.get_next()
+	while f != "":
+		if not dir.current_is_dir() and f.ends_with(".json"):
+			archivos.append(f)
+		f = dir.get_next()
+	dir.list_dir_end()
+	archivos.sort()
+	for nombre in archivos:
+		var texto := FileAccess.get_file_as_string(CIVS_DIR + "/" + nombre)
+		if texto.strip_edges().is_empty():
+			continue
+		var d: Variant = JSON.parse_string(texto)
+		if not (d is Dictionary):
+			continue
+		_civs.append({
+			"id": str(d.get("id", nombre.get_basename())),
+			"nombre": str(d.get("name", d.get("id", "?"))),
+			"color": str(d.get("roof_color", d.get("color", "#73706a"))),
+			"bonus": d.get("bonus", []),
+			"ventajas": d.get("ventajas", []),
+			"debilidades": d.get("debilidades", []),
+			"unique": d.get("unique_unit", {}),
+		})
+	_civs.sort_custom(func(a: Variant, b: Variant) -> bool: return str((a as Dictionary)["nombre"]) < str((b as Dictionary)["nombre"]))
+
+
+func _contar_cartas() -> void:
+	# Propias por civ + neutrales utilizables por todas.
+	_propias.clear()
+	_neutrales = 0
 	var dir := DirAccess.open(FACTIONS_DIR)
 	if dir == null:
 		return
@@ -110,49 +82,7 @@ func _cargar_civs() -> void:
 	dir.list_dir_end()
 	archivos.sort()
 	for nombre in archivos:
-		var texto := FileAccess.get_file_as_string(FACTIONS_DIR + "/" + nombre)
-		if texto.strip_edges().is_empty():
-			continue
-		var datos: Variant = JSON.parse_string(texto)
-		if not (datos is Dictionary):
-			continue
-		var d: Dictionary = datos
-		var bonus: Array[String] = []
-		var lista: Variant = d.get("bonus", [])
-		if lista is Array:
-			for b in (lista as Array):
-				if b is Dictionary and (b as Dictionary).has("descripcion"):
-					bonus.append(str((b as Dictionary)["descripcion"]))
-		_civs.append({
-			"id": str(d.get("id", nombre.get_basename())),
-			"nombre": str(d.get("name", d.get("id", nombre.get_basename()))),
-			"color": str(d.get("roof_color", d.get("color", "#73706a"))),
-			"bonus": bonus,
-		})
-	_civs.sort_custom(func(a: Variant, b: Variant) -> bool: return str((a as Dictionary)["nombre"]) < str((b as Dictionary)["nombre"]))
-
-
-func _contar_cartas() -> void:
-	# Cuenta en mods/aoe2_base/cards/*.json cuántas cartas tienen civ == id de facción.
-	_propias.clear()
-	_neutrales = 0
-	var dir := DirAccess.open(CARDS_DIR)
-	if dir == null:
-		return
-	var archivos: Array[String] = []
-	dir.list_dir_begin()
-	var f := dir.get_next()
-	while f != "":
-		if not dir.current_is_dir() and f.ends_with(".json"):
-			archivos.append(f)
-		f = dir.get_next()
-	dir.list_dir_end()
-	archivos.sort()
-	for nombre in archivos:
-		var texto := FileAccess.get_file_as_string(CARDS_DIR + "/" + nombre)
-		if texto.strip_edges().is_empty():
-			continue
-		var datos: Variant = JSON.parse_string(texto)
+		var datos: Variant = JSON.parse_string(FileAccess.get_file_as_string(FACTIONS_DIR + "/" + nombre))
 		var lista: Array = []
 		if datos is Array:
 			lista = datos
@@ -162,263 +92,289 @@ func _contar_cartas() -> void:
 			if not (c is Dictionary):
 				continue
 			var cciv := str((c as Dictionary).get("civ", "")).strip_edges().to_lower()
-			if cciv == "" or cciv == "todas" or cciv == "todas_las" or cciv == "neutral" or cciv == "neutrales":
+			if cciv == "" or cciv == "todas" or cciv == "neutral" or cciv == "neutrales":
 				_neutrales += 1
 			else:
 				_propias[cciv] = int(_propias.get(cciv, 0)) + 1
 
 
-func _construir_parrilla() -> void:
-	# Una tarjeta por civilización: escudo con inicial, nombre, bonus resumidos y nº de cartas.
+func _construir() -> void:
+	# Fondo oscuro + barra superior + dos columnas con scroll.
+	var fondo := ColorRect.new()
+	fondo.color = Color(0.07, 0.05, 0.04)
+	fondo.set_anchors_preset(Control.PRESET_FULL_RECT)
+	fondo.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(fondo)
+	var margen := MarginContainer.new()
+	margen.set_anchors_preset(Control.PRESET_FULL_RECT)
+	margen.add_theme_constant_override("margin_left", 14)
+	margen.add_theme_constant_override("margin_top", 10)
+	margen.add_theme_constant_override("margin_right", 14)
+	margen.add_theme_constant_override("margin_bottom", 10)
+	add_child(margen)
+	var caja := VBoxContainer.new()
+	caja.add_theme_constant_override("separation", 8)
+	margen.add_child(caja)
+	var barra := HBoxContainer.new()
+	barra.add_theme_constant_override("separation", 12)
+	caja.add_child(barra)
+	var titulo := Label.new()
+	titulo.text = "CIVILIZACIONES"
+	titulo.add_theme_font_size_override("font_size", 30)
+	titulo.add_theme_color_override("font_color", ORO)
+	barra.add_child(titulo)
+	_pista = Label.new()
+	_pista.text = "Pulsa 1 para ver detalle · 2 para comparar"
+	_pista.add_theme_font_size_override("font_size", 14)
+	_pista.add_theme_color_override("font_color", PERGAMINO)
+	_pista.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	barra.add_child(_pista)
+	var volver := Button.new()
+	volver.text = "VOLVER"
+	volver.custom_minimum_size = Vector2(140, 40)
+	volver.pressed.connect(_on_volver)
+	barra.add_child(volver)
+	var cols := HBoxContainer.new()
+	cols.add_theme_constant_override("separation", 10)
+	cols.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	caja.add_child(cols)
+	var scroll_izq := ScrollContainer.new()
+	scroll_izq.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll_izq.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	cols.add_child(scroll_izq)
+	_grid = GridContainer.new()
+	_grid.columns = 2
+	_grid.add_theme_constant_override("h_separation", 10)
+	_grid.add_theme_constant_override("v_separation", 10)
+	_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll_izq.add_child(_grid)
+	for civ in _civs:
+		_grid.add_child(_tarjeta(civ))
+	var marco_der := PanelContainer.new()
+	marco_der.custom_minimum_size = Vector2(430, 0)
+	marco_der.add_theme_stylebox_override("panel", _marco())
+	cols.add_child(marco_der)
+	var scroll_der := ScrollContainer.new()
+	scroll_der.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	marco_der.add_child(scroll_der)
+	_lado_der = VBoxContainer.new()
+	_lado_der.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_lado_der.add_theme_constant_override("separation", 8)
+	scroll_der.add_child(_lado_der)
+
+
+func _marco(borde: Color = ORO) -> StyleBoxFlat:
+	var m := StyleBoxFlat.new()
+	m.bg_color = Color(0.13, 0.09, 0.06, 0.96)
+	m.set_border_width_all(2)
+	m.border_color = borde
+	m.set_corner_radius_all(8)
+	return m
+
+
+func _tarjeta(civ: Dictionary) -> PanelContainer:
+	# Compacta: emblema + nombre + 3 pros + 2 contras + UU + cartas. Clic alterna.
+	var id := str(civ.get("id", ""))
+	var color := Color.html(str(civ.get("color", "#73706a")))
+	var t := PanelContainer.new()
+	t.name = "Civ_" + id
+	t.set_meta("civ", id)
+	t.custom_minimum_size = Vector2(300, 0)
+	t.add_theme_stylebox_override("panel", _marco(color if not _sel.has(id) else ORO))
+	var m := MarginContainer.new()
+	m.add_theme_constant_override("margin_left", 10)
+	m.add_theme_constant_override("margin_top", 8)
+	m.add_theme_constant_override("margin_right", 10)
+	m.add_theme_constant_override("margin_bottom", 8)
+	t.add_child(m)
+	var caja := VBoxContainer.new()
+	caja.add_theme_constant_override("separation", 4)
+	m.add_child(caja)
+	var fila := HBoxContainer.new()
+	fila.add_theme_constant_override("separation", 10)
+	fila.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	caja.add_child(fila)
+	var emb := TextureRect.new()
+	emb.texture = CivEmblems.emblem(id, 56)
+	emb.custom_minimum_size = Vector2(56, 56)
+	emb.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	emb.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	emb.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	fila.add_child(emb)
+	var nom := Label.new()
+	nom.text = str(civ.get("nombre", id))
+	nom.add_theme_font_size_override("font_size", 22)
+	nom.add_theme_color_override("font_color", color.lightened(0.35))
+	nom.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	fila.add_child(nom)
+	for v in _primeros(civ.get("ventajas", []), 3):
+		caja.add_child(_linea("✔ " + str(v), VERDE, 13))
+	for w in _primeros(civ.get("debilidades", []), 2):
+		caja.add_child(_linea("✕ " + str(w), ROJO, 13))
+	var uu: Dictionary = civ.get("unique", {})
+	var pie := Label.new()
+	var txt_uu := str(uu.get("name", uu.get("id", "?"))) if not uu.is_empty() else "?"
+	var propias := int(_propias.get(id.to_lower(), 0))
+	pie.text = "UU: %s · %d cartas" % [txt_uu, propias]
+	pie.add_theme_font_size_override("font_size", 12)
+	pie.add_theme_color_override("font_color", Color(0.95, 0.90, 0.78))
+	pie.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	caja.add_child(pie)
+	t.gui_input.connect(_on_tarjeta.bind(id))
+	return t
+
+
+func _primeros(v: Variant, n: int) -> Array:
+	var salida: Array = []
+	if v is Array:
+		for x in (v as Array):
+			if salida.size() >= n:
+				break
+			salida.append(x)
+	return salida
+
+
+func _linea(texto: String, color: Color, tam: int) -> Label:
+	var l := Label.new()
+	l.text = texto
+	l.add_theme_font_size_override("font_size", tam)
+	l.add_theme_color_override("font_color", color)
+	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	return l
+
+
+func _on_tarjeta(evento: InputEvent, id: String) -> void:
+	if evento is InputEventMouseButton:
+		var r := evento as InputEventMouseButton
+		if r.button_index == MOUSE_BUTTON_LEFT and r.pressed:
+			_alternar(id)
+
+
+func _alternar(id: String) -> void:
+	# Máximo 2: la tercera sustituye a la más antigua.
+	if _sel.has(id):
+		_sel.erase(id)
+	elif _sel.size() >= 2:
+		_sel.pop_front()
+		_sel.append(id)
+	else:
+		_sel.append(id)
+	if _sel.size() == 1:
+		civ_picked.emit(_sel[0])
+	_refrescar_bordes()
+	_actualizar_lado()
+
+
+func _refrescar_bordes() -> void:
 	if _grid == null:
 		return
-	for hijo in _grid.get_children():
-		hijo.queue_free()
-	for civ in _civs:
-		_grid.add_child(_crear_tarjeta(civ))
+	for t in _grid.get_children():
+		if t is PanelContainer and (t as PanelContainer).has_meta("civ"):
+			var id := str((t as PanelContainer).get_meta("civ"))
+			var civ := _buscar(id)
+			var color := Color.html(str(civ.get("color", "#73706a")))
+			(t as PanelContainer).add_theme_stylebox_override("panel", _marco(ORO if _sel.has(id) else color))
 
 
-func _crear_tarjeta(civ: Dictionary) -> PanelContainer:
-	# Tarjeta clicable con el color de la civ en el borde.
-	var id := str(civ.get("id", ""))
-	var nombre := str(civ.get("nombre", id))
-	var color := Color.html(str(civ.get("color", "#73706a")))
-	var tarjeta := PanelContainer.new()
-	tarjeta.name = "Civ_" + id
-	tarjeta.set_meta("civ", id)
-	tarjeta.add_theme_stylebox_override("panel", _marco_tarjeta(color, id == _seleccion))
-	var margen := MarginContainer.new()
-	margen.add_theme_constant_override("margin_left", 12)
-	margen.add_theme_constant_override("margin_top", 10)
-	margen.add_theme_constant_override("margin_right", 12)
-	margen.add_theme_constant_override("margin_bottom", 10)
-	tarjeta.add_child(margen)
-	var caja := VBoxContainer.new()
-	caja.add_theme_constant_override("separation", 6)
-	margen.add_child(caja)
-	# Emblema procedural (escudo de CivEmblems) con la inicial encima.
-	var emblema := Control.new()
-	emblema.custom_minimum_size = Vector2(80, 80)
-	emblema.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	caja.add_child(emblema)
-	var escudo := TextureRect.new()
-	escudo.set_anchors_preset(Control.PRESET_FULL_RECT)
-	escudo.texture = CivEmblems.emblem(id, 80)
-	escudo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	escudo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	escudo.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	emblema.add_child(escudo)
-	var inicial := Label.new()
-	inicial.set_anchors_preset(Control.PRESET_FULL_RECT)
-	inicial.text = nombre.left(1).to_upper()
-	inicial.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	inicial.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	inicial.add_theme_font_size_override("font_size", 34)
-	inicial.add_theme_color_override("font_color", ORO)
-	inicial.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
-	inicial.add_theme_constant_override("outline_size", 6)
-	inicial.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	emblema.add_child(inicial)
-	# Nombre con el color de la civ.
-	var etiqueta := Label.new()
-	etiqueta.text = nombre
-	etiqueta.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	etiqueta.add_theme_font_size_override("font_size", 22)
-	etiqueta.add_theme_color_override("font_color", color.lightened(0.35))
-	etiqueta.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	caja.add_child(etiqueta)
-	# Bonus resumidos (dos primeros, recortados).
-	var bonus := Label.new()
-	bonus.text = _resumen(civ)
-	bonus.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	bonus.custom_minimum_size = Vector2(220, 66)
-	bonus.add_theme_font_size_override("font_size", 13)
-	bonus.add_theme_color_override("font_color", PERGAMINO)
-	bonus.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	caja.add_child(bonus)
-	# Nº de cartas propias más neutrales utilizables.
-	var propias := int(_propias.get(id.to_lower(), 0))
-	var cartas := Label.new()
-	cartas.text = "%d cartas (+%d neutrales)" % [propias, _neutrales]
-	cartas.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	cartas.add_theme_font_size_override("font_size", 14)
-	cartas.add_theme_color_override("font_color", Color(0.95, 0.90, 0.78))
-	cartas.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	caja.add_child(cartas)
-	# Botón para teclado y click directo sobre la tarjeta.
-	var ver := Button.new()
-	ver.text = "Ver detalle"
-	ver.focus_mode = Control.FOCUS_ALL
-	_estilo_boton(ver)
-	ver.pressed.connect(_on_elegir.bind(id))
-	caja.add_child(ver)
-	tarjeta.gui_input.connect(_on_tarjeta_input.bind(id))
-	return tarjeta
+func _actualizar_lado() -> void:
+	for h in _lado_der.get_children():
+		h.queue_free()
+	if _sel.is_empty():
+		_lado_der.add_child(_linea("Pulsa una civilización para ver su detalle, o dos para compararlas.", PERGAMINO, 15))
+		_pista.text = "Pulsa 1 para ver detalle · 2 para comparar"
+		return
+	if _sel.size() == 1:
+		_detalle(_buscar(_sel[0]))
+		_pista.text = "1 elegida: %s · pulsa otra para comparar" % str(_buscar(_sel[0]).get("nombre", "?"))
+	else:
+		_comparar(_buscar(_sel[0]), _buscar(_sel[1]))
+		_pista.text = "Comparando: %s vs %s" % [str(_buscar(_sel[0]).get("nombre", "?")), str(_buscar(_sel[1]).get("nombre", "?"))]
 
 
-func _resumen(civ: Dictionary) -> String:
-	# Dos primeros bonus recortados a una línea cada uno.
-	var bonus: Variant = civ.get("bonus", [])
-	if not (bonus is Array) or (bonus as Array).is_empty():
-		return "Sin bonus registrados."
-	var lineas: Array[String] = []
-	var total := mini(2, (bonus as Array).size())
-	for i in total:
-		lineas.append("• " + _recortar(str((bonus as Array)[i]), MAX_RESUMEN))
-	if (bonus as Array).size() > total:
-		lineas.append("• (+%d bonus más)" % ((bonus as Array).size() - total))
-	return "\n".join(lineas)
-
-
-func _recortar(texto: String, maximo: int) -> String:
-	# Recorta sin partir palabras cuando es posible.
-	var limpio := texto.strip_edges()
-	if limpio.length() <= maximo:
-		return limpio
-	var corte := limpio.left(maximo - 1)
-	var espacio := corte.rfind(" ")
-	if espacio > maximo / 2:
-		corte = corte.left(espacio)
-	return corte + "…"
-
-
-func _on_tarjeta_input(evento: InputEvent, id: String) -> void:
-	# Click en cualquier punto de la tarjeta abre su detalle.
-	if evento is InputEventMouseButton:
-		var raton := evento as InputEventMouseButton
-		if raton.button_index == MOUSE_BUTTON_LEFT and raton.pressed:
-			_on_elegir(id)
-
-
-func _on_elegir(id: String) -> void:
-	# Abre el detalle, resalta la tarjeta y avisa a la otra pantalla.
-	_seleccion = id
-	_mostrar_detalle(id)
-	_refrescar_bordes()
-	civ_picked.emit(id)
-
-
-func _mostrar_detalle(id: String) -> void:
-	# Rellena el panel inferior con todos los bonus y el conteo de cartas.
-	var civ := _buscar(id)
+func _detalle(civ: Dictionary) -> void:
+	# Ficha completa: bonus, UU con stats, cartas.
 	if civ.is_empty():
 		return
-	var nombre := str(civ.get("nombre", id))
-	var bonus: Array = civ.get("bonus", [])
-	var propias := int(_propias.get(id.to_lower(), 0))
-	if _detalle_muestra != null:
-		_detalle_muestra.texture = CivEmblems.emblem(id, 96)
-	if _detalle_inicial != null:
-		_detalle_inicial.text = nombre.left(1).to_upper()
-	if _detalle_titulo != null:
-		_detalle_titulo.text = nombre
-	if _detalle_bonus != null:
-		if bonus.is_empty():
-			_detalle_bonus.text = "Sin bonus registrados."
-		else:
-			var lineas: Array[String] = []
-			for b in bonus:
-				lineas.append("• " + str(b))
-			_detalle_bonus.text = "\n".join(lineas)
-	if _detalle_cartas != null:
-		_detalle_cartas.text = "Cartas propias: %d  ·  Neutrales utilizables: %d" % [propias, _neutrales]
+	var color := Color.html(str(civ.get("color", "#73706a")))
+	var tit := Label.new()
+	tit.text = str(civ.get("nombre", "?"))
+	tit.add_theme_font_size_override("font_size", 26)
+	tit.add_theme_color_override("font_color", color.lightened(0.35))
+	_lado_der.add_child(tit)
+	_lado_der.add_child(_linea("VENTAJAS", ORO, 14))
+	for v in (civ.get("ventajas", []) as Array):
+		_lado_der.add_child(_linea("✔ " + str(v), VERDE, 14))
+	_lado_der.add_child(_linea("DEBILIDADES", ORO, 14))
+	for w in (civ.get("debilidades", []) as Array):
+		_lado_der.add_child(_linea("✕ " + str(w), ROJO, 14))
+	_lado_der.add_child(_linea("BONUS COMPLETOS", ORO, 14))
+	for b in (civ.get("bonus", []) as Array):
+		_lado_der.add_child(_linea("• " + str(b), PERGAMINO, 13))
+	var uu: Dictionary = civ.get("unique", {})
+	if not uu.is_empty():
+		_lado_der.add_child(_linea("UNIDAD ÚNICA", ORO, 14))
+		_lado_der.add_child(_linea("%s · HP %s · ATK %s · %s" % [
+			str(uu.get("name", uu.get("id", "?"))), str(uu.get("hp", "?")),
+			str(uu.get("attack", "?")), _coste_corto(uu.get("cost", {}))], PERGAMINO, 14))
+	var propias := int(_propias.get(str(civ.get("id", "")).to_lower(), 0))
+	_lado_der.add_child(_linea("Cartas: %d propias + %d neutrales" % [propias, _neutrales], Color(0.95, 0.90, 0.78), 14))
+
+
+func _comparar(a: Dictionary, b: Dictionary) -> void:
+	# Tabla lado a lado: nombre, pros, contras, UU, cartas.
+	var tabla := GridContainer.new()
+	tabla.columns = 3
+	tabla.add_theme_constant_override("h_separation", 10)
+	tabla.add_theme_constant_override("v_separation", 6)
+	_lado_der.add_child(tabla)
+	tabla.add_child(_linea("", PERGAMINO, 13))
+	for civ in [a, b]:
+		var n := _linea(str(civ.get("nombre", "?")), Color.html(str(civ.get("color", "#73706a"))).lightened(0.35), 18)
+		tabla.add_child(n)
+	_fila_comp(tabla, "Ventajas", _bullets(a.get("ventajas", []), "✔ "), _bullets(b.get("ventajas", []), "✔ "), VERDE)
+	_fila_comp(tabla, "Debilidades", _bullets(a.get("debilidades", []), "✕ "), _bullets(b.get("debilidades", []), "✕ "), ROJO)
+	_fila_comp(tabla, "UU", _uu_corto(a.get("unique", {})), _uu_corto(b.get("unique", {})), PERGAMINO)
+	_fila_comp(tabla, "Cartas", str(int(_propias.get(str(a.get("id", "")).to_lower(), 0))), str(int(_propias.get(str(b.get("id", "")).to_lower(), 0))), PERGAMINO)
+
+
+func _fila_comp(tabla: GridContainer, titulo: String, va: String, vb: String, color: Color) -> void:
+	tabla.add_child(_linea(titulo, ORO, 13))
+	tabla.add_child(_linea(va, color, 13))
+	tabla.add_child(_linea(vb, color, 13))
+
+
+func _bullets(v: Variant, marca: String) -> String:
+	var partes: Array[String] = []
+	if v is Array:
+		for x in (v as Array):
+			partes.append(marca + str(x))
+	return "\n".join(partes)
+
+
+func _uu_corto(uu: Variant) -> String:
+	if not (uu is Dictionary) or (uu as Dictionary).is_empty():
+		return "—"
+	var u: Dictionary = uu
+	return "%s (HP %s/ATK %s)" % [str(u.get("name", u.get("id", "?"))), str(u.get("hp", "?")), str(u.get("attack", "?"))]
+
+
+func _coste_corto(coste: Variant) -> String:
+	if not (coste is Dictionary) or (coste as Dictionary).is_empty():
+		return "sin coste"
+	var partes: Array[String] = []
+	for k in (coste as Dictionary).keys():
+		partes.append("%s %s" % [str((coste as Dictionary)[k]), str(k)])
+	return ", ".join(partes)
 
 
 func _buscar(id: String) -> Dictionary:
-	# Localiza la civ por id en lo ya cargado de data/factions.
 	for civ in _civs:
 		if str((civ as Dictionary).get("id", "")).to_lower() == id.to_lower():
 			return civ
 	return {}
 
 
-func _refrescar_bordes() -> void:
-	# La tarjeta elegida lleva borde dorado; las demás, el color de su civ.
-	if _grid == null:
-		return
-	for tarjeta in _grid.get_children():
-		if not (tarjeta is PanelContainer):
-			continue
-		var id := str((tarjeta as PanelContainer).get_meta("civ", ""))
-		var civ := _buscar(id)
-		var color := Color.html(str(civ.get("color", "#73706a")))
-		(tarjeta as PanelContainer).add_theme_stylebox_override("panel", _marco_tarjeta(color, id == _seleccion))
-
-
-func _conectar_volver() -> void:
-	# Vuelve al menú principal si existe la escena.
-	var volver := get_node_or_null("Margen/Principal/FilaBotones/BotonVolver") as Button
-	if volver != null and not volver.pressed.is_connected(_on_volver):
-		volver.pressed.connect(_on_volver)
-
-
 func _on_volver() -> void:
-	# Regresa al menú principal; si falta, no hace nada.
-	if ResourceLoader.exists("res://ui/menus/MainMenu.tscn"):
-		get_tree().change_scene_to_file("res://ui/menus/MainMenu.tscn")
-
-
-func _marco_madera() -> StyleBoxFlat:
-	# Marco de madera oscura con ribete dorado para el panel de detalle.
-	var marco := StyleBoxFlat.new()
-	marco.bg_color = Color(0.13, 0.09, 0.06, 0.95)
-	marco.border_width_left = 3
-	marco.border_width_top = 3
-	marco.border_width_right = 3
-	marco.border_width_bottom = 3
-	marco.border_color = ORO
-	marco.corner_radius_top_left = 10
-	marco.corner_radius_top_right = 10
-	marco.corner_radius_bottom_right = 10
-	marco.corner_radius_bottom_left = 10
-	marco.shadow_color = Color(0, 0, 0, 0.6)
-	marco.shadow_size = 18
-	return marco
-
-
-func _marco_tarjeta(color: Color, elegida: bool) -> StyleBoxFlat:
-	# Tarjeta de madera con borde del color de la civ (oro si está elegida).
-	var marco := StyleBoxFlat.new()
-	marco.bg_color = Color(0.13, 0.09, 0.06, 0.95)
-	marco.border_width_left = 3
-	marco.border_width_top = 3
-	marco.border_width_right = 3
-	marco.border_width_bottom = 3
-	marco.border_color = ORO if elegida else color
-	marco.corner_radius_top_left = 8
-	marco.corner_radius_top_right = 8
-	marco.corner_radius_bottom_right = 8
-	marco.corner_radius_bottom_left = 8
-	marco.shadow_color = Color(0, 0, 0, 0.6)
-	marco.shadow_size = 12
-	return marco
-
-
-func _estilo_boton(boton: Button) -> void:
-	# Botón de madera oscura con hover dorado, coherente con el menú.
-	boton.custom_minimum_size = Vector2(220, 44)
-	boton.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	boton.add_theme_font_size_override("font_size", 17)
-	boton.add_theme_color_override("font_color", Color(0.95, 0.90, 0.78))
-	boton.add_theme_color_override("font_hover_color", Color(1.0, 0.95, 0.70))
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color(0.30, 0.20, 0.12)
-	normal.border_width_left = 2
-	normal.border_width_top = 2
-	normal.border_width_right = 2
-	normal.border_width_bottom = 2
-	normal.border_color = Color(0.25, 0.26, 0.29)
-	normal.corner_radius_top_left = 6
-	normal.corner_radius_top_right = 6
-	normal.corner_radius_bottom_right = 6
-	normal.corner_radius_bottom_left = 6
-	var hover := normal.duplicate() as StyleBoxFlat
-	hover.bg_color = Color(0.45, 0.31, 0.16)
-	hover.border_color = ORO
-	var pulsado := normal.duplicate() as StyleBoxFlat
-	pulsado.bg_color = Color(0.19, 0.12, 0.07)
-	pulsado.border_color = Color(0.85, 0.68, 0.35)
-	boton.add_theme_stylebox_override("normal", normal)
-	boton.add_theme_stylebox_override("hover", hover)
-	boton.add_theme_stylebox_override("focus", hover)
-	boton.add_theme_stylebox_override("pressed", pulsado)
+	if ResourceLoader.exists(RUTA_MENU):
+		get_tree().change_scene_to_file(RUTA_MENU)

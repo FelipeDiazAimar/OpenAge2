@@ -7,9 +7,14 @@
       "id": "arqueria_barata",
       "descripcion": "Arquería 10% más barata (madera y oro): arquero, guerrillero, ballestero, tiro largo",
       "efecto": {
-        "descuento_madera": 0.10,
-        "descuento_oro": 0.10,
-        "aplica_a": ["arquero", "guerrillero", "ballestero", "arquero_tiro_largo"]
+        "descuento_madera": 0.1,
+        "descuento_oro": 0.1,
+        "aplica_a": [
+          "arquero",
+          "guerrillero",
+          "ballestero",
+          "arquero_tiro_largo"
+        ]
       }
     },
     {
@@ -27,7 +32,11 @@
       "efecto": {
         "alcance_arqueros_castillos": 1,
         "alcance_arqueros_imperial": 2,
-        "aplica_a": ["arquero", "ballestero", "arquero_tiro_largo"]
+        "aplica_a": [
+          "arquero",
+          "ballestero",
+          "arquero_tiro_largo"
+        ]
       }
     }
   ],
@@ -44,10 +53,16 @@
     "armor_melee": 0,
     "armor_pierce": 0,
     "armor_pierce_elite": 1,
-    "cost": { "wood": 35, "gold": 40 },
+    "cost": {
+      "wood": 35,
+      "gold": 40
+    },
     "train_time_sec": 27,
     "trained_at": "castillo",
-    "mejora_elite_cost": { "food": 850, "gold": 850 },
+    "mejora_elite_cost": {
+      "food": 850,
+      "gold": 850
+    },
     "mejora_elite_tiempo_sec": 90
   },
   "unique_techs": [
@@ -56,14 +71,22 @@
       "nombre": "Puntería (Yeomen)",
       "edificio": "castillo",
       "edad": "castillos",
-      "coste": { "wood": 750, "gold": 450 },
+      "coste": {
+        "wood": 750,
+        "gold": 450
+      },
       "tiempo_sec": 60,
       "descripcion": "Arqueros a pie +2 alcance, +1 ataque. Torres +2 ataque.",
       "efectos": {
         "alcance_arqueros": 2,
         "ataque_arqueros": 1,
         "ataque_torres": 2,
-        "aplica_a": ["arquero", "ballestero", "arquero_tiro_largo", "guerrillero"]
+        "aplica_a": [
+          "arquero",
+          "ballestero",
+          "arquero_tiro_largo",
+          "guerrillero"
+        ]
       }
     },
     {
@@ -71,13 +94,16 @@
       "nombre": "Máquina de guerra (Warwolf)",
       "edificio": "castillo",
       "edad": "imperial",
-      "coste": { "wood": 850, "gold": 750 },
+      "coste": {
+        "wood": 850,
+        "gold": 750
+      },
       "tiempo_sec": 75,
       "descripcion": "Trabuquetes +50% daño, área y precisión (dispersión -50%).",
       "efectos": {
-        "ataque_trabuquete_bonus": 0.50,
-        "area_trabuquete_bonus": 0.50,
-        "dispersion_reduccion": 0.50
+        "ataque_trabuquete_bonus": 0.5,
+        "area_trabuquete_bonus": 0.5,
+        "dispersion_reduccion": 0.5
       }
     }
   ],
@@ -85,7 +111,7 @@
     "id": "galerias_rapidas",
     "descripcion": "Galerías de tiro trabajan 20% más rápido (aliados)",
     "efecto": {
-      "velocidad_arqueria": 0.20
+      "velocidad_arqueria": 0.2
     }
   },
   "tech_tree": {
@@ -180,6 +206,32 @@
       "galeon": false,
       "brulote": true
     },
-    "no_disponible_resumen": ["artillero_manual", "paladin", "paladin_franco", "camello", "camello_pesado", "catafracta", "canon_artillado", "huscarle", "hachero_franco", "iluminacion", "herejia", "torre_muralla", "galeon", "armadura_arq_3", "armadura_cab_3"]
-  }
+    "no_disponible_resumen": [
+      "artillero_manual",
+      "paladin",
+      "paladin_franco",
+      "camello",
+      "camello_pesado",
+      "catafracta",
+      "canon_artillado",
+      "huscarle",
+      "hachero_franco",
+      "iluminacion",
+      "herejia",
+      "torre_muralla",
+      "galeon",
+      "armadura_arq_3",
+      "armadura_cab_3"
+    ]
+  },
+  "ventajas": [
+    "Arquería barata y con alcance",
+    "Pastoreo veloz",
+    "Tiro largo único"
+  ],
+  "debilidades": [
+    "Sin paladín ni camellos",
+    "Caballería floja",
+    "Sin pólvora"
+  ]
 }

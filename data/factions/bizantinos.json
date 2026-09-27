@@ -7,8 +7,17 @@
       "id": "edificios_hp_20",
       "descripcion": "Edificios +20% HP (Centro Urbano 2400->2880, Castillo 4800->5760)",
       "efecto": {
-        "hp_edificios_bonus": 0.20,
-        "aplica_a": ["centro_urbano", "casa", "cuartel", "arqueria", "establo", "castillo", "muralla", "torre"]
+        "hp_edificios_bonus": 0.2,
+        "aplica_a": [
+          "centro_urbano",
+          "casa",
+          "cuartel",
+          "arqueria",
+          "establo",
+          "castillo",
+          "muralla",
+          "torre"
+        ]
       }
     },
     {
@@ -25,7 +34,15 @@
       "descripcion": "Contra-unidades 25% más baratas: guerrillero, piquero, camello, monje",
       "efecto": {
         "descuento_contra_unidades": 0.25,
-        "aplica_a": ["guerrillero", "lancero", "piquero", "alabardero", "camello", "camello_pesado", "monje"]
+        "aplica_a": [
+          "guerrillero",
+          "lancero",
+          "piquero",
+          "alabardero",
+          "camello",
+          "camello_pesado",
+          "monje"
+        ]
       }
     }
   ],
@@ -44,10 +61,16 @@
     "bonus_vs_infanteria_elite": 12,
     "pisoteo_base": 0,
     "pisoteo_con_logistica": 5,
-    "cost": { "food": 70, "gold": 75 },
+    "cost": {
+      "food": 70,
+      "gold": 75
+    },
     "train_time_sec": 22,
     "trained_at": "castillo",
-    "mejora_elite_cost": { "food": 1600, "gold": 800 },
+    "mejora_elite_cost": {
+      "food": 1600,
+      "gold": 800
+    },
     "mejora_elite_tiempo_sec": 90
   },
   "unique_techs": [
@@ -56,13 +79,19 @@
       "nombre": "Fuego griego",
       "edificio": "castillo",
       "edad": "castillos",
-      "coste": { "food": 400, "gold": 300 },
+      "coste": {
+        "food": 400,
+        "gold": 300
+      },
       "tiempo_sec": 50,
       "descripcion": "Barcos de fuego y dromones +1 alcance, +2 ataque.",
       "efectos": {
         "alcance_barcos_fuego": 1,
         "ataque_barcos_fuego": 2,
-        "aplica_a": ["brulote", "dromon"]
+        "aplica_a": [
+          "brulote",
+          "dromon"
+        ]
       }
     },
     {
@@ -70,12 +99,17 @@
       "nombre": "Logística",
       "edificio": "castillo",
       "edad": "imperial",
-      "coste": { "food": 1000, "gold": 600 },
+      "coste": {
+        "food": 1000,
+        "gold": 600
+      },
       "tiempo_sec": 70,
       "descripcion": "Catafracta pisoteo 5 daño en área + infantería aliada? (aquí: catafracta 5 área).",
       "efectos": {
         "pisoteo_catafracta": 5,
-        "aplica_a": ["catafracta"]
+        "aplica_a": [
+          "catafracta"
+        ]
       }
     }
   ],
@@ -181,6 +215,22 @@
       "brulote": true,
       "dromon": true
     },
-    "no_disponible_resumen": ["paladin", "paladin_franco", "arquero_tiro_largo", "huscarle", "hachero_franco"]
-  }
+    "no_disponible_resumen": [
+      "paladin",
+      "paladin_franco",
+      "arquero_tiro_largo",
+      "huscarle",
+      "hachero_franco"
+    ]
+  },
+  "ventajas": [
+    "Edificios con +HP",
+    "Monjes que curan el doble",
+    "Catafracta anti-infantería"
+  ],
+  "debilidades": [
+    "Sin paladín",
+    "Economía sin bonus",
+    "Arqueros medios"
+  ]
 }
