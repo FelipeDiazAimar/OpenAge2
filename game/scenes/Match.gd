@@ -1,7 +1,7 @@
 extends Node2D
-## Partida local con el motor nuevo (F1): terreno iso, centros urbanos y
-## aldeanos; selección con clic/arrastre y movimiento con clic derecho.
-## Simulación a 10 Hz; el render interpola entre ticks.
+## Partida local con el motor nuevo: terreno iso, centros urbanos, aldeanos
+## y recursos generados; selección con clic/arrastre y clic derecho
+## inteligente (recolectar o mover). Simulación a 10 Hz; el render interpola.
 
 const Registry := preload("res://engine/data/Registry.gd")
 const Sim := preload("res://engine/sim/Sim.gd")
@@ -12,8 +12,11 @@ const TerrainLayer := preload("res://engine/render2d/TerrainLayer.gd")
 const EntityLayer := preload("res://engine/render2d/EntityLayer.gd")
 const IsoCamera := preload("res://engine/render2d/IsoCamera.gd")
 const SelectionOverlay := preload("res://engine/render2d/SelectionOverlay.gd")
+const MapGen := preload("res://engine/sim/MapGen.gd")
+const ResourceBar := preload("res://engine/ui/ResourceBar.gd")
 
 const MAP_SIZE := 144
+const MAP_SEED := 1234
 const START_OFFSETS: Array[Vector2i] = [
 	Vector2i(-33, -33), Vector2i(33, 33), Vector2i(33, -33), Vector2i(-33, 33),
 	Vector2i(0, -46), Vector2i(0, 46), Vector2i(-46, 0), Vector2i(46, 0),
@@ -32,6 +35,7 @@ var sim
 var layer
 var cam
 var overlay
+var bar
 var selected: Array[int] = []
 
 var _acc := 0.0
@@ -82,6 +86,8 @@ func _ready() -> void:
 			_shot_path = s.get_slice("=", 1)
 		elif s.begins_with("--frames="):
 			_shot_frames = int(s.get_slice("=", 1))
+		elif s.begins_with("--zoom="):
+			cam.set_zoom_now(float(s.get_slice("=", 1)))
 	if _shot_path != "":
 		cam.edge_scroll = false
 
@@ -105,6 +111,20 @@ func issue_move(tiles: Vector2) -> void:
 	sim.queue_command(local_pid, "move", {"ids": selected.duplicate(), "pos": [int(round(tiles.x * 1000.0)), int(round(tiles.y * 1000.0))]})
 
 
+## Clic derecho estilo AoE2: sobre un recurso, los aldeanos seleccionados lo
+## recolectan; en otro caso, mover.
+func smart_command(world_pos: Vector2) -> void:
+	if selected.is_empty():
+		return
+	var id: int = layer.pick(world_pos)
+	if id >= 0 and sim.world.has_ability(id, "ResourceSource"):
+		var gatherers: Array = selected.filter(func(s): return sim.world.has_ability(s, "Gather"))
+		if not gatherers.is_empty():
+			sim.queue_command(local_pid, "gather", {"ids": gatherers, "target": id})
+			return
+	issue_move(Iso.to_tiles(world_pos))
+
+
 func _process(delta: float) -> void:
 	if sim == null:
 		return
@@ -115,6 +135,7 @@ func _process(delta: float) -> void:
 		sim.step()
 		_acc -= dt
 	layer.sync(_acc / dt, delta)
+	bar.refresh()
 	_frames += 1
 	if _shot_path != "" and _frames >= maxi(1, _shot_frames):
 		_save_screenshot(_shot_path)
@@ -154,7 +175,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				else:
 					select(layer.ids_in_rect(Rect2(_press_pos, wp - _press_pos), local_pid))
 		elif event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-			issue_move(Iso.to_tiles(wp))
+			smart_command(wp)
 	elif event is InputEventMouseMotion and _pressing:
 		var wp2 := get_global_mouse_position()
 		if wp2.distance_to(_press_pos) >= DRAG_MIN:
@@ -171,14 +192,22 @@ func _spawn_start() -> void:
 		sim.spawn("centro_urbano", i, c - Vector2i(2, 2))
 		for off in VILLAGER_OFFSETS:
 			sim.spawn("aldeano", i, c + off)
+	var starts: Array[Vector2i] = []
+	for i in sim.players.size():
+		starts.append(_start_tile(i))
+	MapGen.generate(sim, MAP_SEED, starts)
 
 
 func _build_help() -> void:
 	var ui := CanvasLayer.new()
 	add_child(ui)
+	bar = ResourceBar.new()
+	bar.setup(sim, local_pid)
+	bar.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
+	ui.add_child(bar)
 	var l := Label.new()
-	l.text = "Motor nuevo (F1) — clic izq: seleccionar / arrastrar · clic der: mover · flechas/borde/botón medio: cámara · rueda: zoom · Esc: menú"
-	l.position = Vector2(12, 8)
+	l.text = "Motor nuevo — clic izq: seleccionar / arrastrar · clic der: recolectar / mover · flechas/borde/botón medio: cámara · rueda: zoom · Esc: menú"
+	l.position = Vector2(12, 40)
 	l.add_theme_color_override("font_color", Color(1, 0.92, 0.7))
 	l.add_theme_color_override("font_outline_color", Color.BLACK)
 	l.add_theme_constant_override("outline_size", 4)

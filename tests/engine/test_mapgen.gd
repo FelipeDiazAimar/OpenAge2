@@ -32,6 +32,25 @@ func _count_near(s: Sim, c: Vector2i, def_id: String, r: int) -> int:
 	return n
 
 
+func test_mine_piles_are_compact() -> void:
+	for sd in [1, 2, 3]:
+		var s := _gen(sd)
+		for c in STARTS:
+			var lo := Vector2i(9999, 9999)
+			var hi := Vector2i(-9999, -9999)
+			for id in s.world.entities:
+				var e: Dictionary = s.world.entities[id]
+				if e["def_id"] != "gold_mine":
+					continue
+				var t := Grid.tile_of(e["pos"])
+				if maxi(absi(t.x - c.x), absi(t.y - c.y)) > 14:
+					continue
+				lo = Vector2i(mini(lo.x, t.x), mini(lo.y, t.y))
+				hi = Vector2i(maxi(hi.x, t.x), maxi(hi.y, t.y))
+			var size := hi - lo + Vector2i.ONE
+			assert_true(size.x <= 4 and size.y <= 4, "pila de oro compacta (semilla %d): %s" % [sd, size])
+
+
 func test_deterministic() -> void:
 	assert_eq(_gen(7).state_hash(), _gen(7).state_hash())
 	assert_true(_gen(7).state_hash() != _gen(8).state_hash())

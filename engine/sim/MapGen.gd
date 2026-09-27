@@ -10,6 +10,7 @@ const PER_PLAYER := [["gold_mine", 10, 7], ["stone_mine", 11, 5], ["berry_bush",
 const FORESTS := 16
 const LOOSE_GOLD := 6
 const LOOSE_STONE := 4
+const LOOSE_MIN_DIST := 20 # minas sueltas lejos de los inicios (como Arabia)
 
 
 static func generate(sim, p_seed: int, starts: Array[Vector2i]) -> void:
@@ -26,10 +27,18 @@ static func generate(sim, p_seed: int, starts: Array[Vector2i]) -> void:
 	var h: int = sim.grid.height
 	for i in FORESTS:
 		_blob(sim, rng, reserved, Vector2i(rng.range_i(3, w - 4), rng.range_i(3, h - 4)), "tree", rng.range_i(30, 70))
-	for i in LOOSE_GOLD:
-		_blob(sim, rng, reserved, Vector2i(rng.range_i(5, w - 6), rng.range_i(5, h - 6)), "gold_mine", 4)
-	for i in LOOSE_STONE:
-		_blob(sim, rng, reserved, Vector2i(rng.range_i(5, w - 6), rng.range_i(5, h - 6)), "stone_mine", 4)
+	for spec in [["gold_mine", LOOSE_GOLD], ["stone_mine", LOOSE_STONE]]:
+		for i in int(spec[1]):
+			var t := Vector2i(rng.range_i(5, w - 6), rng.range_i(5, h - 6))
+			if _far_from_starts(t, starts):
+				_blob(sim, rng, reserved, t, str(spec[0]), 4)
+
+
+static func _far_from_starts(t: Vector2i, starts: Array[Vector2i]) -> bool:
+	for s in starts:
+		if maxi(absi(t.x - s.x), absi(t.y - s.y)) < LOOSE_MIN_DIST:
+			return false
+	return true
 
 
 ## Grupo de n recursos cuyo núcleo está a `dist` casillas (Chebyshev) de c.
@@ -51,13 +60,16 @@ static func _cluster(sim, rng, reserved: Dictionary, c: Vector2i, dist: int, def
 			return
 
 
-## Crecimiento aleatorio desde seed_tile hasta colocar n recursos.
+## Crecimiento desde seed_tile hasta colocar n recursos. Los bosques crecen
+## al azar (formas orgánicas); minas y bayas eligen la casilla libre más
+## cercana a la semilla (montón compacto, como en AoE2).
 static func _blob(sim, rng, reserved: Dictionary, seed_tile: Vector2i, def_id: String, n: int) -> int:
+	var compact := def_id != "tree"
 	var frontier: Array[Vector2i] = [seed_tile]
 	var queued := {seed_tile: true}
 	var placed := 0
 	while placed < n and not frontier.is_empty():
-		var i: int = rng.range_i(0, frontier.size() - 1)
+		var i: int = _closest_index(rng, frontier, seed_tile) if compact else rng.range_i(0, frontier.size() - 1)
 		var t: Vector2i = frontier[i]
 		frontier.remove_at(i)
 		if not _can_place(sim, reserved, t):
@@ -70,6 +82,21 @@ static func _blob(sim, rng, reserved: Dictionary, seed_tile: Vector2i, def_id: S
 				queued[nt] = true
 				frontier.append(nt)
 	return placed
+
+
+## Índice del elemento de la frontera más cercano a c (empates al azar).
+static func _closest_index(rng, frontier: Array[Vector2i], c: Vector2i) -> int:
+	var best_d := -1
+	var ties: Array[int] = []
+	for i in frontier.size():
+		var d: Vector2i = frontier[i] - c
+		var dd := d.x * d.x + d.y * d.y
+		if best_d < 0 or dd < best_d:
+			best_d = dd
+			ties = [i]
+		elif dd == best_d:
+			ties.append(i)
+	return ties[rng.range_i(0, ties.size() - 1)]
 
 
 static func _can_place(sim, reserved: Dictionary, t: Vector2i) -> bool:

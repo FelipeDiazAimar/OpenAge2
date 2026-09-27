@@ -17,6 +17,12 @@ func focus(screen_pos: Vector2) -> void:
 	position = screen_pos
 
 
+## Zoom inmediato (sin suavizado), dentro de los límites.
+func set_zoom_now(z: float) -> void:
+	_target_zoom = clampf(z, ZOOM_MIN, ZOOM_MAX)
+	zoom = Vector2.ONE * _target_zoom
+
+
 func _process(delta: float) -> void:
 	var dir := Vector2.ZERO
 	if Input.is_key_pressed(KEY_LEFT):
