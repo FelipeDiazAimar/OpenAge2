@@ -43,6 +43,8 @@ var _card_art: Script = null
 @onready var _buscador: LineEdit = $MainMargin/MainVBox/Columns/LeftPanel/LeftVBox/SearchEdit
 @onready var _nombre_mazo: LineEdit = $MainMargin/MainVBox/Columns/CenterPanel/CenterVBox/DeckNameEdit
 @onready var _filas_mazo: VBoxContainer = $MainMargin/MainVBox/Columns/CenterPanel/CenterVBox/DeckScroll/DeckRows
+@onready var _scroll_mazo: ScrollContainer = $MainMargin/MainVBox/Columns/CenterPanel/CenterVBox/DeckScroll
+@onready var _scroll_inv: ScrollContainer = $MainMargin/MainVBox/Columns/InventoryPanel/InvVBox/InvScroll
 @onready var _estado: Label = $MainMargin/MainVBox/Columns/CenterPanel/CenterVBox/StatusLabel
 @onready var _errores_fijo: Label = $MainMargin/MainVBox/Columns/CenterPanel/CenterVBox/ErrorsLabel
 @onready var _filas_inv: VBoxContainer = $MainMargin/MainVBox/Columns/InventoryPanel/InvVBox/InvScroll/InvRows
@@ -240,6 +242,13 @@ func _refrescar_mazo() -> void:
 			if c is Dictionary and str((c as Dictionary).get("id", "")) == str(cid):
 				fichas.append(c)
 				break
+	if fichas.is_empty():
+		var ayuda := Label.new()
+		ayuda.text = "⬇ Baraja vacía: arrastra aquí tu primera carta o pulsa en el inventario."
+		ayuda.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		ayuda.add_theme_color_override("font_color", Color(0.75, 0.70, 0.60))
+		_filas_mazo.add_child(ayuda)
+		return
 	var grupos := _por_edad(fichas)
 	for e in [1, 2, 3, 4]:
 		if (grupos[e] as Array).is_empty():
@@ -474,15 +483,13 @@ func _con_meta(nodo: Node) -> Array:
 
 
 func _loseta_bajo_raton() -> Dictionary:
-	# {control, id, en_mazo} o {} si no hay loseta debajo.
+	# Busca loseta bajo el ratón sin precondiciones de zona (la zona se
+	# evalúa al soltar, y la baraja vacía no tiene filas que la delimiten).
 	var mp := get_global_mouse_position()
-	var en_mazo := _dentro_de(mp, _filas_mazo)
-	var en_inv := _dentro_de(mp, _filas_inv)
-	if not en_mazo and not en_inv:
-		return {}
 	for w in _losetas():
 		var c := w as Control
 		if c != null and c.visible and c.get_global_rect().has_point(mp):
+			var en_mazo := _dentro_de(mp, _scroll_mazo)
 			return {"control": c, "id": str(c.get_meta("card_id")), "en_mazo": en_mazo}
 	return {}
 
@@ -536,12 +543,13 @@ func _soltar_arrastre() -> void:
 	get_viewport().set_input_as_handled()
 	if id.is_empty():
 		return
-	if _dentro_de(mp, _filas_mazo) and not venia_mazo:
+	# Zonas = los scrolls completos (las filas se vacían y su rect colapsa).
+	if _dentro_de(mp, _scroll_mazo) and not venia_mazo:
 		for c in _cartas_civ():
 			if c is Dictionary and str((c as Dictionary).get("id", "")) == id:
 				_on_anadir(c)
 				return
-	elif _dentro_de(mp, _filas_inv) and venia_mazo:
+	elif _dentro_de(mp, _scroll_inv) and venia_mazo:
 		_on_quitar(id)
 		return
 	_estado.text = "Arrastra cartas entre baraja e inventario."
