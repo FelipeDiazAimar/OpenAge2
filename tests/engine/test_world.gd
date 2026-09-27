@@ -70,3 +70,14 @@ func test_state_hash_deterministic() -> void:
 	assert_eq(a.state_hash().length(), 64)
 	b.set_pos(1, Vector2i(1001, 1000))
 	assert_true(a.state_hash() != b.state_hash())
+
+
+func test_move_component_initial_state() -> void:
+	var w := World.new()
+	var a := w.spawn(SOLDADO, 0, Vector2i(0, 0))
+	var m := w.comp(a, "Move")
+	assert_eq(m["step"], 90, "0.9 casillas/s a 10 Hz = 90 milésimas por tick")
+	assert_eq(m["waypoints"], [])
+	assert_false(m["moving"])
+	assert_eq(m["facing"], Vector2i(1000, 1000))
+	assert_eq(World.TICK_RATE, 10)

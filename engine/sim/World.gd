@@ -6,6 +6,8 @@ extends RefCounted
 const FP := preload("res://engine/sim/FixedPoint.gd")
 const SpatialHash := preload("res://engine/sim/SpatialHash.gd")
 
+const TICK_RATE := 10
+
 var tick := 0
 var entities: Dictionary = {}
 var components: Dictionary = {}
@@ -84,4 +86,9 @@ static func _init_component(ability: String, params: Dictionary) -> Dictionary:
 			c["hp"] = mx
 		"ResourceSource":
 			c["amount"] = FP.from_data(float(params["amount"]))
+		"Move":
+			c["step"] = FP.from_data(float(params["speed"])) / TICK_RATE
+			c["waypoints"] = [] as Array[Vector2i]
+			c["moving"] = false
+			c["facing"] = Vector2i(1000, 1000)
 	return c
