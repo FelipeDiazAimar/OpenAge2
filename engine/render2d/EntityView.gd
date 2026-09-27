@@ -79,6 +79,8 @@ func update_view(moving: bool, facing_screen: Vector2, delta: float, action: Str
 	if facing_screen.length_squared() > 0.0001:
 		_slot = Iso.dir16(facing_screen)
 	var want := "walk" if moving else "idle"
+	if action.begins_with("task_") and _pack(action).is_empty():
+		action = "task"
 	if action != "" and not _pack(action).is_empty():
 		want = action
 	if _pack(want).is_empty():

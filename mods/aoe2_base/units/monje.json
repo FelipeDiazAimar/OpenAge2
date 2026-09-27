@@ -12,7 +12,8 @@
   "graphics": {
     "idle": "sprite:monk/idle",
     "task": "sprite:monk/task",
-    "walk": "sprite:monk/walk"
+    "walk": "sprite:monk/walk",
+    "task_food_farm": "sprite:monk/task"
   },
   "abilities": {
     "Hitpoints": {

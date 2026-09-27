@@ -60,7 +60,7 @@ func sync(alpha: float, delta: float) -> void:
 		var action := ""
 		var g: Dictionary = w.comp(id, "Gather")
 		if not g.is_empty() and str(g["state"]) == "gathering":
-			action = "task"
+			action = "task_" + str(g["kind"])
 		v.update_view(moving, facing, delta, action)
 
 

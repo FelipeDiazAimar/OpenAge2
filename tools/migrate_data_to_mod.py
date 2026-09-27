@@ -41,6 +41,11 @@ BUILDING_SPRITES = {
     "casa": "buildings/house/b_west_house_age3_x1",
     "cuartel": "buildings/barracks/b_west_barracks_age3_x1",
 }
+# rate_key -> packs de faena del aldeano, en orden de preferencia.
+VILLAGER_TASKS = {
+    "wood": ["lumber"], "gold": ["miner_gold"], "stone": ["miner_stone", "miner_gold"],
+    "food_forage": ["forager"], "food_farm": ["farmer", "task"], "food_fish": ["fisher"],
+}
 RESOURCE_SPRITES = {
     "tree": "nature/oak", "gold_mine": "nature/goldmine",
     "stone_mine": "nature/stonemine", "berry_bush": "nature/bush",
@@ -91,7 +96,14 @@ def graphics_for_unit(unit_id, sprites_root):
     base = os.path.join(sprites_root, pack)
     if not os.path.isdir(base):
         return {}
-    return {a: f"sprite:{pack}/{a}" for a in sorted(os.listdir(base)) if os.path.isdir(os.path.join(base, a))}
+    out = {a: f"sprite:{pack}/{a}" for a in sorted(os.listdir(base)) if os.path.isdir(os.path.join(base, a))}
+    # Animación de faena por tipo de recurso (render: acción "task_<rate_key>").
+    for rate_key, candidates in VILLAGER_TASKS.items():
+        for anim in candidates:
+            if anim in out:
+                out[f"task_{rate_key}"] = out[anim]
+                break
+    return out
 
 
 def convert_unit(u, rates, carry, actions, sprites_root=None):

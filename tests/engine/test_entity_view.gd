@@ -93,4 +93,16 @@ func test_task_action_uses_task_anim() -> void:
 	assert_eq(v.current_anim(), "task")
 	v.update_view(false, Vector2.ZERO, 0.016, "")
 	assert_eq(v.current_anim(), "idle")
+	v.update_view(false, Vector2.ZERO, 0.016, "task_wood")
+	assert_eq(v.current_anim(), "task", "sin pack de faena propio cae a 'task'")
+	v.free()
+
+
+func test_task_per_resource_anim() -> void:
+	_make_pack("idle", 16)
+	_make_pack("lumber", 16)
+	var v := EntityView.new()
+	v.setup(4, {"id": "bar", "type": "unit", "graphics": {"idle": "sprite:bar/idle", "task_wood": "sprite:bar/lumber"}}, Color.RED, AssetLocator.new([ROOT]))
+	v.update_view(false, Vector2(1, 0), 0.016, "task_wood")
+	assert_eq(v.current_anim(), "task_wood")
 	v.free()

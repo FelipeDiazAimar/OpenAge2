@@ -108,6 +108,17 @@ class TestFiles(unittest.TestCase):
             with open(p, encoding="utf-8") as f:
                 self.assertEqual(json.load(f)["name"], "Torre Vigía")
 
+    def test_villager_task_graphics_per_resource(self):
+        with tempfile.TemporaryDirectory() as d:
+            for anim in ("idle", "walk", "task", "lumber", "miner_gold"):
+                os.makedirs(os.path.join(d, "villager", anim))
+            g = M.graphics_for_unit("aldeano", d)
+            self.assertEqual(g["task_wood"], "sprite:villager/lumber")
+            self.assertEqual(g["task_gold"], "sprite:villager/miner_gold")
+            self.assertEqual(g["task_stone"], "sprite:villager/miner_gold", "piedra usa el minero si no hay pack propio")
+            self.assertNotIn("task_food_forage", g, "sin pack forager no se inventa")
+            self.assertEqual(g["walk"], "sprite:villager/walk")
+
     def test_resource_graphics(self):
         rd = {"id": "tree", "resource": "wood", "amount": 100, "gather": {"rate_key": "wood"}}
         self.assertNotIn("graphics", M.convert_resource(rd, {}))

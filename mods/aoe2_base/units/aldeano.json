@@ -10,10 +10,24 @@
   "pop_cost": 1,
   "hotkey": "C",
   "graphics": {
+    "builder": "sprite:villager/builder",
     "death": "sprite:villager/death",
+    "fight": "sprite:villager/fight",
+    "fisher": "sprite:villager/fisher",
+    "forager": "sprite:villager/forager",
+    "hunter": "sprite:villager/hunter",
     "idle": "sprite:villager/idle",
+    "lumber": "sprite:villager/lumber",
+    "miner_gold": "sprite:villager/miner_gold",
+    "shepherd": "sprite:villager/shepherd",
     "task": "sprite:villager/task",
-    "walk": "sprite:villager/walk"
+    "walk": "sprite:villager/walk",
+    "task_wood": "sprite:villager/lumber",
+    "task_gold": "sprite:villager/miner_gold",
+    "task_stone": "sprite:villager/miner_gold",
+    "task_food_forage": "sprite:villager/forager",
+    "task_food_farm": "sprite:villager/task",
+    "task_food_fish": "sprite:villager/fisher"
   },
   "abilities": {
     "Hitpoints": {
