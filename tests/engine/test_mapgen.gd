@@ -1,0 +1,57 @@
+extends "res://tests/engine/TestCase.gd"
+
+const Registry := preload("res://engine/data/Registry.gd")
+const Sim := preload("res://engine/sim/Sim.gd")
+const MapGen := preload("res://engine/sim/MapGen.gd")
+const Grid := preload("res://engine/sim/Grid.gd")
+
+const STARTS: Array[Vector2i] = [Vector2i(39, 39), Vector2i(105, 105)]
+
+
+func _gen(sd: int) -> Sim:
+	var r := Registry.new()
+	r.load_mods("res://mods")
+	var s := Sim.new(r, 144, 144)
+	for i in STARTS.size():
+		s.add_player(i, "britones", i)
+		s.spawn("centro_urbano", i, STARTS[i] - Vector2i(2, 2))
+		s.spawn("aldeano", i, STARTS[i] + Vector2i(3, -1))
+	MapGen.generate(s, sd, STARTS)
+	return s
+
+
+func _count_near(s: Sim, c: Vector2i, def_id: String, r: int) -> int:
+	var n := 0
+	for id in s.world.entities:
+		var e: Dictionary = s.world.entities[id]
+		if e["def_id"] != def_id:
+			continue
+		var t := Grid.tile_of(e["pos"])
+		if maxi(absi(t.x - c.x), absi(t.y - c.y)) <= r:
+			n += 1
+	return n
+
+
+func test_deterministic() -> void:
+	assert_eq(_gen(7).state_hash(), _gen(7).state_hash())
+	assert_true(_gen(7).state_hash() != _gen(8).state_hash())
+
+
+func test_players_get_resources_and_are_connected() -> void:
+	for sd in [1, 2, 3]:
+		var s := _gen(sd)
+		var region := -1
+		for c in STARTS:
+			assert_true(_count_near(s, c, "gold_mine", 16) >= 7, "oro cerca (semilla %d)" % sd)
+			assert_true(_count_near(s, c, "stone_mine", 16) >= 5, "piedra cerca (semilla %d)" % sd)
+			assert_true(_count_near(s, c, "berry_bush", 14) >= 6, "bayas cerca (semilla %d)" % sd)
+			assert_true(_count_near(s, c, "tree", 22) >= 30, "bosque cerca (semilla %d)" % sd)
+			for def_id in ["tree", "gold_mine", "stone_mine", "berry_bush"]:
+				assert_eq(_count_near(s, c, def_id, MapGen.CLEAR_R), 0, "claro alrededor del TC (semilla %d)" % sd)
+			var r: int = s.grid.region_of(c + Vector2i(3, -1))
+			assert_true(r >= 0)
+			if region < 0:
+				region = r
+			assert_eq(r, region, "todos los inicios conectados (semilla %d)" % sd)
+		var total_trees := _count_near(s, Vector2i(72, 72), "tree", 80)
+		assert_true(total_trees > 400, "bosques generales: %d" % total_trees)
