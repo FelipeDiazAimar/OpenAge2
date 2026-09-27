@@ -1,0 +1,3 @@
+{"id": "cuartel", "type": "building", "name": "Cuartel", "cost": {"wood": 175}, "build_time": 50,
+ "footprint": [3, 3], "requires": {"age": "edad1"},
+ "abilities": {"Hitpoints": {"max": 1200}, "Train": {"units": ["soldado"], "queue": 5}}}

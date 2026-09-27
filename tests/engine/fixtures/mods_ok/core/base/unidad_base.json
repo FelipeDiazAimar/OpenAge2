@@ -1,0 +1,2 @@
+{"id": "unidad_base", "type": "unit", "abstract": true, "tags": ["unidad"], "pop_cost": 1,
+ "abilities": {"Move": {"speed": 1.0}, "Vision": {"sight": 4}}}

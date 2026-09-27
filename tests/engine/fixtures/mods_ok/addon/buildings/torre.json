@@ -1,0 +1,2 @@
+{"id": "torre", "type": "building", "cost": {"stone": 125}, "build_time": 80, "footprint": [1, 1],
+ "abilities": {"Hitpoints": {"max": 700}, "Garrison": {"capacity": 5.0}}}

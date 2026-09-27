@@ -1,0 +1,2 @@
+{"id": "cuartel", "type": "building", "build_time": 50, "footprint": [3, 3],
+ "abilities": {"Train": {"units": ["fantasma", "cuartel"], "queue": 5}}}
