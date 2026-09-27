@@ -1,0 +1,266 @@
+[
+  {
+    "id": "eq_vision_franca_2",
+    "name": "Ojos Francos",
+    "civ": "todas",
+    "age": 2,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:caballeria",
+      "op": "add",
+      "path": "abilities.Vision.sight",
+      "value": 2
+    },
+    "icon": "antorcha",
+    "rarity": "comun",
+    "desc": "Bonus de equipo franco: caballería aliada +2 de línea de visión."
+  },
+  {
+    "id": "eq_cuartel_godo_2",
+    "name": "Recluta Goda",
+    "civ": "todas",
+    "age": 2,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:cuartel",
+      "op": "mul",
+      "path": "abilities.Train.time",
+      "value": 0.8
+    },
+    "icon": "espada",
+    "rarity": "rara",
+    "desc": "Bonus de equipo godo: el Cuartel aliado trabaja un 20% más rápido."
+  },
+  {
+    "id": "eq_galeria_britona_2",
+    "name": "Galerías Bretonas",
+    "civ": "todas",
+    "age": 2,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:arqueria",
+      "op": "mul",
+      "path": "abilities.Train.time",
+      "value": 0.8
+    },
+    "icon": "arco",
+    "rarity": "rara",
+    "desc": "Bonus de equipo bretón: la Arquería aliada trabaja un 20% más rápido."
+  },
+  {
+    "id": "eq_vision_compartida_2",
+    "name": "Visión Compartida",
+    "civ": "todas",
+    "age": 2,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:infanteria",
+      "op": "add",
+      "path": "abilities.Vision.sight",
+      "value": 1
+    },
+    "icon": "ojo",
+    "rarity": "comun",
+    "desc": "Los aliados comparten vigías: infantería +1 de línea de visión."
+  },
+  {
+    "id": "eq_muelle_vikingo_3",
+    "name": "Carpinteros Nórdicos",
+    "civ": "todas",
+    "age": 3,
+    "type": "edificio",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:muelle",
+      "op": "mul",
+      "path": "cost.wood",
+      "value": 0.85
+    },
+    "icon": "muelle",
+    "rarity": "rara",
+    "desc": "Bonus de equipo vikingo: Muelles aliados un 15% más baratos (175 a 149 de madera)."
+  },
+  {
+    "id": "eq_curacion_bizantina_3",
+    "name": "Hospitalidad Bizantina",
+    "civ": "todas",
+    "age": 3,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:monje",
+      "op": "add",
+      "path": "abilities.Heal.rate",
+      "value": 1.5
+    },
+    "icon": "cruz",
+    "rarity": "rara",
+    "desc": "Bonus de equipo bizantino: monjes aliados curan +1.5 HP/s extra."
+  },
+  {
+    "id": "eq_comercio_aliado_3",
+    "name": "Rutas Aliadas",
+    "civ": "todas",
+    "age": 3,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:carreta_comercio",
+      "op": "mul",
+      "path": "abilities.Trade.gold_per_distance",
+      "value": 1.25
+    },
+    "icon": "comercio",
+    "rarity": "rara",
+    "desc": "Comercio aliado: las carretas generan un 25% más de oro por distancia."
+  },
+  {
+    "id": "eq_tributo_aliado_3",
+    "name": "Tributo Sin Impuesto",
+    "civ": "todas",
+    "age": 3,
+    "type": "recurso",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:jugador",
+      "op": "add",
+      "path": "recursos.oro",
+      "value": 200
+    },
+    "icon": "oro",
+    "rarity": "comun",
+    "desc": "Tributo aliado sin impuesto: recibe 200 de oro al instante."
+  },
+  {
+    "id": "eq_muralla_aliada_4",
+    "name": "Murallas de la Alianza",
+    "civ": "todas",
+    "age": 4,
+    "type": "edificio",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "type:building",
+      "op": "mul",
+      "path": "abilities.Hitpoints.max",
+      "value": 1.1
+    },
+    "icon": "muralla",
+    "rarity": "rara",
+    "desc": "Ingenieros aliados: todos los edificios +10% de HP máximo."
+  },
+  {
+    "id": "eq_marchas_aliadas_4",
+    "name": "Marchas Aliadas",
+    "civ": "todas",
+    "age": 4,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:infanteria",
+      "op": "mul",
+      "path": "abilities.Move.speed",
+      "value": 1.1
+    },
+    "icon": "botas",
+    "rarity": "rara",
+    "desc": "Guías aliados: la infantería se mueve un 10% más rápido."
+  },
+  {
+    "id": "eq_vigias_aliados_4",
+    "name": "Vigías Aliados",
+    "civ": "todas",
+    "age": 4,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Vision.sight",
+      "value": 1
+    },
+    "icon": "diana",
+    "rarity": "comun",
+    "desc": "Red de vigías compartida: arqueros +1 de línea de visión."
+  },
+  {
+    "id": "eq_caravanas_veloces_4",
+    "name": "Caravanas Veloces",
+    "civ": "todas",
+    "age": 4,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:carreta_comercio",
+      "op": "mul",
+      "path": "abilities.Move.speed",
+      "value": 1.15
+    },
+    "icon": "carreta",
+    "rarity": "epica",
+    "desc": "Escoltas aliadas: las carretas de comercio son un 15% más rápidas."
+  }
+]

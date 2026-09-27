@@ -1,0 +1,442 @@
+[
+  {
+    "id": "neut_madera_1",
+    "name": "Cajón de Madera",
+    "civ": "todas",
+    "age": 1,
+    "type": "recurso",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:jugador",
+      "op": "add",
+      "path": "res.wood",
+      "value": 300
+    },
+    "icon": "madera",
+    "rarity": "comun",
+    "desc": "Recibe 300 de madera al instante."
+  },
+  {
+    "id": "neut_alimento_1",
+    "name": "Cajón de Alimento",
+    "civ": "todas",
+    "age": 1,
+    "type": "recurso",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:jugador",
+      "op": "add",
+      "path": "res.food",
+      "value": 300
+    },
+    "icon": "alimento",
+    "rarity": "comun",
+    "desc": "Recibe 300 de alimento al instante."
+  },
+  {
+    "id": "neut_oro_1",
+    "name": "Cajón de Oro",
+    "civ": "todas",
+    "age": 1,
+    "type": "recurso",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:jugador",
+      "op": "add",
+      "path": "res.gold",
+      "value": 300
+    },
+    "icon": "oro",
+    "rarity": "comun",
+    "desc": "Recibe 300 de oro al instante."
+  },
+  {
+    "id": "neut_piedra_1",
+    "name": "Cajón de Piedra",
+    "civ": "todas",
+    "age": 1,
+    "type": "recurso",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:jugador",
+      "op": "add",
+      "path": "res.stone",
+      "value": 300
+    },
+    "icon": "piedra",
+    "rarity": "comun",
+    "desc": "Recibe 300 de piedra al instante."
+  },
+  {
+    "id": "neut_aldeanos_1",
+    "name": "Dos Aldeanos",
+    "civ": "todas",
+    "age": 1,
+    "type": "unidad",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:aldeano",
+      "op": "mul",
+      "path": "cost.food",
+      "value": 0.5
+    },
+    "icon": "aldeano",
+    "rarity": "rara",
+    "desc": "Recibe 2 aldeanos en el Centro Urbano."
+  },
+  {
+    "id": "neut_carretilla_2",
+    "name": "Carretilla",
+    "civ": "todas",
+    "age": 2,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:aldeano",
+      "op": "mul",
+      "path": "abilities.Gather.capacity",
+      "value": 1.25
+    },
+    "icon": "carretilla",
+    "rarity": "rara",
+    "desc": "Aldeanos cargan un 25% más de recursos."
+  },
+  {
+    "id": "neut_telar_2",
+    "name": "Telar",
+    "civ": "todas",
+    "age": 2,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:aldeano",
+      "op": "add",
+      "path": "abilities.Hitpoints.max",
+      "value": 15
+    },
+    "icon": "telar",
+    "rarity": "rara",
+    "desc": "Aldeanos ganan +15 puntos de vida."
+  },
+  {
+    "id": "neut_forja_2",
+    "name": "Forja",
+    "civ": "todas",
+    "age": 2,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:infanteria",
+      "op": "add",
+      "path": "abilities.Attack.damage.melee",
+      "value": 1
+    },
+    "icon": "herreria",
+    "rarity": "comun",
+    "desc": "Infantería +1 de ataque cuerpo a cuerpo."
+  },
+  {
+    "id": "neut_cota_malla_2",
+    "name": "Cota de Malla",
+    "civ": "todas",
+    "age": 2,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:infanteria",
+      "op": "add",
+      "path": "abilities.Armor.classes.melee",
+      "value": 1
+    },
+    "icon": "armadura",
+    "rarity": "comun",
+    "desc": "Infantería +1 de armadura cuerpo a cuerpo."
+  },
+  {
+    "id": "neut_armadura_arq_2",
+    "name": "Armadura de Arqueros",
+    "civ": "todas",
+    "age": 2,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Armor.classes.pierce",
+      "value": 1
+    },
+    "icon": "armadura",
+    "rarity": "comun",
+    "desc": "Arqueros +1 de armadura antiproyectil."
+  },
+  {
+    "id": "neut_emplumado_2",
+    "name": "Emplumado",
+    "civ": "todas",
+    "age": 2,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Attack.damage.pierce",
+      "value": 1
+    },
+    "icon": "flecha",
+    "rarity": "comun",
+    "desc": "Arqueros +1 de ataque perforante."
+  },
+  {
+    "id": "neut_quimica_3",
+    "name": "Química Básica",
+    "civ": "todas",
+    "age": 3,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Attack.damage.edificio",
+      "value": 2
+    },
+    "icon": "quimica",
+    "rarity": "rara",
+    "desc": "Arqueros +2 de bonus contra edificios."
+  },
+  {
+    "id": "neut_merc_huscarle_3",
+    "name": "Mercenarios Huscarles",
+    "civ": "todas",
+    "age": 3,
+    "type": "unidad",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:huscarle",
+      "op": "enable",
+      "path": "",
+      "value": 0
+    },
+    "icon": "huscarle",
+    "rarity": "epica",
+    "desc": "Habilita y envía huscarles mercenarios."
+  },
+  {
+    "id": "neut_merc_nordico_3",
+    "name": "Mercenarios Nórdicos",
+    "civ": "todas",
+    "age": 3,
+    "type": "unidad",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:cuartel",
+      "op": "append",
+      "path": "abilities.Train.units",
+      "value": "invasor_nordico"
+    },
+    "icon": "espada",
+    "rarity": "epica",
+    "desc": "El Cuartel puede entrenar invasores nórdicos."
+  },
+  {
+    "id": "neut_comercio_3",
+    "name": "Rutas Comerciales",
+    "civ": "todas",
+    "age": 3,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:carreta_comercio",
+      "op": "mul",
+      "path": "abilities.Trade.gold_per_distance",
+      "value": 1.25
+    },
+    "icon": "comercio",
+    "rarity": "rara",
+    "desc": "Carretas de comercio generan +25% de oro."
+  },
+  {
+    "id": "neut_balistica_3",
+    "name": "Balística Básica",
+    "civ": "todas",
+    "age": 3,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:arqueros",
+      "op": "set",
+      "path": "abilities.Attack.accuracy",
+      "value": 1
+    },
+    "icon": "balistica",
+    "rarity": "rara",
+    "desc": "Arqueros disparan con puntería total predictiva."
+  },
+  {
+    "id": "neut_campeon_elite_4",
+    "name": "Campeón de Élite",
+    "civ": "todas",
+    "age": 4,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:campeon",
+      "op": "set",
+      "path": "abilities.Attack.damage.melee",
+      "value": 13
+    },
+    "icon": "campeon",
+    "rarity": "epica",
+    "desc": "Campeones fijan su ataque en 13."
+  },
+  {
+    "id": "neut_ariete_elite_4",
+    "name": "Ariete de Élite",
+    "civ": "todas",
+    "age": 4,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:ariete",
+      "op": "remove",
+      "path": "abilities.Attack.min_range",
+      "value": 0
+    },
+    "icon": "ariete",
+    "rarity": "epica",
+    "desc": "Arietes pierden su restricción de rango mínimo."
+  },
+  {
+    "id": "neut_inquisicion_4",
+    "name": "Inquisición",
+    "civ": "todas",
+    "age": 4,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:monje",
+      "op": "disable",
+      "path": "",
+      "value": 0
+    },
+    "icon": "monje",
+    "rarity": "epica",
+    "desc": "Anula la conversión de monjes enemigos."
+  },
+  {
+    "id": "neut_maravilla_4",
+    "name": "Maravilla",
+    "civ": "todas",
+    "age": 4,
+    "type": "edificio",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:maravilla",
+      "op": "enable",
+      "path": "",
+      "value": 0
+    },
+    "icon": "maravilla",
+    "rarity": "epica",
+    "desc": "Habilita la construcción de la Maravilla."
+  }
+]

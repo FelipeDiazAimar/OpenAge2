@@ -1,0 +1,266 @@
+[
+  {
+    "id": "esp_devocion_2",
+    "name": "Devoción Ferviente",
+    "civ": "todas",
+    "age": 2,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:monje",
+      "op": "add",
+      "path": "abilities.Convert.range",
+      "value": 1
+    },
+    "icon": "cruz",
+    "rarity": "comun",
+    "desc": "Monjes +1 de alcance de conversión."
+  },
+  {
+    "id": "esp_salmos_2",
+    "name": "Salmos de Sanación",
+    "civ": "todas",
+    "age": 2,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:monje",
+      "op": "mul",
+      "path": "abilities.Heal.rate",
+      "value": 1.5
+    },
+    "icon": "monje",
+    "rarity": "comun",
+    "desc": "Monjes curan un 50% más rápido."
+  },
+  {
+    "id": "esp_reliquias_3",
+    "name": "Oro de las Reliquias",
+    "civ": "todas",
+    "age": 3,
+    "type": "recurso",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:jugador",
+      "op": "add",
+      "path": "recursos.oro",
+      "value": 300
+    },
+    "icon": "oro",
+    "rarity": "rara",
+    "desc": "Tus reliquias generan 300 de oro al instante."
+  },
+  {
+    "id": "esp_disciplina_4",
+    "name": "Disciplina Monástica",
+    "civ": "todas",
+    "age": 4,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:monje",
+      "op": "mul",
+      "path": "abilities.Convert.cooldown",
+      "value": 0.75
+    },
+    "icon": "cruz",
+    "rarity": "epica",
+    "desc": "Monjes convierten un 25% más rápido."
+  },
+  {
+    "id": "esp_ariete_3",
+    "name": "Ariete Reforzado",
+    "civ": "todas",
+    "age": 3,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:ariete",
+      "op": "add",
+      "path": "abilities.Attack.damage.edificio",
+      "value": 25
+    },
+    "icon": "ariete",
+    "rarity": "rara",
+    "desc": "Arietes +25 de daño contra edificios."
+  },
+  {
+    "id": "esp_catapulta_3",
+    "name": "Piedras Pesadas",
+    "civ": "todas",
+    "age": 3,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:catapulta",
+      "op": "add",
+      "path": "abilities.Attack.damage.edificio",
+      "value": 10
+    },
+    "icon": "catapulta",
+    "rarity": "rara",
+    "desc": "Catapultas +10 de daño contra edificios."
+  },
+  {
+    "id": "esp_trabuquete_4",
+    "name": "Ingenieros de Asedio",
+    "civ": "todas",
+    "age": 4,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:trebuchet",
+      "op": "add",
+      "path": "abilities.Attack.damage.pierce",
+      "value": 50
+    },
+    "icon": "trabuquete",
+    "rarity": "epica",
+    "desc": "Trabuquetes +50 de daño perforante."
+  },
+  {
+    "id": "esp_mantos_4",
+    "name": "Mantos de Asedio",
+    "civ": "todas",
+    "age": 4,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:ariete|id:catapulta|id:trebuchet",
+      "op": "mul",
+      "path": "abilities.Hitpoints.max",
+      "value": 1.2
+    },
+    "icon": "ariete",
+    "rarity": "rara",
+    "desc": "Arietes, catapultas y trabuquetes +20% de vida."
+  },
+  {
+    "id": "esp_rutas_2",
+    "name": "Rutas Seguras",
+    "civ": "todas",
+    "age": 2,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:carreta_comercio",
+      "op": "mul",
+      "path": "abilities.Move.speed",
+      "value": 1.15
+    },
+    "icon": "comercio",
+    "rarity": "comun",
+    "desc": "Carretas de comercio un 15% más rápidas."
+  },
+  {
+    "id": "esp_gremio_3",
+    "name": "Gremio de Mercaderes",
+    "civ": "todas",
+    "age": 3,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:carreta_comercio",
+      "op": "mul",
+      "path": "abilities.Trade.gold_per_distance",
+      "value": 1.5
+    },
+    "icon": "comercio",
+    "rarity": "rara",
+    "desc": "Carretas de comercio generan +50% de oro."
+  },
+  {
+    "id": "esp_mercado_3",
+    "name": "Mercado Fortificado",
+    "civ": "todas",
+    "age": 3,
+    "type": "edificio",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:mercado",
+      "op": "add",
+      "path": "abilities.Hitpoints.max",
+      "value": 300
+    },
+    "icon": "comercio",
+    "rarity": "rara",
+    "desc": "Mercado +300 de vida máxima."
+  },
+  {
+    "id": "esp_maravilla_4",
+    "name": "Voto de la Maravilla",
+    "civ": "todas",
+    "age": 4,
+    "type": "edificio",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:maravilla",
+      "op": "mul",
+      "path": "cost.stone",
+      "value": 0.8
+    },
+    "icon": "maravilla",
+    "rarity": "epica",
+    "desc": "Maravilla cuesta un 20% menos de piedra."
+  }
+]

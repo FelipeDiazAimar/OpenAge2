@@ -1,0 +1,222 @@
+[
+  {
+    "id": "mar_redes_2",
+    "name": "Redes de Pesca",
+    "civ": "todas",
+    "age": 2,
+    "type": "recurso",
+    "cost": {
+      "madera": 50,
+      "alimento": 50,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:barco_pesquero",
+      "op": "mul",
+      "path": "abilities.Gather.rates.food_fish",
+      "value": 1.15
+    },
+    "icon": "red",
+    "rarity": "comun",
+    "desc": "Redes finas: el barco pesquero recoge alimento del mar un 15% más rápido."
+  },
+  {
+    "id": "mar_velas_2",
+    "name": "Velas de Feudal",
+    "civ": "todas",
+    "age": 2,
+    "type": "mejora",
+    "cost": {
+      "madera": 100,
+      "alimento": 0,
+      "oro": 25,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:barco",
+      "op": "mul",
+      "path": "abilities.Move.speed",
+      "value": 1.1
+    },
+    "icon": "vela",
+    "rarity": "comun",
+    "desc": "Aparejo ligero: todos los barcos se mueven un 10% más rápido."
+  },
+  {
+    "id": "mar_muelle_2",
+    "name": "Muelle Barato",
+    "civ": "todas",
+    "age": 2,
+    "type": "edificio",
+    "cost": {
+      "madera": 100,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:muelle",
+      "op": "mul",
+      "path": "cost.wood",
+      "value": 0.85
+    },
+    "icon": "ancla",
+    "rarity": "comun",
+    "desc": "Astilleros eficientes: el muelle cuesta un 15% menos de madera."
+  },
+  {
+    "id": "mar_galeras_3",
+    "name": "Galeras de Guerra",
+    "civ": "todas",
+    "age": 3,
+    "type": "unidad",
+    "cost": {
+      "madera": 150,
+      "alimento": 0,
+      "oro": 75,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:galera",
+      "op": "add",
+      "path": "abilities.Attack.damage.pierce",
+      "value": 2
+    },
+    "icon": "barco",
+    "rarity": "rara",
+    "desc": "Artillería naval: la galera gana +2 de ataque perforante."
+  },
+  {
+    "id": "mar_alcance_3",
+    "name": "Alcance Naval",
+    "civ": "todas",
+    "age": 3,
+    "type": "mejora",
+    "cost": {
+      "madera": 150,
+      "alimento": 0,
+      "oro": 100,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:galera",
+      "op": "add",
+      "path": "abilities.Attack.range",
+      "value": 1
+    },
+    "icon": "diana",
+    "rarity": "rara",
+    "desc": "Cofas altas: la galera gana +1 de alcance."
+  },
+  {
+    "id": "mar_capacidad_3",
+    "name": "Bodegas de Pesca",
+    "civ": "todas",
+    "age": 3,
+    "type": "recurso",
+    "cost": {
+      "madera": 50,
+      "alimento": 100,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:barco_pesquero",
+      "op": "add",
+      "path": "abilities.Gather.capacity",
+      "value": 5
+    },
+    "icon": "cesta",
+    "rarity": "comun",
+    "desc": "Bodegas amplias: el barco pesquero carga +5 de alimento por viaje."
+  },
+  {
+    "id": "mar_cog_3",
+    "name": "Cog Comercial",
+    "civ": "todas",
+    "age": 3,
+    "type": "unidad",
+    "cost": {
+      "madera": 100,
+      "alimento": 0,
+      "oro": 50,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:carreta_comercio",
+      "op": "mul",
+      "path": "abilities.Trade.gold_per_tile",
+      "value": 1.25
+    },
+    "icon": "comercio",
+    "rarity": "rara",
+    "desc": "Cog de comercio: las rutas comerciales generan +25% de oro por distancia."
+  },
+  {
+    "id": "mar_drakkar_4",
+    "name": "Drakkar de Élite",
+    "civ": "todas",
+    "age": 4,
+    "type": "unidad",
+    "cost": {
+      "madera": 250,
+      "alimento": 0,
+      "oro": 200,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:drakkar",
+      "op": "add",
+      "path": "abilities.Attack.damage.pierce",
+      "value": 2
+    },
+    "icon": "drakkar",
+    "rarity": "epica",
+    "desc": "Proas de dragón: el drakkar gana +2 de ataque perforante."
+  },
+  {
+    "id": "mar_acorazado_4",
+    "name": "Cascos Reforzados",
+    "civ": "todas",
+    "age": 4,
+    "type": "mejora",
+    "cost": {
+      "madera": 300,
+      "alimento": 0,
+      "oro": 250,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:barco",
+      "op": "add",
+      "path": "abilities.Hitpoints.max",
+      "value": 40
+    },
+    "icon": "tridente",
+    "rarity": "epica",
+    "desc": "Cascos reforzados: todos los barcos ganan +40 de vida máxima."
+  },
+  {
+    "id": "mar_rutas_4",
+    "name": "Rutas Marítimas",
+    "civ": "todas",
+    "age": 4,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 200,
+      "oro": 150,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:carreta_comercio",
+      "op": "add",
+      "path": "abilities.Trade.gold_base",
+      "value": 10
+    },
+    "icon": "oro",
+    "rarity": "epica",
+    "desc": "Puertos francos: el comercio gana +10 de oro base por viaje."
+  }
+]

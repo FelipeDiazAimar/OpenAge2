@@ -1,6 +1,6 @@
 extends Control
 # MainMenu estilo medieval: marco madera, título dorado y botones con hover.
-# Conserva rutas: Un Jugador, LAN, Campaña, Editor, Opciones y beta v2.
+# Conserva rutas: Un Jugador, LAN, Campaña, Editor, Opciones, Mazos, Civilizaciones, Tecnologías y beta v2.
 # Usa ui/menus/MenuStyle.gd, todo procedural sin assets de pago.
 
 var _status: Label
@@ -105,6 +105,9 @@ func _conectar_y_estilizar_botones() -> void:
 		"CenterContainer/MainFrame/Margin/MenuVBox/CampaignButton": _on_campaign,
 		"CenterContainer/MainFrame/Margin/MenuVBox/EditorButton": _on_editor,
 		"CenterContainer/MainFrame/Margin/MenuVBox/OptionsButton": _on_options,
+		"CenterContainer/MainFrame/Margin/MenuVBox/DecksButton": _on_decks,
+		"CenterContainer/MainFrame/Margin/MenuVBox/CivsButton": _on_civs,
+		"CenterContainer/MainFrame/Margin/MenuVBox/TechButton": _on_tech,
 	}
 	_botones.clear()
 	for ruta: String in rutas.keys():
@@ -124,6 +127,9 @@ func _conectar_y_estilizar_botones() -> void:
 			_add_btn(vb, "Campaña", _on_campaign)
 			_add_btn(vb, "Editor Mapas", _on_editor)
 			_add_btn(vb, "Opciones", _on_options)
+			_add_btn(vb, "Mazos", _on_decks)
+			_add_btn(vb, "Civilizaciones", _on_civs)
+			_add_btn(vb, "Tecnologías", _on_tech)
 
 func _estilo_boton_aoe(btn: Button) -> void:
 	# Delega en MenuStyle: borde hierro y hover dorado brillante.
@@ -224,6 +230,27 @@ func _on_options() -> void:
 		get_tree().change_scene_to_file("res://ui/menus/Settings.tscn")
 	else:
 		_status.text = "Opciones: volumen y resolución desde Settings (solo editor)"
+
+func _on_decks() -> void:
+	# Abre el constructor de mazos si existe, o muestra aviso en el estado.
+	if ResourceLoader.exists("res://ui/decks/DeckBuilder.tscn"):
+		get_tree().change_scene_to_file("res://ui/decks/DeckBuilder.tscn")
+	else:
+		_status.text = "Mazos no encontrados (falta DeckBuilder.tscn)"
+
+func _on_civs() -> void:
+	# Abre la galería de civilizaciones si existe, o muestra aviso en el estado.
+	if ResourceLoader.exists("res://ui/civs/CivGallery.tscn"):
+		get_tree().change_scene_to_file("res://ui/civs/CivGallery.tscn")
+	else:
+		_status.text = "Civilizaciones no encontradas (falta CivGallery.tscn)"
+
+func _on_tech() -> void:
+	# Abre el visor de tecnologías si existe, o muestra aviso en el estado.
+	if ResourceLoader.exists("res://ui/techviewer/TechViewer.tscn"):
+		get_tree().change_scene_to_file("res://ui/techviewer/TechViewer.tscn")
+	else:
+		_status.text = "Tecnologías no encontradas (falta TechViewer.tscn)"
 
 func _on_new_engine() -> void:
 	# Botón beta conservado: abre la escena v2 del nuevo motor.

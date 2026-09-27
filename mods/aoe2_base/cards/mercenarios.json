@@ -1,0 +1,222 @@
+[
+  {
+    "id": "merc_catafracta_3",
+    "name": "Catafractas Mercenarias",
+    "civ": "todas",
+    "age": 3,
+    "type": "unidad",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:catafracta",
+      "op": "enable",
+      "path": "",
+      "value": 0
+    },
+    "icon": "catafracta",
+    "rarity": "epica",
+    "desc": "Habilita catafractas mercenarias."
+  },
+  {
+    "id": "merc_huscarle_3",
+    "name": "Huscarles Mercenarios",
+    "civ": "todas",
+    "age": 3,
+    "type": "unidad",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:huscarle",
+      "op": "enable",
+      "path": "",
+      "value": 0
+    },
+    "icon": "huscarle",
+    "rarity": "epica",
+    "desc": "Habilita huscarles mercenarios."
+  },
+  {
+    "id": "merc_invasor_3",
+    "name": "Invasores Nórdicos",
+    "civ": "todas",
+    "age": 3,
+    "type": "unidad",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:invasor_nordico",
+      "op": "enable",
+      "path": "",
+      "value": 0
+    },
+    "icon": "invasor_nordico",
+    "rarity": "rara",
+    "desc": "Habilita invasores nórdicos mercenarios."
+  },
+  {
+    "id": "merc_tiro_largo_3",
+    "name": "Arqueros de Tiro Largo",
+    "civ": "todas",
+    "age": 3,
+    "type": "unidad",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:arquero_tiro_largo",
+      "op": "enable",
+      "path": "",
+      "value": 0
+    },
+    "icon": "arquero_tiro_largo",
+    "rarity": "rara",
+    "desc": "Habilita arqueros de tiro largo mercenarios."
+  },
+  {
+    "id": "merc_guerrillero_3",
+    "name": "Guerrilleros de Frontera",
+    "civ": "todas",
+    "age": 3,
+    "type": "unidad",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:guerrillero",
+      "op": "enable",
+      "path": "",
+      "value": 0
+    },
+    "icon": "guerrillero",
+    "rarity": "rara",
+    "desc": "Habilita guerrilleros mercenarios."
+  },
+  {
+    "id": "merc_paladin_franco_4",
+    "name": "Paladines Francos",
+    "civ": "todas",
+    "age": 4,
+    "type": "unidad",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:paladin_franco",
+      "op": "enable",
+      "path": "",
+      "value": 0
+    },
+    "icon": "paladin_franco",
+    "rarity": "epica",
+    "desc": "Habilita paladines francos mercenarios."
+  },
+  {
+    "id": "merc_espadachin_4",
+    "name": "Espadachines a Sueldo",
+    "civ": "todas",
+    "age": 4,
+    "type": "unidad",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:espadachin_mandoble",
+      "op": "enable",
+      "path": "",
+      "value": 0
+    },
+    "icon": "espadachin_mandoble",
+    "rarity": "rara",
+    "desc": "Habilita espadachines de mandoble mercenarios."
+  },
+  {
+    "id": "merc_trebuchet_4",
+    "name": "Ingenieros de Trebuchet",
+    "civ": "todas",
+    "age": 4,
+    "type": "unidad",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "id:trebuchet",
+      "op": "enable",
+      "path": "",
+      "value": 0
+    },
+    "icon": "trebuchet",
+    "rarity": "epica",
+    "desc": "Habilita trebuchets mercenarios."
+  },
+  {
+    "id": "merc_honor_4",
+    "name": "Honor Mercenario",
+    "civ": "todas",
+    "age": 4,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:infanteria",
+      "op": "add",
+      "path": "abilities.Attack.damage.melee",
+      "value": 1
+    },
+    "icon": "espada",
+    "rarity": "rara",
+    "desc": "Infantería mercenaria +1 de ataque cuerpo a cuerpo."
+  },
+  {
+    "id": "merc_punteria_4",
+    "name": "Ojo de Mercenario",
+    "civ": "todas",
+    "age": 4,
+    "type": "mejora",
+    "cost": {
+      "madera": 0,
+      "alimento": 0,
+      "oro": 0,
+      "piedra": 0
+    },
+    "effect": {
+      "target": "tag:arqueros",
+      "op": "add",
+      "path": "abilities.Attack.damage.pierce",
+      "value": 1
+    },
+    "icon": "flecha",
+    "rarity": "rara",
+    "desc": "Arqueros mercenarios +1 de ataque perforante."
+  }
+]
