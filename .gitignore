@@ -18,6 +18,10 @@ assets/sprites/**/p_*.png
 assets/sprites/**/m_*.png
 assets/sprites/**/frame_*.png
 assets/sprites/**/*.import
+# Muestras extraídas del juego (copyright): se regeneran en user://
+assets/ui_extraidos/*.png
+assets/ui_extraidos/*.import
+assets/sonidos_extraidos/*
 
 # Python
 __pycache__/
