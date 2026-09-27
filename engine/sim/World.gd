@@ -37,6 +37,12 @@ func despawn(id: int) -> void:
 	spatial.remove(id)
 
 
+## Quita una habilidad de una entidad viva (p. ej. animal muerto -> carcasa).
+func remove_component(id: int, ability: String) -> void:
+	if components.has(ability):
+		components[ability].erase(id)
+
+
 func has_ability(id: int, ability: String) -> bool:
 	return components.has(ability) and components[ability].has(id)
 
@@ -95,6 +101,7 @@ static func _init_component(ability: String, params: Dictionary) -> Dictionary:
 			c["hp"] = mx
 		"ResourceSource":
 			c["amount"] = FP.from_data(float(params["amount"]))
+			c["killed"] = false # animales: carcasa tras morir
 		"Attack":
 			c["target"] = -1
 			c["explicit"] = false

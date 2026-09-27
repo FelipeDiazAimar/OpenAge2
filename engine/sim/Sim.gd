@@ -63,9 +63,15 @@ func spawn(def_id: String, owner: int, tile: Vector2i) -> int:
 		var size := Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
 		grid.block_rect(tile, size)
 		return world.spawn(def, owner, tile * FP.SCALE + size * (FP.SCALE / 2))
-	if str(def["type"]) == "resource":
+	if _blocks_tile(def):
 		grid.set_blocked(tile, true)
 	return world.spawn(def, owner, Grid.center_of(tile))
+
+
+## Recursos fijos (árboles, minas, bayas) bloquean su casilla; los animales
+## (tienen Move en la definición) no, ni vivos ni como carcasa.
+static func _blocks_tile(def: Dictionary) -> bool:
+	return str(def.get("type", "")) == "resource" and not (def.get("abilities", {}) as Dictionary).has("Move")
 
 
 func next_projectile_id() -> int:
@@ -84,7 +90,8 @@ func is_enemy(a: int, b: int) -> bool:
 	return a >= 0 and b >= 0 and a != b and team_of(a) != team_of(b)
 
 
-## Muerte: evento para el render (cadáver) y eliminación de la entidad.
+## Muerte: evento para el render (cadáver) y eliminación de la entidad. Los
+## animales (ResourceSource con requires_kill) quedan como carcasa recolectable.
 func kill(id: int) -> void:
 	if not world.entities.has(id):
 		return
@@ -92,6 +99,13 @@ func kill(id: int) -> void:
 	var facing := Vector2i(1000, 1000)
 	if world.has_ability(id, "Move"):
 		facing = world.comp(id, "Move")["facing"]
+	var src: Dictionary = world.comp(id, "ResourceSource")
+	if not src.is_empty() and bool(src["params"].get("requires_kill", false)):
+		for ability in ["Hitpoints", "Attack", "Armor", "Move"]:
+			world.remove_component(id, ability)
+		src["killed"] = true
+		events.append({"type": "carcass", "id": id, "def_id": e["def_id"], "pos": e["pos"], "facing": facing})
+		return
 	events.append({"type": "death", "id": id, "def_id": e["def_id"], "owner": e["owner"], "pos": e["pos"], "facing": facing, "kind": e["type"]})
 	remove(id)
 
@@ -113,7 +127,8 @@ func remove(id: int) -> void:
 			var size := Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
 			grid.block_rect(Grid.tile_of(pos - size * (FP.SCALE / 2)), size, false)
 		"resource":
-			grid.set_blocked(Grid.tile_of(pos), false)
+			if _blocks_tile(def_for(id)):
+				grid.set_blocked(Grid.tile_of(pos), false)
 	world.despawn(id)
 
 

@@ -239,16 +239,19 @@ static func _hit(sim, id: int, t: int) -> void:
 		var to: Vector2i = w.entities[t]["pos"]
 		var speed := maxi(1, FP.from_data(float(params["projectile_speed"])) / World.TICK_RATE)
 		sim.projectiles.append({
-			"id": sim.next_projectile_id(), "owner": owner, "target": t, "from": from, "pos": from,
+			"id": sim.next_projectile_id(), "owner": owner, "src": id, "target": t, "from": from, "pos": from,
 			"to": to, "speed": speed, "damage": params["damage"],
 			"area": FP.from_data(float(params.get("area_radius", 0.0))),
 			"age": 0, "total": maxi(1, (FP.dist(from, to) + speed - 1) / speed),
 		})
 	else:
-		apply_damage(sim, params["damage"], t)
+		apply_damage(sim, params["damage"], t, id)
 
 
-static func apply_damage(sim, atk: Dictionary, t: int) -> void:
+## attacker: id de quien golpea (-1 si no se sabe). Represalia AoE2: si el
+## golpeado puede atacar, no es aldeano (sin Gather) y está sin objetivo, va
+## contra el atacante aunque esté fuera de su vista (militares, jabalí).
+static func apply_damage(sim, atk: Dictionary, t: int, attacker: int = -1) -> void:
 	var w = sim.world
 	if not w.entities.has(t) or not w.has_ability(t, "Hitpoints"):
 		return
@@ -259,6 +262,12 @@ static func apply_damage(sim, atk: Dictionary, t: int) -> void:
 	hp["hp"] = int(hp["hp"]) - damage(atk, sim.def_for(t), armor)
 	if int(hp["hp"]) <= 0:
 		sim.kill(t)
+		return
+	if attacker < 0 or not w.entities.has(attacker) or w.has_ability(t, "Gather"):
+		return
+	var ta: Dictionary = w.comp(t, "Attack")
+	if not ta.is_empty() and int(ta["target"]) < 0 and w.has_ability(attacker, "Hitpoints"):
+		order_attack(sim, t, attacker)
 
 
 static func _step_projectiles(sim) -> void:
@@ -286,15 +295,15 @@ static func _land(sim, p: Dictionary) -> void:
 	if int(p["area"]) > 0:
 		for c in w.spatial.query_radius(to, int(p["area"])):
 			if w.has_ability(c, "Hitpoints") and sim.is_enemy(owner, int(w.entities[c]["owner"])):
-				apply_damage(sim, p["damage"], c)
+				apply_damage(sim, p["damage"], c, int(p["src"]))
 		return
 	var t: int = p["target"]
 	if w.entities.has(t) and _hits(sim, t, to):
-		apply_damage(sim, p["damage"], t)
+		apply_damage(sim, p["damage"], t, int(p["src"]))
 		return
 	for c in w.spatial.query_radius(to, HIT_RADIUS):
 		if w.has_ability(c, "Hitpoints") and sim.is_enemy(owner, int(w.entities[c]["owner"])):
-			apply_damage(sim, p["damage"], c)
+			apply_damage(sim, p["damage"], c, int(p["src"]))
 			return
 
 
