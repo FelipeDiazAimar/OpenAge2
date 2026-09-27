@@ -8,6 +8,9 @@ var height := 0
 var _blocked := PackedByteArray()
 var _region := PackedInt32Array()
 var _regions_dirty := true
+var _next_label := 0
+## Cuántas veces se re-etiquetó el mapa completo (para tests de rendimiento).
+var relabel_count := 0
 
 
 func _init(w: int, h: int) -> void:
@@ -26,10 +29,15 @@ func is_walkable(c: Vector2i) -> bool:
 
 func set_blocked(c: Vector2i, v: bool) -> void:
 	if in_bounds(c):
+		var i := c.y * width + c.x
 		var nv := 1 if v else 0
-		if _blocked[c.y * width + c.x] != nv:
-			_blocked[c.y * width + c.x] = nv
-			_regions_dirty = true
+		if _blocked[i] == nv:
+			return
+		_blocked[i] = nv
+		if v or _regions_dirty:
+			_regions_dirty = true # bloquear puede partir una región
+		else:
+			_unblock_region(c, i)
 
 
 func block_rect(origin: Vector2i, size: Vector2i, v: bool = true) -> void:
@@ -48,7 +56,29 @@ func region_of(c: Vector2i) -> int:
 	return _region[c.y * width + c.x]
 
 
+## Casilla liberada con las regiones al día (p. ej. árbol talado): si sus
+## vecinos caminables son todos de una región, se une a ella; si no tiene
+## vecinos, región nueva. Solo si une regiones distintas se re-etiqueta todo.
+func _unblock_region(c: Vector2i, i: int) -> void:
+	var label := -1
+	for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+		var n: Vector2i = c + d
+		if not is_walkable(n):
+			continue
+		var r := _region[n.y * width + n.x]
+		if label < 0:
+			label = r
+		elif r != label:
+			_regions_dirty = true
+			return
+	if label < 0:
+		label = _next_label
+		_next_label += 1
+	_region[i] = label
+
+
 func _label_regions() -> void:
+	relabel_count += 1
 	var n := width * height
 	_region.resize(n)
 	_region.fill(-1)
@@ -69,6 +99,7 @@ func _label_regions() -> void:
 					_region[nb] = next
 					stack.append(nb)
 		next += 1
+	_next_label = next
 	_regions_dirty = false
 
 

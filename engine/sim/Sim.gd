@@ -90,16 +90,16 @@ func add_res(pid: int, res: String, milli: int) -> void:
 
 
 func population(pid: int) -> Vector2i:
+	# Solo unidades (tienen Move) y proveedores de población: no recorre los
+	# miles de árboles y minas del mapa.
 	var used := 0
 	var cap := 0
-	for id in world.entities:
+	for id in world.ids_with("Move"):
 		var e: Dictionary = world.entities[id]
-		if int(e["owner"]) != pid:
-			continue
-		var def := def_for(id)
-		if str(e["type"]) == "unit":
-			used += int(def.get("pop_cost", 0))
-		elif world.has_ability(id, "ProvidesPop"):
+		if int(e["owner"]) == pid and str(e["type"]) == "unit":
+			used += int(def_for(id).get("pop_cost", 0))
+	for id in world.ids_with("ProvidesPop"):
+		if int(world.entities[id]["owner"]) == pid:
 			cap += int(world.comp(id, "ProvidesPop")["params"]["amount"])
 	return Vector2i(used, mini(cap, POP_MAX))
 

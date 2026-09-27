@@ -89,6 +89,27 @@ func test_path_is_deterministic() -> void:
 	assert_eq(Pathfinder.find_path(g, Vector2i(2, 15), Vector2i(25, 15)), Pathfinder.find_path(g, Vector2i(2, 15), Vector2i(25, 15)))
 
 
+func test_unblock_updates_regions_incrementally() -> void:
+	var g := Grid.new(10, 10)
+	g.block_rect(Vector2i(5, 0), Vector2i(1, 10))
+	var left := g.region_of(Vector2i(1, 1))
+	g.set_blocked(Vector2i(3, 3), true)
+	assert_eq(g.region_of(Vector2i(1, 1)), left)
+	var runs := g.relabel_count
+	g.set_blocked(Vector2i(3, 3), false)
+	assert_eq(g.region_of(Vector2i(3, 3)), left, "casilla liberada entre vecinos de una región")
+	assert_eq(g.relabel_count, runs, "un árbol talado no re-etiqueta todo el mapa")
+	g.block_rect(Vector2i(7, 7), Vector2i(3, 3))
+	g.region_of(Vector2i(0, 0))
+	runs = g.relabel_count
+	g.set_blocked(Vector2i(8, 8), false)
+	var iso := g.region_of(Vector2i(8, 8))
+	assert_true(iso >= 0 and iso != left and iso != g.region_of(Vector2i(8, 1)), "casilla aislada: región nueva")
+	assert_eq(g.relabel_count, runs)
+	g.set_blocked(Vector2i(5, 5), false)
+	assert_eq(g.region_of(Vector2i(1, 1)), g.region_of(Vector2i(8, 1)), "unir dos regiones sí recalcula")
+
+
 func test_regions_split_by_walls_and_update() -> void:
 	var g := Grid.new(10, 10)
 	g.block_rect(Vector2i(5, 0), Vector2i(1, 10))

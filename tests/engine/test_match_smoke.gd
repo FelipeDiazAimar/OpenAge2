@@ -30,6 +30,17 @@ func test_match_spawns_and_moves() -> void:
 	m.queue_free()
 
 
+func test_bar_refreshes_per_tick_not_per_frame() -> void:
+	var m = load(MATCH).instantiate()
+	Engine.get_main_loop().root.add_child(m)
+	m.sim.add_res(m.local_pid, "wood", 50000)
+	m._process(0.001)
+	assert_eq(m.bar.text_of("wood"), "Madera 200 (0)", "un frame sin tick no recalcula la barra")
+	m._process(0.2)
+	assert_eq(m.bar.text_of("wood"), "Madera 250 (0)", "tras un tick sí")
+	m.queue_free()
+
+
 func test_match_has_resources_and_smart_gather() -> void:
 	var m = load(MATCH).instantiate()
 	Engine.get_main_loop().root.add_child(m)

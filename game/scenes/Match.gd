@@ -130,12 +130,15 @@ func _process(delta: float) -> void:
 		return
 	var dt := 1.0 / World.TICK_RATE
 	_acc += delta
+	var ticked := false
 	while _acc >= dt:
 		layer.snapshot()
 		sim.step()
 		_acc -= dt
+		ticked = true
 	layer.sync(_acc / dt, delta)
-	bar.refresh()
+	if ticked:
+		bar.refresh() # la economía solo cambia por tick (10 Hz), no por frame
 	_frames += 1
 	if _shot_path != "" and _frames >= maxi(1, _shot_frames):
 		_save_screenshot(_shot_path)
