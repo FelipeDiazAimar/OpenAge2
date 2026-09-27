@@ -72,6 +72,15 @@ Proyecto → Configuración → Mapa de entrada, o edita la sección `[input]` d
 - Clic derecho sobre un **animal** con aldeanos: cazar (ciervo/jabalí se matan primero y luego se
   recolecta la carcasa; el jabalí contraataca). Las **ovejas propias** se seleccionan y mueven como
   unidades; si te alejas, un aldeano enemigo cercano puede quedárselas.
+- **Construir**: con aldeanos seleccionados, el panel de abajo a la izquierda muestra los edificios
+  (en gris los bloqueados; el motivo aparece al pasar el ratón). Clic en uno, clic en el mapa
+  para colocarlo (vista previa verde/roja); **Shift** coloca varios; clic derecho o **Esc** cancela.
+  Clic derecho sobre un cimiento propio = seguir construyéndolo.
+- **Entrenar / investigar / avanzar de edad**: selecciona el edificio y usa su panel; la tecla de
+  cada unidad (p. ej. **C** aldeano, **Q** milicia) también entrena. Clic en un puesto de la cola
+  = cancelar (devuelve el coste). Sin casas, la cola se detiene.
+- **Punto de reunión**: con un edificio seleccionado, clic derecho en el mapa (sobre un recurso,
+  los aldeanos nuevos lo recolectan; sobre un cimiento, lo construyen).
 - **S**: detener. Flechas / borde de pantalla / botón medio: cámara. Rueda: zoom. Esc: menú.
 - **F9** / **Shift+F9**: tropas de prueba (5 milicias + 5 arqueros) propias / enemigas bajo el cursor,
   hasta que exista producción en los edificios.
