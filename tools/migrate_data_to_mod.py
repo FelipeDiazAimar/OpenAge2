@@ -131,6 +131,9 @@ def graphics_for_unit(unit_id, sprites_root):
     # El aldeano del DE llama "fight" a su animación de ataque.
     if "attack" not in out and "fight" in out:
         out["attack"] = out["fight"]
+    # ...y "builder" a la de construir (render: acción "build").
+    if "build" not in out and "builder" in out:
+        out["build"] = out["builder"]
     return out
 
 
