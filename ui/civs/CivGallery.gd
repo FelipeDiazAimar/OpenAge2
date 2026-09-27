@@ -322,26 +322,40 @@ func _detalle(civ: Dictionary) -> void:
 
 
 func _comparar(a: Dictionary, b: Dictionary) -> void:
-	# Tabla lado a lado: nombre, pros, contras, UU, cartas.
-	var tabla := GridContainer.new()
-	tabla.columns = 3
-	tabla.add_theme_constant_override("h_separation", 10)
-	tabla.add_theme_constant_override("v_separation", 6)
-	_lado_der.add_child(tabla)
-	tabla.add_child(_linea("", PERGAMINO, 13))
-	for civ in [a, b]:
-		var n := _linea(str(civ.get("nombre", "?")), Color.html(str(civ.get("color", "#73706a"))).lightened(0.35), 18)
-		tabla.add_child(n)
-	_fila_comp(tabla, "Ventajas", _bullets(a.get("ventajas", []), "✔ "), _bullets(b.get("ventajas", []), "✔ "), VERDE)
-	_fila_comp(tabla, "Debilidades", _bullets(a.get("debilidades", []), "✕ "), _bullets(b.get("debilidades", []), "✕ "), ROJO)
-	_fila_comp(tabla, "UU", _uu_corto(a.get("unique", {})), _uu_corto(b.get("unique", {})), PERGAMINO)
-	_fila_comp(tabla, "Cartas", str(int(_propias.get(str(a.get("id", "")).to_lower(), 0))), str(int(_propias.get(str(b.get("id", "")).to_lower(), 0))), PERGAMINO)
+	# Tres columnas flexibles (título | A | B): los textos envuelven normal,
+	# sin el colapso de la rejilla que los ponía en vertical.
+	var cols := HBoxContainer.new()
+	cols.add_theme_constant_override("separation", 10)
+	_lado_der.add_child(cols)
+	var col_tit := _columna_comp(cols, "")
+	var col_a := _columna_comp(cols, str(a.get("nombre", "?")), Color.html(str(a.get("color", "#73706a"))).lightened(0.35))
+	var col_b := _columna_comp(cols, str(b.get("nombre", "?")), Color.html(str(b.get("color", "#73706a"))).lightened(0.35))
+	_fila_comp(col_tit, col_a, col_b, "Ventajas",
+		_bullets(a.get("ventajas", []), "✔ "), _bullets(b.get("ventajas", []), "✔ "), VERDE)
+	_fila_comp(col_tit, col_a, col_b, "Debilidades",
+		_bullets(a.get("debilidades", []), "✕ "), _bullets(b.get("debilidades", []), "✕ "), ROJO)
+	_fila_comp(col_tit, col_a, col_b, "UU",
+		_uu_corto(a.get("unique", {})), _uu_corto(b.get("unique", {})), PERGAMINO)
+	_fila_comp(col_tit, col_a, col_b, "Cartas",
+		str(int(_propias.get(str(a.get("id", "")).to_lower(), 0))),
+		str(int(_propias.get(str(b.get("id", "")).to_lower(), 0))), PERGAMINO)
 
 
-func _fila_comp(tabla: GridContainer, titulo: String, va: String, vb: String, color: Color) -> void:
-	tabla.add_child(_linea(titulo, ORO, 13))
-	tabla.add_child(_linea(va, color, 13))
-	tabla.add_child(_linea(vb, color, 13))
+func _columna_comp(padre: Container, titulo: String, color_tit: Color = PERGAMINO) -> VBoxContainer:
+	var col := VBoxContainer.new()
+	col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	col.add_theme_constant_override("separation", 4)
+	padre.add_child(col)
+	if not titulo.is_empty():
+		var t := _linea(titulo, color_tit, 16)
+		col.add_child(t)
+	return col
+
+
+func _fila_comp(col_tit: VBoxContainer, col_a: VBoxContainer, col_b: VBoxContainer, titulo: String, va: String, vb: String, color: Color) -> void:
+	col_tit.add_child(_linea(titulo, ORO, 13))
+	col_a.add_child(_linea(va if not va.is_empty() else "—", color, 13))
+	col_b.add_child(_linea(vb if not vb.is_empty() else "—", color, 13))
 
 
 func _bullets(v: Variant, marca: String) -> String:
