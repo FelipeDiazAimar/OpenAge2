@@ -24,7 +24,7 @@ code_bal=0
 
 code_eng=0
 echo "[run_all] 0/2 Motor nuevo (tests/engine)..."
-"$GODOT" --headless --path "$ROOT" -s "$ROOT/tests/engine/run_tests.gd" || code_eng=$?
+GODOT="$GODOT" sh "$ROOT/tests/engine/run.sh" || code_eng=$?
 
 echo "[run_all] 1/2 Lan8Bots (ticks=$TICKS)..."
 "$GODOT" --headless --path "$ROOT" -s "$ROOT/tests/Lan8Bots.gd" -- --ticks="$TICKS" || code_lan=$?

@@ -88,3 +88,10 @@ func test_parse_json_text_bom_and_errors() -> void:
 	var bad := Registry.parse_json_text("{\n\"id\": ")
 	assert_false(bad["ok"])
 	assert_true("línea" in str(bad["error"]), str(bad["error"]))
+
+
+func test_malformed_manifest_fields_are_errors() -> void:
+	var r := Registry.new()
+	assert_false(r.load_mods("res://tests/engine/fixtures/mods_bad_manifest"))
+	assert_has_error(r.errors, "mod.json: depends debe ser lista de textos")
+	assert_has_error(r.errors, "mod.json: priority debe ser número")

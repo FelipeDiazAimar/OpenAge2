@@ -116,12 +116,21 @@ func _discover(root: String, enabled: Array) -> Array[Dictionary]:
 		if not (m is Dictionary) or not (m.get("id") is String):
 			errors.append("%s: mod.json necesita 'id' (texto)" % mpath)
 			continue
+		var bad := false
+		if Schemas.type_error(m.get("depends", []), "string_list") != "":
+			errors.append("%s: depends debe ser lista de textos" % mpath)
+			bad = true
+		if not Schemas.is_num(m.get("priority", 0)):
+			errors.append("%s: priority debe ser número" % mpath)
+			bad = true
+		if bad:
+			continue
 		if not enabled.is_empty() and not enabled.has(m["id"]):
 			continue
 		out.append({
 			"id": str(m["id"]),
 			"version": str(m.get("version", "0")),
-			"depends": Array(m.get("depends", [])),
+			"depends": (m.get("depends", []) as Array).duplicate(),
 			"priority": int(m.get("priority", 0)),
 			"path": "%s/%s" % [root, n],
 		})
