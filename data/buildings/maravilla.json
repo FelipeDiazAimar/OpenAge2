@@ -1,0 +1,12 @@
+{
+  "id": "maravilla",
+  "name": "Maravilla",
+  "hp": 5000, "armor_melee": 2, "armor_pierce": 8,
+  "sight": 6.0, "size_tiles": [5, 5],
+  "cost": {"wood": 1000, "gold": 1000, "stone": 1000}, "build_time_sec": 300,
+  "actions": ["wonder_victory"],
+  "trains": [],
+  "requires_age": "imperial",
+  "wonder": true,
+  "victory_time_min": 10
+}

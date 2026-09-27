@@ -1,0 +1,104 @@
+{
+  "_comment": "OpenAge-LAN: definiciones de nodos de recurso. Determinista: cantidades enteras fijas, sin RNG. regen_per_sec=0 (sin regen), depletable=true salvo pesca costera infinita. Tasas de recolección coherentes con data/actions.json gather.rates_per_sec.",
+  "defaults": {
+    "regen_per_sec": 0.0,
+    "depletable": true,
+    "infinite": false,
+    "coastal": false,
+    "decays": false
+  },
+  "resources": [
+    {
+      "id": "tree",
+      "name": "Árbol",
+      "resource": "wood",
+      "amount": 100,
+      "infinite": false,
+      "depletable": true,
+      "regen_per_sec": 0.0,
+      "coastal": false,
+      "gather": { "rate_key": "wood", "rate_per_sec": 0.39, "carry": 10 }
+    },
+    {
+      "id": "berry_bush",
+      "name": "Arbusto de bayas",
+      "resource": "food",
+      "amount": 125,
+      "infinite": false,
+      "depletable": true,
+      "regen_per_sec": 0.0,
+      "coastal": false,
+      "gather": { "rate_key": "food_forage", "rate_per_sec": 0.41, "carry": 10 }
+    },
+    {
+      "id": "boar",
+      "name": "Jabalí",
+      "resource": "food",
+      "amount": 340,
+      "infinite": false,
+      "depletable": true,
+      "regen_per_sec": 0.0,
+      "coastal": false,
+      "hostile": true,
+      "gather": { "rate_key": "food_forage", "rate_per_sec": 0.41, "carry": 10 }
+    },
+    {
+      "id": "sheep",
+      "name": "Oveja",
+      "resource": "food",
+      "amount": 100,
+      "infinite": false,
+      "depletable": true,
+      "regen_per_sec": 0.0,
+      "coastal": false,
+      "tame": true,
+      "gather": { "rate_key": "food_forage", "rate_per_sec": 0.41, "carry": 10 }
+    },
+    {
+      "id": "deer",
+      "name": "Ciervo",
+      "resource": "food",
+      "amount": 140,
+      "infinite": false,
+      "depletable": true,
+      "regen_per_sec": 0.0,
+      "coastal": false,
+      "flees": true,
+      "gather": { "rate_key": "food_forage", "rate_per_sec": 0.41, "carry": 10 }
+    },
+    {
+      "id": "gold_mine",
+      "name": "Mina de oro",
+      "resource": "gold",
+      "amount": 800,
+      "infinite": false,
+      "depletable": true,
+      "regen_per_sec": 0.0,
+      "coastal": false,
+      "gather": { "rate_key": "gold", "rate_per_sec": 0.38, "carry": 10 }
+    },
+    {
+      "id": "stone_mine",
+      "name": "Mina de piedra",
+      "resource": "stone",
+      "amount": 800,
+      "infinite": false,
+      "depletable": true,
+      "regen_per_sec": 0.0,
+      "coastal": false,
+      "gather": { "rate_key": "stone", "rate_per_sec": 0.36, "carry": 10 }
+    },
+    {
+      "id": "shore_fish",
+      "name": "Banco de peces",
+      "resource": "food",
+      "amount": -1,
+      "infinite": true,
+      "depletable": false,
+      "regen_per_sec": 0.0,
+      "coastal": true,
+      "water": true,
+      "gather": { "rate_key": "food_fish", "rate_per_sec": 0.43, "carry": 10 }
+    }
+  ]
+}

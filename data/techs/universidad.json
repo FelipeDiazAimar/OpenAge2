@@ -1,0 +1,91 @@
+{
+  "building": "universidad",
+  "name": "Universidad",
+  "_comment": "Tecnologías de alcance, pólvora, torres y edificios. Efectos cuantificados para Techs.gd.",
+  "techs": [
+    {
+      "id": "balistica",
+      "nombre": "Balística",
+      "edad": "castillos",
+      "coste": { "wood": 300, "gold": 175 },
+      "tiempo_sec": 60,
+      "descripcion": "Arqueros y torres disparan con predicción: aciertan a objetivos móviles (anula dispersión por movimiento)",
+      "efectos": { "balistica": true, "categoria": "arqueros", "precision_vs_movil": 1.0 }
+    },
+    {
+      "id": "quimica",
+      "nombre": "Química",
+      "edad": "imperial",
+      "coste": { "food": 300, "gold": 200 },
+      "tiempo_sec": 60,
+      "descripcion": "Arqueros y pólvora +1 ataque, +2 vs edificios",
+      "efectos": { "categoria": "arqueros", "attack": 1, "bonus_vs_edificio": 2 }
+    },
+    {
+      "id": "punteria_universidad",
+      "nombre": "Puntería (universidad)",
+      "edad": "imperial",
+      "coste": { "food": 250, "gold": 250 },
+      "tiempo_sec": 60,
+      "descripcion": "Torres y arqueros +1 alcance (no acumulable con Puntería britona en arqueros, sí en torres)",
+      "efectos": { "categoria": "arqueros", "range": 1, "alcance_torres": 1 }
+    },
+    {
+      "id": "torre_vigilancia",
+      "nombre": "Torre de vigilancia",
+      "edad": "feudal",
+      "coste": { "food": 50, "stone": 125 },
+      "tiempo_sec": 30,
+      "descripcion": "Desbloquea Torre de vigilancia: +2 ataque torre, +1 alcance",
+      "efectos": { "desbloquea": "torre_vigilancia", "ataque_torres": 2, "alcance_torres": 1 }
+    },
+    {
+      "id": "torre_guardia",
+      "nombre": "Torre de guardia",
+      "edad": "castillos",
+      "coste": { "food": 100, "stone": 200 },
+      "tiempo_sec": 40,
+      "requiere": ["torre_vigilancia"],
+      "descripcion": "Desbloquea Torre de guardia: +2 ataque torre",
+      "efectos": { "desbloquea": "torre_guardia", "ataque_torres": 2 }
+    },
+    {
+      "id": "torre_muralla",
+      "nombre": "Torre de muralla (Keep)",
+      "edad": "imperial",
+      "coste": { "food": 200, "stone": 200 },
+      "tiempo_sec": 60,
+      "requiere": ["torre_guardia"],
+      "descripcion": "Desbloquea Torre de muralla: +2 ataque torre, +1000 HP torres",
+      "efectos": { "desbloquea": "torre_muralla", "ataque_torres": 2, "hp_torres": 1000 }
+    },
+    {
+      "id": "arquitectura",
+      "nombre": "Arquitectura",
+      "edad": "castillos",
+      "coste": { "wood": 200, "stone": 200 },
+      "tiempo_sec": 50,
+      "descripcion": "Edificios +10% HP, +1 armadura",
+      "efectos": { "hp_edificios_bonus": 0.10, "armor_edificios": 1 }
+    },
+    {
+      "id": "muralla_fortificada",
+      "nombre": "Muralla fortificada",
+      "edad": "castillos",
+      "coste": { "food": 200, "stone": 100 },
+      "tiempo_sec": 40,
+      "descripcion": "Murallas +1500 HP (de 1500 a 3000)",
+      "efectos": { "hp_murallas": 1500 }
+    },
+    {
+      "id": "albanileria",
+      "nombre": "Albañilería",
+      "edad": "imperial",
+      "coste": { "wood": 150, "stone": 175 },
+      "tiempo_sec": 50,
+      "requiere": ["arquitectura"],
+      "descripcion": "Torres y castillos +20% HP, +1 armadura",
+      "efectos": { "hp_torres_castillo_bonus": 0.20, "armor_edificios": 1 }
+    }
+  ]
+}

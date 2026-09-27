@@ -1,0 +1,10 @@
+{
+  "id": "campamento_maderero",
+  "name": "Campamento Maderero",
+  "hp": 600,
+  "size_tiles": [2, 2],
+  "cost": {"wood": 100},
+  "build_time_sec": 35,
+  "actions": ["dropoff_wood"],
+  "trains": []
+}

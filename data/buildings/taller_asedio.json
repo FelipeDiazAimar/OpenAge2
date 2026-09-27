@@ -1,0 +1,9 @@
+{
+  "id": "taller_asedio",
+  "name": "Taller de Asedio",
+  "hp": 1200, "size_tiles": [3, 3],
+  "cost": {"wood": 200}, "build_time_sec": 60,
+  "trains": ["ariete", "escorpion", "catapulta"],
+  "actions": ["train", "set_rally"],
+  "requires_age": "castillos"
+}

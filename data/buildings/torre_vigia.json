@@ -1,0 +1,12 @@
+{
+  "id": "torre_vigia",
+  "name": "Torre Vigía",
+  "hp": 700, "armor_melee": 2, "armor_pierce": 8,
+  "attack": 5, "range": 8.0, "sight": 8.0,
+  "size_tiles": [2, 2],
+  "cost": {"stone": 125}, "build_time_sec": 80,
+  "trains": [],
+  "actions": ["garrison_5"],
+  "garrison_max": 5,
+  "requires_age": "feudal"
+}

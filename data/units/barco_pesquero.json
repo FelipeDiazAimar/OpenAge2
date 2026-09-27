@@ -1,0 +1,11 @@
+{
+  "id": "barco_pesquero",
+  "name": "Barco pesquero",
+  "hp": 100, "attack": 0, "armor_melee": 0, "armor_pierce": 3,
+  "range": 0.0, "sight": 5.0, "speed": 1.1,
+  "cost": {"wood": 75}, "train_time_sec": 40, "pop_cost": 1,
+  "trained_at": "muelle", "hotkey": "Q",
+  "actions": ["move", "gather_fish", "stop"],
+  "armor_class": "barco",
+  "model": "res://models/fishing_ship.tscn"
+}

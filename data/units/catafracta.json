@@ -1,0 +1,14 @@
+{
+  "id": "catafracta",
+  "name": "Catafracta",
+  "hp": 150, "attack": 12, "armor_melee": 2, "armor_pierce": 1,
+  "range": 1.2, "sight": 4.0, "speed": 1.35,
+  "cost": {"food": 70, "gold": 75}, "train_time_sec": 20, "pop_cost": 1,
+  "trained_at": "castillo", "hotkey": "Q",
+  "actions": ["move", "attack", "attack_move", "patrol", "stop", "garrison"],
+  "bonus_vs": {"infanteria": 9, "milicia": 9, "piquero": 9},
+  "armor_class": "caballeria",
+  "civ_unica": "bizantinos",
+  "anti_class": "infanteria",
+  "model": "res://models/cataphract.tscn"
+}

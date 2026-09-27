@@ -1,0 +1,87 @@
+{
+  "_comment": "Arbol tecnologico completo OpenAge-LAN. Tabla autoritativa de QUÉ se habilita en cada edad. Determinista: claves ordenadas, listas ordenadas alfabeticamente. Fuente de edades: data/ages/ages.json + core/GameManager.gd (AGE_ORDER, requires herreria_o_mercado / castillo_o_monasterio). Edificios base conocidos: data/buildings/*.json + fallbacks de systems/construction/Construction.gd y systems/production/Production.gd. Unidades conocidas: data/units/*.json + trains de cuartel/arqueria/monasterio. Civs: data/factions/*.json (tech_tree = linea de fuerza, unique_unit bloqueada por civ). Sin costes inventados: solo requires_age + vinculos (trained_at/trains/researched_at).",
+  "age_order": ["alta_edad_media", "feudal", "castillos", "imperial"],
+  "ages": {
+    "alta_edad_media": {"name": "Alta Edad Media", "cost": {}, "requires": [], "research_time_sec": 0},
+    "feudal": {"name": "Feudal", "cost": {"food": 500}, "requires": [], "research_time_sec": 130},
+    "castillos": {"name": "Castillos", "cost": {"food": 800, "gold": 200}, "requires": ["herreria_o_mercado"], "research_time_sec": 160},
+    "imperial": {"name": "Imperial", "cost": {"food": 1000, "gold": 800}, "requires": ["castillo_o_monasterio"], "research_time_sec": 190}
+  },
+  "buildings": {
+    "arqueria": {"requires_age": "feudal", "trains": ["arquero", "ballestero"]},
+    "casa": {"requires_age": "alta_edad_media", "trains": []},
+    "castillo": {"requires_age": "castillos", "trains": ["arquero_tiro_largo", "catafracta", "huscarle", "invasor_nordico", "paladin_franco"]},
+    "centro_urbano": {"requires_age": "alta_edad_media", "trains": ["aldeano"]},
+    "cuartel": {"requires_age": "alta_edad_media", "trains": ["hombre_de_armas", "lancero", "milicia"]},
+    "establo": {"requires_age": "feudal", "trains": ["jinete"]},
+    "granja": {"requires_age": "alta_edad_media", "trains": []},
+    "herreria": {"requires_age": "feudal", "trains": []},
+    "maravilla": {"requires_age": "imperial", "trains": []},
+    "mercado": {"requires_age": "feudal", "trains": ["carreta_comercio"]},
+    "monasterio": {"requires_age": "castillos", "trains": ["monje"]},
+    "taller_asedio": {"requires_age": "castillos", "trains": ["ariete"]},
+    "torre_vigilancia": {"requires_age": "feudal", "trains": []},
+    "universidad": {"requires_age": "castillos", "trains": []}
+  },
+  "units": {
+    "aldeano": {"requires_age": "alta_edad_media", "trained_at": "centro_urbano", "civs": "all", "unique_for": null},
+    "ariete": {"requires_age": "castillos", "trained_at": "taller_asedio", "civs": "all", "unique_for": null},
+    "arquero": {"requires_age": "feudal", "trained_at": "arqueria", "civs": "all", "unique_for": null},
+    "arquero_tiro_largo": {"requires_age": "imperial", "trained_at": "castillo", "civs": ["britones"], "unique_for": "britones"},
+    "ballestero": {"requires_age": "castillos", "trained_at": "arqueria", "civs": "all", "unique_for": null},
+    "carreta_comercio": {"requires_age": "feudal", "trained_at": "mercado", "civs": "all", "unique_for": null},
+    "catafracta": {"requires_age": "imperial", "trained_at": "castillo", "civs": ["bizantinos"], "unique_for": "bizantinos"},
+    "drakkar": {"requires_age": "castillos", "trained_at": "muelle", "civs": ["vikingos"], "unique_for": "vikingos"},
+    "hombre_de_armas": {"requires_age": "castillos", "trained_at": "cuartel", "civs": "all", "unique_for": null},
+    "huscarle": {"requires_age": "imperial", "trained_at": "castillo", "civs": ["godos"], "unique_for": "godos"},
+    "invasor_nordico": {"requires_age": "imperial", "trained_at": "castillo", "civs": ["vikingos"], "unique_for": "vikingos"},
+    "jinete": {"requires_age": "feudal", "trained_at": "establo", "civs": "all", "unique_for": null},
+    "lancero": {"requires_age": "feudal", "trained_at": "cuartel", "civs": "all", "unique_for": null},
+    "milicia": {"requires_age": "alta_edad_media", "trained_at": "cuartel", "civs": "all", "unique_for": null},
+    "monje": {"requires_age": "castillos", "trained_at": "monasterio", "civs": "all", "unique_for": null},
+    "paladin_franco": {"requires_age": "imperial", "trained_at": "castillo", "civs": ["francos"], "unique_for": "francos"}
+  },
+    "techs": {
+    "barcos_dragon": {"requires_age": "imperial", "researched_at": "castillo", "note": "tecnologia unica vikinga: drakkar +20% ataque"},
+    "carretilla": {"requires_age": "feudal", "researched_at": "centro_urbano"},
+    "cota_malla": {"requires_age": "castillos", "researched_at": "herreria"},
+    "edad_castillos": {"requires_age": "feudal", "researched_at": "centro_urbano", "note": "avanza a Castillos; exige herreria o mercado (GameManager)"},
+    "edad_feudal": {"requires_age": "alta_edad_media", "researched_at": "centro_urbano", "note": "avanza a Feudal"},
+    "edad_imperial": {"requires_age": "castillos", "researched_at": "centro_urbano", "note": "avanza a Imperial; exige castillo o monasterio (GameManager)"},
+    "elite_unica": {"requires_age": "imperial", "researched_at": "castillo", "note": "mejora de la unidad unica de cada civ"},
+    "fervor": {"requires_age": "castillos", "researched_at": "monasterio"},
+    "forja": {"requires_age": "feudal", "researched_at": "herreria"},
+    "jefatura": {"requires_age": "castillos", "researched_at": "castillo", "note": "tecnologia unica vikinga: infanteria +5 HP"},
+    "quimica": {"requires_age": "imperial", "researched_at": "universidad"},
+    "telar": {"requires_age": "alta_edad_media", "researched_at": "centro_urbano"}
+  },
+  "unlocks_by_age": {
+    "alta_edad_media": {
+      "buildings": ["casa", "centro_urbano", "cuartel", "granja"],
+      "units": ["aldeano", "milicia"],
+      "techs": ["edad_feudal", "telar"]
+    },
+    "feudal": {
+      "buildings": ["arqueria", "establo", "herreria", "mercado", "torre_vigilancia"],
+      "units": ["arquero", "carreta_comercio", "jinete", "lancero"],
+      "techs": ["carretilla", "edad_castillos", "forja"]
+    },
+    "castillos": {
+      "buildings": ["castillo", "monasterio", "taller_asedio", "universidad"],
+      "units": ["ariete", "ballestero", "drakkar", "hombre_de_armas", "monje"],
+      "techs": ["cota_malla", "edad_imperial", "fervor", "jefatura"]
+    },
+    "imperial": {
+      "buildings": ["maravilla"],
+      "units": ["arquero_tiro_largo", "catafracta", "huscarle", "invasor_nordico", "paladin_franco"],
+      "techs": ["barcos_dragon", "elite_unica", "quimica"]
+    }
+  },
+  "civs": {
+    "bizantinos": {"tech_tree": ["monje", "arquero", "jinete"], "unique_unit": "catafracta"},
+    "britones": {"tech_tree": ["arquero", "milicia", "monje"], "unique_unit": "arquero_tiro_largo"},
+    "francos": {"tech_tree": ["jinete", "milicia", "monje"], "unique_unit": "paladin_franco"},
+    "godos": {"tech_tree": ["milicia", "lancero"], "unique_unit": "huscarle"},
+    "vikingos": {"tech_tree": ["milicia", "arquero", "drakkar"], "unique_unit": "invasor_nordico"}
+  }
+}

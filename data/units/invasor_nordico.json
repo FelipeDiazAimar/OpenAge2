@@ -1,0 +1,16 @@
+{
+  "id": "invasor_nordico",
+  "name": "Invasor nórdico",
+  "hp": 60, "attack": 8, "armor_melee": 0, "armor_pierce": 1,
+  "armor_class": "infanteria",
+  "range": 1.2, "sight": 5.0, "speed": 1.05,
+  "cost": {"food": 65, "gold": 35}, "train_time_sec": 16, "pop_cost": 1,
+  "trained_at": "castillo", "hotkey": "E",
+  "requires_age": "castillos",
+  "unique_to": "vikingos",
+  "upgrade_from": null,
+  "upgrade_to": null,
+  "actions": ["move", "attack", "attack_move", "patrol", "stop", "garrison"],
+  "bonus_vs": {"caballeria": 4, "caballero": 4, "jinete": 4, "edificio": 3},
+  "model": "res://models/berserk.tscn"
+}

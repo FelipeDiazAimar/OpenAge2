@@ -1,0 +1,181 @@
+{
+  "building": "herreria",
+  "name": "Herrería",
+  "_comment": "Mejoras +1 ataque/defensa por nivel, estilo AoE2. Costes y tiempos para Techs.gd (research por tick, 10Hz).",
+  "techs": [
+    {
+      "id": "forja",
+      "nombre": "Forja",
+      "edad": "feudal",
+      "coste": { "food": 150 },
+      "tiempo_sec": 30,
+      "descripcion": "Infantería +1 ataque cuerpo a cuerpo",
+      "efectos": { "categoria": "infanteria", "attack": 1 }
+    },
+    {
+      "id": "hierro_fundido",
+      "nombre": "Hierro fundido",
+      "edad": "castillos",
+      "coste": { "food": 220, "gold": 160 },
+      "tiempo_sec": 40,
+      "requiere": ["forja"],
+      "descripcion": "Infantería +1 ataque cuerpo a cuerpo (acumulable)",
+      "efectos": { "categoria": "infanteria", "attack": 1 }
+    },
+    {
+      "id": "alto_horno",
+      "nombre": "Alto horno",
+      "edad": "imperial",
+      "coste": { "food": 350, "gold": 250 },
+      "tiempo_sec": 60,
+      "requiere": ["hierro_fundido"],
+      "descripcion": "Infantería +2 ataque cuerpo a cuerpo",
+      "efectos": { "categoria": "infanteria", "attack": 2 }
+    },
+    {
+      "id": "armadura_inf_1",
+      "nombre": "Armadura de escamas (infantería)",
+      "edad": "feudal",
+      "coste": { "food": 100 },
+      "tiempo_sec": 30,
+      "descripcion": "Infantería +1 armadura cuerpo a cuerpo",
+      "efectos": { "categoria": "infanteria", "armor_melee": 1 }
+    },
+    {
+      "id": "armadura_inf_2",
+      "nombre": "Cota de malla (infantería)",
+      "edad": "castillos",
+      "coste": { "food": 200, "gold": 100 },
+      "tiempo_sec": 40,
+      "requiere": ["armadura_inf_1"],
+      "descripcion": "Infantería +1 armadura cuerpo a cuerpo, +1 antiproyectil",
+      "efectos": { "categoria": "infanteria", "armor_melee": 1, "armor_pierce": 1 }
+    },
+    {
+      "id": "armadura_inf_3",
+      "nombre": "Placas (infantería)",
+      "edad": "imperial",
+      "coste": { "food": 300, "gold": 150 },
+      "tiempo_sec": 60,
+      "requiere": ["armadura_inf_2"],
+      "descripcion": "Infantería +1 armadura cuerpo a cuerpo, +1 antiproyectil",
+      "efectos": { "categoria": "infanteria", "armor_melee": 1, "armor_pierce": 1 }
+    },
+    {
+      "id": "ataque_arq_1",
+      "nombre": "Pluma de flecha",
+      "edad": "feudal",
+      "coste": { "food": 100, "gold": 50 },
+      "tiempo_sec": 30,
+      "descripcion": "Arqueros +1 ataque a distancia",
+      "efectos": { "categoria": "arqueros", "attack": 1 }
+    },
+    {
+      "id": "ataque_arq_2",
+      "nombre": "Puntas de flecha",
+      "edad": "castillos",
+      "coste": { "food": 200, "gold": 100 },
+      "tiempo_sec": 40,
+      "requiere": ["ataque_arq_1"],
+      "descripcion": "Arqueros +1 ataque a distancia",
+      "efectos": { "categoria": "arqueros", "attack": 1 }
+    },
+    {
+      "id": "ataque_arq_3",
+      "nombre": "Brasa (Bracer)",
+      "edad": "imperial",
+      "coste": { "food": 300, "gold": 200 },
+      "tiempo_sec": 60,
+      "requiere": ["ataque_arq_2"],
+      "descripcion": "Arqueros +1 ataque a distancia, +1 alcance",
+      "efectos": { "categoria": "arqueros", "attack": 1, "range": 1 }
+    },
+    {
+      "id": "armadura_arq_1",
+      "nombre": "Forro de cuero (arqueros)",
+      "edad": "feudal",
+      "coste": { "food": 150 },
+      "tiempo_sec": 30,
+      "descripcion": "Arqueros +1 armadura cuerpo a cuerpo, +1 antiproyectil",
+      "efectos": { "categoria": "arqueros", "armor_melee": 1, "armor_pierce": 1 }
+    },
+    {
+      "id": "armadura_arq_2",
+      "nombre": "Cota de arquero",
+      "edad": "castillos",
+      "coste": { "food": 200, "gold": 100 },
+      "tiempo_sec": 40,
+      "requiere": ["armadura_arq_1"],
+      "descripcion": "Arqueros +1 armadura cuerpo a cuerpo, +1 antiproyectil",
+      "efectos": { "categoria": "arqueros", "armor_melee": 1, "armor_pierce": 1 }
+    },
+    {
+      "id": "armadura_arq_3",
+      "nombre": "Anillo de cota (arqueros)",
+      "edad": "imperial",
+      "coste": { "food": 250, "gold": 150 },
+      "tiempo_sec": 60,
+      "requiere": ["armadura_arq_2"],
+      "descripcion": "Arqueros +1 armadura cuerpo a cuerpo, +2 antiproyectil",
+      "efectos": { "categoria": "arqueros", "armor_melee": 1, "armor_pierce": 2 }
+    },
+    {
+      "id": "ataque_cab_1",
+      "nombre": "Forja de caballería I",
+      "edad": "feudal",
+      "coste": { "food": 150 },
+      "tiempo_sec": 30,
+      "descripcion": "Caballería +1 ataque cuerpo a cuerpo",
+      "efectos": { "categoria": "caballeria", "attack": 1 }
+    },
+    {
+      "id": "ataque_cab_2",
+      "nombre": "Forja de caballería II",
+      "edad": "castillos",
+      "coste": { "food": 220, "gold": 160 },
+      "tiempo_sec": 40,
+      "requiere": ["ataque_cab_1"],
+      "descripcion": "Caballería +1 ataque cuerpo a cuerpo",
+      "efectos": { "categoria": "caballeria", "attack": 1 }
+    },
+    {
+      "id": "ataque_cab_3",
+      "nombre": "Forja de caballería III",
+      "edad": "imperial",
+      "coste": { "food": 350, "gold": 250 },
+      "tiempo_sec": 60,
+      "requiere": ["ataque_cab_2"],
+      "descripcion": "Caballería +2 ataque cuerpo a cuerpo",
+      "efectos": { "categoria": "caballeria", "attack": 2 }
+    },
+    {
+      "id": "armadura_cab_1",
+      "nombre": "Barda de cuero (caballería)",
+      "edad": "feudal",
+      "coste": { "food": 150 },
+      "tiempo_sec": 30,
+      "descripcion": "Caballería +1 armadura cuerpo a cuerpo, +1 antiproyectil",
+      "efectos": { "categoria": "caballeria", "armor_melee": 1, "armor_pierce": 1 }
+    },
+    {
+      "id": "armadura_cab_2",
+      "nombre": "Barda de malla (caballería)",
+      "edad": "castillos",
+      "coste": { "food": 200, "gold": 100 },
+      "tiempo_sec": 40,
+      "requiere": ["armadura_cab_1"],
+      "descripcion": "Caballería +1 armadura cuerpo a cuerpo, +1 antiproyectil",
+      "efectos": { "categoria": "caballeria", "armor_melee": 1, "armor_pierce": 1 }
+    },
+    {
+      "id": "armadura_cab_3",
+      "nombre": "Barda de placas (caballería)",
+      "edad": "imperial",
+      "coste": { "food": 300, "gold": 150 },
+      "tiempo_sec": 60,
+      "requiere": ["armadura_cab_2"],
+      "descripcion": "Caballería +1 armadura cuerpo a cuerpo, +2 antiproyectil",
+      "efectos": { "categoria": "caballeria", "armor_melee": 1, "armor_pierce": 2 }
+    }
+  ]
+}

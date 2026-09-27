@@ -1,0 +1,12 @@
+{
+  "id": "jinete",
+  "name": "Jinete (Caballero)",
+  "hp": 100, "attack": 10, "armor_melee": 2, "armor_pierce": 2,
+  "range": 1.2, "sight": 4.0, "speed": 1.35,
+  "cost": {"food": 60, "gold": 75}, "train_time_sec": 30, "pop_cost": 1,
+  "trained_at": "caballeriza", "hotkey": "W",
+  "actions": ["move", "attack", "attack_move", "patrol", "stop", "garrison"],
+  "bonus_vs": {"arquero": 3},
+  "armor_class": "caballeria",
+  "model": "res://models/knight.tscn"
+}

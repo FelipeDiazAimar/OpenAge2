@@ -1,0 +1,25 @@
+{
+  "_comment": "Acciones idénticas AoE2. Cada unidad/edificio referencia estas. Para añadir acciones nuevas, añadir aquí.",
+  "smart_action_priority": ["attack_if_enemy", "gather_if_resource", "repair_if_damaged_ally", "garrison_if_own", "trade_if_market", "convert_if_monk_vs_enemy", "heal_if_monk_vs_ally", "move otherwise"],
+  "actions": {
+    "move": {"hotkey": "right_click", "queueable": true, "target": "position"},
+    "attack": {"hotkey": "right_click_on_enemy", "queueable": true, "target": "entity"},
+    "attack_move": {"hotkey": "A", "queueable": true, "target": "position"},
+    "patrol": {"hotkey": "P", "queueable": true, "target": "position"},
+    "stop": {"hotkey": "S", "queueable": false},
+    "gather": {"hotkey": "right_click_on_resource", "queueable": true, "rates_per_sec": {"wood": 0.39, "food_forage": 0.41, "food_farm": 0.32, "food_fish": 0.43, "gold": 0.38, "stone": 0.36}, "carry_capacity": 10},
+    "build": {"hotkey": "B", "queueable": true, "target": "blueprint"},
+    "repair": {"hotkey": "R", "queueable": true, "rate_hp_per_sec": 15.0, "cost_factor": 0.5},
+    "garrison": {"hotkey": "G", "queueable": true, "target": "building"},
+    "ungarrison": {"hotkey": "U", "queueable": false},
+    "bell": {"hotkey": "T", "toggle": true, "effect": "villagers_to_tc"},
+    "convert": {"hotkey": "", "unit": "monje", "range": 8.0, "cooldown_sec": 12, "chance_base": 0.35, "queueable": false},
+    "heal": {"hotkey": "", "unit": "monje", "rate_hp_per_sec": 2.5, "range": 4.0, "auto": true},
+    "trade": {"hotkey": "", "unit": "carreta_comercio", "gold_per_trip_base": 20, "bonus_per_tile": 0.3},
+    "set_rally": {"hotkey": "right_click_with_building_selected"},
+    "train": {"queue_max": 5, "shift_adds_5": false}
+  },
+  "stances": ["agresivo", "defensivo", "mantener_posicion", "no_atacar"],
+  "formations": ["linea", "escalonada", "caja", "flanco"],
+  "control_groups": {"create": "Ctrl+1..9", "select": "1..9", "center": "doble 1..9", "add": "Shift+Nº"}
+}

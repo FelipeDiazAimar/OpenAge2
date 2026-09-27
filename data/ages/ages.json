@@ -1,0 +1,8 @@
+{
+  "ages": [
+    {"id": "alta_edad_media", "name": "Alta Edad Media", "cost": {}, "requires": []},
+    {"id": "feudal", "name": "Feudal", "cost": {"food": 500}, "requires": [], "research_time_sec": 130},
+    {"id": "castillos", "name": "Castillos", "cost": {"food": 800, "gold": 200}, "requires": ["herreria_o_mercado"], "research_time_sec": 160},
+    {"id": "imperial", "name": "Imperial", "cost": {"food": 1000, "gold": 800}, "requires": ["castillo_o_monasterio"], "research_time_sec": 190}
+  ]
+}

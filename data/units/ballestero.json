@@ -1,0 +1,12 @@
+{
+  "id": "ballestero",
+  "name": "Ballestero",
+  "hp": 35, "attack": 5, "armor_melee": 0, "armor_pierce": 0,
+  "armor_class": "arquero",
+  "range": 5.0, "sight": 6.0, "speed": 0.96,
+  "cost": {"wood": 25, "gold": 45}, "train_time_sec": 27, "pop_cost": 1,
+  "trained_at": "arqueria", "hotkey": "E",
+  "projectile_speed": 12.0, "fire_cooldown_sec": 2.0,
+  "actions": ["move", "attack", "attack_move", "patrol", "stop", "garrison"],
+  "model": "res://models/crossbowman.tscn"
+}

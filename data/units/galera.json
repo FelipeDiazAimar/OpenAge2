@@ -1,0 +1,13 @@
+{
+  "id": "galera",
+  "name": "Galera",
+  "hp": 120, "attack": 6, "armor_melee": 0, "armor_pierce": 6,
+  "range": 5.0, "sight": 6.0, "speed": 1.43,
+  "cost": {"wood": 90, "gold": 30}, "train_time_sec": 60, "pop_cost": 1,
+  "trained_at": "muelle", "hotkey": "W",
+  "projectile_speed": 12.0, "fire_cooldown_sec": 3.0,
+  "actions": ["move", "attack", "attack_move", "patrol", "stop"],
+  "bonus_vs": {"barco_pesquero": 6, "galera": 0},
+  "armor_class": "barco",
+  "model": "res://models/galley.tscn"
+}

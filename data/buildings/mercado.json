@@ -1,0 +1,10 @@
+{
+  "id": "mercado",
+  "name": "Mercado",
+  "hp": 1200,
+  "size_tiles": [3, 3],
+  "cost": {"wood": 175},
+  "build_time_sec": 60,
+  "actions": ["trade"],
+  "trains": ["carreta_comercio"]
+}

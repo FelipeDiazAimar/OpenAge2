@@ -1,0 +1,439 @@
+#!/usr/bin/env python3
+"""
+extract_aoe2_sprites.py - Convierte sprites de Age of Empires 2: DE (.sld) a PNG.
+
+Formato SLD documentado por el proyecto openage (doc/media/sld-files.md):
+  Header: "SLDX", version u16, num_frames u16.
+  Frame: canvas w/h u16, hotspot x/y i16, frame_type u8 (bits: main=0x01,
+    shadow=0x02, ???=0x04, playercolor=0x08, damage=0x10), ...
+  Capas con content_length u32 (incluye esos 4 bytes, padded a múltiplo de 4).
+  Main/shadow: header gfx (offsets x1,y1,x2,y2 + 2 flags), command array
+    [(skip,draw)...], bloques DXT1 (main/damage) o DXT4 (shadow/playercolor).
+  Damage/???: se saltan por content_length. Damage no se usa en display.
+
+Salida por archivo .sld:
+  <out>/<base>/frame_%03d.png        (sprite RGBA sobre canvas)
+  <out>/<base>/frame_%03d.mask.png   (máscara player-color: blanco+alpha)
+  <out>/<base>/frame_%03d.shadow.png (sombra en escala de grises+alpha)
+  <out>/<base>/manifest.json         (frames, canvas, hotspot, anim info)
+
+Uso:
+  py tools/extract_aoe2_sprites.py --src "C:/XboxGames/.../drs/graphics" --out assets/sprites --files u_vil_male_farmer_walkA_x1
+  py tools/extract_aoe2_sprites.py --src ... --out ... --list "u_vil_male*"
+  py tools/extract_aoe2_sprites.py --src ... --out ... --files u_inf_militia_idleA_x1 u_inf_militia_walkA_x1 --angles 8
+
+Solo stdlib (struct/zlib/json/os/argparse). Los assets son de tu copia
+comprada del juego: úsalos solo para ti, no los redistribuyas.
+"""
+import argparse
+import json
+import os
+import struct
+import sys
+import zlib
+
+MAGIC = b"SLDX"
+HDR = struct.Struct("<4s4HI")      # magic, ver, nframes, u1, u2, u3
+FHDR = struct.Struct("<4H2BH")     # cw, ch, cx, cy, ftype, unk, idx
+GFXHDR = struct.Struct("<4H2B")    # ox1, oy1, ox2, oy2, flag1, unk
+U32 = struct.Struct("<I")
+U16 = struct.Struct("<H")
+BC1 = struct.Struct("<2H I")
+BC4 = struct.Struct("<8B")
+
+F_MAIN, F_SHADOW, F_UNK, F_PLAYER, F_DAMAGE = 0x01, 0x02, 0x04, 0x08, 0x10
+REUSE_MASK = 0x80  # flag1: reutiliza bloques del frame anterior
+
+
+def _r5(v):
+    return (v * 255 + 15) // 31
+
+
+def _g6(v):
+    return (v * 255 + 31) // 63
+
+
+def decode_dxt1(block):
+    """8 bytes -> lista de 16 tuplas RGBA (izq->der, arriba->abajo)."""
+    c0, c1, idx = BC1.unpack(block[:8])
+
+    def split(c):
+        return ((c & 0xF800) >> 11, (c & 0x07E0) >> 5, c & 0x001F)
+
+    r0, g0, b0 = split(c0)
+    r1, g1, b1 = split(c1)
+    R0, G0, B0 = _r5(r0), _g6(g0), _r5(b0)
+    R1, G1, B1 = _r5(r1), _g6(g1), _r5(b1)
+    if c0 > c1:
+        lut = [(R0, G0, B0, 255), (R1, G1, B1, 255),
+               ((2 * R0 + R1) // 3, (2 * G0 + G1) // 3, (2 * B0 + B1) // 3, 255),
+               ((R0 + 2 * R1) // 3, (G0 + 2 * G1) // 3, (B0 + 2 * B1) // 3, 255)]
+    else:
+        lut = [(R0, G0, B0, 255), (R1, G1, B1, 255),
+               ((R0 + R1) // 2, (G0 + G1) // 2, (B0 + B1) // 2, 255),
+               (0, 0, 0, 0)]
+    return [lut[(idx >> (2 * i)) & 3] for i in range(16)]
+
+
+def decode_dxt4(block):
+    """8 bytes -> lista de 16 grises 0..255."""
+    c0 = block[0]
+    c1 = block[1]
+    bits = int.from_bytes(block[2:8], "little")
+    if c0 > c1:
+        lut = [c0, c1] + [( (6 - k) * c0 + (1 + k) * c1 + 3) // 7 for k in range(6)]
+    else:
+        lut = [c0, c1] + [( (4 - k) * c0 + (1 + k) * c1 + 2) // 5 for k in range(4)] + [0, 255]
+    return [lut[(bits >> (3 * i)) & 7] for i in range(16)]
+
+
+def draw_blocks(w, h, cmds, raw_blocks, decode, prev_img):
+    """Compone una capa w*h. raw_blocks: bytes de bloques de 8. Devuelve lista RGBA o grises."""
+    bw = (w + 3) // 4
+    bh = (h + 3) // 4
+    is_rgba = decode is decode_dxt1
+    img = [(0, 0, 0, 0)] * (w * h) if is_rgba else [0] * (w * h)
+    pos = 0
+    bi = 0
+    for skip, draw in cmds:
+        if prev_img is not None:
+            for _ in range(skip):
+                x, y = pos % bw, pos // bw
+                _copy_block(img, prev_img, w, h, x, y)
+                pos += 1
+        else:
+            pos += skip
+        for _ in range(draw):
+            x, y = pos % bw, pos // bw
+            px = decode(raw_blocks[bi * 8:bi * 8 + 8])
+            _put_block(img, px, w, h, x, y)
+            pos += 1
+            bi += 1
+    return img
+
+
+def _put_block(img, px, w, h, bx, by):
+    for j in range(4):
+        for i in range(4):
+            x, y = bx * 4 + i, by * 4 + j
+            if x < w and y < h:
+                img[y * w + x] = px[j * 4 + i]
+
+
+def _copy_block(img, prev, w, h, bx, by):
+    for j in range(4):
+        for i in range(4):
+            x, y = bx * 4 + i, by * 4 + j
+            if x < w and y < h:
+                img[y * w + x] = prev[y * w + x]
+
+
+def write_png(path, w, h, rgba):
+    """PNG RGBA8 mínimo con zlib (sin dependencias). rgba: lista de (r,g,b,a)."""
+    raw = bytearray()
+    for y in range(h):
+        raw.append(0)
+        for x in range(w):
+            raw.extend(rgba[y * w + x])
+
+    def chunk(typ, data):
+        c = struct.pack(">I", len(data)) + typ + data
+        return c + struct.pack(">I", zlib.crc32(typ + data) & 0xFFFFFFFF)
+
+    ihdr = struct.pack(">IIBBBBB", w, h, 8, 6, 0, 0, 0)
+    with open(path, "wb") as f:
+        f.write(b"\x89PNG\r\n\x1a\n")
+        f.write(chunk(b"IHDR", ihdr))
+        f.write(chunk(b"IDAT", zlib.compress(bytes(raw), 6)))
+        f.write(chunk(b"IEND", b""))
+
+
+def read_png(path):
+    """Lee un PNG RGBA8 con filter 0 (los que escribe write_png). Devuelve (w,h,rgba)."""
+    d = open(path, "rb").read()
+    assert d[:8] == b"\x89PNG\r\n\x1a\n", "firma PNG mala en %s" % path
+    w, h = struct.unpack(">II", d[16:24])
+    assert d[24:27] == bytes([8, 6, 0]), "solo RGBA8 filter0 en %s" % path
+    pos = 8
+    raw = b""
+    while pos < len(d):
+        ln = struct.unpack(">I", d[pos:pos + 4])[0]
+        if d[pos + 4:pos + 8] == b"IDAT":
+            raw += d[pos + 8:pos + 8 + ln]
+        pos += 12 + ln
+    px = zlib.decompress(raw)
+    ch = w * 4 + 1
+    rgba = []
+    for y in range(h):
+        assert px[y * ch] == 0, "filter no soportado en %s" % path
+        row = px[y * ch + 1:(y + 1) * ch]
+        rgba.extend((row[i], row[i + 1], row[i + 2], row[i + 3]) for i in range(0, len(row), 4))
+    return w, h, rgba
+
+
+def detect_dirs(n):
+    """(dirs, per_dir, drop_last) desde el nº de frames. DE usa 16 slots x N + 1 extra."""
+    if n > 16 and (n - 1) % 16 == 0:
+        return 16, (n - 1) // 16, True
+    for cand in (16, 8, 5, 4):
+        if n % cand == 0:
+            return cand, n // cand, False
+    return 1, n, False
+
+
+def pack_anim(folder, step=2, margin=2):
+    """Recorta al bbox común + submuestrea. Reescribe PNGs y manifest.pack.json.
+    Devuelve el manifest pack."""
+    man = json.load(open(os.path.join(folder, "manifest.json"), encoding="utf-8"))
+    frames = man["frames"]
+    n = len(frames)
+    dirs, per_dir, drop = detect_dirs(n)
+    if drop:
+        frames = frames[:-1]
+    # bbox común del canal alfa
+    x0, y0, x1, y1 = 10 ** 9, 10 ** 9, -1, -1
+    cache = []
+    for e in frames:
+        w, h, rgba = read_png(os.path.join(folder, e["png"]))
+        cache.append((w, h, rgba))
+        for y in range(h):
+            for x in range(w):
+                if rgba[y * w + x][3] > 10:
+                    if x < x0:
+                        x0 = x
+                    if y < y0:
+                        y0 = y
+                    if x > x1:
+                        x1 = x
+                    if y > y1:
+                        y1 = y
+    if x1 < x0:
+        raise ValueError("animación vacía en %s" % folder)
+    x0 = max(0, x0 - margin)
+    y0 = max(0, y0 - margin)
+    x1 = min(cache[0][0] - 1, x1 + margin)
+    y1 = min(cache[0][1] - 1, y1 + margin)
+    cw, ch = x1 - x0 + 1, y1 - y0 + 1
+    # submuestreo por dirección (mantiene fluidez reduciendo VRAM)
+    keep = []
+    for d in range(dirs):
+        seg = frames[d * per_dir:(d + 1) * per_dir]
+        keep.extend(seg[::step])
+    out_frames = []
+    for e in keep:
+        idx = frames.index(e)
+        w, h, rgba = cache[idx]
+        cut = [rgba[(y0 + y) * w + x0 + x] for y in range(ch) for x in range(cw)]
+        name = "p_%03d.png" % len(out_frames)
+        write_png(os.path.join(folder, name), cw, ch, cut)
+        # Máscara player-color recortada con el MISMO bbox (misma geometría y hotspot).
+        mask_out = None
+        mask_name = e.get("mask", "")
+        if mask_name:
+            mpath = os.path.join(folder, mask_name)
+            if os.path.exists(mpath):
+                mw, mh, mrgba = read_png(mpath)
+                if mw == w and mh == h:
+                    mcut = [mrgba[(y0 + y) * mw + x0 + x] for y in range(ch) for x in range(cw)]
+                    if any(px[3] != 0 for px in mcut):
+                        mask_out = "m_%03d.png" % len(out_frames)
+                        write_png(os.path.join(folder, mask_out), cw, ch, mcut)
+        # hotspot ajustado al recorte
+        hx, hy = e["hotspot"]
+        out_frames.append({"png": name, "mask": mask_out, "dir": idx // per_dir,
+                           "sub": (idx % per_dir) // step,
+                           "hotspot": [hx - x0, hy - y0]})
+    # borra los frame_*.png originales (incluye mask/shadow; el pack deja p_/m_*)
+    import glob as _glob
+    for p in _glob.glob(os.path.join(folder, "frame_*.png")):
+        os.remove(p)
+    pack = {"source": man["file"], "dirs": dirs, "per_dir": per_dir,
+            "kept_per_dir": (per_dir + step - 1) // step, "step": step,
+            "size": [cw, ch], "frames": out_frames}
+    json.dump(pack, open(os.path.join(folder, "manifest.pack.json"), "w", encoding="utf-8"), indent=1)
+    return pack
+
+
+def pad4(n):
+    return n + ((4 - n) % 4)
+
+
+class Reader:
+    def __init__(self, data):
+        self.d = data
+        self.o = 0
+
+    def take(self, n):
+        b = self.d[self.o:self.o + n]
+        if len(b) != n:
+            raise ValueError("SLD truncado en offset %d (pedía %d)" % (self.o, n))
+        self.o += n
+        return b
+
+    def u16(self):
+        return U16.unpack(self.take(2))[0]
+
+    def u32(self):
+        return U32.unpack(self.take(4))[0]
+
+
+def parse_gfx_layer(r, want):
+    """Lee header gfx + command array. Devuelve (w,h,ox1,oy1,flag,cmds,block_start)."""
+    ox1, oy1, ox2, oy2, flag, _ = GFXHDR.unpack(r.take(10))
+    w, h = ox2 - ox1, oy2 - oy1
+    if w <= 0 or h <= 0 or w > 4096 or h > 4096:
+        raise ValueError("dimensiones de capa inválidas %dx%d" % (w, h))
+    ncmd = r.u16()
+    cmds = [(r.d[r.o + 2 * i], r.d[r.o + 2 * i + 1]) for i in range(ncmd)]
+    r.o += 2 * ncmd
+    return w, h, ox1, oy1, flag, cmds, r.o
+
+
+def convert_file(path, outdir, verbose=True, max_frames=0):
+    with open(path, "rb") as f:
+        data = f.read()
+    r = Reader(data)
+    magic, ver, nframes, _, _, _ = HDR.unpack(r.take(16))
+    if magic != MAGIC:
+        raise ValueError("%s: firma inválida %r" % (path, magic))
+    base = os.path.splitext(os.path.basename(path))[0]
+    dest = os.path.join(outdir, base)
+    os.makedirs(dest, exist_ok=True)
+    manifest = {"file": base, "version": ver, "frames": []}
+    prev_main = None
+    for fi in range(nframes):
+        cw, ch, cx, cy, ftype, _, fidx = FHDR.unpack(r.take(12))
+        if cw == 0 or ch == 0 or cw > 4096 or ch > 4096:
+            raise ValueError("%s frame %d: canvas inválido %dx%d" % (base, fi, cw, ch))
+        canvas = [(0, 0, 0, 0)] * (cw * ch)
+        mask = [0] * (cw * ch)
+        shadow = [0] * (cw * ch)
+        main_geom = None  # (w, h, ox1, oy1) de la capa main de ESTE frame
+        entry = {"index": fi, "frame_index": fidx, "w": cw, "h": ch,
+                 "hotspot": [cx, cy], "layers": []}
+        for bit, name in ((F_MAIN, "main"), (F_SHADOW, "shadow"), (F_UNK, "unk"),
+                          (F_DAMAGE, "dmg"), (F_PLAYER, "player")):
+            if not (ftype & bit):
+                continue
+            layer_start = r.o
+            clen = r.u32()
+            if name in ("main", "shadow"):
+                w, h, ox1, oy1, flag, cmds, bstart = parse_gfx_layer(r, name)
+                nblocks = sum(d for _, d in cmds)
+                raw = data[bstart:bstart + nblocks * 8]
+                if len(raw) != nblocks * 8:
+                    raise ValueError("%s f%d %s: faltan bloques (%d/%d)" % (base, fi, name, len(raw), nblocks * 8))
+                if name == "main":
+                    prev = prev_main if (bool(flag & REUSE_MASK) and prev_main is not None and len(prev_main) == w * h) else None
+                    img = draw_blocks(w, h, cmds, raw, decode_dxt1, prev)
+                    _paste(canvas, cw, img, w, h, ox1, oy1)
+                    prev_main = list(img)
+                    main_geom = (w, h, ox1, oy1)
+                    entry["layers"].append("main")
+                else:
+                    img = draw_blocks(w, h, cmds, raw, decode_dxt4, None)
+                    _paste_gray(shadow, cw, img, w, h, ox1, oy1)
+                    entry["layers"].append("shadow")
+                r.o = bstart + nblocks * 8
+            elif name == "player":
+                r.take(2)  # mask header
+                ncmd = r.u16()
+                cmds = [(r.d[r.o + 2 * i], r.d[r.o + 2 * i + 1]) for i in range(ncmd)]
+                r.o += 2 * ncmd
+                nblocks = sum(d for _, d in cmds)
+                raw = data[r.o:r.o + nblocks * 8]
+                if len(raw) != nblocks * 8:
+                    raise ValueError("%s f%d player: faltan bloques" % (base, fi))
+                # La máscara cubre lo mismo que main (misma geometría).
+                mw, mh, mox, moy = main_geom if main_geom is not None else (cw, ch, 0, 0)
+                img = draw_blocks(mw, mh, cmds, raw, decode_dxt4, None)
+                _paste_gray(mask, cw, img, mw, mh, mox, moy)
+                r.o += nblocks * 8
+                entry["layers"].append("player")
+            # dmg y unk se saltan por content_length
+            r.o = layer_start + pad4(clen)
+        # Escribe PNGs
+        fp = os.path.join(dest, "frame_%03d.png" % fi)
+        write_png(fp, cw, ch, canvas)
+        mp = os.path.join(dest, "frame_%03d.mask.png" % fi)
+        write_png(mp, cw, ch, [(255, 255, 255, v) for v in mask])
+        sp = os.path.join(dest, "frame_%03d.shadow.png" % fi)
+        write_png(sp, cw, ch, [(0, 0, 0, v) for v in shadow])
+        entry.update({"png": os.path.basename(fp), "mask": os.path.basename(mp), "shadow": os.path.basename(sp)})
+        manifest["frames"].append(entry)
+        if verbose and (fi % 50 == 0 or fi == nframes - 1):
+            print("  frame %d/%d" % (fi + 1, nframes), flush=True)
+        if max_frames and fi + 1 >= max_frames:
+            manifest["truncated"] = True
+            break
+    with open(os.path.join(dest, "manifest.json"), "w", encoding="utf-8") as f:
+        json.dump(manifest, f, indent=1)
+    return manifest
+
+
+def prev_img_for(name, canvas, shadow, prev_main):
+    # Compat: la reutilización solo aplica a main (prev_main ya validado).
+    return prev_main if name == "main" else None
+
+
+def _layer_copy(img, w, h):
+    return list(img)
+
+
+def _paste(canvas, cw, img, w, h, ox, oy):
+    for y in range(h):
+        base = (oy + y) * cw + ox
+        for x in range(w):
+            canvas[base + x] = img[y * w + x]
+
+
+def _paste_gray(canvas, cw, img, w, h, ox, oy):
+    for y in range(h):
+        base = (oy + y) * cw + ox
+        for x in range(w):
+            canvas[base + x] = img[y * w + x]
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(description="SLD (AoE2:DE) -> PNG. Solo stdlib.")
+    ap.add_argument("--src", required=True, help="carpeta drs/graphics del juego")
+    ap.add_argument("--out", required=True, help="carpeta destino")
+    ap.add_argument("--files", nargs="*", default=[], help="bases .sld (sin extensión)")
+    ap.add_argument("--list", dest="listpat", default=None, help="solo lista archivos que casen (prefijo*)")
+    ap.add_argument("--max-frames", type=int, default=0, help="límite de frames por archivo (0 = todos)")
+    ap.add_argument("--pack", action="store_true", help="tras extraer: recorta+submuestrea (VRAM)")
+    ap.add_argument("--step", type=int, default=2, help="submuestreo por dirección con --pack")
+    args = ap.parse_args(argv)
+    names = sorted(n for n in os.listdir(args.src) if n.endswith(".sld"))
+    if args.listpat:
+        pat = args.listpat.rstrip("*")
+        for n in names:
+            if n.startswith(pat):
+                print(n)
+        return 0
+    if args.files:
+        want = set()
+        for b in args.files:
+            want.add(b if b.endswith(".sld") else b + ".sld")
+        names = [n for n in names if n in want]
+    if not names:
+        print("nada que convertir")
+        return 1
+    for n in names:
+        print("convirtiendo", n, flush=True)
+        try:
+            m = convert_file(os.path.join(args.src, n), args.out, max_frames=args.max_frames)
+            print("  OK %d frames -> %s" % (len(m["frames"]), n.replace(".sld", "")))
+            if args.pack:
+                base = n.replace(".sld", "")
+                pk = pack_anim(os.path.join(args.out, base), step=args.step)
+                print("  PACK %d dirs x %d = %d png %dx%d" % (
+                    pk["dirs"], pk["kept_per_dir"], len(pk["frames"]), pk["size"][0], pk["size"][1]))
+        except Exception as e:
+            print("  ERROR en %s: %s" % (n, e))
+            return 2
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

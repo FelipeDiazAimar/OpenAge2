@@ -1,0 +1,13 @@
+{
+  "id": "ariete",
+  "name": "Ariete",
+  "hp": 175, "attack": 2, "armor_melee": -3, "armor_pierce": 8,
+  "armor_class": "ariete",
+  "range": 1.2, "sight": 3.0, "speed": 0.5,
+  "cost": {"wood": 160, "gold": 75}, "train_time_sec": 36, "pop_cost": 3,
+  "trained_at": "taller_asedio", "hotkey": "Q",
+  "fire_cooldown_sec": 5.0,
+  "bonus_vs": {"edificio": 125},
+  "actions": ["move", "attack", "attack_move", "patrol", "stop"],
+  "model": "res://models/ram.tscn"
+}

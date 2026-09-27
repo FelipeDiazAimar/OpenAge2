@@ -1,0 +1,16 @@
+{
+  "id": "centro_urbano",
+  "name": "Centro Urbano",
+  "hp": 2400, "armor_melee": 2, "armor_pierce": 5,
+  "sight": 6.0, "size_tiles": [4, 4],
+  "cost": {"wood": 275}, "build_time_sec": 120,
+  "actions": ["train_aldeano", "advance_age", "bell", "set_rally", "garrison_15"],
+  "trains": ["aldeano"],
+  "garrison_max": 15,
+  "model_per_age": {
+    "alta_edad_media": "res://models/tc_dark.tscn",
+    "feudal": "res://models/tc_feudal.tscn",
+    "castillos": "res://models/tc_castle.tscn",
+    "imperial": "res://models/tc_imperial.tscn"
+  }
+}

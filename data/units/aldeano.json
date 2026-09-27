@@ -1,0 +1,12 @@
+{
+  "id": "aldeano",
+  "name": "Aldeano",
+  "hp": 25, "attack": 3, "armor_melee": 0, "armor_pierce": 0,
+  "range": 1.0, "sight": 4.0, "speed": 0.8,
+  "cost": {"food": 50}, "train_time_sec": 20, "pop_cost": 1,
+  "trained_at": "centro_urbano", "hotkey": "C",
+  "actions": ["move", "gather", "build", "repair", "garrison", "bell"],
+  "gather_carry": 10,
+  "model": "res://models/villager.tscn",
+  "icon": "res://assets/cc0/icons/villager.png"
+}

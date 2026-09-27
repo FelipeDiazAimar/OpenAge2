@@ -1,0 +1,183 @@
+{
+  "id": "francos",
+  "name": "Francos",
+  "roof_color": "#2a4bff",
+  "bonus": [
+    {
+      "id": "caballeria_hp_20",
+      "descripcion": "Caballería +20% HP (jinete 120->144, caballero 100->120 base antes de mejoras)",
+      "efecto": {
+        "hp_caballeria_bonus": 0.20,
+        "aplica_a": ["jinete", "caballeria_ligera", "husar", "caballero", "paladin_franco"]
+      }
+    },
+    {
+      "id": "granjas_gratis",
+      "descripcion": "Granjas gratis (ahorro 60 madera por granja) + mejoras de molino gratis (ahorro 175 comida + 75 madera aprox.)",
+      "efecto": {
+        "coste_granja_madera": 0,
+        "ahorro_granja_madera": 60,
+        "mejoras_molino_coste": 0,
+        "aplica_a": ["molino", "granja"]
+      }
+    },
+    {
+      "id": "castillo_barato_25",
+      "descripcion": "Castillos 25% más baratos: 650 piedra -> 488 piedra",
+      "efecto": {
+        "descuento_castillo_piedra": 0.25,
+        "coste_base_piedra": 650,
+        "coste_final_piedra": 488
+      }
+    }
+  ],
+  "unique_unit": {
+    "id": "paladin_franco",
+    "name": "Paladín franco",
+    "hp": 160,
+    "hp_elite": 180,
+    "attack": 12,
+    "attack_elite": 14,
+    "armor_melee": 2,
+    "armor_melee_elite": 3,
+    "armor_pierce": 3,
+    "range": 1.2,
+    "sight": 6.0,
+    "cost": { "food": 75, "gold": 75 },
+    "train_time_sec": 30,
+    "trained_at": "castillo",
+    "mejora_elite_cost": { "food": 1000, "gold": 800 },
+    "mejora_elite_tiempo_sec": 90
+  },
+  "unique_techs": [
+    {
+      "id": "hachas_barbas",
+      "nombre": "Hachas de barbas (Bearded Axe)",
+      "edificio": "castillo",
+      "edad": "castillos",
+      "coste": { "food": 300, "gold": 300 },
+      "tiempo_sec": 50,
+      "descripcion": "Hachero franco +1 alcance, +2 ataque.",
+      "efectos": {
+        "alcance_hachero": 1,
+        "ataque_hachero": 2,
+        "aplica_a": ["hachero_franco"]
+      }
+    },
+    {
+      "id": "caballerosidad",
+      "nombre": "Caballerosidad (Chivalry)",
+      "edificio": "castillo",
+      "edad": "imperial",
+      "coste": { "food": 400, "gold": 400 },
+      "tiempo_sec": 60,
+      "descripcion": "Establo trabaja 40% más rápido.",
+      "efectos": {
+        "velocidad_establo": 0.40
+      }
+    }
+  ],
+  "team_bonus": {
+    "id": "vision_caballeria_2",
+    "descripcion": "Caballería +2 línea de visión (aliados)",
+    "efecto": {
+      "vision_caballeria": 2.0,
+      "aplica_a": ["jinete", "caballeria_ligera", "husar", "caballero", "paladin_franco", "camello"]
+    }
+  },
+  "tech_tree": {
+    "cuartel": {
+      "milicia": true,
+      "hombre_de_armas": true,
+      "espadachin_mandoble": true,
+      "campeon": true,
+      "lancero": true,
+      "piquero": true,
+      "alabardero": false,
+      "huscarle": false,
+      "hachero_franco": true
+    },
+    "arqueria": {
+      "arquero": true,
+      "ballestero": false,
+      "guerrillero": true,
+      "guerrillero_elite": true,
+      "artillero_manual": false,
+      "arquero_tiro_largo": false,
+      "hachero_franco": true
+    },
+    "establo": {
+      "jinete": true,
+      "caballeria_ligera": true,
+      "husar": true,
+      "caballero": true,
+      "paladin": true,
+      "paladin_franco": true,
+      "camello": true,
+      "camello_pesado": true,
+      "catafracta": false
+    },
+    "taller_asedio": {
+      "ariete": true,
+      "ariete_blindado": true,
+      "escorpion": true,
+      "escorpion_pesado": false,
+      "mangana": true,
+      "onagro": true,
+      "canon_artillado": true,
+      "trabuquete": true
+    },
+    "monasterio": {
+      "monje": true,
+      "redencion": true,
+      "fervor": true,
+      "santidad": true,
+      "iluminacion": true,
+      "teocracia": false,
+      "herejia": false
+    },
+    "castillo": {
+      "paladin_franco": true,
+      "hachero_franco": true,
+      "hachas_barbas": true,
+      "caballerosidad": true
+    },
+    "herreria": {
+      "forja": true,
+      "hierro_fundido": true,
+      "alto_horno": true,
+      "armadura_inf_1": true,
+      "armadura_inf_2": true,
+      "armadura_inf_3": true,
+      "ataque_arq_1": true,
+      "ataque_arq_2": true,
+      "ataque_arq_3": false,
+      "armadura_arq_1": true,
+      "armadura_arq_2": true,
+      "armadura_arq_3": false,
+      "ataque_cab_1": true,
+      "ataque_cab_2": true,
+      "ataque_cab_3": true,
+      "armadura_cab_1": true,
+      "armadura_cab_2": true,
+      "armadura_cab_3": true
+    },
+    "universidad": {
+      "balistica": false,
+      "quimica": true,
+      "torre_vigilancia": true,
+      "torre_guardia": true,
+      "torre_muralla": true,
+      "arquitectura": true,
+      "muralla_fortificada": true,
+      "albanileria": true
+    },
+    "puerto": {
+      "barco_pesquero": true,
+      "galera_guerra": true,
+      "galeon": true,
+      "brulote": true
+    },
+    "no_disponible_resumen": ["alabardero", "ballestero", "artillero_manual", "arquero_tiro_largo", "catafracta", "huscarle", "escorpion_pesado", "teocracia", "herejia", "balistica", "ataque_arq_3", "armadura_arq_3"]
+  }
+}

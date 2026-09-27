@@ -1,0 +1,15 @@
+{
+  "id": "drakkar",
+  "name": "Drakkar",
+  "hp": 100, "attack": 7, "armor_melee": 0, "armor_pierce": 6,
+  "range": 6.0, "sight": 7.0, "speed": 1.65,
+  "cost": {"wood": 100, "gold": 40}, "train_time_sec": 45, "pop_cost": 1,
+  "trained_at": "muelle", "hotkey": "E",
+  "requires_age": "castillos",
+  "unique_to": "vikingos",
+  "projectile_speed": 12.0, "fire_cooldown_sec": 2.5,
+  "actions": ["move", "attack", "attack_move", "patrol", "stop"],
+  "bonus_vs": {"barco_pesquero": 6, "brulote": 4, "galera": 2},
+  "armor_class": "barco",
+  "model": "res://models/longboat.tscn"
+}

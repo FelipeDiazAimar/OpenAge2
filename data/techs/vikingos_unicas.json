@@ -1,0 +1,27 @@
+{
+  "building": "castillo",
+  "civ": "vikingos",
+  "name": "Tecnologías únicas vikingas",
+  "_comment": "Tecnologías únicas de los Vikingos. Costes y tiempos para research por tick. Jefatura (Castillos): infantería +5 HP. Barcos dragón (Imperial): drakkar +20% ataque.",
+  "techs": [
+    {
+      "id": "jefatura",
+      "nombre": "Jefatura (Chieftains)",
+      "edad": "castillos",
+      "coste": { "food": 400, "gold": 300 },
+      "tiempo_sec": 50,
+      "descripcion": "Infantería +5 HP (milicia 45->50, invasor nórdico 60->65; acumulable con bonus de HP por edad)",
+      "efectos": { "categoria": "infanteria", "hp": 5, "aplica_a": ["milicia", "hombre_de_armas", "espadachin_mandoble", "campeon", "lancero", "piquero", "alabardero", "invasor_nordico"] }
+    },
+    {
+      "id": "barcos_dragon",
+      "nombre": "Barcos dragón (Dragon Ships)",
+      "edad": "imperial",
+      "coste": { "wood": 250, "gold": 250 },
+      "tiempo_sec": 60,
+      "requiere": ["jefatura"],
+      "descripcion": "Drakkar +20% ataque (7->8.4) y +1 alcance (6->7)",
+      "efectos": { "categoria": "barco", "ataque_drakkar_bonus": 0.20, "alcance_drakkar": 1, "aplica_a": ["drakkar"] }
+    }
+  ]
+}

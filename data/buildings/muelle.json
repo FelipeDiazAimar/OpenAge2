@@ -1,0 +1,10 @@
+{
+  "id": "muelle",
+  "name": "Muelle",
+  "hp": 1200,
+  "size_tiles": [3, 3],
+  "cost": {"wood": 150},
+  "build_time_sec": 50,
+  "actions": ["train", "set_rally"],
+  "trains": ["barco_pesquero", "galera"]
+}

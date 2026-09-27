@@ -1,0 +1,12 @@
+{
+  "id": "castillo",
+  "name": "Castillo",
+  "hp": 4800, "armor_melee": 2, "armor_pierce": 8,
+  "attack": 11, "range": 8.0, "sight": 8.0,
+  "size_tiles": [4, 4],
+  "cost": {"stone": 650}, "build_time_sec": 200,
+  "trains": ["unidad_unica", "trabuquete", "petardo"],
+  "actions": ["train", "set_rally", "garrison_20"],
+  "garrison_max": 20,
+  "requires_age": "castillos"
+}

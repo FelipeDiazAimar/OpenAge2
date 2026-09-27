@@ -1,0 +1,16 @@
+{
+  "id": "hombre_armas",
+  "name": "Hombre de Armas",
+  "hp": 55, "attack": 6, "armor_melee": 0, "armor_pierce": 1,
+  "range": 1.2, "sight": 4.0, "speed": 0.9,
+  "cost": {"food": 60, "gold": 20}, "train_time_sec": 21, "pop_cost": 1,
+  "trained_at": "cuartel", "hotkey": "Q",
+  "requires_age": "feudal",
+  "upgrade_from": "milicia",
+  "upgrade_to": "espadachin_mandoble",
+  "upgrade_cost": {"food": 100, "gold": 40},
+  "upgrade_research_time_sec": 40,
+  "actions": ["move", "attack", "attack_move", "patrol", "stop", "garrison"],
+  "bonus_vs": {"edificio": 2},
+  "model": "res://models/man_at_arms.tscn"
+}

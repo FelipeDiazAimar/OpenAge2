@@ -1,0 +1,61 @@
+{
+  "_comment": "OpenAge-LAN campaña 'Sangre del Norte' 1/3. Vikingos (jugador) vs britones (bot defensivo). Objetivo único: destruye el cuartel enemigo antes de 15 min. Derrota: tu centro urbano cae o se agota el tiempo.",
+  "id": "01_sangre_norte",
+  "order": 1,
+  "name": "01 · Sangre del Norte",
+  "campaign": "Sangre del Norte",
+  "briefing": "Año 793. Tus drakkars han tocado la costa de Northumbria y los britones se han atrincherado tras su cuartel. Ragnar te ha dado 15 minutos antes de que la marea atrape los barcos: cruza la aldea, arrasa su cuartel y no dejes que tomen tu centro urbano. Si cae tu centro urbano, la incursión habrá fracasado.",
+  "map": "arabia",
+  "map_seed": 793,
+  "starting_age": "feudal",
+  "starting_res": {},
+  "time_limit_min": 15,
+  "players": [
+    {"civ": "vikingos", "team": 0, "is_player": true, "base": [20, 20]},
+    {"civ": "britones", "team": 1, "is_player": false, "base": [120, 120]}
+  ],
+  "bots": [
+    {"player_id": 1, "difficulty": "facil", "stance": "defensivo"}
+  ],
+  "objectives": [
+    {
+      "id": "destruye_cuartel",
+      "text": "Destruye el cuartel enemigo (britones).",
+      "type": "destroy_building",
+      "building": "cuartel",
+      "owner": 1,
+      "count": 1
+    }
+  ],
+  "defeat": [
+    {
+      "id": "pierdes_tc",
+      "text": "Pierdes tu centro urbano.",
+      "type": "lose_building",
+      "building": "centro_urbano",
+      "owner": 0
+    },
+    {
+      "id": "tiempo_agotado",
+      "text": "Se agotan los 15 minutos (la marea atrapa los drakkars).",
+      "type": "timeout"
+    }
+  ],
+  "waves": {},
+  "dialogues": {
+    "intro": [
+      {"speaker": "Ragnar", "text": "Ahí está, muchacho. El cuartel britón. Quémalo hasta los cimientos."},
+      {"speaker": "Ragnar", "text": "La marea vuelve en 15 minutos. Si para entonces seguimos aquí, los barcos no saldrán. ¡Ve!"},
+      {"speaker": "Centinela", "text": "Defiende tu centro urbano a toda costa. Sin él no hay retirada."}
+    ],
+    "victory": [
+      {"speaker": "Ragnar", "text": "¡El cuartel arde! Los britones huyen a los bosques."},
+      {"speaker": "Skald", "text": "Cantarán esta incursión en el norte durante cien inviernos."}
+    ],
+    "defeat": [
+      {"speaker": "Ragnar", "text": "La marea nos ha vencido... o nuestro hogar ha caído. Retirada."},
+      {"speaker": "Skald", "text": "El mar no perdona a los lentos. Volveremos con más hachas."}
+    ]
+  },
+  "rewards": {"unlocks": "02_el_fiordo"}
+}

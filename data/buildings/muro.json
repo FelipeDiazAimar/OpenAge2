@@ -1,0 +1,10 @@
+{
+  "id": "muro",
+  "name": "Muro de Piedra",
+  "hp": 1800, "armor_melee": 3, "armor_pierce": 8,
+  "size_tiles": [1, 1],
+  "cost": {"stone": 5}, "build_time_sec": 10,
+  "trains": [],
+  "actions": [],
+  "requires_age": "feudal"
+}

@@ -1,0 +1,13 @@
+{
+  "id": "arquero_tiro_largo",
+  "name": "Arquero de Tiro Largo",
+  "hp": 35, "attack": 6, "armor_melee": 0, "armor_pierce": 0,
+  "armor_class": "arquero",
+  "range": 8.0, "sight": 8.0, "speed": 0.96,
+  "cost": {"wood": 35, "gold": 40}, "train_time_sec": 19, "pop_cost": 1,
+  "trained_at": "castillo", "hotkey": "E",
+  "unique_to": "britones",
+  "projectile_speed": 12.0, "fire_cooldown_sec": 2.0,
+  "actions": ["move", "attack", "attack_move", "patrol", "stop", "garrison"],
+  "model": "res://models/longbowman.tscn"
+}

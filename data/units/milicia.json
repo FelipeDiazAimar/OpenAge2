@@ -1,0 +1,11 @@
+{
+  "id": "milicia",
+  "name": "Milicia",
+  "hp": 45, "attack": 4, "armor_melee": 0, "armor_pierce": 1,
+  "range": 1.2, "sight": 4.0, "speed": 0.9,
+  "cost": {"food": 60, "gold": 20}, "train_time_sec": 21, "pop_cost": 1,
+  "trained_at": "cuartel", "hotkey": "Q",
+  "actions": ["move", "attack", "attack_move", "patrol", "stop", "garrison"],
+  "bonus_vs": {"edificio": 2},
+  "model": "res://models/militia.tscn"
+}

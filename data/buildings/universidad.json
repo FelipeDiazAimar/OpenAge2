@@ -1,0 +1,10 @@
+{
+  "id": "universidad",
+  "name": "Universidad",
+  "hp": 1200,
+  "size_tiles": [3, 3],
+  "cost": {"wood": 200},
+  "build_time_sec": 70,
+  "actions": ["research"],
+  "trains": []
+}

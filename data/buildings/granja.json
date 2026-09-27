@@ -1,0 +1,10 @@
+{
+  "id": "granja",
+  "name": "Granja",
+  "hp": 300,
+  "size_tiles": [2, 2],
+  "cost": {"wood": 60},
+  "build_time_sec": 10,
+  "actions": ["gather_food"],
+  "trains": []
+}

@@ -1,0 +1,31 @@
+# Godot
+.godot/
+build/
+*.tmp
+*.log
+*.TMP
+*.godot.tmp
+
+# User data / saves / debug
+user://
+*.save
+*.cfg.user
+
+# Sprites extraídos del AoE2:DE (propiedad de Microsoft).
+# Cada uno regenera los suyos con tools/extract_aoe2_sprites.py (ver docs/SPRITES.md).
+# Se versionan los manifests + script, NO los PNG (pesan y no son redistribuibles).
+assets/sprites/**/p_*.png
+assets/sprites/**/m_*.png
+assets/sprites/**/frame_*.png
+
+# Python
+__pycache__/
+*.pyc
+
+# OS / editores
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*~

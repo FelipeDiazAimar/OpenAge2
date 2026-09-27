@@ -1,0 +1,16 @@
+{
+  "id": "trebuchet",
+  "name": "Trebuchet",
+  "alias": ["trabuquete"],
+  "hp": 150, "attack": 200, "armor_melee": 0, "armor_pierce": 8,
+  "armor_class": "asedio",
+  "range": 16.0, "min_range": 3.0, "sight": 9.0, "speed": 0.5,
+  "cost": {"wood": 200, "gold": 200}, "train_time_sec": 50, "pop_cost": 3,
+  "trained_at": "castillo", "hotkey": "W",
+  "packable": true, "pack_time_sec": 3.0, "unpack_time_sec": 3.0,
+  "projectile_kind": "catapult", "projectile_speed": 12.0, "fire_cooldown_sec": 10.0,
+  "splash_radius": 1.0,
+  "actions": ["move", "attack", "attack_move", "stop", "pack", "unpack"],
+  "model": "res://models/trebuchet.tscn",
+  "model_packed": "res://models/trebuchet_packed.tscn"
+}

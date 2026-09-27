@@ -1,0 +1,8 @@
+{
+  "id": "casa",
+  "name": "Casa",
+  "hp": 550, "size_tiles": [2, 2],
+  "cost": {"wood": 25}, "build_time_sec": 20,
+  "pop_supply": 5,
+  "actions": []
+}

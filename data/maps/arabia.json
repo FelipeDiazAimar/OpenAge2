@@ -1,0 +1,8 @@
+{
+  "name": "Arabia (propia)",
+  "size_tiles": [144, 144],
+  "terrain": "desierto_hierba",
+  "start_resources": {"wood_patches": 8, "gold_piles": 6, "stone_piles": 4, "forage": 4, "boars": 2},
+  "water": false,
+  "relics": 5
+}

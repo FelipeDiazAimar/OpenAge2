@@ -1,0 +1,10 @@
+{
+  "id": "puerta",
+  "name": "Puerta",
+  "hp": 2750, "armor_melee": 3, "armor_pierce": 8,
+  "size_tiles": [2, 2],
+  "cost": {"stone": 30}, "build_time_sec": 30,
+  "trains": [],
+  "actions": ["lock_unlock"],
+  "requires_age": "feudal"
+}

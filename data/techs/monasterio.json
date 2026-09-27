@@ -1,0 +1,70 @@
+{
+  "building": "monasterio",
+  "name": "Monasterio",
+  "_comment": "Tecnologías de monje: conversión, curación, HP y velocidad. Efectos cuantificados para Techs.gd.",
+  "techs": [
+    {
+      "id": "redencion",
+      "nombre": "Redención",
+      "edad": "castillos",
+      "coste": { "gold": 475 },
+      "tiempo_sec": 60,
+      "descripcion": "Monjes pueden convertir edificios y asedio (antes solo unidades)",
+      "efectos": { "convierte_edificios": true, "convierte_asedio": true }
+    },
+    {
+      "id": "fervor",
+      "nombre": "Fervor",
+      "edad": "castillos",
+      "coste": { "gold": 140 },
+      "tiempo_sec": 40,
+      "descripcion": "Monjes +50% velocidad (0.7 -> 1.05 tiles/s)",
+      "efectos": { "velocidad_monje_bonus": 0.50, "velocidad_base": 0.7, "velocidad_final": 1.05 }
+    },
+    {
+      "id": "santidad",
+      "nombre": "Santidad",
+      "edad": "castillos",
+      "coste": { "gold": 120 },
+      "tiempo_sec": 40,
+      "descripcion": "Monjes +45 HP (30 -> 75)",
+      "efectos": { "hp_monje": 45 }
+    },
+    {
+      "id": "iluminacion",
+      "nombre": "Iluminación",
+      "edad": "imperial",
+      "coste": { "gold": 120 },
+      "tiempo_sec": 40,
+      "descripcion": "Monjes recuperan fe 50% más rápido (cooldown conversión 12s -> 8s)",
+      "efectos": { "recuperacion_fe_bonus": 0.50, "cooldown_conversion_base": 12, "cooldown_conversion_final": 8 }
+    },
+    {
+      "id": "teocracia",
+      "nombre": "Teocracia",
+      "edad": "imperial",
+      "coste": { "gold": 200 },
+      "tiempo_sec": 40,
+      "descripcion": "Solo 1 monje pierde fe al convertir en grupo",
+      "efectos": { "teocracia": true }
+    },
+    {
+      "id": "herejia",
+      "nombre": "Herejía",
+      "edad": "imperial",
+      "coste": { "gold": 1000 },
+      "tiempo_sec": 60,
+      "descripcion": "Tus unidades mueren en vez de ser convertidas (anti-monje)",
+      "efectos": { "herejia": true }
+    },
+    {
+      "id": "curacion_mejorada",
+      "nombre": "Bendición (curación mejorada)",
+      "edad": "castillos",
+      "coste": { "gold": 150 },
+      "tiempo_sec": 40,
+      "descripcion": "Monjes curan +2.5 HP/s extra (2.5 -> 5.0 HP/s, igual que bono bizantino)",
+      "efectos": { "curacion_bonus_hp_s": 2.5 }
+    }
+  ]
+}

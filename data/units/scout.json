@@ -1,0 +1,12 @@
+{
+  "id": "scout",
+  "name": "Scout a caballo",
+  "hp": 45, "attack": 3, "armor_melee": 0, "armor_pierce": 2,
+  "range": 1.2, "sight": 6.0, "speed": 1.2,
+  "cost": {"food": 80}, "train_time_sec": 30, "pop_cost": 1,
+  "trained_at": "caballeriza", "hotkey": "Q",
+  "actions": ["move", "attack", "attack_move", "patrol", "stop", "garrison"],
+  "bonus_vs": {"arquero": 2, "monje": 6},
+  "armor_class": "caballeria",
+  "model": "res://models/scout.tscn"
+}

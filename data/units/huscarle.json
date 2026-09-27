@@ -1,0 +1,14 @@
+{
+  "id": "huscarle",
+  "name": "Huscarle",
+  "hp": 65, "attack": 10, "armor_melee": 0, "armor_pierce": 6,
+  "range": 1.2, "sight": 5.0, "speed": 1.0,
+  "cost": {"food": 80, "gold": 40}, "train_time_sec": 16, "pop_cost": 1,
+  "trained_at": "cuartel", "hotkey": "E",
+  "requires_age": "castillos",
+  "upgrade_from": null,
+  "upgrade_to": null,
+  "actions": ["move", "attack", "attack_move", "patrol", "stop", "garrison"],
+  "bonus_vs": {"edificio": 2, "arquero": 2},
+  "model": "res://models/huskarl.tscn"
+}

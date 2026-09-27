@@ -1,0 +1,185 @@
+{
+  "id": "britones",
+  "name": "Britones",
+  "roof_color": "#5a6a7a",
+  "bonus": [
+    {
+      "id": "arqueria_barata",
+      "descripcion": "Arquería 10% más barata (madera y oro): arquero, guerrillero, ballestero, tiro largo",
+      "efecto": {
+        "descuento_madera": 0.10,
+        "descuento_oro": 0.10,
+        "aplica_a": ["arquero", "guerrillero", "ballestero", "arquero_tiro_largo"]
+      }
+    },
+    {
+      "id": "pastores_rapidos",
+      "descripcion": "Pastores 25% más rápidos: recolección de oveja 0.41 -> 0.51 comida/s",
+      "efecto": {
+        "recoleccion_oveja_bonus": 0.25,
+        "tasa_base": 0.41,
+        "tasa_final": 0.51
+      }
+    },
+    {
+      "id": "alcance_civ_arqueros",
+      "descripcion": "Bono civ arqueros a pie: +1 alcance en Castillos, +2 en Imperial (acumulable con Puntería)",
+      "efecto": {
+        "alcance_arqueros_castillos": 1,
+        "alcance_arqueros_imperial": 2,
+        "aplica_a": ["arquero", "ballestero", "arquero_tiro_largo"]
+      }
+    }
+  ],
+  "unique_unit": {
+    "id": "arquero_tiro_largo",
+    "name": "Arquero de tiro largo",
+    "hp": 40,
+    "hp_elite": 45,
+    "attack": 6,
+    "attack_elite": 7,
+    "range": 7,
+    "range_elite": 9,
+    "range_con_punteria": 11,
+    "armor_melee": 0,
+    "armor_pierce": 0,
+    "armor_pierce_elite": 1,
+    "cost": { "wood": 35, "gold": 40 },
+    "train_time_sec": 27,
+    "trained_at": "castillo",
+    "mejora_elite_cost": { "food": 850, "gold": 850 },
+    "mejora_elite_tiempo_sec": 90
+  },
+  "unique_techs": [
+    {
+      "id": "punteria",
+      "nombre": "Puntería (Yeomen)",
+      "edificio": "castillo",
+      "edad": "castillos",
+      "coste": { "wood": 750, "gold": 450 },
+      "tiempo_sec": 60,
+      "descripcion": "Arqueros a pie +2 alcance, +1 ataque. Torres +2 ataque.",
+      "efectos": {
+        "alcance_arqueros": 2,
+        "ataque_arqueros": 1,
+        "ataque_torres": 2,
+        "aplica_a": ["arquero", "ballestero", "arquero_tiro_largo", "guerrillero"]
+      }
+    },
+    {
+      "id": "maquina_guerra",
+      "nombre": "Máquina de guerra (Warwolf)",
+      "edificio": "castillo",
+      "edad": "imperial",
+      "coste": { "wood": 850, "gold": 750 },
+      "tiempo_sec": 75,
+      "descripcion": "Trabuquetes +50% daño, área y precisión (dispersión -50%).",
+      "efectos": {
+        "ataque_trabuquete_bonus": 0.50,
+        "area_trabuquete_bonus": 0.50,
+        "dispersion_reduccion": 0.50
+      }
+    }
+  ],
+  "team_bonus": {
+    "id": "galerias_rapidas",
+    "descripcion": "Galerías de tiro trabajan 20% más rápido (aliados)",
+    "efecto": {
+      "velocidad_arqueria": 0.20
+    }
+  },
+  "tech_tree": {
+    "cuartel": {
+      "milicia": true,
+      "hombre_de_armas": true,
+      "espadachin_mandoble": true,
+      "campeon": true,
+      "lancero": true,
+      "piquero": true,
+      "alabardero": true,
+      "huscarle": false,
+      "hachero_franco": false
+    },
+    "arqueria": {
+      "arquero": true,
+      "ballestero": true,
+      "guerrillero": true,
+      "guerrillero_elite": true,
+      "artillero_manual": false,
+      "arquero_tiro_largo": true,
+      "hachero_franco": false
+    },
+    "establo": {
+      "jinete": true,
+      "caballeria_ligera": true,
+      "husar": true,
+      "caballero": true,
+      "paladin": false,
+      "paladin_franco": false,
+      "camello": false,
+      "camello_pesado": false,
+      "catafracta": false
+    },
+    "taller_asedio": {
+      "ariete": true,
+      "ariete_blindado": true,
+      "escorpion": true,
+      "escorpion_pesado": true,
+      "mangana": true,
+      "onagro": true,
+      "canon_artillado": false,
+      "trabuquete": true
+    },
+    "monasterio": {
+      "monje": true,
+      "redencion": true,
+      "fervor": true,
+      "santidad": true,
+      "iluminacion": false,
+      "teocracia": true,
+      "herejia": false
+    },
+    "castillo": {
+      "arquero_tiro_largo": true,
+      "punteria": true,
+      "maquina_guerra": true
+    },
+    "herreria": {
+      "forja": true,
+      "hierro_fundido": true,
+      "alto_horno": true,
+      "armadura_inf_1": true,
+      "armadura_inf_2": true,
+      "armadura_inf_3": true,
+      "ataque_arq_1": true,
+      "ataque_arq_2": true,
+      "ataque_arq_3": true,
+      "armadura_arq_1": true,
+      "armadura_arq_2": true,
+      "armadura_arq_3": false,
+      "ataque_cab_1": true,
+      "ataque_cab_2": true,
+      "ataque_cab_3": true,
+      "armadura_cab_1": true,
+      "armadura_cab_2": true,
+      "armadura_cab_3": false
+    },
+    "universidad": {
+      "balistica": true,
+      "quimica": true,
+      "torre_vigilancia": true,
+      "torre_guardia": true,
+      "torre_muralla": false,
+      "arquitectura": true,
+      "muralla_fortificada": true,
+      "albanileria": true
+    },
+    "puerto": {
+      "barco_pesquero": true,
+      "galera_guerra": true,
+      "galeon": false,
+      "brulote": true
+    },
+    "no_disponible_resumen": ["artillero_manual", "paladin", "paladin_franco", "camello", "camello_pesado", "catafracta", "canon_artillado", "huscarle", "hachero_franco", "iluminacion", "herejia", "torre_muralla", "galeon", "armadura_arq_3", "armadura_cab_3"]
+  }
+}

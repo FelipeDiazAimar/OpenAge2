@@ -1,0 +1,12 @@
+{
+  "id": "lancero",
+  "name": "Lancero",
+  "hp": 45, "attack": 3, "armor_melee": 0, "armor_pierce": 0,
+  "range": 1.4, "sight": 4.0, "speed": 0.9,
+  "cost": {"food": 35, "wood": 25}, "train_time_sec": 22, "pop_cost": 1,
+  "trained_at": "cuartel", "hotkey": "W",
+  "requires_age": "feudal",
+  "actions": ["move", "attack", "attack_move", "patrol", "stop", "garrison"],
+  "bonus_vs": {"caballeria": 3},
+  "model": "res://models/spearman.tscn"
+}

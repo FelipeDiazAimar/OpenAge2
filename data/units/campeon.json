@@ -1,0 +1,16 @@
+{
+  "id": "campeon",
+  "name": "Campeón",
+  "hp": 75, "attack": 13, "armor_melee": 1, "armor_pierce": 1,
+  "range": 1.2, "sight": 4.0, "speed": 0.9,
+  "cost": {"food": 60, "gold": 20}, "train_time_sec": 21, "pop_cost": 1,
+  "trained_at": "cuartel", "hotkey": "Q",
+  "requires_age": "imperial",
+  "upgrade_from": "espadachin_mandoble",
+  "upgrade_to": null,
+  "upgrade_cost": {"food": 300, "gold": 200},
+  "upgrade_research_time_sec": 100,
+  "actions": ["move", "attack", "attack_move", "patrol", "stop", "garrison"],
+  "bonus_vs": {"edificio": 4},
+  "model": "res://models/champion.tscn"
+}

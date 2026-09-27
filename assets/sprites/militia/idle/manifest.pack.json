@@ -1,0 +1,2173 @@
+{
+ "source": "u_inf_militia_idleA_x1",
+ "dirs": 16,
+ "per_dir": 30,
+ "kept_per_dir": 15,
+ "step": 2,
+ "size": [
+  38,
+  50
+ ],
+ "frames": [
+  {
+   "png": "p_000.png",
+   "dir": 0,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_001.png",
+   "dir": 0,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_002.png",
+   "dir": 0,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_003.png",
+   "dir": 0,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_004.png",
+   "dir": 0,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_005.png",
+   "dir": 0,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_006.png",
+   "dir": 0,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_007.png",
+   "dir": 0,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_008.png",
+   "dir": 0,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_009.png",
+   "dir": 0,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_010.png",
+   "dir": 0,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_011.png",
+   "dir": 0,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_012.png",
+   "dir": 0,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_013.png",
+   "dir": 0,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_014.png",
+   "dir": 0,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_015.png",
+   "dir": 1,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_016.png",
+   "dir": 1,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_017.png",
+   "dir": 1,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_018.png",
+   "dir": 1,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_019.png",
+   "dir": 1,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_020.png",
+   "dir": 1,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_021.png",
+   "dir": 1,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_022.png",
+   "dir": 1,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_023.png",
+   "dir": 1,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_024.png",
+   "dir": 1,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_025.png",
+   "dir": 1,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_026.png",
+   "dir": 1,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_027.png",
+   "dir": 1,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_028.png",
+   "dir": 1,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_029.png",
+   "dir": 1,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_030.png",
+   "dir": 2,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_031.png",
+   "dir": 2,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_032.png",
+   "dir": 2,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_033.png",
+   "dir": 2,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_034.png",
+   "dir": 2,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_035.png",
+   "dir": 2,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_036.png",
+   "dir": 2,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_037.png",
+   "dir": 2,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_038.png",
+   "dir": 2,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_039.png",
+   "dir": 2,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_040.png",
+   "dir": 2,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_041.png",
+   "dir": 2,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_042.png",
+   "dir": 2,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_043.png",
+   "dir": 2,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_044.png",
+   "dir": 2,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_045.png",
+   "dir": 3,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_046.png",
+   "dir": 3,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_047.png",
+   "dir": 3,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_048.png",
+   "dir": 3,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_049.png",
+   "dir": 3,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_050.png",
+   "dir": 3,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_051.png",
+   "dir": 3,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_052.png",
+   "dir": 3,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_053.png",
+   "dir": 3,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_054.png",
+   "dir": 3,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_055.png",
+   "dir": 3,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_056.png",
+   "dir": 3,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_057.png",
+   "dir": 3,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_058.png",
+   "dir": 3,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_059.png",
+   "dir": 3,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_060.png",
+   "dir": 4,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_061.png",
+   "dir": 4,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_062.png",
+   "dir": 4,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_063.png",
+   "dir": 4,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_064.png",
+   "dir": 4,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_065.png",
+   "dir": 4,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_066.png",
+   "dir": 4,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_067.png",
+   "dir": 4,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_068.png",
+   "dir": 4,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_069.png",
+   "dir": 4,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_070.png",
+   "dir": 4,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_071.png",
+   "dir": 4,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_072.png",
+   "dir": 4,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_073.png",
+   "dir": 4,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_074.png",
+   "dir": 4,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_075.png",
+   "dir": 5,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_076.png",
+   "dir": 5,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_077.png",
+   "dir": 5,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_078.png",
+   "dir": 5,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_079.png",
+   "dir": 5,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_080.png",
+   "dir": 5,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_081.png",
+   "dir": 5,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_082.png",
+   "dir": 5,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_083.png",
+   "dir": 5,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_084.png",
+   "dir": 5,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_085.png",
+   "dir": 5,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_086.png",
+   "dir": 5,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_087.png",
+   "dir": 5,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_088.png",
+   "dir": 5,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_089.png",
+   "dir": 5,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_090.png",
+   "dir": 6,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_091.png",
+   "dir": 6,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_092.png",
+   "dir": 6,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_093.png",
+   "dir": 6,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_094.png",
+   "dir": 6,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_095.png",
+   "dir": 6,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_096.png",
+   "dir": 6,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_097.png",
+   "dir": 6,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_098.png",
+   "dir": 6,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_099.png",
+   "dir": 6,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_100.png",
+   "dir": 6,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_101.png",
+   "dir": 6,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_102.png",
+   "dir": 6,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_103.png",
+   "dir": 6,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_104.png",
+   "dir": 6,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_105.png",
+   "dir": 7,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_106.png",
+   "dir": 7,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_107.png",
+   "dir": 7,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_108.png",
+   "dir": 7,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_109.png",
+   "dir": 7,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_110.png",
+   "dir": 7,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_111.png",
+   "dir": 7,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_112.png",
+   "dir": 7,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_113.png",
+   "dir": 7,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_114.png",
+   "dir": 7,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_115.png",
+   "dir": 7,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_116.png",
+   "dir": 7,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_117.png",
+   "dir": 7,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_118.png",
+   "dir": 7,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_119.png",
+   "dir": 7,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_120.png",
+   "dir": 8,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_121.png",
+   "dir": 8,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_122.png",
+   "dir": 8,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_123.png",
+   "dir": 8,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_124.png",
+   "dir": 8,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_125.png",
+   "dir": 8,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_126.png",
+   "dir": 8,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_127.png",
+   "dir": 8,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_128.png",
+   "dir": 8,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_129.png",
+   "dir": 8,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_130.png",
+   "dir": 8,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_131.png",
+   "dir": 8,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_132.png",
+   "dir": 8,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_133.png",
+   "dir": 8,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_134.png",
+   "dir": 8,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_135.png",
+   "dir": 9,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_136.png",
+   "dir": 9,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_137.png",
+   "dir": 9,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_138.png",
+   "dir": 9,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_139.png",
+   "dir": 9,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_140.png",
+   "dir": 9,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_141.png",
+   "dir": 9,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_142.png",
+   "dir": 9,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_143.png",
+   "dir": 9,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_144.png",
+   "dir": 9,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_145.png",
+   "dir": 9,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_146.png",
+   "dir": 9,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_147.png",
+   "dir": 9,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_148.png",
+   "dir": 9,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_149.png",
+   "dir": 9,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_150.png",
+   "dir": 10,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_151.png",
+   "dir": 10,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_152.png",
+   "dir": 10,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_153.png",
+   "dir": 10,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_154.png",
+   "dir": 10,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_155.png",
+   "dir": 10,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_156.png",
+   "dir": 10,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_157.png",
+   "dir": 10,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_158.png",
+   "dir": 10,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_159.png",
+   "dir": 10,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_160.png",
+   "dir": 10,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_161.png",
+   "dir": 10,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_162.png",
+   "dir": 10,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_163.png",
+   "dir": 10,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_164.png",
+   "dir": 10,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_165.png",
+   "dir": 11,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_166.png",
+   "dir": 11,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_167.png",
+   "dir": 11,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_168.png",
+   "dir": 11,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_169.png",
+   "dir": 11,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_170.png",
+   "dir": 11,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_171.png",
+   "dir": 11,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_172.png",
+   "dir": 11,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_173.png",
+   "dir": 11,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_174.png",
+   "dir": 11,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_175.png",
+   "dir": 11,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_176.png",
+   "dir": 11,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_177.png",
+   "dir": 11,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_178.png",
+   "dir": 11,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_179.png",
+   "dir": 11,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_180.png",
+   "dir": 12,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_181.png",
+   "dir": 12,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_182.png",
+   "dir": 12,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_183.png",
+   "dir": 12,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_184.png",
+   "dir": 12,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_185.png",
+   "dir": 12,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_186.png",
+   "dir": 12,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_187.png",
+   "dir": 12,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_188.png",
+   "dir": 12,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_189.png",
+   "dir": 12,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_190.png",
+   "dir": 12,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_191.png",
+   "dir": 12,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_192.png",
+   "dir": 12,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_193.png",
+   "dir": 12,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_194.png",
+   "dir": 12,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_195.png",
+   "dir": 13,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_196.png",
+   "dir": 13,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_197.png",
+   "dir": 13,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_198.png",
+   "dir": 13,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_199.png",
+   "dir": 13,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_200.png",
+   "dir": 13,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_201.png",
+   "dir": 13,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_202.png",
+   "dir": 13,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_203.png",
+   "dir": 13,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_204.png",
+   "dir": 13,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_205.png",
+   "dir": 13,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_206.png",
+   "dir": 13,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_207.png",
+   "dir": 13,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_208.png",
+   "dir": 13,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_209.png",
+   "dir": 13,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_210.png",
+   "dir": 14,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_211.png",
+   "dir": 14,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_212.png",
+   "dir": 14,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_213.png",
+   "dir": 14,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_214.png",
+   "dir": 14,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_215.png",
+   "dir": 14,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_216.png",
+   "dir": 14,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_217.png",
+   "dir": 14,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_218.png",
+   "dir": 14,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_219.png",
+   "dir": 14,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_220.png",
+   "dir": 14,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_221.png",
+   "dir": 14,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_222.png",
+   "dir": 14,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_223.png",
+   "dir": 14,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_224.png",
+   "dir": 14,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_225.png",
+   "dir": 15,
+   "sub": 0,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_226.png",
+   "dir": 15,
+   "sub": 1,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_227.png",
+   "dir": 15,
+   "sub": 2,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_228.png",
+   "dir": 15,
+   "sub": 3,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_229.png",
+   "dir": 15,
+   "sub": 4,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_230.png",
+   "dir": 15,
+   "sub": 5,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_231.png",
+   "dir": 15,
+   "sub": 6,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_232.png",
+   "dir": 15,
+   "sub": 7,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_233.png",
+   "dir": 15,
+   "sub": 8,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_234.png",
+   "dir": 15,
+   "sub": 9,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_235.png",
+   "dir": 15,
+   "sub": 10,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_236.png",
+   "dir": 15,
+   "sub": 11,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_237.png",
+   "dir": 15,
+   "sub": 12,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_238.png",
+   "dir": 15,
+   "sub": 13,
+   "hotspot": [
+    19,
+    42
+   ]
+  },
+  {
+   "png": "p_239.png",
+   "dir": 15,
+   "sub": 14,
+   "hotspot": [
+    19,
+    42
+   ]
+  }
+ ]
+}

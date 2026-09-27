@@ -1,0 +1,62 @@
+{
+  "_comment": "OpenAge-LAN campaña 'Sangre del Norte' 3/3. Secuencial: 1) asegura 3 reliquias con tus monjes, 2) levanta la maravilla. Sin límite de tiempo. Derrota: cae tu centro urbano.",
+  "id": "03_el_conquistador",
+  "order": 3,
+  "name": "03 · El Conquistador",
+  "campaign": "Sangre del Norte",
+  "briefing": "El norte es tuyo, pero los dioses piden más: las viejas piedras sagradas (3 reliquias) y una maravilla que el mundo recuerde. Primero envía a tus monjes a recoger 3 reliquias y llévalas al monasterio; después, en la Edad Imperial, levanta la maravilla. Hazlo en este orden: sin la bendición de las reliquias, nadie seguirá tu estandarte. Si tu centro urbano cae, la leyenda muere contigo.",
+  "map": "arabia",
+  "map_seed": 866,
+  "starting_age": "castillos",
+  "starting_res": {"wood": 600, "food": 600, "gold": 400, "stone": 400},
+  "time_limit_min": 0,
+  "players": [
+    {"civ": "vikingos", "team": 0, "is_player": true, "base": [72, 72]},
+    {"civ": "britones", "team": 1, "is_player": false, "base": [120, 120]}
+  ],
+  "bots": [
+    {"player_id": 1, "difficulty": "dificil", "stance": "agresivo"}
+  ],
+  "objectives": [
+    {
+      "id": "reliquias_3",
+      "text": "Asegura 3 reliquias en tu monasterio.",
+      "type": "collect_relic",
+      "count": 3
+    },
+    {
+      "id": "levanta_maravilla",
+      "text": "Levanta la maravilla (Edad Imperial).",
+      "type": "build_building",
+      "building": "maravilla",
+      "owner": 0,
+      "count": 1
+    }
+  ],
+  "defeat": [
+    {
+      "id": "pierdes_tc",
+      "text": "Pierdes tu centro urbano.",
+      "type": "lose_building",
+      "building": "centro_urbano",
+      "owner": 0
+    }
+  ],
+  "waves": {},
+  "dialogues": {
+    "intro": [
+      {"speaker": "Skald", "text": "Tres piedras sagradas duermen en estas tierras. Tráelas al monasterio."},
+      {"speaker": "Ragnar", "text": "Y cuando los dioses sonrían, alzaremos una maravilla que se vea desde el mar."},
+      {"speaker": "Centinela", "text": "Orden estricto: primero las 3 reliquias, después la maravilla. El centro urbano no debe caer."}
+    ],
+    "victory": [
+      {"speaker": "Skald", "text": "¡Las reliquias brillan y la maravilla toca el cielo!"},
+      {"speaker": "Ragnar", "text": "Del norte al sur, todos sabrán tu nombre, Conquistador."}
+    ],
+    "defeat": [
+      {"speaker": "Centinela", "text": "El centro urbano ha caído y la leyenda muere aquí."},
+      {"speaker": "Skald", "text": "Los dioses callan... esta vez."}
+    ]
+  },
+  "rewards": {"unlocks": ""}
+}

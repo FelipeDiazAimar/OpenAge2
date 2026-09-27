@@ -1,0 +1,61 @@
+{
+  "_comment": "OpenAge-LAN campaña 'Sangre del Norte' 2/3. Supervivencia: defiende tu centro urbano 20 minutos contra oleadas britonas y francas (5 oleadas, primera al minuto 3, resto cada 4). Derrota: cae el centro urbano.",
+  "id": "02_el_fiordo",
+  "order": 2,
+  "name": "02 · El Fiordo",
+  "campaign": "Sangre del Norte",
+  "briefing": "Los britones han pedido ayuda a los francos y ahora las velas enemigas cierran el fiordo. Solo tienes tu centro urbano y lo que puedas levantar a su alrededor. Aguanta 20 minutos: llegarán 5 oleadas (la primera al minuto 3, luego una cada 4 minutos). Si tu centro urbano cae, todo habrá terminado. Repara, guarece a los aldeanos con la campana y contraataca entre oleada y oleada.",
+  "map": "arabia",
+  "map_seed": 802,
+  "starting_age": "feudal",
+  "starting_res": {"wood": 400, "food": 400, "gold": 200, "stone": 300},
+  "time_limit_min": 20,
+  "players": [
+    {"civ": "vikingos", "team": 0, "is_player": true, "base": [72, 72]},
+    {"civ": "britones", "team": 1, "is_player": false, "base": [20, 120]},
+    {"civ": "francos", "team": 1, "is_player": false, "base": [120, 20]}
+  ],
+  "bots": [
+    {"player_id": 1, "difficulty": "normal", "stance": "agresivo"},
+    {"player_id": 2, "difficulty": "normal", "stance": "agresivo"}
+  ],
+  "objectives": [
+    {
+      "id": "aguanta_20",
+      "text": "Defiende tu centro urbano durante 20 minutos (5 oleadas).",
+      "type": "survive_min",
+      "minutes": 20
+    }
+  ],
+  "defeat": [
+    {
+      "id": "pierdes_tc",
+      "text": "Pierdes tu centro urbano.",
+      "type": "lose_building",
+      "building": "centro_urbano",
+      "owner": 0
+    }
+  ],
+  "waves": {
+    "interval_min": 4,
+    "count": 5,
+    "first_min": 3,
+    "warning": "¡Velas enemigas en el fiordo! ¡A las armas!"
+  },
+  "dialogues": {
+    "intro": [
+      {"speaker": "Ragnar", "text": "Nos han encerrado en el fiordo. Bien: así no podrán huir."},
+      {"speaker": "Centinela", "text": "Cinco oleadas, la primera al minuto 3. Que no toquen el centro urbano."},
+      {"speaker": "Ragnar", "text": "Toca la campana para guarecer a los aldeanos cuando ataquen. Aguanta 20 minutos."}
+    ],
+    "victory": [
+      {"speaker": "Centinela", "text": "¡Se retiran! El fiordo es nuestro."},
+      {"speaker": "Ragnar", "text": "Veinte minutos contra dos ejércitos. Hasta Odín habrá mirado."}
+    ],
+    "defeat": [
+      {"speaker": "Centinela", "text": "¡El centro urbano ha caído!"},
+      {"speaker": "Ragnar", "text": "El fiordo se tiñe de rojo... el nuestro. Nos reagruparemos."}
+    ]
+  },
+  "rewards": {"unlocks": "03_el_conquistador"}
+}

@@ -1,0 +1,16 @@
+{
+  "id": "espadachin_mandoble",
+  "name": "Espadachín de Mandoble",
+  "hp": 60, "attack": 9, "armor_melee": 1, "armor_pierce": 1,
+  "range": 1.2, "sight": 4.0, "speed": 0.9,
+  "cost": {"food": 60, "gold": 20}, "train_time_sec": 21, "pop_cost": 1,
+  "trained_at": "cuartel", "hotkey": "Q",
+  "requires_age": "castillos",
+  "upgrade_from": "hombre_armas",
+  "upgrade_to": "campeon",
+  "upgrade_cost": {"food": 200, "gold": 65},
+  "upgrade_research_time_sec": 45,
+  "actions": ["move", "attack", "attack_move", "patrol", "stop", "garrison"],
+  "bonus_vs": {"edificio": 3},
+  "model": "res://models/longswordsman.tscn"
+}

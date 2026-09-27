@@ -1,0 +1,72 @@
+# Exporta OpenAge-LAN (win + linux) con Godot 4.4. Todo gratis: runner
+# ubuntu-latest + descargas oficiales + actions/upload-artifact (sin firmas).
+name: Export (Godot 4.4)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  GODOT_VERSION: 4.4
+  GODOT_STATUS: stable
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instalar Godot 4.4 + templates (gratis, oficial)
+        run: |
+          set -eux
+          GODOT_ZIP="Godot_v${GODOT_VERSION}-${GODOT_STATUS}_linux.x86_64.zip"
+          TPL="Godot_v${GODOT_VERSION}-${GODOT_STATUS}_export_templates.tpz"
+          wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-${GODOT_STATUS}/${GODOT_ZIP}" -O /tmp/godot.zip
+          unzip -q -o /tmp/godot.zip -d /tmp/godot
+          sudo install -m 0755 "/tmp/godot/Godot_v${GODOT_VERSION}-${GODOT_STATUS}_linux.x86_64" /usr/local/bin/godot
+          godot --version
+          wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-${GODOT_STATUS}/${TPL}" -O /tmp/templates.tpz
+          mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_STATUS}
+          unzip -q -o /tmp/templates.tpz -d /tmp/godot_tpl
+          cp /tmp/godot_tpl/templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_STATUS}/
+          ls ~/.local/share/godot/export_templates/${GODOT_VERSION}.${GODOT_STATUS}/ | grep -E "windows_64|linux_64"
+
+      - name: Verificar preset sin firma (codesign off)
+        run: |
+          grep -q 'export_path="build/OpenAge-LAN.exe"' export_presets.cfg
+          grep -q 'export_path="build/OpenAge-LAN.x86_64"' export_presets.cfg
+          grep -q 'codesign/enable=false' export_presets.cfg
+
+      - name: Exportar Windows + Linux
+        run: |
+          set -eux
+          mkdir -p build
+          godot --headless --path . --import
+          godot --headless --path . --export-release "Windows Desktop" build/OpenAge-LAN.exe
+          godot --headless --path . --export-release "Linux" build/OpenAge-LAN.x86_64
+          cp README.md build/ || true
+          cp docs/*.md build/ || true
+          mkdir -p build/data && cp data/* build/data/ || true
+          ls -la build/
+
+      - name: Subir artifact Windows
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenAge-LAN-Windows
+          path: |
+            build/OpenAge-LAN.exe
+            build/*.pck
+            build/*.md
+            build/data/
+
+      - name: Subir artifact Linux
+        uses: actions/upload-artifact@v4
+        with:
+          name: OpenAge-LAN-Linux
+          path: |
+            build/OpenAge-LAN.x86_64
+            build/*.pck
+            build/*.md
+            build/data/

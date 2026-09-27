@@ -1,0 +1,15 @@
+{
+  "id": "paladin_franco",
+  "name": "Paladín franco",
+  "hp": 192, "attack": 14, "armor_melee": 2, "armor_pierce": 3,
+  "range": 1.2, "sight": 5.0, "speed": 1.35,
+  "cost": {"food": 60, "gold": 75}, "train_time_sec": 30, "pop_cost": 1,
+  "trained_at": "caballeriza", "hotkey": "E",
+  "actions": ["move", "attack", "attack_move", "patrol", "stop", "garrison"],
+  "bonus_vs": {"arquero": 3},
+  "armor_class": "caballeria",
+  "civ_unica": "francos",
+  "civ_bonus_hp": 32,
+  "upgrade_from": "jinete",
+  "model": "res://models/paladin_franco.tscn"
+}

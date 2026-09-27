@@ -1,0 +1,10 @@
+{
+  "id": "monje",
+  "name": "Monje",
+  "hp": 30, "attack": 0, "armor_melee": 0, "armor_pierce": 0,
+  "range": 8.0, "sight": 9.0, "speed": 0.7,
+  "cost": {"gold": 100}, "train_time_sec": 51, "pop_cost": 1,
+  "trained_at": "monasterio", "hotkey": "Q",
+  "actions": ["move", "convert", "heal", "pick_relic"],
+  "model": "res://models/monk.tscn"
+}
