@@ -22,3 +22,68 @@ func test_tile_conversions() -> void:
 	assert_eq(Grid.tile_of(Vector2i(2999, 1000)), Vector2i(2, 1))
 	assert_eq(Grid.tile_of(Vector2i(-1, -1000)), Vector2i(-1, -1))
 	assert_eq(Grid.center_of(Vector2i(3, 4)), Vector2i(3500, 4500))
+
+
+const Pathfinder := preload("res://engine/sim/Pathfinder.gd")
+
+
+func test_straight_path() -> void:
+	var g := Grid.new(10, 10)
+	var p := Pathfinder.find_path(g, Vector2i(1, 1), Vector2i(4, 1))
+	assert_eq(p, [Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1)])
+	assert_eq(Pathfinder.find_path(g, Vector2i(1, 1), Vector2i(1, 1)), [])
+
+
+func test_path_around_wall_without_corner_cutting() -> void:
+	var g := Grid.new(10, 10)
+	g.block_rect(Vector2i(3, 0), Vector2i(1, 6))
+	var p := Pathfinder.find_path(g, Vector2i(1, 2), Vector2i(5, 2))
+	assert_eq(p[p.size() - 1], Vector2i(5, 2))
+	var prev := Vector2i(1, 2)
+	for c in p:
+		assert_true(g.is_walkable(c), "pisa bloqueada: %s" % c)
+		var d: Vector2i = c - prev
+		if d.x != 0 and d.y != 0:
+			assert_true(g.is_walkable(Vector2i(prev.x + d.x, prev.y)) and g.is_walkable(Vector2i(prev.x, prev.y + d.y)), "corta esquina en %s" % c)
+		prev = c
+
+
+func test_blocked_goal_goes_to_nearest() -> void:
+	var g := Grid.new(10, 10)
+	g.block_rect(Vector2i(4, 4), Vector2i(3, 3))
+	assert_eq(Pathfinder.nearest_walkable(g, Vector2i(5, 5)), Vector2i(5, 3))
+	var p := Pathfinder.find_path(g, Vector2i(0, 5), Vector2i(5, 5))
+	assert_true(g.is_walkable(p[p.size() - 1]))
+	assert_eq(p[p.size() - 1], Pathfinder.nearest_walkable(g, Vector2i(5, 5)))
+	var full := Grid.new(2, 2)
+	full.block_rect(Vector2i(0, 0), Vector2i(2, 2))
+	assert_eq(Pathfinder.nearest_walkable(full, Vector2i(0, 0)), Vector2i(-1, -1))
+
+
+func test_start_on_blocked_edge_can_leave() -> void:
+	var g := Grid.new(10, 10)
+	g.block_rect(Vector2i(2, 2), Vector2i(3, 3))
+	var p := Pathfinder.find_path(g, Vector2i(4, 3), Vector2i(8, 3))
+	assert_eq(p[p.size() - 1], Vector2i(8, 3))
+
+
+func test_unreachable_goes_closest() -> void:
+	var g := Grid.new(12, 12)
+	# anillo cerrado alrededor de (8,8)
+	for x in range(6, 11):
+		g.set_blocked(Vector2i(x, 6), true)
+		g.set_blocked(Vector2i(x, 10), true)
+	for y in range(6, 11):
+		g.set_blocked(Vector2i(6, y), true)
+		g.set_blocked(Vector2i(10, y), true)
+	var p := Pathfinder.find_path(g, Vector2i(1, 1), Vector2i(8, 8))
+	assert_false(p.is_empty())
+	var end: Vector2i = p[p.size() - 1]
+	assert_true(g.is_walkable(end))
+	assert_true(absi(end.x - 8) + absi(end.y - 8) <= 4, "termina pegado al anillo: %s" % end)
+
+
+func test_path_is_deterministic() -> void:
+	var g := Grid.new(30, 30)
+	g.block_rect(Vector2i(10, 5), Vector2i(2, 20))
+	assert_eq(Pathfinder.find_path(g, Vector2i(2, 15), Vector2i(25, 15)), Pathfinder.find_path(g, Vector2i(2, 15), Vector2i(25, 15)))
