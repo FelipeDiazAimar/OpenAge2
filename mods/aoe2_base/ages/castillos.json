@@ -11,8 +11,10 @@
   "prerequisite_buildings": {
     "any_of": [
       "herreria",
-      "mercado"
+      "mercado",
+      "arqueria",
+      "establo"
     ],
-    "count": 1
+    "count": 2
   }
 }

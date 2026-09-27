@@ -40,7 +40,141 @@ func add_player(pid: int, civ: String, team: int) -> void:
 	var res := {}
 	for k in START_RES:
 		res[k] = int(START_RES[k]) * FP.SCALE
-	players.append({"id": pid, "civ": civ, "team": team, "defs": PlayerDefs.new(registry.defs, civ), "res": res})
+	# age: índice de la edad actual; pending: techs/edades encoladas (no se repiten).
+	players.append({"id": pid, "civ": civ, "team": team, "defs": PlayerDefs.new(registry.defs, civ), "res": res,
+		"age": 0, "pending": {}})
+
+
+func age_of(pid: int) -> int:
+	return int(players[pid]["age"])
+
+
+func researched(pid: int) -> Array[String]:
+	return players[pid]["defs"].researched
+
+
+## Coste de datos ({recurso: número}) en milésimas.
+static func cost_milli(cost: Dictionary) -> Dictionary:
+	var out := {}
+	var keys: Array = cost.keys()
+	keys.sort()
+	for k in keys:
+		out[str(k)] = FP.from_data(float(cost[k]))
+	return out
+
+
+func can_afford(pid: int, cost: Dictionary) -> bool:
+	var r: Dictionary = players[pid]["res"]
+	var c := cost_milli(cost)
+	for k in c:
+		if int(r.get(k, 0)) < int(c[k]):
+			return false
+	return true
+
+
+func pay(pid: int, cost: Dictionary) -> void:
+	var c := cost_milli(cost)
+	for k in c:
+		add_res(pid, k, -int(c[k]))
+
+
+func refund(pid: int, cost: Dictionary) -> void:
+	var c := cost_milli(cost)
+	for k in c:
+		add_res(pid, k, int(c[k]))
+
+
+## "" si el jugador puede usar def (unidad, edificio, tech); si no, el motivo.
+func requirements_met(pid: int, def: Dictionary) -> String:
+	var d = players[pid]["defs"]
+	var id := str(def.get("id", ""))
+	if not d.is_available(id):
+		return "no disponible para esta civilización"
+	var req: Dictionary = def.get("requires", {})
+	if req.has("age"):
+		var a: Dictionary = registry.get_def(str(req["age"]))
+		if int(a.get("index", 0)) > age_of(pid):
+			return "requiere %s" % str(a.get("name", req["age"]))
+	for t in req.get("techs", []):
+		if not d.researched.has(str(t)):
+			return "requiere %s" % str(registry.get_def(str(t)).get("name", t))
+	return ""
+
+
+func footprint_of(def: Dictionary) -> Vector2i:
+	return Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
+
+
+## "" si pid puede colocar un cimiento de def_id con esquina en tile.
+func can_place(pid: int, def_id: String, tile: Vector2i) -> String:
+	if pid < 0 or pid >= players.size():
+		return "jugador inválido"
+	var def: Dictionary = players[pid]["defs"].get_def(def_id)
+	if def.is_empty() or str(def.get("type", "")) != "building" or bool(def.get("abstract", false)):
+		return "no es un edificio"
+	var req := requirements_met(pid, def)
+	if req != "":
+		return req
+	if not can_afford(pid, def.get("cost", {})):
+		return "recursos insuficientes"
+	var size := footprint_of(def)
+	for y in size.y:
+		for x in size.x:
+			if not grid.is_walkable(tile + Vector2i(x, y)):
+				return "lugar ocupado"
+	for id in _ids_in_rect(tile, size):
+		if world.has_ability(id, "ResourceSource") and not world.has_ability(id, "Move"):
+			return "lugar ocupado" # carcasas
+	return ""
+
+
+## Entidades cuya casilla cae dentro del rectángulo (orden por id).
+func _ids_in_rect(tile: Vector2i, size: Vector2i) -> Array[int]:
+	var out: Array[int] = []
+	var center := tile * FP.SCALE + size * (FP.SCALE / 2)
+	for id in world.spatial.query_radius(center, maxi(size.x, size.y) * FP.SCALE):
+		var t := Grid.tile_of(world.entities[id]["pos"])
+		if t.x >= tile.x and t.y >= tile.y and t.x < tile.x + size.x and t.y < tile.y + size.y:
+			out.append(id)
+	return out
+
+
+## Edificio terminado (no es cimiento).
+func is_built(id: int) -> bool:
+	return world.entities.has(id) and not world.has_ability(id, "Foundation")
+
+
+## Cimiento: el edificio con Foundation y 1 HP; no funciona hasta terminarlo.
+## Las unidades dentro de la huella salen a la casilla libre más cercana.
+func place_foundation(pid: int, def_id: String, tile: Vector2i) -> int:
+	var def: Dictionary = players[pid]["defs"].get_def(def_id)
+	var size := footprint_of(def)
+	var inside := _ids_in_rect(tile, size)
+	var id := spawn(def_id, pid, tile)
+	if id < 0:
+		return -1
+	var total := int(round(float(def["build_time"]) * World.TICK_RATE)) * 3
+	world.add_component(id, "Foundation", {"params": {}, "progress": 0, "total": maxi(3, total)})
+	var hp: Dictionary = world.comp(id, "Hitpoints")
+	if not hp.is_empty():
+		hp["hp"] = 1
+	for u in inside:
+		if world.has_ability(u, "Move"):
+			_eject(u, tile, size)
+	return id
+
+
+func _eject(id: int, tile: Vector2i, size: Vector2i) -> void:
+	var from := Grid.tile_of(world.entities[id]["pos"])
+	for off in spread_offsets(400):
+		var t: Vector2i = from + off / FP.SCALE
+		var inside := t.x >= tile.x and t.y >= tile.y and t.x < tile.x + size.x and t.y < tile.y + size.y
+		if not inside and grid.is_walkable(t):
+			world.set_pos(id, Grid.center_of(t))
+			var m: Dictionary = world.comp(id, "Move")
+			(m["waypoints"] as Array).clear()
+			m["moving"] = false
+			return
 
 
 func def_for(id: int) -> Dictionary:
@@ -158,7 +292,7 @@ func population(pid: int) -> Vector2i:
 		if int(e["owner"]) == pid and str(e["type"]) == "unit":
 			used += int(def_for(id).get("pop_cost", 0))
 	for id in world.ids_with("ProvidesPop"):
-		if int(world.entities[id]["owner"]) == pid:
+		if int(world.entities[id]["owner"]) == pid and is_built(id):
 			cap += int(world.comp(id, "ProvidesPop")["params"]["amount"])
 	return Vector2i(used, mini(cap, POP_MAX))
 
@@ -240,6 +374,8 @@ func _apply(c: Dictionary) -> void:
 			_cmd_attack(int(c["pid"]), c["payload"])
 		"stop":
 			_cmd_stop(int(c["pid"]), c["payload"])
+		"place":
+			_cmd_place(int(c["pid"]), c["payload"])
 		"debug_spawn":
 			_cmd_debug_spawn(c["payload"])
 
@@ -317,6 +453,18 @@ func _cmd_stop(pid: int, payload: Dictionary) -> void:
 		var m: Dictionary = world.comp(id, "Move")
 		(m["waypoints"] as Array).clear()
 		m["moving"] = false
+
+
+func _cmd_place(pid: int, payload: Dictionary) -> void:
+	var t: Variant = payload.get("tile")
+	if not (t is Array) or t.size() != 2 or not _num_ok(t[0]) or not _num_ok(t[1]):
+		return
+	var def_id := str(payload.get("def", ""))
+	var tile := Vector2i(int(t[0]), int(t[1]))
+	if can_place(pid, def_id, tile) != "":
+		return
+	pay(pid, players[pid]["defs"].get_def(def_id).get("cost", {}))
+	place_foundation(pid, def_id, tile)
 
 
 ## Tropas de prueba (solo con debug_enabled): n unidades cerca de pos.

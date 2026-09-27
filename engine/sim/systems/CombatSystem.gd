@@ -63,8 +63,8 @@ static func step(sim) -> void:
 	for id in w.ids_with("Attack"):
 		# Un golpe de este mismo bucle puede haber matado a id (o dejarlo como
 		# carcasa, sin Attack).
-		if not w.has_ability(id, "Attack"):
-			continue
+		if not w.has_ability(id, "Attack") or w.has_ability(id, "Foundation"):
+			continue # (los cimientos no disparan)
 		var a: Dictionary = w.comp(id, "Attack")
 		if int(a["cooldown"]) > 0:
 			a["cooldown"] = int(a["cooldown"]) - 1

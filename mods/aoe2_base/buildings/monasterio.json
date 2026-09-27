@@ -11,6 +11,9 @@
     3,
     3
   ],
+  "requires": {
+    "age": "castillos"
+  },
   "graphics": {
     "idle": "sprite:buildings/monastery/b_west_monastery_age3_x1"
   },

@@ -216,7 +216,7 @@ static func _nearest_dropsite(sim, owner: int, res: String, pos: Vector2i) -> in
 	var best := -1
 	var best_d := 0
 	for d in w.ids_with("DropSite"):
-		if int(w.entities[d]["owner"]) != owner:
+		if int(w.entities[d]["owner"]) != owner or w.has_ability(d, "Foundation"):
 			continue
 		if not (w.comp(d, "DropSite")["params"]["accepts"] as Array).has(res):
 			continue
