@@ -5,6 +5,8 @@ Sin internet, sin servidores, sin DLCs: **8 jugadores en red local (1 host + 7)*
 
 ## Estado final — qué está implementado
 
+> **Reestructura en curso** (`docs/superpowers/`): motor nuevo por habilidades (`engine/`, `mods/aoe2_base`) con render 2D isométrico — menú "Partida (nuevo motor, beta)". El juego descrito abajo sigue siendo el modo por defecto hasta la fase F5.
+
 **Simulación determinista (lockstep 10 Hz, `core/`):**
 - `GameManager.gd` (500+ líneas): economía por jugador, edades (Alta Edad Media → Feudal → Castillos → Imperial), población y tope (casa +5, máx 200), victoria por equipos, reembolsos.
 - `SimRNG.gd` + `SimAPI.gd`: prohibido `randf/Time/física` en lógica; comandos via `SimAPI.queue_command(pid, tipo, payload)`. Tipos válidos: `move, attack, attack_move, patrol, stop, gather, build, repair, garrison, ungarrison, bell, convert, heal, trade, train, research, set_rally, tribute, chat, ping` (ver `core/API.md`).

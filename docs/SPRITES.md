@@ -42,3 +42,14 @@ move assets\sprites\tmp\u_inf_militia_idleA_x1 assets\sprites\militia\idle
 - El pack conserva la máscara player-color en `m_*.png` (algunos .sld no la
   traen: entonces `"mask": null`); el tinte en juego queda pendiente.
 - Sombras del sprite ignoradas (el sol 3D ya proyecta sombra del quad).
+
+## Motor nuevo (F1)
+
+- Las definiciones en `mods/aoe2_base` referencian sprites como `"sprite:<pack>/<anim>"`
+  (p. ej. `"sprite:villager/walk"`). `engine/assets/AssetLocator.gd` los busca en
+  `user://aoe2_assets/sprites/<pack>/<anim>/` y luego en `res://assets/sprites/<pack>/<anim>/`.
+- Formato: el mismo `manifest.pack.json` + `p_*.png` (+ `m_*.png` máscara) de `--pack`.
+- Proyección isométrica 2:1 con casilla de 96×48 (sprites `x1`). Direcciones: 16 slots,
+  W=0 antihorario (S=4, E=8, N=12). Sin pack, el render dibuja un placeholder.
+- Probar: menú → "Partida (nuevo motor, beta)", o
+  `godot --path . res://game/scenes/Match.tscn -- --screenshot=user://f1.png --frames=90`.
