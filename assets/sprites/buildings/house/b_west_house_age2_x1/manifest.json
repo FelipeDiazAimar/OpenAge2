@@ -1,0 +1,60 @@
+{
+ "file": "b_west_house_age2_x1",
+ "version": 4,
+ "frames": [
+  {
+   "index": 0,
+   "frame_index": 0,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow",
+    "player"
+   ],
+   "png": "frame_000.png",
+   "mask": "frame_000.mask.png",
+   "shadow": "frame_000.shadow.png"
+  },
+  {
+   "index": 1,
+   "frame_index": 1,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow",
+    "player"
+   ],
+   "png": "frame_001.png",
+   "mask": "frame_001.mask.png",
+   "shadow": "frame_001.shadow.png"
+  },
+  {
+   "index": 2,
+   "frame_index": 2,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow",
+    "player"
+   ],
+   "png": "frame_002.png",
+   "mask": "frame_002.mask.png",
+   "shadow": "frame_002.shadow.png"
+  }
+ ]
+}

@@ -1,15 +1,16 @@
 extends Control
-# Menú de campaña estilo AoE2: lista con estados, briefing y retrato del héroe.
+# Menú de campaña estilo MEDIEVAL (taberna y scriptorium): tablones, pergamino sellado y sello real.
 # Fuente de datos: CampaignManager (autoload /root/CampaignManager).
 # Si el autoload no existe (tests), se instancia el script como fallback.
 # Conserva la lógica: lista, briefing, desbloqueo y start_scenario.
-# Visual: madera oscura, pergamino, dorado, retrato procedural (sin assets de pago).
+# Visual: madera de taberna, pergamino con lacre, dorado, retrato procedural (sin assets de pago).
+# Nota: ui/menus/MenuStyle.gd no existe; se aplican estilos locales en este archivo.
 
 const MAIN_MENU := "res://ui/menus/MainMenu.tscn"
 const MANAGER_PATH := "/root/CampaignManager"
 const MANAGER_SCRIPT := "res://systems/campaign/CampaignManager.gd"
 
-# Paleta AoE2 (madera, pergamino y dorado).
+# Paleta medieval (madera, pergamino, hierro y dorado).
 const COLOR_DORADO := Color("e8c15a")
 const COLOR_PERGAMINO := Color("e8d5a3")
 const COLOR_TINTA := Color("2a1c10")
@@ -17,6 +18,16 @@ const COLOR_SUBTITULO := Color("b8a684")
 const COLOR_VERDE := Color("7bc47f")
 const COLOR_GRIS := Color("9a9a9a")
 const COLOR_ROJO := Color("e08a7a")
+const COLOR_HIERRO := Color("3a3a42")
+const COLOR_HIERRO_BORDE := Color("1e1e22")
+const COLOR_LACRE := Color("8b1a1a")
+const COLOR_LACRE_HOVER := Color("a92222")
+const COLOR_LACRE_SOMBRA := Color("5a0f0f")
+# Runas de estado (solo texto visual; el desbloqueo lo decide el manager).
+const RUNA_VENCIDO := "ᚹ"
+const RUNA_ACTUAL := "ᚦ"
+const RUNA_DISPONIBLE := "ᚱ"
+const RUNA_BLOQUEADO := "ᛝ"
 
 # Retrato procedural: un color por héroe/escenario y un icono rotativo.
 const COLORES_HEROE: Array[Color] = [
@@ -77,24 +88,26 @@ func _resolver_manager() -> void:
 		add_child(_manager)
 
 
-# Aplica toda la piel AoE2 por código (tscn solo define estructura).
+# Aplica toda la piel medieval por código (tscn solo define estructura).
 func _aplicar_estilo_aoe2() -> void:
 	_titulo.add_theme_font_size_override("font_size", 32)
 	_titulo.add_theme_color_override("font_color", COLOR_DORADO)
+	_titulo.add_theme_color_override("font_outline_color", Color.BLACK)
+	_titulo.add_theme_constant_override("outline_size", 6)
 	_subtitulo.add_theme_font_size_override("font_size", 15)
 	_subtitulo.add_theme_color_override("font_color", COLOR_SUBTITULO)
-	# Paneles de madera oscura con borde dorado.
-	_panel_lista.add_theme_stylebox_override("panel", _hacer_panel(Color("241a10"), Color("c9a227"), 2, 10))
-	_panel_briefing.add_theme_stylebox_override("panel", _hacer_panel(Color("2e2115"), Color("c9a227"), 2, 10))
+	# Tablones de taberna con marco de hierro.
+	_panel_lista.add_theme_stylebox_override("panel", _hacer_panel(Color("2e1f12"), COLOR_HIERRO_BORDE, 3, 10))
+	_panel_briefing.add_theme_stylebox_override("panel", _hacer_panel(Color("2e2115"), COLOR_HIERRO_BORDE, 3, 10))
 	# Cabecera del briefing.
 	_nombre.add_theme_font_size_override("font_size", 22)
 	_nombre.add_theme_color_override("font_color", COLOR_DORADO)
 	_estado_esc.add_theme_font_size_override("font_size", 15)
-	# Zonas de pergamino para briefing e intro.
-	_briefing.add_theme_stylebox_override("normal", _hacer_panel(COLOR_PERGAMINO, Color("8a6d3b"), 1, 6))
+	# Pergamino sellado para briefing e intro.
+	_briefing.add_theme_stylebox_override("normal", _hacer_panel(COLOR_PERGAMINO, Color("8a6d3b"), 2, 6))
 	_briefing.add_theme_color_override("default_color", COLOR_TINTA)
 	_briefing.add_theme_font_size_override("normal_font_size", 16)
-	_intro.add_theme_stylebox_override("normal", _hacer_panel(Color("dfcba0"), Color("8a6d3b"), 1, 6))
+	_intro.add_theme_stylebox_override("normal", _hacer_panel(Color("dfcba0"), Color("8a6d3b"), 2, 6))
 	_intro.add_theme_color_override("default_color", COLOR_TINTA)
 	_intro.add_theme_font_size_override("normal_font_size", 15)
 	_retrato_icono.add_theme_font_size_override("font_size", 46)
@@ -102,12 +115,49 @@ func _aplicar_estilo_aoe2() -> void:
 	_progreso.add_theme_font_size_override("font_size", 14)
 	_status.add_theme_color_override("font_color", COLOR_PERGAMINO)
 	_status.add_theme_font_size_override("font_size", 15)
-	# Botones Jugar (rojo) y Volver (marrón).
-	_estilizar_boton(_play_btn, Color("8b1a1a"), Color("a92222"), Color("5a0f0f"))
-	_estilizar_boton(_back_btn, Color("4a3826"), Color("5d4730"), Color("33271a"))
+	# Sello real rojo para Jugar y hierro para Volver.
+	_estilizar_sello_real(_play_btn)
+	_estilizar_boton(_back_btn, COLOR_HIERRO, COLOR_HIERRO.lightened(0.15), COLOR_HIERRO.darkened(0.2))
+	_colocar_lacre_en_cabecera()
 
 
-# Crea un panel con fondo, borde y esquinas redondeadas.
+# Lacre de cera junto al retrato: sello circular con runa (solo visual).
+func _colocar_lacre_en_cabecera() -> void:
+	var cab: HBoxContainer = (_nombre.get_parent().get_parent() as HBoxContainer)
+	if cab == null:
+		return
+	# Evita duplicar el lacre si el estilo se reaplica.
+	for c in cab.get_children():
+		if (c as Node).has_meta("lacre_real"):
+			return
+	cab.add_child(_crear_lacre())
+
+
+# Crea el lacre circular rojo con filo dorado y runa grabada.
+func _crear_lacre() -> Control:
+	var sello := PanelContainer.new()
+	sello.set_meta("lacre_real", true)
+	sello.custom_minimum_size = Vector2(48, 48)
+	sello.tooltip_text = "Lacre real: el pergamino queda sellado"
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = COLOR_LACRE
+	sb.border_color = COLOR_DORADO
+	sb.set_border_width_all(2)
+	sb.set_corner_radius_all(24)
+	sb.shadow_color = Color(0, 0, 0, 0.6)
+	sb.shadow_size = 6
+	sello.add_theme_stylebox_override("panel", sb)
+	var centro := CenterContainer.new()
+	sello.add_child(centro)
+	var runa := Label.new()
+	runa.text = RUNA_ACTUAL
+	runa.add_theme_font_size_override("font_size", 22)
+	runa.add_theme_color_override("font_color", COLOR_DORADO)
+	centro.add_child(runa)
+	return sello
+
+
+# Crea un tablón con fondo, marco de hierro y esquinas redondeadas.
 func _hacer_panel(fondo: Color, borde: Color, grosor: int, radio: int) -> StyleBoxFlat:
 	var sb := StyleBoxFlat.new()
 	sb.bg_color = fondo
@@ -118,22 +168,54 @@ func _hacer_panel(fondo: Color, borde: Color, grosor: int, radio: int) -> StyleB
 	sb.content_margin_right = 14.0
 	sb.content_margin_top = 12.0
 	sb.content_margin_bottom = 12.0
+	sb.shadow_color = Color(0, 0, 0, 0.5)
+	sb.shadow_size = 6
 	return sb
 
 
-# Da a un botón su aspecto AoE2 en los cuatro estados.
+# Da a un botón su aspecto de hierro en los cuatro estados.
 func _estilizar_boton(b: Button, normal: Color, hover: Color, pressed: Color) -> void:
 	var sn := StyleBoxFlat.new()
 	sn.bg_color = normal
-	sn.border_color = Color("c9a227")
+	sn.border_color = COLOR_HIERRO_BORDE
 	sn.set_border_width_all(2)
 	sn.set_corner_radius_all(6)
 	sn.content_margin_left = 12.0
 	sn.content_margin_right = 12.0
 	var sh := sn.duplicate() as StyleBoxFlat
 	sh.bg_color = hover
+	sh.border_color = Color("8a6d3b")
 	var sp := sn.duplicate() as StyleBoxFlat
 	sp.bg_color = pressed
+	var sd := sn.duplicate() as StyleBoxFlat
+	sd.bg_color = Color("2a2a2a")
+	sd.border_color = Color("666666")
+	b.add_theme_stylebox_override("normal", sn)
+	b.add_theme_stylebox_override("hover", sh)
+	b.add_theme_stylebox_override("pressed", sp)
+	b.add_theme_stylebox_override("disabled", sd)
+	b.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	b.add_theme_color_override("font_color", Color("f5e6c4"))
+	b.add_theme_color_override("font_hover_color", Color("ffe9a8"))
+	b.add_theme_color_override("font_disabled_color", Color("888888"))
+	b.add_theme_font_size_override("font_size", 20)
+
+
+# Sello real rojo con filo dorado para el botón de Jugar (solo visual).
+func _estilizar_sello_real(b: Button) -> void:
+	var sn := StyleBoxFlat.new()
+	sn.bg_color = COLOR_LACRE
+	sn.border_color = COLOR_DORADO
+	sn.set_border_width_all(3)
+	sn.set_corner_radius_all(12)
+	sn.content_margin_left = 14.0
+	sn.content_margin_right = 14.0
+	sn.shadow_color = Color(0, 0, 0, 0.6)
+	sn.shadow_size = 8
+	var sh := sn.duplicate() as StyleBoxFlat
+	sh.bg_color = COLOR_LACRE_HOVER
+	var sp := sn.duplicate() as StyleBoxFlat
+	sp.bg_color = COLOR_LACRE_SOMBRA
 	var sd := sn.duplicate() as StyleBoxFlat
 	sd.bg_color = Color("2a2a2a")
 	sd.border_color = Color("666666")
@@ -164,7 +246,7 @@ func refresh_list() -> void:
 		none.text = "(no hay campañas en data/campaigns/*.json)"
 		none.add_theme_color_override("font_color", COLOR_SUBTITULO)
 		_lista.add_child(none)
-		_progreso.text = "🏆 Progreso: 0/0"
+		_progreso.text = "%s Progreso: 0/0" % RUNA_VENCIDO
 		return
 	# Detecta el escenario actual: primer desbloqueado sin completar.
 	_indice_actual = -1
@@ -173,7 +255,7 @@ func refresh_list() -> void:
 		if bool(dd.get("unlocked", false)) and not bool(dd.get("completed", false)):
 			_indice_actual = i
 			break
-	# Crea una fila por escenario con su icono de estado.
+	# Crea una fila-tablon por escenario con su runa de estado.
 	for i in items.size():
 		var d: Dictionary = items[i]
 		var sid := str(d.get("id", "?"))
@@ -209,32 +291,32 @@ func _actualizar_progreso(items: Array) -> void:
 	var pct := 0
 	if not items.is_empty():
 		pct = int(round(100.0 * float(hechos) / float(items.size())))
-	_progreso.text = "🏆 Progreso: %d/%d · %d%%" % [hechos, items.size(), pct]
+	_progreso.text = "%s Progreso: %d/%d · %d%%" % [RUNA_VENCIDO, hechos, items.size(), pct]
 
 
-# Crea el botón-fila de un escenario con icono y color según estado.
+# Crea el botón-fila (tablón de taberna) con runa y color según estado.
 func _crear_fila(d: Dictionary, indice: int, es_actual: bool) -> Button:
 	var sid := str(d.get("id", "?"))
 	var nombre := str(d.get("name", sid))
 	var completado := bool(d.get("completed", false))
 	var desbloqueado := bool(d.get("unlocked", false))
 	var btn := Button.new()
-	btn.custom_minimum_size = Vector2(320, 46)
+	btn.custom_minimum_size = Vector2(340, 48)
 	btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	btn.text = "%s  %02d · %s" % [_icono_estado(completado, desbloqueado, es_actual), indice + 1, nombre]
 	btn.tooltip_text = _texto_estado(completado, desbloqueado, es_actual)
 	btn.disabled = not desbloqueado
 	btn.set_meta("sid", sid)
 	btn.pressed.connect(_on_select.bind(sid))
-	# Color de fila: verde completado, dorado actual, gris bloqueado.
-	var fondo := Color("3a2c1c")
-	var borde := Color("8a6d3b")
+	# Tablón: verde vencido, rojo sellado actual, gris con lacre roto bloqueado.
+	var fondo := Color("4a2f1a")
+	var borde := COLOR_HIERRO_BORDE
 	if completado:
 		fondo = Color("2e4a2a")
-		borde = Color("7bc47f")
+		borde = COLOR_VERDE
 	elif es_actual:
 		fondo = Color("5a1a12")
-		borde = Color("e8c15a")
+		borde = COLOR_DORADO
 	elif not desbloqueado:
 		fondo = Color("222222")
 		borde = Color("555555")
@@ -244,15 +326,17 @@ func _crear_fila(d: Dictionary, indice: int, es_actual: bool) -> Button:
 	return btn
 
 
-# Estilo compacto para las filas (reusa la idea de _estilizar_boton).
+# Estilo de tablón para las filas (reusa la idea de _estilizar_boton).
 func _estilizar_fila(b: Button, fondo: Color, borde: Color) -> void:
 	var sn := StyleBoxFlat.new()
 	sn.bg_color = fondo
 	sn.border_color = borde
-	sn.set_border_width_all(1)
+	sn.set_border_width_all(2)
 	sn.set_corner_radius_all(6)
 	sn.content_margin_left = 10.0
 	sn.content_margin_right = 10.0
+	sn.shadow_color = Color(0, 0, 0, 0.5)
+	sn.shadow_size = 4
 	var sh := sn.duplicate() as StyleBoxFlat
 	sh.bg_color = fondo.lightened(0.12)
 	var sp := sn.duplicate() as StyleBoxFlat
@@ -270,26 +354,26 @@ func _estilizar_fila(b: Button, fondo: Color, borde: Color) -> void:
 	b.add_theme_color_override("font_disabled_color", Color("777777"))
 
 
-# Icono de estado: candado, tick, estrella del actual o flecha disponible.
+# Runa de estado: vencido, actual, disponible o bloqueado (texto, sin emojis).
 func _icono_estado(completado: bool, desbloqueado: bool, es_actual: bool) -> String:
 	if completado:
-		return "✅"
+		return RUNA_VENCIDO
 	if es_actual:
-		return "⭐"
+		return RUNA_ACTUAL
 	if desbloqueado:
-		return "▶"
-	return "🔒"
+		return RUNA_DISPONIBLE
+	return RUNA_BLOQUEADO
 
 
-# Texto corto de estado para tooltip y panel.
+# Texto corto de estado para tooltip y panel (con runa al frente).
 func _texto_estado(completado: bool, desbloqueado: bool, es_actual: bool) -> String:
 	if completado:
-		return "Completado"
+		return "%s Vencido" % RUNA_VENCIDO
 	if es_actual:
-		return "Escenario actual — ¡a la batalla!"
+		return "%s Escenario actual — ¡a la batalla!" % RUNA_ACTUAL
 	if desbloqueado:
-		return "Disponible"
-	return "Bloqueado — completa el anterior"
+		return "%s Disponible" % RUNA_DISPONIBLE
+	return "%s Sellado — completa el anterior" % RUNA_BLOQUEADO
 
 
 # Resalta la fila seleccionada con un borde dorado más grueso.
@@ -311,7 +395,7 @@ func _on_select(sid: String) -> void:
 	_show_briefing(sid)
 
 
-# Muestra briefing, objetivos, intro y retrato del escenario elegido.
+# Muestra briefing en pergamino, objetivos, intro y retrato del escenario.
 func _show_briefing(sid: String) -> void:
 	if _manager == null:
 		return
@@ -327,12 +411,12 @@ func _show_briefing(sid: String) -> void:
 		completado = bool(datos.get("completed", false))
 		desbloqueado = bool(datos.get("unlocked", true))
 	var es_actual := _orden_ids.find(sid) == _indice_actual
-	# Cabecera: nombre + estado con color.
+	# Cabecera: nombre + runa de estado con color.
 	_nombre.text = nombre
 	_estado_esc.text = _etiqueta_estado(completado, desbloqueado, es_actual)
 	_estado_esc.add_theme_color_override("font_color", _color_estado(completado, desbloqueado, es_actual))
-	# Cuerpo del briefing en pergamino.
-	_briefing.text = "[b]BRIEFING[/b]\n" + texto.strip_edges()
+	# Pergamino sellado con lacre.
+	_briefing.text = "[b]BRIEFING — PERGAMINO SELLADO %s[/b]\n" % RUNA_ACTUAL + texto.strip_edges()
 	_mostrar_objetivos(objetivos)
 	# Diálogos de introducción con el hablante destacado.
 	if intro.is_empty():
@@ -358,15 +442,15 @@ func _buscar_datos(sid: String) -> Dictionary:
 	return {}
 
 
-# Etiqueta de estado para la cabecera del briefing.
+# Etiqueta rúnica de estado para la cabecera del briefing.
 func _etiqueta_estado(completado: bool, desbloqueado: bool, es_actual: bool) -> String:
 	if completado:
-		return "✅ COMPLETADO"
+		return "%s VENCIDO" % RUNA_VENCIDO
 	if es_actual:
-		return "⭐ ESCENARIO ACTUAL — ¡A la batalla!"
+		return "%s ESCENARIO ACTUAL — ¡A la batalla!" % RUNA_ACTUAL
 	if desbloqueado:
-		return "▶ DISPONIBLE"
-	return "🔒 BLOQUEADO — Completa el escenario anterior"
+		return "%s DISPONIBLE" % RUNA_DISPONIBLE
+	return "%s SELLADO — Completa el escenario anterior" % RUNA_BLOQUEADO
 
 
 # Color de la etiqueta de estado.

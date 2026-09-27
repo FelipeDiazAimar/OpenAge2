@@ -11,6 +11,20 @@ extends CanvasLayer
 const SAVE_PATH := "user://savegame.json"
 const MAIN_MENU := "res://ui/menus/MainMenu.tscn"
 const SETTINGS_CFG := "user://settings.cfg"
+# Paleta medieval local (MenuStyle.gd no existe; se define aquí mismo).
+# Madera para el marco, pergamino para opciones, oro para bordes y pomos,
+# carmesí para acentos y hierro para botones. Todo procedural, sin assets.
+const MED_MADERA_OSCURA := Color(0.28, 0.18, 0.10)
+const MED_MADERA_BORDE := Color(0.16, 0.10, 0.06)
+const MED_PERGAMINO := Color(0.87, 0.76, 0.55)
+const MED_PERGAMINO_OSCURO := Color(0.76, 0.63, 0.42)
+const MED_ORO := Color(0.85, 0.65, 0.25)
+const MED_ORO_CLARO := Color(1.0, 0.82, 0.38)
+const MED_CARMESI := Color(0.55, 0.12, 0.14)
+const MED_HIERRO := Color(0.24, 0.25, 0.28)
+const MED_HIERRO_CLARO := Color(0.34, 0.35, 0.39)
+const MED_HIERRO_OSCURO := Color(0.14, 0.15, 0.17)
+const MED_TINTA := Color(0.22, 0.14, 0.07)
 
 var _dim: ColorRect
 var _center: CenterContainer
@@ -44,7 +58,7 @@ func _build_ui() -> void:
 	_center = CenterContainer.new()
 	_center.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(_center)
-	# Panel estilo AoE2: pergamino oscuro semitransparente con borde dorado.
+	# Panel estilo medieval: marco de madera con remaches y borde dorado.
 	_panel = PanelContainer.new()
 	_panel.custom_minimum_size = Vector2(360, 0)
 	_panel.add_theme_stylebox_override("panel", _aoe_panel_style())
@@ -52,12 +66,16 @@ func _build_ui() -> void:
 	var vb := VBoxContainer.new()
 	vb.add_theme_constant_override("separation", 8)
 	_panel.add_child(vb)
+	_med_agregar_remaches(_panel)
 	# Título del menú.
 	var title := Label.new()
 	title.text = "Pausa"
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title.add_theme_font_size_override("font_size", 28)
-	title.add_theme_color_override("font_color", Color(0.95, 0.80, 0.45))
+	title.add_theme_color_override("font_color", MED_ORO_CLARO)
+	title.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.8))
+	title.add_theme_constant_override("shadow_offset_x", 2)
+	title.add_theme_constant_override("shadow_offset_y", 2)
 	vb.add_child(title)
 	# Botones principales del menú.
 	_btn_continue = _make_button(vb, "Continuar (Esc)")
@@ -72,7 +90,7 @@ func _build_ui() -> void:
 	surrender.pressed.connect(_on_surrender)
 	var quit := _make_button(vb, "Salir al menú")
 	quit.pressed.connect(_on_quit)
-	# Subpanel plegable de opciones rápidas (no saca de la partida).
+	# Subpanel plegable de opciones rápidas en pergamino (no saca de la partida).
 	_options_box = VBoxContainer.new()
 	_options_box.add_theme_constant_override("separation", 6)
 	_options_box.visible = false
@@ -82,48 +100,193 @@ func _build_ui() -> void:
 	var hint := Label.new()
 	hint.text = "Esc cierra · F10 abre"
 	hint.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	hint.add_theme_color_override("font_color", Color(0.65, 0.60, 0.52))
+	hint.add_theme_color_override("font_color", MED_PERGAMINO)
 	vb.add_child(hint)
 	_status = Label.new()
 	_status.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_status.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_status.add_theme_color_override("font_color", Color(1.0, 0.85, 0.5))
+	_status.add_theme_color_override("font_color", MED_ORO_CLARO)
 	vb.add_child(_status)
 
 
 func _aoe_panel_style() -> StyleBoxFlat:
-	# Estilo pergamino semitransparente con borde dorado redondeado.
+	# Marco de madera con borde dorado y sombra. Procedural puro.
+	# Se conserva el nombre para no romper llamadas; la piel ahora es medieval.
 	var sb := StyleBoxFlat.new()
-	sb.bg_color = Color(0.16, 0.12, 0.08, 0.95)
-	sb.border_color = Color(0.72, 0.58, 0.30)
-	sb.set_border_width_all(2)
-	sb.set_corner_radius_all(8)
+	sb.bg_color = MED_MADERA_OSCURA
+	sb.border_color = MED_ORO
+	sb.set_border_width_all(3)
+	sb.set_corner_radius_all(10)
 	sb.content_margin_left = 24.0
 	sb.content_margin_right = 24.0
 	sb.content_margin_top = 20.0
 	sb.content_margin_bottom = 20.0
+	sb.shadow_color = Color(0, 0, 0, 0.6)
+	sb.shadow_size = 14
 	return sb
 
 
+func _med_caja_pergamino() -> StyleBoxFlat:
+	# Pergamino para el subpanel de opciones rápidas. Procedural puro.
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = MED_PERGAMINO
+	sb.border_color = MED_MADERA_BORDE
+	sb.set_border_width_all(2)
+	sb.set_corner_radius_all(6)
+	sb.content_margin_left = 10.0
+	sb.content_margin_right = 10.0
+	sb.content_margin_top = 8.0
+	sb.content_margin_bottom = 8.0
+	return sb
+
+
+func _med_agregar_remaches(panel: PanelContainer) -> void:
+	# Remaches dorados en las esquinas del marco de madera.
+	# Overlay para no romper el layout del PanelContainer.
+	if panel == null:
+		return
+	if panel.has_meta("med_remaches"):
+		return
+	panel.set_meta("med_remaches", true)
+	var overlay := Control.new()
+	overlay.name = "RemachesOverlay"
+	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	panel.add_child(overlay)
+	var esquinas := [Control.PRESET_TOP_LEFT, Control.PRESET_TOP_RIGHT,
+		Control.PRESET_BOTTOM_LEFT, Control.PRESET_BOTTOM_RIGHT]
+	for preset in esquinas:
+		var r := Panel.new()
+		r.custom_minimum_size = Vector2(12, 12)
+		r.size = Vector2(12, 12)
+		r.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		var estilo := StyleBoxFlat.new()
+		estilo.bg_color = MED_ORO
+		estilo.border_color = MED_MADERA_BORDE
+		estilo.set_border_width_all(2)
+		estilo.set_corner_radius_all(6)
+		estilo.shadow_color = Color(0, 0, 0, 0.5)
+		estilo.shadow_size = 3
+		r.add_theme_stylebox_override("panel", estilo)
+		overlay.add_child(r)
+		r.set_anchors_preset(preset)
+		match preset:
+			Control.PRESET_TOP_LEFT:
+				r.position = Vector2(6, 6)
+			Control.PRESET_TOP_RIGHT:
+				r.anchor_left = 1.0
+				r.anchor_right = 1.0
+				r.offset_left = -18.0
+				r.offset_right = -6.0
+				r.offset_top = 6.0
+				r.offset_bottom = 18.0
+			Control.PRESET_BOTTOM_LEFT:
+				r.anchor_top = 1.0
+				r.anchor_bottom = 1.0
+				r.offset_left = 6.0
+				r.offset_right = 18.0
+				r.offset_top = -18.0
+				r.offset_bottom = -6.0
+			Control.PRESET_BOTTOM_RIGHT:
+				r.anchor_left = 1.0
+				r.anchor_right = 1.0
+				r.anchor_top = 1.0
+				r.anchor_bottom = 1.0
+				r.offset_left = -18.0
+				r.offset_right = -6.0
+				r.offset_top = -18.0
+				r.offset_bottom = -6.0
+
+
+func _med_pomo_oro(tam: int = 18, resaltado: bool = false) -> ImageTexture:
+	# Pomo dorado procedural para el slider, sin assets externos.
+	var img := Image.create(tam, tam, false, Image.FORMAT_RGBA8)
+	img.fill(Color(0, 0, 0, 0))
+	var centro := Vector2(tam, tam) * 0.5
+	var radio := float(tam) * 0.5 - 1.0
+	for y in range(tam):
+		for x in range(tam):
+			var d := Vector2(x + 0.5, y + 0.5).distance_to(centro)
+			if d <= radio:
+				var t := d / radio
+				var col := MED_ORO_CLARO.lerp(MED_ORO, t)
+				if d > radio - 2.0:
+					col = MED_MADERA_BORDE
+				if resaltado:
+					col = col.lightened(0.15)
+				img.set_pixel(x, y, col)
+	return ImageTexture.create_from_image(img)
+
+
+func _med_estilar_slider(s: HSlider) -> void:
+	# Ranura de madera oscura, tramo dorado y pomo circular. Simple y procedural.
+	if s == null:
+		return
+	var ranura := StyleBoxFlat.new()
+	ranura.bg_color = MED_MADERA_BORDE
+	ranura.set_corner_radius_all(4)
+	ranura.content_margin_top = 4
+	ranura.content_margin_bottom = 4
+	s.add_theme_stylebox_override("slider", ranura)
+	var relleno := StyleBoxFlat.new()
+	relleno.bg_color = MED_ORO
+	relleno.set_corner_radius_all(4)
+	relleno.content_margin_top = 4
+	relleno.content_margin_bottom = 4
+	s.add_theme_stylebox_override("grabber_area", relleno)
+	s.add_theme_icon_override("grabber", _med_pomo_oro(18, false))
+	s.add_theme_icon_override("grabber_highlight", _med_pomo_oro(20, true))
+	s.custom_minimum_size = Vector2(120, 22)
+
+
 func _make_button(parent: Container, text: String) -> Button:
-	# Crea un botón ancho centrado listo para teclado y ratón.
+	# Botón de hierro ancho con hover dorado. Lógica intacta, solo piel medieval.
 	var b := Button.new()
 	b.text = text
 	b.custom_minimum_size = Vector2(320, 44)
 	b.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 	b.focus_mode = Control.FOCUS_ALL
+	var normal := StyleBoxFlat.new()
+	normal.bg_color = MED_HIERRO
+	normal.border_color = Color(0.10, 0.10, 0.11)
+	normal.set_border_width_all(2)
+	normal.set_corner_radius_all(6)
+	normal.content_margin_left = 12
+	normal.content_margin_right = 12
+	normal.content_margin_top = 6
+	normal.content_margin_bottom = 6
+	normal.shadow_color = Color(0, 0, 0, 0.5)
+	normal.shadow_size = 4
+	b.add_theme_stylebox_override("normal", normal)
+	var hover := normal.duplicate() as StyleBoxFlat
+	hover.bg_color = MED_HIERRO_CLARO
+	hover.border_color = MED_ORO
+	b.add_theme_stylebox_override("hover", hover)
+	var pressed := normal.duplicate() as StyleBoxFlat
+	pressed.bg_color = MED_HIERRO_OSCURO
+	pressed.border_color = MED_ORO
+	b.add_theme_stylebox_override("pressed", pressed)
+	b.add_theme_color_override("font_color", Color(0.92, 0.90, 0.86))
+	b.add_theme_color_override("font_hover_color", MED_ORO_CLARO)
+	b.add_theme_color_override("font_pressed_color", MED_ORO)
 	parent.add_child(b)
 	return b
 
 
 func _build_quick_options() -> void:
-	# Volumen general con deslizante.
+	# Volumen general con deslizante sobre pergamino; lógica intacta.
+	var marco := PanelContainer.new()
+	marco.add_theme_stylebox_override("panel", _med_caja_pergamino())
+	_options_box.add_child(marco)
+	var inner := VBoxContainer.new()
+	inner.add_theme_constant_override("separation", 6)
+	marco.add_child(inner)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 8)
-	_options_box.add_child(row)
+	inner.add_child(row)
 	var lab := Label.new()
 	lab.text = "Volumen"
 	lab.custom_minimum_size = Vector2(90, 0)
+	lab.add_theme_color_override("font_color", MED_TINTA)
 	row.add_child(lab)
 	_vol_slider = HSlider.new()
 	_vol_slider.min_value = 0.0
@@ -131,18 +294,21 @@ func _build_quick_options() -> void:
 	_vol_slider.step = 1.0
 	_vol_slider.value = 80.0
 	_vol_slider.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_med_estilar_slider(_vol_slider)
 	_vol_slider.value_changed.connect(_on_volume_changed)
 	row.add_child(_vol_slider)
 	_vol_label = Label.new()
 	_vol_label.custom_minimum_size = Vector2(52, 0)
 	_vol_label.text = "80%"
+	_vol_label.add_theme_color_override("font_color", MED_TINTA)
 	row.add_child(_vol_label)
 	# Interruptor de edge-pan de cámara.
 	_edge_check = CheckButton.new()
 	_edge_check.text = "Edge-pan de cámara"
 	_edge_check.button_pressed = true
+	_edge_check.add_theme_color_override("font_color", MED_TINTA)
 	_edge_check.toggled.connect(_on_edge_pan_toggled)
-	_options_box.add_child(_edge_check)
+	inner.add_child(_edge_check)
 
 
 func _unhandled_input(event: InputEvent) -> void:

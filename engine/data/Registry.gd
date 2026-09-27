@@ -81,7 +81,7 @@ func ids_of_type(type: String) -> Array[String]:
 
 ## {ok: bool, data: Variant, error: String}. Ignora BOM UTF-8.
 static func parse_json_text(text: String) -> Dictionary:
-	if text.begins_with("﻿"):
+	if text.begins_with(String.chr(0xFEFF)):
 		text = text.substr(1)
 	var j := JSON.new()
 	if j.parse(text) != OK:

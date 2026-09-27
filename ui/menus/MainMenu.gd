@@ -1,7 +1,7 @@
 extends Control
-# MainMenu estilo AoE2 DE: título dorado con sombra y botones anchos.
+# MainMenu estilo medieval: marco madera, título dorado y botones con hover.
 # Conserva rutas: Un Jugador, LAN, Campaña, Editor, Opciones y beta v2.
-# Todo procedural con StyleBoxFlat, sin assets externos de pago.
+# Usa ui/menus/MenuStyle.gd, todo procedural sin assets de pago.
 
 var _status: Label
 var _botones: Array[Button] = []
@@ -11,12 +11,14 @@ func _ready() -> void:
 	set_anchors_preset(Control.PRESET_FULL_RECT)
 	# Fondo: usa MenuBackdrop del TSCN o crea degradado oscuro.
 	_aplicar_fondo()
-	# Marco de piedra/madera procedural sobre el panel central.
+	# Marco de madera procedural vía MenuStyle.
 	_estilizar_marco()
-	# Título dorado grande con sombra y subtítulo pergamino.
+	# Título dorado con sombra de antorcha y subtítulo pergamino.
 	_estilizar_titulos()
-	# Botones anchos con hover brillante y rutas originales.
+	# Botones con borde hierro y hover brillante, rutas originales.
 	_conectar_y_estilizar_botones()
+	# Estandartes laterales carmesí con color de civ.
+	_asegurar_estandartes()
 	# Versión abajo y ayudas de controles visibles.
 	_asegurar_version_y_hints()
 	# Localiza el estado y deja foco inicial para teclado.
@@ -75,37 +77,17 @@ func _crear_degradado_fondo() -> GradientTexture2D:
 	return tex
 
 func _estilizar_marco() -> void:
-	# Marco piedra/madera con StyleBoxFlat: borde dorado-piedra y sombra.
+	# Marco madera central con ayuda de MenuStyle.
 	var panel := get_node_or_null("CenterContainer/MainFrame") as PanelContainer
 	if panel == null:
 		return
-	var marco := StyleBoxFlat.new()
-	marco.bg_color = Color(0.13, 0.09, 0.06, 0.95)
-	marco.border_width_left = 3
-	marco.border_width_top = 3
-	marco.border_width_right = 3
-	marco.border_width_bottom = 3
-	marco.border_color = Color(0.72, 0.58, 0.30)
-	marco.corner_radius_top_left = 10
-	marco.corner_radius_top_right = 10
-	marco.corner_radius_bottom_right = 10
-	marco.corner_radius_bottom_left = 10
-	marco.shadow_color = Color(0, 0, 0, 0.6)
-	marco.shadow_size = 18
-	panel.add_theme_stylebox_override("panel", marco)
+	panel.add_theme_stylebox_override("panel", MenuStyle.panel_madera())
 
 func _estilizar_titulos() -> void:
-	# Título dorado grande con sombra y contorno oscuro.
+	# Título dorado con sombra de antorcha vía MenuStyle.
 	var titulo := get_node_or_null("CenterContainer/MainFrame/Margin/MenuVBox/TitleLabel") as Label
 	if titulo != null:
-		titulo.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		titulo.add_theme_font_size_override("font_size", 68)
-		titulo.add_theme_color_override("font_color", Color(1.0, 0.84, 0.42))
-		titulo.add_theme_color_override("font_outline_color", Color(0.25, 0.12, 0.05))
-		titulo.add_theme_constant_override("outline_size", 8)
-		titulo.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0.9))
-		titulo.add_theme_constant_override("shadow_offset_x", 3)
-		titulo.add_theme_constant_override("shadow_offset_y", 3)
+		MenuStyle.aplicar_titulo(titulo, 68)
 	# Subtítulo color pergamino con sombra suave.
 	var sub := get_node_or_null("CenterContainer/MainFrame/Margin/MenuVBox/SubtitleLabel") as Label
 	if sub != null:
@@ -148,48 +130,33 @@ func _conectar_y_estilizar_botones() -> void:
 			_add_btn(vb, "Partida (nuevo motor, beta)", _on_new_engine)
 
 func _estilo_boton_aoe(btn: Button) -> void:
-	# Botón ancho estilo AoE2 DE: madera oscura, borde piedra y hover brillante.
-	btn.custom_minimum_size = Vector2(460, 54)
-	btn.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	btn.focus_mode = Control.FOCUS_ALL
-	btn.add_theme_font_size_override("font_size", 20)
-	btn.add_theme_color_override("font_color", Color(0.95, 0.90, 0.78))
-	btn.add_theme_color_override("font_hover_color", Color(1.0, 0.95, 0.70))
-	btn.add_theme_color_override("font_pressed_color", Color(1.0, 0.88, 0.55))
-	btn.add_theme_color_override("font_focus_color", Color(1.0, 0.95, 0.70))
-	# Estado normal: madera oscura con borde dorado apagado.
-	var normal := StyleBoxFlat.new()
-	normal.bg_color = Color(0.28, 0.19, 0.11)
-	normal.border_width_left = 2
-	normal.border_width_top = 2
-	normal.border_width_right = 2
-	normal.border_width_bottom = 2
-	normal.border_color = Color(0.62, 0.48, 0.26)
-	normal.corner_radius_top_left = 6
-	normal.corner_radius_top_right = 6
-	normal.corner_radius_bottom_right = 6
-	normal.corner_radius_bottom_left = 6
-	normal.shadow_color = Color(0, 0, 0, 0.5)
-	normal.shadow_size = 8
-	btn.add_theme_stylebox_override("normal", normal)
-	# Hover brillante: fondo cálido y borde dorado vivo.
-	var hover := normal.duplicate() as StyleBoxFlat
-	hover.bg_color = Color(0.52, 0.36, 0.18)
-	hover.border_color = Color(1.0, 0.86, 0.48)
-	hover.shadow_color = Color(1.0, 0.80, 0.35, 0.35)
-	hover.shadow_size = 12
-	btn.add_theme_stylebox_override("hover", hover)
-	btn.add_theme_stylebox_override("focus", hover)
-	# Pulsado: madera quemada más oscura.
-	var pressed := normal.duplicate() as StyleBoxFlat
-	pressed.bg_color = Color(0.18, 0.12, 0.07)
-	pressed.border_color = Color(0.85, 0.68, 0.35)
-	btn.add_theme_stylebox_override("pressed", pressed)
-	# Deshabilitado: gris piedra apagado.
-	var disabled := normal.duplicate() as StyleBoxFlat
-	disabled.bg_color = Color(0.16, 0.15, 0.13)
-	disabled.border_color = Color(0.35, 0.33, 0.30)
-	btn.add_theme_stylebox_override("disabled", disabled)
+	# Delega en MenuStyle: borde hierro y hover dorado brillante.
+	MenuStyle.aplicar_boton(btn)
+
+func _asegurar_estandartes() -> void:
+	# Tiñe los estandartes del TSCN o los crea si faltan.
+	var izq := get_node_or_null("LeftBanner") as ColorRect
+	var der := get_node_or_null("RightBanner") as ColorRect
+	if izq == null:
+		izq = MenuStyle.banner_carmesi(MenuStyle.CARMESI)
+		izq.name = "LeftBanner"
+		izq.set_anchors_preset(Control.PRESET_LEFT_WIDE)
+		izq.offset_right = 72.0
+		add_child(izq)
+		move_child(izq, 1)
+	else:
+		izq.color = MenuStyle.CARMESI
+		izq.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	if der == null:
+		der = MenuStyle.banner_carmesi(Color(0.12, 0.25, 0.55))
+		der.name = "RightBanner"
+		der.set_anchors_preset(Control.PRESET_RIGHT_WIDE)
+		der.offset_left = -72.0
+		add_child(der)
+		move_child(der, 2)
+	else:
+		der.color = Color(0.12, 0.25, 0.55)
+		der.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func _asegurar_version_y_hints() -> void:
 	# Versión abajo a la izquierda, siempre visible.
@@ -217,13 +184,10 @@ func _localizar_status() -> void:
 		_status.add_theme_color_override("font_color", Color(1.0, 0.85, 0.50))
 
 func _add_btn(parent: Container, text: String, fn: Callable) -> void:
-	# Creador de respaldo con el mismo estilo AoE2 DE.
-	var btn := Button.new()
-	btn.text = text
-	btn.focus_mode = Control.FOCUS_ALL
+	# Creador de respaldo con botón medieval ya estilizado.
+	var btn := MenuStyle.boton_medieval(text)
 	btn.pressed.connect(fn)
 	parent.add_child(btn)
-	_estilo_boton_aoe(btn)
 	_botones.append(btn)
 
 func _on_single() -> void:

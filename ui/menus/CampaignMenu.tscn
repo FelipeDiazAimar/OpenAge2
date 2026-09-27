@@ -1,4 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://openage_campaignmenu"]
+; Scriptorium medieval: estructura intacta (nombres únicos % preservados).
+; La piel (tablones, pergamino, lacre, sello real) la aplica CampaignMenu.gd.
 
 [ext_resource type="Script" path="res://ui/menus/CampaignMenu.gd" id="1"]
 
@@ -18,7 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.086, 0.063, 0.039, 1)
+color = Color(0.13, 0.09, 0.055, 1)
 
 [node name="Margen" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -39,13 +41,14 @@ theme_override_constants/separation = 10
 [node name="Titulo" type="Label" parent="Margen/Raiz"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "⚔️ CAMPAÑA: SANGRE DEL NORTE"
+text = "ᚦ CAMPAÑA: SANGRE DEL NORTE ᚦ"
 horizontal_alignment = 1
+tooltip_text = "Crónica sellada del reino"
 
 [node name="Subtitulo" type="Label" parent="Margen/Raiz"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Completa cada escenario para desbloquear el siguiente"
+text = "Completa cada gesta para romper el lacre de la siguiente"
 horizontal_alignment = 1
 
 [node name="Columnas" type="HBoxContainer" parent="Margen/Raiz"]
@@ -55,8 +58,9 @@ theme_override_constants/separation = 14
 
 [node name="PanelLista" type="PanelContainer" parent="Margen/Raiz/Columnas"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(360, 0)
+custom_minimum_size = Vector2(380, 0)
 layout_mode = 2
+tooltip_text = "Tablones de la taberna: una silla por escenario"
 
 [node name="ListaVBox" type="VBoxContainer" parent="Margen/Raiz/Columnas/PanelLista"]
 layout_mode = 2
@@ -64,7 +68,7 @@ theme_override_constants/separation = 8
 
 [node name="EtiquetaLista" type="Label" parent="Margen/Raiz/Columnas/PanelLista/ListaVBox"]
 layout_mode = 2
-text = "🗺️ ESCENARIOS"
+text = "ᚱ TABLONES — ESCENARIOS"
 horizontal_alignment = 1
 
 [node name="SeparadorLista" type="HSeparator" parent="Margen/Raiz/Columnas/PanelLista/ListaVBox"]
@@ -84,13 +88,14 @@ theme_override_constants/separation = 6
 [node name="ProgresoLabel" type="Label" parent="Margen/Raiz/Columnas/PanelLista/ListaVBox"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "🏆 Progreso: 0/0"
+text = "ᚹ Progreso: 0/0"
 horizontal_alignment = 1
 
 [node name="PanelBriefing" type="PanelContainer" parent="Margen/Raiz/Columnas"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
+tooltip_text = "Pergamino sellado con lacre real"
 
 [node name="BriefingVBox" type="VBoxContainer" parent="Margen/Raiz/Columnas/PanelBriefing"]
 layout_mode = 2
@@ -104,6 +109,7 @@ theme_override_constants/separation = 12
 unique_name_in_owner = true
 custom_minimum_size = Vector2(104, 104)
 layout_mode = 2
+tooltip_text = "Retrato del héroe (procedural)"
 
 [node name="RetratoCentro" type="CenterContainer" parent="Margen/Raiz/Columnas/PanelBriefing/BriefingVBox/CabeceraHeroe/RetratoMarco"]
 layout_mode = 2
@@ -134,7 +140,7 @@ autowrap_mode = 2
 
 [node name="PistaHeroe" type="Label" parent="Margen/Raiz/Columnas/PanelBriefing/BriefingVBox/CabeceraHeroe/DatosHeroe"]
 layout_mode = 2
-text = "Haz clic en un escenario de la izquierda para ver su briefing."
+text = "Toca un tablón de la izquierda para romper su lacre y leer el pergamino."
 autowrap_mode = 2
 
 [node name="SeparadorBriefing" type="HSeparator" parent="Margen/Raiz/Columnas/PanelBriefing/BriefingVBox"]
@@ -152,7 +158,7 @@ theme_override_constants/separation = 8
 
 [node name="BriefingEtiqueta" type="Label" parent="Margen/Raiz/Columnas/PanelBriefing/BriefingVBox/BriefingScroll/BriefingContenido"]
 layout_mode = 2
-text = "📖 BRIEFING"
+text = "BRIEFING — PERGAMINO SELLADO ᚦ"
 
 [node name="BriefingTexto" type="RichTextLabel" parent="Margen/Raiz/Columnas/PanelBriefing/BriefingVBox/BriefingScroll/BriefingContenido"]
 unique_name_in_owner = true
@@ -167,7 +173,7 @@ text = "El briefing aparecerá aquí."
 
 [node name="ObjetivosTitulo" type="Label" parent="Margen/Raiz/Columnas/PanelBriefing/BriefingVBox/BriefingScroll/BriefingContenido"]
 layout_mode = 2
-text = "🎯 OBJETIVOS"
+text = "ᚱ OBJETIVOS DE LA GESTA"
 
 [node name="ObjetivosLista" type="VBoxContainer" parent="Margen/Raiz/Columnas/PanelBriefing/BriefingVBox/BriefingScroll/BriefingContenido"]
 unique_name_in_owner = true
@@ -177,7 +183,7 @@ theme_override_constants/separation = 4
 
 [node name="IntroTitulo" type="Label" parent="Margen/Raiz/Columnas/PanelBriefing/BriefingVBox/BriefingScroll/BriefingContenido"]
 layout_mode = 2
-text = "📜 INTRODUCCIÓN"
+text = "ᛝ INTRODUCCIÓN"
 
 [node name="IntroTexto" type="RichTextLabel" parent="Margen/Raiz/Columnas/PanelBriefing/BriefingVBox/BriefingScroll/BriefingContenido"]
 unique_name_in_owner = true
@@ -197,15 +203,17 @@ theme_override_constants/separation = 12
 
 [node name="BotonJugar" type="Button" parent="Margen/Raiz/BarraInferior"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(260, 50)
+custom_minimum_size = Vector2(280, 54)
 layout_mode = 2
-text = "▶ JUGAR"
+text = "⛨ SELLAR Y PARTIR"
+tooltip_text = "Sello real: inicia el escenario (start_scenario)"
 
 [node name="BotonVolver" type="Button" parent="Margen/Raiz/BarraInferior"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 50)
 layout_mode = 2
 text = "← VOLVER"
+tooltip_text = "Vuelve al menú principal"
 
 [node name="EstadoLabel" type="Label" parent="Margen/Raiz"]
 unique_name_in_owner = true
