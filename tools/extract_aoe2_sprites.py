@@ -573,16 +573,20 @@ def _layer_copy(img, w, h):
 
 
 def _paste(canvas, cw, img, w, h, ox, oy):
-    for y in range(h):
+    # Recorta al lienzo: la capa del frame puede sobresalir del recorte con
+    # contenido (antes desbordaba o envolvía a la fila siguiente).
+    ch = len(canvas) // cw
+    for y in range(max(0, -oy), min(h, ch - oy)):
         base = (oy + y) * cw + ox
-        for x in range(w):
+        for x in range(max(0, -ox), min(w, cw - ox)):
             canvas[base + x] = img[y * w + x]
 
 
 def _paste_gray(canvas, cw, img, w, h, ox, oy):
-    for y in range(h):
+    ch = len(canvas) // cw
+    for y in range(max(0, -oy), min(h, ch - oy)):
         base = (oy + y) * cw + ox
-        for x in range(w):
+        for x in range(max(0, -ox), min(w, cw - ox)):
             canvas[base + x] = img[y * w + x]
 
 
