@@ -9,6 +9,8 @@ const PlayerDefs := preload("res://engine/data/PlayerDefs.gd")
 const MoveSystem := preload("res://engine/sim/systems/MoveSystem.gd")
 const GatherSystem := preload("res://engine/sim/systems/GatherSystem.gd")
 const CombatSystem := preload("res://engine/sim/systems/CombatSystem.gd")
+const HerdSystem := preload("res://engine/sim/systems/HerdSystem.gd")
+const SeparationSystem := preload("res://engine/sim/systems/SeparationSystem.gd")
 
 const INPUT_DELAY := 2
 const START_RES := {"wood": 200, "food": 200, "gold": 100, "stone": 200}
@@ -201,8 +203,10 @@ func step() -> void:
 	for c in cmds:
 		_apply(c)
 	MoveSystem.step(world)
+	SeparationSystem.step(self)
 	CombatSystem.step(self)
 	GatherSystem.step(self)
+	HerdSystem.step(self)
 
 
 ## Desplazamientos (milésimas) para repartir un grupo: casillas en espiral
