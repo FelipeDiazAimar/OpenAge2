@@ -7,6 +7,7 @@ extends RefCounted
 const FP := preload("res://engine/sim/FixedPoint.gd")
 const World := preload("res://engine/sim/World.gd")
 const MoveSystem := preload("res://engine/sim/systems/MoveSystem.gd")
+const CombatSystem := preload("res://engine/sim/systems/CombatSystem.gd")
 
 const REACH := 1500
 const DROP_REACH := 800
@@ -22,18 +23,32 @@ static func order_gather(sim, id: int, target: int) -> void:
 	var kind := str(src["params"]["rate_key"])
 	if not (g["params"]["rates"] as Dictionary).has(kind):
 		return
+	if not _may_take(sim, id, target):
+		return # oveja de otro jugador
 	var res := str(src["params"]["resource"])
 	if int(g["carry"]) > 0 and str(g["carry_res"]) != res:
 		g["carry"] = 0
 	g["carry_res"] = res
 	g["target"] = target
 	g["kind"] = kind
+	if bool(src["params"].get("requires_kill", false)) and not bool(src["killed"]):
+		# Caza: primero matar al animal (CombatSystem); al caer, recolectar.
+		g["state"] = "hunting"
+		CombatSystem.order_attack(sim, id, target)
+		return
 	var tpos: Vector2i = w.entities[target]["pos"]
 	if FP.dist(w.entities[id]["pos"], tpos) <= REACH:
 		_start_gathering(w, id, g, tpos)
 	else:
 		g["state"] = "to_resource"
 		MoveSystem.order_move(w, sim.grid, id, tpos)
+
+
+## Ovejas: solo las propias o las sin dueño.
+static func _may_take(sim, id: int, target: int) -> bool:
+	var w = sim.world
+	var owner := int(w.entities[target]["owner"])
+	return owner < 0 or owner == int(w.entities[id]["owner"])
 
 
 static func stop(sim, id: int) -> void:
@@ -57,12 +72,30 @@ static func step(sim) -> void:
 	for id in w.ids_with("Gather"):
 		var g: Dictionary = w.comp(id, "Gather")
 		match str(g["state"]):
+			"hunting":
+				_hunting(sim, id, g)
 			"to_resource":
 				_to_resource(sim, id, g)
 			"gathering":
 				_gather_tick(sim, id, g)
 			"to_drop":
 				_to_drop(sim, id, g)
+
+
+static func _hunting(sim, id: int, g: Dictionary) -> void:
+	var w = sim.world
+	var t: int = g["target"]
+	if not w.entities.has(t):
+		_retarget(sim, id, g)
+		return
+	if not _may_take(sim, id, t):
+		# La oveja cambió de dueño a mitad de la caza.
+		CombatSystem.stop(sim, id)
+		_retarget(sim, id, g)
+		return
+	if bool(w.comp(t, "ResourceSource")["killed"]):
+		CombatSystem.stop(sim, id)
+		order_gather(sim, id, t)
 
 
 static func _to_resource(sim, id: int, g: Dictionary) -> void:
@@ -159,6 +192,11 @@ static func _retarget(sim, id: int, g: Dictionary) -> void:
 	for c in w.spatial.query_radius(pos, RETARGET_R):
 		var src: Dictionary = w.comp(c, "ResourceSource")
 		if src.is_empty() or str(src["params"]["rate_key"]) != str(g["kind"]):
+			continue
+		var p: Dictionary = src["params"]
+		if bool(p.get("hostile", false)) and not bool(src["killed"]):
+			continue # AoE2: no ataca un jabalí por su cuenta
+		if bool(p.get("water", false)) or not _may_take(sim, id, c):
 			continue
 		var dd := FP.dist(pos, w.entities[c]["pos"])
 		if best < 0 or dd < best_d:

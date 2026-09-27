@@ -5,13 +5,39 @@
   "tags": [
     "recurso"
   ],
+  "graphics": {
+    "attack": "sprite:animals/boar/attack",
+    "death": "sprite:animals/boar/death",
+    "decay": "sprite:animals/boar/decay",
+    "idle": "sprite:animals/boar/idle",
+    "walk": "sprite:animals/boar/walk"
+  },
   "abilities": {
     "ResourceSource": {
       "resource": "food",
       "amount": 340,
-      "rate_key": "food_forage",
+      "rate_key": "food_hunt",
       "requires_kill": true,
       "hostile": true
+    },
+    "Hitpoints": {
+      "max": 75
+    },
+    "Move": {
+      "speed": 1.0
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 1
+      }
+    },
+    "Attack": {
+      "damage": {
+        "melee": 8
+      },
+      "range": 0,
+      "reload": 2.0
     }
   }
 }

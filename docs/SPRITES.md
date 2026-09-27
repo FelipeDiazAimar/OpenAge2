@@ -75,3 +75,14 @@ move assets\sprites\tmp\u_inf_militia_idleA_x1 assets\sprites\militia\idle
 - `engine/render2d/terrain.gdshader` mezcla las capas con un mapa de control (bosque bajo los
   árboles, parches por ruido) y bordes orgánicos; fuera del mapa el fondo es negro.
 
+
+## Animales (F3b)
+
+- Packs en `assets/sprites/animals/<animal>/<anim>` (`deer`, `boar`, `sheep`; anims `idle`, `walk`,
+  `death`, `decay` y `attack` en el jabalí), extraídos de `a_hunt_*` / `a_herd_*` del DE. En el repo
+  van solo los manifests; los PNG los extrae cada jugador.
+- El migrador genera `graphics` por subcarpeta (`"death": "sprite:animals/deer/death"`...).
+  Al morir, la carcasa reproduce `death` una vez y luego queda el frame de `decay` en el suelo
+  mientras se recolecta.
+- Las ovejas con dueño llevan la elipse del color del jugador (no traen máscara) y se re-tiñen
+  al cambiar de dueño.

@@ -61,7 +61,9 @@ static func step(sim) -> void:
 	_step_projectiles(sim)
 	var w = sim.world
 	for id in w.ids_with("Attack"):
-		if not w.entities.has(id):
+		# Un golpe de este mismo bucle puede haber matado a id (o dejarlo como
+		# carcasa, sin Attack).
+		if not w.has_ability(id, "Attack"):
 			continue
 		var a: Dictionary = w.comp(id, "Attack")
 		if int(a["cooldown"]) > 0:
@@ -111,6 +113,8 @@ static func _acquire(sim, id: int) -> int:
 	for c in w.spatial.query_radius(e["pos"], sight):
 		if c == id or not w.has_ability(c, "Hitpoints"):
 			continue
+		if w.has_ability(c, "ResourceSource"):
+			continue # animales: solo por orden (caza); las ovejas se capturan
 		if not sim.is_enemy(int(e["owner"]), int(w.entities[c]["owner"])):
 			continue
 		if c == int(a["ignore"]) and w.tick < int(a["ignore_until"]):
@@ -239,16 +243,21 @@ static func _hit(sim, id: int, t: int) -> void:
 		var to: Vector2i = w.entities[t]["pos"]
 		var speed := maxi(1, FP.from_data(float(params["projectile_speed"])) / World.TICK_RATE)
 		sim.projectiles.append({
-			"id": sim.next_projectile_id(), "owner": owner, "target": t, "from": from, "pos": from,
+			"id": sim.next_projectile_id(), "owner": owner, "src": id, "target": t, "from": from, "pos": from,
 			"to": to, "speed": speed, "damage": params["damage"],
 			"area": FP.from_data(float(params.get("area_radius", 0.0))),
 			"age": 0, "total": maxi(1, (FP.dist(from, to) + speed - 1) / speed),
 		})
 	else:
-		apply_damage(sim, params["damage"], t)
+		apply_damage(sim, params["damage"], t, id)
 
 
-static func apply_damage(sim, atk: Dictionary, t: int) -> void:
+## attacker: id de quien golpea (-1 si no se sabe). Represalia AoE2: si el
+## golpeado puede atacar, no es aldeano (sin Gather), está sin objetivo y no
+## se está moviendo por orden, va contra el atacante aunque esté fuera de su
+## vista. El jabalí persigue (orden explícita); los militares lo sueltan si
+## no lo alcanzan.
+static func apply_damage(sim, atk: Dictionary, t: int, attacker: int = -1) -> void:
 	var w = sim.world
 	if not w.entities.has(t) or not w.has_ability(t, "Hitpoints"):
 		return
@@ -259,6 +268,20 @@ static func apply_damage(sim, atk: Dictionary, t: int) -> void:
 	hp["hp"] = int(hp["hp"]) - damage(atk, sim.def_for(t), armor)
 	if int(hp["hp"]) <= 0:
 		sim.kill(t)
+		return
+	if attacker < 0 or not w.entities.has(attacker) or w.has_ability(t, "Gather"):
+		return
+	var ta: Dictionary = w.comp(t, "Attack")
+	if ta.is_empty() or int(ta["target"]) >= 0 or not w.has_ability(attacker, "Hitpoints"):
+		return
+	var tm: Dictionary = w.comp(t, "Move")
+	if not tm.is_empty() and bool(tm["moving"]):
+		return # retirada ordenada por el jugador
+	if _too_close(sim, t, attacker):
+		return # asedio con enemigo dentro del alcance mínimo
+	order_attack(sim, t, attacker)
+	if not w.has_ability(t, "ResourceSource"):
+		ta["explicit"] = false
 
 
 static func _step_projectiles(sim) -> void:
@@ -286,15 +309,15 @@ static func _land(sim, p: Dictionary) -> void:
 	if int(p["area"]) > 0:
 		for c in w.spatial.query_radius(to, int(p["area"])):
 			if w.has_ability(c, "Hitpoints") and sim.is_enemy(owner, int(w.entities[c]["owner"])):
-				apply_damage(sim, p["damage"], c)
+				apply_damage(sim, p["damage"], c, int(p["src"]))
 		return
 	var t: int = p["target"]
 	if w.entities.has(t) and _hits(sim, t, to):
-		apply_damage(sim, p["damage"], t)
+		apply_damage(sim, p["damage"], t, int(p["src"]))
 		return
 	for c in w.spatial.query_radius(to, HIT_RADIUS):
 		if w.has_ability(c, "Hitpoints") and sim.is_enemy(owner, int(w.entities[c]["owner"])):
-			apply_damage(sim, p["damage"], c)
+			apply_damage(sim, p["damage"], c, int(p["src"]))
 			return
 
 

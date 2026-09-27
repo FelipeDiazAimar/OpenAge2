@@ -5,12 +5,31 @@
   "tags": [
     "recurso"
   ],
+  "graphics": {
+    "death": "sprite:animals/sheep/death",
+    "decay": "sprite:animals/sheep/decay",
+    "idle": "sprite:animals/sheep/idle",
+    "walk": "sprite:animals/sheep/walk"
+  },
   "abilities": {
     "ResourceSource": {
       "resource": "food",
       "amount": 100,
-      "rate_key": "food_forage",
+      "rate_key": "food_herd",
+      "requires_kill": true,
       "tame": true
+    },
+    "Hitpoints": {
+      "max": 7
+    },
+    "Move": {
+      "speed": 0.7
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
     }
   }
 }

@@ -134,6 +134,26 @@ class TestFiles(unittest.TestCase):
         b2 = dict(b, attack=5, range=8.0)
         self.assertEqual(M.convert_building(b2, [], [])["abilities"]["Attack"]["projectile_speed"], 7.0, "las torres disparan flechas")
 
+    def test_animals_have_hp_move_and_sprites(self):
+        with tempfile.TemporaryDirectory() as d:
+            for anim in ("idle", "walk", "attack", "death", "decay"):
+                os.makedirs(os.path.join(d, "animals", "boar", anim))
+            rd = {"id": "boar", "resource": "food", "amount": 340, "hostile": True, "gather": {"rate_key": "food_forage"}}
+            e = M.convert_resource(rd, {}, d)
+            ab = e["abilities"]
+            self.assertEqual(ab["Hitpoints"], {"max": 75})
+            self.assertEqual(ab["Move"], {"speed": 1.0})
+            self.assertEqual(ab["Attack"], {"damage": {"melee": 8}, "range": 0, "reload": 2.0})
+            self.assertEqual(ab["Armor"], {"classes": {"melee": 0, "pierce": 1}})
+            self.assertTrue(ab["ResourceSource"]["requires_kill"])
+            self.assertEqual(e["graphics"]["decay"], "sprite:animals/boar/decay")
+        sheep = M.convert_resource({"id": "sheep", "resource": "food", "amount": 100, "tame": True, "gather": {"rate_key": "food_forage"}}, {})
+        self.assertTrue(sheep["abilities"]["ResourceSource"]["requires_kill"], "las ovejas también se matan antes de recolectar")
+        self.assertEqual(sheep["abilities"]["Hitpoints"], {"max": 7})
+        # Caza y pastoreo con tasa propia (no se mezclan con las bayas).
+        self.assertEqual(ab["ResourceSource"]["rate_key"], "food_hunt")
+        self.assertEqual(sheep["abilities"]["ResourceSource"]["rate_key"], "food_herd")
+
     def test_resource_graphics(self):
         rd = {"id": "tree", "resource": "wood", "amount": 100, "gather": {"rate_key": "wood"}}
         self.assertNotIn("graphics", M.convert_resource(rd, {}))

@@ -74,3 +74,21 @@ func test_players_get_resources_and_are_connected() -> void:
 			assert_eq(r, region, "todos los inicios conectados (semilla %d)" % sd)
 		var total_trees := _count_near(s, Vector2i(72, 72), "tree", 80)
 		assert_true(total_trees > 400, "bosques generales: %d" % total_trees)
+
+
+func test_animals_per_player() -> void:
+	for sd in [1, 2]:
+		var s := _gen(sd)
+		for i in STARTS.size():
+			var c: Vector2i = STARTS[i]
+			var own_sheep := 0
+			for id in s.world.entities:
+				var e: Dictionary = s.world.entities[id]
+				if e["def_id"] == "sheep" and e["owner"] == i:
+					var t := Grid.tile_of(e["pos"])
+					if maxi(absi(t.x - c.x), absi(t.y - c.y)) <= 7:
+						own_sheep += 1
+					assert_true(s.grid.is_walkable(t), "oveja en casilla libre")
+			assert_eq(own_sheep, 4, "4 ovejas propias junto al TC (semilla %d)" % sd)
+			assert_eq(_count_near(s, c, "boar", 18), 2, "2 jabalíes (semilla %d)" % sd)
+			assert_true(_count_near(s, c, "deer", 24) >= 3, "ciervos (semilla %d)" % sd)

@@ -52,15 +52,24 @@ BUILDING_ARROW_SPEED = 7.0  # casillas/s de las flechas de torres y castillos
 VILLAGER_TASKS = {
     "wood": ["lumber"], "gold": ["miner_gold"], "stone": ["miner_stone", "miner_gold"],
     "food_forage": ["forager"], "food_farm": ["farmer", "task"], "food_fish": ["fisher"],
+    "food_hunt": ["hunter", "forager"], "food_herd": ["shepherd", "forager"],
 }
 RESOURCE_SPRITES = {
     "tree": "nature/oak", "gold_mine": "nature/goldmine",
     "stone_mine": "nature/stonemine", "berry_bush": "nature/bush",
+    "deer": "animals/deer", "boar": "animals/boar", "sheep": "animals/sheep",
 }
 AGE_PREREQS = {"herreria_o_mercado": ["herreria", "mercado"], "castillo_o_monasterio": ["castillo", "monasterio"]}
 HOTKEY_ORDER = "QWERTASDFGZXCVB"
 UNIT_ALIASES = {"hombre_de_armas": "hombre_armas", "trabuquete": "trebuchet"}
-HUNTABLE = {"boar", "deer"}
+HUNTABLE = {"boar", "deer", "sheep"}
+ANIMAL_RATES = {"food_hunt": 0.41, "food_herd": 0.33}
+# Animales (AoE2): se matan y quedan como carcasa recolectable.
+ANIMALS = {
+    "deer": {"hp": 5, "speed": 1.1, "rate_key": "food_hunt"},
+    "boar": {"hp": 75, "speed": 1.0, "attack": 8, "rate_key": "food_hunt", "armor": {"melee": 0, "pierce": 1}},
+    "sheep": {"hp": 7, "speed": 0.7, "rate_key": "food_herd"},
+}
 DEFAULT_MELEE_RELOAD = 2.0  # AoE2: recarga cuerpo a cuerpo estándar
 TRAIN_QUEUE = 5
 TC_POP = 5
@@ -325,7 +334,8 @@ def convert_age(a, index, report):
 
 def convert_resource(r, defaults, sprites_root=None):
     rr = {**defaults, **r}
-    src = {"resource": rr["resource"], "amount": rr["amount"], "rate_key": rr["gather"]["rate_key"]}
+    rate_key = ANIMALS.get(r["id"], {}).get("rate_key", rr["gather"]["rate_key"])
+    src = {"resource": rr["resource"], "amount": rr["amount"], "rate_key": rate_key}
     if rr.get("infinite"):
         src["infinite"] = True
     if r["id"] in HUNTABLE:
@@ -336,8 +346,19 @@ def convert_resource(r, defaults, sprites_root=None):
     e = {"id": r["id"], "type": "resource", "name": rr.get("name", r["id"]), "tags": ["recurso"]}
     sp = RESOURCE_SPRITES.get(r["id"])
     if sp and sprites_root and os.path.isdir(os.path.join(sprites_root, sp)):
-        e["graphics"] = {"idle": f"sprite:{sp}"}
-    e["abilities"] = {"ResourceSource": src}
+        base = os.path.join(sprites_root, sp)
+        subs = sorted(a for a in os.listdir(base) if os.path.isdir(os.path.join(base, a)))
+        # Pack con animaciones (animales) o pack único de variantes (árboles, minas).
+        e["graphics"] = {a: f"sprite:{sp}/{a}" for a in subs} if subs else {"idle": f"sprite:{sp}"}
+    ab = {"ResourceSource": src}
+    animal = ANIMALS.get(r["id"])
+    if animal:
+        ab["Hitpoints"] = {"max": animal["hp"]}
+        ab["Move"] = {"speed": animal["speed"]}
+        ab["Armor"] = {"classes": dict(animal.get("armor", {"melee": 0, "pierce": 0}))}
+        if animal.get("attack"):
+            ab["Attack"] = {"damage": {"melee": animal["attack"]}, "range": 0, "reload": DEFAULT_MELEE_RELOAD}
+    e["abilities"] = ab
     return e
 
 
@@ -358,7 +379,9 @@ def migrate(src, out, sprites_root):
     report = {"dropped_train_refs": {}, "dropped_effect_targets": {}, "legacy_effects": {},
               "unported_fields": {}, "warnings": []}
     actions = load(os.path.join(src, "actions.json"))["actions"]
-    rates = actions["gather"]["rates_per_sec"]
+    # Caza y pastoreo (AoE2): tasas propias; así un recolector de bayas no
+    # se va a cazar al agotarse el arbusto (y viceversa).
+    rates = {**actions["gather"]["rates_per_sec"], **ANIMAL_RATES}
     carry = actions["gather"]["carry_capacity"]
     units = [load(p) for p in sorted(glob.glob(os.path.join(src, "units", "*.json")))]
     buildings = [load(p) for p in sorted(glob.glob(os.path.join(src, "buildings", "*.json")))]

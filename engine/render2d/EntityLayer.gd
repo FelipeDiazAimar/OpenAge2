@@ -14,6 +14,9 @@ var views: Dictionary = {}
 ## Cadáveres (solo render): {view, t}. No se seleccionan.
 var corpses: Array = []
 var _prev: Dictionary = {}
+## Carcasas recientes: id -> segundos desde la muerte (animación death y luego decay).
+var _dying: Dictionary = {}
+const DEATH_TIME := 1.2
 
 
 func _init() -> void:
@@ -37,6 +40,8 @@ func sync(alpha: float, delta: float) -> void:
 	for ev in sim.drain_events():
 		if str(ev.get("type", "")) == "death":
 			_spawn_corpse(ev)
+		elif str(ev.get("type", "")) == "carcass":
+			_dying[int(ev["id"])] = 0.0
 	for c in corpses.duplicate():
 		c["t"] += delta
 		c["view"].update_view(false, Vector2.ZERO, delta, "death")
@@ -49,6 +54,7 @@ func sync(alpha: float, delta: float) -> void:
 		if not w.entities.has(id):
 			views[id].queue_free()
 			views.erase(id)
+			_dying.erase(id)
 	var ids: Array = w.entities.keys()
 	ids.sort()
 	var a := clampf(alpha, 0.0, 1.0)
@@ -72,6 +78,9 @@ func sync(alpha: float, delta: float) -> void:
 		var hp: Dictionary = w.comp(id, "Hitpoints")
 		if not hp.is_empty() and int(hp["max"]) > 0:
 			v.hp_ratio = float(hp["hp"]) / float(hp["max"])
+		var col: Color = colors.get(e["owner"], Color(0.6, 0.6, 0.6))
+		v.set_color(col)
+		v.owned = str(e["type"]) == "resource" and int(e["owner"]) >= 0 and w.has_ability(id, "Hitpoints")
 		var action := ""
 		var att: Dictionary = w.comp(id, "Attack")
 		var g: Dictionary = w.comp(id, "Gather")
@@ -79,6 +88,14 @@ func sync(alpha: float, delta: float) -> void:
 			action = "attack"
 		elif not g.is_empty() and str(g["state"]) == "gathering":
 			action = "task_" + str(g["kind"])
+		var src: Dictionary = w.comp(id, "ResourceSource")
+		if not src.is_empty() and bool(src["killed"]):
+			# Carcasa: la animación de muerte una vez y luego el cuerpo en el suelo.
+			var t: float = _dying.get(id, DEATH_TIME) + delta
+			_dying[id] = t
+			v.one_shot = t < DEATH_TIME
+			action = "death" if t < DEATH_TIME else "decay"
+			moving = false
 		v.update_view(moving, facing, delta, action)
 
 

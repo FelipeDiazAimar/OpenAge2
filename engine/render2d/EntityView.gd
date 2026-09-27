@@ -6,7 +6,7 @@ extends Node2D
 
 const Iso := preload("res://engine/render2d/Iso.gd")
 const PLAYER_SHADER := preload("res://engine/render2d/player_color.gdshader")
-const FPS := {"walk": 10.0, "idle": 6.0, "task": 8.0, "attack": 10.0, "death": 8.0}
+const FPS := {"walk": 10.0, "idle": 6.0, "task": 8.0, "attack": 10.0, "death": 8.0, "decay": 0.0}
 
 var entity_id := 0
 var kind := "unit"
@@ -24,6 +24,8 @@ var hp_ratio := 1.0:
 			queue_redraw()
 ## La animación no se repite: queda en el último frame (muerte).
 var one_shot := false
+## Animal con dueño (oveja propia): lleva la marca de bando.
+var owned := false
 
 var _graphics: Dictionary = {}
 var _locator
@@ -35,6 +37,15 @@ var _frame := 0
 var _has_mask := false
 var _sprite: Sprite2D
 var _mat: ShaderMaterial
+
+
+## Cambio de dueño (p. ej. oveja capturada).
+func set_color(c: Color) -> void:
+	if c == color:
+		return
+	color = c
+	_mat.set_shader_parameter("player_color", c)
+	queue_redraw()
 
 
 func setup(id: int, def: Dictionary, p_color: Color, locator) -> void:
@@ -74,7 +85,7 @@ func current_frame() -> int:
 ## Unidad con sprite sin máscara de color de jugador: se dibuja una elipse del
 ## color del jugador bajo los pies para distinguir bandos.
 func team_marker() -> bool:
-	return kind == "unit" and _sprite.visible and not _has_mask and not one_shot
+	return (kind == "unit" or owned) and _sprite.visible and not _has_mask and not one_shot
 
 
 func pick_radius() -> float:
