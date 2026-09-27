@@ -8,6 +8,7 @@ const FP := preload("res://engine/sim/FixedPoint.gd")
 const PlayerDefs := preload("res://engine/data/PlayerDefs.gd")
 const MoveSystem := preload("res://engine/sim/systems/MoveSystem.gd")
 const GatherSystem := preload("res://engine/sim/systems/GatherSystem.gd")
+const CombatSystem := preload("res://engine/sim/systems/CombatSystem.gd")
 
 const INPUT_DELAY := 2
 const START_RES := {"wood": 200, "food": 200, "gold": 100, "stone": 200}
@@ -19,6 +20,13 @@ var grid
 var players: Array[Dictionary] = []
 var _pending: Dictionary = {}
 var _seq := 0
+## Proyectiles en vuelo: {id, owner, target, from, pos, to, speed, damage, area, age, total}.
+var projectiles: Array = []
+## Eventos para el render ({"type": "death", ...}); se consumen con drain_events().
+var events: Array = []
+## Solo partidas locales: habilita el comando debug_spawn (tropas de prueba).
+var debug_enabled := false
+var _next_projectile := 1
 
 
 func _init(p_registry, map_w: int, map_h: int) -> void:
@@ -58,6 +66,40 @@ func spawn(def_id: String, owner: int, tile: Vector2i) -> int:
 	if str(def["type"]) == "resource":
 		grid.set_blocked(tile, true)
 	return world.spawn(def, owner, Grid.center_of(tile))
+
+
+func next_projectile_id() -> int:
+	_next_projectile += 1
+	return _next_projectile - 1
+
+
+func team_of(pid: int) -> int:
+	if pid < 0 or pid >= players.size():
+		return -1
+	return int(players[pid]["team"])
+
+
+## Dueños jugadores distintos y de equipos distintos (gaia -1 nunca es enemigo).
+func is_enemy(a: int, b: int) -> bool:
+	return a >= 0 and b >= 0 and a != b and team_of(a) != team_of(b)
+
+
+## Muerte: evento para el render (cadáver) y eliminación de la entidad.
+func kill(id: int) -> void:
+	if not world.entities.has(id):
+		return
+	var e: Dictionary = world.entities[id]
+	var facing := Vector2i(1000, 1000)
+	if world.has_ability(id, "Move"):
+		facing = world.comp(id, "Move")["facing"]
+	events.append({"type": "death", "id": id, "def_id": e["def_id"], "owner": e["owner"], "pos": e["pos"], "facing": facing, "kind": e["type"]})
+	remove(id)
+
+
+func drain_events() -> Array:
+	var out := events
+	events = []
+	return out
 
 
 func remove(id: int) -> void:
@@ -120,6 +162,8 @@ func state_hash() -> String:
 	for p in players:
 		var r: Dictionary = p["res"]
 		parts.append("%d:%d,%d,%d,%d" % [p["id"], r["wood"], r["food"], r["gold"], r["stone"]])
+	for p in projectiles:
+		parts.append("P%d:%d,%d,%d" % [p["id"], p["pos"].x, p["pos"].y, p["target"]])
 	var ctx := HashingContext.new()
 	ctx.start(HashingContext.HASH_SHA256)
 	ctx.update("\n".join(parts).to_utf8_buffer())
@@ -142,6 +186,7 @@ func step() -> void:
 	for c in cmds:
 		_apply(c)
 	MoveSystem.step(world)
+	CombatSystem.step(self)
 	GatherSystem.step(self)
 
 
@@ -172,6 +217,12 @@ func _apply(c: Dictionary) -> void:
 			_cmd_move(int(c["pid"]), c["payload"])
 		"gather":
 			_cmd_gather(int(c["pid"]), c["payload"])
+		"attack":
+			_cmd_attack(int(c["pid"]), c["payload"])
+		"stop":
+			_cmd_stop(int(c["pid"]), c["payload"])
+		"debug_spawn":
+			_cmd_debug_spawn(c["payload"])
 
 
 ## Número utilizable de un payload (puede venir de JSON: floats, basura).
@@ -210,6 +261,7 @@ func _cmd_move(pid: int, payload: Dictionary) -> void:
 	var hi := Vector2i(grid.width * FP.SCALE - 1, grid.height * FP.SCALE - 1)
 	for i in ids.size():
 		GatherSystem.stop(self, ids[i])
+		CombatSystem.stop(self, ids[i])
 		MoveSystem.order_move(world, grid, ids[i], (target + offs[i]).clamp(lo, hi))
 
 
@@ -221,4 +273,51 @@ func _cmd_gather(pid: int, payload: Dictionary) -> void:
 	if not world.has_ability(target, "ResourceSource"):
 		return
 	for id in _own_ids(pid, payload.get("ids"), "Gather"):
+		CombatSystem.stop(self, id)
 		GatherSystem.order_gather(self, id, target)
+
+
+func _cmd_attack(pid: int, payload: Dictionary) -> void:
+	var raw_t: Variant = payload.get("target")
+	if not _num_ok(raw_t):
+		return
+	var t := int(raw_t)
+	if not world.entities.has(t) or not world.has_ability(t, "Hitpoints"):
+		return
+	if not is_enemy(pid, int(world.entities[t]["owner"])):
+		return
+	for id in _own_ids(pid, payload.get("ids"), "Attack"):
+		GatherSystem.stop(self, id)
+		CombatSystem.order_attack(self, id, t)
+
+
+func _cmd_stop(pid: int, payload: Dictionary) -> void:
+	for id in _own_ids(pid, payload.get("ids"), "Move"):
+		GatherSystem.stop(self, id)
+		CombatSystem.stop(self, id)
+		var m: Dictionary = world.comp(id, "Move")
+		(m["waypoints"] as Array).clear()
+		m["moving"] = false
+
+
+## Tropas de prueba (solo con debug_enabled): n unidades cerca de pos.
+func _cmd_debug_spawn(payload: Dictionary) -> void:
+	if not debug_enabled:
+		return
+	var pos: Variant = payload.get("pos")
+	if not (pos is Array) or pos.size() != 2 or not _num_ok(pos[0]) or not _num_ok(pos[1]):
+		return
+	if not _num_ok(payload.get("n")) or not _num_ok(payload.get("owner")):
+		return
+	var owner := int(payload["owner"])
+	if owner < 0 or owner >= players.size():
+		return
+	var center := Grid.tile_of(Vector2i(int(pos[0]), int(pos[1])))
+	var want := clampi(int(payload["n"]), 0, 40)
+	var placed := 0
+	for off in spread_offsets(128):
+		if placed >= want:
+			break
+		var tile: Vector2i = center + off / FP.SCALE
+		if grid.is_walkable(tile) and spawn(str(payload.get("def", "")), owner, tile) >= 0:
+			placed += 1

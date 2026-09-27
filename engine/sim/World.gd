@@ -95,6 +95,13 @@ static func _init_component(ability: String, params: Dictionary) -> Dictionary:
 			c["hp"] = mx
 		"ResourceSource":
 			c["amount"] = FP.from_data(float(params["amount"]))
+		"Attack":
+			c["target"] = -1
+			c["explicit"] = false
+			c["cooldown"] = 0
+			c["windup"] = -1
+			c["attacking"] = false
+			c["repath"] = 0
 		"Gather":
 			c["state"] = "idle"
 			c["target"] = -1
