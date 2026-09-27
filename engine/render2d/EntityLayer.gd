@@ -4,11 +4,15 @@ extends Node2D
 
 const Iso := preload("res://engine/render2d/Iso.gd")
 const EntityView := preload("res://engine/render2d/EntityView.gd")
+## Segundos que un cadáver queda en el suelo (el último segundo se funde).
+const CORPSE_TIME := 5.0
 
 var sim
 var locator
 var colors: Dictionary = {}
 var views: Dictionary = {}
+## Cadáveres (solo render): {view, t}. No se seleccionan.
+var corpses: Array = []
 var _prev: Dictionary = {}
 
 
@@ -30,6 +34,17 @@ func snapshot() -> void:
 
 func sync(alpha: float, delta: float) -> void:
 	var w = sim.world
+	for ev in sim.drain_events():
+		if str(ev.get("type", "")) == "death":
+			_spawn_corpse(ev)
+	for c in corpses.duplicate():
+		c["t"] += delta
+		c["view"].update_view(false, Vector2.ZERO, delta, "death")
+		if c["t"] > CORPSE_TIME - 1.0:
+			c["view"].modulate.a = clampf(CORPSE_TIME - c["t"], 0.0, 1.0)
+		if c["t"] >= CORPSE_TIME:
+			c["view"].queue_free()
+			corpses.erase(c)
 	for id in views.keys():
 		if not w.entities.has(id):
 			views[id].queue_free()
@@ -58,10 +73,27 @@ func sync(alpha: float, delta: float) -> void:
 		if not hp.is_empty() and int(hp["max"]) > 0:
 			v.hp_ratio = float(hp["hp"]) / float(hp["max"])
 		var action := ""
+		var att: Dictionary = w.comp(id, "Attack")
 		var g: Dictionary = w.comp(id, "Gather")
-		if not g.is_empty() and str(g["state"]) == "gathering":
+		if not att.is_empty() and bool(att["attacking"]):
+			action = "attack"
+		elif not g.is_empty() and str(g["state"]) == "gathering":
 			action = "task_" + str(g["kind"])
 		v.update_view(moving, facing, delta, action)
+
+
+## Cadáver: animación de muerte una vez (si hay pack) y fundido.
+func _spawn_corpse(ev: Dictionary) -> void:
+	var def: Dictionary = sim.registry.get_def(str(ev["def_id"]))
+	if def.is_empty():
+		return
+	var v := EntityView.new()
+	v.setup(int(ev["id"]), def, colors.get(ev["owner"], Color(0.6, 0.6, 0.6)), locator)
+	v.one_shot = true
+	v.position = Iso.milli_to_screen(ev["pos"])
+	add_child(v)
+	v.update_view(false, Iso.to_screen(Vector2(ev["facing"])), 0.0, "death")
+	corpses.append({"view": v, "t": 0.0})
 
 
 ## Entidad bajo el punto (coordenadas de mundo del canvas). Prioriza unidades.

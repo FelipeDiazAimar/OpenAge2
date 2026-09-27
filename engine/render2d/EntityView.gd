@@ -17,7 +17,13 @@ var selected := false:
 		if v != selected:
 			selected = v
 			queue_redraw()
-var hp_ratio := 1.0
+var hp_ratio := 1.0:
+	set(v):
+		if not is_equal_approx(v, hp_ratio):
+			hp_ratio = v
+			queue_redraw()
+## La animación no se repite: queda en el último frame (muerte).
+var one_shot := false
 
 var _graphics: Dictionary = {}
 var _locator
@@ -102,7 +108,8 @@ func update_view(moving: bool, facing_screen: Vector2, delta: float, action: Str
 	if kind != "unit" and dirs == 1:
 		sub = posmod(entity_id * 7919, maxi(1, per_dir))
 	else:
-		sub = int(_t * float(FPS.get(want, 8.0))) % maxi(1, per_dir)
+		var raw := int(_t * float(FPS.get(want, 8.0)))
+		sub = mini(raw, per_dir - 1) if one_shot else raw % maxi(1, per_dir)
 	var d := (_slot * dirs) / 16 if dirs > 1 else 0
 	_frame = d * per_dir + sub
 	var fr: Dictionary = pk["frames"][_frame]
@@ -141,7 +148,7 @@ func _draw() -> void:
 		else:
 			draw_circle(Vector2(0, -14), 9.0, color)
 			draw_arc(Vector2(0, -14), 9.0, 0.0, TAU, 20, Color.BLACK, 1.5)
-	if selected:
+	if selected or (hp_ratio < 0.999 and kind != "resource"):
 		var top := -(footprint.y * Iso.TILE_H + 60.0) if kind == "building" else -70.0
 		draw_rect(Rect2(-16, top, 32, 4), Color(0.6, 0.0, 0.0))
 		draw_rect(Rect2(-16, top, 32 * clampf(hp_ratio, 0.0, 1.0), 4), Color(0.1, 0.9, 0.1))
