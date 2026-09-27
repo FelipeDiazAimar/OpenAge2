@@ -17,6 +17,7 @@ user://
 assets/sprites/**/p_*.png
 assets/sprites/**/m_*.png
 assets/sprites/**/frame_*.png
+assets/sprites/**/*.import
 
 # Python
 __pycache__/
