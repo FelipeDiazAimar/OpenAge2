@@ -70,7 +70,16 @@ func state_hash() -> String:
 		var hp := -1
 		if has_ability(id, "Hitpoints"):
 			hp = components["Hitpoints"][id]["hp"]
-		parts.append("%d|%s|%d|%d|%d|%d" % [id, e["def_id"], e["owner"], e["pos"].x, e["pos"].y, hp])
+		var mv := "-"
+		if has_ability(id, "Move"):
+			var m: Dictionary = components["Move"][id]
+			mv = "%d:%d" % [1 if m["moving"] else 0, (m["waypoints"] as Array).size()]
+		var extra := -1
+		if has_ability(id, "Gather"):
+			extra = components["Gather"][id]["carry"]
+		elif has_ability(id, "ResourceSource"):
+			extra = components["ResourceSource"][id]["amount"]
+		parts.append("%d|%s|%d|%d|%d|%d|%s|%d" % [id, e["def_id"], e["owner"], e["pos"].x, e["pos"].y, hp, mv, extra])
 	var ctx := HashingContext.new()
 	ctx.start(HashingContext.HASH_SHA256)
 	ctx.update("\n".join(parts).to_utf8_buffer())
@@ -86,6 +95,13 @@ static func _init_component(ability: String, params: Dictionary) -> Dictionary:
 			c["hp"] = mx
 		"ResourceSource":
 			c["amount"] = FP.from_data(float(params["amount"]))
+		"Gather":
+			c["state"] = "idle"
+			c["target"] = -1
+			c["carry"] = 0
+			c["carry_res"] = ""
+			c["kind"] = ""
+			c["dropsite"] = -1
 		"Move":
 			c["step"] = FP.from_data(float(params["speed"])) / TICK_RATE
 			c["waypoints"] = [] as Array[Vector2i]

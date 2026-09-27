@@ -9,6 +9,8 @@ const PlayerDefs := preload("res://engine/data/PlayerDefs.gd")
 const MoveSystem := preload("res://engine/sim/systems/MoveSystem.gd")
 
 const INPUT_DELAY := 2
+const START_RES := {"wood": 200, "food": 200, "gold": 100, "stone": 200}
+const POP_MAX := 200
 
 var registry
 var world := World.new()
@@ -24,7 +26,10 @@ func _init(p_registry, map_w: int, map_h: int) -> void:
 
 
 func add_player(pid: int, civ: String, team: int) -> void:
-	players.append({"id": pid, "civ": civ, "team": team, "defs": PlayerDefs.new(registry.defs, civ)})
+	var res := {}
+	for k in START_RES:
+		res[k] = int(START_RES[k]) * FP.SCALE
+	players.append({"id": pid, "civ": civ, "team": team, "defs": PlayerDefs.new(registry.defs, civ), "res": res})
 
 
 func def_for(id: int) -> Dictionary:
@@ -49,7 +54,76 @@ func spawn(def_id: String, owner: int, tile: Vector2i) -> int:
 		var size := Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
 		grid.block_rect(tile, size)
 		return world.spawn(def, owner, tile * FP.SCALE + size * (FP.SCALE / 2))
+	if str(def["type"]) == "resource":
+		grid.set_blocked(tile, true)
 	return world.spawn(def, owner, Grid.center_of(tile))
+
+
+func remove(id: int) -> void:
+	if not world.entities.has(id):
+		return
+	var e: Dictionary = world.entities[id]
+	var pos: Vector2i = e["pos"]
+	match str(e["type"]):
+		"building":
+			var def := def_for(id)
+			var size := Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
+			grid.block_rect(Grid.tile_of(pos - size * (FP.SCALE / 2)), size, false)
+		"resource":
+			grid.set_blocked(Grid.tile_of(pos), false)
+	world.despawn(id)
+
+
+func res_of(pid: int) -> Dictionary:
+	var out := {}
+	var res: Dictionary = players[pid]["res"]
+	for k in START_RES:
+		out[k] = int(res[k]) / FP.SCALE
+	return out
+
+
+func add_res(pid: int, res: String, milli: int) -> void:
+	var r: Dictionary = players[pid]["res"]
+	if r.has(res):
+		r[res] = int(r[res]) + milli
+
+
+func population(pid: int) -> Vector2i:
+	var used := 0
+	var cap := 0
+	for id in world.entities:
+		var e: Dictionary = world.entities[id]
+		if int(e["owner"]) != pid:
+			continue
+		var def := def_for(id)
+		if str(e["type"]) == "unit":
+			used += int(def.get("pop_cost", 0))
+		elif world.has_ability(id, "ProvidesPop"):
+			cap += int(world.comp(id, "ProvidesPop")["params"]["amount"])
+	return Vector2i(used, mini(cap, POP_MAX))
+
+
+func gatherer_counts(pid: int) -> Dictionary:
+	var out := {"wood": 0, "food": 0, "gold": 0, "stone": 0}
+	for id in world.ids_with("Gather"):
+		if int(world.entities[id]["owner"]) != pid:
+			continue
+		var g: Dictionary = world.comp(id, "Gather")
+		if str(g["state"]) != "idle" and out.has(g["carry_res"]):
+			out[g["carry_res"]] += 1
+	return out
+
+
+func state_hash() -> String:
+	var parts := PackedStringArray([world.state_hash()])
+	for p in players:
+		var r: Dictionary = p["res"]
+		parts.append("%d:%d,%d,%d,%d" % [p["id"], r["wood"], r["food"], r["gold"], r["stone"]])
+	var ctx := HashingContext.new()
+	ctx.start(HashingContext.HASH_SHA256)
+	ctx.update("
+".join(parts).to_utf8_buffer())
+	return ctx.finish().hex_encode()
 
 
 func queue_command(pid: int, type: String, payload: Dictionary) -> void:
