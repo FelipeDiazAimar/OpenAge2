@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://openage_lobby"]
+; Taberna medieval: el fondo de madera lo pinta Lobby.gd por código (procedural).
+; Este ColorRect base da el tono de taberna antes del primer _ready.
+
+[ext_resource type="Script" path="res://ui/lobby/Lobby.gd" id="1"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="FondoTaberna" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.13, 0.09, 0.06, 1)
+tooltip_text = "Madera de taberna (base; el detalle lo dibuja Lobby.gd)"

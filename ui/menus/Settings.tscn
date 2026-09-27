@@ -1,0 +1,267 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://ui/menus/Settings.gd" id="1_settings"]
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_settings")
+
+[node name="Fondo" type="ColorRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+; Piedra oscura medieval (la madera y remaches los pinta Settings.gd).
+color = Color(0.12, 0.1, 0.08, 1)
+
+[node name="Margen" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Panel" type="PanelContainer" parent="Margen"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Margen/Panel"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Titulo" type="Label" parent="Margen/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.38, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 32
+text = "OPCIONES"
+horizontal_alignment = 1
+
+[node name="Subtitulo" type="Label" parent="Margen/Panel/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.87, 0.76, 0.55, 1)
+text = "Video, audio y controles. Se guarda en user://settings.cfg."
+horizontal_alignment = 1
+
+[node name="Pestanas" type="TabContainer" parent="Margen/Panel/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+; Pestañas como sellos de cera: el StyleBox completo lo pone Settings.gd.
+theme_override_colors/font_selected_color = Color(1, 0.82, 0.38, 1)
+theme_override_colors/font_unselected_color = Color(0.87, 0.76, 0.55, 1)
+theme_override_colors/font_hover_color = Color(1, 0.82, 0.38, 1)
+
+[node name="Video" type="Control" parent="Margen/Panel/VBox/Pestanas"]
+layout_mode = 2
+
+[node name="VideoBox" type="VBoxContainer" parent="Margen/Panel/VBox/Pestanas/Video"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="FilaRes" type="HBoxContainer" parent="Margen/Panel/VBox/Pestanas/Video/VideoBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="EtiquetaRes" type="Label" parent="Margen/Panel/VBox/Pestanas/Video/VideoBox/FilaRes"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22, 0.14, 0.07, 1)
+text = "Resolución"
+
+[node name="ResolucionOption" type="OptionButton" parent="Margen/Panel/VBox/Pestanas/Video/VideoBox/FilaRes"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PantallaCompletaCheck" type="CheckButton" parent="Margen/Panel/VBox/Pestanas/Video/VideoBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22, 0.14, 0.07, 1)
+text = "Pantalla completa"
+
+[node name="VSyncCheck" type="CheckButton" parent="Margen/Panel/VBox/Pestanas/Video/VideoBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22, 0.14, 0.07, 1)
+button_pressed = true
+text = "VSync (sincronización vertical)"
+
+[node name="EdgeCheck" type="CheckButton" parent="Margen/Panel/VBox/Pestanas/Video/VideoBox"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22, 0.14, 0.07, 1)
+button_pressed = true
+text = "Edge-pan (mover cámara al borde) activado"
+
+[node name="Audio" type="Control" parent="Margen/Panel/VBox/Pestanas"]
+layout_mode = 2
+
+[node name="AudioBox" type="VBoxContainer" parent="Margen/Panel/VBox/Pestanas/Audio"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="FilaMaster" type="HBoxContainer" parent="Margen/Panel/VBox/Pestanas/Audio/AudioBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="EtiquetaMaster" type="Label" parent="Margen/Panel/VBox/Pestanas/Audio/AudioBox/FilaMaster"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22, 0.14, 0.07, 1)
+text = "Volumen general"
+
+[node name="MasterSlider" type="HSlider" parent="Margen/Panel/VBox/Pestanas/Audio/AudioBox/FilaMaster"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+value = 80.0
+
+[node name="MasterValor" type="Label" parent="Margen/Panel/VBox/Pestanas/Audio/AudioBox/FilaMaster"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22, 0.14, 0.07, 1)
+text = "80%"
+
+[node name="FilaMusica" type="HBoxContainer" parent="Margen/Panel/VBox/Pestanas/Audio/AudioBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="EtiquetaMusica" type="Label" parent="Margen/Panel/VBox/Pestanas/Audio/AudioBox/FilaMusica"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22, 0.14, 0.07, 1)
+text = "Volumen música"
+
+[node name="MusicaSlider" type="HSlider" parent="Margen/Panel/VBox/Pestanas/Audio/AudioBox/FilaMusica"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+value = 80.0
+
+[node name="MusicaValor" type="Label" parent="Margen/Panel/VBox/Pestanas/Audio/AudioBox/FilaMusica"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22, 0.14, 0.07, 1)
+text = "80%"
+
+[node name="FilaEfectos" type="HBoxContainer" parent="Margen/Panel/VBox/Pestanas/Audio/AudioBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="EtiquetaEfectos" type="Label" parent="Margen/Panel/VBox/Pestanas/Audio/AudioBox/FilaEfectos"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22, 0.14, 0.07, 1)
+text = "Volumen efectos"
+
+[node name="EfectosSlider" type="HSlider" parent="Margen/Panel/VBox/Pestanas/Audio/AudioBox/FilaEfectos"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 100.0
+step = 1.0
+value = 80.0
+
+[node name="EfectosValor" type="Label" parent="Margen/Panel/VBox/Pestanas/Audio/AudioBox/FilaEfectos"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22, 0.14, 0.07, 1)
+text = "80%"
+
+[node name="NotaAudio" type="Label" parent="Margen/Panel/VBox/Pestanas/Audio/AudioBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.25, 0.15, 1)
+theme_override_font_sizes/font_size = 13
+text = "Música y efectos usan sus buses si existen; si no, se crean en ejecución."
+autowrap_mode = 2
+
+[node name="Controles" type="Control" parent="Margen/Panel/VBox/Pestanas"]
+layout_mode = 2
+
+[node name="ControlesBox" type="VBoxContainer" parent="Margen/Panel/VBox/Pestanas/Controles"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Info" type="Label" parent="Margen/Panel/VBox/Pestanas/Controles/ControlesBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.22, 0.14, 0.07, 1)
+text = "Teclas (clic en un botón y pulsa la nueva tecla, Esc cancela):"
+autowrap_mode = 2
+
+[node name="Scroll" type="ScrollContainer" parent="Margen/Panel/VBox/Pestanas/Controles/ControlesBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TeclasBox" type="VBoxContainer" parent="Margen/Panel/VBox/Pestanas/Controles/ControlesBox/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="Pie" type="HBoxContainer" parent="Margen/Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="GuardarButton" type="Button" parent="Margen/Panel/VBox/Pie"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 36)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.9, 0.86, 1)
+theme_override_colors/font_hover_color = Color(1, 0.82, 0.38, 1)
+; Botón de hierro con hover dorado (StyleBox completo en Settings.gd).
+text = "Guardar"
+
+[node name="VolverButton" type="Button" parent="Margen/Panel/VBox/Pie"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(220, 36)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.9, 0.86, 1)
+theme_override_colors/font_hover_color = Color(1, 0.82, 0.38, 1)
+text = "← Volver al menú"

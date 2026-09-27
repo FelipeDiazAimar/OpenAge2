@@ -1,0 +1,43 @@
+{
+ "source": "b_west_house_age2_x1",
+ "dirs": 1,
+ "per_dir": 3,
+ "kept_per_dir": 3,
+ "step": 1,
+ "size": [
+  189,
+  170
+ ],
+ "frames": [
+  {
+   "png": "p_000.png",
+   "mask": "m_000.png",
+   "dir": 0,
+   "sub": 0,
+   "hotspot": [
+    93,
+    125
+   ]
+  },
+  {
+   "png": "p_001.png",
+   "mask": "m_001.png",
+   "dir": 0,
+   "sub": 1,
+   "hotspot": [
+    93,
+    125
+   ]
+  },
+  {
+   "png": "p_002.png",
+   "mask": "m_002.png",
+   "dir": 0,
+   "sub": 2,
+   "hotspot": [
+    93,
+    125
+   ]
+  }
+ ]
+}

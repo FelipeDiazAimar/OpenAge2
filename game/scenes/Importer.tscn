@@ -1,0 +1,173 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://game/scenes/Importer.gd" id="1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_marco"]
+bg_color = Color(0.13, 0.09, 0.06, 0.95)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.72, 0.58, 0.3, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.6)
+shadow_size = 18
+
+[node name="Importer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="Fondo" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.03, 0.02, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Marco" type="PanelContainer" parent="Center"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_marco")
+
+[node name="Margen" type="MarginContainer" parent="Center/Marco"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 24
+
+[node name="Caja" type="VBoxContainer" parent="Center/Marco/Margen"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Titulo" type="Label" parent="Center/Marco/Margen/Caja"]
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.84, 0.42, 1)
+theme_override_font_sizes/font_size = 32
+text = "Importador de sprites"
+horizontal_alignment = 1
+
+[node name="Subtitulo" type="Label" parent="Center/Marco/Margen/Caja"]
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82, 0.76, 0.64, 1)
+theme_override_font_sizes/font_size = 14
+text = "Usa tu copia comprada del AoE2:DE. Destino: user://aoe2_assets/sprites (lo lee Match). Solo cliente."
+autowrap_mode = 2
+horizontal_alignment = 1
+
+[node name="OrigenLabel" type="Label" parent="Center/Marco/Margen/Caja"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82, 0.76, 0.64, 1)
+theme_override_font_sizes/font_size = 15
+text = "Carpeta drs/graphics del juego:"
+
+[node name="FilaOrigen" type="HBoxContainer" parent="Center/Marco/Margen/Caja"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SrcEdit" type="LineEdit" parent="Center/Marco/Margen/Caja/FilaOrigen"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "C:/.../drs/graphics"
+
+[node name="ElegirButton" type="Button" parent="Center/Marco/Margen/Caja/FilaOrigen"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Elegir carpeta…"
+
+[node name="AutoLabel" type="Label" parent="Center/Marco/Margen/Caja"]
+custom_minimum_size = Vector2(560, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.68, 0.63, 0.55, 1)
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 2
+text = "Buscando instalación…"
+
+[node name="SetsLabel" type="Label" parent="Center/Marco/Margen/Caja"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82, 0.76, 0.64, 1)
+theme_override_font_sizes/font_size = 15
+text = "Sets a extraer:"
+
+[node name="CheckAldeano" type="CheckBox" parent="Center/Marco/Margen/Caja"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Aldeano (walk, idle, task, death)"
+button_pressed = true
+
+[node name="CheckMilicia" type="CheckBox" parent="Center/Marco/Margen/Caja"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Milicia (walk, idle, attack)"
+button_pressed = true
+
+[node name="CheckArquero" type="CheckBox" parent="Center/Marco/Margen/Caja"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Arquero (walk, idle, attack)"
+button_pressed = true
+
+[node name="CheckEdificios" type="CheckBox" parent="Center/Marco/Margen/Caja"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Edificios (centro urbano, casa, cuartel)"
+
+[node name="CheckNaturaleza" type="CheckBox" parent="Center/Marco/Margen/Caja"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Naturaleza (roble, pino, oro, piedra, arbusto)"
+
+[node name="Progreso" type="ProgressBar" parent="Center/Marco/Margen/Caja"]
+custom_minimum_size = Vector2(560, 22)
+layout_mode = 2
+max_value = 100.0
+show_percentage = true
+
+[node name="FilaBotones" type="HBoxContainer" parent="Center/Marco/Margen/Caja"]
+layout_mode = 2
+theme_override_constants/separation = 12
+alignment = 1
+
+[node name="ExtraerButton" type="Button" parent="Center/Marco/Margen/Caja/FilaBotones"]
+custom_minimum_size = Vector2(220, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Extraer"
+
+[node name="VolverButton" type="Button" parent="Center/Marco/Margen/Caja/FilaBotones"]
+custom_minimum_size = Vector2(220, 50)
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Volver"
+
+[node name="Estado" type="Label" parent="Center/Marco/Margen/Caja"]
+custom_minimum_size = Vector2(560, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.5, 1)
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 2
+text = "Buscando instalación…"
+
+[node name="Explorador" type="FileDialog" parent="."]
+title = "Elige la carpeta drs/graphics"
+file_mode = 2

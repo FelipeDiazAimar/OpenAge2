@@ -1,0 +1,24 @@
+{
+ "file": "b_west_tower_age2_x1",
+ "version": 4,
+ "frames": [
+  {
+   "index": 0,
+   "frame_index": 0,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow",
+    "player"
+   ],
+   "png": "frame_000.png",
+   "mask": "frame_000.mask.png",
+   "shadow": "frame_000.shadow.png"
+  }
+ ]
+}

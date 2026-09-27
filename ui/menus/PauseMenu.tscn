@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://openage_pausemenu"]
+[ext_resource type="Script" path="res://ui/menus/PauseMenu.gd" id="1"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+; Pausa medieval: marco de madera con remaches, pergamino en opciones,
+; botones de hierro con hover dorado y slider con pomo dorado.
+; El StyleBox completo lo construye PauseMenu.gd de forma procedural.
+layer = 100
+script = ExtResource("1")
