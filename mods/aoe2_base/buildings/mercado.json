@@ -14,6 +14,8 @@
   "requires": {
     "age": "feudal"
   },
+  "build_menu": "economico",
+  "hotkey": "D",
   "graphics": {
     "idle": "sprite:buildings/market/b_west_market_age2_x1"
   },

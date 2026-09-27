@@ -16,6 +16,8 @@
   "requires": {
     "age": "imperial"
   },
+  "build_menu": "economico",
+  "hotkey": "X",
   "abilities": {
     "Hitpoints": {
       "max": 5000

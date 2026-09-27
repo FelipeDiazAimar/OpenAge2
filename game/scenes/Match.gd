@@ -303,12 +303,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		if placing != "":
 			cancel_placing()
 			return
+		if panel.back():
+			return
 		get_tree().change_scene_to_file("res://ui/menus/MainMenu.tscn")
 		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_F9:
 			debug_troops(1 if event.shift_pressed else local_pid, Iso.to_tiles(get_global_mouse_position()))
 			return
+		var plain_key: bool = not (event.ctrl_pressed or event.alt_pressed or event.meta_pressed)
+		if plain_key and placing == "" and panel.press_key(OS.get_keycode_string(event.keycode)):
+			return # menú de construir (va antes que S = detener)
 		if event.keycode == KEY_S and not selected.is_empty():
 			sim.queue_command(local_pid, "stop", {"ids": selected.duplicate()})
 			return

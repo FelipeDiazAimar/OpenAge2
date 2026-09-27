@@ -14,6 +14,8 @@
   "requires": {
     "age": "castillos"
   },
+  "build_menu": "economico",
+  "hotkey": "G",
   "abilities": {
     "Hitpoints": {
       "max": 1200

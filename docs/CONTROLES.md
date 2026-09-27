@@ -72,8 +72,12 @@ Proyecto → Configuración → Mapa de entrada, o edita la sección `[input]` d
 - Clic derecho sobre un **animal** con aldeanos: cazar (ciervo/jabalí se matan primero y luego se
   recolecta la carcasa; el jabalí contraataca). Las **ovejas propias** se seleccionan y mueven como
   unidades; si te alejas, un aldeano enemigo cercano puede quedárselas.
-- **Construir**: con aldeanos seleccionados, el panel de abajo a la izquierda muestra los edificios
-  (en gris los bloqueados; el motivo aparece al pasar el ratón). Clic en uno, clic en el mapa
+- **Construir**: con aldeanos seleccionados, el panel de abajo a la izquierda muestra las páginas
+  **Q** (económicos) y **W** (militares); dentro, cada edificio tiene su tecla (económicos: Q casa,
+  W molino, E campamento minero, R campamento maderero, T muelle, A granja, S herrería, D mercado,
+  F monasterio, G universidad, Z centro urbano, X maravilla; militares: Q cuartel, W arquería,
+  E establo, R taller de asedio, A muro, S puerta, D torre, F castillo). **Esc** vuelve atrás.
+  En gris los bloqueados (el motivo aparece al pasar el ratón). Elige uno y haz clic en el mapa
   para colocarlo (vista previa verde/roja); **Shift** coloca varios; clic derecho o **Esc** cancela.
   Clic derecho sobre un cimiento propio = seguir construyéndolo.
 - **Entrenar / investigar / avanzar de edad**: selecciona el edificio y usa su panel; la tecla de

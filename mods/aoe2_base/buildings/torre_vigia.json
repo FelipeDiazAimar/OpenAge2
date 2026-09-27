@@ -14,6 +14,8 @@
   "requires": {
     "age": "feudal"
   },
+  "build_menu": "militar",
+  "hotkey": "D",
   "graphics": {
     "idle": "sprite:buildings/tower/b_west_tower_age2_x1"
   },

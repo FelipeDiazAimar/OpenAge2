@@ -14,6 +14,8 @@
   "requires": {
     "age": "feudal"
   },
+  "build_menu": "economico",
+  "hotkey": "S",
   "graphics": {
     "idle": "sprite:buildings/smith/b_west_blacksmith_age2_x1"
   },

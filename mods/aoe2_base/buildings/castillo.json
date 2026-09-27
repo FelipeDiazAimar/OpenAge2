@@ -14,6 +14,8 @@
   "requires": {
     "age": "castillos"
   },
+  "build_menu": "militar",
+  "hotkey": "F",
   "graphics": {
     "idle": "sprite:buildings/castle/b_west_castle_age3_x1"
   },
