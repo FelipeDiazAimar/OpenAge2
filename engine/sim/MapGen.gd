@@ -7,6 +7,9 @@ const Rng := preload("res://engine/sim/Rng.gd")
 
 const CLEAR_R := 7
 const PER_PLAYER := [["gold_mine", 10, 7], ["stone_mine", 11, 5], ["berry_bush", 9, 6], ["tree", 15, 45]]
+## Animales por jugador: [id, distancia, cantidad, propio]. AoE2: 4 ovejas
+## propias junto al TC, 2 jabalíes y una manada de ciervos más lejos.
+const ANIMALS := [["sheep", 5, 4, true], ["boar", 15, 2, false], ["deer", 19, 4, false]]
 const FORESTS := 16
 const LOOSE_GOLD := 6
 const LOOSE_STONE := 4
@@ -32,6 +35,43 @@ static func generate(sim, p_seed: int, starts: Array[Vector2i]) -> void:
 			var t := Vector2i(rng.range_i(5, w - 6), rng.range_i(5, h - 6))
 			if _far_from_starts(t, starts):
 				_blob(sim, rng, reserved, t, str(spec[0]), 4)
+	# Animales al final (no bloquean casillas; así no quedan bajo árboles).
+	var used := {}
+	for i in starts.size():
+		for spec in ANIMALS:
+			var owner := i if bool(spec[3]) else -1
+			_herd(sim, rng, used, starts[i], int(spec[1]), str(spec[0]), int(spec[2]), owner)
+
+
+## Grupo de n animales alrededor de un punto a `dist` casillas de c (±2).
+static func _herd(sim, rng, used: Dictionary, c: Vector2i, dist: int, def_id: String, n: int, owner: int) -> void:
+	var g = sim.grid
+	for attempt in 30:
+		var t: int = rng.range_i(-dist, dist)
+		var anchor: Vector2i
+		match rng.range_i(0, 3):
+			0:
+				anchor = c + Vector2i(t, -dist)
+			1:
+				anchor = c + Vector2i(dist, t)
+			2:
+				anchor = c + Vector2i(t, dist)
+			_:
+				anchor = c + Vector2i(-dist, t)
+		if not g.is_walkable(anchor):
+			continue
+		var placed := 0
+		for k in 40:
+			if placed >= n:
+				break
+			var spread := 1 if dist <= 6 else 2
+			var tile := anchor + Vector2i(rng.range_i(-spread, spread), rng.range_i(-spread, spread))
+			if used.has(tile) or not g.is_walkable(tile):
+				continue
+			if sim.spawn(def_id, owner, tile) >= 0:
+				used[tile] = true
+				placed += 1
+		return
 
 
 static func _far_from_starts(t: Vector2i, starts: Array[Vector2i]) -> bool:

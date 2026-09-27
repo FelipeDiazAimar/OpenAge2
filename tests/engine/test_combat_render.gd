@@ -72,3 +72,55 @@ func test_no_ghost_corpse_without_death_anim() -> void:
 	layer.sync(1.0, 0.1)
 	assert_eq(layer.corpses.size(), 0, "sin animación de muerte no queda una unidad 'fantasma' de pie")
 	layer.free()
+
+
+const SPR := "user://test_animals_sprites"
+
+
+func _anim_pack(path: String) -> void:
+	var dir := SPR + "/" + path
+	DirAccess.make_dir_recursive_absolute(dir)
+	var frames := []
+	for d in 16:
+		for sub in 2:
+			var n := "p_%03d.png" % (d * 2 + sub)
+			var img := Image.create(6, 6, false, Image.FORMAT_RGBA8)
+			img.fill(Color(0.5, 0.4, 0.3, 1))
+			img.save_png(dir + "/" + n)
+			frames.append({"png": n, "dir": d, "sub": sub, "hotspot": [3, 5]})
+	var f := FileAccess.open(dir + "/manifest.pack.json", FileAccess.WRITE)
+	f.store_string(JSON.stringify({"dirs": 16, "kept_per_dir": 2, "size": [6, 6], "frames": frames}))
+	f.close()
+
+
+func test_carcass_plays_death_then_decay() -> void:
+	for a in ["idle", "walk", "death", "decay"]:
+		_anim_pack("animals/deer/" + a)
+	var s := _sim()
+	var deer := s.spawn("deer", -1, Vector2i(10, 10))
+	var layer := EntityLayer.new()
+	layer.bind(s, AssetLocator.new([SPR], ["user://nada"]), {0: Color.BLUE, 1: Color.RED})
+	layer.snapshot()
+	layer.sync(1.0, 0.0)
+	s.kill(deer)
+	layer.sync(1.0, 0.1)
+	assert_eq(layer.views[deer].current_anim(), "death")
+	layer.sync(1.0, 1.5)
+	assert_eq(layer.views[deer].current_anim(), "decay")
+	var f: int = layer.views[deer].current_frame()
+	layer.sync(1.0, 3.0)
+	assert_eq(layer.views[deer].current_frame(), f, "la carcasa no se anima")
+	layer.free()
+
+
+func test_owner_change_recolors() -> void:
+	var s := _sim()
+	var sheep := s.spawn("sheep", -1, Vector2i(10, 10))
+	var layer := EntityLayer.new()
+	layer.bind(s, AssetLocator.new(["user://nada"], ["user://nada"]), {0: Color.BLUE, 1: Color.RED})
+	layer.snapshot()
+	layer.sync(1.0, 0.0)
+	s.world.entities[sheep]["owner"] = 1
+	layer.sync(1.0, 0.1)
+	assert_eq(layer.views[sheep].color, Color.RED)
+	layer.free()
