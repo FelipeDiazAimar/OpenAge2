@@ -62,3 +62,16 @@ move assets\sprites\tmp\u_inf_militia_idleA_x1 assets\sprites\militia\idle
 - Faenas del aldeano: el migrador genera `graphics.task_<rate_key>` (`task_wood → villager/lumber`,
   `task_gold`/`task_stone → villager/miner_gold`, `task_food_forage → villager/forager`,
   `task_food_fish → villager/fisher`); si falta el pack, el render usa `task`.
+
+## Terreno (F1b)
+
+- Al abrir la partida del motor nuevo, si el AoE2 DE está instalado (rutas típicas de Xbox/Steam,
+  o `OPENAGE_AOE2_PATH=<carpeta del juego>`), se exportan una vez las texturas
+  `resources/_common/terrain/textures/2x/*.dds` que usan los terrenos del mod a
+  `user://aoe2_assets/terrain/*.png` (Godot decodifica el DXT1; no hace falta Python).
+- Terrenos como datos: `mods/aoe2_base/terrains/*.json` con `texture` (`"terrain:g_gr2"`) y `color`
+  de respaldo (se usa si no hay juego instalado). Arabia usa pasto `g_gr2`, pasto seco `g_gr3`,
+  tierra `g_ds3` y suelo de bosque `g_fo2`.
+- `engine/render2d/terrain.gdshader` mezcla las capas con un mapa de control (bosque bajo los
+  árboles, parches por ruido) y bordes orgánicos; fuera del mapa el fondo es negro.
+
