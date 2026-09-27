@@ -161,12 +161,50 @@ func _build_systems() -> void:
 	add_child(units_root)
 
 
+## Mapa importado del AoE2 (--map=res://data/maps/imported/x.oamap.json).
+## Vacío = mapa propio (arabia). Solo cliente + sim local.
+var _active_map := {}
+
+
+## Ruta de mapa pasado por línea de comandos (--map=...). Vacío si no hay.
+func _active_map_path() -> String:
+	for a in OS.get_cmdline_user_args():
+		if str(a).begins_with("--map="):
+			return str(a).get_slice("=", 1)
+	return ""
+
+
 func _build_map() -> void:
+	# Mapa importado: recursos y spawns del archivo en vez de generados.
+	var mpath := _active_map_path()
+	if mpath != "" and FileAccess.file_exists(mpath):
+		var ml := MapLoader.new()
+		add_child(ml)
+		var loaded := ml.load_map(mpath, map_seed, -1)
+		if not bool(loaded.get("fallback_used", true)) and not (loaded.get("map", {}) as Dictionary).is_empty():
+			_active_map = loaded["map"]
+			print("GameWorld: mapa importado %s (%d spawns)" % [mpath, ((_active_map.get("spawns", []) as Array).size())])
 	# Spawns primero: el terreno aplana una meseta en cada uno (nada en agua).
 	var n: int = GameManager.players.size()
+	var want := n
+	if not _active_map.is_empty():
+		want = maxi(1, ((_active_map.get("spawns", []) as Array).size()))
+	if want != n:
+		var civs := ["britones", "francos", "godos", "bizantinos", "vikingos"]
+		var slots := []
+		for pid in want:
+			slots.append({"civ": civs[pid % civs.size()], "team": pid % 2})
+		GameManager.setup_lobby(slots)
+		n = want
+		local_pid = clampi(local_pid, 0, n - 1)
+		print("GameWorld: lobby ajustado a %d jugadores del mapa" % n)
 	_spawn_tiles.clear()
-	for pid in n:
-		_spawn_tiles.append(_tc_tile_for(pid, n))
+	if not _active_map.is_empty():
+		for s in (_active_map["spawns"] as Array):
+			_spawn_tiles.append(Vector2i(clampi(int(s[0]), 6, 137), clampi(int(s[1]), 6, 137)))
+	else:
+		for pid in n:
+			_spawn_tiles.append(_tc_tile_for(pid, n))
 	terrain = Terrain.new()
 	terrain.auto_build = false # construimos a mano con la seed de la partida
 	var spots: Array[Vector2] = []
@@ -294,7 +332,35 @@ func _spawn_all() -> void:
 	var n: int = GameManager.players.size()
 	for pid in n:
 		_spawn_player(pid, _spawn_tiles[pid] if pid < _spawn_tiles.size() else _tc_tile_for(pid, n))
+	if not _active_map.is_empty():
+		_spawn_imported_resources()
 	_setup_ai(n)
+
+
+## Recursos de un mapa importado: def_id del archivo -> (kind eco, modelo).
+func _spawn_imported_resources() -> void:
+	var nid := 20000
+	for r in (_active_map.get("resources", []) as Array):
+		if typeof(r) != TYPE_DICTIONARY:
+			continue
+		var t := Vector2i(clampi(int(r.get("tile", [72, 72])[0]), 6, 137), clampi(int(r.get("tile", [72, 72])[1]), 6, 137))
+		var amt := float(r.get("amount", 100.0))
+		match str(r.get("def_id", "")):
+			"tree":
+				_add_resource_node(nid, "wood", amt, t, "arbol")
+			"gold_mine":
+				_add_resource_node(nid, "gold", amt, t, "mina_oro")
+			"stone_mine":
+				_add_resource_node(nid, "stone", amt, t, "mina_piedra")
+			"berry_bush":
+				_add_resource_node(nid, "food_forage", amt, t, "granja")
+			"boar":
+				_add_resource_node(nid, "food_forage", amt, t, "jabali")
+			"deer":
+				_add_resource_node(nid, "food_forage", amt, t, "ciervo")
+			"sheep":
+				_add_resource_node(nid, "food_forage", amt, t, "oveja")
+		nid += 1
 
 
 ## IA enemiga: todos los pids menos el local juegan solos (en LAN nadie:
@@ -328,7 +394,10 @@ func _add_resource_node(node_id: int, kind: String, amount: float, tile: Vector2
 
 
 ## Visual de recurso: billboard del AoE2 según bioma, fallback al 3D propio.
+## Los animales (oveja/jabalí/ciervo) usan bicho 3D propio.
 func _resource_visual(node_id: int, kind: String, model: String) -> Node3D:
+	if model == "oveja" or model == "jabali" or model == "ciervo":
+		return ModelFactory.spawn_critter(model)
 	var pack := ""
 	var px := 0.03
 	match kind:
@@ -367,13 +436,14 @@ func _spawn_player(pid: int, tc_tile: Vector2i) -> void:
 	garrison.register_building(tc_uid, "centro_urbano", Vector2(tc_tile), pid)
 	# --- Recursos iniciales alrededor del TC (madera/oro/piedra) ---
 	var nid := 10000 + pid * 100
-	_add_resource_node(nid + 0, "wood", 100.0, tc_tile + Vector2i(4, 1), "arbol")
-	_add_resource_node(nid + 1, "wood", 100.0, tc_tile + Vector2i(-4, 2), "arbol")
-	_add_resource_node(nid + 2, "wood", 100.0, tc_tile + Vector2i(1, -5), "arbol")
-	_add_resource_node(nid + 3, "gold", 800.0, tc_tile + Vector2i(6, -2), "mina_oro")
-	_add_resource_node(nid + 4, "stone", 800.0, tc_tile + Vector2i(-5, -4), "mina_piedra")
-	_add_resource_node(nid + 5, "food_forage", 125.0, tc_tile + Vector2i(3, 4), "granja")
-	_add_resource_node(nid + 6, "food_forage", 125.0, tc_tile + Vector2i(-2, 6), "granja")
+	if _active_map.is_empty():
+		_add_resource_node(nid + 0, "wood", 100.0, tc_tile + Vector2i(4, 1), "arbol")
+		_add_resource_node(nid + 1, "wood", 100.0, tc_tile + Vector2i(-4, 2), "arbol")
+		_add_resource_node(nid + 2, "wood", 100.0, tc_tile + Vector2i(1, -5), "arbol")
+		_add_resource_node(nid + 3, "gold", 800.0, tc_tile + Vector2i(6, -2), "mina_oro")
+		_add_resource_node(nid + 4, "stone", 800.0, tc_tile + Vector2i(-5, -4), "mina_piedra")
+		_add_resource_node(nid + 5, "food_forage", 125.0, tc_tile + Vector2i(3, 4), "granja")
+		_add_resource_node(nid + 6, "food_forage", 125.0, tc_tile + Vector2i(-2, 6), "granja")
 	# --- 3 aldeanos alrededor del TC ---
 	for i in VILLAGER_OFFSETS.size():
 		var vtile := Vector2i(

@@ -140,6 +140,31 @@ static func spawn_unit(kind: String, civ_color: Color) -> Node3D:
 	return root
 
 
+## Bicho de caza (oveja/jabalí/ciervo): cuerpo + cabeza + patas. Solo visual.
+static func spawn_critter(kind: String) -> Node3D:
+	var root := Node3D.new()
+	root.name = "Crit_" + kind
+	match kind.to_lower().strip_edges():
+		"jabali":
+			_build_critter(root, Color(0.35, 0.24, 0.16), true)
+		"ciervo":
+			_build_critter(root, Color(0.65, 0.48, 0.3), false)
+		_:
+			_build_critter(root, Color(0.88, 0.86, 0.8), false)
+	return root
+
+
+static func _build_critter(root: Node3D, piel: Color, colmillos: bool) -> void:
+	_sphere(root, 0.42, Vector3(0, 0.55, 0), piel) # cuerpo
+	_sphere(root, 0.22, Vector3(0, 0.95, 0.35), piel) # cabeza
+	for sx in [-0.18, 0.18]:
+		for sz in [-0.2, 0.2]:
+			_box(root, Vector3(0.1, 0.35, 0.1), Vector3(sx, 0.18, sz), piel.darkened(0.25))
+	if colmillos:
+		_box(root, Vector3(0.05, 0.05, 0.18), Vector3(-0.12, 0.85, 0.55), Color(0.9, 0.88, 0.8))
+		_box(root, Vector3(0.05, 0.05, 0.18), Vector3(0.12, 0.85, 0.55), Color(0.9, 0.88, 0.8))
+
+
 static func _common_head(parent: Node3D, y: float) -> void:
 	_sphere(parent, 0.22, Vector3(0, y, 0), Color(0.9, 0.72, 0.55)) # piel
 
