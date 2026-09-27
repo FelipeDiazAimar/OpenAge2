@@ -40,3 +40,6 @@ El motor nuevo lee `mods/<mod>/` (el juego viejo sigue leyendo `data/` hasta la 
 - Validar: `godot --headless --path . -s tools/validate_mods.gd` (errores con archivo y campo).
 - `mods/aoe2_base` se genera con `py tools/migrate_data_to_mod.py`; lo no portado está en
   `mods/aoe2_base/_migration_report.json`.
+- Recolección: una unidad con `Gather {rates: {rate_key: por_seg}, capacity}` recolecta de
+  cualquier entidad con `ResourceSource {resource, amount, rate_key}` cuyo `rate_key` esté en sus
+  `rates`, y deposita en edificios propios con `DropSite {accepts: [recursos]}`.

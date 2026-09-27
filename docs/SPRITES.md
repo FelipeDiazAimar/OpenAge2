@@ -54,3 +54,11 @@ move assets\sprites\tmp\u_inf_militia_idleA_x1 assets\sprites\militia\idle
   W=0 antihorario (S=4, E=8, N=12). Sin pack, el render dibuja un placeholder.
 - Probar: menú → "Partida (nuevo motor, beta)", o
   `godot --path . res://game/scenes/Match.tscn -- --screenshot=user://f1.png --frames=90`.
+- Recursos y edificios con packs de **1 dirección y varios frames** (p. ej. `nature/oak` con 42
+  árboles) se tratan como **variantes**: cada entidad muestra un frame fijo elegido por su id.
+  Las unidades sí animan esos frames.
+- Recursos: `tree → nature/oak`, `gold_mine → nature/goldmine`, `stone_mine → nature/stonemine`,
+  `berry_bush → nature/bush` (definidos en `tools/migrate_data_to_mod.py`).
+- Faenas del aldeano: el migrador genera `graphics.task_<rate_key>` (`task_wood → villager/lumber`,
+  `task_gold`/`task_stone → villager/miner_gold`, `task_food_forage → villager/forager`,
+  `task_food_fish → villager/fisher`); si falta el pack, el render usa `task`.
