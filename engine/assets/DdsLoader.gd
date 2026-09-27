@@ -4,6 +4,7 @@ extends RefCounted
 ## bytes comprimidos y se descomprime con el decodificador BC de Godot.
 
 const HEADER := 128
+const MAX_DIM := 16384 # máximo de Image en Godot
 
 
 static func decode(bytes: PackedByteArray) -> Image:
@@ -20,12 +21,14 @@ static func decode(bytes: PackedByteArray) -> Image:
 		0x35545844:
 			fmt = Image.FORMAT_DXT5
 			block = 16
-	if fmt < 0 or w <= 0 or h <= 0:
+	if fmt < 0 or w <= 0 or h <= 0 or w > MAX_DIM or h > MAX_DIM:
 		return null
 	var size := maxi(1, (w + 3) / 4) * maxi(1, (h + 3) / 4) * block
 	if bytes.size() < HEADER + size:
 		return null
 	var img := Image.create_from_data(w, h, false, fmt, bytes.slice(HEADER, HEADER + size))
+	if img.is_empty():
+		return null
 	img.decompress()
 	if img.get_format() != Image.FORMAT_RGBA8:
 		img.convert(Image.FORMAT_RGBA8)

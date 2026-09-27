@@ -82,3 +82,10 @@ func test_terrain_schema() -> void:
 	assert_eq(Schemas.validate_entity(t, "t.json"), [])
 	t.erase("texture")
 	assert_has_error(Schemas.validate_entity(t, "t.json"), "grass.texture: falta campo obligatorio")
+
+
+func test_terrain_texture_ref_and_color_are_checked() -> void:
+	var t := {"id": "nieve", "type": "terrain", "texture": "g_sno", "color": "blanquito"}
+	var errs := Schemas.validate_entity(t, "n.json")
+	assert_has_error(errs, "nieve.texture: debe empezar con 'terrain:'")
+	assert_has_error(errs, "nieve.color: color inválido 'blanquito'")

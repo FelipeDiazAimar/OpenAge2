@@ -128,6 +128,11 @@ static func validate_entity(e: Dictionary, src: String) -> Array[String]:
 	var fields: Dictionary = COMMON.duplicate()
 	fields.merge(BY_TYPE[t])
 	_check_fields(e, fields, id, src, abstract, errs)
+	if t == "terrain":
+		if e.get("texture") is String and not str(e["texture"]).begins_with("terrain:"):
+			errs.append("%s: %s.texture: debe empezar con 'terrain:'" % [src, id])
+		if e.get("color") is String and not Color.html_is_valid(str(e["color"])):
+			errs.append("%s: %s.color: color inválido '%s'" % [src, id, e["color"]])
 	var abil: Variant = e.get("abilities", {})
 	if not (abil is Dictionary):
 		return errs

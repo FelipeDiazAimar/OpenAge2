@@ -28,6 +28,8 @@ func setup(sim, registry, locator, p_seed: int) -> void:
 	_mat.set_shader_parameter("tiles_per_tex", TILES_PER_TEX)
 	for i in LAYERS.size():
 		var def: Dictionary = registry.get_def(LAYERS[i])
+		if def.is_empty():
+			push_warning("TerrainLayer: el mod no define el terreno '%s'; se usa un color genérico" % LAYERS[i])
 		var tex: Texture2D = locator.terrain(str(def.get("texture", "")))
 		if tex == null:
 			tex = _flat(Color(str(def.get("color", "#6a8a3a"))))

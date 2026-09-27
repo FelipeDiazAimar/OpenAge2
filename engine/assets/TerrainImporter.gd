@@ -41,4 +41,6 @@ static func import(root: String, names: Array, dest: String = DEST, max_size: in
 			img.resize(max_size, max_size, Image.INTERPOLATE_LANCZOS)
 		if img.save_png(out) == OK:
 			written += 1
+		else:
+			push_warning("TerrainImporter: no se pudo escribir %s" % out)
 	return written

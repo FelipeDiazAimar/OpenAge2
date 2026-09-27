@@ -33,3 +33,14 @@ func test_rejects_bad_input() -> void:
 	var t := dxt1_red_4x4().slice(0, 130)
 	assert_true(DdsLoader.decode(t) == null, "truncado")
 	assert_true(DdsLoader.load_file("user://no_existe.dds") == null)
+
+
+func test_rejects_absurd_dimensions() -> void:
+	var b := dxt1_red_4x4()
+	b.resize(128 + 40000) # bytes suficientes para 20000x4 en DXT1
+	b.encode_u32(16, 20000)
+	b.encode_u32(12, 4)
+	assert_true(DdsLoader.decode(b) == null, "ancho mayor al máximo de Godot (16384)")
+	var c := dxt1_red_4x4()
+	c.encode_u32(12, 0)
+	assert_true(DdsLoader.decode(c) == null, "alto cero")
