@@ -28,3 +28,36 @@ func test_match_spawns_and_moves() -> void:
 	var end: Vector2i = m.sim.world.entities[villagers[0]]["pos"]
 	assert_true(Vector2(end).distance_to(goal * 1000.0) < 2.0, "llegó: %s" % end)
 	m.queue_free()
+
+
+func test_match_has_resources_and_smart_gather() -> void:
+	var m = load(MATCH).instantiate()
+	Engine.get_main_loop().root.add_child(m)
+	var trees := 0
+	for id in m.sim.world.entities:
+		if m.sim.world.entities[id]["def_id"] == "tree":
+			trees += 1
+	assert_true(trees > 300, "bosques generados: %d" % trees)
+	assert_eq(m.bar.text_of("wood"), "Madera 200 (0)")
+	var v := -1
+	for id in m.sim.world.entities:
+		var e: Dictionary = m.sim.world.entities[id]
+		if e["def_id"] == "aldeano" and e["owner"] == m.local_pid and (v < 0 or id < v):
+			v = id
+	var vpos: Vector2i = m.sim.world.entities[v]["pos"]
+	var tree := -1
+	var best := 0.0
+	for id in m.sim.world.entities:
+		var e: Dictionary = m.sim.world.entities[id]
+		if e["def_id"] != "tree":
+			continue
+		var d := Vector2(e["pos"]).distance_to(Vector2(vpos))
+		if tree < 0 or d < best:
+			tree = id
+			best = d
+	m.select([v])
+	m.smart_command(m.layer.views[tree].position + Vector2(0, -10))
+	for i in 3:
+		m.tick_once()
+	assert_true(m.sim.world.comp(v, "Gather")["state"] != "idle", "clic derecho sobre árbol = recolectar")
+	m.queue_free()

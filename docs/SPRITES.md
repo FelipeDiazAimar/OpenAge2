@@ -13,6 +13,7 @@ move assets\sprites\tmp\u_inf_militia_idleA_x1 assets\sprites\militia\idle
 
 - `--list "u_arc*"` lista archivos sin extraer.
 - `--pack --step 2` recorta al contenido y guarda 1 de cada 2 frames (VRAM).
+- `--pack` usa vía rápida sin PNG intermedios (escribe solo p_*/m_* finales).
 - `--max-frames 5` para probar rápido.
 - Formato detectado: 16 slots x N frames (8 dirs + 8 espejadas) + 1 extra.
 

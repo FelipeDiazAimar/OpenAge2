@@ -418,6 +418,151 @@ def convert_file(path, outdir, verbose=True, max_frames=0):
     return manifest
 
 
+def _blocks_bbox(w, h, cmds):
+    """bbox en píxeles de los bloques dibujados (sin decodificar)."""
+    bw = (w + 3) // 4
+    pos = 0
+    x0, y0, x1, y1 = 10 ** 9, 10 ** 9, -1, -1
+    for skip, draw in cmds:
+        pos += skip
+        for _ in range(draw):
+            bx, by = pos % bw, pos // bw
+            x0 = min(x0, bx * 4)
+            y0 = min(y0, by * 4)
+            x1 = max(x1, min(w - 1, bx * 4 + 3))
+            y1 = max(y1, min(h - 1, by * 4 + 3))
+            pos += 1
+    return None if x1 < x0 else (x0, y0, x1, y1)
+
+
+def convert_packed(path, outdir, step=2, margin=2, max_frames=0, verbose=True):
+    """Vía rápida con --pack: sin PNG intermedios (el antivirus los escaneaba
+    uno a uno y parecía colgado). Pasada 1: bbox por comandos; pasada 2: solo
+    los frames conservados. Escribe p_*.png (+m_*.png) y manifest.pack.json."""
+    import time
+    t0 = time.time()
+    with open(path, "rb") as f:
+        data = f.read()
+    r = Reader(data)
+    magic, ver, nframes, _, _, _ = HDR.unpack(r.take(16))
+    if magic != MAGIC:
+        raise ValueError("%s: firma inválida %r" % (path, magic))
+    base = os.path.splitext(os.path.basename(path))[0]
+    dest = os.path.join(outdir, base)
+    os.makedirs(dest, exist_ok=True)
+    metas = []  # por frame: dict ligero con cmds y bloques (bytes)
+    gx0, gy0, gx1, gy1 = 10 ** 9, 10 ** 9, -1, -1
+    prev_bbox = None
+    prev_geom = None
+    count = nframes if not max_frames else min(nframes, max_frames)
+    for fi in range(count):
+        cw, ch, cx, cy, ftype, _, fidx = FHDR.unpack(r.take(12))
+        if cw == 0 or ch == 0 or cw > 4096 or ch > 4096:
+            raise ValueError("%s frame %d: canvas inválido" % (base, fi))
+        meta = {"cw": cw, "ch": ch, "cx": cx, "cy": cy, "fidx": fidx,
+                "main": None, "mask": None, "bbox": None}
+        for bit, name in ((F_MAIN, "main"), (F_SHADOW, "shadow"), (F_UNK, "unk"),
+                          (F_DAMAGE, "dmg"), (F_PLAYER, "player")):
+            if not (ftype & bit):
+                continue
+            layer_start = r.o
+            clen = r.u32()
+            if name in ("main", "shadow"):
+                w, h, ox1, oy1, flag, cmds, bstart = parse_gfx_layer(r, name)
+                nblocks = sum(d for _, d in cmds)
+                raw = data[bstart:bstart + nblocks * 8]
+                if len(raw) != nblocks * 8:
+                    raise ValueError("%s f%d %s: faltan bloques" % (base, fi, name))
+                if name == "main":
+                    bb = _blocks_bbox(w, h, cmds)
+                    if bb is None and bool(flag & REUSE_MASK) and prev_bbox is not None and prev_geom == (w, h, ox1, oy1):
+                        bb = prev_bbox  # reutiliza: misma zona que el anterior
+                    if bb is not None:
+                        ax0, ay0, ax1, ay1 = bb[0] + ox1, bb[1] + oy1, bb[2] + ox1, bb[3] + oy1
+                        gx0, gy0, gx1, gy1 = min(gx0, ax0), min(gy0, ay0), max(gx1, ax1), max(gy1, ay1)
+                    meta["main"] = (w, h, ox1, oy1, flag, cmds, raw)
+                    meta["bbox"] = bb
+                    prev_bbox, prev_geom = bb, (w, h, ox1, oy1)
+                r.o = bstart + nblocks * 8
+            elif name == "player":
+                r.take(2)
+                ncmd = r.u16()
+                cmds = [(r.d[r.o + 2 * i], r.d[r.o + 2 * i + 1]) for i in range(ncmd)]
+                r.o += 2 * ncmd
+                nblocks = sum(d for _, d in cmds)
+                raw = data[r.o:r.o + nblocks * 8]
+                if len(raw) != nblocks * 8:
+                    raise ValueError("%s f%d player: faltan bloques" % (base, fi))
+                meta["mask"] = (cmds, raw)
+                r.o += nblocks * 8
+            r.o = layer_start + pad4(clen)
+        metas.append(meta)
+        if verbose and (fi % 100 == 0 or fi == count - 1):
+            dt = time.time() - t0
+            eta = dt / (fi + 1) * (count - fi - 1) if fi + 1 < count else 0
+            print("  scan %d/%d (%.0fs, ETA %.0fs)" % (fi + 1, count, dt, eta), flush=True)
+    if gx1 < gx0:
+        raise ValueError("animación vacía en %s" % base)
+    gx0 = max(0, gx0 - margin)
+    gy0 = max(0, gy0 - margin)
+    gx1 = min(metas[0]["cw"] - 1, gx1 + margin)
+    gy1 = min(metas[0]["ch"] - 1, gy1 + margin)
+    cw, ch = gx1 - gx0 + 1, gy1 - gy0 + 1
+    dirs, per_dir, drop = detect_dirs(len(metas))
+    fr = metas[:-1] if drop else metas
+    # id(e) -> (dir, sub) conservados; se decodifica TODO (barato) para que el
+    # flag reuse encadene bien, pero solo se escriben los conservados.
+    kept_of = {}
+    for d in range(dirs):
+        for s, e in enumerate(fr[d * per_dir:(d + 1) * per_dir][::step]):
+            kept_of[id(e)] = (d, s)
+    out_frames = []
+    prev_img = None
+    prev_g = None
+    done = 0
+    total_keep = len(kept_of)
+    t1 = time.time()
+    for e in fr:
+        m = e["main"]
+        if m is None:
+            continue
+        w, h, ox1, oy1, flag, cmds, raw = m
+        prev = prev_img if (bool(flag & REUSE_MASK) and prev_img is not None and prev_g == (w, h)) else None
+        img = draw_blocks(w, h, cmds, raw, decode_dxt1, prev)
+        prev_img, prev_g = list(img), (w, h)
+        if id(e) not in kept_of:
+            continue
+        d, s = kept_of[id(e)]
+        layer = [(0, 0, 0, 0)] * (cw * ch)
+        _paste(layer, cw, img, w, h, ox1 - gx0, oy1 - gy0)
+        name = "p_%03d.png" % len(out_frames)
+        write_png(os.path.join(dest, name), cw, ch, layer)
+        mask_out = None
+        if e["mask"] is not None:
+            mcmds, mraw = e["mask"]
+            mimg = draw_blocks(w, h, mcmds, mraw, decode_dxt4, None)
+            mlayer = [0] * (cw * ch)
+            _paste_gray(mlayer, cw, mimg, w, h, ox1 - gx0, oy1 - gy0)
+            if any(v != 0 for v in mlayer):
+                mask_out = "m_%03d.png" % len(out_frames)
+                write_png(os.path.join(dest, mask_out), cw, ch,
+                          [(255, 255, 255, v) for v in mlayer])
+        out_frames.append({"png": name, "mask": mask_out, "dir": d, "sub": s,
+                           "hotspot": [e["cx"] - gx0, e["cy"] - gy0]})
+        done += 1
+        if verbose and (done % 60 == 0 or done == total_keep):
+            print("  pack %d/%d (%.0fs)" % (done, total_keep, time.time() - t1), flush=True)
+    pack = {"source": base, "dirs": dirs, "per_dir": per_dir,
+            "kept_per_dir": (per_dir + step - 1) // step, "step": step,
+            "size": [cw, ch], "frames": out_frames}
+    json.dump(pack, open(os.path.join(dest, "manifest.pack.json"), "w", encoding="utf-8"), indent=1)
+    return pack
+
+
+def main_geom_ok(e, w, h, ox1, oy1):
+    return True
+
+
 def prev_img_for(name, canvas, shadow, prev_main):
     # Compat: la reutilización solo aplica a main (prev_main ya validado).
     return prev_main if name == "main" else None
@@ -469,13 +614,15 @@ def main(argv=None):
     for n in names:
         print("convirtiendo", n, flush=True)
         try:
-            m = convert_file(os.path.join(args.src, n), args.out, max_frames=args.max_frames)
-            print("  OK %d frames -> %s" % (len(m["frames"]), n.replace(".sld", "")))
             if args.pack:
-                base = n.replace(".sld", "")
-                pk = pack_anim(os.path.join(args.out, base), step=args.step)
+                # Vía rápida: sin PNG intermedios (rápida y sin miles de archivos).
+                pk = convert_packed(os.path.join(args.src, n), args.out,
+                                    step=args.step, max_frames=args.max_frames)
                 print("  PACK %d dirs x %d = %d png %dx%d" % (
                     pk["dirs"], pk["kept_per_dir"], len(pk["frames"]), pk["size"][0], pk["size"][1]))
+            else:
+                m = convert_file(os.path.join(args.src, n), args.out, max_frames=args.max_frames)
+                print("  OK %d frames -> %s" % (len(m["frames"]), n.replace(".sld", "")))
         except Exception as e:
             print("  ERROR en %s: %s" % (n, e))
             return 2
