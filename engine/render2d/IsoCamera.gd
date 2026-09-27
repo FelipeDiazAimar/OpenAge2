@@ -28,21 +28,28 @@ func _process(delta: float) -> void:
 	if Input.is_key_pressed(KEY_DOWN):
 		dir.y += 1
 	if edge_scroll and DisplayServer.window_is_focused():
-		var mp := get_viewport().get_mouse_position()
-		var vs := get_viewport_rect().size
-		if mp.x < EDGE:
-			dir.x -= 1
-		elif mp.x > vs.x - EDGE:
-			dir.x += 1
-		if mp.y < EDGE:
-			dir.y -= 1
-		elif mp.y > vs.y - EDGE:
-			dir.y += 1
+		dir += edge_dir(get_viewport().get_mouse_position(), get_viewport_rect().size)
 	if dir != Vector2.ZERO:
 		position += dir.normalized() * PAN_SPEED * delta / zoom.x
 	zoom = zoom.lerp(Vector2.ONE * _target_zoom, clampf(delta * 10.0, 0.0, 1.0))
 	if bounds.has_area():
 		position = position.clamp(bounds.position, bounds.end)
+
+
+## Dirección de scroll por borde; cero si el cursor está fuera de la ventana.
+static func edge_dir(mp: Vector2, vs: Vector2) -> Vector2:
+	if not Rect2(Vector2.ZERO, vs).has_point(mp):
+		return Vector2.ZERO
+	var d := Vector2.ZERO
+	if mp.x < EDGE:
+		d.x = -1
+	elif mp.x > vs.x - EDGE:
+		d.x = 1
+	if mp.y < EDGE:
+		d.y = -1
+	elif mp.y > vs.y - EDGE:
+		d.y = 1
+	return d
 
 
 func _unhandled_input(event: InputEvent) -> void:

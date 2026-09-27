@@ -5,7 +5,20 @@ extends SceneTree
 const TEST_DIR := "res://tests/engine"
 
 
-func _initialize() -> void:
+var _started := false
+
+
+## Corre en el primer frame (no en _initialize) para que el árbol ya esté
+## listo y los tests puedan instanciar escenas con _ready.
+func _process(_delta: float) -> bool:
+	if _started:
+		return false
+	_started = true
+	quit(_run_all())
+	return false
+
+
+func _run_all() -> int:
 	var only := ""
 	for a in OS.get_cmdline_user_args():
 		if str(a).begins_with("--only="):
@@ -39,4 +52,4 @@ func _initialize() -> void:
 	for e in failed:
 		printerr(e)
 	print("%d tests, %d fallos" % [total, failed.size()])
-	quit(1 if failed.size() > 0 or total == 0 else 0)
+	return 1 if failed.size() > 0 or total == 0 else 0

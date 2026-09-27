@@ -40,6 +40,7 @@ func _ready() -> void:
 	_add_btn(vb, "Campaña", _on_campaign)
 	_add_btn(vb, "Editor Mapas", _on_editor)
 	_add_btn(vb, "Opciones", _on_options)
+	_add_btn(vb, "Partida (nuevo motor, beta)", _on_new_engine)
 
 	var ver := Label.new()
 	ver.text = "v0.1 — Godot 4.4 — Presiona el modo para empezar"
@@ -88,3 +89,7 @@ func _on_options() -> void:
 		get_tree().change_scene_to_file("res://ui/menus/Settings.tscn")
 	else:
 		_status.text = "Opciones: volumen y resolución desde Settings (solo editor)"
+
+
+func _on_new_engine() -> void:
+	get_tree().change_scene_to_file("res://game/scenes/Match.tscn")
