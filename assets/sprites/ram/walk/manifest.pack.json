@@ -1,0 +1,313 @@
+{
+ "source": "u_sie_battering_ram_walkA_x1",
+ "dirs": 5,
+ "per_dir": 12,
+ "kept_per_dir": 6,
+ "step": 2,
+ "size": [
+  94,
+  67
+ ],
+ "frames": [
+  {
+   "png": "p_000.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 0,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_001.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 1,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_002.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 2,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_003.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 3,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_004.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 4,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_005.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 5,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_006.png",
+   "mask": null,
+   "dir": 1,
+   "sub": 0,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_007.png",
+   "mask": null,
+   "dir": 1,
+   "sub": 1,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_008.png",
+   "mask": null,
+   "dir": 1,
+   "sub": 2,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_009.png",
+   "mask": null,
+   "dir": 1,
+   "sub": 3,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_010.png",
+   "mask": null,
+   "dir": 1,
+   "sub": 4,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_011.png",
+   "mask": null,
+   "dir": 1,
+   "sub": 5,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_012.png",
+   "mask": null,
+   "dir": 2,
+   "sub": 0,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_013.png",
+   "mask": null,
+   "dir": 2,
+   "sub": 1,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_014.png",
+   "mask": null,
+   "dir": 2,
+   "sub": 2,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_015.png",
+   "mask": null,
+   "dir": 2,
+   "sub": 3,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_016.png",
+   "mask": null,
+   "dir": 2,
+   "sub": 4,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_017.png",
+   "mask": null,
+   "dir": 2,
+   "sub": 5,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_018.png",
+   "mask": null,
+   "dir": 3,
+   "sub": 0,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_019.png",
+   "mask": null,
+   "dir": 3,
+   "sub": 1,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_020.png",
+   "mask": null,
+   "dir": 3,
+   "sub": 2,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_021.png",
+   "mask": null,
+   "dir": 3,
+   "sub": 3,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_022.png",
+   "mask": null,
+   "dir": 3,
+   "sub": 4,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_023.png",
+   "mask": null,
+   "dir": 3,
+   "sub": 5,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_024.png",
+   "mask": null,
+   "dir": 4,
+   "sub": 0,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_025.png",
+   "mask": null,
+   "dir": 4,
+   "sub": 1,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_026.png",
+   "mask": null,
+   "dir": 4,
+   "sub": 2,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_027.png",
+   "mask": null,
+   "dir": 4,
+   "sub": 3,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_028.png",
+   "mask": null,
+   "dir": 4,
+   "sub": 4,
+   "hotspot": [
+    44,
+    49
+   ]
+  },
+  {
+   "png": "p_029.png",
+   "mask": null,
+   "dir": 4,
+   "sub": 5,
+   "hotspot": [
+    44,
+    49
+   ]
+  }
+ ]
+}

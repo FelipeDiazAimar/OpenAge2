@@ -19,8 +19,37 @@ var packs := {} # anim -> {frames: Array, dirs, kept}
 var cur_anim := ""
 var frame_f := 0.0
 var slot := 0
-var flipped := false
-var moving := false
+var _slot5 := [0, false] # (slot, flip) para packs de 5 dirs
+var _slot8 := 0 # octante clásico para packs de 8 dirs
+
+
+## Rumbo mundo (dx,dz) -> slot. Archivo DE: W(0) antihorario hasta ESE(7),
+## E(8)..WNW(15). Clásico 5 dirs: S,SW,W,NW,N + espejos.
+func _dir_from_world(d: Vector3) -> void:
+	var c := rad_to_deg(atan2(d.x, -d.z)) # 0=N, horario hacia E
+	if c < 0.0:
+		c += 360.0
+	slot = int(round((270.0 - c) / 22.5)) % 16
+	var oct := int(round(c / 45.0)) % 8 # 0=N,1=NE,2=E,3=SE,4=S,5=SW,6=W,7=NW
+	_slot8 = oct
+	# oct -> (slot5, flip) clásico
+	match oct:
+		0:
+			_slot5 = [4, false] # N
+		1:
+			_slot5 = [3, true] # NE = espejo NW
+		2:
+			_slot5 = [2, true] # E = espejo W
+		3:
+			_slot5 = [1, true] # SE = espejo SW
+		4:
+			_slot5 = [0, false] # S
+		5:
+			_slot5 = [1, false] # SW
+		6:
+			_slot5 = [2, false] # W
+		_:
+			_slot5 = [3, false] # NW
 var _last_pos := Vector3.ZERO
 var _still := 0.0
 var _started := false
@@ -107,17 +136,7 @@ func _process(delta: float) -> void:
 	if d.length() > 0.005:
 		moving = true
 		_still = 0.0
-		if cam != null:
-			var a: Vector2 = cam.unproject_position(global_position)
-			var b: Vector2 = cam.unproject_position(global_position + d)
-			var s: Vector2 = b - a
-			if s.length() > 0.5:
-				# 0 = abajo (sur, hacia cámara), 16 dirs horarias. Slots 8-15 espejados.
-				var ang := rad_to_deg(atan2(s.x, -s.y)) # 0 = arriba
-				var raw := int(round((ang - 180.0) / 22.5)) % 16
-				if raw < 0:
-					raw += 16
-				slot = raw
+		_dir_from_world(d)
 	else:
 		_still += delta
 		if _still >= STILL_TIME:
@@ -142,6 +161,7 @@ func _process(delta: float) -> void:
 	if pk.is_empty():
 		return
 	var kept: int = pk["kept"]
+	var dirs: int = pk.get("dirs", 16)
 	var fps := IDLE_FPS
 	if cur_anim == "walk":
 		fps = WALK_FPS
@@ -153,9 +173,13 @@ func _process(delta: float) -> void:
 	var sub := int(frame_f) % maxi(1, kept)
 	var real_slot := slot
 	flipped = false
-	if real_slot >= 8:
-		real_slot -= 8
-		flipped = true
+	if dirs == 5:
+		# Clásico S,SW,W,NW,N + espejos. _slot5 ya trae (slot, flip).
+		real_slot = _slot5[0]
+		flipped = _slot5[1]
+	elif dirs == 8:
+		real_slot = (_slot8 + 4) % 8 # nuestro octante 0=N -> clásico 4=N
+	# dirs == 16: slot directo 0-15 (8-15 ya vienen espejados en el archivo).
 	var tex: Texture2D = null
 	var hs := [30, 55]
 	for e in (pk["frames"] as Array):
