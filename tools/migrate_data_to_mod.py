@@ -56,11 +56,18 @@ VILLAGER_TASKS = {
 RESOURCE_SPRITES = {
     "tree": "nature/oak", "gold_mine": "nature/goldmine",
     "stone_mine": "nature/stonemine", "berry_bush": "nature/bush",
+    "deer": "animals/deer", "boar": "animals/boar", "sheep": "animals/sheep",
 }
 AGE_PREREQS = {"herreria_o_mercado": ["herreria", "mercado"], "castillo_o_monasterio": ["castillo", "monasterio"]}
 HOTKEY_ORDER = "QWERTASDFGZXCVB"
 UNIT_ALIASES = {"hombre_de_armas": "hombre_armas", "trabuquete": "trebuchet"}
-HUNTABLE = {"boar", "deer"}
+HUNTABLE = {"boar", "deer", "sheep"}
+# Animales (AoE2): se matan y quedan como carcasa recolectable.
+ANIMALS = {
+    "deer": {"hp": 5, "speed": 1.1},
+    "boar": {"hp": 75, "speed": 1.0, "attack": 8, "armor": {"melee": 0, "pierce": 1}},
+    "sheep": {"hp": 7, "speed": 0.7},
+}
 DEFAULT_MELEE_RELOAD = 2.0  # AoE2: recarga cuerpo a cuerpo estándar
 TRAIN_QUEUE = 5
 TC_POP = 5
@@ -336,8 +343,19 @@ def convert_resource(r, defaults, sprites_root=None):
     e = {"id": r["id"], "type": "resource", "name": rr.get("name", r["id"]), "tags": ["recurso"]}
     sp = RESOURCE_SPRITES.get(r["id"])
     if sp and sprites_root and os.path.isdir(os.path.join(sprites_root, sp)):
-        e["graphics"] = {"idle": f"sprite:{sp}"}
-    e["abilities"] = {"ResourceSource": src}
+        base = os.path.join(sprites_root, sp)
+        subs = sorted(a for a in os.listdir(base) if os.path.isdir(os.path.join(base, a)))
+        # Pack con animaciones (animales) o pack único de variantes (árboles, minas).
+        e["graphics"] = {a: f"sprite:{sp}/{a}" for a in subs} if subs else {"idle": f"sprite:{sp}"}
+    ab = {"ResourceSource": src}
+    animal = ANIMALS.get(r["id"])
+    if animal:
+        ab["Hitpoints"] = {"max": animal["hp"]}
+        ab["Move"] = {"speed": animal["speed"]}
+        ab["Armor"] = {"classes": dict(animal.get("armor", {"melee": 0, "pierce": 0}))}
+        if animal.get("attack"):
+            ab["Attack"] = {"damage": {"melee": animal["attack"]}, "range": 0, "reload": DEFAULT_MELEE_RELOAD}
+    e["abilities"] = ab
     return e
 
 

@@ -5,6 +5,12 @@
   "tags": [
     "recurso"
   ],
+  "graphics": {
+    "death": "sprite:animals/deer/death",
+    "decay": "sprite:animals/deer/decay",
+    "idle": "sprite:animals/deer/idle",
+    "walk": "sprite:animals/deer/walk"
+  },
   "abilities": {
     "ResourceSource": {
       "resource": "food",
@@ -12,6 +18,18 @@
       "rate_key": "food_forage",
       "requires_kill": true,
       "flees": true
+    },
+    "Hitpoints": {
+      "max": 5
+    },
+    "Move": {
+      "speed": 1.1
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
     }
   }
 }
