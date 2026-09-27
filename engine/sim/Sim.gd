@@ -7,6 +7,7 @@ const Grid := preload("res://engine/sim/Grid.gd")
 const FP := preload("res://engine/sim/FixedPoint.gd")
 const PlayerDefs := preload("res://engine/data/PlayerDefs.gd")
 const MoveSystem := preload("res://engine/sim/systems/MoveSystem.gd")
+const GatherSystem := preload("res://engine/sim/systems/GatherSystem.gd")
 
 const INPUT_DELAY := 2
 const START_RES := {"wood": 200, "food": 200, "gold": 100, "stone": 200}
@@ -108,9 +109,9 @@ func gatherer_counts(pid: int) -> Dictionary:
 	for id in world.ids_with("Gather"):
 		if int(world.entities[id]["owner"]) != pid:
 			continue
-		var g: Dictionary = world.comp(id, "Gather")
-		if str(g["state"]) != "idle" and out.has(g["carry_res"]):
-			out[g["carry_res"]] += 1
+		var r := GatherSystem.task_resource(self, id)
+		if out.has(r):
+			out[r] += 1
 	return out
 
 
@@ -141,6 +142,7 @@ func step() -> void:
 	for c in cmds:
 		_apply(c)
 	MoveSystem.step(world)
+	GatherSystem.step(self)
 
 
 ## Desplazamientos (milésimas) para repartir un grupo: casillas en espiral
@@ -168,6 +170,8 @@ func _apply(c: Dictionary) -> void:
 	match str(c["type"]):
 		"move":
 			_cmd_move(int(c["pid"]), c["payload"])
+		"gather":
+			_cmd_gather(int(c["pid"]), c["payload"])
 
 
 ## Número utilizable de un payload (puede venir de JSON: floats, basura).
@@ -177,28 +181,44 @@ static func _num_ok(x: Variant) -> bool:
 	return typeof(x) == TYPE_FLOAT and is_finite(x) and absf(x) < 1.0e9
 
 
-func _cmd_move(pid: int, payload: Dictionary) -> void:
-	var pos: Variant = payload.get("pos")
-	var raw_ids: Variant = payload.get("ids")
-	if not (pos is Array) or pos.size() != 2 or not _num_ok(pos[0]) or not _num_ok(pos[1]):
-		return
-	if not (raw_ids is Array):
-		return
-	var target := Vector2i(int(pos[0]), int(pos[1]))
+## Ids válidos de un payload: numéricos, existentes, propios, con la habilidad.
+func _own_ids(pid: int, raw_ids: Variant, ability: String) -> Array[int]:
 	var ids: Array[int] = []
+	if not (raw_ids is Array):
+		return ids
 	for raw in raw_ids:
 		if not _num_ok(raw):
 			continue
 		var id := int(raw)
 		if ids.has(id) or not world.entities.has(id):
 			continue
-		if int(world.entities[id]["owner"]) != pid or not world.has_ability(id, "Move"):
+		if int(world.entities[id]["owner"]) != pid or not world.has_ability(id, ability):
 			continue
 		ids.append(id)
 	ids.sort()
+	return ids
+
+
+func _cmd_move(pid: int, payload: Dictionary) -> void:
+	var pos: Variant = payload.get("pos")
+	if not (pos is Array) or pos.size() != 2 or not _num_ok(pos[0]) or not _num_ok(pos[1]):
+		return
+	var target := Vector2i(int(pos[0]), int(pos[1]))
+	var ids := _own_ids(pid, payload.get("ids"), "Move")
 	var offs := spread_offsets(ids.size())
 	var lo := Vector2i(0, 0)
 	var hi := Vector2i(grid.width * FP.SCALE - 1, grid.height * FP.SCALE - 1)
 	for i in ids.size():
-		var dest := (target + offs[i]).clamp(lo, hi)
-		MoveSystem.order_move(world, grid, ids[i], dest)
+		GatherSystem.stop(self, ids[i])
+		MoveSystem.order_move(world, grid, ids[i], (target + offs[i]).clamp(lo, hi))
+
+
+func _cmd_gather(pid: int, payload: Dictionary) -> void:
+	var raw_t: Variant = payload.get("target")
+	if not _num_ok(raw_t):
+		return
+	var target := int(raw_t)
+	if not world.has_ability(target, "ResourceSource"):
+		return
+	for id in _own_ids(pid, payload.get("ids"), "Gather"):
+		GatherSystem.order_gather(self, id, target)
