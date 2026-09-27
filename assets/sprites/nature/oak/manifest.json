@@ -1,0 +1,720 @@
+{
+ "file": "n_tree_oak_x1",
+ "version": 4,
+ "frames": [
+  {
+   "index": 0,
+   "frame_index": 0,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_000.png",
+   "mask": "frame_000.mask.png",
+   "shadow": "frame_000.shadow.png"
+  },
+  {
+   "index": 1,
+   "frame_index": 1,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_001.png",
+   "mask": "frame_001.mask.png",
+   "shadow": "frame_001.shadow.png"
+  },
+  {
+   "index": 2,
+   "frame_index": 2,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_002.png",
+   "mask": "frame_002.mask.png",
+   "shadow": "frame_002.shadow.png"
+  },
+  {
+   "index": 3,
+   "frame_index": 3,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_003.png",
+   "mask": "frame_003.mask.png",
+   "shadow": "frame_003.shadow.png"
+  },
+  {
+   "index": 4,
+   "frame_index": 4,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_004.png",
+   "mask": "frame_004.mask.png",
+   "shadow": "frame_004.shadow.png"
+  },
+  {
+   "index": 5,
+   "frame_index": 5,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_005.png",
+   "mask": "frame_005.mask.png",
+   "shadow": "frame_005.shadow.png"
+  },
+  {
+   "index": 6,
+   "frame_index": 6,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_006.png",
+   "mask": "frame_006.mask.png",
+   "shadow": "frame_006.shadow.png"
+  },
+  {
+   "index": 7,
+   "frame_index": 7,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_007.png",
+   "mask": "frame_007.mask.png",
+   "shadow": "frame_007.shadow.png"
+  },
+  {
+   "index": 8,
+   "frame_index": 8,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_008.png",
+   "mask": "frame_008.mask.png",
+   "shadow": "frame_008.shadow.png"
+  },
+  {
+   "index": 9,
+   "frame_index": 9,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_009.png",
+   "mask": "frame_009.mask.png",
+   "shadow": "frame_009.shadow.png"
+  },
+  {
+   "index": 10,
+   "frame_index": 10,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_010.png",
+   "mask": "frame_010.mask.png",
+   "shadow": "frame_010.shadow.png"
+  },
+  {
+   "index": 11,
+   "frame_index": 11,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_011.png",
+   "mask": "frame_011.mask.png",
+   "shadow": "frame_011.shadow.png"
+  },
+  {
+   "index": 12,
+   "frame_index": 12,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_012.png",
+   "mask": "frame_012.mask.png",
+   "shadow": "frame_012.shadow.png"
+  },
+  {
+   "index": 13,
+   "frame_index": 13,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_013.png",
+   "mask": "frame_013.mask.png",
+   "shadow": "frame_013.shadow.png"
+  },
+  {
+   "index": 14,
+   "frame_index": 14,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_014.png",
+   "mask": "frame_014.mask.png",
+   "shadow": "frame_014.shadow.png"
+  },
+  {
+   "index": 15,
+   "frame_index": 15,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_015.png",
+   "mask": "frame_015.mask.png",
+   "shadow": "frame_015.shadow.png"
+  },
+  {
+   "index": 16,
+   "frame_index": 16,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_016.png",
+   "mask": "frame_016.mask.png",
+   "shadow": "frame_016.shadow.png"
+  },
+  {
+   "index": 17,
+   "frame_index": 17,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_017.png",
+   "mask": "frame_017.mask.png",
+   "shadow": "frame_017.shadow.png"
+  },
+  {
+   "index": 18,
+   "frame_index": 18,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_018.png",
+   "mask": "frame_018.mask.png",
+   "shadow": "frame_018.shadow.png"
+  },
+  {
+   "index": 19,
+   "frame_index": 19,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_019.png",
+   "mask": "frame_019.mask.png",
+   "shadow": "frame_019.shadow.png"
+  },
+  {
+   "index": 20,
+   "frame_index": 20,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_020.png",
+   "mask": "frame_020.mask.png",
+   "shadow": "frame_020.shadow.png"
+  },
+  {
+   "index": 21,
+   "frame_index": 21,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_021.png",
+   "mask": "frame_021.mask.png",
+   "shadow": "frame_021.shadow.png"
+  },
+  {
+   "index": 22,
+   "frame_index": 22,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_022.png",
+   "mask": "frame_022.mask.png",
+   "shadow": "frame_022.shadow.png"
+  },
+  {
+   "index": 23,
+   "frame_index": 23,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_023.png",
+   "mask": "frame_023.mask.png",
+   "shadow": "frame_023.shadow.png"
+  },
+  {
+   "index": 24,
+   "frame_index": 24,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_024.png",
+   "mask": "frame_024.mask.png",
+   "shadow": "frame_024.shadow.png"
+  },
+  {
+   "index": 25,
+   "frame_index": 25,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_025.png",
+   "mask": "frame_025.mask.png",
+   "shadow": "frame_025.shadow.png"
+  },
+  {
+   "index": 26,
+   "frame_index": 26,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_026.png",
+   "mask": "frame_026.mask.png",
+   "shadow": "frame_026.shadow.png"
+  },
+  {
+   "index": 27,
+   "frame_index": 27,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_027.png",
+   "mask": "frame_027.mask.png",
+   "shadow": "frame_027.shadow.png"
+  },
+  {
+   "index": 28,
+   "frame_index": 28,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_028.png",
+   "mask": "frame_028.mask.png",
+   "shadow": "frame_028.shadow.png"
+  },
+  {
+   "index": 29,
+   "frame_index": 29,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_029.png",
+   "mask": "frame_029.mask.png",
+   "shadow": "frame_029.shadow.png"
+  },
+  {
+   "index": 30,
+   "frame_index": 30,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_030.png",
+   "mask": "frame_030.mask.png",
+   "shadow": "frame_030.shadow.png"
+  },
+  {
+   "index": 31,
+   "frame_index": 31,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_031.png",
+   "mask": "frame_031.mask.png",
+   "shadow": "frame_031.shadow.png"
+  },
+  {
+   "index": 32,
+   "frame_index": 32,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_032.png",
+   "mask": "frame_032.mask.png",
+   "shadow": "frame_032.shadow.png"
+  },
+  {
+   "index": 33,
+   "frame_index": 33,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_033.png",
+   "mask": "frame_033.mask.png",
+   "shadow": "frame_033.shadow.png"
+  },
+  {
+   "index": 34,
+   "frame_index": 34,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_034.png",
+   "mask": "frame_034.mask.png",
+   "shadow": "frame_034.shadow.png"
+  },
+  {
+   "index": 35,
+   "frame_index": 35,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_035.png",
+   "mask": "frame_035.mask.png",
+   "shadow": "frame_035.shadow.png"
+  },
+  {
+   "index": 36,
+   "frame_index": 36,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_036.png",
+   "mask": "frame_036.mask.png",
+   "shadow": "frame_036.shadow.png"
+  },
+  {
+   "index": 37,
+   "frame_index": 37,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_037.png",
+   "mask": "frame_037.mask.png",
+   "shadow": "frame_037.shadow.png"
+  },
+  {
+   "index": 38,
+   "frame_index": 38,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_038.png",
+   "mask": "frame_038.mask.png",
+   "shadow": "frame_038.shadow.png"
+  },
+  {
+   "index": 39,
+   "frame_index": 39,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_039.png",
+   "mask": "frame_039.mask.png",
+   "shadow": "frame_039.shadow.png"
+  },
+  {
+   "index": 40,
+   "frame_index": 40,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_040.png",
+   "mask": "frame_040.mask.png",
+   "shadow": "frame_040.shadow.png"
+  },
+  {
+   "index": 41,
+   "frame_index": 41,
+   "w": 400,
+   "h": 400,
+   "hotspot": [
+    200,
+    200
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_041.png",
+   "mask": "frame_041.mask.png",
+   "shadow": "frame_041.shadow.png"
+  }
+ ]
+}

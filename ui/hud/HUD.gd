@@ -67,6 +67,7 @@ var lbl_hint: Label
 
 # --- Nodos bottom ---
 var portrait: ColorRect
+var portrait_tex: TextureRect # retrato con sprite real del AoE2 (encima del color)
 var lbl_sel_name: Label
 var hp_bar: ProgressBar
 var lbl_sel_hp: Label
@@ -256,6 +257,12 @@ func _build_bottom_bar() -> void:
 	portrait.color = Color("#2a4bff")
 	portrait.tooltip_text = "Retrato: color del jugador dueño de la selección."
 	top_row.add_child(portrait)
+	portrait_tex = TextureRect.new()
+	portrait_tex.set_anchors_preset(Control.PRESET_FULL_RECT)
+	portrait_tex.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	portrait_tex.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	portrait_tex.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	portrait.add_child(portrait_tex)
 	var name_col := VBoxContainer.new()
 	name_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	top_row.add_child(name_col)
@@ -300,7 +307,7 @@ func _build_bottom_bar() -> void:
 	cmd_grid.add_theme_constant_override("v_separation", 6)
 	grid_wrap.add_child(cmd_grid)
 	lbl_hint = Label.new()
-	lbl_hint.text = ""
+	lbl_hint.text = "Click izq: seleccionar · Click derecho: mover/atacar/talar · B: construir · H: tu centro · .: aldeano libre"
 	lbl_hint.add_theme_font_size_override("font_size", 12)
 	lbl_hint.add_theme_color_override("font_color", Color(1.0, 0.85, 0.5))
 	lbl_hint.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -488,9 +495,15 @@ func _update_selection_panel() -> void:
 		lbl_sel_hp.text = "HP —"
 		lbl_sel_stats.text = "Atk —   Arm —   Alc —"
 		portrait.color = Color(0.2, 0.2, 0.2, 1.0)
+		if portrait_tex != null:
+			portrait_tex.texture = null
 		return
 	var first: Variant = current_selection[0]
 	var uname := str(_sel_field(first, "name", _sel_field(first, "unit_id", _sel_field(first, "id", "Unidad"))))
+	if first is int and selection_ref != null and selection_ref.has_method("get_unit_type"):
+		var t: String = selection_ref.get_unit_type(int(first))
+		if t != "":
+			uname = t
 	var pid := int(_sel_field(first, "player_id", _sel_field(first, "owner", local_player_id)))
 	if current_selection.size() == 1:
 		lbl_sel_name.text = uname.capitalize()
@@ -516,8 +529,44 @@ func _update_selection_panel() -> void:
 	var armor := float(_sel_field(first, "armor", _sel_field(first, "armadura", 0.0)))
 	var prange := float(_sel_field(first, "range", _sel_field(first, "alcance", 0.0)))
 	lbl_sel_stats.text = "Atk %d   Arm %d   Alc %s" % [int(atk), int(armor), ("%d" % int(prange)) if prange > 0.0 else "—"]
-	# Retrato = color del jugador (clon barato sin sprites; agente 26 pone iconos CC0).
+	# Retrato = color del jugador + sprite real del AoE2 si hay selección única.
 	portrait.color = _player_color(pid)
+	_update_portrait()
+
+
+## Miniatura del seleccionado con su sprite (idle dir sur). Solo cliente.
+func _update_portrait() -> void:
+	if portrait_tex == null:
+		return
+	portrait_tex.texture = null
+	if current_selection.size() != 1:
+		return
+	var kind := ""
+	var u: Variant = current_selection[0]
+	if u is int and selection_ref != null and selection_ref.has_method("get_unit_type"):
+		kind = selection_ref.get_unit_type(int(u))
+	elif u is Dictionary:
+		kind = str((u as Dictionary).get("unit_type", (u as Dictionary).get("kind", "")))
+	var folder := _sprite_folder(kind)
+	if folder == "":
+		return
+	var tex := load(folder + "/idle/p_000.png") as Texture2D
+	portrait_tex.texture = tex
+
+
+func _sprite_folder(kind: String) -> String:
+	match kind.to_lower().strip_edges():
+		"aldeano":
+			return "res://assets/sprites/villager"
+		"milicia":
+			return "res://assets/sprites/militia"
+		"arquero":
+			return "res://assets/sprites/archer"
+		"scout":
+			return "res://assets/sprites/scout"
+		"monje":
+			return "res://assets/sprites/monk"
+	return ""
 
 
 func _player_color(pid: int) -> Color:

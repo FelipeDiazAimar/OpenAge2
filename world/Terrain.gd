@@ -29,8 +29,12 @@ const FLATTEN_R := 7.0
 const FLATTEN_FULL := 4.0
 const SAFE_H := 2.30
 
-const GRASS := Color(0.38, 0.55, 0.27)
-const DIRT := Color(0.60, 0.50, 0.34)
+const GRASS_ARABIA := Color(0.42, 0.58, 0.28)
+const DIRT_ARABIA := Color(0.62, 0.53, 0.35)
+const GRASS_FOREST := Color(0.24, 0.44, 0.22)
+const DIRT_FOREST := Color(0.38, 0.33, 0.24)
+const GRASS_TROPICAL := Color(0.30, 0.62, 0.30)
+const DIRT_TROPICAL := Color(0.66, 0.56, 0.36)
 const TRUNK_COL := Color(0.42, 0.30, 0.19)
 const LEAF_COL := Color(0.24, 0.47, 0.20)
 
@@ -46,6 +50,9 @@ var _heights: PackedFloat32Array = PackedFloat32Array() # (MAP_W+1)*(MAP_H+1)
 ## Tiles de spawn a aplanar (los fija GameWorld antes de build()). Solo visual.
 var flatten_spots: Array[Vector2] = []
 var _ground: MeshInstance3D
+## Paleta del bioma (la fija build() según el mapa). Solo visual.
+var GRASS := GRASS_ARABIA
+var DIRT := DIRT_ARABIA
 var _water: MeshInstance3D
 var _trunks: MultiMeshInstance3D
 var _leaves: MultiMeshInstance3D
@@ -61,6 +68,7 @@ func _ready() -> void:
 func build(p_seed: int = 1234, p_map: Dictionary = {}) -> void:
 	clear()
 	map_seed = p_seed
+	_apply_biome(str(p_map.get("biome", p_map.get("terrain", ""))))
 	_gen_control_grid(p_seed)
 	_build_ground(p_seed)
 	_build_water()
@@ -79,6 +87,21 @@ func clear() -> void:
 	_heights = PackedFloat32Array()
 	_ctrl = PackedFloat32Array()
 	_built = false
+
+
+# ---------------------------------------------------------------- biomas --
+func _apply_biome(key: String) -> void:
+	# Paleta por bioma: arabia (base), bosque (oscuro), tropical/islas (vivo).
+	var k := key.to_lower()
+	if "bosque" in k or "forest" in k or "negro" in k:
+		GRASS = GRASS_FOREST
+		DIRT = DIRT_FOREST
+	elif "isla" in k or "trop" in k or "island" in k:
+		GRASS = GRASS_TROPICAL
+		DIRT = DIRT_TROPICAL
+	else:
+		GRASS = GRASS_ARABIA
+		DIRT = DIRT_ARABIA
 
 
 # ---------------------------------------------------------------- alturas --

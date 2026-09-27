@@ -19,6 +19,8 @@ var packs := {} # anim -> {frames: Array, dirs, kept}
 var cur_anim := ""
 var frame_f := 0.0
 var slot := 0
+var moving := false
+var flipped := false
 var _slot5 := [0, false] # (slot, flip) para packs de 5 dirs
 var _slot8 := 0 # octante clásico para packs de 8 dirs
 

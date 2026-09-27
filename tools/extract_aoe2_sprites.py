@@ -181,8 +181,57 @@ def detect_dirs(n):
     return 1, n, False
 
 
+def _png_raw(path):
+    """IDAT descomprimido de un PNG RGBA8 filter0. Devuelve (w,h,bytes)."""
+    d = open(path, "rb").read()
+    if d[:8] != b"\x89PNG\r\n\x1a\n":
+        raise ValueError("firma PNG mala en %s" % path)
+    w, h = struct.unpack(">II", d[16:24])
+    if d[24:27] != bytes([8, 6, 0]):
+        raise ValueError("solo RGBA8 filter0 en %s" % path)
+    pos = 8
+    raw = b""
+    while pos < len(d):
+        ln = struct.unpack(">I", d[pos:pos + 4])[0]
+        if d[pos + 4:pos + 8] == b"IDAT":
+            raw += d[pos + 8:pos + 8 + ln]
+        pos += 12 + ln
+    return w, h, zlib.decompress(raw)
+
+
+def _bbox_raw(w, h, raw, thr=10):
+    """bbox de píxeles con alfa>thr. Devuelve (x0,y0,x1,y1) o None si vacío."""
+    ch = w * 4 + 1
+    x0, y0, x1, y1 = w, h, -1, -1
+    for y in range(h):
+        base = y * ch + 1
+        for x in range(w):
+            if raw[base + x * 4 + 3] > thr:
+                if x < x0:
+                    x0 = x
+                if y < y0:
+                    y0 = y
+                if x > x1:
+                    x1 = x
+                if y > y1:
+                    y1 = y
+    return None if x1 < x0 else (x0, y0, x1, y1)
+
+
+def _crop_raw(w, h, raw, x0, y0, cw, ch):
+    """Recorte a lista de tuplas RGBA (solo para frames conservados, pequeños)."""
+    s = w * 4 + 1
+    out = []
+    for y in range(ch):
+        base = (y0 + y) * s + 1 + x0 * 4
+        row = raw[base:base + cw * 4]
+        out.extend((row[i], row[i + 1], row[i + 2], row[i + 3]) for i in range(0, len(row), 4))
+    return out
+
+
 def pack_anim(folder, step=2, margin=2):
     """Recorta al bbox común + submuestrea. Reescribe PNGs y manifest.pack.json.
+    Streaming: 2 pasadas sin cachear frames (los .sld grandes mataban la RAM).
     Devuelve el manifest pack."""
     man = json.load(open(os.path.join(folder, "manifest.json"), encoding="utf-8"))
     frames = man["frames"]
@@ -190,29 +239,26 @@ def pack_anim(folder, step=2, margin=2):
     dirs, per_dir, drop = detect_dirs(n)
     if drop:
         frames = frames[:-1]
-    # bbox común del canal alfa
+    # Pasada 1: bbox común del canal alfa (bytes crudos, sin tuplas).
     x0, y0, x1, y1 = 10 ** 9, 10 ** 9, -1, -1
-    cache = []
+    fw = fh = 0
     for e in frames:
-        w, h, rgba = read_png(os.path.join(folder, e["png"]))
-        cache.append((w, h, rgba))
-        for y in range(h):
-            for x in range(w):
-                if rgba[y * w + x][3] > 10:
-                    if x < x0:
-                        x0 = x
-                    if y < y0:
-                        y0 = y
-                    if x > x1:
-                        x1 = x
-                    if y > y1:
-                        y1 = y
+        w, h, raw = _png_raw(os.path.join(folder, e["png"]))
+        fw, fh = w, h
+        bb = _bbox_raw(w, h, raw)
+        if bb is None:
+            continue
+        bx0, by0, bx1, by1 = bb
+        x0 = min(x0, bx0)
+        y0 = min(y0, by0)
+        x1 = max(x1, bx1)
+        y1 = max(y1, by1)
     if x1 < x0:
         raise ValueError("animación vacía en %s" % folder)
     x0 = max(0, x0 - margin)
     y0 = max(0, y0 - margin)
-    x1 = min(cache[0][0] - 1, x1 + margin)
-    y1 = min(cache[0][1] - 1, y1 + margin)
+    x1 = min(fw - 1, x1 + margin)
+    y1 = min(fh - 1, y1 + margin)
     cw, ch = x1 - x0 + 1, y1 - y0 + 1
     # submuestreo por dirección (mantiene fluidez reduciendo VRAM)
     keep = []
@@ -220,10 +266,11 @@ def pack_anim(folder, step=2, margin=2):
         seg = frames[d * per_dir:(d + 1) * per_dir]
         keep.extend(seg[::step])
     out_frames = []
+    # Pasada 2: solo los conservados.
     for e in keep:
         idx = frames.index(e)
-        w, h, rgba = cache[idx]
-        cut = [rgba[(y0 + y) * w + x0 + x] for y in range(ch) for x in range(cw)]
+        w, h, raw = _png_raw(os.path.join(folder, e["png"]))
+        cut = _crop_raw(w, h, raw, x0, y0, cw, ch)
         name = "p_%03d.png" % len(out_frames)
         write_png(os.path.join(folder, name), cw, ch, cut)
         # Máscara player-color recortada con el MISMO bbox (misma geometría y hotspot).
@@ -232,9 +279,9 @@ def pack_anim(folder, step=2, margin=2):
         if mask_name:
             mpath = os.path.join(folder, mask_name)
             if os.path.exists(mpath):
-                mw, mh, mrgba = read_png(mpath)
+                mw, mh, mraw = _png_raw(mpath)
                 if mw == w and mh == h:
-                    mcut = [mrgba[(y0 + y) * mw + x0 + x] for y in range(ch) for x in range(cw)]
+                    mcut = _crop_raw(mw, mh, mraw, x0, y0, cw, ch)
                     if any(px[3] != 0 for px in mcut):
                         mask_out = "m_%03d.png" % len(out_frames)
                         write_png(os.path.join(folder, mask_out), cw, ch, mcut)

@@ -1,0 +1,125 @@
+{
+ "file": "n_mine_gold_x1",
+ "version": 4,
+ "frames": [
+  {
+   "index": 0,
+   "frame_index": 0,
+   "w": 200,
+   "h": 200,
+   "hotspot": [
+    100,
+    100
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_000.png",
+   "mask": "frame_000.mask.png",
+   "shadow": "frame_000.shadow.png"
+  },
+  {
+   "index": 1,
+   "frame_index": 1,
+   "w": 200,
+   "h": 200,
+   "hotspot": [
+    100,
+    100
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_001.png",
+   "mask": "frame_001.mask.png",
+   "shadow": "frame_001.shadow.png"
+  },
+  {
+   "index": 2,
+   "frame_index": 2,
+   "w": 200,
+   "h": 200,
+   "hotspot": [
+    100,
+    100
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_002.png",
+   "mask": "frame_002.mask.png",
+   "shadow": "frame_002.shadow.png"
+  },
+  {
+   "index": 3,
+   "frame_index": 3,
+   "w": 200,
+   "h": 200,
+   "hotspot": [
+    100,
+    100
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_003.png",
+   "mask": "frame_003.mask.png",
+   "shadow": "frame_003.shadow.png"
+  },
+  {
+   "index": 4,
+   "frame_index": 4,
+   "w": 200,
+   "h": 200,
+   "hotspot": [
+    100,
+    100
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_004.png",
+   "mask": "frame_004.mask.png",
+   "shadow": "frame_004.shadow.png"
+  },
+  {
+   "index": 5,
+   "frame_index": 5,
+   "w": 200,
+   "h": 200,
+   "hotspot": [
+    100,
+    100
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_005.png",
+   "mask": "frame_005.mask.png",
+   "shadow": "frame_005.shadow.png"
+  },
+  {
+   "index": 6,
+   "frame_index": 6,
+   "w": 200,
+   "h": 200,
+   "hotspot": [
+    100,
+    100
+   ],
+   "layers": [
+    "main",
+    "shadow"
+   ],
+   "png": "frame_006.png",
+   "mask": "frame_006.mask.png",
+   "shadow": "frame_006.shadow.png"
+  }
+ ]
+}

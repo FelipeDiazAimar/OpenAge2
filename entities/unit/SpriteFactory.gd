@@ -9,6 +9,10 @@ const PACKS := {
 	"arquero": "res://assets/sprites/archer",
 	"scout": "res://assets/sprites/scout",
 	"monje": "res://assets/sprites/monk",
+	"ariete": "res://assets/sprites/ram",
+	"catapulta": "res://assets/sprites/mangonel",
+	"carreta_comercio": "res://assets/sprites/cart",
+	"barco_pesquero": "res://assets/sprites/fishingship",
 }
 
 

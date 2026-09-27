@@ -83,6 +83,7 @@ var _solo_accum := 0.0
 var _solo_tick := 0
 var _over_shown := false
 var _dump_frames := 0
+var _gtest := 0
 
 
 func _ready() -> void:
@@ -315,14 +316,37 @@ func _setup_ai(n: int) -> void:
 	enemy_ai.setup(economy, production, combat, ai_pids, tiles, uids)
 
 
-## Recurso del mapa: nodo sim (Economy) + visual 3D. Click derecho lo recolecta.
+## Recurso del mapa: nodo sim (Economy) + visual (sprite AoE2 o 3D propio).
+## Click derecho lo recolecta.
 func _add_resource_node(node_id: int, kind: String, amount: float, tile: Vector2i, model: String) -> void:
 	var t := Vector2i(clampi(tile.x, SPAWN_MARGIN, 143 - SPAWN_MARGIN), clampi(tile.y, SPAWN_MARGIN, 143 - SPAWN_MARGIN))
 	economy.register_node(node_id, kind, amount, Vector2(t))
-	var visual: Node3D = ModelFactory.spawn_building(model, 0, Color.WHITE)
+	var visual: Node3D = _resource_visual(node_id, kind, model)
 	visual.position = terrain.tile_to_world(Vector2(t))
 	units_root.add_child(visual)
 	resources.append({"id": node_id, "kind": kind, "tile": t, "node": visual})
+
+
+## Visual de recurso: billboard del AoE2 según bioma, fallback al 3D propio.
+func _resource_visual(node_id: int, kind: String, model: String) -> Node3D:
+	var pack := ""
+	var px := 0.03
+	match kind:
+		"wood":
+			pack = "res://assets/sprites/nature/oak" if node_id % 2 == 0 else "res://assets/sprites/nature/pine"
+			px = 0.035
+		"gold":
+			pack = "res://assets/sprites/nature/goldmine"
+		"stone":
+			pack = "res://assets/sprites/nature/stonemine"
+		"food_forage":
+			pack = "res://assets/sprites/nature/bush"
+			px = 0.025
+	if pack != "":
+		var s := StaticSprite.make(pack, px)
+		if s != null:
+			return s
+	return ModelFactory.spawn_building(model, 0, Color.WHITE)
 
 
 func _spawn_player(pid: int, tc_tile: Vector2i) -> void:
@@ -348,6 +372,8 @@ func _spawn_player(pid: int, tc_tile: Vector2i) -> void:
 	_add_resource_node(nid + 2, "wood", 100.0, tc_tile + Vector2i(1, -5), "arbol")
 	_add_resource_node(nid + 3, "gold", 800.0, tc_tile + Vector2i(6, -2), "mina_oro")
 	_add_resource_node(nid + 4, "stone", 800.0, tc_tile + Vector2i(-5, -4), "mina_piedra")
+	_add_resource_node(nid + 5, "food_forage", 125.0, tc_tile + Vector2i(3, 4), "granja")
+	_add_resource_node(nid + 6, "food_forage", 125.0, tc_tile + Vector2i(-2, 6), "granja")
 	# --- 3 aldeanos alrededor del TC ---
 	for i in VILLAGER_OFFSETS.size():
 		var vtile := Vector2i(
@@ -385,6 +411,51 @@ func _process(delta: float) -> void:
 		_dump_frames += 1
 		if _dump_frames == 90 and is_instance_valid(hud) and hud.has_method("_dump_debug"):
 			hud.call("_dump_debug")
+	# Test recolección: -- --test-gather ordena recolectar en tick 10 y vuelca en 250.
+	if "--test-gather" in OS.get_cmdline_user_args():
+		_gather_test()
+
+
+## Test headless de recolección: ordena a un aldeano y avanza 300 ticks
+## de sim manualmente (headless no da tiempo real), luego vuelca estado.
+func _gather_test() -> void:
+	if _gtest != 0:
+		return
+	_gtest = 1
+	var vid := -1
+	for uid in units.keys():
+		var u: Dictionary = units[uid]
+		if int(u.get("pid", -1)) == 0 and str(u.get("kind", "")) == "aldeano":
+			vid = int(uid)
+			break
+	if vid < 0 or resources.is_empty():
+		print("GATHER-TEST sin aldeano o sin recursos")
+		_gtest = 2
+		return
+	var nid := int(resources[0]["id"])
+	SimAPI.queue_command(0, "gather", {"unit_ids": [vid], "node_id": nid})
+	print("GATHER-TEST ordena vid=", vid, " nodo=", nid)
+	for t in range(1, 501):
+		GameManager._on_tick(t)
+	_sync_visuals()
+	_gtest = 2
+	var txt := "tick=500 res=%s\n" % str(GameManager.players[0]["res"])
+	var evills: Dictionary = economy.get("_villagers")
+	for uid in units.keys():
+		var u: Dictionary = units[uid]
+		if str(u.get("kind", "")) != "aldeano" or int(u.get("pid", -1)) != 0:
+			continue
+		var id := int(uid)
+		var eco := str(evills.get(id, {}).get("state", "?"))
+		var epos := str(evills.get(id, {}).get("pos", "?"))
+		var carry := str(evills.get(id, {}).get("carry_amount", "?"))
+		var cpos := str(combat.get_pos(id)) if combat.has_unit(id) else "?"
+		var vpos := str((u["node"] as Node3D).global_position)
+		txt += "v%d eco=%s carry=%s epos=%s combat=%s visual=%s\n" % [id, eco, carry, epos, cpos, vpos]
+	var f := FileAccess.open("user://gather_test.txt", FileAccess.WRITE)
+	if f != null:
+		f.store_string(txt)
+	print(txt)
 
 
 ## Cliente: copia posiciones sim (tiles) -> visuales 3D. Sin peer no hay sim.
@@ -610,6 +681,9 @@ func _on_unit_died(uid: int, _killer_id: int) -> void:
 func _on_command(cmd: Dictionary) -> void:
 	if typeof(cmd) != TYPE_DICTIONARY:
 		return
+	var payload: Dictionary = cmd.get("payload", {})
+	# Feedback visual de órdenes en los sprites (faena/ataque). Solo cliente.
+	_visual_order_feedback(str(cmd.get("type", "")), payload)
 	match str(cmd.get("type", "")):
 		"go_tc":
 			_center_on_local_tc()
@@ -617,6 +691,36 @@ func _on_command(cmd: Dictionary) -> void:
 			# Fallback por si VillagerAI no esta en escena: selecciona + centra.
 			if is_instance_valid(selection):
 				selection.select_next_idle_villager(local_pid)
+
+
+## SpriteUnit: muestra faena al recolectar/construir y ataque al atacar.
+## Los modelos 3D no tienen estos métodos (guardia has_method).
+func _visual_order_feedback(cmd_type: String, payload: Dictionary) -> void:
+	var ids: Array = []
+	for key in ["unit_ids", "villager_ids", "units"]:
+		if payload.has(key) and typeof(payload[key]) == TYPE_ARRAY:
+			for v in payload[key]:
+				ids.append(int(v))
+	if ids.is_empty():
+		return
+	for uid in ids:
+		if not units.has(uid):
+			continue
+		var node: Node = (units[uid] as Dictionary)["node"]
+		if node == null or not is_instance_valid(node):
+			continue
+		match cmd_type:
+			"gather", "build", "repair":
+				if node.has_method("play_task"):
+					node.call("play_task")
+			"attack", "attack_move":
+				if node.has_method("stop_task"):
+					node.call("stop_task")
+				if node.has_method("play_attack"):
+					node.call("play_attack")
+			"move", "stop", "patrol":
+				if node.has_method("stop_task"):
+					node.call("stop_task")
 
 
 func _on_focus_camera(world_pos: Vector3) -> void:

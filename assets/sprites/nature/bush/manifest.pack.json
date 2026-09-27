@@ -1,0 +1,73 @@
+{
+ "source": "n_tree_bush_a_x1",
+ "dirs": 1,
+ "per_dir": 6,
+ "kept_per_dir": 6,
+ "step": 1,
+ "size": [
+  141,
+  96
+ ],
+ "frames": [
+  {
+   "png": "p_000.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 0,
+   "hotspot": [
+    72,
+    72
+   ]
+  },
+  {
+   "png": "p_001.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 1,
+   "hotspot": [
+    72,
+    72
+   ]
+  },
+  {
+   "png": "p_002.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 2,
+   "hotspot": [
+    72,
+    72
+   ]
+  },
+  {
+   "png": "p_003.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 3,
+   "hotspot": [
+    72,
+    72
+   ]
+  },
+  {
+   "png": "p_004.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 4,
+   "hotspot": [
+    72,
+    72
+   ]
+  },
+  {
+   "png": "p_005.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 5,
+   "hotspot": [
+    72,
+    72
+   ]
+  }
+ ]
+}

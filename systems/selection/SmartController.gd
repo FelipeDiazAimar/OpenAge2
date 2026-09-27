@@ -14,7 +14,7 @@ var resources: Array = []
 var local_pid := 0
 
 const ENEMY_PICK_R := 1.5 # tiles para enganchar enemigo con click derecho
-const RES_PICK_R := 2.0 # tiles para ordenar recolectar
+const RES_PICK_R := 3.0 # tiles para ordenar recolectar (generoso al clickar)
 const GROUND_Y := 2.0 # altura aprox para el primer rayo (se refina con el terreno)
 
 
