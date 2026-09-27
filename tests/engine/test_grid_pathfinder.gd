@@ -87,3 +87,13 @@ func test_path_is_deterministic() -> void:
 	var g := Grid.new(30, 30)
 	g.block_rect(Vector2i(10, 5), Vector2i(2, 20))
 	assert_eq(Pathfinder.find_path(g, Vector2i(2, 15), Vector2i(25, 15)), Pathfinder.find_path(g, Vector2i(2, 15), Vector2i(25, 15)))
+
+
+func test_regions_split_by_walls_and_update() -> void:
+	var g := Grid.new(10, 10)
+	g.block_rect(Vector2i(5, 0), Vector2i(1, 10))
+	assert_eq(g.region_of(Vector2i(1, 1)), g.region_of(Vector2i(4, 9)))
+	assert_true(g.region_of(Vector2i(1, 1)) != g.region_of(Vector2i(8, 1)))
+	assert_eq(g.region_of(Vector2i(5, 5)), -1, "bloqueada no tiene región")
+	g.set_blocked(Vector2i(5, 5), false)
+	assert_eq(g.region_of(Vector2i(1, 1)), g.region_of(Vector2i(8, 1)), "abrir un hueco une regiones")
