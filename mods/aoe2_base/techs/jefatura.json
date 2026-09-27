@@ -14,7 +14,7 @@
   },
   "effects": [
     {
-      "target": "id:milicia|id:hombre_de_armas|id:espadachin_mandoble|id:campeon|id:lancero|id:piquero|id:alabardero|id:invasor_nordico",
+      "target": "id:milicia|id:hombre_armas|id:espadachin_mandoble|id:campeon|id:lancero|id:invasor_nordico",
       "op": "add",
       "path": "abilities.Hitpoints.max",
       "value": 5

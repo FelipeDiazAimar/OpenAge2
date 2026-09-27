@@ -43,6 +43,7 @@ BUILDING_SPRITES = {
 }
 AGE_PREREQS = {"herreria_o_mercado": ["herreria", "mercado"], "castillo_o_monasterio": ["castillo", "monasterio"]}
 HOTKEY_ORDER = "QWERTASDFGZXCVB"
+UNIT_ALIASES = {"hombre_de_armas": "hombre_armas", "trabuquete": "trebuchet"}
 HUNTABLE = {"boar", "deer"}
 DEFAULT_MELEE_RELOAD = 2.0  # AoE2: recarga cuerpo a cuerpo estándar
 TRAIN_QUEUE = 5
@@ -195,10 +196,25 @@ def convert_building(b, trains, research, sprites_root=None):
     return e
 
 
-def tech_effects(ef):
+def id_target(ids, known=None, dropped=None):
+    """Selector "id:a|id:b" con alias aplicados. Con known, descarta ids
+    inexistentes (los anota en dropped); None si no queda ninguno."""
+    out = []
+    for x in ids:
+        x = UNIT_ALIASES.get(x, x)
+        if known is not None and x not in known:
+            if dropped is not None:
+                dropped.append(x)
+            continue
+        if x not in out:
+            out.append(x)
+    return "|".join(f"id:{x}" for x in out) or None
+
+
+def tech_effects(ef, known=None, dropped=None):
     """Efectos del formato viejo -> (efectos portables, legacy sin portar)."""
     if "aplica_a" in ef:
-        target = "|".join(f"id:{x}" for x in ef["aplica_a"])
+        target = id_target(ef["aplica_a"], known, dropped)
     elif ef.get("categoria") in ("infanteria", "arqueros", "caballeria", "barco"):
         target = f"tag:{ef['categoria']}"
     else:
@@ -228,7 +244,7 @@ def tech_effects(ef):
     return effects, legacy
 
 
-def convert_tech(t, building):
+def convert_tech(t, building, known=None, dropped=None):
     e = {"id": t["id"], "type": "tech", "name": t.get("nombre", t["id"]), "cost": t.get("coste", {}),
          "research_time": t.get("tiempo_sec", 0), "at": building_id(building)}
     if t.get("descripcion"):
@@ -240,18 +256,20 @@ def convert_tech(t, building):
         req["techs"] = list(t["requiere"])
     if req:
         e["requires"] = req
-    effects, legacy = tech_effects(t.get("efectos", {}))
+    effects, legacy = tech_effects(t.get("efectos", {}), known, dropped)
     e["effects"] = effects
     if legacy:
         e["legacy_effects"] = legacy
     return e
 
 
-def civ_bonus_effects(ef):
+def civ_bonus_effects(ef, known=None, dropped=None):
     """Bonus de civ portables (descuentos, HP). Si queda algo sin mapear -> []."""
     if "aplica_a" not in ef:
         return []
-    target = "|".join(f"id:{x}" for x in ef["aplica_a"])
+    target = id_target(ef["aplica_a"], known, dropped)
+    if target is None:
+        return []
     out, handled = [], {"aplica_a"}
     for key, path in (("descuento_madera", "cost.wood"), ("descuento_oro", "cost.gold")):
         if key in ef:
@@ -305,7 +323,8 @@ def bases():
 
 
 def migrate(src, out, sprites_root):
-    report = {"dropped_train_refs": {}, "legacy_effects": {}, "unported_fields": {}, "warnings": []}
+    report = {"dropped_train_refs": {}, "dropped_effect_targets": {}, "legacy_effects": {},
+              "unported_fields": {}, "warnings": []}
     actions = load(os.path.join(src, "actions.json"))["actions"]
     rates = actions["gather"]["rates_per_sec"]
     carry = actions["gather"]["carry_capacity"]
@@ -315,6 +334,14 @@ def migrate(src, out, sprites_root):
     tech_files = [load(p) for p in sorted(glob.glob(os.path.join(src, "techs", "*.json")))]
     unit_ids = {u["id"] for u in units}
     building_ids = {b["id"] for b in buildings}
+    targetable = unit_ids | building_ids
+
+    def note_dropped(eid, dropped):
+        if dropped:
+            report["dropped_effect_targets"].setdefault(eid, [])
+            for x in dropped:
+                if x not in report["dropped_effect_targets"][eid]:
+                    report["dropped_effect_targets"][eid].append(x)
 
     for sub in ENTITY_DIRS + ["maps"]:
         shutil.rmtree(os.path.join(out, sub), ignore_errors=True)
@@ -338,7 +365,9 @@ def migrate(src, out, sprites_root):
         if t["id"] in techs:
             report["warnings"].append(f"tech {t['id']} duplicada: se conserva la primera")
             return
-        e = convert_tech(t, building)
+        dropped = []
+        e = convert_tech(t, building, targetable, dropped)
+        note_dropped(t["id"], dropped)
         techs[t["id"]] = e
         research.setdefault(e["at"], []).append(t["id"])
         if civ:
@@ -392,7 +421,9 @@ def migrate(src, out, sprites_root):
         cid = f["id"]
         effects, legacy = [], []
         for bonus in f.get("bonus", []):
-            mapped = civ_bonus_effects(bonus.get("efecto", {}))
+            dropped = []
+            mapped = civ_bonus_effects(bonus.get("efecto", {}), targetable, dropped)
+            note_dropped(cid, dropped)
             if mapped:
                 effects.extend(mapped)
             else:

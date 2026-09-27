@@ -12,6 +12,45 @@
       "escorpion"
     ]
   },
+  "dropped_effect_targets": {
+    "jefatura": [
+      "piquero",
+      "alabardero"
+    ],
+    "fuego_griego": [
+      "brulote",
+      "dromon"
+    ],
+    "hachas_barbas": [
+      "hachero_franco"
+    ],
+    "bizantinos": [
+      "muralla",
+      "torre",
+      "piquero",
+      "alabardero",
+      "camello",
+      "camello_pesado"
+    ],
+    "francos": [
+      "caballeria_ligera",
+      "husar",
+      "caballero"
+    ],
+    "godos": [
+      "piquero",
+      "alabardero",
+      "jabali",
+      "ciervo"
+    ],
+    "vikingos": [
+      "piquero",
+      "alabardero",
+      "galera_guerra",
+      "galeon",
+      "brulote"
+    ]
+  },
   "legacy_effects": {
     "redencion": {
       "convierte_edificios": true,

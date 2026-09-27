@@ -292,6 +292,10 @@ func _check_refs() -> void:
 				_ref(id, "requires.techs", str(t), "tech")
 		if d.has("upgrades_to"):
 			_ref(id, "upgrades_to", str(d["upgrades_to"]), "unit")
+		if ab.get("Unique") is Dictionary:
+			_ref(id, "abilities.Unique.civ", str(ab["Unique"].get("civ", "")), "civ")
+		if d.get("effects") is Array:
+			_check_effects(id, d["effects"])
 		match str(d.get("type", "")):
 			"tech":
 				_ref(id, "at", str(d.get("at", "")), "building")
@@ -303,6 +307,40 @@ func _check_refs() -> void:
 					_ref(id, "unique_units", str(u), "unit")
 				for t in d.get("unique_techs", []):
 					_ref(id, "unique_techs", str(t), "tech")
+
+
+## Selectores de efectos: términos id:/tag:/type: válidos, ids existentes,
+## replace_entity entre unidades. Un tag sin coincidencias es solo aviso.
+func _check_effects(id: String, effects: Array) -> void:
+	var tags := {}
+	for d in defs.values():
+		for t in d.get("tags", []):
+			tags[t] = true
+	for i in effects.size():
+		var e: Variant = effects[i]
+		if not (e is Dictionary):
+			continue
+		var field := "effects[%d]" % i
+		if str(e.get("op", "")) == "replace_entity":
+			_ref(id, field + ".from", str(e.get("from", "")), "unit")
+			_ref(id, field + ".to", str(e.get("to", "")), "unit")
+			continue
+		if not (e.get("target") is String):
+			continue
+		for alt in str(e["target"]).split("|"):
+			for raw in alt.split("&"):
+				var term := raw.strip_edges()
+				var kind := term.get_slice(":", 0)
+				var val := term.get_slice(":", 1)
+				var where := "%s: %s.%s.target" % [_src[id], id, field]
+				if term.find(":") < 0 or not (kind in ["id", "tag", "type"]):
+					errors.append("%s: término desconocido '%s' (usa id:, tag: o type:)" % [where, term])
+				elif kind == "id" and not defs.has(val):
+					errors.append("%s: '%s' no existe" % [where, val])
+				elif kind == "type" and not Schemas.ENTITY_TYPES.has(val):
+					errors.append("%s: tipo desconocido '%s'" % [where, val])
+				elif kind == "tag" and not tags.has(val):
+					warnings.append("%s: tag '%s' no coincide con ninguna entidad" % [where, val])
 
 
 func _ref(id: String, field: String, target: String, type: String) -> void:

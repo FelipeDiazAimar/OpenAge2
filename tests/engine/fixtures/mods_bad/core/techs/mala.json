@@ -1,0 +1,6 @@
+{"id": "mala", "type": "tech", "research_time": 1, "at": "cuartel", "effects": [
+  {"target": "tags:infanteria", "op": "add", "path": "cost.food", "value": 1},
+  {"target": "id:fantasma", "op": "disable"},
+  {"op": "replace_entity", "from": "soldado", "to": "no_existe"},
+  {"target": "type:dragon", "op": "enable"}
+]}

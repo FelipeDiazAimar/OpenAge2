@@ -5,7 +5,7 @@
   "color": "#2a4bff",
   "effects": [
     {
-      "target": "id:jinete|id:caballeria_ligera|id:husar|id:caballero|id:paladin_franco",
+      "target": "id:jinete|id:paladin_franco",
       "op": "mul",
       "path": "abilities.Hitpoints.max",
       "value": 1.2

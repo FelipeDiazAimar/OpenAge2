@@ -77,6 +77,22 @@ class TestEffects(unittest.TestCase):
             {"target": "id:arquero|id:ballestero", "op": "mul", "path": "cost.wood", "value": 0.9},
             {"target": "id:arquero|id:ballestero", "op": "mul", "path": "cost.gold", "value": 0.9}])
 
+    def test_effect_targets_aliased_and_filtered(self):
+        known = {"hombre_armas", "jinete"}
+        dropped = []
+        eff, legacy = M.tech_effects({"aplica_a": ["hombre_de_armas", "piquero"], "attack": 1}, known, dropped)
+        self.assertEqual(eff, [{"target": "id:hombre_armas", "op": "add", "path": "abilities.Attack.damage.melee", "value": 1}])
+        self.assertEqual(legacy, {})
+        self.assertEqual(dropped, ["piquero"])
+        dropped = []
+        eff, legacy = M.tech_effects({"aplica_a": ["alabardero"], "hp": 5}, known, dropped)
+        self.assertEqual(eff, [])
+        self.assertEqual(legacy, {"hp": 5, "aplica_a": ["alabardero"]})
+        dropped = []
+        eff = M.civ_bonus_effects({"hp_caballeria_bonus": 0.2, "aplica_a": ["jinete", "husar"]}, known, dropped)
+        self.assertEqual(eff, [{"target": "id:jinete", "op": "mul", "path": "abilities.Hitpoints.max", "value": 1.2}])
+        self.assertEqual(dropped, ["husar"])
+
     def test_civ_partial_bonus_not_mapped(self):
         self.assertEqual(M.civ_bonus_effects({"descuento_madera": 0.1, "raro": 1, "aplica_a": ["x"]}), [])
 

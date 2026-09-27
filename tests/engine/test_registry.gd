@@ -95,3 +95,19 @@ func test_malformed_manifest_fields_are_errors() -> void:
 	assert_false(r.load_mods("res://tests/engine/fixtures/mods_bad_manifest"))
 	assert_has_error(r.errors, "mod.json: depends debe ser lista de textos")
 	assert_has_error(r.errors, "mod.json: priority debe ser número")
+
+
+func test_effect_and_unique_references_are_checked() -> void:
+	var r := Registry.new()
+	assert_false(r.load_mods(BAD_ROOT))
+	assert_has_error(r.errors, "mala.effects[0].target: término desconocido 'tags:infanteria'")
+	assert_has_error(r.errors, "mala.effects[1].target: 'fantasma' no existe")
+	assert_has_error(r.errors, "mala.effects[2].to: 'no_existe' no existe")
+	assert_has_error(r.errors, "mala.effects[3].target: tipo desconocido 'dragon'")
+	assert_has_error(r.errors, "unico.abilities.Unique.civ: 'atlantes' no existe")
+
+
+func test_tag_selector_without_matches_is_warning() -> void:
+	var r := Registry.new()
+	assert_true(r.load_mods("res://tests/engine/fixtures/mods_warn"), str(r.errors))
+	assert_has_error(r.warnings, "t.effects[0].target: tag 'nadie' no coincide con ninguna entidad")

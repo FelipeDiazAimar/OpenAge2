@@ -1,0 +1,3 @@
+{"id": "t", "type": "tech", "research_time": 1, "at": "b", "effects": [
+  {"target": "tag:nadie", "op": "add", "path": "cost.food", "value": 1}
+]}
