@@ -121,8 +121,7 @@ func state_hash() -> String:
 		parts.append("%d:%d,%d,%d,%d" % [p["id"], r["wood"], r["food"], r["gold"], r["stone"]])
 	var ctx := HashingContext.new()
 	ctx.start(HashingContext.HASH_SHA256)
-	ctx.update("
-".join(parts).to_utf8_buffer())
+	ctx.update("\n".join(parts).to_utf8_buffer())
 	return ctx.finish().hex_encode()
 
 
