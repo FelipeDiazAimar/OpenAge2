@@ -114,3 +114,65 @@ func test_hunting_deterministic() -> void:
 		_steps(s, 200)
 		hashes.append(s.state_hash())
 	assert_eq(hashes[0], hashes[1])
+
+
+func test_killing_boar_mid_combat_loop() -> void:
+	# El aldeano (id menor) mata al jabalí dentro del mismo bucle de combate:
+	# el jabalí pierde Attack y no debe romper el paso.
+	var s := _sim()
+	s.spawn("centro_urbano", 0, Vector2i(2, 2))
+	var v := s.spawn("aldeano", 0, Vector2i(10, 10))
+	var boar := s.spawn("boar", -1, Vector2i(11, 10))
+	s.world.comp(boar, "Hitpoints")["hp"] = 1
+	s.queue_command(0, "gather", {"ids": [v], "target": boar})
+	_steps(s, 60)
+	assert_true(s.world.comp(boar, "ResourceSource")["killed"])
+	assert_eq(s.world.comp(v, "Gather")["state"], "gathering", "recolecta la carcasa")
+
+
+func test_sheep_lost_mid_hunt_releases_villager() -> void:
+	var s := _sim()
+	var v := s.spawn("aldeano", 0, Vector2i(4, 10))
+	var sheep := s.spawn("sheep", 0, Vector2i(20, 10))
+	s.spawn("aldeano", 1, Vector2i(21, 10))
+	s.queue_command(0, "gather", {"ids": [v], "target": sheep})
+	_steps(s, 150)
+	assert_eq(s.world.entities[sheep]["owner"], 1)
+	assert_true(s.world.comp(v, "Gather")["state"] != "hunting", "no queda cazando una oveja ajena")
+	assert_eq(s.world.comp(v, "Attack")["target"], -1)
+
+
+func test_retreat_is_not_overridden_by_retaliation() -> void:
+	var s := _sim()
+	var m := s.spawn("milicia", 0, Vector2i(15, 10))
+	var a := s.spawn("arquero", 1, Vector2i(19, 10))
+	s.queue_command(1, "attack", {"ids": [a], "target": m})
+	s.queue_command(0, "move", {"ids": [m], "pos": [2500, 10500]})
+	_steps(s, 120)
+	assert_true(s.world.entities.has(m))
+	assert_true(s.world.entities[m]["pos"].x < 6000, "se retira: %s" % s.world.entities[m]["pos"])
+
+
+func test_military_ignores_animals() -> void:
+	var s := _sim()
+	s.spawn("milicia", 0, Vector2i(10, 10))
+	var sheep := s.spawn("sheep", 1, Vector2i(11, 10))
+	var deer := s.spawn("deer", -1, Vector2i(10, 11))
+	s.spawn("aldeano", 1, Vector2i(12, 10)) # mantiene la oveja del jugador 1
+	_steps(s, 100)
+	assert_eq(int(s.world.comp(sheep, "Hitpoints")["hp"]), 7, "no mata ovejas enemigas por su cuenta")
+	assert_eq(int(s.world.comp(deer, "Hitpoints")["hp"]), 5)
+
+
+func test_forager_does_not_go_hunting() -> void:
+	var s := _sim()
+	s.spawn("centro_urbano", 0, Vector2i(2, 2))
+	var v := s.spawn("aldeano", 0, Vector2i(10, 10))
+	var bush := s.spawn("berry_bush", -1, Vector2i(11, 10))
+	var deer := s.spawn("deer", -1, Vector2i(10, 12))
+	s.world.comp(bush, "ResourceSource")["amount"] = 1
+	s.queue_command(0, "gather", {"ids": [v], "target": bush})
+	_steps(s, 60)
+	assert_false(s.world.entities.has(bush))
+	assert_true(s.world.comp(v, "Gather")["target"] != deer, "se agotó el arbusto: no se va a cazar")
+	assert_eq(int(s.world.comp(deer, "Hitpoints")["hp"]), 5)

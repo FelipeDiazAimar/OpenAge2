@@ -150,6 +150,9 @@ class TestFiles(unittest.TestCase):
         sheep = M.convert_resource({"id": "sheep", "resource": "food", "amount": 100, "tame": True, "gather": {"rate_key": "food_forage"}}, {})
         self.assertTrue(sheep["abilities"]["ResourceSource"]["requires_kill"], "las ovejas también se matan antes de recolectar")
         self.assertEqual(sheep["abilities"]["Hitpoints"], {"max": 7})
+        # Caza y pastoreo con tasa propia (no se mezclan con las bayas).
+        self.assertEqual(ab["ResourceSource"]["rate_key"], "food_hunt")
+        self.assertEqual(sheep["abilities"]["ResourceSource"]["rate_key"], "food_herd")
 
     def test_resource_graphics(self):
         rd = {"id": "tree", "resource": "wood", "amount": 100, "gather": {"rate_key": "wood"}}

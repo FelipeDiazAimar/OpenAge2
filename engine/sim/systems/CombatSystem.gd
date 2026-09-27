@@ -61,7 +61,9 @@ static func step(sim) -> void:
 	_step_projectiles(sim)
 	var w = sim.world
 	for id in w.ids_with("Attack"):
-		if not w.entities.has(id):
+		# Un golpe de este mismo bucle puede haber matado a id (o dejarlo como
+		# carcasa, sin Attack).
+		if not w.has_ability(id, "Attack"):
 			continue
 		var a: Dictionary = w.comp(id, "Attack")
 		if int(a["cooldown"]) > 0:
@@ -111,6 +113,8 @@ static func _acquire(sim, id: int) -> int:
 	for c in w.spatial.query_radius(e["pos"], sight):
 		if c == id or not w.has_ability(c, "Hitpoints"):
 			continue
+		if w.has_ability(c, "ResourceSource"):
+			continue # animales: solo por orden (caza); las ovejas se capturan
 		if not sim.is_enemy(int(e["owner"]), int(w.entities[c]["owner"])):
 			continue
 		if c == int(a["ignore"]) and w.tick < int(a["ignore_until"]):
@@ -249,8 +253,10 @@ static func _hit(sim, id: int, t: int) -> void:
 
 
 ## attacker: id de quien golpea (-1 si no se sabe). Represalia AoE2: si el
-## golpeado puede atacar, no es aldeano (sin Gather) y está sin objetivo, va
-## contra el atacante aunque esté fuera de su vista (militares, jabalí).
+## golpeado puede atacar, no es aldeano (sin Gather), está sin objetivo y no
+## se está moviendo por orden, va contra el atacante aunque esté fuera de su
+## vista. El jabalí persigue (orden explícita); los militares lo sueltan si
+## no lo alcanzan.
 static func apply_damage(sim, atk: Dictionary, t: int, attacker: int = -1) -> void:
 	var w = sim.world
 	if not w.entities.has(t) or not w.has_ability(t, "Hitpoints"):
@@ -266,8 +272,16 @@ static func apply_damage(sim, atk: Dictionary, t: int, attacker: int = -1) -> vo
 	if attacker < 0 or not w.entities.has(attacker) or w.has_ability(t, "Gather"):
 		return
 	var ta: Dictionary = w.comp(t, "Attack")
-	if not ta.is_empty() and int(ta["target"]) < 0 and w.has_ability(attacker, "Hitpoints"):
-		order_attack(sim, t, attacker)
+	if ta.is_empty() or int(ta["target"]) >= 0 or not w.has_ability(attacker, "Hitpoints"):
+		return
+	var tm: Dictionary = w.comp(t, "Move")
+	if not tm.is_empty() and bool(tm["moving"]):
+		return # retirada ordenada por el jugador
+	if _too_close(sim, t, attacker):
+		return # asedio con enemigo dentro del alcance mínimo
+	order_attack(sim, t, attacker)
+	if not w.has_ability(t, "ResourceSource"):
+		ta["explicit"] = false
 
 
 static func _step_projectiles(sim) -> void:

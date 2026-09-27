@@ -28,6 +28,8 @@
     "task_food_forage": "sprite:villager/forager",
     "task_food_farm": "sprite:villager/task",
     "task_food_fish": "sprite:villager/fisher",
+    "task_food_hunt": "sprite:villager/hunter",
+    "task_food_herd": "sprite:villager/shepherd",
     "attack": "sprite:villager/fight"
   },
   "abilities": {
@@ -60,7 +62,9 @@
         "food_farm": 0.32,
         "food_fish": 0.43,
         "gold": 0.38,
-        "stone": 0.36
+        "stone": 0.36,
+        "food_hunt": 0.41,
+        "food_herd": 0.33
       },
       "capacity": 10
     },

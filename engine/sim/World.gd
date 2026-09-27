@@ -81,11 +81,16 @@ func state_hash() -> String:
 			var m: Dictionary = components["Move"][id]
 			mv = "%d:%d" % [1 if m["moving"] else 0, (m["waypoints"] as Array).size()]
 		var extra := -1
+		var st := ""
 		if has_ability(id, "Gather"):
 			extra = components["Gather"][id]["carry"]
+			st = "%s:%d" % [components["Gather"][id]["state"], components["Gather"][id]["target"]]
 		elif has_ability(id, "ResourceSource"):
 			extra = components["ResourceSource"][id]["amount"]
-		parts.append("%d|%s|%d|%d|%d|%d|%s|%d" % [id, e["def_id"], e["owner"], e["pos"].x, e["pos"].y, hp, mv, extra])
+			st = "k" if components["ResourceSource"][id]["killed"] else ""
+		if has_ability(id, "Attack"):
+			st += "@%d" % components["Attack"][id]["target"]
+		parts.append("%d|%s|%d|%d|%d|%d|%s|%d|%s" % [id, e["def_id"], e["owner"], e["pos"].x, e["pos"].y, hp, mv, extra, st])
 	var ctx := HashingContext.new()
 	ctx.start(HashingContext.HASH_SHA256)
 	ctx.update("\n".join(parts).to_utf8_buffer())

@@ -13,9 +13,10 @@ static func step(sim) -> void:
 	var w = sim.world
 	if w.tick % EVERY != 0:
 		return
-	for id in w.ids_with("ResourceSource"):
+	# Las ovejas vivas tienen Move: evita recorrer miles de árboles y minas.
+	for id in w.ids_with("Move"):
 		var src: Dictionary = w.comp(id, "ResourceSource")
-		if not bool(src["params"].get("tame", false)) or not w.has_ability(id, "Hitpoints"):
+		if src.is_empty() or not bool(src["params"].get("tame", false)) or not w.has_ability(id, "Hitpoints"):
 			continue
 		var e: Dictionary = w.entities[id]
 		var owner := int(e["owner"])

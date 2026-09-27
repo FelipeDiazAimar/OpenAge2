@@ -37,6 +37,15 @@ static func step(sim) -> void:
 			_try_move(sim, id, p - off)
 
 
+## Solo a casillas transitables; un cambio diagonal de casilla exige ambas
+## ortogonales libres (no cruzar esquinas de muros o edificios).
 static func _try_move(sim, id: int, to: Vector2i) -> void:
-	if sim.grid.is_walkable(Grid.tile_of(to)):
-		sim.world.set_pos(id, to)
+	var g = sim.grid
+	var a := Grid.tile_of(sim.world.entities[id]["pos"])
+	var b := Grid.tile_of(to)
+	if not g.is_walkable(b):
+		return
+	if a.x != b.x and a.y != b.y:
+		if not g.is_walkable(Vector2i(b.x, a.y)) or not g.is_walkable(Vector2i(a.x, b.y)):
+			return
+	sim.world.set_pos(id, to)

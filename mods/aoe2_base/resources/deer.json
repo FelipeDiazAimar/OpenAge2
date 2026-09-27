@@ -15,7 +15,7 @@
     "ResourceSource": {
       "resource": "food",
       "amount": 140,
-      "rate_key": "food_forage",
+      "rate_key": "food_hunt",
       "requires_kill": true,
       "flees": true
     },

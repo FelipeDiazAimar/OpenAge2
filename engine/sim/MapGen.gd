@@ -46,6 +46,7 @@ static func generate(sim, p_seed: int, starts: Array[Vector2i]) -> void:
 ## Grupo de n animales alrededor de un punto a `dist` casillas de c (±2).
 static func _herd(sim, rng, used: Dictionary, c: Vector2i, dist: int, def_id: String, n: int, owner: int) -> void:
 	var g = sim.grid
+	var placed := 0
 	for attempt in 30:
 		var t: int = rng.range_i(-dist, dist)
 		var anchor: Vector2i
@@ -60,7 +61,6 @@ static func _herd(sim, rng, used: Dictionary, c: Vector2i, dist: int, def_id: St
 				anchor = c + Vector2i(-dist, t)
 		if not g.is_walkable(anchor):
 			continue
-		var placed := 0
 		for k in 40:
 			if placed >= n:
 				break
@@ -71,7 +71,8 @@ static func _herd(sim, rng, used: Dictionary, c: Vector2i, dist: int, def_id: St
 			if sim.spawn(def_id, owner, tile) >= 0:
 				used[tile] = true
 				placed += 1
-		return
+		if placed >= n:
+			return # si el ancla quedó junto a un bosque, se completa con otra
 
 
 static func _far_from_starts(t: Vector2i, starts: Array[Vector2i]) -> bool:

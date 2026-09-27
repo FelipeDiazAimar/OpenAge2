@@ -15,7 +15,7 @@
     "ResourceSource": {
       "resource": "food",
       "amount": 100,
-      "rate_key": "food_forage",
+      "rate_key": "food_herd",
       "requires_kill": true,
       "tame": true
     },

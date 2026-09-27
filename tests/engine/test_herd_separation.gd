@@ -85,3 +85,14 @@ func test_separation_deterministic() -> void:
 		_steps(s, 30)
 		hashes.append(s.state_hash())
 	assert_eq(hashes[0], hashes[1])
+
+
+func test_separation_does_not_cut_corners() -> void:
+	var s := _sim()
+	s.grid.set_blocked(Vector2i(11, 10), true)
+	s.grid.set_blocked(Vector2i(10, 11), true)
+	var a: int = s.world.spawn(s.registry.get_def("milicia"), 0, Vector2i(10950, 10950))
+	s.world.spawn(s.registry.get_def("milicia"), 0, Vector2i(10850, 10850))
+	_steps(s, 5)
+	var p: Vector2i = s.world.entities[a]["pos"]
+	assert_eq(Vector2i(p.x / 1000, p.y / 1000), Vector2i(10, 10), "no cruza la esquina en diagonal: %s" % p)

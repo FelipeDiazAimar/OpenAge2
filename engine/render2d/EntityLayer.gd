@@ -80,7 +80,7 @@ func sync(alpha: float, delta: float) -> void:
 			v.hp_ratio = float(hp["hp"]) / float(hp["max"])
 		var col: Color = colors.get(e["owner"], Color(0.6, 0.6, 0.6))
 		v.set_color(col)
-		v.owned = str(e["type"]) == "resource" and int(e["owner"]) >= 0
+		v.owned = str(e["type"]) == "resource" and int(e["owner"]) >= 0 and w.has_ability(id, "Hitpoints")
 		var action := ""
 		var att: Dictionary = w.comp(id, "Attack")
 		var g: Dictionary = w.comp(id, "Gather")

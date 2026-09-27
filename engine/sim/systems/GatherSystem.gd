@@ -88,6 +88,11 @@ static func _hunting(sim, id: int, g: Dictionary) -> void:
 	if not w.entities.has(t):
 		_retarget(sim, id, g)
 		return
+	if not _may_take(sim, id, t):
+		# La oveja cambió de dueño a mitad de la caza.
+		CombatSystem.stop(sim, id)
+		_retarget(sim, id, g)
+		return
 	if bool(w.comp(t, "ResourceSource")["killed"]):
 		CombatSystem.stop(sim, id)
 		order_gather(sim, id, t)
