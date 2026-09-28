@@ -259,7 +259,9 @@ func smart_command(world_pos: Vector2) -> void:
 	if _monk_command(id):
 		return
 	var carts: Array = selected.filter(func(s): return sim.world.has_ability(s, "Trade"))
-	if id >= 0 and not carts.is_empty() and sim.world.has_ability(id, "Market") and int(sim.world.entities[id]["owner"]) != local_pid:
+	var mkt_owner := int(sim.world.entities[id]["owner"]) if id >= 0 else -1
+	if id >= 0 and not carts.is_empty() and sim.world.has_ability(id, "Market") and mkt_owner != local_pid \
+			and not sim.is_enemy(local_pid, mkt_owner):
 		sim.queue_command(local_pid, "trade", {"ids": carts, "target": id})
 		return
 	if id >= 0 and sim.world.has_ability(id, "Hitpoints") and sim.is_enemy(local_pid, int(sim.world.entities[id]["owner"])):
@@ -282,10 +284,13 @@ func smart_command(world_pos: Vector2) -> void:
 		# Aldeanos solo con Alt (como en AoE2): si no, el clic derecho no los mete.
 		var alt := Input.is_key_pressed(KEY_ALT)
 		# Aldeanos con carga sobre un depósito que la acepta: descargar.
-		var carriers: Array = selected.filter(func(s): return sim.world.has_ability(s, "Gather") and int(sim.world.comp(s, "Gather")["carry"]) > 0)
-		if not alt and not carriers.is_empty() and sim.world.has_ability(id, "DropSite") and sim.is_built(id):
+		var accepts: Array = sim.world.comp(id, "DropSite")["params"]["accepts"] if sim.world.has_ability(id, "DropSite") else []
+		var carriers: Array = selected.filter(func(s): return sim.world.has_ability(s, "Gather") \
+			and int(sim.world.comp(s, "Gather")["carry"]) > 0 and accepts.has(str(sim.world.comp(s, "Gather")["carry_res"])))
+		if not alt and not carriers.is_empty() and sim.is_built(id):
 			sim.queue_command(local_pid, "drop", {"ids": carriers, "target": id})
-			return
+			if carriers.size() == selected.size():
+				return # si hay más unidades, siguen con su orden (guarecer)
 		var garrisonable: Array = selected.filter(func(s): return sim.world.has_ability(s, "Garrisonable") and (alt or not sim.world.has_ability(s, "Gather")))
 		if not garrisonable.is_empty() and sim.world.has_ability(id, "Garrison"):
 			sim.queue_command(local_pid, "garrison", {"ids": garrisonable, "target": id})
@@ -302,7 +307,9 @@ func _monk_command(id: int) -> bool:
 	var w = sim.world
 	var owner := int(w.entities[id]["owner"])
 	if w.has_ability(id, "Relic"):
-		sim.queue_command(local_pid, "pick_relic", {"ids": [monks[0]], "target": id})
+		var free: Array = monks.filter(func(s): return not w.has_ability(s, "Carrying"))
+		if not free.is_empty():
+			sim.queue_command(local_pid, "pick_relic", {"ids": [free[0]], "target": id})
 		return true
 	var carrying: Array = monks.filter(func(s): return w.has_ability(s, "Carrying"))
 	if not carrying.is_empty() and w.has_ability(id, "RelicHolder") and owner == local_pid:

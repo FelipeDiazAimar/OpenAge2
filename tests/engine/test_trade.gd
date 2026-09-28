@@ -82,3 +82,26 @@ func test_drop_off() -> void:
 	_steps(s, 3)
 	assert_true(str(s.world.comp(v, "Gather")["dropsite"]) != str(e), "no en depósito ajeno")
 	assert_true(tc > 0)
+
+
+func test_cart_rehomes_when_home_falls() -> void:
+	var s := _sim()
+	var home := s.spawn("mercado", 0, Vector2i(5, 5))
+	var backup := s.spawn("mercado", 0, Vector2i(5, 20))
+	var ally := s.spawn("mercado", 1, Vector2i(35, 5))
+	var cart := s.spawn("carreta_comercio", 0, Vector2i(9, 6))
+	s.queue_command(0, "trade", {"ids": [cart], "target": ally})
+	_steps(s, 3)
+	# Llega al aliado y carga; entonces cae el mercado de origen.
+	for i in 400:
+		s.step()
+		if s.world.comp(cart, "Trade")["state"] == "to_home":
+			break
+	assert_eq(s.world.comp(cart, "Trade")["state"], "to_home")
+	var carry: int = s.world.comp(cart, "Trade")["carry"]
+	assert_true(carry > 0)
+	var gold0: int = s.players[0]["res"]["gold"]
+	s.kill(home)
+	_steps(s, 600)
+	assert_eq(s.world.comp(cart, "Trade")["home"], backup, "busca otro mercado propio")
+	assert_true(int(s.players[0]["res"]["gold"]) >= gold0 + carry, "no pierde el oro que llevaba")

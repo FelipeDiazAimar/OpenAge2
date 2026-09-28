@@ -94,3 +94,57 @@ func test_mapgen_places_relics_far_from_starts() -> void:
 	var starts: Array[Vector2i] = [Vector2i(39, 39), Vector2i(105, 105)]
 	MapGen.generate(s, 3, starts)
 	assert_eq(_relic_count(s), MapGen.RELICS)
+
+
+func test_auto_heal_does_not_steal_pick_order() -> void:
+	for off in 10:
+		var s := _sim()
+		var monk := s.spawn("monje", 0, Vector2i(10, 10))
+		var relic := s.spawn("reliquia", -1, Vector2i(14 + off % 3, 10))
+		var hurt := s.spawn("milicia", 0, Vector2i(10, 14))
+		s.world.comp(hurt, "Hitpoints")["hp"] = 5
+		_steps(s, off)
+		s.queue_command(0, "pick_relic", {"ids": [monk], "target": relic})
+		_steps(s, 100)
+		assert_true(s.world.has_ability(monk, "Carrying"), "recoge la reliquia (desfase %d)" % off)
+
+
+func test_convert_order_cancels_pending_pick() -> void:
+	var s := _sim()
+	var monk := s.spawn("monje", 0, Vector2i(10, 10))
+	var relic := s.spawn("reliquia", -1, Vector2i(20, 10))
+	var foe := s.spawn("arquero", 1, Vector2i(10, 15))
+	s.queue_command(0, "pick_relic", {"ids": [monk], "target": relic})
+	_steps(s, 5)
+	s.queue_command(0, "convert", {"ids": [monk], "target": foe})
+	_steps(s, 150)
+	assert_false(s.world.has_ability(monk, "RelicTask"))
+	assert_eq(int(s.world.entities[foe]["owner"]), 0, "convierte en vez de ir por la reliquia")
+
+
+func test_converting_monk_obeys_garrison() -> void:
+	var s := _sim()
+	s.players[0]["age"] = 1
+	var tower := s.spawn("torre_vigia", 0, Vector2i(6, 10))
+	var monk := s.spawn("monje", 0, Vector2i(10, 10))
+	var foe := s.spawn("arquero", 1, Vector2i(16, 10))
+	s.queue_command(0, "convert", {"ids": [monk], "target": foe})
+	_steps(s, 20)
+	s.queue_command(0, "garrison", {"ids": [monk], "target": tower})
+	_steps(s, 120)
+	assert_true(bool(s.world.comp(monk, "Garrisoned").get("inside", false)), "se guarece")
+	assert_eq(int(s.world.entities[foe]["owner"]), 1)
+
+
+func test_mapgen_seeds_match_rng() -> void:
+	var r := Registry.new()
+	r.load_mods("res://mods")
+	var starts: Array[Vector2i] = [Vector2i(39, 39), Vector2i(105, 105)]
+	var draws := []
+	for sd in [1, 2]:
+		var s := Sim.new(r, 144, 144)
+		s.add_player(0, "britones", 0)
+		s.add_player(1, "francos", 1)
+		MapGen.generate(s, sd, starts)
+		draws.append(s.rng.next_u32())
+	assert_true(draws[0] != draws[1], "cada mapa, su azar de conversiones")

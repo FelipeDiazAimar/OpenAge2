@@ -92,10 +92,19 @@ static func step(sim) -> void:
 			continue
 		var home: int = t["home"]
 		var target: int = t["target"]
-		if not _market_ok(sim, home) or int(w.entities[home]["owner"]) != int(w.entities[cart]["owner"]) \
-				or trade_error(sim, cart, target) != "":
-			stop(sim, cart) # mercado destruido o ahora enemigo
-			continue
+		var owner := int(w.entities[cart]["owner"])
+		if not _market_ok(sim, home) or int(w.entities[home]["owner"]) != owner:
+			# Cayó (o cambió de dueño) el mercado propio: otro propio, como en AoE2.
+			home = home_market(sim, owner, w.entities[cart]["pos"])
+			t["home"] = home
+			if home >= 0 and st == "to_home":
+				_go(sim, cart, home)
+		if home < 0 or trade_error(sim, cart, target) != "":
+			if home >= 0 and st == "to_home" and int(t["carry"]) > 0:
+				pass # el destino ya no sirve, pero lleva oro: que lo entregue
+			else:
+				stop(sim, cart) # sin mercado propio, o el ajeno cayó o es enemigo
+				continue
 		if bool(w.comp(cart, "Move")["moving"]):
 			continue
 		var dest := target if st == "to_target" else home
@@ -107,7 +116,10 @@ static func step(sim) -> void:
 			t["state"] = "to_home"
 			_go(sim, cart, home)
 		else:
-			sim.add_res(int(w.entities[cart]["owner"]), "gold", int(t["carry"]))
+			sim.add_res(owner, "gold", int(t["carry"]))
 			t["carry"] = 0
+			if trade_error(sim, cart, target) != "":
+				stop(sim, cart)
+				continue
 			t["state"] = "to_target"
 			_go(sim, cart, target)

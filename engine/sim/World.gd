@@ -139,9 +139,12 @@ func state_hash() -> String:
 			st += "F%d" % components["Foundation"][id]["progress"]
 		if has_ability(id, "Convert"):
 			var cv: Dictionary = components["Convert"][id]
-			st += "C%d:%d:%d" % [cv["target"], cv["channel"], cv["faith"]]
+			st += "C%d:%d:%d:%d" % [cv["target"], cv["channel"], cv["faith"], cv["repath"]]
 		if has_ability(id, "Heal"):
-			st += "H%d:%d" % [components["Heal"][id]["target"], components["Heal"][id]["acc"]]
+			var hl: Dictionary = components["Heal"][id]
+			st += "H%d:%d:%s:%d" % [hl["target"], hl["acc"], hl["explicit"], hl["repath"]]
+		if has_ability(id, "RelicTask"):
+			st += "R%s:%d" % [components["RelicTask"][id]["kind"], components["RelicTask"][id]["target"]]
 		if has_ability(id, "Trade"):
 			var tr: Dictionary = components["Trade"][id]
 			st += "T%s:%d:%d:%d" % [tr["state"], tr["home"], tr["target"], tr["carry"]]

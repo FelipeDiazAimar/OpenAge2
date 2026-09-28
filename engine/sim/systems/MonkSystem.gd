@@ -184,6 +184,8 @@ static func _heal_tick(sim, id: int, h: Dictionary) -> void:
 		var m: Dictionary = w.comp(id, "Move")
 		if (not c.is_empty() and int(c["target"]) >= 0) or (not m.is_empty() and bool(m["moving"])):
 			return
+		if w.has_ability(id, "RelicTask") or w.has_ability(id, "Garrisoned"):
+			return # tiene otra orden (reliquia o guarecerse)
 		if (w.tick + id) % AUTO_HEAL_EVERY != 0:
 			return
 		t = _nearest_injured(sim, id)

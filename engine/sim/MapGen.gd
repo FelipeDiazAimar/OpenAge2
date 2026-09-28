@@ -19,6 +19,8 @@ const RELICS := 5 # reliquias lejos de los inicios
 
 static func generate(sim, p_seed: int, starts: Array[Vector2i]) -> void:
 	var rng := Rng.new(p_seed)
+	# El azar de la partida (conversiones) sale de la semilla del mapa.
+	sim.rng = Rng.new(p_seed ^ 0x5EED1234)
 	var reserved := {}
 	for s in starts:
 		for dy in range(-CLEAR_R - 1, CLEAR_R + 2):

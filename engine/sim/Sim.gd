@@ -682,6 +682,7 @@ func _cmd_monk(pid: int, payload: Dictionary, ability: String) -> void:
 		return
 	for id in _own_ids(pid, payload.get("ids"), ability):
 		GarrisonSystem.cancel(world, id)
+		RelicSystem.cancel(world, id)
 		if ability == "Convert":
 			MonkSystem.order_convert(self, id, int(raw_t))
 		else:
@@ -693,6 +694,9 @@ func _cmd_garrison(pid: int, payload: Dictionary) -> void:
 	if not _num_ok(raw_t) or not world.entities.has(int(raw_t)):
 		return
 	for id in _own_ids(pid, payload.get("ids"), "Garrisonable"):
+		MonkSystem.stop(self, id)
+		RelicSystem.cancel(world, id)
+		TradeSystem.stop(self, id)
 		GarrisonSystem.order_garrison(self, id, int(raw_t))
 
 
