@@ -91,7 +91,7 @@ func sync(alpha: float, delta: float) -> void:
 		var bld: Dictionary = w.comp(id, "Build")
 		if not att.is_empty() and bool(att["attacking"]):
 			action = "attack"
-		elif not bld.is_empty() and str(bld["state"]) == "building":
+		elif not bld.is_empty() and (str(bld["state"]) == "building" or str(bld["state"]) == "repairing"):
 			action = "build"
 		elif not g.is_empty() and str(g["state"]) == "gathering":
 			action = "task_" + str(g["kind"])
