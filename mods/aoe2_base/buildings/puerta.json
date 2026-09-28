@@ -26,5 +26,8 @@
         "pierce": 8
       }
     }
+  },
+  "graphics": {
+    "idle": "sprite:buildings/gate/b_west_gate_stone_e_closed_x1"
   }
 }

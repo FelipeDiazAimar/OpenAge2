@@ -37,5 +37,8 @@
         "food"
       ]
     }
+  },
+  "graphics": {
+    "idle": "sprite:buildings/dock/b_west_dock_age3_x1"
   }
 }

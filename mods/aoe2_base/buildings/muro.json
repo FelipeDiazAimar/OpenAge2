@@ -26,5 +26,8 @@
         "pierce": 8
       }
     }
+  },
+  "graphics": {
+    "idle": "sprite:buildings/wall/b_west_wall_stone_x1"
   }
 }

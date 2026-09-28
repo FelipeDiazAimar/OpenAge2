@@ -28,5 +28,8 @@
         "wood"
       ]
     }
+  },
+  "graphics": {
+    "idle": "sprite:buildings/lumber/b_west_lumber_camp_age2_x1"
   }
 }

@@ -34,5 +34,8 @@
     "Wonder": {
       "victory_time": 600
     }
+  },
+  "graphics": {
+    "idle": "sprite:buildings/wonder/b_west_wonder_britons_x1"
   }
 }

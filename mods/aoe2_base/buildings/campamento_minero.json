@@ -29,5 +29,8 @@
         "stone"
       ]
     }
+  },
+  "graphics": {
+    "idle": "sprite:buildings/mining/b_west_mining_camp_age2_x1"
   }
 }

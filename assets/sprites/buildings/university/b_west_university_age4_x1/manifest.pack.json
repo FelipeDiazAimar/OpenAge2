@@ -1,12 +1,12 @@
 {
- "source": "b_west_town_center_age4_x1",
+ "source": "b_west_university_age4_x1",
  "dirs": 1,
  "per_dir": 1,
  "kept_per_dir": 1,
  "step": 1,
  "size": [
   396,
-  268
+  284
  ],
  "frames": [
   {
@@ -15,8 +15,8 @@
    "dir": 0,
    "sub": 0,
    "hotspot": [
-    198,
-    210
+    206,
+    194
    ]
   }
  ]

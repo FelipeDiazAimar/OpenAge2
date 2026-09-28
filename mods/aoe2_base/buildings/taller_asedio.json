@@ -34,5 +34,8 @@
       "queue": 5
     },
     "RallyPoint": {}
+  },
+  "graphics": {
+    "idle": "sprite:buildings/siege/b_west_siege_workshop_age3_x1"
   }
 }

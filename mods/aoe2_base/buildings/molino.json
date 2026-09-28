@@ -28,5 +28,8 @@
         "food"
       ]
     }
+  },
+  "graphics": {
+    "idle": "sprite:buildings/mill/b_west_mill_age3_x1"
   }
 }

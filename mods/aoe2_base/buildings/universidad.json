@@ -39,5 +39,8 @@
         "albanileria"
       ]
     }
+  },
+  "graphics": {
+    "idle": "sprite:buildings/university/b_west_university_age3_x1"
   }
 }
