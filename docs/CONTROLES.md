@@ -87,8 +87,8 @@ Proyecto → Configuración → Mapa de entrada, o edita la sección `[input]` d
   los aldeanos nuevos lo recolectan; sobre un cimiento, lo construyen).
 - **Reparar**: clic derecho de aldeanos sobre un edificio propio dañado (cuesta la mitad de su
   coste en proporción al daño; se detiene si no alcanzan los recursos).
-- **Guarecer**: clic derecho de unidades sobre un edificio propio con guarnición (centro urbano,
-  torre, castillo); dentro no se las puede atacar y cada una suma una flecha. **Sacar**: botón en
+- **Guarecer**: clic derecho de militares (aldeanos: **Alt**+clic derecho) sobre un edificio propio
+  con guarnición (centro urbano, torre, castillo); dentro no se las puede atacar y cada una suma una flecha. **Sacar**: botón en
   el panel del edificio. **Campana**: botón del centro urbano; mete a los aldeanos cercanos y, al
   tocarla de nuevo, los saca.
 - **Mejoras de línea** (p. ej. Piquero): convierten las unidades existentes y el edificio pasa a
