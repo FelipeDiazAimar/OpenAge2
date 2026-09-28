@@ -14,6 +14,7 @@ const FORESTS := 16
 const LOOSE_GOLD := 6
 const LOOSE_STONE := 4
 const LOOSE_MIN_DIST := 20 # minas sueltas lejos de los inicios (como Arabia)
+const RELICS := 5 # reliquias lejos de los inicios
 
 
 static func generate(sim, p_seed: int, starts: Array[Vector2i]) -> void:
@@ -41,6 +42,16 @@ static func generate(sim, p_seed: int, starts: Array[Vector2i]) -> void:
 		for spec in ANIMALS:
 			var owner := i if bool(spec[3]) else -1
 			_herd(sim, rng, used, starts[i], int(spec[1]), str(spec[0]), int(spec[2]), owner)
+	var placed := 0
+	for attempt in 400:
+		if placed >= RELICS:
+			break
+		var t := Vector2i(rng.range_i(4, w - 5), rng.range_i(4, h - 5))
+		if used.has(t) or not sim.grid.is_walkable(t) or not _far_from_starts(t, starts):
+			continue
+		if sim.spawn("reliquia", -1, t) >= 0:
+			used[t] = true
+			placed += 1
 
 
 ## Grupo de n animales alrededor de un punto a `dist` casillas de c (±2).

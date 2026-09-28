@@ -38,6 +38,7 @@
    "queue": 5
   },
   "RallyPoint": {},
+  "RelicHolder": {},
   "Research": {
    "techs": [
     "redencion",

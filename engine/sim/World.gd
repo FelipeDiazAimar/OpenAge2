@@ -39,7 +39,7 @@ func despawn(id: int) -> void:
 
 ## Componentes de tiempo de ejecución: no vienen de la definición y se
 ## conservan al convertir una entidad.
-const RUNTIME := ["Foundation", "Queue", "Garrisoned", "Garrison"]
+const RUNTIME := ["Foundation", "Queue", "Garrisoned", "Garrison", "Held", "Carrying", "RelicTask"]
 
 
 ## Mejora de línea (milicia -> hombre de armas): la entidad pasa a def; cada
@@ -142,6 +142,12 @@ func state_hash() -> String:
 			st += "C%d:%d:%d" % [cv["target"], cv["channel"], cv["faith"]]
 		if has_ability(id, "Heal"):
 			st += "H%d:%d" % [components["Heal"][id]["target"], components["Heal"][id]["acc"]]
+		if has_ability(id, "Held"):
+			st += "h%d" % components["Held"][id]["by"]
+		if has_ability(id, "Carrying"):
+			st += "c%d" % components["Carrying"][id]["relic"]
+		if has_ability(id, "RelicHolder"):
+			st += "r%s" % [components["RelicHolder"][id]["relics"]]
 		if has_ability(id, "Garrisoned"):
 			st += "G%d:%s" % [components["Garrisoned"][id]["in"], components["Garrisoned"][id]["inside"]]
 		if has_ability(id, "Garrison"):
@@ -180,6 +186,8 @@ static func _init_component(ability: String, params: Dictionary) -> Dictionary:
 			c["ignore_until"] = 0
 		"Garrison":
 			c["units"] = [] # ids guarecidos (ordenados)
+		"RelicHolder":
+			c["relics"] = [] # reliquias guardadas (ids ordenados)
 		"Convert":
 			c["target"] = -1
 			c["channel"] = 0 # ticks canalizando la conversión

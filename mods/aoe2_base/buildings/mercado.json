@@ -36,6 +36,7 @@
    "queue": 5
   },
   "RallyPoint": {},
+  "Market": {},
   "Research": {
    "techs": [
     "caravana",

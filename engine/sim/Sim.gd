@@ -15,6 +15,7 @@ const BuildSystem := preload("res://engine/sim/systems/BuildSystem.gd")
 const ProductionSystem := preload("res://engine/sim/systems/ProductionSystem.gd")
 const GarrisonSystem := preload("res://engine/sim/systems/GarrisonSystem.gd")
 const MonkSystem := preload("res://engine/sim/systems/MonkSystem.gd")
+const RelicSystem := preload("res://engine/sim/systems/RelicSystem.gd")
 const Rng := preload("res://engine/sim/Rng.gd")
 
 const INPUT_DELAY := 2
@@ -296,7 +297,8 @@ func spawn(def_id: String, owner: int, tile: Vector2i) -> int:
 ## Recursos fijos (árboles, minas, bayas) bloquean su casilla; los animales
 ## (tienen Move en la definición) no, ni vivos ni como carcasa.
 static func _blocks_tile(def: Dictionary) -> bool:
-	return str(def.get("type", "")) == "resource" and not (def.get("abilities", {}) as Dictionary).has("Move")
+	var ab: Dictionary = def.get("abilities", {})
+	return str(def.get("type", "")) == "resource" and not ab.has("Move") and not ab.has("Relic")
 
 
 func next_projectile_id() -> int:
@@ -345,6 +347,7 @@ func remove(id: int) -> void:
 	if not world.entities.has(id):
 		return
 	GarrisonSystem.on_remove(self, id)
+	RelicSystem.on_remove(self, id)
 	var e: Dictionary = world.entities[id]
 	var pos: Vector2i = e["pos"]
 	match str(e["type"]):
@@ -431,6 +434,7 @@ func step() -> void:
 	SeparationSystem.step(self)
 	CombatSystem.step(self)
 	MonkSystem.step(self)
+	RelicSystem.step(self)
 	GatherSystem.step(self)
 	BuildSystem.step(self)
 	GarrisonSystem.step(self)
@@ -479,6 +483,10 @@ func _apply(c: Dictionary) -> void:
 			_cmd_garrison(int(c["pid"]), c["payload"])
 		"convert":
 			_cmd_monk(int(c["pid"]), c["payload"], "Convert")
+		"pick_relic":
+			_cmd_relic(int(c["pid"]), c["payload"], "pick")
+		"store_relic":
+			_cmd_relic(int(c["pid"]), c["payload"], "store")
 		"heal":
 			_cmd_monk(int(c["pid"]), c["payload"], "Heal")
 		"ungarrison":
@@ -542,6 +550,7 @@ func _cmd_move(pid: int, payload: Dictionary) -> void:
 		BuildSystem.stop(self, ids[i])
 		GarrisonSystem.cancel(world, ids[i])
 		MonkSystem.stop(self, ids[i])
+		RelicSystem.cancel(world, ids[i])
 		MoveSystem.order_move(world, grid, ids[i], (target + offs[i]).clamp(lo, hi))
 
 
@@ -581,6 +590,7 @@ func _cmd_stop(pid: int, payload: Dictionary) -> void:
 		BuildSystem.stop(self, id)
 		GarrisonSystem.cancel(world, id)
 		MonkSystem.stop(self, id)
+		RelicSystem.cancel(world, id)
 		var m: Dictionary = world.comp(id, "Move")
 		(m["waypoints"] as Array).clear()
 		m["moving"] = false
@@ -612,6 +622,16 @@ func _cmd_build(pid: int, payload: Dictionary) -> void:
 	for id in _own_ids(pid, payload.get("ids"), "Build"):
 		GarrisonSystem.cancel(world, id)
 		BuildSystem.order_build(self, id, t)
+
+
+func _cmd_relic(pid: int, payload: Dictionary, kind: String) -> void:
+	var raw_t: Variant = payload.get("target")
+	if not _num_ok(raw_t) or not world.entities.has(int(raw_t)):
+		return
+	for id in _own_ids(pid, payload.get("ids"), "Convert"):
+		MonkSystem.stop(self, id)
+		GarrisonSystem.cancel(world, id)
+		RelicSystem.order(self, id, kind, int(raw_t))
 
 
 func _cmd_monk(pid: int, payload: Dictionary, ability: String) -> void:

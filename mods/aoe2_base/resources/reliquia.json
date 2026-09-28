@@ -1,0 +1,13 @@
+{
+  "id": "reliquia",
+  "type": "resource",
+  "name": "Reliquia",
+  "tags": [
+    "reliquia"
+  ],
+  "abilities": {
+    "Relic": {
+      "gold_per_sec": 0.5
+    }
+  }
+}
