@@ -1,0 +1,47 @@
+{
+ "id": "guerrillero_elite",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Guerrillero de Élite",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 25,
+  "food": 35
+ },
+ "train_time": 22,
+ "pop_cost": 1,
+ "hotkey": "W",
+ "graphics": {
+  "walk": "sprite:guerrillero_elite/walk",
+  "attack": "sprite:guerrillero_elite/attack",
+  "idle": "sprite:guerrillero_elite/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 35
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 4
+   }
+  },
+  "Move": {
+   "speed": 0.96
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 3,
+    "arquero": 4
+   },
+   "range": 5.0,
+   "reload": 3.0,
+   "projectile_speed": 12.0
+  }
+ }
+}

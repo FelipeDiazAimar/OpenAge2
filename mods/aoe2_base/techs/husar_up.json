@@ -1,0 +1,22 @@
+{
+  "id": "husar_up",
+  "type": "tech",
+  "name": "Húsar",
+  "cost": {
+    "food": 500,
+    "gold": 600
+  },
+  "research_time": 50,
+  "at": "establo",
+  "description": "Mejora Caballería ligera a Húsar",
+  "requires": {
+    "age": "imperial"
+  },
+  "effects": [
+    {
+      "op": "replace_entity",
+      "from": "caballeria_ligera",
+      "to": "husar"
+    }
+  ]
+}

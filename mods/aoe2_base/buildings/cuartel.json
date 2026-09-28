@@ -39,7 +39,8 @@
     "huscarle",
     "aguila",
     "legionario",
-    "milicia_flamenca"
+    "milicia_flamenca",
+    "condotiero"
    ],
    "queue": 5
   },
@@ -49,7 +50,9 @@
     "suministros",
     "gambesones",
     "escuderos",
-    "incendio"
+    "incendio",
+    "piquero_up",
+    "alabardero_up"
    ]
   }
  }

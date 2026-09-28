@@ -1,0 +1,51 @@
+{
+ "id": "galeon_artillado",
+ "type": "unit",
+ "extends": "barco_base",
+ "name": "Galeón Artillado",
+ "requires": {
+  "age": "imperial",
+  "techs": [
+   "quimica"
+  ]
+ },
+ "cost": {
+  "wood": 200,
+  "gold": 150
+ },
+ "train_time": 46,
+ "pop_cost": 1,
+ "hotkey": "R",
+ "graphics": {
+  "idle": "sprite:galeon_artillado/idle",
+  "walk": "sprite:galeon_artillado/walk"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 120
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 6
+   }
+  },
+  "Move": {
+   "speed": 1.1
+  },
+  "Vision": {
+   "sight": 10.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 50,
+    "edificio": 200
+   },
+   "range": 13.0,
+   "reload": 10.0,
+   "min_range": 3.0,
+   "projectile_speed": 6.0,
+   "area_radius": 0.3
+  }
+ }
+}

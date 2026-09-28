@@ -1,0 +1,48 @@
+{
+ "id": "liao_dao",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Liao Dao",
+ "cost": {
+  "food": 40,
+  "gold": 40
+ },
+ "train_time": 12,
+ "pop_cost": 1,
+ "hotkey": "L",
+ "graphics": {
+  "walk": "sprite:uniques/liao_dao/walk",
+  "attack": "sprite:uniques/liao_dao/attack",
+  "idle": "sprite:uniques/liao_dao/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 75
+  },
+  "Armor": {
+   "classes": {
+    "melee": 3,
+    "pierce": 1
+   }
+  },
+  "Move": {
+   "speed": 1.0
+  },
+  "Vision": {
+   "sight": 3.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 9,
+    "infanteria": 2,
+    "edificio": 2,
+    "arquero": 2
+   },
+   "range": 0,
+   "reload": 2.4
+  },
+  "Unique": {
+   "civ": "khitans"
+  }
+ }
+}

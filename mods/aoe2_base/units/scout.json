@@ -9,6 +9,7 @@
   "train_time": 30,
   "pop_cost": 1,
   "hotkey": "Q",
+  "upgrades_to": "caballeria_ligera",
   "graphics": {
     "attack": "sprite:scout/attack",
     "idle": "sprite:scout/idle",

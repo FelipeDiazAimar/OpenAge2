@@ -10,7 +10,11 @@
  "train_time": 16,
  "pop_cost": 1,
  "hotkey": "Q",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/konnik/walk",
+  "attack": "sprite:uniques/konnik/attack",
+  "idle": "sprite:uniques/konnik/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 120

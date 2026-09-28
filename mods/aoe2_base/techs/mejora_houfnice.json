@@ -1,0 +1,22 @@
+{
+  "id": "mejora_houfnice",
+  "type": "tech",
+  "name": "Houfnice",
+  "cost": {
+    "food": 1100,
+    "gold": 800
+  },
+  "research_time": 140,
+  "at": "taller_asedio",
+  "description": "Mejora Cañón de asedio a Houfnice (+10 vida, +1 antiproyectil, +10 ataque, radio 0.7)",
+  "requires": {
+   "age": "imperial"
+  },
+  "effects": [
+   {
+    "op": "replace_entity",
+    "from": "canon_asedio",
+    "to": "houfnice"
+   }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "canon_asedio",
+  "type": "unit",
+  "extends": "asedio_base",
+  "name": "Cañón de Asedio",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "wood": 225,
+    "gold": 225
+  },
+  "train_time": 56,
+  "pop_cost": 3,
+  "hotkey": "E",
+  "graphics": {
+    "walk": "sprite:canon_asedio/walk",
+    "attack": "sprite:canon_asedio/attack",
+    "idle": "sprite:canon_asedio/idle"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 80
+    },
+    "Armor": {
+      "classes": {
+        "melee": 2,
+        "pierce": 5
+      }
+    },
+    "Move": {
+      "speed": 0.7
+    },
+    "Vision": {
+      "sight": 8.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 40,
+        "edificio": 40
+      },
+      "range": 12.0,
+      "reload": 6.5,
+      "min_range": 3.0,
+      "projectile_speed": 8.0,
+      "area_radius": 0.5
+    }
+  }
+}

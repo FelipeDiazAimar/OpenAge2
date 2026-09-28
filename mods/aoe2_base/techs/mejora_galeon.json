@@ -1,0 +1,25 @@
+{
+ "id": "mejora_galeon",
+ "type": "tech",
+ "name": "Galeón",
+ "cost": {
+  "food": 400,
+  "wood": 315
+ },
+ "research_time": 65,
+ "at": "muelle",
+ "description": "Galera de Guerra→Galeón",
+ "requires": {
+  "age": "imperial",
+  "techs": [
+   "mejora_galera_guerra"
+  ]
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "galera_guerra",
+   "to": "galeon"
+  }
+ ]
+}

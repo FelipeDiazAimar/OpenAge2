@@ -10,7 +10,11 @@
  "train_time": 35,
  "pop_cost": 1,
  "hotkey": "Q",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:aguila/walk",
+  "attack": "sprite:aguila/attack",
+  "idle": "sprite:aguila/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 55

@@ -27,10 +27,11 @@
    }
   },
   "Train": {
-   "units": [
-    "scout",
-    "jinete",
-    "paladin",
+    "units": [
+     "scout",
+     "jinete",
+     "camello",
+     "paladin",
     "paladin_franco",
     "huszar_magiar"
    ],
@@ -38,10 +39,13 @@
   },
   "RallyPoint": {},
   "Research": {
-   "techs": [
-    "pureza_sangre",
-    "ganaderia"
-   ]
+    "techs": [
+     "pureza_sangre",
+     "ganaderia",
+     "caballeria_ligera_up",
+     "husar_up",
+     "camello_pesado_up"
+    ]
   }
  },
  "graphics": {

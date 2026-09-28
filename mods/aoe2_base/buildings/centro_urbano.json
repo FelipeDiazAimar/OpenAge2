@@ -34,7 +34,8 @@
   },
   "Train": {
    "units": [
-    "aldeano"
+    "aldeano",
+    "aldeana"
    ],
    "queue": 5
   },

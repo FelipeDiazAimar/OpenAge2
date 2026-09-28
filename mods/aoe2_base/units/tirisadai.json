@@ -1,0 +1,51 @@
+{
+ "id": "tirisadai",
+ "type": "unit",
+ "extends": "barco_base",
+ "name": "Tirisadai",
+ "requires": {
+  "age": "imperial"
+ },
+ "cost": {
+  "wood": 180,
+  "gold": 60
+ },
+ "train_time": 40,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {
+  "walk": "sprite:uniques/tirisadai/walk",
+  "idle": "sprite:uniques/tirisadai/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 250
+  },
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 10
+   }
+  },
+  "Move": {
+   "speed": 1.3
+  },
+  "Vision": {
+   "sight": 8.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 9,
+    "barco": 9,
+    "edificio": 9,
+    "ariete": 4
+   },
+   "range": 7.0,
+   "reload": 3.0,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "dravidianos"
+  }
+ }
+}

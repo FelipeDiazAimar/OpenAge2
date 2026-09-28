@@ -10,7 +10,11 @@
  "train_time": 14,
  "pop_cost": 1,
  "hotkey": "Q",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/legionario/walk",
+  "attack": "sprite:uniques/legionario/attack",
+  "idle": "sprite:uniques/legionario/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 75

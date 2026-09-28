@@ -1,0 +1,25 @@
+{
+ "id": "mejora_fuego_rapido",
+ "type": "tech",
+ "name": "Barco de Fuego Rápido",
+ "cost": {
+  "wood": 280,
+  "gold": 250
+ },
+ "research_time": 50,
+ "at": "muelle",
+ "description": "Barco de Fuego→Barco de Fuego Rápido",
+ "requires": {
+  "age": "imperial",
+  "techs": [
+   "mejora_galera_guerra"
+  ]
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "barco_fuego",
+   "to": "barco_fuego_rapido"
+  }
+ ]
+}

@@ -13,7 +13,11 @@
  "train_time": 14,
  "pop_cost": 1,
  "hotkey": "W",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/tarkan/walk",
+  "attack": "sprite:uniques/tarkan/attack",
+  "idle": "sprite:uniques/tarkan/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 100

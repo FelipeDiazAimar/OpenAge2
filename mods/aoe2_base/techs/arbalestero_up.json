@@ -1,0 +1,21 @@
+{
+ "id": "arbalestero_up",
+ "type": "tech",
+ "name": "Arbalestero",
+ "at": "arqueria",
+ "cost": {
+  "food": 350,
+  "gold": 300
+ },
+ "research_time": 50,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "ballestero",
+   "to": "arbalestero"
+  }
+ ]
+}

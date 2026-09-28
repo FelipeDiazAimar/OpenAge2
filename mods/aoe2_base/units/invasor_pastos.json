@@ -13,7 +13,11 @@
  "train_time": 10,
  "pop_cost": 1,
  "hotkey": "E",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/invasor_pastos/walk",
+  "attack": "sprite:uniques/invasor_pastos/attack",
+  "idle": "sprite:uniques/invasor_pastos/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 70

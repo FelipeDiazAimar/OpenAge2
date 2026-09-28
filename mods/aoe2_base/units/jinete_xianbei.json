@@ -1,0 +1,51 @@
+{
+ "id": "jinete_xianbei",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Jinete Xianbei",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 65,
+  "gold": 35
+ },
+ "train_time": 29,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {
+  "walk": "sprite:uniques/jinete_xianbei/walk",
+  "attack": "sprite:uniques/jinete_xianbei/attack",
+  "idle": "sprite:uniques/jinete_xianbei/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 30
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 1.4
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 5,
+    "piquero": 3,
+    "infanteria": 1
+   },
+   "range": 4.0,
+   "reload": 1.8,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "wei"
+  }
+ }
+}

@@ -29,7 +29,12 @@
     "galera",
     "drakkar",
     "barco_tortuga",
-    "carabela"
+     "carabela",
+     "tirisadai",
+    "piquete_demoledor",
+    "barco_fuego",
+    "transporte",
+    "galeon_artillado"
    ],
    "queue": 5
   },
@@ -43,7 +48,11 @@
    "techs": [
     "carenado",
     "dique_seco",
-    "carpintero_naval"
+    "carpintero_naval",
+    "mejora_galera_guerra",
+    "mejora_galeon",
+    "mejora_brulote_pesado",
+    "mejora_fuego_rapido"
    ]
   }
  },

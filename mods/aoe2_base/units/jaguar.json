@@ -13,7 +13,11 @@
  "train_time": 12,
  "pop_cost": 1,
  "hotkey": "E",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/jaguar/walk",
+  "attack": "sprite:uniques/jaguar/attack",
+  "idle": "sprite:uniques/jaguar/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 50

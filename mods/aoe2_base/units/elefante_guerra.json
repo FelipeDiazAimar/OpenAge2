@@ -13,7 +13,11 @@
  "train_time": 31,
  "pop_cost": 1,
  "hotkey": "Q",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/elefante_guerra/walk",
+  "attack": "sprite:uniques/elefante_guerra/attack",
+  "idle": "sprite:uniques/elefante_guerra/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 450

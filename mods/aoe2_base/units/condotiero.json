@@ -1,0 +1,49 @@
+{
+ "id": "condotiero",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Condotiero",
+ "requires": {
+  "age": "imperial"
+ },
+ "cost": {
+  "food": 50,
+  "gold": 35
+ },
+ "train_time": 18,
+ "pop_cost": 1,
+ "hotkey": "D",
+ "graphics": {
+  "walk": "sprite:uniques/condotiero/walk",
+  "attack": "sprite:uniques/condotiero/attack",
+  "idle": "sprite:uniques/condotiero/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 80
+  },
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 1
+   }
+  },
+  "Move": {
+   "speed": 1.1
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 9,
+    "polvora": 10
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "italianos"
+  }
+ }
+}

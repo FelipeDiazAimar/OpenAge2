@@ -39,5 +39,6 @@
       "range": 0,
       "reload": 5.0
     }
-  }
+  },
+  "upgrades_to": "ariete_cubierto"
 }

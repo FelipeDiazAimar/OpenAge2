@@ -1,0 +1,22 @@
+{
+  "id": "mejora_onagro_asedio",
+  "type": "tech",
+  "name": "Onagro de Asedio",
+  "cost": {
+    "food": 1450,
+    "gold": 1000
+  },
+  "research_time": 150,
+  "at": "taller_asedio",
+  "description": "Mejora Onagro a Onagro de Asedio",
+  "requires": {
+    "age": "imperial"
+  },
+  "effects": [
+    {
+      "op": "replace_entity",
+      "from": "onagro",
+      "to": "onagro_asedio"
+    }
+  ]
+}

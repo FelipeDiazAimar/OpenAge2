@@ -10,7 +10,11 @@
  "train_time": 14,
  "pop_cost": 1,
  "hotkey": "Q",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/monaspa/walk",
+  "attack": "sprite:uniques/monaspa/attack",
+  "idle": "sprite:uniques/monaspa/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 80

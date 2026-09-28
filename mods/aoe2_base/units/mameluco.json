@@ -13,7 +13,11 @@
  "train_time": 21,
  "pop_cost": 1,
  "hotkey": "E",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/mameluco/walk",
+  "attack": "sprite:uniques/mameluco/attack",
+  "idle": "sprite:uniques/mameluco/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 65

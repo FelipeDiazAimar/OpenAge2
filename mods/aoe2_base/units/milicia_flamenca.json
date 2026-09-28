@@ -10,7 +10,11 @@
  "train_time": 13,
  "pop_cost": 1,
  "hotkey": "Q",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/milicia_flamenca/walk",
+  "attack": "sprite:uniques/milicia_flamenca/attack",
+  "idle": "sprite:uniques/milicia_flamenca/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 60

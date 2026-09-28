@@ -1,0 +1,21 @@
+{
+  "id": "mejora_ariete_asedio",
+  "type": "tech",
+  "name": "Ariete de Asedio",
+  "cost": {
+    "food": 1000
+  },
+  "research_time": 75,
+  "at": "taller_asedio",
+  "description": "Mejora Ariete Cubierto a Ariete de Asedio",
+  "requires": {
+    "age": "imperial"
+  },
+  "effects": [
+    {
+      "op": "replace_entity",
+      "from": "ariete_cubierto",
+      "to": "ariete_asedio"
+    }
+  ]
+}

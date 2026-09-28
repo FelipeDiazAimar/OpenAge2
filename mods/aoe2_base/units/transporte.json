@@ -1,0 +1,39 @@
+{
+ "id": "transporte",
+ "type": "unit",
+ "extends": "barco_base",
+ "name": "Barco de Transporte",
+ "requires": {
+  "age": "feudal"
+ },
+ "cost": {
+  "wood": 125
+ },
+ "train_time": 45,
+ "pop_cost": 1,
+ "hotkey": "T",
+ "graphics": {
+  "idle": "sprite:transporte/idle",
+  "walk": "sprite:transporte/walk"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 100
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 8
+   }
+  },
+  "Move": {
+   "speed": 1.45
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Garrison": {
+   "capacity": 5
+  }
+ }
+}

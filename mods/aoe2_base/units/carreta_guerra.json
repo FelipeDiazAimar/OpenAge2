@@ -13,7 +13,10 @@
  "train_time": 21,
  "pop_cost": 1,
  "hotkey": "E",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/carreta_guerra/walk",
+  "idle": "sprite:uniques/carreta_guerra/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 150

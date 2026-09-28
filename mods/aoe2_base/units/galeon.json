@@ -1,0 +1,45 @@
+{
+ "id": "galeon",
+ "type": "unit",
+ "extends": "barco_base",
+ "name": "Galeón",
+ "requires": {
+  "age": "imperial"
+ },
+ "cost": {
+  "wood": 90,
+  "gold": 30
+ },
+ "train_time": 36,
+ "pop_cost": 1,
+ "hotkey": "W",
+ "graphics": {
+  "idle": "sprite:galeon/idle",
+  "walk": "sprite:galeon/walk"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 165
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 8
+   }
+  },
+  "Move": {
+   "speed": 1.43
+  },
+  "Vision": {
+   "sight": 9.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 8
+   },
+   "range": 7.0,
+   "reload": 3.0,
+   "projectile_speed": 12.0
+  }
+ }
+}

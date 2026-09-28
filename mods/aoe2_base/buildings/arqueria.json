@@ -32,16 +32,24 @@
   "Train": {
    "units": [
     "arquero",
+    "arquero_caballo",
     "guerrillero",
     "ballestero",
-    "arquero_compuesto"
+    "arquero_compuesto",
+    "artillero_manual",
+    "jinete_xianbei",
+    "jenizaro",
+    "genitour"
    ],
    "queue": 5
   },
   "RallyPoint": {},
   "Research": {
    "techs": [
-    "dedal"
+    "dedal",
+    "arquero_caballo_pesado_up",
+    "arbalestero_up",
+    "guerrillero_elite_up"
    ]
   }
  }

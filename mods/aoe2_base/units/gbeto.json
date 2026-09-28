@@ -13,7 +13,11 @@
  "train_time": 17,
  "pop_cost": 1,
  "hotkey": "Q",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/gbeto/walk",
+  "attack": "sprite:uniques/gbeto/attack",
+  "idle": "sprite:uniques/gbeto/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 40

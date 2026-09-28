@@ -1,38 +1,43 @@
 {
-  "id": "paladin",
-  "type": "unit",
-  "extends": "caballeria_base",
-  "name": "Paladín",
-  "cost": {
-    "food": 60,
-    "gold": 75
+ "id": "paladin",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Paladín",
+ "cost": {
+  "food": 60,
+  "gold": 75
+ },
+ "train_time": 30,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "abilities": {
+  "Hitpoints": {
+   "max": 160
   },
-  "train_time": 30,
-  "pop_cost": 1,
-  "hotkey": "E",
-  "abilities": {
-    "Hitpoints": {
-      "max": 160
-    },
-    "Armor": {
-      "classes": {
-        "melee": 2,
-        "pierce": 3
-      }
-    },
-    "Move": {
-      "speed": 1.35
-    },
-    "Vision": {
-      "sight": 5.0
-    },
-    "Attack": {
-      "damage": {
-        "melee": 14,
-        "arquero": 3
-      },
-      "range": 0,
-      "reload": 2.0
-    }
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 3
+   }
+  },
+  "Move": {
+   "speed": 1.35
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 14,
+    "arquero": 3
+   },
+   "range": 0,
+   "reload": 2.0
   }
+ },
+ "graphics": {
+  "walk": "sprite:uniques/paladin/walk",
+  "attack": "sprite:uniques/paladin/attack",
+  "idle": "sprite:uniques/paladin/idle"
+ }
 }

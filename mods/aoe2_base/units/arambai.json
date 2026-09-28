@@ -13,7 +13,11 @@
  "train_time": 21,
  "pop_cost": 1,
  "hotkey": "W",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/arambai/walk",
+  "attack": "sprite:uniques/arambai/attack",
+  "idle": "sprite:uniques/arambai/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 60

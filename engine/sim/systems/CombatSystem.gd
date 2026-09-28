@@ -266,6 +266,8 @@ static func apply_damage(sim, atk: Dictionary, t: int, attacker: int = -1) -> vo
 		armor = w.comp(t, "Armor")["params"]["classes"]
 	var hp: Dictionary = w.comp(t, "Hitpoints")
 	hp["hp"] = int(hp["hp"]) - damage(atk, sim.def_for(t), armor)
+	if attacker >= 0 and w.entities.has(attacker) and w.has_ability(attacker, "Demolish"):
+		sim.kill(attacker) # petardo: tras impactar, muere (aunque remate o golpee aldeano)
 	if int(hp["hp"]) <= 0:
 		sim.kill(t)
 		return

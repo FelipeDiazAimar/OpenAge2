@@ -1,0 +1,22 @@
+{
+  "id": "mejora_escorpion_pesado",
+  "type": "tech",
+  "name": "Escorpión Pesado",
+  "cost": {
+    "food": 800,
+    "wood": 750
+  },
+  "research_time": 50,
+  "at": "taller_asedio",
+  "description": "Mejora Escorpión a Escorpión Pesado",
+  "requires": {
+    "age": "imperial"
+  },
+  "effects": [
+    {
+      "op": "replace_entity",
+      "from": "escorpion",
+      "to": "escorpion_pesado"
+    }
+  ]
+}

@@ -13,7 +13,11 @@
  "train_time": 25,
  "pop_cost": 1,
  "hotkey": "W",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/elefante_balista/walk",
+  "attack": "sprite:uniques/elefante_balista/attack",
+  "idle": "sprite:uniques/elefante_balista/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 250

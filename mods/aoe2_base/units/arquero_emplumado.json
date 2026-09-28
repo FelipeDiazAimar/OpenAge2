@@ -13,7 +13,11 @@
  "train_time": 16,
  "pop_cost": 1,
  "hotkey": "E",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/arquero_emplumado/walk",
+  "attack": "sprite:uniques/arquero_emplumado/attack",
+  "idle": "sprite:uniques/arquero_emplumado/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 50

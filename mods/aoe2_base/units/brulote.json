@@ -1,0 +1,45 @@
+{
+ "id": "brulote",
+ "type": "unit",
+ "extends": "barco_base",
+ "name": "Brulote",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 70,
+  "gold": 50
+ },
+ "train_time": 31,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "upgrades_to": "brulote_pesado",
+ "graphics": {
+  "idle": "sprite:brulote/idle",
+  "walk": "sprite:brulote/walk"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 60
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 3
+   }
+  },
+  "Move": {
+   "speed": 1.6
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 110
+   },
+   "range": 0,
+   "reload": 3.0
+  }
+ }
+}

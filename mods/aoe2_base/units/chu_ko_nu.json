@@ -13,7 +13,11 @@
  "train_time": 16,
  "pop_cost": 1,
  "hotkey": "W",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/chu_ko_nu/walk",
+  "attack": "sprite:uniques/chu_ko_nu/attack",
+  "idle": "sprite:uniques/chu_ko_nu/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 45

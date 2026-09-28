@@ -115,6 +115,7 @@ const ABILITIES := {
 	"Packable": {"pack_time": {"type": "number", "required": true}, "unpack_time": {"type": "number", "required": true}},
 	"Wonder": {"victory_time": {"type": "number", "required": true}},
 	"Unique": {"civ": {"type": "string", "required": true}},
+	"Demolish": {},
 }
 
 

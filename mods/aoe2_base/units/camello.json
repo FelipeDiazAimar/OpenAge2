@@ -1,0 +1,47 @@
+{
+  "id": "camello",
+  "type": "unit",
+  "extends": "caballeria_base",
+  "name": "Camello",
+  "requires": {
+    "age": "castillos"
+  },
+  "cost": {
+    "food": 55,
+    "gold": 60
+  },
+  "train_time": 22,
+  "pop_cost": 1,
+  "hotkey": "E",
+  "upgrades_to": "camello_pesado",
+  "graphics": {
+    "attack": "sprite:camello/attack",
+    "idle": "sprite:camello/idle",
+    "walk": "sprite:camello/walk"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 100
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
+    },
+    "Move": {
+      "speed": 1.45
+    },
+    "Vision": {
+      "sight": 4.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 6,
+        "caballeria": 9
+      },
+      "range": 0,
+      "reload": 2.0
+    }
+  }
+}

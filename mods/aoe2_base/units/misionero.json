@@ -9,7 +9,12 @@
  "train_time": 51,
  "pop_cost": 1,
  "hotkey": "Q",
- "graphics": {},
+  "graphics": {
+    "walk": "sprite:monk_missionary/walk",
+    "idle": "sprite:monk_missionary/idle",
+    "attack": "sprite:monk_missionary/attack",
+    "task": "sprite:monk_missionary/attack"
+  },
  "abilities": {
   "Hitpoints": {
    "max": 30

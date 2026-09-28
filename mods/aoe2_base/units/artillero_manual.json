@@ -1,0 +1,47 @@
+{
+  "id": "artillero_manual",
+  "type": "unit",
+  "extends": "arqueros_base",
+  "name": "Artillero Manual",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "food": 45,
+    "gold": 50
+  },
+  "train_time": 34,
+  "pop_cost": 1,
+  "hotkey": "R",
+  "graphics": {
+    "walk": "sprite:artillero_manual/walk",
+    "attack": "sprite:artillero_manual/attack",
+    "idle": "sprite:artillero_manual/idle"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 40
+    },
+    "Armor": {
+      "classes": {
+        "melee": 1,
+        "pierce": 0
+      }
+    },
+    "Move": {
+      "speed": 0.96
+    },
+    "Vision": {
+      "sight": 9.0
+    },
+    "Attack": {
+      "damage": {
+        "pierce": 17,
+        "infanteria": 10
+      },
+      "range": 7.0,
+      "reload": 3.45,
+      "projectile_speed": 14.0
+    }
+  }
+}

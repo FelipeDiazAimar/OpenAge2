@@ -13,7 +13,11 @@
  "train_time": 14,
  "pop_cost": 1,
  "hotkey": "E",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/huszar_magiar/walk",
+  "attack": "sprite:uniques/huszar_magiar/attack",
+  "idle": "sprite:uniques/huszar_magiar/idle"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 75

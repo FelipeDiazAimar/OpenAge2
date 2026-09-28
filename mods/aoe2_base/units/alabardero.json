@@ -1,0 +1,46 @@
+{
+ "id": "alabardero",
+ "type": "unit",
+ "extends": "piquero",
+ "name": "Alabardero",
+ "requires": {
+  "age": "imperial"
+ },
+ "cost": {
+  "food": 35,
+  "wood": 25
+ },
+ "train_time": 22,
+ "pop_cost": 1,
+ "hotkey": "W",
+ "graphics": {
+  "walk": "sprite:alabardero/walk",
+  "attack": "sprite:alabardero/attack",
+  "idle": "sprite:alabardero/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 60
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 1.0
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 6,
+    "caballeria": 32
+   },
+   "range": 0,
+   "reload": 2.0
+  }
+ }
+}
