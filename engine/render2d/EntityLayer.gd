@@ -64,6 +64,8 @@ func sync(alpha: float, delta: float) -> void:
 		if v == null:
 			v = EntityView.new()
 			v.setup(id, sim.def_for(id), colors.get(e["owner"], Color(0.6, 0.6, 0.6)), locator)
+			if w.has_ability(id, "Farm"):
+				v.z_index = -1 # suelo: los granjeros se dibujan encima
 			add_child(v)
 			views[id] = v
 		var cur: Vector2i = e["pos"]

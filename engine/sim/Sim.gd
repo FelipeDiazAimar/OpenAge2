@@ -124,6 +124,12 @@ func can_place(pid: int, def_id: String, tile: Vector2i) -> String:
 		for x in size.x:
 			if not grid.is_walkable(tile + Vector2i(x, y)):
 				return "lugar ocupado"
+	for f in world.ids_with("Farm"):
+		# Las granjas no bloquean la grilla: se comprueba su huella aparte.
+		var fs := footprint_of(def_for(f))
+		var fo := Grid.tile_of(world.entities[f]["pos"] - fs * (FP.SCALE / 2))
+		if fo.x < tile.x + size.x and tile.x < fo.x + fs.x and fo.y < tile.y + size.y and tile.y < fo.y + fs.y:
+			return "lugar ocupado"
 	for id in _ids_in_rect(tile, size):
 		if world.has_ability(id, "ResourceSource") and not world.has_ability(id, "Move"):
 			return "lugar ocupado" # carcasas
@@ -142,6 +148,33 @@ func _ids_in_rect(tile: Vector2i, size: Vector2i) -> Array[int]:
 		if t.x >= tile.x and t.y >= tile.y and t.x < tile.x + size.x and t.y < tile.y + size.y:
 			out.append(id)
 	return out
+
+
+## Granja: su comida es un ResourceSource de tiempo de ejecución.
+func _add_farm_food(id: int) -> void:
+	var farm: Dictionary = world.comp(id, "Farm")["params"]
+	var params := {"resource": "food", "amount": farm["food"], "rate_key": farm["rate_key"]}
+	world.add_component(id, "ResourceSource", {"params": params, "amount": FP.from_data(float(farm["food"])), "killed": false})
+
+
+## Obra terminada (BuildSystem): las granjas empiezan a dar comida.
+func on_built(id: int) -> void:
+	if world.has_ability(id, "Farm") and not world.has_ability(id, "ResourceSource"):
+		_add_farm_food(id)
+
+
+## Granja agotada: se resiembra sola si el dueño tiene la madera (DE); si no,
+## desaparece. true si se resembró.
+func reseed_farm(id: int) -> bool:
+	var owner := int(world.entities[id]["owner"])
+	var cost: Dictionary = def_for(id).get("cost", {})
+	if owner < 0 or not can_afford(owner, cost):
+		return false
+	pay(owner, cost)
+	var src: Dictionary = world.comp(id, "ResourceSource")
+	src["amount"] = FP.from_data(float(world.comp(id, "Farm")["params"]["food"]))
+	events.append({"type": "reseed", "id": id, "owner": owner})
+	return true
 
 
 ## Edificio terminado (no es cimiento).
@@ -163,6 +196,9 @@ func place_foundation(pid: int, def_id: String, tile: Vector2i) -> int:
 	var hp: Dictionary = world.comp(id, "Hitpoints")
 	if not hp.is_empty():
 		hp["hp"] = 1
+	if world.has_ability(id, "Farm"):
+		world.remove_component(id, "ResourceSource") # da comida al terminarla
+		return id
 	for u in inside:
 		if world.has_ability(u, "Move"):
 			_eject(u, tile, size)
@@ -238,9 +274,12 @@ func spawn(def_id: String, owner: int, tile: Vector2i) -> int:
 		return -1
 	if str(def["type"]) == "building":
 		var size := Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
-		grid.block_rect(tile, size)
-		var b := world.spawn(def, owner, tile * FP.SCALE + size * (FP.SCALE / 2))
 		var ab: Dictionary = def.get("abilities", {})
+		if not ab.has("Farm"):
+			grid.block_rect(tile, size) # las granjas se pisan
+		var b := world.spawn(def, owner, tile * FP.SCALE + size * (FP.SCALE / 2))
+		if ab.has("Farm"):
+			_add_farm_food(b)
 		if ab.has("Train") or ab.has("Research") or ab.has("AgeAdvance"):
 			world.add_component(b, "Queue", ProductionSystem.new_queue())
 		return b
@@ -306,7 +345,8 @@ func remove(id: int) -> void:
 		"building":
 			var def := def_for(id)
 			var size := Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
-			grid.block_rect(Grid.tile_of(pos - size * (FP.SCALE / 2)), size, false)
+			if not world.has_ability(id, "Farm"):
+				grid.block_rect(Grid.tile_of(pos - size * (FP.SCALE / 2)), size, false)
 		"resource":
 			if _blocks_tile(def_for(id)):
 				grid.set_blocked(Grid.tile_of(pos), false)

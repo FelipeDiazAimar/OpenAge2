@@ -93,6 +93,7 @@ static func _advance(sim, t: int, n: int) -> void:
 		hp["hp"] = mini(mx, int(hp["hp"]) + gained)
 	if after >= total:
 		w.remove_component(t, "Foundation")
+		sim.on_built(t)
 		sim.events.append({"type": "built", "id": t, "def_id": w.entities[t]["def_id"], "owner": w.entities[t]["owner"]})
 
 
@@ -101,6 +102,10 @@ static func _advance(sim, t: int, n: int) -> void:
 static func _after(sim, id: int, b: Dictionary, done: int) -> void:
 	var w = sim.world
 	stop(sim, id)
+	if w.has_ability(done, "Farm") and w.has_ability(done, "ResourceSource") and w.has_ability(id, "Gather"):
+		GatherSystem.order_gather(sim, id, done) # quien la construye la cultiva
+		if str(w.comp(id, "Gather")["state"]) != "idle":
+			return
 	var e: Dictionary = w.entities[id]
 	var pos: Vector2i = e["pos"]
 	var best := -1

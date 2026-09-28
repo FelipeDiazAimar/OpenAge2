@@ -25,6 +25,8 @@ static func order_gather(sim, id: int, target: int) -> void:
 		return
 	if not _may_take(sim, id, target):
 		return # oveja de otro jugador
+	if _farm_busy(sim, target, id):
+		return # una granja, un granjero
 	var res := str(src["params"]["resource"])
 	if int(g["carry"]) > 0 and str(g["carry_res"]) != res:
 		g["carry"] = 0
@@ -47,6 +49,20 @@ static func order_gather(sim, id: int, target: int) -> void:
 	else:
 		g["state"] = "to_resource"
 		MoveSystem.order_move(w, sim.grid, id, tpos)
+
+
+## Granja con otro granjero trabajándola.
+static func _farm_busy(sim, target: int, id: int) -> bool:
+	var w = sim.world
+	if not w.has_ability(target, "Farm"):
+		return false
+	for o in w.ids_with("Gather"):
+		if o == id:
+			continue
+		var g: Dictionary = w.comp(o, "Gather")
+		if int(g["target"]) == target and str(g["state"]) != "idle":
+			return true
+	return false
 
 
 ## Ovejas: solo las propias o las sin dueño.
@@ -145,7 +161,7 @@ static func _gather_tick(sim, id: int, g: Dictionary) -> void:
 	g["carry"] = int(g["carry"]) + take
 	if not infinite:
 		src["amount"] = int(src["amount"]) - take
-		if int(src["amount"]) <= 0:
+		if int(src["amount"]) <= 0 and not (w.has_ability(t, "Farm") and sim.reseed_farm(t)):
 			sim.remove(t)
 	if int(g["carry"]) >= cap:
 		_go_drop(sim, id, g)
@@ -201,7 +217,7 @@ static func _retarget(sim, id: int, g: Dictionary) -> void:
 		var p: Dictionary = src["params"]
 		if bool(p.get("hostile", false)) and not bool(src["killed"]):
 			continue # AoE2: no ataca un jabalí por su cuenta
-		if bool(p.get("water", false)) or not _may_take(sim, id, c):
+		if bool(p.get("water", false)) or not _may_take(sim, id, c) or _farm_busy(sim, c, id):
 			continue
 		var dd := FP.dist(pos, w.entities[c]["pos"])
 		if best < 0 or dd < best_d:
