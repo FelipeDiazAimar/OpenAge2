@@ -16,6 +16,7 @@ const ProductionSystem := preload("res://engine/sim/systems/ProductionSystem.gd"
 const GarrisonSystem := preload("res://engine/sim/systems/GarrisonSystem.gd")
 const MonkSystem := preload("res://engine/sim/systems/MonkSystem.gd")
 const RelicSystem := preload("res://engine/sim/systems/RelicSystem.gd")
+const TradeSystem := preload("res://engine/sim/systems/TradeSystem.gd")
 const Rng := preload("res://engine/sim/Rng.gd")
 
 const INPUT_DELAY := 2
@@ -435,6 +436,7 @@ func step() -> void:
 	CombatSystem.step(self)
 	MonkSystem.step(self)
 	RelicSystem.step(self)
+	TradeSystem.step(self)
 	GatherSystem.step(self)
 	BuildSystem.step(self)
 	GarrisonSystem.step(self)
@@ -485,6 +487,10 @@ func _apply(c: Dictionary) -> void:
 			_cmd_monk(int(c["pid"]), c["payload"], "Convert")
 		"pick_relic":
 			_cmd_relic(int(c["pid"]), c["payload"], "pick")
+		"trade":
+			_cmd_trade(int(c["pid"]), c["payload"])
+		"drop":
+			_cmd_drop(int(c["pid"]), c["payload"])
 		"store_relic":
 			_cmd_relic(int(c["pid"]), c["payload"], "store")
 		"heal":
@@ -551,6 +557,7 @@ func _cmd_move(pid: int, payload: Dictionary) -> void:
 		GarrisonSystem.cancel(world, ids[i])
 		MonkSystem.stop(self, ids[i])
 		RelicSystem.cancel(world, ids[i])
+		TradeSystem.stop(self, ids[i])
 		MoveSystem.order_move(world, grid, ids[i], (target + offs[i]).clamp(lo, hi))
 
 
@@ -591,6 +598,7 @@ func _cmd_stop(pid: int, payload: Dictionary) -> void:
 		GarrisonSystem.cancel(world, id)
 		MonkSystem.stop(self, id)
 		RelicSystem.cancel(world, id)
+		TradeSystem.stop(self, id)
 		var m: Dictionary = world.comp(id, "Move")
 		(m["waypoints"] as Array).clear()
 		m["moving"] = false
@@ -622,6 +630,40 @@ func _cmd_build(pid: int, payload: Dictionary) -> void:
 	for id in _own_ids(pid, payload.get("ids"), "Build"):
 		GarrisonSystem.cancel(world, id)
 		BuildSystem.order_build(self, id, t)
+
+
+func _cmd_trade(pid: int, payload: Dictionary) -> void:
+	var raw_t: Variant = payload.get("target")
+	if not _num_ok(raw_t) or not world.entities.has(int(raw_t)):
+		return
+	for id in _own_ids(pid, payload.get("ids"), "Trade"):
+		GarrisonSystem.cancel(world, id)
+		TradeSystem.order_trade(self, id, int(raw_t))
+
+
+## Descargar: aldeanos con carga van a ese depósito propio y vuelven a su recurso.
+func _cmd_drop(pid: int, payload: Dictionary) -> void:
+	var raw_t: Variant = payload.get("target")
+	if not _num_ok(raw_t):
+		return
+	var d := int(raw_t)
+	if not world.has_ability(d, "DropSite") or int(world.entities.get(d, {}).get("owner", -1)) != pid or not is_built(d):
+		return
+	var accepts: Array = world.comp(d, "DropSite")["params"]["accepts"]
+	for id in _own_ids(pid, payload.get("ids"), "Gather"):
+		var g: Dictionary = world.comp(id, "Gather")
+		if int(g["carry"]) <= 0 or not accepts.has(str(g["carry_res"])):
+			continue
+		CombatSystem.stop(self, id)
+		BuildSystem.stop(self, id)
+		GarrisonSystem.cancel(world, id)
+		g["dropsite"] = d
+		g["state"] = "to_drop"
+		var pos: Vector2i = world.entities[id]["pos"]
+		var r := GatherSystem._rect(self, d)
+		var lo: Vector2i = r[0]
+		var hi: Vector2i = r[1]
+		MoveSystem.order_move(world, grid, id, Vector2i(clampi(pos.x, lo.x, hi.x - 1), clampi(pos.y, lo.y, hi.y - 1)))
 
 
 func _cmd_relic(pid: int, payload: Dictionary, kind: String) -> void:

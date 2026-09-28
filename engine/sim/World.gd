@@ -142,6 +142,9 @@ func state_hash() -> String:
 			st += "C%d:%d:%d" % [cv["target"], cv["channel"], cv["faith"]]
 		if has_ability(id, "Heal"):
 			st += "H%d:%d" % [components["Heal"][id]["target"], components["Heal"][id]["acc"]]
+		if has_ability(id, "Trade"):
+			var tr: Dictionary = components["Trade"][id]
+			st += "T%s:%d:%d:%d" % [tr["state"], tr["home"], tr["target"], tr["carry"]]
 		if has_ability(id, "Held"):
 			st += "h%d" % components["Held"][id]["by"]
 		if has_ability(id, "Carrying"):
@@ -188,6 +191,11 @@ static func _init_component(ability: String, params: Dictionary) -> Dictionary:
 			c["units"] = [] # ids guarecidos (ordenados)
 		"RelicHolder":
 			c["relics"] = [] # reliquias guardadas (ids ordenados)
+		"Trade":
+			c["state"] = "idle"
+			c["home"] = -1
+			c["target"] = -1
+			c["carry"] = 0 # oro (milésimas) que lleva de vuelta
 		"Convert":
 			c["target"] = -1
 			c["channel"] = 0 # ticks canalizando la conversión
