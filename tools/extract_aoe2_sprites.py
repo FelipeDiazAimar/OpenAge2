@@ -340,9 +340,12 @@ def convert_file(path, outdir, verbose=True, max_frames=0):
     with open(path, "rb") as f:
         data = f.read()
     r = Reader(data)
-    magic, ver, nframes, _, _, _ = HDR.unpack(r.take(16))
+    magic, ver, nframes, _, header_size, _ = HDR.unpack(r.take(16))
     if magic != MAGIC:
         raise ValueError("%s: firma inválida %r" % (path, magic))
+    # header_size (u2) = offset del primer frame: 16 normal, 14 en archivos
+    # 0x0e (openage sld.pyx: current_offset = header_size).
+    r.o = header_size
     base = os.path.splitext(os.path.basename(path))[0]
     dest = os.path.join(outdir, base)
     os.makedirs(dest, exist_ok=True)
@@ -444,9 +447,12 @@ def convert_packed(path, outdir, step=2, margin=2, max_frames=0, verbose=True):
     with open(path, "rb") as f:
         data = f.read()
     r = Reader(data)
-    magic, ver, nframes, _, _, _ = HDR.unpack(r.take(16))
+    magic, ver, nframes, _, header_size, _ = HDR.unpack(r.take(16))
     if magic != MAGIC:
         raise ValueError("%s: firma inválida %r" % (path, magic))
+    # header_size (u2) = offset del primer frame: 16 normal, 14 en archivos
+    # 0x0e (openage sld.pyx: current_offset = header_size).
+    r.o = header_size
     base = os.path.splitext(os.path.basename(path))[0]
     dest = os.path.join(outdir, base)
     os.makedirs(dest, exist_ok=True)

@@ -36,5 +36,8 @@
       "queue": 5
     },
     "RallyPoint": {}
+  },
+  "graphics": {
+    "idle": "sprite:buildings/stable/b_west_stable_age3_x1"
   }
 }
