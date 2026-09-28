@@ -85,6 +85,14 @@ Proyecto → Configuración → Mapa de entrada, o edita la sección `[input]` d
   = cancelar (devuelve el coste). Sin casas, la cola se detiene.
 - **Punto de reunión**: con un edificio seleccionado, clic derecho en el mapa (sobre un recurso,
   los aldeanos nuevos lo recolectan; sobre un cimiento, lo construyen).
+- **Reparar**: clic derecho de aldeanos sobre un edificio propio dañado (cuesta la mitad de su
+  coste en proporción al daño; se detiene si no alcanzan los recursos).
+- **Guarecer**: clic derecho de unidades sobre un edificio propio con guarnición (centro urbano,
+  torre, castillo); dentro no se las puede atacar y cada una suma una flecha. **Sacar**: botón en
+  el panel del edificio. **Campana**: botón del centro urbano; mete a los aldeanos cercanos y, al
+  tocarla de nuevo, los saca.
+- **Mejoras de línea** (p. ej. Piquero): convierten las unidades existentes y el edificio pasa a
+  entrenar la versión mejorada.
 - **S**: detener. Flechas / borde de pantalla / botón medio: cámara. Rueda: zoom. Esc: menú.
 - **F9** / **Shift+F9**: tropas de prueba (5 milicias + 5 arqueros) propias / enemigas bajo el cursor,
   hasta que exista producción en los edificios.

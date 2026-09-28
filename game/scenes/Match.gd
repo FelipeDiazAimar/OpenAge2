@@ -221,6 +221,12 @@ func _on_panel_action(kind: String, arg: Variant) -> void:
 		"cancel":
 			if b >= 0:
 				sim.queue_command(local_pid, "cancel", {"id": b, "index": int(arg)})
+		"ungarrison":
+			if selected.size() == 1:
+				sim.queue_command(local_pid, "ungarrison", {"ids": [selected[0]]})
+		"bell":
+			if selected.size() == 1:
+				sim.queue_command(local_pid, "bell", {"id": selected[0]})
 
 
 func issue_move(tiles: Vector2) -> void:
@@ -256,6 +262,17 @@ func smart_command(world_pos: Vector2) -> void:
 		var gatherers: Array = selected.filter(func(s): return sim.world.has_ability(s, "Gather"))
 		if not gatherers.is_empty():
 			sim.queue_command(local_pid, "gather", {"ids": gatherers, "target": id})
+			return
+	if id >= 0 and int(sim.world.entities[id]["owner"]) == local_pid and str(sim.world.entities[id]["type"]) == "building":
+		# Edificio propio: dañado = reparar (aldeanos); con guarnición = guarecer.
+		var hp: Dictionary = sim.world.comp(id, "Hitpoints")
+		var repairers: Array = selected.filter(func(s): return sim.world.has_ability(s, "Repair"))
+		if not repairers.is_empty() and not hp.is_empty() and int(hp["hp"]) < int(hp["max"]) and sim.is_built(id):
+			sim.queue_command(local_pid, "repair", {"ids": repairers, "target": id})
+			return
+		var garrisonable: Array = selected.filter(func(s): return sim.world.has_ability(s, "Garrisonable"))
+		if not garrisonable.is_empty() and sim.world.has_ability(id, "Garrison"):
+			sim.queue_command(local_pid, "garrison", {"ids": garrisonable, "target": id})
 			return
 	issue_move(Iso.to_tiles(world_pos))
 

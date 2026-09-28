@@ -107,7 +107,7 @@ func show_for(ids: Array, keep_page: bool = false) -> void:
 		_title.text += " ×%d" % alive.size()
 	if alive.any(func(i): return w.has_ability(i, "Build") and int(w.entities[i]["owner"]) == pid):
 		_build_buttons()
-	elif alive.size() == 1 and w.has_ability(first, "Queue") and int(w.entities[first]["owner"]) == pid:
+	elif alive.size() == 1 and int(w.entities[first]["owner"]) == pid and (w.has_ability(first, "Queue") or w.has_ability(first, "Garrison")):
 		_building = first
 		_production_buttons(first)
 	refresh()
@@ -204,6 +204,11 @@ func _production_buttons(b: int) -> void:
 				continue
 			_add("research", str(t), "%s\n%s" % [d.get("name", t), cost_text(d.get("cost", {}))],
 				func() -> String: return sim.research_error(pid, b, str(t)))
+	if w.has_ability(b, "Garrison"):
+		_add("ungarrison", "", "Sacar\nguarecidos", func() -> String:
+			return "" if not (w.comp(b, "Garrison")["units"] as Array).is_empty() else "no hay nadie dentro")
+	if w.has_ability(b, "Bell"):
+		_add("bell", "", "Campana\n(aldeanos)", func() -> String: return "" if sim.is_built(b) else "en construcción")
 	if w.has_ability(b, "AgeAdvance"):
 		var a: Dictionary = sim.next_age(pid)
 		if not a.is_empty():
@@ -257,7 +262,12 @@ func refresh() -> void:
 			_status.text = "En construcción: %d%%" % (100 * int(f["progress"]) / maxi(1, int(f["total"])))
 	if _building < 0 or not w.entities.has(_building):
 		return
+	var gar: Dictionary = w.comp(_building, "Garrison")
+	if not gar.is_empty() and not (gar["units"] as Array).is_empty():
+		_status.text = "Guarecidos: %d/%d" % [(gar["units"] as Array).size(), int(gar["params"]["capacity"])]
 	var q: Dictionary = w.comp(_building, "Queue")
+	if q.is_empty():
+		return
 	var items: Array = q["items"]
 	# Los botones de la cola solo se recrean si cambia su contenido (si no, un
 	# clic que cruza un tick caería sobre un botón ya liberado).

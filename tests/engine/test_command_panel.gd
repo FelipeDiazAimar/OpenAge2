@@ -123,3 +123,52 @@ func test_panel_rebuilds_after_age_up() -> void:
 	p.refresh()
 	assert_true(p.buttons.has("age_up:castillos"), "ofrece la siguiente edad")
 	p.free()
+
+
+func test_garrison_buttons_and_count() -> void:
+	var s := _sim()
+	s.players[0]["age"] = 1
+	var t := s.spawn("torre_vigia", 0, Vector2i(10, 10))
+	var p := CommandPanel.new()
+	p.setup(s, 0)
+	p.show_for([t])
+	assert_true(p.buttons.has("ungarrison:"), "botón Sacar")
+	assert_true(p.buttons["ungarrison:"].disabled, "vacía")
+	var v := s.spawn("aldeano", 0, Vector2i(13, 10))
+	s.queue_command(0, "garrison", {"ids": [v], "target": t})
+	for i in 40:
+		s.step()
+	p.refresh()
+	assert_false(p.buttons["ungarrison:"].disabled)
+	assert_true(p._status.text.begins_with("Guarecidos: 1/5"))
+	var tc := s.spawn("centro_urbano", 0, Vector2i(25, 25))
+	p.show_for([tc])
+	assert_true(p.buttons.has("bell:"), "campana en el centro urbano")
+	p.free()
+
+
+func test_match_right_click_repair_and_garrison() -> void:
+	var m = load(MATCH).instantiate()
+	Engine.get_main_loop().root.add_child(m)
+	var tc := -1
+	var v := -1
+	for id in m.sim.world.entities:
+		var e: Dictionary = m.sim.world.entities[id]
+		if e["owner"] == m.local_pid and e["def_id"] == "centro_urbano":
+			tc = id
+		elif e["owner"] == m.local_pid and e["def_id"] == "aldeano" and v < 0:
+			v = id
+	m.select([v])
+	m.sim.world.comp(tc, "Hitpoints")["hp"] = 2000
+	m.smart_command(m.layer.views[tc].position)
+	for i in 3:
+		m.tick_once()
+	assert_true(str(m.sim.world.comp(v, "Build")["state"]) in ["to_repair", "repairing"], "dañado: repara")
+	m.sim.world.comp(tc, "Hitpoints")["hp"] = 2400
+	m.select([v])
+	m.smart_command(m.layer.views[tc].position)
+	for i in 80:
+		m.tick_once()
+	assert_true(bool(m.sim.world.comp(v, "Garrisoned").get("inside", false)), "entero: se guarece")
+	assert_false(m.layer.views[v].visible, "guarecido: no se dibuja")
+	m.queue_free()

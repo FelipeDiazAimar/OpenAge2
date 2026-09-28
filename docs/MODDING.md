@@ -60,3 +60,9 @@ El motor nuevo lee `mods/<mod>/` (el juego viejo sigue leyendo `data/` hasta la 
 - Población: `ProvidesPop {amount}` en edificios terminados, tope 200.
 - Menú de construir: `"build_menu": "economico" | "militar"` y `"hotkey": "Q"` en el edificio
   (tecla dentro de su página; sin `build_menu` va a la económica).
+- Mejoras de línea: una tech con `{"op": "replace_entity", "from": "lancero", "to": "piquero"}`
+  convierte las unidades vivas del jugador y el edificio que entrena `from` pasa a entrenar `to`
+  (las unidades que solo son destino de una mejora no se entrenan hasta investigarla).
+- Guarnición: `Garrison {capacity, arrows_per_unit}` en el edificio y `Garrisonable {}` en la
+  unidad; `Bell {}` en el centro urbano. `Repair {rate, cost_factor}` en el aldeano (HP/s y
+  fracción del coste del edificio que se paga por el HP reparado).

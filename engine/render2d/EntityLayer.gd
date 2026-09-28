@@ -61,6 +61,15 @@ func sync(alpha: float, delta: float) -> void:
 	for id in ids:
 		var e: Dictionary = w.entities[id]
 		var v = views.get(id)
+		var gar: Dictionary = w.comp(id, "Garrisoned")
+		if not gar.is_empty() and bool(gar["inside"]):
+			# Guarecida: no se dibuja ni se puede elegir.
+			if v != null:
+				v.visible = false
+				v.selected = false
+			continue
+		if v != null and not v.visible:
+			v.visible = true
 		if v == null:
 			v = EntityView.new()
 			v.setup(id, sim.def_for(id), colors.get(e["owner"], Color(0.6, 0.6, 0.6)), locator)
@@ -159,6 +168,8 @@ func pick(world_pos: Vector2) -> int:
 	var best_score := INF
 	for id in views:
 		var v = views[id]
+		if not v.visible:
+			continue
 		var local: Vector2 = world_pos - v.position
 		var d: float
 		if v.kind == "building":
@@ -178,7 +189,7 @@ func ids_in_rect(r: Rect2, owner: int) -> Array[int]:
 	var box := r.abs()
 	for id in views:
 		var e: Dictionary = sim.world.entities.get(id, {})
-		if e.is_empty() or int(e["owner"]) != owner or not sim.world.has_ability(id, "Move"):
+		if e.is_empty() or int(e["owner"]) != owner or not sim.world.has_ability(id, "Move") or not views[id].visible:
 			continue
 		if box.has_point(views[id].position):
 			out.append(id)
