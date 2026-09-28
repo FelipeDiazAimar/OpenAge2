@@ -137,6 +137,11 @@ func state_hash() -> String:
 			st += "B%s:%d:%d" % [components["Build"][id]["state"], components["Build"][id]["target"], components["Build"][id]["acc"]]
 		if has_ability(id, "Foundation"):
 			st += "F%d" % components["Foundation"][id]["progress"]
+		if has_ability(id, "Convert"):
+			var cv: Dictionary = components["Convert"][id]
+			st += "C%d:%d:%d" % [cv["target"], cv["channel"], cv["faith"]]
+		if has_ability(id, "Heal"):
+			st += "H%d:%d" % [components["Heal"][id]["target"], components["Heal"][id]["acc"]]
 		if has_ability(id, "Garrisoned"):
 			st += "G%d:%s" % [components["Garrisoned"][id]["in"], components["Garrisoned"][id]["inside"]]
 		if has_ability(id, "Garrison"):
@@ -175,6 +180,16 @@ static func _init_component(ability: String, params: Dictionary) -> Dictionary:
 			c["ignore_until"] = 0
 		"Garrison":
 			c["units"] = [] # ids guarecidos (ordenados)
+		"Convert":
+			c["target"] = -1
+			c["channel"] = 0 # ticks canalizando la conversión
+			c["faith"] = 0 # ticks de recarga tras convertir
+			c["repath"] = 0
+		"Heal":
+			c["target"] = -1
+			c["explicit"] = false
+			c["acc"] = 0
+			c["repath"] = 0
 		"Build":
 			c["state"] = "idle"
 			c["target"] = -1

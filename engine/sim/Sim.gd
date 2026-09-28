@@ -14,6 +14,8 @@ const SeparationSystem := preload("res://engine/sim/systems/SeparationSystem.gd"
 const BuildSystem := preload("res://engine/sim/systems/BuildSystem.gd")
 const ProductionSystem := preload("res://engine/sim/systems/ProductionSystem.gd")
 const GarrisonSystem := preload("res://engine/sim/systems/GarrisonSystem.gd")
+const MonkSystem := preload("res://engine/sim/systems/MonkSystem.gd")
+const Rng := preload("res://engine/sim/Rng.gd")
 
 const INPUT_DELAY := 2
 const START_RES := {"wood": 200, "food": 200, "gold": 100, "stone": 200}
@@ -32,6 +34,8 @@ var events: Array = []
 ## Solo partidas locales: habilita el comando debug_spawn (tropas de prueba).
 var debug_enabled := false
 var _next_projectile := 1
+## Azar de la partida (conversiones): mismo resultado en todas las PCs.
+var rng := Rng.new(0x5EED1234)
 
 
 func _init(p_registry, map_w: int, map_h: int) -> void:
@@ -396,7 +400,7 @@ func gatherer_counts(pid: int) -> Dictionary:
 
 
 func state_hash() -> String:
-	var parts := PackedStringArray([world.state_hash()])
+	var parts := PackedStringArray([world.state_hash(), "rng%d" % rng._s])
 	for p in players:
 		var r: Dictionary = p["res"]
 		parts.append("%d:%d,%d,%d,%d|a%d|b%s|%s" % [p["id"], r["wood"], r["food"], r["gold"], r["stone"], p["age"], p.get("bell", false), ",".join(p["defs"].researched)])
@@ -426,6 +430,7 @@ func step() -> void:
 	MoveSystem.step(world)
 	SeparationSystem.step(self)
 	CombatSystem.step(self)
+	MonkSystem.step(self)
 	GatherSystem.step(self)
 	BuildSystem.step(self)
 	GarrisonSystem.step(self)
@@ -472,6 +477,10 @@ func _apply(c: Dictionary) -> void:
 			_cmd_repair(int(c["pid"]), c["payload"])
 		"garrison":
 			_cmd_garrison(int(c["pid"]), c["payload"])
+		"convert":
+			_cmd_monk(int(c["pid"]), c["payload"], "Convert")
+		"heal":
+			_cmd_monk(int(c["pid"]), c["payload"], "Heal")
 		"ungarrison":
 			for b in _own_ids(int(c["pid"]), c["payload"].get("ids"), "Garrison"):
 				GarrisonSystem.eject(self, b)
@@ -532,6 +541,7 @@ func _cmd_move(pid: int, payload: Dictionary) -> void:
 		CombatSystem.stop(self, ids[i])
 		BuildSystem.stop(self, ids[i])
 		GarrisonSystem.cancel(world, ids[i])
+		MonkSystem.stop(self, ids[i])
 		MoveSystem.order_move(world, grid, ids[i], (target + offs[i]).clamp(lo, hi))
 
 
@@ -570,6 +580,7 @@ func _cmd_stop(pid: int, payload: Dictionary) -> void:
 		CombatSystem.stop(self, id)
 		BuildSystem.stop(self, id)
 		GarrisonSystem.cancel(world, id)
+		MonkSystem.stop(self, id)
 		var m: Dictionary = world.comp(id, "Move")
 		(m["waypoints"] as Array).clear()
 		m["moving"] = false
@@ -601,6 +612,18 @@ func _cmd_build(pid: int, payload: Dictionary) -> void:
 	for id in _own_ids(pid, payload.get("ids"), "Build"):
 		GarrisonSystem.cancel(world, id)
 		BuildSystem.order_build(self, id, t)
+
+
+func _cmd_monk(pid: int, payload: Dictionary, ability: String) -> void:
+	var raw_t: Variant = payload.get("target")
+	if not _num_ok(raw_t):
+		return
+	for id in _own_ids(pid, payload.get("ids"), ability):
+		GarrisonSystem.cancel(world, id)
+		if ability == "Convert":
+			MonkSystem.order_convert(self, id, int(raw_t))
+		else:
+			MonkSystem.order_heal(self, id, int(raw_t))
 
 
 func _cmd_garrison(pid: int, payload: Dictionary) -> void:
