@@ -465,6 +465,8 @@ func _apply(c: Dictionary) -> void:
 			_cmd_place(int(c["pid"]), c["payload"])
 		"build":
 			_cmd_build(int(c["pid"]), c["payload"])
+		"repair":
+			_cmd_repair(int(c["pid"]), c["payload"])
 		"train":
 			_cmd_train(int(c["pid"]), c["payload"])
 		"research":
@@ -581,6 +583,14 @@ func _cmd_build(pid: int, payload: Dictionary) -> void:
 		return
 	for id in _own_ids(pid, payload.get("ids"), "Build"):
 		BuildSystem.order_build(self, id, t)
+
+
+func _cmd_repair(pid: int, payload: Dictionary) -> void:
+	var raw_t: Variant = payload.get("target")
+	if not _num_ok(raw_t):
+		return
+	for id in _own_ids(pid, payload.get("ids"), "Repair"):
+		BuildSystem.order_repair(self, id, int(raw_t))
 
 
 ## Edificio propio, terminado y con cola; si no, -1.

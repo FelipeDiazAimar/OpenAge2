@@ -2,7 +2,9 @@ extends RefCounted
 ## Construcción estilo AoE2: los aldeanos van al borde del cimiento y lo
 ## levantan juntos. Con n constructores el avance por tick es n + 2 tercios
 ## (tiempo = base × 3 / (n + 2)). El HP del edificio crece con el avance.
-## Estados: idle, to_site, building.
+## Reparación (habilidad Repair): HP por segundo = rate, pagando el coste del
+## edificio × cost_factor en proporción al HP reparado; se corta sin recursos.
+## Estados: idle, to_site, building, to_repair, repairing.
 
 const FP := preload("res://engine/sim/FixedPoint.gd")
 const MoveSystem := preload("res://engine/sim/systems/MoveSystem.gd")
@@ -35,6 +37,79 @@ static func order_build(sim, id: int, target: int) -> void:
 	MoveSystem.order_move(w, sim.grid, id, Vector2i(clampi(pos.x, lo.x, hi.x - 1), clampi(pos.y, lo.y, hi.y - 1)))
 
 
+## "" si id puede reparar target (edificio propio terminado y dañado).
+static func repair_error(sim, id: int, target: int) -> String:
+	var w = sim.world
+	if not w.has_ability(id, "Repair") or not w.has_ability(id, "Build"):
+		return "no repara"
+	if not w.entities.has(target) or str(w.entities[target]["type"]) != "building":
+		return "no es un edificio"
+	if int(w.entities[target]["owner"]) != int(w.entities[id]["owner"]) or not sim.is_built(target):
+		return "no se puede reparar"
+	var hp: Dictionary = w.comp(target, "Hitpoints")
+	if hp.is_empty() or int(hp["hp"]) >= int(hp["max"]):
+		return "no está dañado"
+	return ""
+
+
+static func order_repair(sim, id: int, target: int) -> void:
+	if repair_error(sim, id, target) != "":
+		return
+	var w = sim.world
+	GatherSystem.stop(sim, id)
+	CombatSystem.stop(sim, id)
+	var b: Dictionary = w.comp(id, "Build")
+	b["target"] = target
+	b["state"] = "to_repair"
+	b["acc"] = 0
+	var pos: Vector2i = w.entities[id]["pos"]
+	var r := GatherSystem._rect(sim, target)
+	if GatherSystem._rect_dist(pos, r) > REACH:
+		var lo: Vector2i = r[0]
+		var hi: Vector2i = r[1]
+		MoveSystem.order_move(w, sim.grid, id, Vector2i(clampi(pos.x, lo.x, hi.x - 1), clampi(pos.y, lo.y, hi.y - 1)))
+
+
+static func _repair_tick(sim, id: int, b: Dictionary) -> void:
+	var w = sim.world
+	var t: int = b["target"]
+	if repair_error(sim, id, t) != "":
+		stop(sim, id) # terminado, destruido o ajeno
+		return
+	if str(b["state"]) == "to_repair":
+		if bool(w.comp(id, "Move").get("moving", false)):
+			return
+		if GatherSystem._rect_dist(w.entities[id]["pos"], GatherSystem._rect(sim, t)) > REACH:
+			stop(sim, id)
+			return
+		_start(w, id, b, t)
+		b["state"] = "repairing"
+	var p: Dictionary = w.comp(id, "Repair")["params"]
+	b["acc"] = int(b["acc"]) + FP.from_data(float(p["rate"])) / 10
+	var gain: int = int(b["acc"]) / FP.SCALE
+	if gain <= 0:
+		return
+	var hp: Dictionary = w.comp(t, "Hitpoints")
+	gain = mini(gain, int(hp["max"]) - int(hp["hp"]))
+	var owner := int(w.entities[id]["owner"])
+	var cf := FP.from_data(float(p.get("cost_factor", 0.5)))
+	var cost := {}
+	var base: Dictionary = sim.cost_milli(sim.def_for(t).get("cost", {}))
+	for k in base:
+		# Redondeo hacia arriba: nunca se repara gratis.
+		var mx: int = maxi(1, int(hp["max"]))
+		cost[k] = (int(base[k]) * cf / FP.SCALE * gain + mx - 1) / mx
+	var res: Dictionary = sim.players[owner]["res"]
+	for k in cost:
+		if int(res.get(k, 0)) < int(cost[k]):
+			stop(sim, id) # sin recursos
+			return
+	for k in cost:
+		sim.add_res(owner, k, -int(cost[k]))
+	hp["hp"] = int(hp["hp"]) + gain
+	b["acc"] = int(b["acc"]) - gain * FP.SCALE
+
+
 static func stop(sim, id: int) -> void:
 	var b: Dictionary = sim.world.comp(id, "Build")
 	if not b.is_empty():
@@ -60,6 +135,9 @@ static func step(sim) -> void:
 	for id in w.ids_with("Build"):
 		var b: Dictionary = w.comp(id, "Build")
 		if str(b["state"]) == "idle":
+			continue
+		if str(b["state"]) == "to_repair" or str(b["state"]) == "repairing":
+			_repair_tick(sim, id, b)
 			continue
 		var t: int = b["target"]
 		if not w.entities.has(t) or not w.has_ability(t, "Foundation"):

@@ -172,6 +172,7 @@ static func _init_component(ability: String, params: Dictionary) -> Dictionary:
 		"Build":
 			c["state"] = "idle"
 			c["target"] = -1
+			c["acc"] = 0 # reparación: milésimas de HP acumuladas
 		"Gather":
 			c["state"] = "idle"
 			c["target"] = -1
