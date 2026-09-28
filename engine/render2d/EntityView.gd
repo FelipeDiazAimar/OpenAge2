@@ -11,6 +11,8 @@ const FPS := {"walk": 10.0, "idle": 6.0, "task": 8.0, "attack": 10.0, "death": 8
 var entity_id := 0
 var kind := "unit"
 var def_id := ""
+## Fracción de comida restante en granjas (0..1): elige estadio visual.
+var farm_frac := 1.0
 var footprint := Vector2i.ONE
 var color := Color.WHITE
 var selected := false:
@@ -38,6 +40,8 @@ var progress := 1.0:
 var _graphics: Dictionary = {}
 var _locator
 var _anims: Dictionary = {}
+## Texturas de campo del DE (user://, pueden faltar): suelo fc1, cultivo fm1.
+var _farm_cache: Dictionary = {}
 var _anim := ""
 var _t := 0.0
 var _slot := 4
@@ -188,6 +192,15 @@ func _pack(anim: String) -> Dictionary:
 	return _anims[anim]
 
 
+## Textura de campo (granja) desde user://; null si aún no se importó.
+func _farm_tex(name: String) -> Texture2D:
+	if not _farm_cache.has(name) and _locator != null:
+		var t: Texture2D = _locator.terrain("terrain:" + name)
+		if t != null:
+			_farm_cache[name] = t
+	return _farm_cache.get(name)
+
+
 func _draw() -> void:
 	var r := pick_radius()
 	if team_marker():
@@ -208,12 +221,24 @@ func _draw() -> void:
 				Iso.to_screen(Vector2(hw, hh)), Iso.to_screen(Vector2(-hw, hh))])
 			if def_id == "granja":
 				# La granja no tiene sprite en el DE (alli es overlay de
-				# terreno): tierra labrada con surcos en vez del rombo de bando.
-				draw_colored_polygon(pts, Color(0.45, 0.30, 0.15))
-				for i in 3:
-					var t := 0.25 + 0.25 * i
-					draw_line(pts[0].lerp(pts[3], t), pts[1].lerp(pts[2], t),
-						Color(0.26, 0.16, 0.07), 3.0)
+				# terreno): rombo con textura de campo según etapa (fc1 en
+				# obra, fc2/fc3 brotes, fm1 maduro) o tierra plana si faltan.
+				var stage := "g_fc1"
+				if progress >= 0.999:
+					stage = "g_fm1" if farm_frac >= 0.66 else ("g_fc3" if farm_frac >= 0.33 else "g_fc2")
+				var tex: Texture2D = _farm_tex(stage)
+				if tex != null:
+					draw_polygon(pts, PackedColorArray(
+						[Color.WHITE, Color.WHITE, Color.WHITE, Color.WHITE]),
+						PackedVector2Array(
+						[Vector2.ZERO, Vector2(1, 0), Vector2.ONE, Vector2(0, 1)]),
+						tex)
+				else:
+					draw_colored_polygon(pts, Color(0.45, 0.30, 0.15))
+					for i in 3:
+						var t := 0.25 + 0.25 * i
+						draw_line(pts[0].lerp(pts[3], t), pts[1].lerp(pts[2], t),
+							Color(0.26, 0.16, 0.07), 3.0)
 				pts.append(pts[0])
 				draw_polyline(pts, Color(0.62, 0.45, 0.24), 2.0)
 			else:

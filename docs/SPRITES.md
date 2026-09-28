@@ -98,5 +98,5 @@ move assets\sprites\tmp\u_inf_militia_idleA_x1 assets\sprites\militia\idle
 - Granja: no existe sprite de campo en el DE (solo anims de granjero u_*_farmer_*
   y overlay de terreno: terrain/blends/farmland.png, textures/2x/g_fm1-2,
   g_fc1-3, g_wt*.dds). En el clon, EntityView._draw() pinta la granja
-  (def_id == granja) como rombo de tierra labrada con surcos en vez del
+  (def_id == granja) como rombo con textura de campo del DE (fc1 en obra, fm1 maduro; tierra plana si faltan) en vez del
   fallback azul. Maravilla usa wonder/b_west_wonder_britons_x1.

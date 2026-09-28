@@ -109,6 +109,8 @@ func _ready() -> void:
 
 ## Primera partida con el DE instalado: exporta las texturas de terreno que
 ## usan los terrenos del mod a user://aoe2_assets/terrain (una sola vez).
+## Incluye el campo de granja (suelo fc1, estadios fc2/fc3, maduro fm1).
+const FARM_TEXTURES := ["g_fm1", "g_fc1", "g_fc2", "g_fc3"]
 func _import_terrain() -> void:
 	var root := TerrainImporter.find_install()
 	if root == "":
@@ -118,6 +120,7 @@ func _import_terrain() -> void:
 		var ref := str(registry.get_def(id)["texture"])
 		if ref.begins_with("terrain:"):
 			names.append(ref.substr(8))
+	names.append_array(FARM_TEXTURES)
 	var n := TerrainImporter.import(root, names)
 	if n > 0:
 		print("[Match] importadas %d texturas de terreno del AoE2 DE" % n)

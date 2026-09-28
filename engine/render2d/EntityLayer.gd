@@ -4,6 +4,7 @@ extends Node2D
 
 const Iso := preload("res://engine/render2d/Iso.gd")
 const EntityView := preload("res://engine/render2d/EntityView.gd")
+const FP := preload("res://engine/sim/FixedPoint.gd")
 ## Segundos que un cadáver queda en el suelo (el último segundo se funde).
 const CORPSE_TIME := 5.0
 
@@ -112,6 +113,11 @@ func sync(alpha: float, delta: float) -> void:
 			v.one_shot = t < DEATH_TIME
 			action = "death" if t < DEATH_TIME else "decay"
 			moving = false
+		var fcomp: Dictionary = w.comp(id, "Farm")
+		if not fcomp.is_empty() and not src.is_empty():
+			var maxfood := float((fcomp.get("params", {}) as Dictionary).get("food", 0))
+			if maxfood > 0.0:
+				v.farm_frac = clampf(float(src.get("amount", 0)) / (maxfood * FP.SCALE), 0.0, 1.0)
 		v.update_view(moving, facing, delta, action)
 
 
