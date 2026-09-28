@@ -43,11 +43,21 @@ static func garrison_error(sim, id: int, b: int) -> String:
 	var w = sim.world
 	if not w.has_ability(id, "Garrisonable") or not w.has_ability(id, "Move") or is_inside(w, id):
 		return "no puede guarecerse"
+	if not w.entities.has(b) or str(w.entities[b]["type"]) != "building":
+		return "no es un edificio" # (los barcos de transporte, más adelante)
 	if not w.has_ability(b, "Garrison") or not sim.is_built(b):
 		return "no admite guarnición"
 	if int(w.entities[b]["owner"]) != int(w.entities[id]["owner"]):
 		return "edificio ajeno"
 	return ""
+
+
+## Una orden nueva del jugador anula la de guarecerse si aún camina hacia el
+## edificio (los que ya están dentro solo salen con "ungarrison").
+static func cancel(w, id: int) -> void:
+	var g: Dictionary = w.comp(id, "Garrisoned")
+	if not g.is_empty() and not bool(g["inside"]):
+		w.remove_component(id, "Garrisoned")
 
 
 static func order_garrison(sim, id: int, b: int) -> void:
@@ -84,10 +94,15 @@ static func step(sim) -> void:
 		if full or GatherSystem._rect_dist(w.entities[id]["pos"], GatherSystem._rect(sim, b)) > REACH:
 			w.remove_component(id, "Garrisoned") # lleno o inalcanzable
 			continue
-		_enter(w, id, b, g)
+		_enter(sim, id, b, g)
 
 
-static func _enter(w, id: int, b: int, g: Dictionary) -> void:
+static func _enter(sim, id: int, b: int, g: Dictionary) -> void:
+	var w = sim.world
+	# Dentro no se recolecta, construye, repara ni ataca.
+	GatherSystem.stop(sim, id)
+	CombatSystem.stop(sim, id)
+	BuildSystem.stop(sim, id)
 	g["inside"] = true
 	var units: Array = w.comp(b, "Garrison")["units"]
 	units.append(id)
@@ -101,13 +116,17 @@ static func _enter(w, id: int, b: int, g: Dictionary) -> void:
 
 ## Saca a los guarecidos (todos, o solo los que cumplan `only`) a casillas
 ## libres junto al edificio; con punto de reunión van hacia él.
-static func eject(sim, b: int, only: Callable = Callable()) -> void:
+## force: si no hay casilla libre, la unidad sale igual sobre el edificio
+## (se usa cuando el edificio desaparece: nadie queda atrapado).
+static func eject(sim, b: int, only: Callable = Callable(), force: bool = false) -> void:
 	var w = sim.world
 	var gar: Dictionary = w.comp(b, "Garrison")
 	if gar.is_empty():
 		return
 	var def: Dictionary = sim.def_for(b)
-	var size := Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
+	var size := Vector2i.ONE
+	if def.get("footprint") is Array:
+		size = Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
 	var origin := Grid.tile_of(w.entities[b]["pos"] - size * (FP.SCALE / 2))
 	var rally := Vector2i(-1, -1)
 	var q: Dictionary = w.comp(b, "Queue")
@@ -122,10 +141,12 @@ static func eject(sim, b: int, only: Callable = Callable()) -> void:
 			keep.append(u)
 			continue
 		var t: Vector2i = sim.exit_tile(origin, size, goal)
-		if t.x < 0:
+		var p: Vector2i = w.entities[b]["pos"]
+		if t.x >= 0:
+			p = Grid.center_of(t)
+		elif not force:
 			keep.append(u) # sin salida: sigue dentro
 			continue
-		var p := Grid.center_of(t)
 		w.entities[u]["pos"] = p
 		w.spatial.insert(u, p)
 		w.remove_component(u, "Garrisoned")
@@ -139,7 +160,7 @@ static func eject(sim, b: int, only: Callable = Callable()) -> void:
 static func on_remove(sim, id: int) -> void:
 	var w = sim.world
 	if w.has_ability(id, "Garrison"):
-		eject(sim, id)
+		eject(sim, id, Callable(), true)
 	var g: Dictionary = w.comp(id, "Garrisoned")
 	if not g.is_empty() and bool(g["inside"]) and w.has_ability(int(g["in"]), "Garrison"):
 		(w.comp(int(g["in"]), "Garrison")["units"] as Array).erase(id)
@@ -161,8 +182,11 @@ static func ring_bell(sim, pid: int, tc: int) -> void:
 	var p: Dictionary = sim.players[pid]
 	if bool(p.get("bell", false)):
 		p["bell"] = false
+		for v in w.ids_with("Gather"):
+			if int(w.entities[v]["owner"]) == pid:
+				cancel(w, v) # los que aún caminan hacia dentro se quedan fuera
 		for b in w.ids_with("Garrison"):
-			if int(w.entities[b]["owner"]) == pid:
+			if int(w.entities[b]["owner"]) == pid and str(w.entities[b]["type"]) == "building":
 				eject(sim, b, func(u): return w.has_ability(u, "Gather"))
 		return
 	p["bell"] = true

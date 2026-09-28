@@ -165,10 +165,35 @@ func test_match_right_click_repair_and_garrison() -> void:
 		m.tick_once()
 	assert_true(str(m.sim.world.comp(v, "Build")["state"]) in ["to_repair", "repairing"], "dañado: repara")
 	m.sim.world.comp(tc, "Hitpoints")["hp"] = 2400
-	m.select([v])
+	var tcp: Vector2i = m.sim.world.entities[tc]["pos"]
+	var mil: int = m.sim.spawn("milicia", m.local_pid, Vector2i(tcp.x / 1000 + 4, tcp.y / 1000))
+	m.select([mil])
 	m.smart_command(m.layer.views[tc].position)
 	for i in 80:
 		m.tick_once()
-	assert_true(bool(m.sim.world.comp(v, "Garrisoned").get("inside", false)), "entero: se guarece")
-	assert_false(m.layer.views[v].visible, "guarecido: no se dibuja")
+	assert_true(bool(m.sim.world.comp(mil, "Garrisoned").get("inside", false)), "militar: se guarece")
+	assert_false(m.layer.views[mil].visible, "guarecido: no se dibuja")
+	m.select([v])
+	m.smart_command(m.layer.views[tc].position)
+	for i in 3:
+		m.tick_once()
+	assert_true(m.sim.world.comp(v, "Garrisoned").is_empty(), "aldeano sin Alt: no se guarece")
+	m.queue_free()
+
+
+func test_train_hotkey_after_upgrade() -> void:
+	var m = load(MATCH).instantiate()
+	Engine.get_main_loop().root.add_child(m)
+	m.sim.players[m.local_pid]["age"] = 2
+	for k in ["food", "wood", "gold"]:
+		m.sim.add_res(m.local_pid, k, 2000000)
+	var bk: int = m.sim.spawn("cuartel", m.local_pid, Vector2i(60, 60))
+	m.sim.complete_research(m.local_pid, "piquero_up")
+	m.select([bk])
+	var hk := str(m.sim.players[m.local_pid]["defs"].get_def("piquero").get("hotkey", ""))
+	assert_true(m._train_hotkey(hk), "la tecla entrena el piquero")
+	for i in 3:
+		m.tick_once()
+	var items: Array = m.sim.world.comp(bk, "Queue")["items"]
+	assert_eq(items[0]["id"], "piquero")
 	m.queue_free()

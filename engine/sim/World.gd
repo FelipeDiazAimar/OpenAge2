@@ -134,7 +134,7 @@ func state_hash() -> String:
 		if has_ability(id, "Attack"):
 			st += "@%d" % components["Attack"][id]["target"]
 		if has_ability(id, "Build"):
-			st += "B%s:%d" % [components["Build"][id]["state"], components["Build"][id]["target"]]
+			st += "B%s:%d:%d" % [components["Build"][id]["state"], components["Build"][id]["target"], components["Build"][id]["acc"]]
 		if has_ability(id, "Foundation"):
 			st += "F%d" % components["Foundation"][id]["progress"]
 		if has_ability(id, "Garrisoned"):

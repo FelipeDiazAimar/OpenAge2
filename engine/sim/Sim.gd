@@ -399,7 +399,7 @@ func state_hash() -> String:
 	var parts := PackedStringArray([world.state_hash()])
 	for p in players:
 		var r: Dictionary = p["res"]
-		parts.append("%d:%d,%d,%d,%d|a%d|%s" % [p["id"], r["wood"], r["food"], r["gold"], r["stone"], p["age"], ",".join(p["defs"].researched)])
+		parts.append("%d:%d,%d,%d,%d|a%d|b%s|%s" % [p["id"], r["wood"], r["food"], r["gold"], r["stone"], p["age"], p.get("bell", false), ",".join(p["defs"].researched)])
 	for p in projectiles:
 		parts.append("P%d:%d,%d,%d" % [p["id"], p["pos"].x, p["pos"].y, p["target"]])
 	var ctx := HashingContext.new()
@@ -531,6 +531,7 @@ func _cmd_move(pid: int, payload: Dictionary) -> void:
 		GatherSystem.stop(self, ids[i])
 		CombatSystem.stop(self, ids[i])
 		BuildSystem.stop(self, ids[i])
+		GarrisonSystem.cancel(world, ids[i])
 		MoveSystem.order_move(world, grid, ids[i], (target + offs[i]).clamp(lo, hi))
 
 
@@ -543,6 +544,7 @@ func _cmd_gather(pid: int, payload: Dictionary) -> void:
 		return
 	for id in _own_ids(pid, payload.get("ids"), "Gather"):
 		CombatSystem.stop(self, id)
+		GarrisonSystem.cancel(world, id)
 		GatherSystem.order_gather(self, id, target)
 
 
@@ -558,6 +560,7 @@ func _cmd_attack(pid: int, payload: Dictionary) -> void:
 	for id in _own_ids(pid, payload.get("ids"), "Attack"):
 		GatherSystem.stop(self, id)
 		BuildSystem.stop(self, id)
+		GarrisonSystem.cancel(world, id)
 		CombatSystem.order_attack(self, id, t)
 
 
@@ -566,6 +569,7 @@ func _cmd_stop(pid: int, payload: Dictionary) -> void:
 		GatherSystem.stop(self, id)
 		CombatSystem.stop(self, id)
 		BuildSystem.stop(self, id)
+		GarrisonSystem.cancel(world, id)
 		var m: Dictionary = world.comp(id, "Move")
 		(m["waypoints"] as Array).clear()
 		m["moving"] = false
@@ -583,6 +587,7 @@ func _cmd_place(pid: int, payload: Dictionary) -> void:
 	pay(pid, players[pid]["defs"].get_def(def_id).get("cost", {}))
 	var f := place_foundation(pid, def_id, tile)
 	for id in builders:
+		GarrisonSystem.cancel(world, id)
 		BuildSystem.order_build(self, id, f)
 
 
@@ -594,6 +599,7 @@ func _cmd_build(pid: int, payload: Dictionary) -> void:
 	if not world.has_ability(t, "Foundation") or int(world.entities[t]["owner"]) != pid:
 		return
 	for id in _own_ids(pid, payload.get("ids"), "Build"):
+		GarrisonSystem.cancel(world, id)
 		BuildSystem.order_build(self, id, t)
 
 
@@ -620,6 +626,7 @@ func _cmd_repair(pid: int, payload: Dictionary) -> void:
 	if not _num_ok(raw_t):
 		return
 	for id in _own_ids(pid, payload.get("ids"), "Repair"):
+		GarrisonSystem.cancel(world, id)
 		BuildSystem.order_repair(self, id, int(raw_t))
 
 

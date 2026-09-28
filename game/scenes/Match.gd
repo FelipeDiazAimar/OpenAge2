@@ -270,7 +270,9 @@ func smart_command(world_pos: Vector2) -> void:
 		if not repairers.is_empty() and not hp.is_empty() and int(hp["hp"]) < int(hp["max"]) and sim.is_built(id):
 			sim.queue_command(local_pid, "repair", {"ids": repairers, "target": id})
 			return
-		var garrisonable: Array = selected.filter(func(s): return sim.world.has_ability(s, "Garrisonable"))
+		# Aldeanos solo con Alt (como en AoE2): si no, el clic derecho no los mete.
+		var alt := Input.is_key_pressed(KEY_ALT)
+		var garrisonable: Array = selected.filter(func(s): return sim.world.has_ability(s, "Garrisonable") and (alt or not sim.world.has_ability(s, "Gather")))
 		if not garrisonable.is_empty() and sim.world.has_ability(id, "Garrison"):
 			sim.queue_command(local_pid, "garrison", {"ids": garrisonable, "target": id})
 			return
@@ -372,10 +374,8 @@ func _train_hotkey(key: String) -> bool:
 	var b := _selected_building()
 	if b < 0 or key == "":
 		return false
-	var tr: Dictionary = sim.world.comp(b, "Train")
-	if tr.is_empty():
-		return false
-	for u in tr["params"]["units"]:
+	# Cada unidad en su versión mejorada (lancero -> piquero).
+	for u in sim.trainable_units(local_pid, b):
 		var d: Dictionary = sim.players[local_pid]["defs"].get_def(str(u))
 		if str(d.get("hotkey", "")) == key and sim.train_error(local_pid, b, str(u)) == "":
 			sim.queue_command(local_pid, "train", {"id": b, "def": str(u)})

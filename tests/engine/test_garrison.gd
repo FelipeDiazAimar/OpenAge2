@@ -131,3 +131,57 @@ func test_garrison_deterministic() -> void:
 		_steps(s, 150)
 		hashes.append(s.state_hash())
 	assert_eq(hashes[0], hashes[1])
+
+
+func test_no_garrison_into_units() -> void:
+	var s := _sim()
+	var ship := s.spawn("transporte", 0, Vector2i(10, 10))
+	var v := s.spawn("aldeano", 0, Vector2i(11, 10))
+	if ship >= 0:
+		s.queue_command(0, "garrison", {"ids": [v], "target": ship})
+		_steps(s, 20)
+		assert_false(_inside(s, v), "un barco no es un edificio (por ahora)")
+		s.kill(ship)
+	assert_true(s.world.entities.has(v))
+
+
+func test_new_order_cancels_pending_garrison() -> void:
+	var s := _sim()
+	var tc := s.spawn("centro_urbano", 0, Vector2i(10, 10))
+	s.world.comp(tc, "Hitpoints")["hp"] = 1000
+	var v := s.spawn("aldeano", 0, Vector2i(20, 12))
+	s.queue_command(0, "garrison", {"ids": [v], "target": tc})
+	_steps(s, 5)
+	s.queue_command(0, "repair", {"ids": [v], "target": tc})
+	_steps(s, 150)
+	assert_false(_inside(s, v), "la orden de reparar anula la de guarecerse")
+	assert_true(int(s.world.comp(tc, "Hitpoints")["hp"]) > 1000)
+
+
+func test_second_bell_cancels_walkers() -> void:
+	var s := _sim()
+	var tc := s.spawn("centro_urbano", 0, Vector2i(5, 5))
+	var far := s.spawn("aldeano", 0, Vector2i(30, 30))
+	s.queue_command(0, "bell", {"id": tc})
+	_steps(s, 20)
+	assert_false(_inside(s, far), "aún caminando")
+	s.queue_command(0, "bell", {"id": tc})
+	_steps(s, 400)
+	assert_false(_inside(s, far), "la segunda campana lo deja afuera")
+	assert_true(s.world.comp(far, "Garrisoned").is_empty())
+
+
+func test_building_removal_frees_everyone_even_without_exit() -> void:
+	var s := _sim()
+	var t := s.spawn("torre_vigia", 0, Vector2i(10, 10))
+	var v := s.spawn("aldeano", 0, Vector2i(13, 10))
+	s.queue_command(0, "garrison", {"ids": [v], "target": t})
+	_steps(s, 40)
+	assert_true(_inside(s, v))
+	for y in range(0, 40):
+		for x in range(0, 40):
+			if not (x >= 10 and x < 12 and y >= 10 and y < 12):
+				s.grid.set_blocked(Vector2i(x, y), true)
+	s.kill(t)
+	assert_false(_inside(s, v), "sale aunque no haya casilla libre")
+	assert_true(s.world.comp(v, "Garrisoned").is_empty())
