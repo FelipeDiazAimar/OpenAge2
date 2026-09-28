@@ -671,11 +671,17 @@ func _cmd_rally(pid: int, payload: Dictionary) -> void:
 ## "" si el edificio b de pid puede entrenar def_id ahora; si no, el motivo.
 func train_error(pid: int, b: int, def_id: String) -> String:
 	var tr: Dictionary = world.comp(b, "Train")
-	if tr.is_empty() or not (tr["params"]["units"] as Array).has(def_id):
+	var d = players[pid]["defs"]
+	if tr.is_empty() or not trainable_units(pid, b).has(def_id) and not (tr["params"]["units"] as Array).has(def_id):
 		return "este edificio no la entrena"
-	var def: Dictionary = players[pid]["defs"].get_def(def_id)
+	var def: Dictionary = d.get_def(def_id)
 	if def.is_empty() or str(def.get("type", "")) != "unit":
 		return "no es una unidad"
+	var cur: String = d.resolve_unit(def_id)
+	if cur != def_id:
+		return "mejorada a %s" % str(d.get_def(cur).get("name", cur))
+	if is_upgrade_target(def_id) and not d.upgrades.values().has(def_id):
+		return "requiere mejora"
 	return _queue_error(pid, b, def)
 
 
@@ -689,6 +695,21 @@ func research_error(pid: int, b: int, tech: String) -> String:
 	if researched(pid).has(tech) or is_pending(pid, tech):
 		return "ya investigada o en curso"
 	return _queue_error(pid, b, def)
+
+
+## Unidades que entrena el edificio para pid: cada una de su lista en su
+## versión mejorada actual (lancero -> piquero), sin repetir.
+func trainable_units(pid: int, b: int) -> Array[String]:
+	var out: Array[String] = []
+	var tr: Dictionary = world.comp(b, "Train")
+	if tr.is_empty():
+		return out
+	var d = players[pid]["defs"]
+	for u in tr["params"]["units"]:
+		var cur: String = d.resolve_unit(str(u))
+		if not out.has(cur):
+			out.append(cur)
+	return out
 
 
 ## Siguiente edad del jugador ({} si ya está en la última).
@@ -738,7 +759,11 @@ func _queue_error(pid: int, b: int, def: Dictionary) -> String:
 ## Tecnología terminada: parchea la vista del jugador (las entidades vivas
 ## leen de ella) y refresca los valores que se guardan precalculados.
 func complete_research(pid: int, tech: String) -> void:
-	players[pid]["defs"].research(tech)
+	var d = players[pid]["defs"]
+	d.research(tech)
+	for e in d.get_def(tech).get("effects", []):
+		if str(e.get("op", "")) == "replace_entity":
+			_convert_line(pid, str(e["from"]))
 	refresh_caches(pid)
 	events.append({"type": "researched", "owner": pid, "id": tech})
 
@@ -747,6 +772,34 @@ func complete_age(pid: int, age_id: String) -> void:
 	var a: Dictionary = registry.get_def(age_id)
 	players[pid]["age"] = maxi(age_of(pid), int(a.get("index", 0)))
 	events.append({"type": "age", "owner": pid, "id": age_id})
+
+
+## Mejora de línea: las unidades vivas de `from` pasan a su versión actual.
+func _convert_line(pid: int, from: String) -> void:
+	var d = players[pid]["defs"]
+	var to: String = d.resolve_unit(from)
+	if to == from or d.get_def(to).is_empty():
+		return
+	for id in world.ids_with("Hitpoints"):
+		var e: Dictionary = world.entities[id]
+		if int(e["owner"]) == pid and str(e["def_id"]) == from:
+			world.convert_entity(id, d.get_def(to))
+	events.append({"type": "upgraded", "owner": pid, "from": from, "to": to})
+
+
+var _upgrade_targets: Dictionary = {}
+var _upgrade_targets_ready := false
+
+
+## Unidades a las que solo se llega por una mejora (piquero, alabardero...).
+func is_upgrade_target(def_id: String) -> bool:
+	if not _upgrade_targets_ready:
+		_upgrade_targets_ready = true
+		for id in registry.ids_of_type("tech"):
+			for e in registry.get_def(id).get("effects", []):
+				if str(e.get("op", "")) == "replace_entity":
+					_upgrade_targets[str(e["to"])] = true
+	return _upgrade_targets.has(def_id)
 
 
 func refresh_caches(pid: int) -> void:

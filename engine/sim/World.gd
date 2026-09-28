@@ -37,6 +37,42 @@ func despawn(id: int) -> void:
 	spatial.remove(id)
 
 
+## Componentes de tiempo de ejecución: no vienen de la definición y se
+## conservan al convertir una entidad.
+const RUNTIME := ["Foundation", "Queue", "Garrisoned", "Garrison"]
+
+
+## Mejora de línea (milicia -> hombre de armas): la entidad pasa a def; cada
+## componente conserva su estado y apunta a los nuevos parámetros; el HP se
+## escala en proporción. Las habilidades que la nueva def no tiene se quitan.
+func convert_entity(id: int, def: Dictionary) -> void:
+	var e: Dictionary = entities[id]
+	e["def_id"] = str(def["id"])
+	var ab: Dictionary = def.get("abilities", {})
+	var names: Array = components.keys()
+	names.sort()
+	for a in names:
+		if components[a].has(id) and not ab.has(a) and not RUNTIME.has(a):
+			components[a].erase(id)
+	names = ab.keys()
+	names.sort()
+	for a in names:
+		if not has_ability(id, a):
+			if not components.has(a):
+				components[a] = {}
+			components[a][id] = _init_component(str(a), ab[a])
+			continue
+		var c: Dictionary = components[a][id]
+		c["params"] = ab[a]
+		match str(a):
+			"Hitpoints":
+				var mx := int(round(float(ab[a]["max"])))
+				c["hp"] = maxi(1, int(c["hp"]) * mx / maxi(1, int(c["max"])))
+				c["max"] = mx
+			"Move":
+				c["step"] = FP.from_data(float(ab[a]["speed"])) / TICK_RATE
+
+
 ## Componente de estado de ejecución (Foundation, Queue): no viene de la definición.
 func add_component(id: int, ability: String, c: Dictionary) -> void:
 	if not components.has(ability):

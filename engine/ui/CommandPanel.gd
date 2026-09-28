@@ -187,9 +187,11 @@ func _production_buttons(b: int) -> void:
 	var w = sim.world
 	var tr: Dictionary = w.comp(b, "Train")
 	if not tr.is_empty():
-		for u in tr["params"]["units"]:
+		# Cada unidad en su versión mejorada; las que solo llegan por mejora,
+		# ocultas hasta investigarla.
+		for u in sim.trainable_units(pid, b):
 			var d: Dictionary = _defs().get_def(str(u))
-			if d.is_empty() or not _defs().is_available(str(u)):
+			if d.is_empty() or not _defs().is_available(str(u)) or sim.train_error(pid, b, str(u)) == "requiere mejora":
 				continue
 			var hk := str(d.get("hotkey", ""))
 			var label := "%s%s\n%s" % [d.get("name", u), " (%s)" % hk if hk != "" else "", cost_text(d.get("cost", {}))]
