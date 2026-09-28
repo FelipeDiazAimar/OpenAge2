@@ -197,3 +197,43 @@ func test_train_hotkey_after_upgrade() -> void:
 	var items: Array = m.sim.world.comp(bk, "Queue")["items"]
 	assert_eq(items[0]["id"], "piquero")
 	m.queue_free()
+
+
+func test_match_right_click_monk_relic_and_drop() -> void:
+	var m = load(MATCH).instantiate()
+	Engine.get_main_loop().root.add_child(m)
+	var s = m.sim
+	var tc := -1
+	var v := -1
+	for id in s.world.entities:
+		var e: Dictionary = s.world.entities[id]
+		if e["owner"] == m.local_pid and e["def_id"] == "centro_urbano":
+			tc = id
+		elif e["owner"] == m.local_pid and e["def_id"] == "aldeano" and v < 0:
+			v = id
+	var c: Vector2i = s.world.entities[tc]["pos"] / 1000
+	var monk: int = s.spawn("monje", m.local_pid, c + Vector2i(5, 0))
+	var relic: int = s.spawn("reliquia", -1, c + Vector2i(7, 0))
+	m.select([monk])
+	m.tick_once()
+	m.smart_command(m.layer.views[relic].position)
+	for i in 60:
+		m.tick_once()
+	assert_true(s.world.has_ability(monk, "Carrying"), "clic derecho en reliquia: la recoge")
+	assert_false(m.layer.views[relic].visible, "llevada: no se dibuja suelta")
+	var enemy: int = s.spawn("arquero", 1, c + Vector2i(6, 3))
+	var monk2: int = s.spawn("monje", m.local_pid, c + Vector2i(4, 3))
+	m.tick_once()
+	m.select([monk2])
+	m.smart_command(m.layer.views[enemy].position)
+	for i in 3:
+		m.tick_once()
+	assert_eq(s.world.comp(monk2, "Convert")["target"], enemy, "enemigo: convertir")
+	s.world.comp(v, "Gather")["carry"] = 5000
+	s.world.comp(v, "Gather")["carry_res"] = "wood"
+	m.select([v])
+	m.smart_command(m.layer.views[tc].position)
+	for i in 3:
+		m.tick_once()
+	assert_eq(s.world.comp(v, "Gather")["state"], "to_drop", "con carga sobre el TC: descargar")
+	m.queue_free()

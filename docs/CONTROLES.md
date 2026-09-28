@@ -91,6 +91,13 @@ Proyecto → Configuración → Mapa de entrada, o edita la sección `[input]` d
   con guarnición (centro urbano, torre, castillo); dentro no se las puede atacar y cada una suma una flecha. **Sacar**: botón en
   el panel del edificio. **Campana**: botón del centro urbano; mete a los aldeanos cercanos y, al
   tocarla de nuevo, los saca.
+- **Monjes** (clic derecho): sobre un enemigo = convertir (4–10 s, luego recargan la fe); sobre una
+  unidad propia o aliada herida = curar (si están quietos curan solos a los heridos cercanos);
+  sobre una **reliquia** = recogerla; con la reliquia, sobre tu monasterio = guardarla (+0,5 oro/s).
+- **Carreta de comercio**: clic derecho sobre el mercado de un aliado; va y viene desde tu mercado
+  más cercano y trae oro según la distancia.
+- **Descargar**: aldeanos con carga, clic derecho sobre un depósito propio que la acepte; después
+  vuelven a su recurso.
 - **Mejoras de línea** (p. ej. Piquero): convierten las unidades existentes y el edificio pasa a
   entrenar la versión mejorada.
 - **S**: detener. Flechas / borde de pantalla / botón medio: cámara. Rueda: zoom. Esc: menú.

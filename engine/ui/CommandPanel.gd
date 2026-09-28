@@ -262,6 +262,9 @@ func refresh() -> void:
 			_status.text = "En construcción: %d%%" % (100 * int(f["progress"]) / maxi(1, int(f["total"])))
 	if _building < 0 or not w.entities.has(_building):
 		return
+	var rh: Dictionary = w.comp(_building, "RelicHolder")
+	if not rh.is_empty() and not (rh["relics"] as Array).is_empty():
+		_status.text = "Reliquias: %d (+%s oro/s)" % [(rh["relics"] as Array).size(), str(0.5 * (rh["relics"] as Array).size())]
 	var gar: Dictionary = w.comp(_building, "Garrison")
 	if not gar.is_empty() and not (gar["units"] as Array).is_empty():
 		_status.text = "Guarecidos: %d/%d" % [(gar["units"] as Array).size(), int(gar["params"]["capacity"])]

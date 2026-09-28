@@ -63,7 +63,8 @@ func sync(alpha: float, delta: float) -> void:
 		var e: Dictionary = w.entities[id]
 		var v = views.get(id)
 		var gar: Dictionary = w.comp(id, "Garrisoned")
-		if not gar.is_empty() and bool(gar["inside"]):
+		if (not gar.is_empty() and bool(gar["inside"])) or w.has_ability(id, "Held"):
+			# (guarecida, o reliquia que lleva un monje o está en el monasterio)
 			# Guarecida: no se dibuja ni se puede elegir.
 			if v != null:
 				v.visible = false

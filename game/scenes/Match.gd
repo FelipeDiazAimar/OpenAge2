@@ -256,6 +256,12 @@ func smart_command(world_pos: Vector2) -> void:
 		if not _builders().is_empty():
 			sim.queue_command(local_pid, "build", {"ids": _builders(), "target": id})
 			return
+	if _monk_command(id):
+		return
+	var carts: Array = selected.filter(func(s): return sim.world.has_ability(s, "Trade"))
+	if id >= 0 and not carts.is_empty() and sim.world.has_ability(id, "Market") and int(sim.world.entities[id]["owner"]) != local_pid:
+		sim.queue_command(local_pid, "trade", {"ids": carts, "target": id})
+		return
 	if id >= 0 and sim.world.has_ability(id, "Hitpoints") and sim.is_enemy(local_pid, int(sim.world.entities[id]["owner"])):
 		var attackers: Array = selected.filter(func(s): return sim.world.has_ability(s, "Attack"))
 		if not attackers.is_empty():
@@ -275,11 +281,46 @@ func smart_command(world_pos: Vector2) -> void:
 			return
 		# Aldeanos solo con Alt (como en AoE2): si no, el clic derecho no los mete.
 		var alt := Input.is_key_pressed(KEY_ALT)
+		# Aldeanos con carga sobre un depósito que la acepta: descargar.
+		var carriers: Array = selected.filter(func(s): return sim.world.has_ability(s, "Gather") and int(sim.world.comp(s, "Gather")["carry"]) > 0)
+		if not alt and not carriers.is_empty() and sim.world.has_ability(id, "DropSite") and sim.is_built(id):
+			sim.queue_command(local_pid, "drop", {"ids": carriers, "target": id})
+			return
 		var garrisonable: Array = selected.filter(func(s): return sim.world.has_ability(s, "Garrisonable") and (alt or not sim.world.has_ability(s, "Gather")))
 		if not garrisonable.is_empty() and sim.world.has_ability(id, "Garrison"):
 			sim.queue_command(local_pid, "garrison", {"ids": garrisonable, "target": id})
 			return
 	issue_move(Iso.to_tiles(world_pos))
+
+
+## Monjes seleccionados: enemigo = convertir, reliquia = recoger, monasterio
+## propio (con reliquia) = guardar, propia/aliada herida = curar. true si se usó.
+func _monk_command(id: int) -> bool:
+	var monks: Array = selected.filter(func(s): return sim.world.has_ability(s, "Convert"))
+	if id < 0 or monks.is_empty():
+		return false
+	var w = sim.world
+	var owner := int(w.entities[id]["owner"])
+	if w.has_ability(id, "Relic"):
+		sim.queue_command(local_pid, "pick_relic", {"ids": [monks[0]], "target": id})
+		return true
+	var carrying: Array = monks.filter(func(s): return w.has_ability(s, "Carrying"))
+	if not carrying.is_empty() and w.has_ability(id, "RelicHolder") and owner == local_pid:
+		sim.queue_command(local_pid, "store_relic", {"ids": carrying, "target": id})
+		return true
+	if str(w.entities[id]["type"]) != "unit":
+		return false
+	if sim.is_enemy(local_pid, owner):
+		sim.queue_command(local_pid, "convert", {"ids": monks, "target": id})
+		var attackers: Array = selected.filter(func(s): return w.has_ability(s, "Attack"))
+		if not attackers.is_empty():
+			sim.queue_command(local_pid, "attack", {"ids": attackers, "target": id})
+		return true
+	var hp: Dictionary = w.comp(id, "Hitpoints")
+	if not hp.is_empty() and int(hp["hp"]) < int(hp["max"]) and sim.team_of(owner) == sim.team_of(local_pid):
+		sim.queue_command(local_pid, "heal", {"ids": monks, "target": id})
+		return true
+	return false
 
 
 func _process(delta: float) -> void:

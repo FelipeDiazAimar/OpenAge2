@@ -66,3 +66,9 @@ El motor nuevo lee `mods/<mod>/` (el juego viejo sigue leyendo `data/` hasta la 
 - Guarnición: `Garrison {capacity, arrows_per_unit}` en el edificio y `Garrisonable {}` en la
   unidad; `Bell {}` en el centro urbano. `Repair {rate, cost_factor}` en el aldeano (HP/s y
   fracción del coste del edificio que se paga por el HP reparado).
+- Monjes: `Convert {range, cooldown, chance}` (tirada por segundo desde los 4 s, segura a los 10 s;
+  el asedio requiere la tech `redencion`) y `Heal {range, rate}`. Reliquias: entidad con
+  `Relic {gold_per_sec}`; el edificio que las guarda lleva `RelicHolder {}`.
+- Comercio: `Trade {gold_base, gold_per_tile}` en la carreta y `Market {}` en el mercado; oro por
+  viaje = gold_base + gold_per_tile × casillas entre mercados (solo con mercados de otros jugadores
+  no enemigos).
