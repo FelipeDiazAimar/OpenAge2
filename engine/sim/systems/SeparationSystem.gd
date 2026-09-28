@@ -13,8 +13,8 @@ const SEP := 400
 static func step(sim) -> void:
 	var w = sim.world
 	for id in w.ids_with("Move"):
-		if not w.entities.has(id):
-			continue
+		if not w.entities.has(id) or w.has_ability(id, "Garrisoned") and bool(w.comp(id, "Garrisoned")["inside"]):
+			continue # (las guarecidas no están en el mapa)
 		for o in w.spatial.query_radius(w.entities[id]["pos"], SEP - 1):
 			if o <= id or not w.has_ability(o, "Move"):
 				continue

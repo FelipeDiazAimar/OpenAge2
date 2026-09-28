@@ -13,6 +13,7 @@ const HerdSystem := preload("res://engine/sim/systems/HerdSystem.gd")
 const SeparationSystem := preload("res://engine/sim/systems/SeparationSystem.gd")
 const BuildSystem := preload("res://engine/sim/systems/BuildSystem.gd")
 const ProductionSystem := preload("res://engine/sim/systems/ProductionSystem.gd")
+const GarrisonSystem := preload("res://engine/sim/systems/GarrisonSystem.gd")
 
 const INPUT_DELAY := 2
 const START_RES := {"wood": 200, "food": 200, "gold": 100, "stone": 200}
@@ -339,6 +340,7 @@ func drain_events() -> Array:
 func remove(id: int) -> void:
 	if not world.entities.has(id):
 		return
+	GarrisonSystem.on_remove(self, id)
 	var e: Dictionary = world.entities[id]
 	var pos: Vector2i = e["pos"]
 	match str(e["type"]):
@@ -426,6 +428,7 @@ func step() -> void:
 	CombatSystem.step(self)
 	GatherSystem.step(self)
 	BuildSystem.step(self)
+	GarrisonSystem.step(self)
 	ProductionSystem.step(self)
 	HerdSystem.step(self)
 
@@ -467,6 +470,13 @@ func _apply(c: Dictionary) -> void:
 			_cmd_build(int(c["pid"]), c["payload"])
 		"repair":
 			_cmd_repair(int(c["pid"]), c["payload"])
+		"garrison":
+			_cmd_garrison(int(c["pid"]), c["payload"])
+		"ungarrison":
+			for b in _own_ids(int(c["pid"]), c["payload"].get("ids"), "Garrison"):
+				GarrisonSystem.eject(self, b)
+		"bell":
+			_cmd_bell(int(c["pid"]), c["payload"])
 		"train":
 			_cmd_train(int(c["pid"]), c["payload"])
 		"research":
@@ -501,6 +511,8 @@ func _own_ids(pid: int, raw_ids: Variant, ability: String) -> Array[int]:
 			continue
 		if int(world.entities[id]["owner"]) != pid or not world.has_ability(id, ability):
 			continue
+		if GarrisonSystem.is_inside(world, id):
+			continue # dentro de un edificio: solo sale con "ungarrison"
 		ids.append(id)
 	ids.sort()
 	return ids
@@ -583,6 +595,24 @@ func _cmd_build(pid: int, payload: Dictionary) -> void:
 		return
 	for id in _own_ids(pid, payload.get("ids"), "Build"):
 		BuildSystem.order_build(self, id, t)
+
+
+func _cmd_garrison(pid: int, payload: Dictionary) -> void:
+	var raw_t: Variant = payload.get("target")
+	if not _num_ok(raw_t) or not world.entities.has(int(raw_t)):
+		return
+	for id in _own_ids(pid, payload.get("ids"), "Garrisonable"):
+		GarrisonSystem.order_garrison(self, id, int(raw_t))
+
+
+func _cmd_bell(pid: int, payload: Dictionary) -> void:
+	var raw: Variant = payload.get("id")
+	if not _num_ok(raw):
+		return
+	var tc := int(raw)
+	if not world.has_ability(tc, "Bell") or int(world.entities[tc]["owner"]) != pid or not is_built(tc):
+		return
+	GarrisonSystem.ring_bell(self, pid, tc)
 
 
 func _cmd_repair(pid: int, payload: Dictionary) -> void:

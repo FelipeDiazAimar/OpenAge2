@@ -65,6 +65,8 @@ static func step(sim) -> void:
 		# carcasa, sin Attack).
 		if not w.has_ability(id, "Attack") or w.has_ability(id, "Foundation"):
 			continue # (los cimientos no disparan)
+		if _inside(w, id):
+			continue # guarecida
 		var a: Dictionary = w.comp(id, "Attack")
 		if int(a["cooldown"]) > 0:
 			a["cooldown"] = int(a["cooldown"]) - 1
@@ -82,9 +84,15 @@ static func step(sim) -> void:
 		_engage(sim, id, a, t)
 
 
+## Unidad dentro de un edificio (GarrisonSystem; sin preload para evitar el ciclo).
+static func _inside(w, id: int) -> bool:
+	var g: Dictionary = w.comp(id, "Garrisoned")
+	return not g.is_empty() and bool(g["inside"])
+
+
 static func _valid_target(sim, id: int, a: Dictionary, t: int) -> bool:
 	var w = sim.world
-	if not w.entities.has(t) or not w.has_ability(t, "Hitpoints"):
+	if not w.entities.has(t) or not w.has_ability(t, "Hitpoints") or _inside(w, t):
 		return false
 	if bool(a["explicit"]):
 		return true
@@ -242,12 +250,18 @@ static func _hit(sim, id: int, t: int) -> void:
 		var from: Vector2i = w.entities[id]["pos"]
 		var to: Vector2i = w.entities[t]["pos"]
 		var speed := maxi(1, FP.from_data(float(params["projectile_speed"])) / World.TICK_RATE)
-		sim.projectiles.append({
-			"id": sim.next_projectile_id(), "owner": owner, "src": id, "target": t, "from": from, "pos": from,
-			"to": to, "speed": speed, "damage": params["damage"],
-			"area": FP.from_data(float(params.get("area_radius", 0.0))),
-			"age": 0, "total": maxi(1, (FP.dist(from, to) + speed - 1) / speed),
-		})
+		# Edificio guarecido: una flecha más por cada arrows_per_unit ocupantes.
+		var shots := 1
+		var gar: Dictionary = w.comp(id, "Garrison")
+		if not gar.is_empty():
+			shots += (gar["units"] as Array).size() * FP.from_data(float(gar["params"].get("arrows_per_unit", 0.0))) / FP.SCALE
+		for i in shots:
+			sim.projectiles.append({
+				"id": sim.next_projectile_id(), "owner": owner, "src": id, "target": t, "from": from, "pos": from,
+				"to": to, "speed": speed, "damage": params["damage"],
+				"area": FP.from_data(float(params.get("area_radius", 0.0))),
+				"age": 0, "total": maxi(1, (FP.dist(from, to) + speed - 1) / speed),
+			})
 	else:
 		apply_damage(sim, params["damage"], t, id)
 
@@ -259,7 +273,7 @@ static func _hit(sim, id: int, t: int) -> void:
 ## no lo alcanzan.
 static func apply_damage(sim, atk: Dictionary, t: int, attacker: int = -1) -> void:
 	var w = sim.world
-	if not w.entities.has(t) or not w.has_ability(t, "Hitpoints"):
+	if not w.entities.has(t) or not w.has_ability(t, "Hitpoints") or _inside(w, t):
 		return
 	var armor: Dictionary = {}
 	if w.has_ability(t, "Armor"):

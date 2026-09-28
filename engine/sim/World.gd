@@ -137,6 +137,10 @@ func state_hash() -> String:
 			st += "B%s:%d" % [components["Build"][id]["state"], components["Build"][id]["target"]]
 		if has_ability(id, "Foundation"):
 			st += "F%d" % components["Foundation"][id]["progress"]
+		if has_ability(id, "Garrisoned"):
+			st += "G%d:%s" % [components["Garrisoned"][id]["in"], components["Garrisoned"][id]["inside"]]
+		if has_ability(id, "Garrison"):
+			st += "g%s" % [components["Garrison"][id]["units"]]
 		if has_ability(id, "Queue"):
 			var q: Dictionary = components["Queue"][id]
 			st += "Q%d:%d:%s:%d:%s" % [(q["items"] as Array).size(), q["progress"], q["rally"], q["rally_target"],
@@ -169,6 +173,8 @@ static func _init_component(ability: String, params: Dictionary) -> Dictionary:
 			c["stuck"] = 0
 			c["ignore"] = -1
 			c["ignore_until"] = 0
+		"Garrison":
+			c["units"] = [] # ids guarecidos (ordenados)
 		"Build":
 			c["state"] = "idle"
 			c["target"] = -1
