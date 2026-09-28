@@ -10,7 +10,10 @@
   "at": "universidad",
   "description": "Edificios +10% HP, +1 armadura",
   "requires": {
-    "age": "castillos"
+   "age": "imperial",
+   "techs": [
+    "albanileria"
+   ]
   },
   "effects": [],
   "legacy_effects": {

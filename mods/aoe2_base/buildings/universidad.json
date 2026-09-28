@@ -26,19 +26,22 @@
         "pierce": 0
       }
     },
-    "Research": {
-      "techs": [
-        "balistica",
-        "quimica",
-        "punteria_universidad",
-        "torre_vigilancia",
-        "torre_guardia",
-        "torre_muralla",
-        "arquitectura",
-        "muralla_fortificada",
-        "albanileria"
-      ]
-    }
+   "Research": {
+    "techs": [
+     "balistica",
+     "quimica",
+     "tiro_caliente",
+     "grua",
+     "torre_vigilancia",
+     "torre_guardia",
+     "torre_muralla",
+     "arquitectura",
+     "muralla_fortificada",
+     "albanileria",
+     "ingenieros_asedio",
+     "aspilleras"
+    ]
+   }
   },
   "graphics": {
     "idle": "sprite:buildings/university/b_west_university_age3_x1"

@@ -1,0 +1,23 @@
+{
+ "id": "grua",
+ "type": "tech",
+ "name": "Grúa (Treadmill Crane)",
+ "cost": {
+  "food": 300,
+  "wood": 200
+ },
+ "research_time": 50,
+ "at": "universidad",
+ "description": "Aldeanos construyen +20% rápido",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [
+  {
+   "target": "tag:aldeano",
+   "op": "mul",
+   "path": "abilities.Build.rate",
+   "value": 1.2
+  }
+ ]
+}
