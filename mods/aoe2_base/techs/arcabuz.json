@@ -1,0 +1,27 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 700,
+  "gold": 400
+ },
+ "description": "Unidades de pólvora apuntan a blancos móviles como a fijos (efecto Balística); +velocidad de proyectil.",
+ "effects": [],
+ "id": "arcabuz",
+ "legacy_effects": {
+  "aplica_a": [
+   "canon_organos",
+   "arcabucero",
+   "canon_bombardeo",
+   "torre_bombardeo",
+   "galeon_artillado"
+  ],
+  "precision_blancos_moviles": true,
+  "velocidad_proyectil_bonus": 0.5
+ },
+ "name": "Arcabuz (Arquebus)",
+ "requires": {
+  "age": "imperial"
+ },
+ "research_time": 32,
+ "type": "tech"
+}

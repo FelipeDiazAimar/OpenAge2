@@ -1,0 +1,46 @@
+{
+ "id": "gbeto",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Gbeto",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 50,
+  "gold": 40
+ },
+ "train_time": 17,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 40
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 1.25
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 10,
+    "aguila": 1
+   },
+   "range": 5.0,
+   "reload": 2.0,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "malienses"
+  }
+ }
+}

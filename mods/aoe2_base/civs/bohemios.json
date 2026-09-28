@@ -1,0 +1,268 @@
+{
+ "id": "bohemios",
+ "type": "civ",
+ "name": "Bohemios",
+ "color": "#6d8a2a",
+ "effects": [],
+ "disabled": [
+  "acero_wootz",
+  "aguila",
+  "aldeana",
+  "almenas",
+  "anarquia",
+  "arambai",
+  "arcabuz",
+  "arco_recurvo",
+  "armadura_cab_3",
+  "armadura_lamelar",
+  "armadura_ming_guang",
+  "armadura_seda",
+  "arquero_camello",
+  "arquero_compuesto",
+  "arquero_emplumado",
+  "arquero_tiro_largo",
+  "artilleria",
+  "asedio_timurido",
+  "ateismo",
+  "atlatl",
+  "bagains",
+  "balistas",
+  "ballestero_genoves",
+  "barco_tortuga",
+  "barcos_dragon",
+  "bastiones_fortificados",
+  "bimaristan",
+  "blindaje",
+  "bombas_trueno",
+  "boyar",
+  "caballeria_aznauri",
+  "caballeria_manipur",
+  "caballeria_ordo",
+  "caballero_teutonico",
+  "caballerosidad",
+  "camellos_magrebies",
+  "canon_organo",
+  "carabela",
+  "cargador_virotes",
+  "carreta_guerra",
+  "catafracta",
+  "chatras",
+  "chu_ko_nu",
+  "circunnavegacion",
+  "ciudadelas",
+  "coheteria",
+  "comitatenses",
+  "contrapesos",
+  "cuerpo_medico",
+  "dedal",
+  "detinets",
+  "dique_seco",
+  "doble_ballesta",
+  "drakkar",
+  "druzhina",
+  "ejercito_corvino",
+  "elefante_balista",
+  "elefante_combate",
+  "elefante_guerra",
+  "escudos_tela",
+  "escudos_torre",
+  "espadas_colmillos",
+  "estribos",
+  "eupseong",
+  "farimba",
+  "fereteres",
+  "flota_cilicia",
+  "fortaleza",
+  "fuego_griego",
+  "fuertes_colina",
+  "furor_celta",
+  "gambesones",
+  "ganaderia_estepa",
+  "gbeto",
+  "ghulam",
+  "gran_muralla",
+  "gran_ruta_troncal",
+  "grua",
+  "guardias_frontera",
+  "guerras_floridas",
+  "hachas_barbas",
+  "hauberk",
+  "herederos_reales",
+  "holcanes",
+  "honda_andina",
+  "howdah",
+  "huscarle",
+  "huszar_magiar",
+  "inquisicion",
+  "invasor_nordico",
+  "invasor_pastos",
+  "jabalineros_hulche",
+  "jaguar",
+  "jefatura",
+  "kamandaran",
+  "kamayuk",
+  "karambit",
+  "kasbah",
+  "kataparuto",
+  "keshik",
+  "kipchak",
+  "konnik",
+  "kshatriyas",
+  "legado_lechitico",
+  "legionario",
+  "leva_masa",
+  "logistica",
+  "mahayana",
+  "mameluco",
+  "mangudai",
+  "maquina_guerra",
+  "mercenarios_cumanos",
+  "merodeadores",
+  "milicia_flamenca",
+  "misionero",
+  "monaspa",
+  "motores_torsion",
+  "nomadas",
+  "pagoda_hierro",
+  "paiks",
+  "paladin",
+  "paladin_franco",
+  "papel_moneda",
+  "perfusion",
+  "pirotecnia",
+  "primera_cruzada",
+  "privilegios_szlachta",
+  "punteria",
+  "pureza_sangre",
+  "ratha",
+  "rattan",
+  "revolucion_flamenca",
+  "rotacion_cultivos",
+  "ruta_seda",
+  "sacerdote_guerrero",
+  "samurai",
+  "serpiente_enroscada",
+  "shatagni",
+  "shinkichon",
+  "shotel",
+  "sipahi",
+  "supremacia",
+  "tacticas_acantilados",
+  "taladro",
+  "talasocracia",
+  "tarkan",
+  "tigre_agazapado",
+  "tigui",
+  "tiro_caliente",
+  "torres_svan",
+  "tuntian",
+  "vinedos_borgonones",
+  "yasama"
+ ],
+ "unique_units": [],
+ "unique_techs": [
+  "tactica_wagenburg",
+  "reformas_husitas"
+ ],
+ "legacy_effects": [
+  {
+   "id": "herreria_uni_100",
+   "descripcion": "Herrería y Universidad -100 madera",
+   "efecto": {
+    "descuento_madera_herreria": 100,
+    "descuento_madera_universidad": 100
+   }
+  },
+  {
+   "id": "quimica_castillos",
+   "descripcion": "Química y Arcabucero disponibles en Castillos",
+   "efecto": {
+    "quimica_edad": "castillos",
+    "arcabucero_edad": "castillos"
+   }
+  },
+  {
+   "id": "lanceros_bonus_25",
+   "descripcion": "Línea del lancero +25% daño bonus",
+   "efecto": {
+    "dano_bonus_lancero": 0.25,
+    "aplica_a": [
+     "lancero",
+     "piquero",
+     "alabardero"
+    ]
+   }
+  },
+  {
+   "id": "fervor_aldeanos",
+   "descripcion": "Fervor y Santidad también afectan a aldeanos",
+   "efecto": {
+    "fervor_aldeanos": true,
+    "santidad_aldeanos": true,
+    "aplica_a": [
+     "aldeano"
+    ]
+   }
+  },
+  {
+   "id": "mineria_gratis",
+   "descripcion": "Tecnologías del campamento minero gratis",
+   "efecto": {
+    "mineria_coste": 0,
+    "aplica_a": [
+     "mineria_oro",
+     "mineria_piedra",
+     "pique_oro",
+     "pique_piedra"
+    ]
+   }
+  },
+  {
+   "id": "houfnice_mejora",
+   "descripcion": "Houfnice: mejora de Culebrina de bombardeo (1100F/800G, +vida/ataque/área)",
+   "efecto": {
+    "unidad_mejora": "houfnice",
+    "mejora_de": "culebrina_bombardeo",
+    "coste_food": 1100,
+    "coste_gold": 800
+   }
+  },
+  {
+   "id": "sin_id_repo",
+   "descripcion": "Sin equivalente en repo (sin ID): sin Húsar, sin Ariete/Onagro de asedio, sin Arquero a caballo, sin Camello/Elefante/Lancero estepario, sin Brulote rápido/pesado, sin Maestranza, sin Matacanes (Hoardings)",
+   "efecto": {
+    "faltan_sin_id": [
+     "husar",
+     "ariete_asedio",
+     "onagro_asedio",
+     "arquero_caballo",
+     "camello",
+     "elefante",
+     "lancero_estepario",
+     "brulote_rapido",
+     "brulote_pesado",
+     "maestranza",
+     "matacanes"
+    ]
+   }
+  },
+  {
+   "id": "set_maravilla_bohemia",
+   "descripcion": "Set Europa del Este; maravilla Torre de la Pólvora de Praga; castillo Karlštejn",
+   "efecto": {
+    "set_arquitectonico": "europa_este",
+    "maravilla": "torre_polvora_praga",
+    "castillo_unico": "karlstejn"
+   }
+  },
+  {
+   "team_bonus": {
+    "id": "mercado_rapido_80",
+    "descripcion": "Mercados trabajan 80% más rápido (aliados)",
+    "efecto": {
+     "velocidad_mercado": 0.8
+    }
+   }
+  }
+ ]
+}

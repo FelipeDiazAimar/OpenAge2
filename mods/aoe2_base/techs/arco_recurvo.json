@@ -1,0 +1,24 @@
+{
+ "id": "arco_recurvo",
+ "type": "tech",
+ "name": "Arco Recurvo (Recurve Bow)",
+ "cost": {
+  "wood": 400,
+  "gold": 600
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Arqueros a caballo +1 ataque, +1 alcance.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "ataque_arquero_caballo": 1,
+  "alcance_arquero_caballo": 1,
+  "aplica_a": [
+   "arquero_caballo",
+   "arquero_caballo_pesado"
+  ]
+ }
+}

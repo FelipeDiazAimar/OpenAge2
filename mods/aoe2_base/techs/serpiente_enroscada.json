@@ -1,0 +1,24 @@
+{
+ "id": "serpiente_enroscada",
+ "type": "tech",
+ "name": "Formación Serpiente Enroscada",
+ "cost": {
+  "food": 350,
+  "gold": 300
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Lanceros y Guardias Pluma Blanca +HP juntos (hasta +15% con 30 unidades).",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "hp_bonus_max": 0.15,
+  "unidades_para_max": 30,
+  "aplica_a": [
+   "lancero",
+   "guardia_pluma_blanca"
+  ]
+ }
+}

@@ -33,7 +33,8 @@
    "units": [
     "arquero",
     "guerrillero",
-    "ballestero"
+    "ballestero",
+    "arquero_compuesto"
    ],
    "queue": 5
   },

@@ -1,0 +1,24 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 900,
+  "gold": 450
+ },
+ "description": "Línea de milicia +5 armadura cuerpo a cuerpo.",
+ "effects": [],
+ "id": "bagains",
+ "legacy_effects": {
+  "aplica_a": [
+   "milicia",
+   "hombre_de_armas",
+   "espadachin_mandoble"
+  ],
+  "armadura_melee_bonus": 5
+ },
+ "name": "Bagains",
+ "requires": {
+  "age": "imperial"
+ },
+ "research_time": 40,
+ "type": "tech"
+}

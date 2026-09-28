@@ -1,0 +1,24 @@
+{
+ "id": "camellos_magrebies",
+ "type": "tech",
+ "name": "Camellos magrebíes (Maghrebi Camels)",
+ "cost": {
+  "wood": 200,
+  "gold": 300
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Unidades camello regeneran 15 HP/min.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "regen_camellos_hp_min": 15,
+  "aplica_a": [
+   "camello",
+   "camello_pesado",
+   "arquero_camello"
+  ]
+ }
+}

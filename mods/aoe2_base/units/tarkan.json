@@ -1,0 +1,45 @@
+{
+ "id": "tarkan",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Tarkan",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 60,
+  "gold": 60
+ },
+ "train_time": 14,
+ "pop_cost": 1,
+ "hotkey": "W",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 100
+  },
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 3
+   }
+  },
+  "Move": {
+   "speed": 1.35
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 8,
+    "edificio": 8
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "hunos"
+  }
+ }
+}

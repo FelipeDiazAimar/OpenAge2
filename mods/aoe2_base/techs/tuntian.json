@@ -1,0 +1,24 @@
+{
+ "id": "tuntian",
+ "type": "tech",
+ "name": "Tuntian",
+ "cost": {
+  "food": 250,
+  "wood": 300
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Los soldados generan comida pasivamente (1.8 comida/min por unidad).",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "comida_por_min_por_soldado": 1.8,
+  "aplica_a": [
+   "infanteria",
+   "arqueros",
+   "caballeria"
+  ]
+ }
+}

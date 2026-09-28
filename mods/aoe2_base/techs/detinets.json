@@ -1,0 +1,25 @@
+{
+ "id": "detinets",
+ "type": "tech",
+ "name": "Detinets",
+ "cost": {
+  "wood": 400,
+  "gold": 200
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Reemplaza 40% del coste de piedra de castillos y torres por madera (castillo 650P -> 260M/390P).",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "piedra_a_madera": 0.4,
+  "aplica_a": [
+   "castillo",
+   "torre_vigilancia",
+   "torre_guardia",
+   "torre_muralla"
+  ]
+ }
+}

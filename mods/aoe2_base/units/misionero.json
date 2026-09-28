@@ -1,0 +1,39 @@
+{
+ "id": "misionero",
+ "type": "unit",
+ "extends": "monje_base",
+ "name": "Misionero",
+ "cost": {
+  "gold": 100
+ },
+ "train_time": 51,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 30
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 1.1
+  },
+  "Vision": {
+   "sight": 9.0
+  },
+  "Convert": {
+   "range": 7.0,
+   "cooldown": 12,
+   "chance": 0.35
+  },
+  "Heal": {
+   "range": 4.0,
+   "rate": 2.5
+  }
+ }
+}

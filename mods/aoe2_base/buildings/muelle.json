@@ -27,7 +27,9 @@
    "units": [
     "barco_pesquero",
     "galera",
-    "drakkar"
+    "drakkar",
+    "barco_tortuga",
+    "carabela"
    ],
    "queue": 5
   },

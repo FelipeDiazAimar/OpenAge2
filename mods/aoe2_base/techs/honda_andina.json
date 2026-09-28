@@ -1,0 +1,25 @@
+{
+ "id": "honda_andina",
+ "type": "tech",
+ "name": "Honda andina (Andean Sling)",
+ "cost": {
+  "food": 200,
+  "gold": 150
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Honderos +1 ataque; honderos y guerrilleros sin alcance mínimo.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "ataque_hondero": 1,
+  "alcance_minimo_hondero": 0,
+  "alcance_minimo_guerrillero": 0,
+  "aplica_a": [
+   "hondero",
+   "guerrillero"
+  ]
+ }
+}

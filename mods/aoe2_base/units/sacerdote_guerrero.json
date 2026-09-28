@@ -1,0 +1,43 @@
+{
+ "id": "sacerdote_guerrero",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Sacerdote Guerrero",
+ "cost": {
+  "food": 30,
+  "gold": 50
+ },
+ "train_time": 30,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 100
+  },
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 1
+   }
+  },
+  "Move": {
+   "speed": 0.9
+  },
+  "Vision": {
+   "sight": 7.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 11,
+    "monje": 8,
+    "caballeria": 3
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "armenios"
+  }
+ }
+}

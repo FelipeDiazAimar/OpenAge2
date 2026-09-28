@@ -1,0 +1,45 @@
+{
+ "id": "rattan",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Rattan",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 50,
+  "gold": 45
+ },
+ "train_time": 16,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 40
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 4
+   }
+  },
+  "Move": {
+   "speed": 1.1
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 6
+   },
+   "range": 4.0,
+   "reload": 2.0,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "vietnamitas"
+  }
+ }
+}

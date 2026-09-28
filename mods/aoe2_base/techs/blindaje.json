@@ -1,0 +1,24 @@
+{
+ "id": "blindaje",
+ "type": "tech",
+ "name": "Blindaje (Ironclad)",
+ "cost": {
+  "wood": 400,
+  "gold": 350
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Armas de asedio +4 armadura cuerpo a cuerpo.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "armadura_melee_asedio": 4,
+  "aplica_a": [
+   "ariete",
+   "catapulta",
+   "trebuchet"
+  ]
+ }
+}

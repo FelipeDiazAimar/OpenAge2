@@ -1,0 +1,24 @@
+{
+ "id": "farimba",
+ "type": "tech",
+ "name": "Farimba",
+ "cost": {
+  "food": 650,
+  "gold": 250
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Caballería +5 ataque cuerpo a cuerpo.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "target": "tag:caballeria",
+   "op": "add",
+   "path": "abilities.Attack.damage.melee",
+   "value": 5
+  }
+ ],
+ "legacy_effects": {}
+}

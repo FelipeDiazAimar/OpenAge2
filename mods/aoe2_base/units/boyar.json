@@ -1,0 +1,44 @@
+{
+ "id": "boyar",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Boyar",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 60,
+  "gold": 70
+ },
+ "train_time": 15,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 100
+  },
+  "Armor": {
+   "classes": {
+    "melee": 4,
+    "pierce": 2
+   }
+  },
+  "Move": {
+   "speed": 1.3
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 12
+   },
+   "range": 0,
+   "reload": 1.9
+  },
+  "Unique": {
+   "civ": "eslavos"
+  }
+ }
+}

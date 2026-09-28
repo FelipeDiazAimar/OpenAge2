@@ -1,0 +1,24 @@
+{
+ "id": "taladro",
+ "type": "tech",
+ "name": "Taladro (Drill)",
+ "cost": {
+  "wood": 500,
+  "gold": 450
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Unidades del taller de asedio +50% velocidad de movimiento.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "velocidad_asedio_bonus": 0.5,
+  "aplica_a": [
+   "ariete",
+   "catapulta",
+   "trebuchet"
+  ]
+ }
+}

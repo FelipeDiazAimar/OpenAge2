@@ -1,0 +1,24 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 400,
+  "gold": 200
+ },
+ "description": "Caballería ataca 33% más rápido.",
+ "effects": [],
+ "id": "estribos",
+ "legacy_effects": {
+  "aplica_a": [
+   "jinete",
+   "scout",
+   "konnik"
+  ],
+  "velocidad_ataque_bonus": 0.33
+ },
+ "name": "Estribos (Stirrups)",
+ "requires": {
+  "age": "castillos"
+ },
+ "research_time": 35,
+ "type": "tech"
+}

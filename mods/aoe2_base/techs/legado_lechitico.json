@@ -1,0 +1,24 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 750,
+  "gold": 550
+ },
+ "description": "Línea scout inflige 33% de daño por pisoteo en 0.5 casillas de radio.",
+ "effects": [],
+ "id": "legado_lechitico",
+ "legacy_effects": {
+  "aplica_a": [
+   "scout",
+   "jinete"
+  ],
+  "dano_pisoteo": 0.33,
+  "radio_pisoteo": 0.5
+ },
+ "name": "Legado Lechítico (Lechitic Legacy)",
+ "requires": {
+  "age": "imperial"
+ },
+ "research_time": 60,
+ "type": "tech"
+}

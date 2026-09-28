@@ -1,0 +1,23 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 800,
+  "gold": 650
+ },
+ "description": "Aldeanos y monjes ocupan -10% espacio de población.",
+ "effects": [],
+ "id": "mahayana",
+ "legacy_effects": {
+  "aplica_a": [
+   "aldeano",
+   "monje"
+  ],
+  "espacio_poblacion": -0.1
+ },
+ "name": "Mahayana",
+ "requires": {
+  "age": "imperial"
+ },
+ "research_time": 60,
+ "type": "tech"
+}

@@ -1,0 +1,46 @@
+{
+ "id": "chu_ko_nu",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Chu Ko Nu",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 40,
+  "gold": 35
+ },
+ "train_time": 16,
+ "pop_cost": 1,
+ "hotkey": "W",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 45
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 0.96
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 8,
+    "piquero": 2
+   },
+   "range": 4.0,
+   "reload": 2.0,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "chinos"
+  }
+ }
+}

@@ -1,0 +1,43 @@
+{
+ "id": "legionario",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Legionario",
+ "cost": {
+  "food": 50,
+  "gold": 20
+ },
+ "train_time": 14,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 75
+  },
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 1
+   }
+  },
+  "Move": {
+   "speed": 0.96
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 12,
+    "infanteria": 8,
+    "edificio": 2
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "romanos"
+  }
+ }
+}

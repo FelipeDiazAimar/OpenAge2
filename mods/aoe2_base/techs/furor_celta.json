@@ -1,0 +1,24 @@
+{
+ "id": "furor_celta",
+ "type": "tech",
+ "name": "Furor celta (Furor Celtica)",
+ "cost": {
+  "food": 750,
+  "gold": 450
+ },
+ "research_time": 50,
+ "at": "castillo",
+ "description": "Armas de asedio +40% puntos de vida.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "hp_asedio_bonus": 0.4,
+  "aplica_a": [
+   "ariete",
+   "catapulta",
+   "trebuchet"
+  ]
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "id": "bastiones_fortificados",
+ "type": "tech",
+ "name": "Bastiones Fortificados (Fortified Bastions)",
+ "cost": {
+  "food": 350,
+  "gold": 250
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Fortificaciones y Centros urbanos regeneran 500 HP por minuto.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "regen_por_minuto": 500,
+  "aplica_a": [
+   "castillo",
+   "centro_urbano",
+   "muralla",
+   "puerta",
+   "torre"
+  ]
+ }
+}

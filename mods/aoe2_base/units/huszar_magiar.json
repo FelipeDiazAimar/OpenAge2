@@ -1,0 +1,46 @@
+{
+ "id": "huszar_magiar",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Húsar Magiar",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 35,
+  "gold": 45
+ },
+ "train_time": 14,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 75
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 2
+   }
+  },
+  "Move": {
+   "speed": 1.5
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 9,
+    "asedio": 5,
+    "ariete": 1
+   },
+   "range": 0,
+   "reload": 1.8
+  },
+  "Unique": {
+   "civ": "magiares"
+  }
+ }
+}

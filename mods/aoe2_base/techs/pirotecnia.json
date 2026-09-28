@@ -1,0 +1,23 @@
+{
+ "id": "pirotecnia",
+ "type": "tech",
+ "name": "Pirotecnia (Pirotechnia)",
+ "cost": {
+  "food": 650,
+  "gold": 500
+ },
+ "research_time": 50,
+ "at": "castillo",
+ "description": "Arcabuceros 90% precisión y +15% daño por atravesamiento.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "precision_arcabucero": 0.9,
+  "dano_atravesado": 0.15,
+  "aplica_a": [
+   "arcabucero"
+  ]
+ }
+}

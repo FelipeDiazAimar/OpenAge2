@@ -1,0 +1,19 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 450,
+  "gold": 500
+ },
+ "description": "Unidades militares cuestan -25% comida.",
+ "effects": [],
+ "id": "kshatriyas",
+ "legacy_effects": {
+  "descuento_comida_militar": 0.25
+ },
+ "name": "Kshatriyas",
+ "requires": {
+  "age": "castillos"
+ },
+ "research_time": 45,
+ "type": "tech"
+}

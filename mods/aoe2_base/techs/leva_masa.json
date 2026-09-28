@@ -1,0 +1,25 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 850,
+  "gold": 500
+ },
+ "description": "Línea de milicia: coste de oro reemplazado por +20 comida.",
+ "effects": [],
+ "id": "leva_masa",
+ "legacy_effects": {
+  "aplica_a": [
+   "milicia",
+   "hombre_de_armas",
+   "espadachin_mandoble"
+  ],
+  "comida_extra": 20,
+  "oro_a_comida": true
+ },
+ "name": "Leva en Masa (Forced Levy)",
+ "requires": {
+  "age": "imperial"
+ },
+ "research_time": 60,
+ "type": "tech"
+}

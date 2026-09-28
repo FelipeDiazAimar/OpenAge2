@@ -1,0 +1,29 @@
+{
+ "id": "fereteres",
+ "type": "tech",
+ "name": "Fereteres (Fereters)",
+ "cost": {
+  "food": 550,
+  "gold": 400
+ },
+ "research_time": 45,
+ "at": "castillo",
+ "description": "Infantería (no lanceros) +30 HP; sacerdotes guerreros curan 100% más rápido",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "hp_infanteria_extra": 30,
+  "curacion_sacerdote_bonus": 1.0,
+  "excluye": [
+   "lancero",
+   "piquero",
+   "alabardero"
+  ],
+  "aplica_a": [
+   "milicia",
+   "sacerdote_guerrero"
+  ]
+ }
+}

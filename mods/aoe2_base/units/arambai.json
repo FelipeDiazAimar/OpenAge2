@@ -1,0 +1,46 @@
+{
+ "id": "arambai",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Arambai",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 75,
+  "gold": 60
+ },
+ "train_time": 21,
+ "pop_cost": 1,
+ "hotkey": "W",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 60
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 1
+   }
+  },
+  "Move": {
+   "speed": 1.3
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 12,
+    "ariete": 2
+   },
+   "range": 5.0,
+   "reload": 2.0,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "birmanos"
+  }
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "id": "armadura_seda",
+ "type": "tech",
+ "name": "Armadura de seda (Silk Armor)",
+ "cost": {
+  "food": 400,
+  "gold": 300
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Exploradores, lanceros de la estepa y arqueros a caballo +1/+1 armadura.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "armadura_cuerpo": 1,
+  "armadura_proyectil": 1,
+  "aplica_a": [
+   "scout",
+   "lancero_estepa",
+   "arquero_caballo",
+   "keshik"
+  ]
+ }
+}

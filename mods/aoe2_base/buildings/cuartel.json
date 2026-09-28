@@ -36,7 +36,10 @@
     "hombre_armas",
     "milicia",
     "lancero",
-    "huscarle"
+    "huscarle",
+    "aguila",
+    "legionario",
+    "milicia_flamenca"
    ],
    "queue": 5
   },

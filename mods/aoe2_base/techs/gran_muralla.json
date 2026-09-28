@@ -1,0 +1,23 @@
+{
+ "at": "castillo",
+ "cost": {
+  "stone": 200,
+  "wood": 400
+ },
+ "description": "Muros y torres +30% puntos de golpe.",
+ "effects": [],
+ "id": "gran_muralla",
+ "legacy_effects": {
+  "aplica_a": [
+   "muro",
+   "torre_vigia"
+  ],
+  "hp_muros_torres": 0.3
+ },
+ "name": "Gran Muralla (Great Wall)",
+ "requires": {
+  "age": "castillos"
+ },
+ "research_time": 40,
+ "type": "tech"
+}

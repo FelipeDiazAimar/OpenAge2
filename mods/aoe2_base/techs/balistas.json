@@ -1,0 +1,25 @@
+{
+ "id": "balistas",
+ "type": "tech",
+ "name": "Balistas (Ballistas)",
+ "cost": {
+  "wood": 400,
+  "gold": 300
+ },
+ "research_time": 45,
+ "at": "castillo",
+ "description": "Escorpiones disparan 33% más rápido; galeras +2 ataque",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "cadencia_escorpion_bonus": 0.33,
+  "ataque_galera_extra": 2,
+  "aplica_a": [
+   "escorpion",
+   "escorpion_pesado",
+   "galera"
+  ]
+ }
+}

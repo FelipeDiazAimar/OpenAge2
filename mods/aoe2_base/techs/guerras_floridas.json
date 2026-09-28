@@ -1,0 +1,29 @@
+{
+ "id": "guerras_floridas",
+ "type": "tech",
+ "name": "Guerras floridas (Garland Wars)",
+ "cost": {
+  "food": 450,
+  "gold": 750
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Infantería +4 ataque.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "ataque_infanteria": 4,
+  "aplica_a": [
+   "milicia",
+   "hombre_armas",
+   "espadachin_mandoble",
+   "campeon",
+   "lancero",
+   "piquero",
+   "guerrero_jaguar",
+   "guerrero_aguila"
+  ]
+ }
+}

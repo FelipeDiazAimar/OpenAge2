@@ -1,0 +1,45 @@
+{
+ "id": "elefante_guerra",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Elefante de Guerra",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 200,
+  "gold": 75
+ },
+ "train_time": 31,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 450
+  },
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 2
+   }
+  },
+  "Move": {
+   "speed": 0.8
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 15,
+    "edificio": 7
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "persas"
+  }
+ }
+}

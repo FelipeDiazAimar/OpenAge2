@@ -1,0 +1,24 @@
+{
+ "id": "revolucion_flamenca",
+ "type": "tech",
+ "name": "Revolución flamenca (Flemish Revolution)",
+ "cost": {
+  "food": 200,
+  "gold": 150
+ },
+ "research_time": 10,
+ "at": "castillo",
+ "description": "Todos los aldeanos se convierten en Milicia flamenca; se entrena en cuartel. Coste base 200F/150G + 10F/5G por aldeano.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "convierte_aldeanos": "milicia_flamenca",
+  "desbloquea_cuartel": "milicia_flamenca",
+  "coste_base_food": 200,
+  "coste_base_gold": 150,
+  "coste_extra_food_por_aldeano": 10,
+  "coste_extra_gold_por_aldeano": 5
+ }
+}

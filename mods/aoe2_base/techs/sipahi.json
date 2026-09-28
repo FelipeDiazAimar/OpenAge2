@@ -1,0 +1,20 @@
+{
+ "id": "sipahi",
+ "type": "tech",
+ "name": "Sipahi",
+ "cost": {
+  "food": 350,
+  "gold": 150
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Arqueros montados +20 HP.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "hp_arqueros_montados": 20,
+  "nota": "a legacy: sin arqueros montados en el mod"
+ }
+}

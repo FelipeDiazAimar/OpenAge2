@@ -1,0 +1,43 @@
+{
+ "id": "kipchak",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Kipchak",
+ "cost": {
+  "wood": 60,
+  "gold": 35
+ },
+ "train_time": 20,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 45
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 1.4
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 5,
+    "piquero": 1
+   },
+   "range": 4.0,
+   "reload": 2.2,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "cumanos"
+  }
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "id": "karambit",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Karambit",
+ "cost": {
+  "food": 25,
+  "gold": 15
+ },
+ "train_time": 6,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 40
+  },
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 1
+   }
+  },
+  "Move": {
+   "speed": 1.2
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 8
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "malayos"
+  }
+ }
+}

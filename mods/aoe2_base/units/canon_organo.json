@@ -1,0 +1,47 @@
+{
+ "id": "canon_organo",
+ "type": "unit",
+ "extends": "asedio_base",
+ "name": "Cañón de Órgano",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 80,
+  "gold": 60
+ },
+ "train_time": 21,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 60
+  },
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 4
+   }
+  },
+  "Move": {
+   "speed": 0.85
+  },
+  "Vision": {
+   "sight": 7.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 16,
+    "edificio": 2
+   },
+   "range": 7.0,
+   "reload": 3.45,
+   "min_range": 1.0,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "portugueses"
+  }
+ }
+}

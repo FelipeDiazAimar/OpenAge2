@@ -1,0 +1,25 @@
+{
+ "id": "shinkichon",
+ "type": "tech",
+ "name": "Shinkichon",
+ "cost": {
+  "food": 1100,
+  "gold": 800
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Carretas de cohetes y barcos tortuga +1 alcance y proyectiles extra.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "alcance_cohetes": 1,
+  "proyectiles_extra_carreta": 6,
+  "proyectiles_extra_tortuga": 2,
+  "aplica_a": [
+   "carreta_cohetes",
+   "barco_tortuga"
+  ]
+ }
+}

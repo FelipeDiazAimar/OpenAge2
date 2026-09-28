@@ -1,0 +1,41 @@
+{
+ "id": "pagoda_hierro",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Pagoda de Hierro",
+ "cost": {
+  "food": 80,
+  "gold": 55
+ },
+ "train_time": 14,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 140
+  },
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 3
+   }
+  },
+  "Move": {
+   "speed": 1.4
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 13
+   },
+   "range": 0,
+   "reload": 1.73
+  },
+  "Unique": {
+   "civ": "jurchens"
+  }
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "id": "acero_wootz",
+ "type": "tech",
+ "name": "Acero wootz (Wootz Steel)",
+ "cost": {
+  "food": 650,
+  "gold": 550
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Infantería y caballería ignoran armadura enemiga",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "ignora_armadura": true,
+  "aplica_a": [
+   "tag:infanteria",
+   "tag:caballeria"
+  ]
+ }
+}

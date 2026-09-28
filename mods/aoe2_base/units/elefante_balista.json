@@ -1,0 +1,47 @@
+{
+ "id": "elefante_balista",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Elefante con Balista",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 100,
+  "gold": 80
+ },
+ "train_time": 25,
+ "pop_cost": 1,
+ "hotkey": "W",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 250
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 0.8
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 9,
+    "barco": 8,
+    "edificio": 3
+   },
+   "range": 5.0,
+   "reload": 2.5,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "jemeres"
+  }
+ }
+}

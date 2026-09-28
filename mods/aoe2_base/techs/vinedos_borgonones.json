@@ -1,0 +1,23 @@
+{
+ "id": "vinedos_borgonones",
+ "type": "tech",
+ "name": "Viñedos borgoñones (Burgundian Vineyards)",
+ "cost": {
+  "food": 300,
+  "gold": 400
+ },
+ "research_time": 45,
+ "at": "castillo",
+ "description": "Granjeros generan oro además de comida (~0,014-0,017 oro/s).",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "oro_granjero_s": 0.017,
+  "oro_granjero_s_sin_mejoras": 0.014,
+  "aplica_a": [
+   "aldeano_granjero"
+  ]
+ }
+}

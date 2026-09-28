@@ -1,0 +1,262 @@
+{
+ "id": "teutones",
+ "type": "civ",
+ "name": "Teutones",
+ "color": "#6c757d",
+ "effects": [],
+ "disabled": [
+  "acero_wootz",
+  "aguila",
+  "aldeana",
+  "anarquia",
+  "arambai",
+  "arcabuz",
+  "arco_recurvo",
+  "armadura_lamelar",
+  "armadura_ming_guang",
+  "armadura_seda",
+  "arquero_camello",
+  "arquero_compuesto",
+  "arquero_emplumado",
+  "arquero_tiro_largo",
+  "artilleria",
+  "asedio_timurido",
+  "ateismo",
+  "atlatl",
+  "bagains",
+  "balistas",
+  "ballestero_genoves",
+  "barco_tortuga",
+  "barcos_dragon",
+  "bastiones_fortificados",
+  "bimaristan",
+  "bombas_trueno",
+  "boyar",
+  "caballeria_aznauri",
+  "caballeria_manipur",
+  "caballeria_ordo",
+  "caballerosidad",
+  "camellos_magrebies",
+  "canon_organo",
+  "carabela",
+  "cargador_virotes",
+  "carreta_guerra",
+  "catafracta",
+  "chatras",
+  "chu_ko_nu",
+  "circunnavegacion",
+  "ciudadelas",
+  "coheteria",
+  "comitatenses",
+  "contrapesos",
+  "cuerpo_medico",
+  "detinets",
+  "doble_ballesta",
+  "drakkar",
+  "druzhina",
+  "ejercito_corvino",
+  "elefante_balista",
+  "elefante_combate",
+  "elefante_guerra",
+  "escudos_tela",
+  "escudos_torre",
+  "espadas_colmillos",
+  "estribos",
+  "eupseong",
+  "farimba",
+  "fereteres",
+  "flota_cilicia",
+  "fortaleza",
+  "fuego_griego",
+  "fuertes_colina",
+  "furor_celta",
+  "ganaderia_estepa",
+  "gbeto",
+  "ghulam",
+  "gran_muralla",
+  "gran_ruta_troncal",
+  "guardias_frontera",
+  "guerras_floridas",
+  "hachas_barbas",
+  "hauberk",
+  "herederos_reales",
+  "holcanes",
+  "honda_andina",
+  "howdah",
+  "huscarle",
+  "huszar_magiar",
+  "inquisicion",
+  "invasor_nordico",
+  "invasor_pastos",
+  "jabalineros_hulche",
+  "jaguar",
+  "jefatura",
+  "kamandaran",
+  "kamayuk",
+  "karambit",
+  "kasbah",
+  "kataparuto",
+  "keshik",
+  "kipchak",
+  "konnik",
+  "kshatriyas",
+  "legado_lechitico",
+  "legionario",
+  "leva_masa",
+  "logistica",
+  "mahayana",
+  "mameluco",
+  "mangudai",
+  "maquina_guerra",
+  "mercenarios_cumanos",
+  "merodeadores",
+  "milicia_flamenca",
+  "misionero",
+  "monaspa",
+  "motores_torsion",
+  "nomadas",
+  "pagoda_hierro",
+  "paiks",
+  "paladin_franco",
+  "papel_moneda",
+  "perfusion",
+  "pirotecnia",
+  "primera_cruzada",
+  "privilegios_szlachta",
+  "punteria",
+  "ratha",
+  "rattan",
+  "reformas_husitas",
+  "revolucion_flamenca",
+  "ruta_seda",
+  "sacerdote_guerrero",
+  "samurai",
+  "serpiente_enroscada",
+  "shatagni",
+  "shinkichon",
+  "shotel",
+  "sipahi",
+  "supremacia",
+  "tactica_wagenburg",
+  "tacticas_acantilados",
+  "taladro",
+  "talasocracia",
+  "tarkan",
+  "tigre_agazapado",
+  "tigui",
+  "torres_svan",
+  "tuntian",
+  "vinedos_borgonones",
+  "yasama"
+ ],
+ "unique_units": [
+  "caballero_teutonico"
+ ],
+ "unique_techs": [
+  "blindaje",
+  "almenas"
+ ],
+ "legacy_effects": [
+  {
+   "id": "monjes_doble_alcance",
+   "descripcion": "Monjes curan al doble de distancia (rango x2)",
+   "efecto": {
+    "rango_curacion_monje_factor": 2.0
+   }
+  },
+  {
+   "id": "torres_doble_guarnicion",
+   "descripcion": "Torres albergan el doble de unidades (5 -> 10)",
+   "efecto": {
+    "capacidad_torre_factor": 2.0,
+    "capacidad_base": 5,
+    "capacidad_final": 10
+   }
+  },
+  {
+   "id": "matacanes_medicina_gratis",
+   "descripcion": "Matacanes (Murder Holes) y Medicina herbal gratis",
+   "efecto": {
+    "matacanes_coste": 0,
+    "medicina_herbal_coste": 0
+   }
+  },
+  {
+   "id": "granjas_40",
+   "descripcion": "Granjas 40% más baratas: 60 madera -> 36 madera",
+   "efecto": {
+    "descuento_granja_madera": 0.4,
+    "coste_base_madera": 60,
+    "coste_final_madera": 36
+   }
+  },
+  {
+   "id": "tc_mas_10",
+   "descripcion": "Centros urbanos +10 espacio de guarnición",
+   "efecto": {
+    "guarnicion_tc_extra": 10
+   }
+  },
+  {
+   "id": "armadura_melee_edad",
+   "descripcion": "Cuartel y Establo +1/+2 armadura cuerpo a cuerpo en Castillos/Imperial",
+   "efecto": {
+    "armadura_melee_castillos": 1,
+    "armadura_melee_imperial": 2,
+    "aplica_a": [
+     "cuartel",
+     "establo"
+    ]
+   }
+  },
+  {
+   "id": "resistencia_conversion",
+   "descripcion": "Unidades y edificios resisten conversión (+3/+1 intervalos mín/máx)",
+   "efecto": {
+    "conversion_min_extra": 3,
+    "conversion_max_extra": 1
+   }
+  },
+  {
+   "team_bonus": {
+    "id": "resistencia_conversion_equipo",
+    "descripcion": "Unidades resisten conversión (aliados)",
+    "efecto": {
+     "conversion_min_extra": 3,
+     "conversion_max_extra": 1
+    }
+   }
+  },
+  {
+   "id": "uu_caballero_teuton",
+   "descripcion": "UU Caballero teutón (infantería lenta y pesada, castillo): 85F/40O aprox.; 70 PV (100 élite); 12 atq (17 élite); armadura 5/2; fuerte vs cuerpo a cuerpo, débil vs arqueros",
+   "efecto": {
+    "unidad": "caballero_teuton",
+    "coste": {
+     "food": 85,
+     "gold": 40
+    },
+    "hp": 70,
+    "hp_elite": 100,
+    "ataque": 12,
+    "ataque_elite": 17,
+    "armadura": "5/2"
+   }
+  },
+  {
+   "id": "maravilla_arquitectura",
+   "descripcion": "Maravilla: Abadía de Maria Laach. Set arquitectónico: centroeuropeo",
+   "efecto": {
+    "maravilla": "Abadía de Maria Laach",
+    "set_arquitectonico": "centroeuropeo"
+   }
+  },
+  {
+   "id": "tech_tree_nota",
+   "descripcion": "Ausencias clave DE: sin Húsar, sin Arbalesta, sin Husbandry (velocidad caballería), arquería débil; SÍ tienen Paladín, Cañón de asedio y Hand Cannoneer",
+   "efecto": {
+    "nota": "verificar contra tech tree DE actual; Húsar/Arbalesta/Husbandry no modelados como IDs en aoe2_base"
+   }
+  }
+ ]
+}

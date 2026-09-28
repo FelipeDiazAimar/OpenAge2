@@ -1,0 +1,19 @@
+{
+ "id": "fuertes_colina",
+ "type": "tech",
+ "name": "Fuertes de colina (Hill Forts)",
+ "cost": {
+  "food": 250,
+  "gold": 250
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Centros Urbanos +3 de alcance.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "alcance_centro_urbano": 3
+ }
+}

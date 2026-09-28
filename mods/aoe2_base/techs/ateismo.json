@@ -1,0 +1,21 @@
+{
+ "id": "ateismo",
+ "type": "tech",
+ "name": "Ateísmo (Atheism)",
+ "cost": {
+  "food": 500,
+  "wood": 300
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Victorias por maravilla/reliquia +100 años para enemigos; reliquias enemigas generan -50% recursos.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "victoria_maravilla_reliquia_anios_extra": 100,
+  "generacion_reliquias_enemigas_factor": 0.5,
+  "nota": "efecto diplomático/económico global, sin equivalente en el motor"
+ }
+}

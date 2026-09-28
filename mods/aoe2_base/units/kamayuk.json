@@ -1,0 +1,46 @@
+{
+ "id": "kamayuk",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Kamayuk",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 60,
+  "gold": 30
+ },
+ "train_time": 15,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 60
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 1.0
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 7,
+    "caballeria": 12,
+    "jinete": 12
+   },
+   "range": 1.0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "incas"
+  }
+ }
+}

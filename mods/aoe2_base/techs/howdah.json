@@ -1,0 +1,23 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 400,
+  "wood": 300
+ },
+ "description": "Elefantes de combate +1/+1 armadura.",
+ "effects": [],
+ "id": "howdah",
+ "legacy_effects": {
+  "aplica_a": [
+   "elefante_combate"
+  ],
+  "armadura_cuerpo": 1,
+  "armadura_proyectil": 1
+ },
+ "name": "Howdah",
+ "requires": {
+  "age": "imperial"
+ },
+ "research_time": 40,
+ "type": "tech"
+}

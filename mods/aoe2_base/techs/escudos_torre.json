@@ -1,0 +1,23 @@
+{
+ "id": "escudos_torre",
+ "type": "tech",
+ "name": "Escudos de torre (Tower Shields)",
+ "cost": {
+  "food": 500,
+  "gold": 200
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Lanceros y guerrilleros +2 armadura antiproyectil.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "armadura_proyectil": 2,
+  "aplica_a": [
+   "lancero",
+   "guerrillero"
+  ]
+ }
+}

@@ -1,0 +1,41 @@
+{
+ "id": "keshik",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Keshik",
+ "cost": {
+  "food": 60,
+  "gold": 40
+ },
+ "train_time": 15,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 140
+  },
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 2
+   }
+  },
+  "Move": {
+   "speed": 1.35
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 11
+   },
+   "range": 0,
+   "reload": 1.9
+  },
+  "Unique": {
+   "civ": "tartaros"
+  }
+ }
+}

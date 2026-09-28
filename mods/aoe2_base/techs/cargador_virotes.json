@@ -1,0 +1,26 @@
+{
+ "id": "cargador_virotes",
+ "type": "tech",
+ "name": "Cargador de Virotes",
+ "cost": {
+  "food": 650,
+  "gold": 750
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Arqueros, Carros de Guerra y Lou Chuan disparan proyectiles adicionales (+2; +3 en modo bombardeo).",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "proyectiles_extra": 2,
+  "proyectiles_extra_bombardeo": 3,
+  "aplica_a": [
+   "arquero",
+   "ballestero",
+   "carro_guerra",
+   "lou_chuan"
+  ]
+ }
+}

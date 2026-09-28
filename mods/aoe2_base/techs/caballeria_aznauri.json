@@ -1,0 +1,24 @@
+{
+ "id": "caballeria_aznauri",
+ "type": "tech",
+ "name": "Caballería Aznauri",
+ "cost": {
+  "food": 550,
+  "gold": 250
+ },
+ "research_time": 45,
+ "at": "castillo",
+ "description": "Unidades montadas ocupan -20% espacio de población.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "poblacion_montadas_factor": 0.8,
+  "aplica_a": [
+   "scout",
+   "jinete",
+   "monaspa"
+  ]
+ }
+}

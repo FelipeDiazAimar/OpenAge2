@@ -1,0 +1,24 @@
+{
+ "at": "castillo",
+ "cost": {
+  "gold": 300,
+  "wood": 600
+ },
+ "description": "Castillos +4 ataque, +3 vs arietes e infanteria, reciben -25% dano bonus.",
+ "effects": [],
+ "id": "ciudadelas",
+ "legacy_effects": {
+  "aplica_a": [
+   "castillo"
+  ],
+  "ataque_castillo": 4,
+  "ataque_vs_ariete_infanteria": 3,
+  "dano_bonus_recibido": -0.25
+ },
+ "name": "Ciudadelas (Citadels)",
+ "requires": {
+  "age": "imperial"
+ },
+ "research_time": 50,
+ "type": "tech"
+}

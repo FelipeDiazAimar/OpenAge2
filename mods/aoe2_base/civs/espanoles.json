@@ -1,0 +1,230 @@
+{
+ "id": "espanoles",
+ "type": "civ",
+ "name": "Españoles",
+ "color": "#c0392b",
+ "effects": [
+  {
+   "target": "tag:aldeano",
+   "op": "mul",
+   "path": "abilities.Build.rate",
+   "value": 1.3
+  }
+ ],
+ "disabled": [
+  "acero_wootz",
+  "aguila",
+  "aldeana",
+  "almenas",
+  "anarquia",
+  "arambai",
+  "arcabuz",
+  "arco_recurvo",
+  "armadura_lamelar",
+  "armadura_ming_guang",
+  "armadura_seda",
+  "arquero_camello",
+  "arquero_compuesto",
+  "arquero_emplumado",
+  "arquero_tiro_largo",
+  "artilleria",
+  "asedio_timurido",
+  "ateismo",
+  "atlatl",
+  "bagains",
+  "balistas",
+  "ballestero_genoves",
+  "barco_tortuga",
+  "barcos_dragon",
+  "bastiones_fortificados",
+  "bimaristan",
+  "blindaje",
+  "bombas_trueno",
+  "boyar",
+  "caballeria_aznauri",
+  "caballeria_manipur",
+  "caballeria_ordo",
+  "caballero_teutonico",
+  "caballerosidad",
+  "camellos_magrebies",
+  "canon_organo",
+  "carabela",
+  "cargador_virotes",
+  "carreta_guerra",
+  "catafracta",
+  "chatras",
+  "chu_ko_nu",
+  "circunnavegacion",
+  "ciudadelas",
+  "coheteria",
+  "comitatenses",
+  "contrapesos",
+  "cuerpo_medico",
+  "detinets",
+  "doble_ballesta",
+  "drakkar",
+  "druzhina",
+  "ejercito_corvino",
+  "elefante_balista",
+  "elefante_combate",
+  "elefante_guerra",
+  "escudos_tela",
+  "escudos_torre",
+  "espadas_colmillos",
+  "estribos",
+  "eupseong",
+  "farimba",
+  "fereteres",
+  "flota_cilicia",
+  "fortaleza",
+  "fuego_griego",
+  "fuertes_colina",
+  "furor_celta",
+  "ganaderia_estepa",
+  "gbeto",
+  "ghulam",
+  "gran_muralla",
+  "gran_ruta_troncal",
+  "grua",
+  "guardias_frontera",
+  "guerras_floridas",
+  "hachas_barbas",
+  "hauberk",
+  "herederos_reales",
+  "holcanes",
+  "honda_andina",
+  "howdah",
+  "huscarle",
+  "huszar_magiar",
+  "ingenieros_asedio",
+  "invasor_nordico",
+  "invasor_pastos",
+  "jabalineros_hulche",
+  "jaguar",
+  "jefatura",
+  "kamandaran",
+  "kamayuk",
+  "karambit",
+  "kasbah",
+  "kataparuto",
+  "keshik",
+  "kipchak",
+  "konnik",
+  "kshatriyas",
+  "legado_lechitico",
+  "legionario",
+  "leva_masa",
+  "logistica",
+  "mahayana",
+  "mameluco",
+  "mangudai",
+  "maquina_guerra",
+  "mercenarios_cumanos",
+  "merodeadores",
+  "milicia_flamenca",
+  "monaspa",
+  "motores_torsion",
+  "nomadas",
+  "pagoda_hierro",
+  "paiks",
+  "paladin_franco",
+  "papel_moneda",
+  "perfusion",
+  "pirotecnia",
+  "primera_cruzada",
+  "privilegios_szlachta",
+  "punteria",
+  "ratha",
+  "rattan",
+  "reformas_husitas",
+  "revolucion_flamenca",
+  "ruta_seda",
+  "sacerdote_guerrero",
+  "samurai",
+  "serpiente_enroscada",
+  "shatagni",
+  "shinkichon",
+  "shotel",
+  "sipahi",
+  "tactica_wagenburg",
+  "tacticas_acantilados",
+  "taladro",
+  "talasocracia",
+  "tarkan",
+  "tigre_agazapado",
+  "tigui",
+  "torres_svan",
+  "tuntian",
+  "vinedos_borgonones",
+  "yasama"
+ ],
+ "unique_units": [
+  "misionero"
+ ],
+ "unique_techs": [
+  "inquisicion",
+  "supremacia"
+ ],
+ "legacy_effects": [
+  {
+   "id": "herreria_sin_oro",
+   "descripcion": "Mejoras de herrería no cuestan oro",
+   "efecto": {
+    "herreria_coste_oro": 0
+   }
+  },
+  {
+   "id": "polvora_rapida_18",
+   "descripcion": "Unidades de pólvora disparan 18% más rápido (no aplica a conquistador)",
+   "efecto": {
+    "cadencia_polvora_bonus": 0.18,
+    "aplica_a": [
+     "arcabucero",
+     "canon_bombardeo",
+     "galeon_artillado"
+    ]
+   }
+  },
+  {
+   "id": "galeon_perseguidor",
+   "descripcion": "Galeón artillado persigue objetivos móviles, proyectiles más rápidos",
+   "efecto": {
+    "galeon_tracking": true,
+    "velocidad_proyectil_bonus": 0.2
+   }
+  },
+  {
+   "id": "oro_por_tech_20",
+   "descripcion": "+20 oro por cada tecnología investigada",
+   "efecto": {
+    "oro_por_tecnologia": 20
+   }
+  },
+  {
+   "id": "maravilla_torre_del_oro",
+   "descripcion": "Maravilla: Torre del Oro (Sevilla)",
+   "efecto": {
+    "maravilla": "Torre del Oro"
+   }
+  },
+  {
+   "id": "set_mediterraneo",
+   "descripcion": "Set arquitectónico: Mediterráneo",
+   "efecto": {
+    "set_arquitectonico": "mediterraneo"
+   }
+  },
+  {
+   "team_bonus": {
+    "id": "comercio_oro_25",
+    "descripcion": "Unidades de comercio generan +25% oro (aliados)",
+    "efecto": {
+     "oro_comercio_bonus": 0.25,
+     "aplica_a": [
+      "carreta_comercio"
+     ]
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "id": "bimaristan",
+ "type": "tech",
+ "name": "Bimaristán (Bimaristan)",
+ "cost": {
+  "wood": 300,
+  "gold": 200
+ },
+ "research_time": 50,
+ "at": "castillo",
+ "description": "Los monjes curan automáticamente a varias unidades cercanas (75 HP/min, radio 5).",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "curacion_monje_area": true,
+  "tasa_hp_min": 75,
+  "radio_casillas": 5,
+  "nota": "curación en área no expresable con paths del mod"
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 500,
+  "gold": 300
+ },
+ "description": "Línea de caballero cuesta -60% oro.",
+ "effects": [
+  {
+   "op": "mul",
+   "path": "cost.gold",
+   "target": "id:jinete|id:paladin",
+   "value": 0.4
+  }
+ ],
+ "id": "privilegios_szlachta",
+ "name": "Privilegios Szlachta (Szlachta Privileges)",
+ "requires": {
+  "age": "castillos"
+ },
+ "research_time": 45,
+ "type": "tech"
+}

@@ -1,0 +1,25 @@
+{
+ "id": "flota_cilicia",
+ "type": "tech",
+ "name": "Flota cilicia (Cilician Fleet)",
+ "cost": {
+  "wood": 350,
+  "food": 300
+ },
+ "research_time": 45,
+ "at": "castillo",
+ "description": "Brulotes +20% radio explosión; galeras y dromones +1 alcance",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "radio_brulote_bonus": 0.2,
+  "alcance_galera_extra": 1,
+  "aplica_a": [
+   "brulote",
+   "galera",
+   "dromon"
+  ]
+ }
+}

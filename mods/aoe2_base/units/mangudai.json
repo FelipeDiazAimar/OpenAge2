@@ -1,0 +1,45 @@
+{
+ "id": "mangudai",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Mangudai",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 55,
+  "gold": 65
+ },
+ "train_time": 26,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 60
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 1.45
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 6
+   },
+   "range": 4.0,
+   "reload": 2.0,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "mongoles"
+  }
+ }
+}

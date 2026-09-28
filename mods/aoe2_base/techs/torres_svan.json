@@ -1,0 +1,24 @@
+{
+ "id": "torres_svan",
+ "type": "tech",
+ "name": "Torres Svan",
+ "cost": {
+  "food": 300,
+  "gold": 200
+ },
+ "research_time": 45,
+ "at": "castillo",
+ "description": "Defensas +2 ataque. Torres disparan flechas que atraviesan varias unidades.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "ataque_defensas": 2,
+  "torres_perforan": true,
+  "aplica_a": [
+   "castillo",
+   "torre"
+  ]
+ }
+}

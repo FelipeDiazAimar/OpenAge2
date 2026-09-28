@@ -1,81 +1,211 @@
 {
-  "id": "britones",
-  "type": "civ",
-  "name": "Britones",
-  "color": "#5a6a7a",
-  "effects": [
-    {
-      "target": "id:arquero|id:guerrillero|id:ballestero|id:arquero_tiro_largo",
-      "op": "mul",
-      "path": "cost.wood",
-      "value": 0.9
-    },
-    {
-      "target": "id:arquero|id:guerrillero|id:ballestero|id:arquero_tiro_largo",
-      "op": "mul",
-      "path": "cost.gold",
-      "value": 0.9
+ "id": "britones",
+ "type": "civ",
+ "name": "Britones",
+ "color": "#5a6a7a",
+ "effects": [
+  {
+   "target": "id:arquero|id:guerrillero|id:ballestero|id:arquero_tiro_largo",
+   "op": "mul",
+   "path": "cost.wood",
+   "value": 0.9
+  },
+  {
+   "target": "id:arquero|id:guerrillero|id:ballestero|id:arquero_tiro_largo",
+   "op": "mul",
+   "path": "cost.gold",
+   "value": 0.9
+  }
+ ],
+ "disabled": [
+  "acero_wootz",
+  "aguila",
+  "aldeana",
+  "almenas",
+  "anarquia",
+  "arambai",
+  "arcabuz",
+  "arco_recurvo",
+  "armadura_arq_3",
+  "armadura_cab_3",
+  "armadura_lamelar",
+  "armadura_ming_guang",
+  "armadura_seda",
+  "arquero_camello",
+  "arquero_compuesto",
+  "arquero_emplumado",
+  "artilleria",
+  "asedio_timurido",
+  "ateismo",
+  "atlatl",
+  "bagains",
+  "balistas",
+  "ballestero_genoves",
+  "barco_tortuga",
+  "barcos_dragon",
+  "bastiones_fortificados",
+  "bimaristan",
+  "blindaje",
+  "bombas_trueno",
+  "boyar",
+  "caballeria_aznauri",
+  "caballeria_manipur",
+  "caballeria_ordo",
+  "caballero_teutonico",
+  "caballerosidad",
+  "camellos_magrebies",
+  "canon_organo",
+  "carabela",
+  "cargador_virotes",
+  "carreta_guerra",
+  "catafracta",
+  "chatras",
+  "chu_ko_nu",
+  "circunnavegacion",
+  "ciudadelas",
+  "coheteria",
+  "comitatenses",
+  "contrapesos",
+  "cuerpo_medico",
+  "detinets",
+  "doble_ballesta",
+  "drakkar",
+  "druzhina",
+  "ejercito_corvino",
+  "elefante_balista",
+  "elefante_combate",
+  "elefante_guerra",
+  "escudos_tela",
+  "escudos_torre",
+  "espadas_colmillos",
+  "estribos",
+  "eupseong",
+  "farimba",
+  "fereteres",
+  "flota_cilicia",
+  "fortaleza",
+  "fuego_griego",
+  "fuertes_colina",
+  "furor_celta",
+  "ganaderia_estepa",
+  "gbeto",
+  "ghulam",
+  "gran_muralla",
+  "gran_ruta_troncal",
+  "guardias_frontera",
+  "guerras_floridas",
+  "hachas_barbas",
+  "hauberk",
+  "herederos_reales",
+  "herejia",
+  "holcanes",
+  "honda_andina",
+  "howdah",
+  "huscarle",
+  "huszar_magiar",
+  "iluminacion",
+  "inquisicion",
+  "invasor_nordico",
+  "invasor_pastos",
+  "jabalineros_hulche",
+  "jaguar",
+  "jefatura",
+  "kamandaran",
+  "kamayuk",
+  "karambit",
+  "kasbah",
+  "kataparuto",
+  "keshik",
+  "kipchak",
+  "konnik",
+  "kshatriyas",
+  "legado_lechitico",
+  "legionario",
+  "leva_masa",
+  "logistica",
+  "mahayana",
+  "mameluco",
+  "mangudai",
+  "mercenarios_cumanos",
+  "merodeadores",
+  "milicia_flamenca",
+  "misionero",
+  "monaspa",
+  "motores_torsion",
+  "nomadas",
+  "pagoda_hierro",
+  "paiks",
+  "paladin",
+  "paladin_franco",
+  "papel_moneda",
+  "perfusion",
+  "pirotecnia",
+  "primera_cruzada",
+  "privilegios_szlachta",
+  "ratha",
+  "rattan",
+  "reformas_husitas",
+  "revolucion_flamenca",
+  "ruta_seda",
+  "sacerdote_guerrero",
+  "samurai",
+  "serpiente_enroscada",
+  "shatagni",
+  "shinkichon",
+  "shotel",
+  "sipahi",
+  "supremacia",
+  "tactica_wagenburg",
+  "tacticas_acantilados",
+  "taladro",
+  "talasocracia",
+  "tarkan",
+  "tigre_agazapado",
+  "tigui",
+  "torre_muralla",
+  "torres_svan",
+  "tuntian",
+  "vinedos_borgonones",
+  "yasama"
+ ],
+ "unique_units": [
+  "arquero_tiro_largo"
+ ],
+ "unique_techs": [
+  "maquina_guerra",
+  "punteria"
+ ],
+ "legacy_effects": [
+  {
+   "id": "pastores_rapidos",
+   "descripcion": "Pastores 25% más rápidos: recolección de oveja 0.41 -> 0.51 comida/s",
+   "efecto": {
+    "recoleccion_oveja_bonus": 0.25,
+    "tasa_base": 0.41,
+    "tasa_final": 0.51
+   }
+  },
+  {
+   "id": "alcance_civ_arqueros",
+   "descripcion": "Bono civ arqueros a pie: +1 alcance en Castillos, +2 en Imperial (acumulable con Puntería)",
+   "efecto": {
+    "alcance_arqueros_castillos": 1,
+    "alcance_arqueros_imperial": 2,
+    "aplica_a": [
+     "arquero",
+     "ballestero",
+     "arquero_tiro_largo"
+    ]
+   }
+  },
+  {
+   "team_bonus": {
+    "id": "galerias_rapidas",
+    "descripcion": "Galerías de tiro trabajan 20% más rápido (aliados)",
+    "efecto": {
+     "velocidad_arqueria": 0.2
     }
-  ],
-  "disabled": [
-    "anarquia",
-    "armadura_arq_3",
-    "armadura_cab_3",
-    "barcos_dragon",
-    "caballerosidad",
-    "catafracta",
-    "drakkar",
-    "fuego_griego",
-    "hachas_barbas",
-    "herejia",
-    "huscarle",
-    "iluminacion",
-    "invasor_nordico",
-    "jefatura",
-    "logistica",
-    "paladin",
-    "paladin_franco",
-    "perfusion",
-    "torre_muralla"
-  ],
-  "unique_units": [
-    "arquero_tiro_largo"
-  ],
-  "unique_techs": [
-    "maquina_guerra",
-    "punteria"
-  ],
-  "legacy_effects": [
-    {
-      "id": "pastores_rapidos",
-      "descripcion": "Pastores 25% más rápidos: recolección de oveja 0.41 -> 0.51 comida/s",
-      "efecto": {
-        "recoleccion_oveja_bonus": 0.25,
-        "tasa_base": 0.41,
-        "tasa_final": 0.51
-      }
-    },
-    {
-      "id": "alcance_civ_arqueros",
-      "descripcion": "Bono civ arqueros a pie: +1 alcance en Castillos, +2 en Imperial (acumulable con Puntería)",
-      "efecto": {
-        "alcance_arqueros_castillos": 1,
-        "alcance_arqueros_imperial": 2,
-        "aplica_a": [
-          "arquero",
-          "ballestero",
-          "arquero_tiro_largo"
-        ]
-      }
-    },
-    {
-      "team_bonus": {
-        "id": "galerias_rapidas",
-        "descripcion": "Galerías de tiro trabajan 20% más rápido (aliados)",
-        "efecto": {
-          "velocidad_arqueria": 0.2
-        }
-      }
-    }
-  ]
+   }
+  }
+ ]
 }

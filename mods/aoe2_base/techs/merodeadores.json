@@ -1,0 +1,19 @@
+{
+ "id": "merodeadores",
+ "type": "tech",
+ "name": "Merodeadores (Marauders)",
+ "cost": {
+  "wood": 300,
+  "gold": 200
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Tarkanos entrenables en el Establo (además del Castillo).",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "tarkano_en_establo": true
+ }
+}

@@ -1,0 +1,25 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 1100,
+  "gold": 900
+ },
+ "description": "Escorpiones, carros cohete y Lou Chuan +25% ataque; Lou Chuan dispara cohetes con dano en area.",
+ "effects": [],
+ "id": "coheteria",
+ "legacy_effects": {
+  "aplica_a": [
+   "escorpion",
+   "carro_cohete",
+   "lou_chuan"
+  ],
+  "ataque_asedio_cohetes": 0.25,
+  "lou_chuan_cohetes_area": true
+ },
+ "name": "Coheteria (Rocketry)",
+ "requires": {
+  "age": "imperial"
+ },
+ "research_time": 60,
+ "type": "tech"
+}

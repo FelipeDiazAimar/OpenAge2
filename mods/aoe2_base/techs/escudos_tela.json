@@ -1,0 +1,24 @@
+{
+ "id": "escudos_tela",
+ "type": "tech",
+ "name": "Escudos de tela (Fabric Shields)",
+ "cost": {
+  "food": 600,
+  "gold": 500
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Kamayuks y honderos +1/+1 armadura.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "armadura_melee": 1,
+  "armadura_perforante": 1,
+  "aplica_a": [
+   "kamayuk",
+   "hondero"
+  ]
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 375,
+  "gold": 275
+ },
+ "description": "Rathas y elefantes atacan 20% más rápido.",
+ "effects": [],
+ "id": "paiks",
+ "legacy_effects": {
+  "aplica_a": [
+   "ratha",
+   "elefante"
+  ],
+  "velocidad_ataque": 0.2
+ },
+ "name": "Paiks",
+ "requires": {
+  "age": "castillos"
+ },
+ "research_time": 45,
+ "type": "tech"
+}

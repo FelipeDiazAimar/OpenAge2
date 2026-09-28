@@ -1,0 +1,26 @@
+{
+ "id": "motores_torsion",
+ "type": "tech",
+ "name": "Motores de torsión (Torsion Engines)",
+ "cost": {
+  "wood": 750,
+  "gold": 350
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Unidades de taller de asedio +área de daño (blast radius).",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "area_asedio_bonus": 1.0,
+  "aplica_a": [
+   "ariete",
+   "onagro",
+   "escorpion",
+   "bombarda",
+   "trabuquete"
+  ]
+ }
+}

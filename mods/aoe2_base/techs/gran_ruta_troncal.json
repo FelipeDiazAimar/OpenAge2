@@ -1,0 +1,25 @@
+{
+ "id": "gran_ruta_troncal",
+ "type": "tech",
+ "name": "Gran Ruta Troncal (Grand Trunk Road)",
+ "cost": {
+  "food": 250,
+  "wood": 200
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Todo ingreso de oro +10% más rápido; tarifa de mercado reducida al 10%.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "ingreso_oro_bonus": 0.1,
+  "tarifa_mercado": 0.1,
+  "aplica_a": [
+   "mineria_oro",
+   "reliquia",
+   "comercio"
+  ]
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "id": "shatagni",
+ "type": "tech",
+ "name": "Shatagni",
+ "cost": {
+  "food": 500,
+  "gold": 650
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Arcabuceros +2 alcance.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "alcance_arcabucero": 2,
+  "aplica_a": [
+   "arcabucero"
+  ]
+ }
+}

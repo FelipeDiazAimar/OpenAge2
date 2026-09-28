@@ -1,0 +1,26 @@
+{
+ "id": "tacticas_acantilados",
+ "type": "tech",
+ "name": "Tácticas de los Acantilados Rojos (Red Cliffs Tactics)",
+ "cost": {
+  "food": 400,
+  "gold": 250
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Brulotes y Arqueros de fuego prenden fuego a barcos y edificios (daño en el tiempo que ignora armadura y se acumula).",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "dano_quemadura_5s": 5,
+  "duracion_s": 5,
+  "ignora_armadura": true,
+  "acumulable": true,
+  "aplica_a": [
+   "brulote",
+   "arquero_fuego"
+  ]
+ }
+}

@@ -1,0 +1,25 @@
+{
+ "id": "bombas_trueno",
+ "type": "tech",
+ "name": "Bombas Trueno (Thunderclap Bombs)",
+ "cost": {
+  "food": 900,
+  "gold": 600
+ },
+ "research_time": 50,
+ "at": "castillo",
+ "description": "Carros cohete, Granaderos y Lou Chuan detonan al caer; sus proyectiles producen explosiones adicionales.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "explosion_al_morir": true,
+  "explosiones_proyectil_extra": 1,
+  "aplica_a": [
+   "carro_cohetes",
+   "granadero",
+   "lou_chuan"
+  ]
+ }
+}

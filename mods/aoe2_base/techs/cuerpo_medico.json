@@ -1,0 +1,24 @@
+{
+ "id": "cuerpo_medico",
+ "type": "tech",
+ "name": "Cuerpo médico (Medical Corps)",
+ "cost": {
+  "food": 300,
+  "gold": 200
+ },
+ "research_time": 45,
+ "at": "castillo",
+ "description": "Elefantes regeneran 30 HP/min",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "regeneracion_elefantes_hp_min": 30,
+  "aplica_a": [
+   "elefante_guerra",
+   "arquero_elefante",
+   "elefante_blindado"
+  ]
+ }
+}

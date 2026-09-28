@@ -1,0 +1,44 @@
+{
+ "id": "caballero_teutonico",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Caballero Teutónico",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 85,
+  "gold": 40
+ },
+ "train_time": 12,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 80
+  },
+  "Armor": {
+   "classes": {
+    "melee": 5,
+    "pierce": 2
+   }
+  },
+  "Move": {
+   "speed": 0.75
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 12
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "teutones"
+  }
+ }
+}

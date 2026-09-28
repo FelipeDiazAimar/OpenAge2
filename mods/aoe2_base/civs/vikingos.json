@@ -1,97 +1,227 @@
 {
-  "id": "vikingos",
-  "type": "civ",
-  "name": "Vikingos",
-  "color": "#0e6e5a",
-  "effects": [],
-  "disabled": [
-    "anarquia",
-    "armadura_cab_3",
-    "arquero_tiro_largo",
-    "arquitectura",
-    "ataque_cab_3",
-    "caballerosidad",
-    "catafracta",
-    "fervor",
-    "fuego_griego",
-    "hachas_barbas",
-    "huscarle",
-    "iluminacion",
-    "logistica",
-    "maquina_guerra",
-    "muralla_fortificada",
-    "paladin",
-    "paladin_franco",
-    "perfusion",
-    "punteria",
-    "redencion",
-    "torre_muralla"
-  ],
-  "unique_units": [
-    "drakkar",
-    "invasor_nordico"
-  ],
-  "unique_techs": [
-    "barcos_dragon",
-    "jefatura"
-  ],
-  "legacy_effects": [
-    {
-      "id": "infanteria_hp_edad",
-      "descripcion": "Infantería +10%/+15%/+20% HP en Feudal/Castillos/Imperial (milicia 45 -> 50/52/54 base antes de herrería; invasor nórdico 60 -> 66/69/72)",
-      "efecto": {
-        "hp_infanteria_feudal": 0.1,
-        "hp_infanteria_castillos": 0.15,
-        "hp_infanteria_imperial": 0.2,
-        "aplica_a": [
-          "milicia",
-          "hombre_de_armas",
-          "espadachin_mandoble",
-          "campeon",
-          "lancero",
-          "piquero",
-          "alabardero",
-          "invasor_nordico"
-        ]
-      }
-    },
-    {
-      "id": "barcos_baratos",
-      "descripcion": "Barcos de guerra 10%/15%/20% más baratos en Feudal/Castillos/Imperial (galera 90M/30O -> 81M/27O en Feudal, 77M/26O en Castillos, 72M/24O en Imperial)",
-      "efecto": {
-        "descuento_barcos_feudal": 0.1,
-        "descuento_barcos_castillos": 0.15,
-        "descuento_barcos_imperial": 0.2,
-        "aplica_a": [
-          "galera_guerra",
-          "galeon",
-          "brulote",
-          "drakkar"
-        ]
-      }
-    },
-    {
-      "id": "carretilla_gratis",
-      "descripcion": "Carretilla y Carreta de mano gratis e instantáneas (ahorro 175 comida + 300 comida/200 madera; 75s + 75s -> 0s)",
-      "efecto": {
-        "carretilla_coste": 0,
-        "carreta_mano_coste": 0,
-        "carretilla_tiempo_sec": 0,
-        "carreta_mano_tiempo_sec": 0,
-        "ahorro_comida": 475,
-        "ahorro_madera": 200
-      }
-    },
-    {
-      "team_bonus": {
-        "id": "muelles_baratos_15",
-        "descripcion": "Muelles 15% más baratos (aliados): 175 madera -> 149 madera",
-        "efecto": {
-          "descuento_muelle_madera": 0.15,
-          "coste_base_madera": 175,
-          "coste_final_madera": 149
-        }
-      }
+ "id": "vikingos",
+ "type": "civ",
+ "name": "Vikingos",
+ "color": "#0e6e5a",
+ "effects": [],
+ "disabled": [
+  "acero_wootz",
+  "aguila",
+  "aldeana",
+  "almenas",
+  "anarquia",
+  "arambai",
+  "arcabuz",
+  "arco_recurvo",
+  "armadura_cab_3",
+  "armadura_lamelar",
+  "armadura_ming_guang",
+  "armadura_seda",
+  "arquero_camello",
+  "arquero_compuesto",
+  "arquero_emplumado",
+  "arquero_tiro_largo",
+  "arquitectura",
+  "artilleria",
+  "asedio_timurido",
+  "ataque_cab_3",
+  "ateismo",
+  "atlatl",
+  "bagains",
+  "balistas",
+  "ballestero_genoves",
+  "barco_tortuga",
+  "bastiones_fortificados",
+  "bimaristan",
+  "blindaje",
+  "bombas_trueno",
+  "boyar",
+  "caballeria_aznauri",
+  "caballeria_manipur",
+  "caballeria_ordo",
+  "caballero_teutonico",
+  "caballerosidad",
+  "camellos_magrebies",
+  "canon_organo",
+  "carabela",
+  "cargador_virotes",
+  "carreta_guerra",
+  "catafracta",
+  "chatras",
+  "chu_ko_nu",
+  "circunnavegacion",
+  "ciudadelas",
+  "coheteria",
+  "comitatenses",
+  "contrapesos",
+  "cuerpo_medico",
+  "detinets",
+  "doble_ballesta",
+  "druzhina",
+  "ejercito_corvino",
+  "elefante_balista",
+  "elefante_combate",
+  "elefante_guerra",
+  "escudos_tela",
+  "escudos_torre",
+  "espadas_colmillos",
+  "estribos",
+  "eupseong",
+  "farimba",
+  "fereteres",
+  "fervor",
+  "flota_cilicia",
+  "fortaleza",
+  "fuego_griego",
+  "fuertes_colina",
+  "furor_celta",
+  "ganaderia_estepa",
+  "gbeto",
+  "ghulam",
+  "gran_muralla",
+  "gran_ruta_troncal",
+  "guardias_frontera",
+  "guerras_floridas",
+  "hachas_barbas",
+  "hauberk",
+  "herederos_reales",
+  "holcanes",
+  "honda_andina",
+  "howdah",
+  "huscarle",
+  "huszar_magiar",
+  "iluminacion",
+  "inquisicion",
+  "invasor_pastos",
+  "jabalineros_hulche",
+  "jaguar",
+  "kamandaran",
+  "kamayuk",
+  "karambit",
+  "kasbah",
+  "kataparuto",
+  "keshik",
+  "kipchak",
+  "konnik",
+  "kshatriyas",
+  "legado_lechitico",
+  "legionario",
+  "leva_masa",
+  "logistica",
+  "mahayana",
+  "mameluco",
+  "mangudai",
+  "maquina_guerra",
+  "mercenarios_cumanos",
+  "merodeadores",
+  "milicia_flamenca",
+  "misionero",
+  "monaspa",
+  "motores_torsion",
+  "muralla_fortificada",
+  "nomadas",
+  "pagoda_hierro",
+  "paiks",
+  "paladin",
+  "paladin_franco",
+  "papel_moneda",
+  "perfusion",
+  "pirotecnia",
+  "primera_cruzada",
+  "privilegios_szlachta",
+  "punteria",
+  "ratha",
+  "rattan",
+  "redencion",
+  "reformas_husitas",
+  "revolucion_flamenca",
+  "ruta_seda",
+  "sacerdote_guerrero",
+  "samurai",
+  "serpiente_enroscada",
+  "shatagni",
+  "shinkichon",
+  "shotel",
+  "sipahi",
+  "supremacia",
+  "tactica_wagenburg",
+  "tacticas_acantilados",
+  "taladro",
+  "talasocracia",
+  "tarkan",
+  "tigre_agazapado",
+  "tigui",
+  "torre_muralla",
+  "torres_svan",
+  "tuntian",
+  "vinedos_borgonones",
+  "yasama"
+ ],
+ "unique_units": [
+  "drakkar",
+  "invasor_nordico"
+ ],
+ "unique_techs": [
+  "barcos_dragon",
+  "jefatura"
+ ],
+ "legacy_effects": [
+  {
+   "id": "infanteria_hp_edad",
+   "descripcion": "Infantería +10%/+15%/+20% HP en Feudal/Castillos/Imperial (milicia 45 -> 50/52/54 base antes de herrería; invasor nórdico 60 -> 66/69/72)",
+   "efecto": {
+    "hp_infanteria_feudal": 0.1,
+    "hp_infanteria_castillos": 0.15,
+    "hp_infanteria_imperial": 0.2,
+    "aplica_a": [
+     "milicia",
+     "hombre_de_armas",
+     "espadachin_mandoble",
+     "campeon",
+     "lancero",
+     "piquero",
+     "alabardero",
+     "invasor_nordico"
+    ]
+   }
+  },
+  {
+   "id": "barcos_baratos",
+   "descripcion": "Barcos de guerra 10%/15%/20% más baratos en Feudal/Castillos/Imperial (galera 90M/30O -> 81M/27O en Feudal, 77M/26O en Castillos, 72M/24O en Imperial)",
+   "efecto": {
+    "descuento_barcos_feudal": 0.1,
+    "descuento_barcos_castillos": 0.15,
+    "descuento_barcos_imperial": 0.2,
+    "aplica_a": [
+     "galera_guerra",
+     "galeon",
+     "brulote",
+     "drakkar"
+    ]
+   }
+  },
+  {
+   "id": "carretilla_gratis",
+   "descripcion": "Carretilla y Carreta de mano gratis e instantáneas (ahorro 175 comida + 300 comida/200 madera; 75s + 75s -> 0s)",
+   "efecto": {
+    "carretilla_coste": 0,
+    "carreta_mano_coste": 0,
+    "carretilla_tiempo_sec": 0,
+    "carreta_mano_tiempo_sec": 0,
+    "ahorro_comida": 475,
+    "ahorro_madera": 200
+   }
+  },
+  {
+   "team_bonus": {
+    "id": "muelles_baratos_15",
+    "descripcion": "Muelles 15% más baratos (aliados): 175 madera -> 149 madera",
+    "efecto": {
+     "descuento_muelle_madera": 0.15,
+     "coste_base_madera": 175,
+     "coste_final_madera": 149
     }
-  ]
+   }
+  }
+ ]
 }

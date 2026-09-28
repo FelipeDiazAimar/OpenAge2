@@ -1,0 +1,22 @@
+{
+ "id": "asedio_timurido",
+ "type": "tech",
+ "name": "Asedio timúrido (Timurid Siegecraft)",
+ "cost": {
+  "wood": 500,
+  "gold": 400
+ },
+ "research_time": 50,
+ "at": "castillo",
+ "description": "Trabuquetes +2 alcance. Permite crear Camellos llameantes (suicida vs caballería).",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "alcance_trabuquete": 2,
+  "desbloquea": [
+   "camello_llameante"
+  ]
+ }
+}

@@ -1,0 +1,236 @@
+{
+ "id": "italianos",
+ "type": "civ",
+ "name": "Italianos",
+ "color": "#3d9e4d",
+ "effects": [
+  {
+   "target": "id:barco_pesquero",
+   "op": "mul",
+   "path": "cost.wood",
+   "value": 0.85
+  }
+ ],
+ "disabled": [
+  "acero_wootz",
+  "aguila",
+  "aldeana",
+  "almenas",
+  "anarquia",
+  "arambai",
+  "arcabuz",
+  "arco_recurvo",
+  "armadura_lamelar",
+  "armadura_ming_guang",
+  "armadura_seda",
+  "arquero_camello",
+  "arquero_compuesto",
+  "arquero_emplumado",
+  "arquero_tiro_largo",
+  "artilleria",
+  "asedio_timurido",
+  "ateismo",
+  "atlatl",
+  "bagains",
+  "balistas",
+  "barco_tortuga",
+  "barcos_dragon",
+  "bastiones_fortificados",
+  "bimaristan",
+  "blindaje",
+  "bombas_trueno",
+  "boyar",
+  "caballeria_aznauri",
+  "caballeria_manipur",
+  "caballeria_ordo",
+  "caballero_teutonico",
+  "caballerosidad",
+  "camellos_magrebies",
+  "canon_organo",
+  "carabela",
+  "cargador_virotes",
+  "carreta_guerra",
+  "catafracta",
+  "chatras",
+  "chu_ko_nu",
+  "circunnavegacion",
+  "ciudadelas",
+  "coheteria",
+  "comitatenses",
+  "contrapesos",
+  "cuerpo_medico",
+  "detinets",
+  "doble_ballesta",
+  "drakkar",
+  "druzhina",
+  "ejercito_corvino",
+  "elefante_balista",
+  "elefante_combate",
+  "elefante_guerra",
+  "escudos_tela",
+  "escudos_torre",
+  "espadas_colmillos",
+  "estribos",
+  "eupseong",
+  "farimba",
+  "fereteres",
+  "flota_cilicia",
+  "fortaleza",
+  "fuego_griego",
+  "fuertes_colina",
+  "furor_celta",
+  "ganaderia_estepa",
+  "gbeto",
+  "ghulam",
+  "gran_muralla",
+  "gran_ruta_troncal",
+  "guardias_frontera",
+  "guerras_floridas",
+  "hachas_barbas",
+  "hauberk",
+  "herederos_reales",
+  "herejia",
+  "holcanes",
+  "honda_andina",
+  "howdah",
+  "huscarle",
+  "huszar_magiar",
+  "ingenieros_asedio",
+  "inquisicion",
+  "invasor_nordico",
+  "invasor_pastos",
+  "jabalineros_hulche",
+  "jaguar",
+  "jefatura",
+  "kamandaran",
+  "kamayuk",
+  "karambit",
+  "kasbah",
+  "kataparuto",
+  "keshik",
+  "kipchak",
+  "konnik",
+  "kshatriyas",
+  "legado_lechitico",
+  "legionario",
+  "leva_masa",
+  "logistica",
+  "mahayana",
+  "mameluco",
+  "mangudai",
+  "maquina_guerra",
+  "mercenarios_cumanos",
+  "merodeadores",
+  "milicia_flamenca",
+  "misionero",
+  "monaspa",
+  "motores_torsion",
+  "nomadas",
+  "pagoda_hierro",
+  "paiks",
+  "paladin",
+  "paladin_franco",
+  "papel_moneda",
+  "perfusion",
+  "primera_cruzada",
+  "privilegios_szlachta",
+  "punteria",
+  "ratha",
+  "rattan",
+  "reformas_husitas",
+  "revolucion_flamenca",
+  "sacerdote_guerrero",
+  "samurai",
+  "serpiente_enroscada",
+  "shatagni",
+  "shinkichon",
+  "shotel",
+  "sipahi",
+  "supremacia",
+  "tactica_wagenburg",
+  "tacticas_acantilados",
+  "taladro",
+  "talasocracia",
+  "tarkan",
+  "tigre_agazapado",
+  "tigui",
+  "torres_svan",
+  "tuntian",
+  "vinedos_borgonones",
+  "yasama"
+ ],
+ "unique_units": [
+  "ballestero_genoves"
+ ],
+ "unique_techs": [
+  "ruta_seda",
+  "pirotecnia"
+ ],
+ "legacy_effects": [
+  {
+   "id": "avance_edad_15",
+   "descripcion": "Avanzar de edad 15% más barato",
+   "efecto": {
+    "descuento_avance_edad": 0.15
+   }
+  },
+  {
+   "id": "arqueros_paves_11",
+   "descripcion": "Arqueros a pie (sin guerrillero) y condotieros +1/+1 armadura (efecto Pavés como bono civ)",
+   "efecto": {
+    "armadura_arqueros": 1,
+    "antiproyectil_arqueros": 1,
+    "aplica_a": [
+     "arquero",
+     "ballestero",
+     "ballestero_genoves",
+     "condotiero"
+    ]
+   }
+  },
+  {
+   "id": "muelle_uni_25",
+   "descripcion": "Tecnologías de muelle y universidad 25% más baratas",
+   "efecto": {
+    "descuento_muelle_universidad": 0.25
+   }
+  },
+  {
+   "id": "polvora_barata_20",
+   "descripcion": "Unidades de pólvora 20% más baratas",
+   "efecto": {
+    "descuento_polvora": 0.2,
+    "aplica_a": [
+     "arcabucero",
+     "canon_bombardeo",
+     "galeon_artillado"
+    ]
+   }
+  },
+  {
+   "id": "maravilla_genova",
+   "descripcion": "Maravilla: Catedral de Génova (San Lorenzo)",
+   "efecto": {
+    "maravilla": "Catedral de Génova"
+   }
+  },
+  {
+   "id": "set_mediterraneo",
+   "descripcion": "Set arquitectónico: Mediterráneo",
+   "efecto": {
+    "set_arquitectonico": "mediterraneo"
+   }
+  },
+  {
+   "team_bonus": {
+    "id": "condotiero_equipo",
+    "descripcion": "Condotieros disponibles en cuartel en Imperial (aliados)",
+    "efecto": {
+     "desbloquea": "condotiero",
+     "edificio": "cuartel",
+     "edad_minima": "imperial"
+    }
+   }
+  }
+ ]
+}

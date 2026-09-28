@@ -1,0 +1,41 @@
+{
+ "id": "konnik",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Konnik",
+ "cost": {
+  "food": 60,
+  "gold": 70
+ },
+ "train_time": 16,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 120
+  },
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 2
+   }
+  },
+  "Move": {
+   "speed": 1.35
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 13
+   },
+   "range": 0,
+   "reload": 2.4
+  },
+  "Unique": {
+   "civ": "bulgaros"
+  }
+ }
+}

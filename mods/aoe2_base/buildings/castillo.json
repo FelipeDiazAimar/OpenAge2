@@ -1,72 +1,193 @@
 {
-  "id": "castillo",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Castillo",
-  "cost": {
-    "stone": 650
+ "id": "castillo",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Castillo",
+ "cost": {
+  "stone": 650
+ },
+ "build_time": 200,
+ "footprint": [
+  4,
+  4
+ ],
+ "requires": {
+  "age": "castillos"
+ },
+ "build_menu": "militar",
+ "hotkey": "F",
+ "graphics": {
+  "idle": "sprite:buildings/castle/b_west_castle_age3_x1"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 4800
   },
-  "build_time": 200,
-  "footprint": [
-    4,
-    4
-  ],
-  "requires": {
-    "age": "castillos"
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 8
+   }
   },
-  "build_menu": "militar",
-  "hotkey": "F",
-  "graphics": {
-    "idle": "sprite:buildings/castle/b_west_castle_age3_x1"
+  "Vision": {
+   "sight": 8.0
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 4800
-    },
-    "Armor": {
-      "classes": {
-        "melee": 2,
-        "pierce": 8
-      }
-    },
-    "Vision": {
-      "sight": 8.0
-    },
-    "Train": {
-      "units": [
-        "catafracta",
-        "trebuchet",
-        "arquero_tiro_largo",
-        "invasor_nordico"
-      ],
-      "queue": 5
-    },
-    "RallyPoint": {},
-    "Research": {
-      "techs": [
-        "jefatura",
-        "barcos_dragon",
-        "fuego_griego",
-        "logistica",
-        "punteria",
-        "maquina_guerra",
-        "hachas_barbas",
-        "caballerosidad",
-        "anarquia",
-        "perfusion"
-      ]
-    },
-    "Garrison": {
-      "capacity": 20,
-      "arrows_per_unit": 1
-    },
-    "Attack": {
-      "damage": {
-        "pierce": 11
-      },
-      "range": 8.0,
-      "reload": 2.0,
-      "projectile_speed": 7.0
-    }
+  "Train": {
+   "units": [
+    "catafracta",
+    "trebuchet",
+    "arquero_tiro_largo",
+    "invasor_nordico",
+    "aldeana",
+    "arambai",
+    "arquero_camello",
+    "arquero_emplumado",
+    "ballestero_genoves",
+    "boyar",
+    "caballero_teutonico",
+    "canon_organo",
+    "carreta_guerra",
+    "chu_ko_nu",
+    "elefante_balista",
+    "elefante_combate",
+    "elefante_guerra",
+    "gbeto",
+    "ghulam",
+    "invasor_pastos",
+    "jaguar",
+    "kamayuk",
+    "karambit",
+    "keshik",
+    "kipchak",
+    "konnik",
+    "mameluco",
+    "mangudai",
+    "monaspa",
+    "pagoda_hierro",
+    "ratha",
+    "rattan",
+    "samurai",
+    "shotel",
+    "tarkan"
+   ],
+   "queue": 5
+  },
+  "RallyPoint": {},
+  "Research": {
+   "techs": [
+    "jefatura",
+    "barcos_dragon",
+    "fuego_griego",
+    "logistica",
+    "punteria",
+    "maquina_guerra",
+    "hachas_barbas",
+    "caballerosidad",
+    "anarquia",
+    "perfusion",
+    "acero_wootz",
+    "almenas",
+    "arcabuz",
+    "arco_recurvo",
+    "armadura_lamelar",
+    "armadura_ming_guang",
+    "armadura_seda",
+    "artilleria",
+    "asedio_timurido",
+    "ateismo",
+    "atlatl",
+    "bagains",
+    "balistas",
+    "bastiones_fortificados",
+    "bimaristan",
+    "blindaje",
+    "bombas_trueno",
+    "caballeria_aznauri",
+    "caballeria_manipur",
+    "caballeria_ordo",
+    "camellos_magrebies",
+    "cargador_virotes",
+    "chatras",
+    "circunnavegacion",
+    "ciudadelas",
+    "coheteria",
+    "comitatenses",
+    "contrapesos",
+    "cuerpo_medico",
+    "detinets",
+    "doble_ballesta",
+    "druzhina",
+    "ejercito_corvino",
+    "escudos_tela",
+    "escudos_torre",
+    "espadas_colmillos",
+    "estribos",
+    "eupseong",
+    "farimba",
+    "fereteres",
+    "flota_cilicia",
+    "fortaleza",
+    "fuertes_colina",
+    "furor_celta",
+    "ganaderia_estepa",
+    "gran_muralla",
+    "gran_ruta_troncal",
+    "guardias_frontera",
+    "guerras_floridas",
+    "hauberk",
+    "herederos_reales",
+    "holcanes",
+    "honda_andina",
+    "howdah",
+    "inquisicion",
+    "jabalineros_hulche",
+    "kamandaran",
+    "kasbah",
+    "kataparuto",
+    "kshatriyas",
+    "legado_lechitico",
+    "leva_masa",
+    "mahayana",
+    "mercenarios_cumanos",
+    "merodeadores",
+    "motores_torsion",
+    "nomadas",
+    "paiks",
+    "papel_moneda",
+    "pirotecnia",
+    "primera_cruzada",
+    "privilegios_szlachta",
+    "reformas_husitas",
+    "revolucion_flamenca",
+    "ruta_seda",
+    "serpiente_enroscada",
+    "shatagni",
+    "shinkichon",
+    "sipahi",
+    "supremacia",
+    "tactica_wagenburg",
+    "tacticas_acantilados",
+    "taladro",
+    "talasocracia",
+    "tigre_agazapado",
+    "tigui",
+    "torres_svan",
+    "tuntian",
+    "vinedos_borgonones",
+    "yasama"
+   ]
+  },
+  "Garrison": {
+   "capacity": 20,
+   "arrows_per_unit": 1
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 11
+   },
+   "range": 8.0,
+   "reload": 2.0,
+   "projectile_speed": 7.0
   }
+ }
 }

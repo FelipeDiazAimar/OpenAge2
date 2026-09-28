@@ -1,0 +1,41 @@
+{
+ "id": "monaspa",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Monaspa",
+ "cost": {
+  "food": 60,
+  "gold": 45
+ },
+ "train_time": 14,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 80
+  },
+  "Armor": {
+   "classes": {
+    "melee": 5,
+    "pierce": 2
+   }
+  },
+  "Move": {
+   "speed": 1.4
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 14
+   },
+   "range": 0,
+   "reload": 1.8
+  },
+  "Unique": {
+   "civ": "georgianos"
+  }
+ }
+}

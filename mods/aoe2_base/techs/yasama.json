@@ -1,0 +1,22 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 300,
+  "wood": 300
+ },
+ "description": "Torres disparan 2 flechas adicionales.",
+ "effects": [],
+ "id": "yasama",
+ "legacy_effects": {
+  "aplica_a": [
+   "torre_vigia"
+  ],
+  "flechas_extra_torres": 2
+ },
+ "name": "Yasama",
+ "requires": {
+  "age": "castillos"
+ },
+ "research_time": 40,
+ "type": "tech"
+}
