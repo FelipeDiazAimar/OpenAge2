@@ -1,0 +1,23 @@
+{
+ "id": "carenado",
+ "type": "tech",
+ "name": "Carenado (Careening)",
+ "cost": {
+  "food": 250,
+  "gold": 150
+ },
+ "research_time": 50,
+ "at": "muelle",
+ "description": "Barcos +1 armadura antiproyectil",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [
+  {
+   "target": "tag:barco",
+   "op": "add",
+   "path": "abilities.Armor.classes.pierce",
+   "value": 1
+  }
+ ]
+}

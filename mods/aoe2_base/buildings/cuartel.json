@@ -1,45 +1,53 @@
 {
-  "id": "cuartel",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Cuartel",
-  "cost": {
-    "wood": 175
+ "id": "cuartel",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Cuartel",
+ "cost": {
+  "wood": 175
+ },
+ "build_time": 50,
+ "footprint": [
+  3,
+  3
+ ],
+ "requires": {
+  "age": "alta_edad_media"
+ },
+ "build_menu": "militar",
+ "hotkey": "Q",
+ "graphics": {
+  "idle": "sprite:buildings/barracks/b_west_barracks_age3_x1"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 1200
   },
-  "build_time": 50,
-  "footprint": [
-    3,
-    3
-  ],
-  "requires": {
-    "age": "alta_edad_media"
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
   },
-  "build_menu": "militar",
-  "hotkey": "Q",
-  "graphics": {
-    "idle": "sprite:buildings/barracks/b_west_barracks_age3_x1"
+  "Train": {
+   "units": [
+    "campeon",
+    "espadachin_mandoble",
+    "hombre_armas",
+    "milicia",
+    "lancero",
+    "huscarle"
+   ],
+   "queue": 5
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 1200
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "Train": {
-      "units": [
-        "campeon",
-        "espadachin_mandoble",
-        "hombre_armas",
-        "milicia",
-        "lancero",
-        "huscarle"
-      ],
-      "queue": 5
-    },
-    "RallyPoint": {}
+  "RallyPoint": {},
+  "Research": {
+   "techs": [
+    "suministros",
+    "gambesones",
+    "escuderos",
+    "incendio"
+   ]
   }
+ }
 }

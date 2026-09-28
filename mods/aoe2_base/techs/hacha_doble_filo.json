@@ -1,0 +1,23 @@
+{
+ "id": "hacha_doble_filo",
+ "type": "tech",
+ "name": "Hacha de doble filo",
+ "cost": {
+  "food": 100,
+  "wood": 50
+ },
+ "research_time": 25,
+ "at": "campamento_maderero",
+ "description": "Aldeanos talan madera 20% más rápido",
+ "requires": {
+  "age": "feudal"
+ },
+ "effects": [
+  {
+   "target": "tag:aldeano",
+   "op": "mul",
+   "path": "abilities.Gather.rates.wood",
+   "value": 1.2
+  }
+ ]
+}

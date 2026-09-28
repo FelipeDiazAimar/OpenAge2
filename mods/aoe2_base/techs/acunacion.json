@@ -1,0 +1,23 @@
+{
+ "id": "acunacion",
+ "type": "tech",
+ "name": "Acuñación",
+ "cost": {
+  "food": 200,
+  "gold": 100
+ },
+ "research_time": 70,
+ "at": "mercado",
+ "description": "Adaptación: carretas +25% oro por distancia (el tributo 1:1 del mod no tiene tasa que reducir)",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [
+  {
+   "target": "id:carreta_comercio",
+   "op": "mul",
+   "path": "abilities.Trade.gold_per_tile",
+   "value": 1.25
+  }
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "id": "ganaderia",
+ "type": "tech",
+ "name": "Ganadería (Husbandry)",
+ "cost": {
+  "food": 150
+ },
+ "research_time": 40,
+ "at": "establo",
+ "description": "Caballería +10% velocidad de movimiento",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [
+  {
+   "target": "tag:caballeria",
+   "op": "mul",
+   "path": "abilities.Move.speed",
+   "value": 1.1
+  }
+ ]
+}

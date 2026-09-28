@@ -1,0 +1,26 @@
+{
+ "id": "sierra",
+ "type": "tech",
+ "name": "Sierra de arco",
+ "cost": {
+  "food": 150,
+  "wood": 100
+ },
+ "research_time": 50,
+ "at": "campamento_maderero",
+ "description": "Aldeanos talan madera 20% más rápido",
+ "requires": {
+  "age": "castillos",
+  "techs": [
+   "hacha_doble_filo"
+  ]
+ },
+ "effects": [
+  {
+   "target": "tag:aldeano",
+   "op": "mul",
+   "path": "abilities.Gather.rates.wood",
+   "value": 1.2
+  }
+ ]
+}

@@ -1,35 +1,42 @@
 {
-  "id": "molino",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Molino",
-  "cost": {
-    "wood": 100
+ "id": "molino",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Molino",
+ "cost": {
+  "wood": 100
+ },
+ "build_time": 35,
+ "footprint": [
+  2,
+  2
+ ],
+ "build_menu": "economico",
+ "hotkey": "W",
+ "abilities": {
+  "Hitpoints": {
+   "max": 600
   },
-  "build_time": 35,
-  "footprint": [
-    2,
-    2
-  ],
-  "build_menu": "economico",
-  "hotkey": "W",
-  "abilities": {
-    "Hitpoints": {
-      "max": 600
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "DropSite": {
-      "accepts": [
-        "food"
-      ]
-    }
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
   },
-  "graphics": {
-    "idle": "sprite:buildings/mill/b_west_mill_age3_x1"
+  "DropSite": {
+   "accepts": [
+    "food"
+   ]
+  },
+  "Research": {
+   "techs": [
+    "collar_caballo",
+    "arado_pesado",
+    "rotacion_cultivos"
+   ]
   }
+ },
+ "graphics": {
+  "idle": "sprite:buildings/mill/b_west_mill_age3_x1"
+ }
 }

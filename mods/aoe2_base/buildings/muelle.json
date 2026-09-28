@@ -1,44 +1,51 @@
 {
-  "id": "muelle",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Muelle",
-  "cost": {
-    "wood": 150
+ "id": "muelle",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Muelle",
+ "cost": {
+  "wood": 150
+ },
+ "build_time": 50,
+ "footprint": [
+  3,
+  3
+ ],
+ "build_menu": "economico",
+ "hotkey": "T",
+ "abilities": {
+  "Hitpoints": {
+   "max": 1200
   },
-  "build_time": 50,
-  "footprint": [
-    3,
-    3
-  ],
-  "build_menu": "economico",
-  "hotkey": "T",
-  "abilities": {
-    "Hitpoints": {
-      "max": 1200
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "Train": {
-      "units": [
-        "barco_pesquero",
-        "galera",
-        "drakkar"
-      ],
-      "queue": 5
-    },
-    "RallyPoint": {},
-    "DropSite": {
-      "accepts": [
-        "food"
-      ]
-    }
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
   },
-  "graphics": {
-    "idle": "sprite:buildings/dock/b_west_dock_age3_x1"
+  "Train": {
+   "units": [
+    "barco_pesquero",
+    "galera",
+    "drakkar"
+   ],
+   "queue": 5
+  },
+  "RallyPoint": {},
+  "DropSite": {
+   "accepts": [
+    "food"
+   ]
+  },
+  "Research": {
+   "techs": [
+    "carenado",
+    "dique_seco",
+    "carpintero_naval"
+   ]
   }
+ },
+ "graphics": {
+  "idle": "sprite:buildings/dock/b_west_dock_age3_x1"
+ }
 }

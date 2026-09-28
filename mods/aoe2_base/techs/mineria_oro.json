@@ -1,0 +1,23 @@
+{
+ "id": "mineria_oro",
+ "type": "tech",
+ "name": "Minería de oro",
+ "cost": {
+  "food": 100,
+  "wood": 75
+ },
+ "research_time": 30,
+ "at": "campamento_minero",
+ "description": "Aldeanos extraen oro 15% más rápido",
+ "requires": {
+  "age": "feudal"
+ },
+ "effects": [
+  {
+   "target": "tag:aldeano",
+   "op": "mul",
+   "path": "abilities.Gather.rates.gold",
+   "value": 1.15
+  }
+ ]
+}

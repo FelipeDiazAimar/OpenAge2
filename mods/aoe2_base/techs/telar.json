@@ -1,0 +1,34 @@
+{
+ "id": "telar",
+ "type": "tech",
+ "name": "Telar (Loom)",
+ "cost": {
+  "gold": 50
+ },
+ "research_time": 25,
+ "at": "centro_urbano",
+ "description": "Aldeanos +15 HP y +1/+2 armadura (25->40 HP)",
+ "requires": {
+  "age": "alta_edad_media"
+ },
+ "effects": [
+  {
+   "target": "id:aldeano",
+   "op": "add",
+   "path": "abilities.Hitpoints.max",
+   "value": 15
+  },
+  {
+   "target": "id:aldeano",
+   "op": "add",
+   "path": "abilities.Armor.classes.melee",
+   "value": 1
+  },
+  {
+   "target": "id:aldeano",
+   "op": "add",
+   "path": "abilities.Armor.classes.pierce",
+   "value": 2
+  }
+ ]
+}

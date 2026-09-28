@@ -1,0 +1,26 @@
+{
+ "id": "sierra_dos_manos",
+ "type": "tech",
+ "name": "Sierra de dos manos",
+ "cost": {
+  "food": 300,
+  "wood": 200
+ },
+ "research_time": 100,
+ "at": "campamento_maderero",
+ "description": "Aldeanos talan madera 10% más rápido",
+ "requires": {
+  "age": "imperial",
+  "techs": [
+   "sierra"
+  ]
+ },
+ "effects": [
+  {
+   "target": "tag:aldeano",
+   "op": "mul",
+   "path": "abilities.Gather.rates.wood",
+   "value": 1.1
+  }
+ ]
+}

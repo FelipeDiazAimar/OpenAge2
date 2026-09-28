@@ -1,0 +1,32 @@
+{
+ "id": "arado_pesado",
+ "type": "tech",
+ "name": "Arado pesado",
+ "cost": {
+  "food": 125,
+  "wood": 125
+ },
+ "research_time": 40,
+ "at": "molino",
+ "description": "Granjas +125 alimento; aldeanos +1 capacidad",
+ "requires": {
+  "age": "castillos",
+  "techs": [
+   "collar_caballo"
+  ]
+ },
+ "effects": [
+  {
+   "target": "id:granja",
+   "op": "add",
+   "path": "abilities.Farm.food",
+   "value": 125
+  },
+  {
+   "target": "tag:aldeano",
+   "op": "add",
+   "path": "abilities.Gather.capacity",
+   "value": 1
+  }
+ ]
+}

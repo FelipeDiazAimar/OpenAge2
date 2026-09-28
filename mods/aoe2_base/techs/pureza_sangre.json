@@ -1,0 +1,23 @@
+{
+ "id": "pureza_sangre",
+ "type": "tech",
+ "name": "Pureza de sangre (Bloodlines)",
+ "cost": {
+  "food": 150,
+  "gold": 100
+ },
+ "research_time": 50,
+ "at": "establo",
+ "description": "Unidades montadas +20 HP",
+ "requires": {
+  "age": "feudal"
+ },
+ "effects": [
+  {
+   "target": "tag:caballeria",
+   "op": "add",
+   "path": "abilities.Hitpoints.max",
+   "value": 20
+  }
+ ]
+}

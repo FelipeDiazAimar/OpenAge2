@@ -515,6 +515,9 @@ def convert_packed(path, outdir, step=2, margin=2, max_frames=0, verbose=True):
     gy1 = min(metas[0]["ch"] - 1, gy1 + margin)
     cw, ch = gx1 - gx0 + 1, gy1 - gy0 + 1
     dirs, per_dir, drop = detect_dirs(len(metas))
+    if max_frames and detect_dirs(nframes)[:2] != (dirs, per_dir):
+        print("  AVISO %s: --max-frames %d cambia dirs %s (completo: %s): la unidad no rotara. Re-extrae sin limite." % (
+            base, max_frames, (dirs, per_dir), detect_dirs(nframes)[:2]), flush=True)
     fr = metas[:-1] if drop else metas
     # id(e) -> (dir, sub) conservados; se decodifica TODO (barato) para que el
     # flag reuse encadene bien, pero solo se escriben los conservados.

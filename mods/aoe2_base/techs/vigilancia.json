@@ -1,0 +1,22 @@
+{
+ "id": "vigilancia",
+ "type": "tech",
+ "name": "Vigilancia (Town Watch)",
+ "cost": {
+  "food": 75
+ },
+ "research_time": 25,
+ "at": "centro_urbano",
+ "description": "Edificios +4 línea de visión",
+ "requires": {
+  "age": "feudal"
+ },
+ "effects": [
+  {
+   "target": "type:building",
+   "op": "add",
+   "path": "abilities.Vision.sight",
+   "value": 4
+  }
+ ]
+}
