@@ -1,0 +1,45 @@
+{
+ "id": "piquete_demoledor",
+ "type": "unit",
+ "extends": "barco_base",
+ "name": "Piquete Demoledor",
+ "requires": {
+  "age": "feudal"
+ },
+ "cost": {
+  "wood": 70,
+  "gold": 50
+ },
+ "train_time": 45,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "upgrades_to": "brulote",
+ "graphics": {
+  "idle": "sprite:piquete_demoledor/idle",
+  "walk": "sprite:piquete_demoledor/walk"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 45
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 2
+   }
+  },
+  "Move": {
+   "speed": 1.5
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 90
+   },
+   "range": 0,
+   "reload": 3.0
+  }
+ }
+}

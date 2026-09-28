@@ -1,0 +1,47 @@
+{
+ "id": "arbalestero",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Arbalestero",
+ "requires": {
+  "age": "imperial"
+ },
+ "cost": {
+  "wood": 25,
+  "gold": 45
+ },
+ "train_time": 27,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {
+  "walk": "sprite:arbalestero/walk",
+  "attack": "sprite:arbalestero/attack",
+  "idle": "sprite:arbalestero/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 40
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 0.96
+  },
+  "Vision": {
+   "sight": 7.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 6,
+    "lancero": 3
+   },
+   "range": 5.0,
+   "reload": 2.0,
+   "projectile_speed": 12.0
+  }
+ }
+}

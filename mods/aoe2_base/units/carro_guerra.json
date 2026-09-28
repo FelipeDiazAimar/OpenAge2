@@ -1,0 +1,50 @@
+{
+ "id": "carro_guerra",
+ "type": "unit",
+ "extends": "asedio_base",
+ "name": "Carro de Guerra",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 65,
+  "gold": 90
+ },
+ "train_time": 28,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {
+  "walk": "sprite:uniques/carro_guerra/walk",
+  "attack": "sprite:uniques/carro_guerra/attack",
+  "idle": "sprite:uniques/carro_guerra/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 65
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 5
+   }
+  },
+  "Move": {
+   "speed": 0.9
+  },
+  "Vision": {
+   "sight": 8.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 8,
+    "edificio": 2
+   },
+   "range": 6.0,
+   "reload": 6.5,
+   "projectile_speed": 7.0
+  },
+  "Unique": {
+   "civ": "shu"
+  }
+ }
+}

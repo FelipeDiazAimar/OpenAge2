@@ -1,0 +1,22 @@
+{
+  "id": "mejora_onagro",
+  "type": "tech",
+  "name": "Onagro",
+  "cost": {
+    "food": 800,
+    "gold": 500
+  },
+  "research_time": 75,
+  "at": "taller_asedio",
+  "description": "Mejora Catapulta (Mangonel) a Onagro",
+  "requires": {
+    "age": "imperial"
+  },
+  "effects": [
+    {
+      "op": "replace_entity",
+      "from": "catapulta",
+      "to": "onagro"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+ "id": "mineria_piedra",
+ "type": "tech",
+ "name": "Minería de piedra",
+ "cost": {
+  "food": 100,
+  "wood": 75
+ },
+ "research_time": 30,
+ "at": "campamento_minero",
+ "description": "Aldeanos extraen piedra 15% más rápido",
+ "requires": {
+  "age": "feudal"
+ },
+ "effects": [
+  {
+   "target": "tag:aldeano",
+   "op": "mul",
+   "path": "abilities.Gather.rates.stone",
+   "value": 1.15
+  }
+ ]
+}

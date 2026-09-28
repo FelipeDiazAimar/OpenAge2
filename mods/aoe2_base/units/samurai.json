@@ -1,0 +1,49 @@
+{
+ "id": "samurai",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Samurai",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 60,
+  "gold": 30
+ },
+ "train_time": 9,
+ "pop_cost": 1,
+ "hotkey": "R",
+ "graphics": {
+  "walk": "sprite:uniques/samurai/walk",
+  "attack": "sprite:uniques/samurai/attack",
+  "idle": "sprite:uniques/samurai/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 60
+  },
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 1
+   }
+  },
+  "Move": {
+   "speed": 1.0
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 8,
+    "edificio": 2
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "japoneses"
+  }
+ }
+}

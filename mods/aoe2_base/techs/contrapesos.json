@@ -1,0 +1,23 @@
+{
+ "id": "contrapesos",
+ "type": "tech",
+ "name": "Contrapesos (Counterweights)",
+ "cost": {
+  "food": 650,
+  "gold": 500
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Trebuquetes y línea de mangonel +15% ataque.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "ataque_trebuquete_mangonel_bonus": 0.15,
+  "aplica_a": [
+   "trebuchet",
+   "catapulta"
+  ]
+ }
+}

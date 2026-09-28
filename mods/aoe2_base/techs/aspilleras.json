@@ -1,0 +1,23 @@
+{
+ "id": "aspilleras",
+ "type": "tech",
+ "name": "Aspilleras (Arrowslits)",
+ "cost": {
+  "food": 250,
+  "wood": 250
+ },
+ "research_time": 60,
+ "at": "universidad",
+ "description": "Torre de vigilancia +1 ataque",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "target": "id:torre_vigia",
+   "op": "add",
+   "path": "abilities.Attack.damage.pierce",
+   "value": 1
+  }
+ ]
+}

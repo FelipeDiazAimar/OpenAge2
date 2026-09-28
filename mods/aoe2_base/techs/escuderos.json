@@ -1,0 +1,22 @@
+{
+ "id": "escuderos",
+ "type": "tech",
+ "name": "Escuderos",
+ "cost": {
+  "food": 100
+ },
+ "research_time": 40,
+ "at": "cuartel",
+ "description": "Infantería +10% velocidad de movimiento",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [
+  {
+   "target": "tag:infanteria",
+   "op": "mul",
+   "path": "abilities.Move.speed",
+   "value": 1.1
+  }
+ ]
+}

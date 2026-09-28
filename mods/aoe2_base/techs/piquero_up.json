@@ -1,0 +1,21 @@
+{
+ "id": "piquero_up",
+ "type": "tech",
+ "name": "Piquero",
+ "at": "cuartel",
+ "cost": {
+  "food": 160,
+  "gold": 90
+ },
+ "research_time": 35,
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "lancero",
+   "to": "piquero"
+  }
+ ]
+}

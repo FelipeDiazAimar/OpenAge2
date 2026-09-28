@@ -1,0 +1,31 @@
+{
+ "id": "druzhina",
+ "type": "tech",
+ "name": "Druzhina",
+ "cost": {
+  "food": 900,
+  "gold": 500
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Infantería daña a unidades adyacentes (5 daño en área).",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "dano_area_infanteria": 5,
+  "radio_area": 0.5,
+  "aplica_a": [
+   "milicia",
+   "hombre_de_armas",
+   "espadachin_mandoble",
+   "campeon",
+   "lancero",
+   "piquero",
+   "alabardero",
+   "huscarle",
+   "boyar"
+  ]
+ }
+}

@@ -340,9 +340,12 @@ def convert_file(path, outdir, verbose=True, max_frames=0):
     with open(path, "rb") as f:
         data = f.read()
     r = Reader(data)
-    magic, ver, nframes, _, _, _ = HDR.unpack(r.take(16))
+    magic, ver, nframes, _, header_size, _ = HDR.unpack(r.take(16))
     if magic != MAGIC:
         raise ValueError("%s: firma inválida %r" % (path, magic))
+    # header_size (u2) = offset del primer frame: 16 normal, 14 en archivos
+    # 0x0e (openage sld.pyx: current_offset = header_size).
+    r.o = header_size
     base = os.path.splitext(os.path.basename(path))[0]
     dest = os.path.join(outdir, base)
     os.makedirs(dest, exist_ok=True)
@@ -444,9 +447,12 @@ def convert_packed(path, outdir, step=2, margin=2, max_frames=0, verbose=True):
     with open(path, "rb") as f:
         data = f.read()
     r = Reader(data)
-    magic, ver, nframes, _, _, _ = HDR.unpack(r.take(16))
+    magic, ver, nframes, _, header_size, _ = HDR.unpack(r.take(16))
     if magic != MAGIC:
         raise ValueError("%s: firma inválida %r" % (path, magic))
+    # header_size (u2) = offset del primer frame: 16 normal, 14 en archivos
+    # 0x0e (openage sld.pyx: current_offset = header_size).
+    r.o = header_size
     base = os.path.splitext(os.path.basename(path))[0]
     dest = os.path.join(outdir, base)
     os.makedirs(dest, exist_ok=True)
@@ -509,6 +515,9 @@ def convert_packed(path, outdir, step=2, margin=2, max_frames=0, verbose=True):
     gy1 = min(metas[0]["ch"] - 1, gy1 + margin)
     cw, ch = gx1 - gx0 + 1, gy1 - gy0 + 1
     dirs, per_dir, drop = detect_dirs(len(metas))
+    if max_frames and detect_dirs(nframes)[:2] != (dirs, per_dir):
+        print("  AVISO %s: --max-frames %d cambia dirs %s (completo: %s): la unidad no rotara. Re-extrae sin limite." % (
+            base, max_frames, (dirs, per_dir), detect_dirs(nframes)[:2]), flush=True)
     fr = metas[:-1] if drop else metas
     # id(e) -> (dir, sub) conservados; se decodifica TODO (barato) para que el
     # flag reuse encadene bien, pero solo se escriben los conservados.

@@ -1,60 +1,70 @@
 {
-  "id": "centro_urbano",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Centro Urbano",
-  "cost": {
-    "wood": 275
+ "id": "centro_urbano",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Centro Urbano",
+ "cost": {
+  "wood": 275
+ },
+ "build_time": 120,
+ "footprint": [
+  4,
+  4
+ ],
+ "requires": {
+  "age": "castillos"
+ },
+ "build_menu": "economico",
+ "hotkey": "Z",
+ "graphics": {
+  "idle": "sprite:buildings/tc/b_west_town_center_age3_x1"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 2400
   },
-  "build_time": 120,
-  "footprint": [
-    4,
-    4
-  ],
-  "requires": {
-    "age": "castillos"
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 5
+   }
   },
-  "build_menu": "economico",
-  "hotkey": "Z",
-  "graphics": {
-    "idle": "sprite:buildings/tc/b_west_town_center_age3_x1"
+  "Vision": {
+   "sight": 6.0
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 2400
-    },
-    "Armor": {
-      "classes": {
-        "melee": 2,
-        "pierce": 5
-      }
-    },
-    "Vision": {
-      "sight": 6.0
-    },
-    "Train": {
-      "units": [
-        "aldeano"
-      ],
-      "queue": 5
-    },
-    "RallyPoint": {},
-    "DropSite": {
-      "accepts": [
-        "wood",
-        "food",
-        "gold",
-        "stone"
-      ]
-    },
-    "Garrison": {
-      "capacity": 15,
-      "arrows_per_unit": 1
-    },
-    "ProvidesPop": {
-      "amount": 5
-    },
-    "AgeAdvance": {},
-    "Bell": {}
+  "Train": {
+   "units": [
+    "aldeano",
+    "aldeana"
+   ],
+   "queue": 5
+  },
+  "RallyPoint": {},
+  "DropSite": {
+   "accepts": [
+    "wood",
+    "food",
+    "gold",
+    "stone"
+   ]
+  },
+  "Garrison": {
+   "capacity": 15,
+   "arrows_per_unit": 1
+  },
+  "ProvidesPop": {
+   "amount": 5
+  },
+  "AgeAdvance": {},
+  "Bell": {},
+  "Research": {
+   "techs": [
+    "telar",
+    "carretilla",
+    "carro_de_mano",
+    "vigilancia",
+    "patrulla"
+   ]
   }
+ }
 }

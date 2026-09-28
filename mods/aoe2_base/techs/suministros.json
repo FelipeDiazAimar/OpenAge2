@@ -1,0 +1,23 @@
+{
+ "id": "suministros",
+ "type": "tech",
+ "name": "Suministros",
+ "cost": {
+  "food": 75,
+  "gold": 75
+ },
+ "research_time": 20,
+ "at": "cuartel",
+ "description": "Línea de milicia -15 comida de coste",
+ "requires": {
+  "age": "feudal"
+ },
+ "effects": [
+  {
+   "target": "id:milicia|id:hombre_armas|id:espadachin_mandoble|id:campeon",
+   "op": "add",
+   "path": "cost.food",
+   "value": -15
+  }
+ ]
+}

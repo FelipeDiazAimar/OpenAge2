@@ -10,6 +10,7 @@ const FPS := {"walk": 10.0, "idle": 6.0, "task": 8.0, "attack": 10.0, "death": 8
 
 var entity_id := 0
 var kind := "unit"
+var def_id := ""
 var footprint := Vector2i.ONE
 var color := Color.WHITE
 var selected := false:
@@ -59,6 +60,7 @@ func set_color(c: Color) -> void:
 func setup(id: int, def: Dictionary, p_color: Color, locator) -> void:
 	entity_id = id
 	kind = str(def.get("type", "unit"))
+	def_id = str(def.get("id", ""))
 	color = p_color
 	_locator = locator
 	_graphics = def.get("graphics", {})
@@ -204,9 +206,20 @@ func _draw() -> void:
 			var pts := PackedVector2Array([
 				Iso.to_screen(Vector2(-hw, -hh)), Iso.to_screen(Vector2(hw, -hh)),
 				Iso.to_screen(Vector2(hw, hh)), Iso.to_screen(Vector2(-hw, hh))])
-			draw_colored_polygon(pts, color.darkened(0.35))
-			pts.append(pts[0])
-			draw_polyline(pts, color.lightened(0.3), 2.0)
+			if def_id == "granja":
+				# La granja no tiene sprite en el DE (alli es overlay de
+				# terreno): tierra labrada con surcos en vez del rombo de bando.
+				draw_colored_polygon(pts, Color(0.45, 0.30, 0.15))
+				for i in 3:
+					var t := 0.25 + 0.25 * i
+					draw_line(pts[0].lerp(pts[3], t), pts[1].lerp(pts[2], t),
+						Color(0.26, 0.16, 0.07), 3.0)
+				pts.append(pts[0])
+				draw_polyline(pts, Color(0.62, 0.45, 0.24), 2.0)
+			else:
+				draw_colored_polygon(pts, color.darkened(0.35))
+				pts.append(pts[0])
+				draw_polyline(pts, color.lightened(0.3), 2.0)
 		else:
 			draw_circle(Vector2(0, -14), 9.0, color)
 			draw_arc(Vector2(0, -14), 9.0, 0.0, TAU, 20, Color.BLACK, 1.5)

@@ -1,0 +1,47 @@
+{
+ "id": "piquero",
+ "type": "unit",
+ "extends": "lancero",
+ "name": "Piquero",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 35,
+  "wood": 25
+ },
+ "train_time": 22,
+ "pop_cost": 1,
+ "hotkey": "W",
+ "upgrades_to": "alabardero",
+ "graphics": {
+  "walk": "sprite:piquero/walk",
+  "attack": "sprite:piquero/attack",
+  "idle": "sprite:piquero/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 55
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 1.0
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 4,
+    "caballeria": 22
+   },
+   "range": 0,
+   "reload": 2.0
+  }
+ }
+}

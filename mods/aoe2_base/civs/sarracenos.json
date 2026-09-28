@@ -1,0 +1,263 @@
+{
+ "id": "sarracenos",
+ "type": "civ",
+ "name": "Sarracenos",
+ "color": "#2a7a6a",
+ "effects": [],
+ "disabled": [
+   "carreta_husita",
+   "centurion",
+   "houfnice",
+   "liao_dao",
+   "mejora_houfnice",
+  "acero_wootz",
+  "aguila",
+  "aldeana",
+  "almenas",
+  "anarquia",
+  "arambai",
+  "arcabuz",
+  "arco_recurvo",
+  "armadura_lamelar",
+  "armadura_ming_guang",
+  "armadura_seda",
+  "arquero_camello",
+  "arquero_compuesto",
+  "arquero_emplumado",
+  "arquero_fuego",
+  "arquero_tiro_largo",
+  "artilleria",
+  "asedio_timurido",
+  "ateismo",
+  "atlatl",
+  "bagains",
+  "balistas",
+  "ballestero_genoves",
+  "barco_tortuga",
+  "barcos_dragon",
+  "bastiones_fortificados",
+  "blindaje",
+  "bombas_trueno",
+  "boyar",
+  "caballeria_aznauri",
+  "caballeria_manipur",
+  "caballeria_ordo",
+  "caballeria_tigre",
+  "caballero_teutonico",
+  "caballerosidad",
+  "camellos_magrebies",
+  "canon_organo",
+  "carabela",
+  "cargador_virotes",
+  "carreta_guerra",
+  "carro_guerra",
+  "catafracta",
+  "chakram",
+  "chatras",
+  "chu_ko_nu",
+  "circunnavegacion",
+  "ciudadelas",
+  "coheteria",
+  "comitatenses",
+  "condotiero",
+  "conquistador",
+  "coustillier",
+  "cuerpo_medico",
+  "detinets",
+  "doble_ballesta",
+  "drakkar",
+  "druzhina",
+  "ejercito_corvino",
+  "elefante_balista",
+  "elefante_combate",
+  "elefante_guerra",
+  "escudos_tela",
+  "escudos_torre",
+  "espadas_colmillos",
+  "estribos",
+  "eupseong",
+  "farimba",
+  "fereteres",
+  "flota_cilicia",
+  "fortaleza",
+  "fuego_griego",
+  "fuertes_colina",
+  "furor_celta",
+  "ganaderia_estepa",
+  "gbeto",
+  "genitour",
+  "ghulam",
+  "gran_muralla",
+  "gran_ruta_troncal",
+  "guardia_pluma_blanca",
+  "guardias_frontera",
+  "guerras_floridas",
+  "hachas_barbas",
+  "hauberk",
+  "herederos_reales",
+  "holcanes",
+  "honda_andina",
+  "howdah",
+  "huscarle",
+  "huszar_magiar",
+  "inquisicion",
+  "invasor_nordico",
+  "invasor_pastos",
+  "jabalineros_hulche",
+  "jaguar",
+  "jefatura",
+  "jenizaro",
+  "jinete_xianbei",
+  "kamandaran",
+  "kamayuk",
+  "karambit",
+  "kasbah",
+  "kataparuto",
+  "keshik",
+  "kipchak",
+  "konnik",
+  "kshatriyas",
+  "legado_lechitico",
+  "legionario",
+  "leitis",
+  "leva_masa",
+  "logistica",
+  "mahayana",
+  "mangudai",
+  "maquina_guerra",
+  "mercenarios_cumanos",
+  "merodeadores",
+  "milicia_flamenca",
+  "misionero",
+  "monaspa",
+  "motores_torsion",
+  "nomadas",
+  "obuch",
+  "pagoda_hierro",
+  "paiks",
+  "paladin",
+  "paladin_franco",
+  "papel_moneda",
+  "perfusion",
+  "pirotecnia",
+  "primera_cruzada",
+  "privilegios_szlachta",
+  "punteria",
+  "ratha",
+  "rattan",
+  "reformas_husitas",
+  "revolucion_flamenca",
+  "ruta_seda",
+  "sacerdote_guerrero",
+  "samurai",
+  "serjeant",
+  "serpiente_enroscada",
+  "shatagni",
+  "shinkichon",
+  "shotel",
+  "sipahi",
+  "supremacia",
+  "tactica_wagenburg",
+  "tacticas_acantilados",
+  "taladro",
+  "talasocracia",
+  "tarkan",
+  "tigre_agazapado",
+  "tigui",
+  "tirisadai",
+  "torres_svan",
+  "tuntian",
+  "urumi",
+  "vinedos_borgonones",
+  "yasama"
+ ],
+ "unique_units": [
+  "mameluco"
+ ],
+ "unique_techs": [
+  "bimaristan",
+  "contrapesos"
+ ],
+ "legacy_effects": [
+  {
+   "id": "tasa_mercado_5",
+   "descripcion": "Comisión de mercado 5% (30% base); mercados cuestan 75 madera",
+   "efecto": {
+    "tasa_mercado": 0.05,
+    "coste_mercado_madera": 75,
+    "nota": "a legacy: tasa de intercambio no expresable en effects"
+   }
+  },
+  {
+   "id": "transporte_reforzado",
+   "descripcion": "Barcos de transporte con doble HP y +20 capacidad",
+   "efecto": {
+    "hp_transporte_factor": 2.0,
+    "capacidad_transporte_extra": 20
+   }
+  },
+  {
+   "id": "galeras_rapidas_25",
+   "descripcion": "Galeras atacan 25% más rápido",
+   "efecto": {
+    "velocidad_ataque_galera": 0.25,
+    "aplica_a": [
+     "galera"
+    ],
+    "nota": "a legacy: cadencia no expresable con paths del mod"
+   }
+  },
+  {
+   "id": "camellos_hp_25",
+   "descripcion": "Unidades de camello +25% HP",
+   "efecto": {
+    "hp_camello_bonus": 0.25,
+    "nota": "a legacy: sin unidades de camello en el mod"
+   }
+  },
+  {
+   "id": "uu_mameluco_stats",
+   "descripcion": "UU Mameluco (camello a distancia, bonus vs caballería): 55F/85O, 80 HP, 8 atk, alcance 3, armadura 0/0, ROF 2.0, vel 1.4, 23s; élite 90 HP/10 atk/1-0",
+   "efecto": {
+    "coste": {
+     "food": 55,
+     "gold": 85
+    },
+    "hp": 80,
+    "ataque": 8,
+    "alcance": 3,
+    "elite_hp": 90,
+    "elite_ataque": 10,
+    "nota": "unidad aún sin JSON en el mod; stats de referencia DE"
+   }
+  },
+  {
+   "id": "identidad_visual",
+   "descripcion": "Set arquitectónico mediooriental; maravilla: Gran Mezquita de Samarra (alminar Malwiya)",
+   "efecto": {
+    "set_arquitectonico": "mediooriental",
+    "maravilla": "Gran Mezquita de Samarra"
+   }
+  },
+  {
+   "id": "ausencias_clave",
+   "descripcion": "Sin Paladín (en disabled); sin Cavalier/Alabardero (solo jinete/lancero base), sin Escorpión pesado, sin Zapadores, sin Gremios (la tasa 5% lo compensa), sin Carpintero naval (Dique seco sí); Banca y Caravana disponibles",
+   "efecto": {
+    "nota": "las ausencias con id del mod van en disabled; el resto aquí"
+   }
+  },
+  {
+   "team_bonus": {
+    "id": "arqueros_vs_edificios_3",
+    "descripcion": "Arqueros a pie +3 ataque vs edificios estándar (aliados; en el árbol se muestra +2)",
+    "efecto": {
+     "ataque_arqueros_vs_edificio": 3,
+     "aplica_a": [
+      "arquero",
+      "ballestero"
+     ]
+    }
+   }
+  }
+ ]
+}

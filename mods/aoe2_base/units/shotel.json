@@ -1,0 +1,49 @@
+{
+ "id": "shotel",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Shotel",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 50,
+  "gold": 30
+ },
+ "train_time": 8,
+ "pop_cost": 1,
+ "hotkey": "W",
+ "graphics": {
+  "walk": "sprite:uniques/shotel/walk",
+  "attack": "sprite:uniques/shotel/attack",
+  "idle": "sprite:uniques/shotel/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 45
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 1.2
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 16,
+    "aguila": 2
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "etiopes"
+  }
+ }
+}

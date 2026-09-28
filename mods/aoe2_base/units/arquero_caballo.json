@@ -1,0 +1,48 @@
+{
+  "id": "arquero_caballo",
+  "type": "unit",
+  "extends": "caballeria_base",
+  "name": "Arquero a caballo",
+  "requires": {
+    "age": "castillos"
+  },
+  "cost": {
+    "wood": 40,
+    "gold": 60
+  },
+  "train_time": 34,
+  "pop_cost": 1,
+  "hotkey": "R",
+  "upgrades_to": "arquero_caballo_pesado",
+  "graphics": {
+    "attack": "sprite:arquero_caballo/attack",
+    "idle": "sprite:arquero_caballo/idle",
+    "walk": "sprite:arquero_caballo/walk"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 50
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
+    },
+    "Move": {
+      "speed": 1.4
+    },
+    "Vision": {
+      "sight": 5.0
+    },
+    "Attack": {
+      "damage": {
+        "pierce": 6,
+        "piquero": 2
+      },
+      "range": 4.0,
+      "reload": 2.0,
+      "projectile_speed": 7.0
+    }
+  }
+}

@@ -1,0 +1,46 @@
+{
+ "id": "aguila",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Guerrero Aguila",
+ "cost": {
+  "food": 20,
+  "gold": 50
+ },
+ "train_time": 35,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {
+  "walk": "sprite:aguila/walk",
+  "attack": "sprite:aguila/attack",
+  "idle": "sprite:aguila/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 55
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 3
+   }
+  },
+  "Move": {
+   "speed": 1.15
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 7,
+    "monje": 8,
+    "caballeria": 3,
+    "asedio": 3,
+    "camello": 2
+   },
+   "range": 0,
+   "reload": 2.0
+  }
+ }
+}

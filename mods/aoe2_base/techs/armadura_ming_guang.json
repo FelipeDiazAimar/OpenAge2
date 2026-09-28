@@ -1,0 +1,24 @@
+{
+ "id": "armadura_ming_guang",
+ "type": "tech",
+ "name": "Armadura Ming Guang",
+ "cost": {
+  "food": 600,
+  "gold": 450
+ },
+ "research_time": 65,
+ "at": "castillo",
+ "description": "Unidades montadas +4 armadura cuerpo a cuerpo.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "armadura_melee_montadas": 4,
+  "aplica_a": [
+   "caballeria_tigre",
+   "jinete_xianbei",
+   "caballeria_hei_guang"
+  ]
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 250,
+  "gold": 250
+ },
+ "description": "Elefantes de combate +100 HP.",
+ "effects": [],
+ "id": "chatras",
+ "legacy_effects": {
+  "aplica_a": [
+   "elefante_combate"
+  ],
+  "hp_bonus": 100
+ },
+ "name": "Chatras",
+ "requires": {
+  "age": "castillos"
+ },
+ "research_time": 40,
+ "type": "tech"
+}

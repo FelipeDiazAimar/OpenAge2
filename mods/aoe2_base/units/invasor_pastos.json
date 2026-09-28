@@ -1,0 +1,49 @@
+{
+ "id": "invasor_pastos",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Invasor de Pastos",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 70,
+  "gold": 25
+ },
+ "train_time": 10,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {
+  "walk": "sprite:uniques/invasor_pastos/walk",
+  "attack": "sprite:uniques/invasor_pastos/attack",
+  "idle": "sprite:uniques/invasor_pastos/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 70
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 1
+   }
+  },
+  "Move": {
+   "speed": 1.2
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 11,
+    "edificio": 2
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "celtas"
+  }
+ }
+}

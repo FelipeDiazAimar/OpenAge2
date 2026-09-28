@@ -1,0 +1,50 @@
+{
+ "id": "genitour",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Genitour",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 30,
+  "wood": 45
+ },
+ "train_time": 25,
+ "pop_cost": 1,
+ "hotkey": "G",
+ "graphics": {
+  "walk": "sprite:uniques/genitour/walk",
+  "attack": "sprite:uniques/genitour/attack",
+  "idle": "sprite:uniques/genitour/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 45
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 4
+   }
+  },
+  "Move": {
+   "speed": 1.35
+  },
+  "Vision": {
+   "sight": 7.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 8,
+    "piquero": 3
+   },
+   "range": 5.0,
+   "reload": 3.0,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "bereberes"
+  }
+ }
+}

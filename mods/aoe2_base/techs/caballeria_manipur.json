@@ -1,0 +1,20 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 300,
+  "gold": 300
+ },
+ "description": "Caballería +4 ataque contra arqueros.",
+ "effects": [],
+ "id": "caballeria_manipur",
+ "legacy_effects": {
+  "aplica_a": "tag:caballeria",
+  "ataque_vs_arqueros": 4
+ },
+ "name": "Caballería Manipur (Manipur Cavalry)",
+ "requires": {
+  "age": "castillos"
+ },
+ "research_time": 40,
+ "type": "tech"
+}

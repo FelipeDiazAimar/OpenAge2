@@ -1,0 +1,25 @@
+{
+ "id": "ganaderia_estepa",
+ "type": "tech",
+ "name": "Ganadería esteparia (Steppe Husbandry)",
+ "cost": {
+  "food": 200,
+  "wood": 300
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Exploradores, lanceros de la estepa y arqueros a caballo se crean 100% más rápido.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "velocidad_creacion": 1.0,
+  "aplica_a": [
+   "scout",
+   "lancero_estepa",
+   "arquero_caballo"
+  ],
+  "nota": "no_afecta_kipchak"
+ }
+}

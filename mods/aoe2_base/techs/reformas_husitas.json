@@ -1,0 +1,29 @@
+{
+ "id": "reformas_husitas",
+ "type": "tech",
+ "name": "Reformas husitas (Hussite Reforms)",
+ "cost": {
+  "food": 500,
+  "gold": 450
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Coste en oro de monjes y tecnologías del monasterio se convierte en comida.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "oro_a_comida_monjes": true,
+  "oro_a_comida_monasterio": true,
+  "aplica_a": [
+   "monje",
+   "redencion",
+   "fervor",
+   "santidad",
+   "iluminacion",
+   "teocracia",
+   "herejia"
+  ]
+ }
+}

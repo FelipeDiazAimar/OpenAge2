@@ -1,0 +1,49 @@
+{
+ "id": "barco_tortuga",
+ "type": "unit",
+ "extends": "barco_base",
+ "name": "Barco Tortuga",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 180,
+  "gold": 180
+ },
+ "train_time": 50,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {
+  "walk": "sprite:uniques/barco_tortuga/walk"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 200
+  },
+  "Armor": {
+   "classes": {
+    "melee": 6,
+    "pierce": 5
+   }
+  },
+  "Move": {
+   "speed": 0.9
+  },
+  "Vision": {
+   "sight": 7.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 50,
+    "barco": 8,
+    "galera": 8
+   },
+   "range": 6.0,
+   "reload": 3.0,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "coreanos"
+  }
+ }
+}

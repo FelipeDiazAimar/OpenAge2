@@ -1,41 +1,62 @@
 {
-  "id": "muelle",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Muelle",
-  "cost": {
-    "wood": 150
+ "id": "muelle",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Muelle",
+ "cost": {
+  "wood": 150
+ },
+ "build_time": 50,
+ "footprint": [
+  3,
+  3
+ ],
+ "build_menu": "economico",
+ "hotkey": "T",
+ "abilities": {
+  "Hitpoints": {
+   "max": 1200
   },
-  "build_time": 50,
-  "footprint": [
-    3,
-    3
-  ],
-  "build_menu": "economico",
-  "hotkey": "T",
-  "abilities": {
-    "Hitpoints": {
-      "max": 1200
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "Train": {
-      "units": [
-        "barco_pesquero",
-        "galera",
-        "drakkar"
-      ],
-      "queue": 5
-    },
-    "RallyPoint": {},
-    "DropSite": {
-      "accepts": [
-        "food"
-      ]
-    }
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Train": {
+   "units": [
+    "barco_pesquero",
+    "galera",
+    "drakkar",
+    "barco_tortuga",
+     "carabela",
+     "tirisadai",
+    "piquete_demoledor",
+    "barco_fuego",
+    "transporte",
+    "galeon_artillado"
+   ],
+   "queue": 5
+  },
+  "RallyPoint": {},
+  "DropSite": {
+   "accepts": [
+    "food"
+   ]
+  },
+  "Research": {
+   "techs": [
+    "carenado",
+    "dique_seco",
+    "carpintero_naval",
+    "mejora_galera_guerra",
+    "mejora_galeon",
+    "mejora_brulote_pesado",
+    "mejora_fuego_rapido"
+   ]
   }
+ },
+ "graphics": {
+  "idle": "sprite:buildings/dock/b_west_dock_age3_x1"
+ }
 }

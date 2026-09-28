@@ -1,0 +1,48 @@
+{
+  "id": "escorpion_pesado",
+  "type": "unit",
+  "extends": "asedio_base",
+  "name": "Escorpión Pesado",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "wood": 75,
+    "gold": 75
+  },
+  "train_time": 30,
+  "pop_cost": 3,
+  "hotkey": "E",
+  "graphics": {
+    "walk": "sprite:escorpion_pesado/walk",
+    "attack": "sprite:escorpion_pesado/attack",
+    "idle": "sprite:escorpion_pesado/idle"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 60
+    },
+    "Armor": {
+      "classes": {
+        "melee": 1,
+        "pierce": 8
+      }
+    },
+    "Move": {
+      "speed": 0.65
+    },
+    "Vision": {
+      "sight": 6.0
+    },
+    "Attack": {
+      "damage": {
+        "pierce": 14,
+        "edificio": 6
+      },
+      "range": 7.0,
+      "reload": 3.6,
+      "min_range": 2.0,
+      "projectile_speed": 6.0
+    }
+  }
+}

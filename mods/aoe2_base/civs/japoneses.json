@@ -1,0 +1,282 @@
+{
+ "color": "#d5d8dc",
+ "disabled": [
+   "carreta_husita",
+   "centurion",
+   "houfnice",
+   "liao_dao",
+   "mejora_houfnice",
+  "acero_wootz",
+  "aguila",
+  "aldeana",
+  "almenas",
+  "anarquia",
+  "arambai",
+  "arcabuz",
+  "arco_recurvo",
+  "armadura_cab_3",
+  "armadura_lamelar",
+  "armadura_ming_guang",
+  "armadura_seda",
+  "arquero_camello",
+  "arquero_compuesto",
+  "arquero_emplumado",
+  "arquero_fuego",
+  "arquero_tiro_largo",
+  "artilleria",
+  "asedio_timurido",
+  "ateismo",
+  "atlatl",
+  "bagains",
+  "balistas",
+  "ballestero_genoves",
+  "barco_tortuga",
+  "barcos_dragon",
+  "bastiones_fortificados",
+  "bimaristan",
+  "blindaje",
+  "bombas_trueno",
+  "boyar",
+  "caballeria_aznauri",
+  "caballeria_manipur",
+  "caballeria_ordo",
+  "caballeria_tigre",
+  "caballero_teutonico",
+  "caballerosidad",
+  "camellos_magrebies",
+  "canon_organo",
+  "carabela",
+  "cargador_virotes",
+  "carreta_guerra",
+  "carro_guerra",
+  "catafracta",
+  "chakram",
+  "chatras",
+  "chu_ko_nu",
+  "circunnavegacion",
+  "ciudadelas",
+  "coheteria",
+  "comitatenses",
+  "condotiero",
+  "conquistador",
+  "contrapesos",
+  "coustillier",
+  "cuerpo_medico",
+  "detinets",
+  "doble_ballesta",
+  "drakkar",
+  "druzhina",
+  "ejercito_corvino",
+  "elefante_balista",
+  "elefante_combate",
+  "elefante_guerra",
+  "escudos_tela",
+  "escudos_torre",
+  "espadas_colmillos",
+  "estribos",
+  "eupseong",
+  "farimba",
+  "fereteres",
+  "flota_cilicia",
+  "fortaleza",
+  "fuertes_colina",
+  "furor_celta",
+  "ganaderia_estepa",
+  "gbeto",
+  "genitour",
+  "ghulam",
+  "gran_muralla",
+  "gran_ruta_troncal",
+  "guardia_pluma_blanca",
+  "guardias_frontera",
+  "guerras_floridas",
+  "hachas_barbas",
+  "hauberk",
+  "herederos_reales",
+  "herejia",
+  "holcanes",
+  "honda_andina",
+  "howdah",
+  "huscarle",
+  "huszar_magiar",
+  "inquisicion",
+  "invasor_nordico",
+  "invasor_pastos",
+  "jabalineros_hulche",
+  "jaguar",
+  "jefatura",
+  "jenizaro",
+  "jinete_xianbei",
+  "kamandaran",
+  "kamayuk",
+  "karambit",
+  "kasbah",
+  "keshik",
+  "kipchak",
+  "konnik",
+  "kshatriyas",
+  "legado_lechitico",
+  "legionario",
+  "leitis",
+  "leva_masa",
+  "logistica",
+  "mahayana",
+  "mameluco",
+  "mangudai",
+  "maquina_guerra",
+  "mercenarios_cumanos",
+  "merodeadores",
+  "milicia_flamenca",
+  "misionero",
+  "monaspa",
+  "motores_torsion",
+  "nomadas",
+  "obuch",
+  "pagoda_hierro",
+  "paiks",
+  "paladin",
+  "paladin_franco",
+  "papel_moneda",
+  "perfusion",
+  "pirotecnia",
+  "primera_cruzada",
+  "privilegios_szlachta",
+  "punteria",
+  "ratha",
+  "rattan",
+  "reformas_husitas",
+  "revolucion_flamenca",
+  "ruta_seda",
+  "sacerdote_guerrero",
+  "serjeant",
+  "serpiente_enroscada",
+  "shatagni",
+  "shinkichon",
+  "shotel",
+  "sipahi",
+  "supremacia",
+  "tactica_wagenburg",
+  "tacticas_acantilados",
+  "taladro",
+  "talasocracia",
+  "tarkan",
+  "tigre_agazapado",
+  "tigui",
+  "tirisadai",
+  "torre_muralla",
+  "torres_svan",
+  "tuntian",
+  "urumi",
+  "vinedos_borgonones"
+ ],
+ "effects": [
+  {
+   "op": "mul",
+   "path": "cost.wood",
+   "target": "id:molino|id:campamento_maderero|id:campamento_minero",
+   "value": 0.5
+  }
+ ],
+ "id": "japoneses",
+ "legacy_effects": [
+  {
+   "descripcion": "Pesqueros 2x HP, +2 armadura perforante, trabajan 5%/10%/15%/20% mas rapido (Oscura/Feudal/Castillos/Imperial).",
+   "efecto": {
+    "hp_x2": true,
+    "armadura_perforante": 2,
+    "ritmo": [
+     0.05,
+     0.1,
+     0.15,
+     0.2
+    ],
+    "aplica_a": [
+     "barco_pesquero"
+    ]
+   },
+   "id": "pesca_superior"
+  },
+  {
+   "descripcion": "Infanteria ataca 33% mas rapido desde Feudal (incluye bonus de dano).",
+   "efecto": {
+    "velocidad_ataque_infanteria": 0.33,
+    "desde_edad": "feudal"
+   },
+   "id": "infanteria_rapida"
+  },
+  {
+   "descripcion": "Arqueros a caballo +2 ataque vs arqueros (excepto guerrilleros).",
+   "efecto": {
+    "ataque_vs_arqueros": 2,
+    "aplica_a": [
+     "arquero_caballo"
+    ]
+   },
+   "id": "ac_vs_arqueros"
+  },
+  {
+   "descripcion": "UU Samurai: 45F/30O, 9s, HP 70/80, atk 10/12 (+10/+12 vs UU), arm 1/1, vel 1.0, cadencia 1.9s, carga +25% vel. Elite: 750F/650O.",
+   "efecto": {
+    "coste": {
+     "oro": 30,
+     "comida": 45
+    },
+    "elite_coste": {
+     "oro": 650,
+     "comida": 750
+    },
+    "hp": [
+     70,
+     80
+    ],
+    "ataque": [
+     10,
+     12
+    ],
+    "bonus_vs_uu": [
+     10,
+     12
+    ],
+    "unidad": "samurai"
+   },
+   "id": "uu_samurai"
+  },
+  {
+   "descripcion": "Ausencias clave: sin paladin, sin husar, sin armadura de caballeria 3, sin canon de bombardeo, sin ariete de asedio, sin onagro de asedio, sin herejia (resto de monjes full), sin brulote pesado.",
+   "efecto": {
+    "sin": [
+     "paladin",
+     "husar",
+     "armadura_cab_3",
+     "canon_bombardeo",
+     "ariete_asedio",
+     "onagro_asedio",
+     "herejia",
+     "brulote_pesado"
+    ]
+   },
+   "id": "ausencias_clave"
+  },
+  {
+   "team_bonus": {
+    "descripcion": "Galeras +4 linea de vision (aliados).",
+    "efecto": {
+     "aplica_a": [
+      "galera"
+     ],
+     "vision_galera": 4
+    },
+    "id": "galeras_vision"
+   }
+  }
+ ],
+ "name": "Japoneses",
+ "type": "civ",
+ "unique_techs": [
+  "yasama",
+  "kataparuto"
+ ],
+ "unique_units": [
+  "samurai"
+ ]
+}

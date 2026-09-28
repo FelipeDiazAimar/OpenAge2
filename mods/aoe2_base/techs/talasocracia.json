@@ -1,0 +1,23 @@
+{
+ "at": "castillo",
+ "cost": {
+  "gold": 250,
+  "wood": 300
+ },
+ "description": "Mejora Muelles a Puertos: disparan flechas y defienden la costa.",
+ "effects": [],
+ "id": "talasocracia",
+ "legacy_effects": {
+  "aplica_a": [
+   "muelle"
+  ],
+  "ataque_puerto": 3,
+  "mejora_a": "puerto"
+ },
+ "name": "Talasocracia (Thalassocracy)",
+ "requires": {
+  "age": "castillos"
+ },
+ "research_time": 75,
+ "type": "tech"
+}

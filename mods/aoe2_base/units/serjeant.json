@@ -1,0 +1,48 @@
+{
+ "id": "serjeant",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Serjeant",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 60,
+  "gold": 35
+ },
+ "train_time": 20,
+ "pop_cost": 1,
+ "hotkey": "S",
+ "graphics": {
+  "walk": "sprite:uniques/serjeant/walk",
+  "attack": "sprite:uniques/serjeant/attack",
+  "idle": "sprite:uniques/serjeant/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 65
+  },
+  "Armor": {
+   "classes": {
+    "melee": 3,
+    "pierce": 3
+   }
+  },
+  "Move": {
+   "speed": 0.9
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 8
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "sicilianos"
+  }
+ }
+}

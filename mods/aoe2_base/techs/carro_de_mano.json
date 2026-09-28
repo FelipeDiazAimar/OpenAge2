@@ -1,0 +1,32 @@
+{
+ "id": "carro_de_mano",
+ "type": "tech",
+ "name": "Carro de mano (Hand Cart)",
+ "cost": {
+  "food": 300,
+  "wood": 200
+ },
+ "research_time": 55,
+ "at": "centro_urbano",
+ "description": "Aldeanos +10% velocidad, +7 capacidad (13->20)",
+ "requires": {
+  "age": "castillos",
+  "techs": [
+   "carretilla"
+  ]
+ },
+ "effects": [
+  {
+   "target": "id:aldeano",
+   "op": "mul",
+   "path": "abilities.Move.speed",
+   "value": 1.1
+  },
+  {
+   "target": "id:aldeano",
+   "op": "add",
+   "path": "abilities.Gather.capacity",
+   "value": 7
+  }
+ ]
+}

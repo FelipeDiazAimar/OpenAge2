@@ -1,0 +1,45 @@
+{
+ "id": "guardia_pluma_blanca",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Guardia Pluma Blanca",
+ "cost": {
+  "food": 60,
+  "gold": 15
+ },
+ "train_time": 11,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {},
+ "abilities": {
+  "Hitpoints": {
+   "max": 95
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 2
+   }
+  },
+  "Move": {
+   "speed": 0.95
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 7,
+    "caballeria": 8,
+    "camello": 6,
+    "infanteria_choque": 4,
+    "edificio": 2
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "shu"
+  }
+ }
+}

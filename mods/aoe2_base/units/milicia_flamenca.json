@@ -1,0 +1,47 @@
+{
+ "id": "milicia_flamenca",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Milicia Flamenca",
+ "cost": {
+  "food": 30,
+  "gold": 30
+ },
+ "train_time": 13,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {
+  "walk": "sprite:uniques/milicia_flamenca/walk",
+  "attack": "sprite:uniques/milicia_flamenca/attack",
+  "idle": "sprite:uniques/milicia_flamenca/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 60
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 1
+   }
+  },
+  "Move": {
+   "speed": 0.9
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 11,
+    "caballeria": 7,
+    "camello": 5
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "borgonones"
+  }
+ }
+}

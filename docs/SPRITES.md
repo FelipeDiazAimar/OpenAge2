@@ -86,3 +86,17 @@ move assets\sprites\tmp\u_inf_militia_idleA_x1 assets\sprites\militia\idle
   mientras se recolecta.
 - Las ovejas con dueño llevan la elipse del color del jugador (no traen máscara) y se re-tiñen
   al cambiar de dueño.
+
+
+## Variante SLD 0x0e (RESUELTO: era header_size, no variante)
+
+- El campo u2 de la cabecera es header_size = offset del primer frame (openage
+  sld.pyx: current_offset = header_size). Archivos 0x10 empiezan en 16; los 226
+  archivos 0x0e (establos, banderas b_misc_waypoint_flag_*, etc.) empiezan en 14.
+  El extractor arranca en r.o = header_size y ambos parsean con el mismo codigo
+  (el establo trae headers estandar ft=0x1f, idx 0..89).
+- Granja: no existe sprite de campo en el DE (solo anims de granjero u_*_farmer_*
+  y overlay de terreno: terrain/blends/farmland.png, textures/2x/g_fm1-2,
+  g_fc1-3, g_wt*.dds). En el clon, EntityView._draw() pinta la granja
+  (def_id == granja) como rombo de tierra labrada con surcos en vez del
+  fallback azul. Maravilla usa wonder/b_west_wonder_britons_x1.

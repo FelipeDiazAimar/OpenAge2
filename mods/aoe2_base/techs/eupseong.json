@@ -1,0 +1,23 @@
+{
+ "id": "eupseong",
+ "type": "tech",
+ "name": "Eupseong",
+ "cost": {
+  "food": 300,
+  "gold": 300
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Torres (excepto bombardeo) +2 alcance.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "alcance_torres": 2,
+  "aplica_a": [
+   "torre_guardia",
+   "torre_muralla"
+  ]
+ }
+}

@@ -1,0 +1,47 @@
+{
+ "id": "ghulam",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Ghulam",
+ "cost": {
+  "food": 30,
+  "gold": 45
+ },
+ "train_time": 9,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {
+  "walk": "sprite:uniques/ghulam/walk",
+  "attack": "sprite:uniques/ghulam/attack",
+  "idle": "sprite:uniques/ghulam/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 70
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 6
+   }
+  },
+  "Move": {
+   "speed": 1.2
+  },
+  "Vision": {
+   "sight": 8.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 11,
+    "arquero": 6,
+    "edificio": 2
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "hindustanies"
+  }
+ }
+}

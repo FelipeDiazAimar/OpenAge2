@@ -6,7 +6,7 @@
     "recurso"
   ],
   "graphics": {
-    "idle": "sprite:nature/bush"
+    "idle": "sprite:nature/berry"
   },
   "abilities": {
     "ResourceSource": {

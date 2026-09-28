@@ -1,0 +1,286 @@
+{
+ "color": "#b7950b",
+ "disabled": [
+   "carreta_husita",
+   "centurion",
+   "houfnice",
+   "liao_dao",
+   "mejora_houfnice",
+  "acero_wootz",
+  "aguila",
+  "aldeana",
+  "almenas",
+  "anarquia",
+  "arambai",
+  "arcabuz",
+  "arco_recurvo",
+  "armadura_lamelar",
+  "armadura_ming_guang",
+  "armadura_seda",
+  "arquero_camello",
+  "arquero_compuesto",
+  "arquero_emplumado",
+  "arquero_fuego",
+  "arquero_tiro_largo",
+  "artilleria",
+  "artillero_manual",
+  "asedio_timurido",
+  "ateismo",
+  "atlatl",
+  "bagains",
+  "balistas",
+  "ballestero_genoves",
+  "barco_tortuga",
+  "barcos_dragon",
+  "bastiones_fortificados",
+  "bimaristan",
+  "blindaje",
+  "bombas_trueno",
+  "boyar",
+  "caballeria_aznauri",
+  "caballeria_manipur",
+  "caballeria_ordo",
+  "caballeria_tigre",
+  "caballero_teutonico",
+  "caballerosidad",
+  "camellos_magrebies",
+  "canon_asedio",
+  "canon_organo",
+  "carabela",
+  "cargador_virotes",
+  "carreta_guerra",
+  "carro_guerra",
+  "catafracta",
+  "chakram",
+  "chatras",
+  "circunnavegacion",
+  "ciudadelas",
+  "comitatenses",
+  "condotiero",
+  "conquistador",
+  "contrapesos",
+  "coustillier",
+  "cuerpo_medico",
+  "detinets",
+  "doble_ballesta",
+  "drakkar",
+  "druzhina",
+  "ejercito_corvino",
+  "elefante_balista",
+  "elefante_combate",
+  "elefante_guerra",
+  "escudos_tela",
+  "escudos_torre",
+  "espadas_colmillos",
+  "estribos",
+  "eupseong",
+  "farimba",
+  "fereteres",
+  "flota_cilicia",
+  "fortaleza",
+  "fuego_griego",
+  "fuertes_colina",
+  "furor_celta",
+  "ganaderia_estepa",
+  "gbeto",
+  "genitour",
+  "ghulam",
+  "gran_ruta_troncal",
+  "guardia_pluma_blanca",
+  "guardias_frontera",
+  "guerras_floridas",
+  "hachas_barbas",
+  "hauberk",
+  "herederos_reales",
+  "holcanes",
+  "honda_andina",
+  "howdah",
+  "huscarle",
+  "huszar_magiar",
+  "ingenieros_asedio",
+  "inquisicion",
+  "invasor_nordico",
+  "invasor_pastos",
+  "jabalineros_hulche",
+  "jaguar",
+  "jefatura",
+  "jenizaro",
+  "jinete_xianbei",
+  "kamandaran",
+  "kamayuk",
+  "karambit",
+  "kasbah",
+  "kataparuto",
+  "keshik",
+  "kipchak",
+  "konnik",
+  "kshatriyas",
+  "legado_lechitico",
+  "legionario",
+  "leitis",
+  "leva_masa",
+  "logistica",
+  "mahayana",
+  "mameluco",
+  "mangudai",
+  "maquina_guerra",
+  "mercenarios_cumanos",
+  "merodeadores",
+  "milicia_flamenca",
+  "misionero",
+  "monaspa",
+  "motores_torsion",
+  "nomadas",
+  "obuch",
+  "pagoda_hierro",
+  "paiks",
+  "paladin_franco",
+  "papel_moneda",
+  "perfusion",
+  "pirotecnia",
+  "primera_cruzada",
+  "privilegios_szlachta",
+  "punteria",
+  "ratha",
+  "rattan",
+  "redencion",
+  "reformas_husitas",
+  "revolucion_flamenca",
+  "ruta_seda",
+  "sacerdote_guerrero",
+  "samurai",
+  "serjeant",
+  "serpiente_enroscada",
+  "shatagni",
+  "shinkichon",
+  "shotel",
+  "sipahi",
+  "supremacia",
+  "tactica_wagenburg",
+  "tacticas_acantilados",
+  "taladro",
+  "talasocracia",
+  "tarkan",
+  "tigre_agazapado",
+  "tigui",
+  "tirisadai",
+  "torre_muralla",
+  "torres_svan",
+  "tuntian",
+  "urumi",
+  "vinedos_borgonones",
+  "yasama"
+ ],
+ "id": "chinos",
+ "legacy_effects": [
+  {
+   "descripcion": "Empieza con +3 aldeanos pero -200 comida, -50 madera.",
+   "efecto": {
+    "aldeanos_extra": 3,
+    "comida_inicial": -200,
+    "madera_inicial": -50
+   },
+   "id": "inicio_aldeanos"
+  },
+  {
+   "descripcion": "Centros urbanos sostienen 15 de poblacion (+10) y +7 linea de vision.",
+   "efecto": {
+    "pop_tc": 15,
+    "vision_tc": 7,
+    "aplica_a": [
+     "centro_urbano"
+    ]
+   },
+   "id": "tc_poblacion"
+  },
+  {
+   "descripcion": "Tecnologias 5%/10%/15% mas baratas en Feudal/Castillos/Imperial.",
+   "efecto": {
+    "descuento_feudal": 0.05,
+    "descuento_castillos": 0.1,
+    "descuento_imperial": 0.15
+   },
+   "id": "tecnologias_descuento"
+  },
+  {
+   "descripcion": "Linea de galera de fuego y lanceros de fuego +5%/+10% velocidad en Castillos/Imperial.",
+   "efecto": {
+    "vel_castillos": 0.05,
+    "vel_imperial": 0.1,
+    "aplica_a": [
+     "galera_fuego",
+     "lancero_fuego"
+    ]
+   },
+   "id": "fuego_rapido"
+  },
+  {
+   "descripcion": "UU Chu Ko Nu: 40M/35O, 16s/13s, HP 45/50, atk 8+3x2 / 10+3x4 elite, alcance 4, precision 85%, arm 0/0. Elite: 1300F/1300O base, 50s.",
+   "efecto": {
+    "coste": {
+     "oro": 35,
+     "madera": 40
+    },
+    "elite_coste": {
+     "oro": 1300,
+     "comida": 1300
+    },
+    "elite_tiempo_sec": 50,
+    "hp": [
+     45,
+     50
+    ],
+    "ataque": [
+     "8+3x2",
+     "10+3x4"
+    ],
+    "unidad": "chu_ko_nu"
+   },
+   "id": "uu_chu_ko_nu"
+  },
+  {
+   "descripcion": "Nao dragon: mejora unica de galera de fuego (reemplaza galera rapida). Regionales: lancero de fuego, carro cohete, Lou Chuan.",
+   "efecto": {
+    "reemplaza_a": "galera_fuego_rapida",
+    "unidad": "nao_dragon"
+   },
+   "id": "mejora_nao_dragon"
+  },
+  {
+   "descripcion": "Ausencias clave: sin redencion, sin ingenieros de asedio, sin canon de bombardeo, sin galeon artillado, sin matacanes (hoardings), sin tacticas partas, sin suministros.",
+   "efecto": {
+    "sin": [
+     "redencion",
+     "ingenieros_asedio",
+     "canon_bombardeo",
+     "galeon_artillado",
+     "matacanes",
+     "tacticas_partas",
+     "suministros"
+    ]
+   },
+   "id": "ausencias_clave"
+  },
+  {
+   "team_bonus": {
+    "descripcion": "Granjas y pastos +10% comida (aliados).",
+    "efecto": {
+     "aplica_a": [
+      "granja"
+     ],
+     "comida_granja": 0.1
+    },
+    "id": "granjas_comida"
+   }
+  }
+ ],
+ "name": "Chinos",
+ "type": "civ",
+ "unique_techs": [
+  "gran_muralla",
+  "coheteria"
+ ],
+ "unique_units": [
+  "chu_ko_nu"
+ ]
+}

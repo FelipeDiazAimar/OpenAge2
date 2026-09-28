@@ -1,0 +1,49 @@
+{
+ "id": "carreta_guerra",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Carreta de Guerra",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 120,
+  "gold": 60
+ },
+ "train_time": 21,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {
+  "walk": "sprite:uniques/carreta_guerra/walk",
+  "idle": "sprite:uniques/carreta_guerra/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 150
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 3
+   }
+  },
+  "Move": {
+   "speed": 1.2
+  },
+  "Vision": {
+   "sight": 7.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 9,
+    "edificio": 5
+   },
+   "range": 4.0,
+   "reload": 2.5,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "coreanos"
+  }
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "id": "jaguar",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Guerrero Jaguar",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 60,
+  "gold": 30
+ },
+ "train_time": 12,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {
+  "walk": "sprite:uniques/jaguar/walk",
+  "attack": "sprite:uniques/jaguar/attack",
+  "idle": "sprite:uniques/jaguar/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 50
+  },
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 1
+   }
+  },
+  "Move": {
+   "speed": 1.0
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 10,
+    "infanteria": 10,
+    "edificio": 2
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "aztecas"
+  }
+ }
+}

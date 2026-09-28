@@ -1,0 +1,23 @@
+{
+ "id": "collar_caballo",
+ "type": "tech",
+ "name": "Collar de caballo",
+ "cost": {
+  "food": 75,
+  "wood": 75
+ },
+ "research_time": 20,
+ "at": "molino",
+ "description": "Granjas +75 alimento",
+ "requires": {
+  "age": "feudal"
+ },
+ "effects": [
+  {
+   "target": "id:granja",
+   "op": "add",
+   "path": "abilities.Farm.food",
+   "value": 75
+  }
+ ]
+}

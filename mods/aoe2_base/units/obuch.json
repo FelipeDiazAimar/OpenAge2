@@ -1,0 +1,50 @@
+{
+ "id": "obuch",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Obuch",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 55,
+  "gold": 20
+ },
+ "train_time": 12,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {
+  "walk": "sprite:uniques/obuch/walk",
+  "attack": "sprite:uniques/obuch/attack",
+  "idle": "sprite:uniques/obuch/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 80
+  },
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 2
+   }
+  },
+  "Move": {
+   "speed": 0.9
+  },
+  "Vision": {
+   "sight": 3.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 8,
+    "infanteria": 2,
+    "edificio": 4
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "polacos"
+  }
+ }
+}

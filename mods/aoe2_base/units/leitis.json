@@ -1,0 +1,48 @@
+{
+ "id": "leitis",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Leitis",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 70,
+  "gold": 50
+ },
+ "train_time": 20,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {
+  "walk": "sprite:uniques/leitis/walk",
+  "attack": "sprite:uniques/leitis/attack",
+  "idle": "sprite:uniques/leitis/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 100
+  },
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 2
+   }
+  },
+  "Move": {
+   "speed": 1.4
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 12
+   },
+   "range": 0,
+   "reload": 1.9
+  },
+  "Unique": {
+   "civ": "lituanos"
+  }
+ }
+}

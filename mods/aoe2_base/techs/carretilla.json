@@ -1,0 +1,29 @@
+{
+ "id": "carretilla",
+ "type": "tech",
+ "name": "Carretilla (Wheelbarrow)",
+ "cost": {
+  "food": 175,
+  "wood": 50
+ },
+ "research_time": 75,
+ "at": "centro_urbano",
+ "description": "Aldeanos +10% velocidad, +3 capacidad (10->13)",
+ "requires": {
+  "age": "feudal"
+ },
+ "effects": [
+  {
+   "target": "id:aldeano",
+   "op": "mul",
+   "path": "abilities.Move.speed",
+   "value": 1.1
+  },
+  {
+   "target": "id:aldeano",
+   "op": "add",
+   "path": "abilities.Gather.capacity",
+   "value": 3
+  }
+ ]
+}

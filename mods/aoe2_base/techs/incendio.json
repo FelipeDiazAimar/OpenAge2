@@ -1,0 +1,23 @@
+{
+ "id": "incendio",
+ "type": "tech",
+ "name": "Incendio",
+ "cost": {
+  "food": 75,
+  "gold": 25
+ },
+ "research_time": 25,
+ "at": "cuartel",
+ "description": "Infantería +2 ataque contra edificios estándar",
+ "requires": {
+  "age": "feudal"
+ },
+ "effects": [
+  {
+   "target": "tag:infanteria",
+   "op": "add",
+   "path": "abilities.Attack.damage.edificio",
+   "value": 2
+  }
+ ]
+}

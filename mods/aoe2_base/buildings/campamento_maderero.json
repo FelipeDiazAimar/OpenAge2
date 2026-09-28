@@ -1,32 +1,42 @@
 {
-  "id": "campamento_maderero",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Campamento Maderero",
-  "cost": {
-    "wood": 100
+ "id": "campamento_maderero",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Campamento Maderero",
+ "cost": {
+  "wood": 100
+ },
+ "build_time": 35,
+ "footprint": [
+  2,
+  2
+ ],
+ "build_menu": "economico",
+ "hotkey": "R",
+ "abilities": {
+  "Hitpoints": {
+   "max": 600
   },
-  "build_time": 35,
-  "footprint": [
-    2,
-    2
-  ],
-  "build_menu": "economico",
-  "hotkey": "R",
-  "abilities": {
-    "Hitpoints": {
-      "max": 600
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "DropSite": {
-      "accepts": [
-        "wood"
-      ]
-    }
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "DropSite": {
+   "accepts": [
+    "wood"
+   ]
+  },
+  "Research": {
+   "techs": [
+    "hacha_doble_filo",
+    "sierra",
+    "sierra_dos_manos"
+   ]
   }
+ },
+ "graphics": {
+  "idle": "sprite:buildings/lumber/b_west_lumber_camp_age2_x1"
+ }
 }

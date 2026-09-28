@@ -1,0 +1,25 @@
+{
+ "id": "artilleria",
+ "type": "tech",
+ "name": "Artillería (Artillery)",
+ "cost": {
+  "food": 600,
+  "gold": 650
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Torres de bombardeo, cañones de bombardeo y galeones artillados +2 alcance.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "alcance_bombardeo": 2,
+  "aplica_a": [
+   "torre_bombardeo",
+   "canon_bombardeo",
+   "galeon_artillado"
+  ],
+  "nota": "a legacy: sin artillería de pólvora en el mod"
+ }
+}

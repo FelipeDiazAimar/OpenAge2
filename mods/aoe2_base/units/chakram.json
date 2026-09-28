@@ -1,0 +1,51 @@
+{
+ "id": "chakram",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Lanzador Chakram",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 65,
+  "gold": 30
+ },
+ "train_time": 15,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {
+  "walk": "sprite:uniques/chakram/walk",
+  "attack": "sprite:uniques/chakram/attack",
+  "idle": "sprite:uniques/chakram/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 40
+  },
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 1.15
+  },
+  "Vision": {
+   "sight": 7.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 3,
+    "infanteria": 1,
+    "edificio": 1
+   },
+   "range": 5.0,
+   "reload": 2.0,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "gurjaras"
+  }
+ }
+}

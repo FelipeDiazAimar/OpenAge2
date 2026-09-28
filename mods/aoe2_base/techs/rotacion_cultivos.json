@@ -1,0 +1,26 @@
+{
+ "id": "rotacion_cultivos",
+ "type": "tech",
+ "name": "Rotación de cultivos",
+ "cost": {
+  "food": 250,
+  "wood": 250
+ },
+ "research_time": 70,
+ "at": "molino",
+ "description": "Granjas +175 alimento",
+ "requires": {
+  "age": "imperial",
+  "techs": [
+   "arado_pesado"
+  ]
+ },
+ "effects": [
+  {
+   "target": "id:granja",
+   "op": "add",
+   "path": "abilities.Farm.food",
+   "value": 175
+  }
+ ]
+}

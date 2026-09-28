@@ -1,0 +1,25 @@
+{
+ "id": "supremacia",
+ "type": "tech",
+ "name": "Supremacía (Supremacy)",
+ "cost": {
+  "food": 400,
+  "gold": 250
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Aldeanos +40 HP, +6 ataque, +2/+2 armadura.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "hp_aldeano": 40,
+  "ataque_aldeano": 6,
+  "armadura_aldeano": 2,
+  "antiproyectil_aldeano": 2,
+  "aplica_a": [
+   "aldeano"
+  ]
+ }
+}

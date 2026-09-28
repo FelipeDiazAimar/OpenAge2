@@ -1,0 +1,50 @@
+{
+ "id": "carabela",
+ "type": "unit",
+ "extends": "barco_base",
+ "name": "Carabela",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 90,
+  "gold": 40
+ },
+ "train_time": 36,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {
+  "walk": "sprite:uniques/carabela/walk",
+  "idle": "sprite:uniques/carabela/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 143
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 6
+   }
+  },
+  "Move": {
+   "speed": 1.43
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 6,
+    "barco": 6,
+    "edificio": 0
+   },
+   "range": 6.0,
+   "reload": 3.0,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "portugueses"
+  }
+ }
+}

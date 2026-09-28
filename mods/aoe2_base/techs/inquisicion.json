@@ -1,0 +1,24 @@
+{
+ "id": "inquisicion",
+ "type": "tech",
+ "name": "Inquisición (Inquisition)",
+ "cost": {
+  "food": 300,
+  "gold": 100
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Monjes y misioneros convierten más rápido. Misioneros +1 alcance.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "conversion_rapida": true,
+  "alcance_misionero": 1,
+  "aplica_a": [
+   "monje",
+   "misionero"
+  ]
+ }
+}

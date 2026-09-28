@@ -1,0 +1,49 @@
+{
+  "id": "onagro_asedio",
+  "type": "unit",
+  "extends": "asedio_base",
+  "name": "Onagro de Asedio",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "wood": 160,
+    "gold": 135
+  },
+  "train_time": 46,
+  "pop_cost": 3,
+  "hotkey": "W",
+  "graphics": {
+    "walk": "sprite:onagro_asedio/walk",
+    "attack": "sprite:onagro_asedio/attack",
+    "idle": "sprite:onagro_asedio/idle"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 70
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 8
+      }
+    },
+    "Move": {
+      "speed": 0.6
+    },
+    "Vision": {
+      "sight": 7.0
+    },
+    "Attack": {
+      "damage": {
+        "pierce": 75,
+        "edificio": 25
+      },
+      "range": 8.0,
+      "reload": 6.0,
+      "min_range": 3.0,
+      "projectile_speed": 12.0,
+      "area_radius": 2.5
+    }
+  }
+}

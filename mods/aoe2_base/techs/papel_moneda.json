@@ -1,0 +1,22 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 550,
+  "wood": 200
+ },
+ "description": "Leñadores generan oro al talar madera (0.014 oro/s).",
+ "effects": [],
+ "id": "papel_moneda",
+ "legacy_effects": {
+  "aplica_a": [
+   "aldeano_lenador"
+  ],
+  "oro_por_segundo": 0.014
+ },
+ "name": "Papel Moneda (Paper Money)",
+ "requires": {
+  "age": "imperial"
+ },
+ "research_time": 60,
+ "type": "tech"
+}

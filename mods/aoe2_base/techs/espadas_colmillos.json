@@ -1,0 +1,22 @@
+{
+ "at": "castillo",
+ "cost": {
+  "gold": 450,
+  "wood": 300
+ },
+ "description": "Elefantes de combate +3 ataque.",
+ "effects": [],
+ "id": "espadas_colmillos",
+ "legacy_effects": {
+  "aplica_a": [
+   "elefante_combate"
+  ],
+  "ataque_bonus": 3
+ },
+ "name": "Espadas colmillos (Tusk Swords)",
+ "requires": {
+  "age": "castillos"
+ },
+ "research_time": 40,
+ "type": "tech"
+}

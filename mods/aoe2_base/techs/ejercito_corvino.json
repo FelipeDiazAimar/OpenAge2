@@ -1,0 +1,24 @@
+{
+ "id": "ejercito_corvino",
+ "type": "tech",
+ "name": "Ejército Corvino (Corvinian Army)",
+ "cost": {
+  "food": 200,
+  "gold": 300
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Coste de oro del Huszar Magiar reemplazado por comida (35C/45O -> 80C).",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "huszar_oro_a_comida": true,
+  "coste_huszar_comida": 80,
+  "coste_huszar_oro": 0,
+  "aplica_a": [
+   "huszar_magiar"
+  ]
+ }
+}

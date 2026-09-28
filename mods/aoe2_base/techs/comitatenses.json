@@ -1,0 +1,26 @@
+{
+ "id": "comitatenses",
+ "type": "tech",
+ "name": "Comitatenses (Comitatenses)",
+ "cost": {
+  "food": 500,
+  "gold": 400
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Milicia, caballería y centuriones se crean 50% más rápido y +5 ataque de carga",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "velocidad_creacion_bonus": 0.5,
+  "ataque_carga_extra": 5,
+  "aplica_a": [
+   "milicia",
+   "jinete",
+   "centurion",
+   "legionario"
+  ]
+ }
+}

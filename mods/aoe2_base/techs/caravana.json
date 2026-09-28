@@ -1,0 +1,23 @@
+{
+ "id": "caravana",
+ "type": "tech",
+ "name": "Caravana",
+ "cost": {
+  "food": 200,
+  "gold": 200
+ },
+ "research_time": 40,
+ "at": "mercado",
+ "description": "Carretas de comercio +20% velocidad",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [
+  {
+   "target": "id:carreta_comercio",
+   "op": "mul",
+   "path": "abilities.Move.speed",
+   "value": 1.2
+  }
+ ]
+}

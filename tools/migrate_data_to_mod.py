@@ -56,7 +56,7 @@ VILLAGER_TASKS = {
 }
 RESOURCE_SPRITES = {
     "tree": "nature/oak", "gold_mine": "nature/goldmine",
-    "stone_mine": "nature/stonemine", "berry_bush": "nature/bush",
+    "stone_mine": "nature/stonemine", "berry_bush": "nature/berry",  # n_forage_bush (con frutos)
     "deer": "animals/deer", "boar": "animals/boar", "sheep": "animals/sheep",
 }
 AGE_PREREQS = {"herreria_o_mercado": ["herreria", "mercado"], "castillo_o_monasterio": ["castillo", "monasterio"]}

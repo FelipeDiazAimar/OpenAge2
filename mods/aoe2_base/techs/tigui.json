@@ -1,0 +1,22 @@
+{
+ "id": "tigui",
+ "type": "tech",
+ "name": "Tigui",
+ "cost": {
+  "food": 200,
+  "wood": 150
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Centros urbanos disparan +8 flechas aun sin guarecer.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "flechas_tc_sin_guarecer": 8,
+  "aplica_a": [
+   "centro_urbano"
+  ]
+ }
+}

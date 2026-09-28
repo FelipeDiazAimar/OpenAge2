@@ -1,0 +1,46 @@
+{
+ "id": "elefante_combate",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Elefante de Combate",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 100,
+  "gold": 70
+ },
+ "train_time": 24,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {
+  "walk": "sprite:uniques/elefante_combate/walk",
+  "attack": "sprite:uniques/elefante_combate/attack",
+  "idle": "sprite:uniques/elefante_combate/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 250
+  },
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 2
+   }
+  },
+  "Move": {
+   "speed": 0.9
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 12,
+    "edificio": 7
+   },
+   "range": 0,
+   "reload": 2.0
+  }
+ }
+}

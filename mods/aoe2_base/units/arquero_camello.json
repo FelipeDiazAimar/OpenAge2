@@ -1,0 +1,50 @@
+{
+ "id": "arquero_camello",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Arquero en Camello",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 50,
+  "gold": 60
+ },
+ "train_time": 25,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {
+  "walk": "sprite:uniques/arquero_camello/walk",
+  "attack": "sprite:uniques/arquero_camello/attack",
+  "idle": "sprite:uniques/arquero_camello/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 55
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 1
+   }
+  },
+  "Move": {
+   "speed": 1.4
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 7,
+    "caballeria_arquera": 4
+   },
+   "range": 4.0,
+   "reload": 2.0,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "bereberes"
+  }
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "id": "carpintero_naval",
+ "type": "tech",
+ "name": "Carpintero naval (Shipwright)",
+ "cost": {
+  "food": 1000,
+  "gold": 300
+ },
+ "research_time": 60,
+ "at": "muelle",
+ "description": "Barcos -20% coste de madera, se crean 35% más rápido",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "target": "tag:barco",
+   "op": "mul",
+   "path": "train_time",
+   "value": 0.65
+  }
+ ],
+ "legacy_effects": {
+  "descuento_madera_barcos": 0.2,
+  "categoria": "barco",
+  "nota": "El -20% de madera aún no lo modela el motor; aplicar al leer cost.wood de tag:barco"
+ }
+}

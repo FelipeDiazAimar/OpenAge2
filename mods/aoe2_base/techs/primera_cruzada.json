@@ -1,0 +1,22 @@
+{
+ "id": "primera_cruzada",
+ "type": "tech",
+ "name": "Primera cruzada (First Crusade)",
+ "cost": {
+  "food": 400,
+  "gold": 300
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Cada Centro Urbano (máx 5) genera 5 serjeants; +4/+4 resistencia a conversión (como Fe).",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "serjeants_por_centro": 5,
+  "max_centros": 5,
+  "conversion_min_bonus": 4,
+  "conversion_max_bonus": 4
+ }
+}

@@ -1,0 +1,53 @@
+{
+ "id": "houfnice",
+ "type": "unit",
+ "extends": "asedio_base",
+ "name": "Houfnice",
+ "requires": {
+  "age": "imperial"
+ },
+ "cost": {
+  "wood": 225,
+  "gold": 225
+ },
+ "train_time": 56,
+ "pop_cost": 1,
+ "hotkey": "H",
+ "graphics": {
+  "walk": "sprite:uniques/houfnice/walk",
+  "attack": "sprite:uniques/houfnice/attack",
+  "idle": "sprite:uniques/houfnice/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 90
+  },
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 6
+   }
+  },
+  "Move": {
+   "speed": 0.7
+  },
+  "Vision": {
+   "sight": 14.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 50,
+    "edificio": 250,
+    "barco": 50,
+    "asedio": 20
+   },
+   "range": 12.0,
+   "reload": 6.5,
+   "min_range": 5.0,
+   "projectile_speed": 4.0
+  },
+  "Unique": {
+   "civ": "bohemios"
+  }
+ }
+}

@@ -1,0 +1,20 @@
+{
+ "id": "nomadas",
+ "type": "tech",
+ "name": "Nómadas (Nomads)",
+ "cost": {
+  "wood": 300,
+  "gold": 150
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Las casas destruidas conservan su espacio de población.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "casas_destruidas_conservan_pob": true,
+  "nota": "no aplica a cimientos sin terminar ni a castillos/TC"
+ }
+}

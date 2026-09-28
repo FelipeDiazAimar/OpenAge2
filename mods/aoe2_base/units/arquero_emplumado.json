@@ -1,0 +1,51 @@
+{
+ "id": "arquero_emplumado",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Arquero Emplumado",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 46,
+  "gold": 46
+ },
+ "train_time": 16,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {
+  "walk": "sprite:uniques/arquero_emplumado/walk",
+  "attack": "sprite:uniques/arquero_emplumado/attack",
+  "idle": "sprite:uniques/arquero_emplumado/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 50
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 1
+   }
+  },
+  "Move": {
+   "speed": 1.2
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 5,
+    "infanteria": 1,
+    "lancero": 2
+   },
+   "range": 4.0,
+   "reload": 1.9,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "mayas"
+  }
+ }
+}

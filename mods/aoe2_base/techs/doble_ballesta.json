@@ -1,0 +1,24 @@
+{
+ "at": "castillo",
+ "cost": {
+  "gold": 400,
+  "wood": 700
+ },
+ "description": "Elefantes de balista y escorpiones disparan una segunda flecha a mitad de fuerza.",
+ "effects": [],
+ "id": "doble_ballesta",
+ "legacy_effects": {
+  "aplica_a": [
+   "elefante_balista",
+   "escorpion"
+  ],
+  "fuerza_segundo_proyectil": 0.5,
+  "proyectil_extra": 1
+ },
+ "name": "Doble ballesta (Double Crossbow)",
+ "requires": {
+  "age": "imperial"
+ },
+ "research_time": 40,
+ "type": "tech"
+}

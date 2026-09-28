@@ -1,51 +1,53 @@
 {
-  "id": "monasterio",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Monasterio",
-  "cost": {
-    "wood": 175
+ "id": "monasterio",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Monasterio",
+ "cost": {
+  "wood": 175
+ },
+ "build_time": 60,
+ "footprint": [
+  3,
+  3
+ ],
+ "requires": {
+  "age": "castillos"
+ },
+ "build_menu": "economico",
+ "hotkey": "F",
+ "graphics": {
+  "idle": "sprite:buildings/monastery/b_west_monastery_age3_x1"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 1200
   },
-  "build_time": 60,
-  "footprint": [
-    3,
-    3
-  ],
-  "requires": {
-    "age": "castillos"
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
   },
-  "build_menu": "economico",
-  "hotkey": "F",
-  "graphics": {
-    "idle": "sprite:buildings/monastery/b_west_monastery_age3_x1"
+  "Train": {
+   "units": [
+    "monje",
+    "misionero",
+    "sacerdote_guerrero"
+   ],
+   "queue": 5
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 1200
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "Train": {
-      "units": [
-        "monje"
-      ],
-      "queue": 5
-    },
-    "RallyPoint": {},
-    "Research": {
-      "techs": [
-        "redencion",
-        "fervor",
-        "santidad",
-        "iluminacion",
-        "teocracia",
-        "herejia",
-        "curacion_mejorada"
-      ]
-    }
+  "RallyPoint": {},
+  "Research": {
+   "techs": [
+    "redencion",
+    "fervor",
+    "santidad",
+    "iluminacion",
+    "teocracia",
+    "herejia",
+    "curacion_mejorada"
+   ]
   }
+ }
 }

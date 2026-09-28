@@ -1,0 +1,47 @@
+{
+ "id": "caballeria_tigre",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Caballería Tigre",
+ "cost": {
+  "food": 60,
+  "gold": 80
+ },
+ "train_time": 15,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {
+  "walk": "sprite:uniques/caballeria_tigre/walk",
+  "attack": "sprite:uniques/caballeria_tigre/attack",
+  "idle": "sprite:uniques/caballeria_tigre/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 115
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 4
+   }
+  },
+  "Move": {
+   "speed": 1.35
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 11,
+    "arquero": 6,
+    "asedio": 2
+   },
+   "range": 0,
+   "reload": 1.9
+  },
+  "Unique": {
+   "civ": "wei"
+  }
+ }
+}

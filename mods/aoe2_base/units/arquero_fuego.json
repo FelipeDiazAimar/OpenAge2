@@ -1,0 +1,50 @@
+{
+ "id": "arquero_fuego",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Arquero de Fuego",
+ "cost": {
+  "wood": 50,
+  "gold": 35
+ },
+ "train_time": 9.5,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {
+  "walk": "sprite:uniques/arquero_fuego/walk",
+  "attack": "sprite:uniques/arquero_fuego/attack",
+  "idle": "sprite:uniques/arquero_fuego/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 35
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 0.96
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 4,
+    "edificio": 4,
+    "barco": 3,
+    "piquero": 2,
+    "asedio": 1
+   },
+   "range": 5.0,
+   "reload": 2.0,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "wu"
+  }
+ }
+}

@@ -1,0 +1,45 @@
+{
+  "id": "husar",
+  "type": "unit",
+  "extends": "caballeria_base",
+  "name": "Húsar",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "food": 80
+  },
+  "train_time": 30,
+  "pop_cost": 1,
+  "hotkey": "T",
+  "graphics": {
+    "attack": "sprite:husar/attack",
+    "idle": "sprite:husar/idle",
+    "walk": "sprite:husar/walk"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 75
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 2
+      }
+    },
+    "Move": {
+      "speed": 1.5
+    },
+    "Vision": {
+      "sight": 10.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 7,
+        "monje": 12
+      },
+      "range": 0,
+      "reload": 1.9
+    }
+  }
+}

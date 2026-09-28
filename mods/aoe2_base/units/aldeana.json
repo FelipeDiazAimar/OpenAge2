@@ -1,0 +1,62 @@
+{
+ "id": "aldeana",
+ "type": "unit",
+ "extends": "aldeano_base",
+ "name": "Aldeana",
+ "cost": {
+  "food": 50
+ },
+ "train_time": 20,
+ "pop_cost": 1,
+ "hotkey": "C",
+  "graphics": {
+    "walk": "sprite:aldeana/walk",
+    "idle": "sprite:aldeana/idle",
+    "attack": "sprite:aldeana/attack",
+    "task": "sprite:aldeana/walk"
+  },
+ "abilities": {
+  "Hitpoints": {
+   "max": 25
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 0.8
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 3
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Gather": {
+   "rates": {
+    "wood": 0.39,
+    "food_forage": 0.41,
+    "food_farm": 0.32,
+    "food_fish": 0.43,
+    "gold": 0.38,
+    "stone": 0.36,
+    "food_hunt": 0.41,
+    "food_herd": 0.33
+   },
+   "capacity": 10
+  },
+  "Build": {
+   "rate": 1.0
+  },
+  "Repair": {
+   "rate": 15.0,
+   "cost_factor": 0.5
+  }
+ }
+}

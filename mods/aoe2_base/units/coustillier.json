@@ -1,0 +1,48 @@
+{
+ "id": "coustillier",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Coustillier",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 55,
+  "gold": 55
+ },
+ "train_time": 21,
+ "pop_cost": 1,
+ "hotkey": "U",
+ "graphics": {
+  "walk": "sprite:uniques/coustillier/walk",
+  "attack": "sprite:uniques/coustillier/attack",
+  "idle": "sprite:uniques/coustillier/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 100
+  },
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 2
+   }
+  },
+  "Move": {
+   "speed": 1.35
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 11
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "borgonones"
+  }
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "id": "armadura_lamelar",
+ "type": "tech",
+ "name": "Armadura Lamelar (Lamellar Armor)",
+ "cost": {
+  "food": 450,
+  "gold": 300
+ },
+ "research_time": 45,
+ "at": "castillo",
+ "description": "Infantería y guerrilleros devuelven 25% del daño cuerpo a cuerpo al atacante.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "reflejo_dano_melee": 0.25,
+  "aplica_a": [
+   "tag:infanteria",
+   "guerrillero"
+  ]
+ }
+}

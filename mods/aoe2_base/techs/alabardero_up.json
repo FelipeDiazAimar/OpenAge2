@@ -1,0 +1,21 @@
+{
+ "id": "alabardero_up",
+ "type": "tech",
+ "name": "Alabardero",
+ "at": "cuartel",
+ "cost": {
+  "food": 300,
+  "gold": 600
+ },
+ "research_time": 50,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "piquero",
+   "to": "alabardero"
+  }
+ ]
+}

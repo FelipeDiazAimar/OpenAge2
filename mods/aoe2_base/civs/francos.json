@@ -1,83 +1,234 @@
 {
-  "id": "francos",
-  "type": "civ",
-  "name": "Francos",
-  "color": "#2a4bff",
-  "effects": [
-    {
-      "target": "id:jinete|id:paladin_franco",
-      "op": "mul",
-      "path": "abilities.Hitpoints.max",
-      "value": 1.2
+ "id": "francos",
+ "type": "civ",
+ "name": "Francos",
+ "color": "#2a4bff",
+ "effects": [
+  {
+   "target": "id:jinete|id:paladin_franco",
+   "op": "mul",
+   "path": "abilities.Hitpoints.max",
+   "value": 1.2
+  }
+ ],
+ "disabled": [
+   "carreta_husita",
+   "centurion",
+   "houfnice",
+   "liao_dao",
+   "mejora_houfnice",
+  "acero_wootz",
+  "aguila",
+  "aldeana",
+  "almenas",
+  "anarquia",
+  "arambai",
+  "arcabuz",
+  "arco_recurvo",
+  "armadura_arq_3",
+  "armadura_lamelar",
+  "armadura_ming_guang",
+  "armadura_seda",
+  "arquero_camello",
+  "arquero_compuesto",
+  "arquero_emplumado",
+  "arquero_fuego",
+  "arquero_tiro_largo",
+  "artilleria",
+  "asedio_timurido",
+  "ataque_arq_3",
+  "ateismo",
+  "atlatl",
+  "bagains",
+  "balistas",
+  "balistica",
+  "ballestero",
+  "ballestero_genoves",
+  "barco_tortuga",
+  "barcos_dragon",
+  "bastiones_fortificados",
+  "bimaristan",
+  "blindaje",
+  "bombas_trueno",
+  "boyar",
+  "caballeria_aznauri",
+  "caballeria_manipur",
+  "caballeria_ordo",
+  "caballeria_tigre",
+  "caballero_teutonico",
+  "camellos_magrebies",
+  "canon_organo",
+  "carabela",
+  "cargador_virotes",
+  "carreta_guerra",
+  "carro_guerra",
+  "catafracta",
+  "chakram",
+  "chatras",
+  "chu_ko_nu",
+  "circunnavegacion",
+  "ciudadelas",
+  "coheteria",
+  "comitatenses",
+  "condotiero",
+  "conquistador",
+  "contrapesos",
+  "coustillier",
+  "cuerpo_medico",
+  "detinets",
+  "doble_ballesta",
+  "drakkar",
+  "druzhina",
+  "ejercito_corvino",
+  "elefante_balista",
+  "elefante_combate",
+  "elefante_guerra",
+  "escudos_tela",
+  "escudos_torre",
+  "espadas_colmillos",
+  "estribos",
+  "eupseong",
+  "farimba",
+  "fereteres",
+  "flota_cilicia",
+  "fortaleza",
+  "fuego_griego",
+  "fuertes_colina",
+  "furor_celta",
+  "ganaderia_estepa",
+  "gbeto",
+  "genitour",
+  "ghulam",
+  "gran_muralla",
+  "gran_ruta_troncal",
+  "guardia_pluma_blanca",
+  "guardias_frontera",
+  "guerras_floridas",
+  "hauberk",
+  "herederos_reales",
+  "herejia",
+  "holcanes",
+  "honda_andina",
+  "howdah",
+  "huscarle",
+  "huszar_magiar",
+  "inquisicion",
+  "invasor_nordico",
+  "invasor_pastos",
+  "jabalineros_hulche",
+  "jaguar",
+  "jefatura",
+  "jenizaro",
+  "jinete_xianbei",
+  "kamandaran",
+  "kamayuk",
+  "karambit",
+  "kasbah",
+  "kataparuto",
+  "keshik",
+  "kipchak",
+  "konnik",
+  "kshatriyas",
+  "legado_lechitico",
+  "legionario",
+  "leitis",
+  "leva_masa",
+  "logistica",
+  "mahayana",
+  "mameluco",
+  "mangudai",
+  "maquina_guerra",
+  "mercenarios_cumanos",
+  "merodeadores",
+  "milicia_flamenca",
+  "misionero",
+  "monaspa",
+  "motores_torsion",
+  "nomadas",
+  "obuch",
+  "pagoda_hierro",
+  "paiks",
+  "papel_moneda",
+  "perfusion",
+  "pirotecnia",
+  "primera_cruzada",
+  "privilegios_szlachta",
+  "punteria",
+  "ratha",
+  "rattan",
+  "reformas_husitas",
+  "revolucion_flamenca",
+  "ruta_seda",
+  "sacerdote_guerrero",
+  "samurai",
+  "serjeant",
+  "serpiente_enroscada",
+  "shatagni",
+  "shinkichon",
+  "shotel",
+  "sipahi",
+  "supremacia",
+  "tactica_wagenburg",
+  "tacticas_acantilados",
+  "taladro",
+  "talasocracia",
+  "tarkan",
+  "teocracia",
+  "tigre_agazapado",
+  "tigui",
+  "tirisadai",
+  "torres_svan",
+  "tuntian",
+  "urumi",
+  "vinedos_borgonones",
+  "yasama"
+ ],
+ "unique_units": [
+  "paladin_franco"
+ ],
+ "unique_techs": [
+  "caballerosidad",
+  "hachas_barbas"
+ ],
+ "legacy_effects": [
+  {
+   "id": "granjas_gratis",
+   "descripcion": "Granjas gratis (ahorro 60 madera por granja) + mejoras de molino gratis (ahorro 175 comida + 75 madera aprox.)",
+   "efecto": {
+    "coste_granja_madera": 0,
+    "ahorro_granja_madera": 60,
+    "mejoras_molino_coste": 0,
+    "aplica_a": [
+     "molino",
+     "granja"
+    ]
+   }
+  },
+  {
+   "id": "castillo_barato_25",
+   "descripcion": "Castillos 25% más baratos: 650 piedra -> 488 piedra",
+   "efecto": {
+    "descuento_castillo_piedra": 0.25,
+    "coste_base_piedra": 650,
+    "coste_final_piedra": 488
+   }
+  },
+  {
+   "team_bonus": {
+    "id": "vision_caballeria_2",
+    "descripcion": "Caballería +2 línea de visión (aliados)",
+    "efecto": {
+     "vision_caballeria": 2.0,
+     "aplica_a": [
+      "jinete",
+      "caballeria_ligera",
+      "husar",
+      "caballero",
+      "paladin_franco",
+      "camello"
+     ]
     }
-  ],
-  "disabled": [
-    "anarquia",
-    "armadura_arq_3",
-    "arquero_tiro_largo",
-    "ataque_arq_3",
-    "balistica",
-    "ballestero",
-    "barcos_dragon",
-    "catafracta",
-    "drakkar",
-    "fuego_griego",
-    "herejia",
-    "huscarle",
-    "invasor_nordico",
-    "jefatura",
-    "logistica",
-    "maquina_guerra",
-    "perfusion",
-    "punteria",
-    "teocracia"
-  ],
-  "unique_units": [
-    "paladin_franco"
-  ],
-  "unique_techs": [
-    "caballerosidad",
-    "hachas_barbas"
-  ],
-  "legacy_effects": [
-    {
-      "id": "granjas_gratis",
-      "descripcion": "Granjas gratis (ahorro 60 madera por granja) + mejoras de molino gratis (ahorro 175 comida + 75 madera aprox.)",
-      "efecto": {
-        "coste_granja_madera": 0,
-        "ahorro_granja_madera": 60,
-        "mejoras_molino_coste": 0,
-        "aplica_a": [
-          "molino",
-          "granja"
-        ]
-      }
-    },
-    {
-      "id": "castillo_barato_25",
-      "descripcion": "Castillos 25% más baratos: 650 piedra -> 488 piedra",
-      "efecto": {
-        "descuento_castillo_piedra": 0.25,
-        "coste_base_piedra": 650,
-        "coste_final_piedra": 488
-      }
-    },
-    {
-      "team_bonus": {
-        "id": "vision_caballeria_2",
-        "descripcion": "Caballería +2 línea de visión (aliados)",
-        "efecto": {
-          "vision_caballeria": 2.0,
-          "aplica_a": [
-            "jinete",
-            "caballeria_ligera",
-            "husar",
-            "caballero",
-            "paladin_franco",
-            "camello"
-          ]
-        }
-      }
-    }
-  ]
+   }
+  }
+ ]
 }

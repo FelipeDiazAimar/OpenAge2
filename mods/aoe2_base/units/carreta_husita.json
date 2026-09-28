@@ -1,0 +1,50 @@
+{
+ "id": "carreta_husita",
+ "type": "unit",
+ "extends": "asedio_base",
+ "name": "Carreta Husita",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 110,
+  "gold": 80
+ },
+ "train_time": 30,
+ "pop_cost": 1,
+ "hotkey": "H",
+ "graphics": {
+  "walk": "sprite:uniques/carreta_husita/walk",
+  "idle": "sprite:uniques/carreta_husita/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 160
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 7
+   }
+  },
+  "Move": {
+   "speed": 0.8
+  },
+  "Vision": {
+   "sight": 7.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 10,
+    "edificio": 2,
+    "ariete": 3
+   },
+   "range": 6.0,
+   "reload": 3.45,
+   "projectile_speed": 7.0
+  },
+  "Unique": {
+   "civ": "bohemios"
+  }
+ }
+}

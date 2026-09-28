@@ -3,8 +3,8 @@
   "type": "tech",
   "name": "Muralla fortificada",
   "cost": {
-    "food": 200,
-    "stone": 100
+   "food": 200,
+   "wood": 100
   },
   "research_time": 40,
   "at": "universidad",

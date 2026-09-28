@@ -1,0 +1,47 @@
+{
+ "id": "arquero_compuesto",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Arquero Compuesto",
+ "cost": {
+  "wood": 35,
+  "gold": 45
+ },
+ "train_time": 10,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {
+  "walk": "sprite:uniques/arquero_compuesto/walk",
+  "attack": "sprite:uniques/arquero_compuesto/attack",
+  "idle": "sprite:uniques/arquero_compuesto/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 50
+  },
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 0.96
+  },
+  "Vision": {
+   "sight": 7.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 4,
+    "piquero": 2
+   },
+   "range": 4.0,
+   "reload": 2.0,
+   "projectile_speed": 7.0
+  },
+  "Unique": {
+   "civ": "armenios"
+  }
+ }
+}

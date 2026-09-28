@@ -1,0 +1,26 @@
+{
+ "id": "patrulla",
+ "type": "tech",
+ "name": "Patrulla (Town Patrol)",
+ "cost": {
+  "food": 300,
+  "gold": 100
+ },
+ "research_time": 40,
+ "at": "centro_urbano",
+ "description": "Edificios +4 línea de visión (acumulable con Vigilancia)",
+ "requires": {
+  "age": "castillos",
+  "techs": [
+   "vigilancia"
+  ]
+ },
+ "effects": [
+  {
+   "target": "type:building",
+   "op": "add",
+   "path": "abilities.Vision.sight",
+   "value": 4
+  }
+ ]
+}

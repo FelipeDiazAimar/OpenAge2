@@ -1,0 +1,23 @@
+{
+ "source": "b_west_mining_camp_age2_x1",
+ "dirs": 1,
+ "per_dir": 1,
+ "kept_per_dir": 1,
+ "step": 1,
+ "size": [
+  172,
+  108
+ ],
+ "frames": [
+  {
+   "png": "p_000.png",
+   "mask": "m_000.png",
+   "dir": 0,
+   "sub": 0,
+   "hotspot": [
+    88,
+    64
+   ]
+  }
+ ]
+}

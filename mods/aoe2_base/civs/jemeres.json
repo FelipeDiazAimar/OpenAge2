@@ -1,0 +1,238 @@
+{
+ "color": "#7d3c98",
+ "disabled": [
+   "carreta_husita",
+   "centurion",
+   "houfnice",
+   "liao_dao",
+   "mejora_houfnice",
+  "acero_wootz",
+  "aguila",
+  "aldeana",
+  "almenas",
+  "arambai",
+  "arcabuz",
+  "arco_recurvo",
+  "armadura_inf_3",
+  "armadura_lamelar",
+  "armadura_ming_guang",
+  "armadura_seda",
+  "arquero_camello",
+  "arquero_compuesto",
+  "arquero_emplumado",
+  "arquero_fuego",
+  "artilleria",
+  "asedio_timurido",
+  "ateismo",
+  "atlatl",
+  "bagains",
+  "balistas",
+  "ballestero_genoves",
+  "barco_tortuga",
+  "bastiones_fortificados",
+  "bimaristan",
+  "blindaje",
+  "bombas_trueno",
+  "boyar",
+  "caballeria_aznauri",
+  "caballeria_manipur",
+  "caballeria_ordo",
+  "caballeria_tigre",
+  "caballero_teutonico",
+  "camellos_magrebies",
+  "campeon",
+  "canon_organo",
+  "carabela",
+  "cargador_virotes",
+  "carpintero_naval",
+  "carreta_guerra",
+  "carro_guerra",
+  "chakram",
+  "chatras",
+  "chu_ko_nu",
+  "circunnavegacion",
+  "ciudadelas",
+  "coheteria",
+  "comitatenses",
+  "condotiero",
+  "conquistador",
+  "contrapesos",
+  "coustillier",
+  "cuerpo_medico",
+  "detinets",
+  "druzhina",
+  "ejercito_corvino",
+  "elefante_combate",
+  "elefante_guerra",
+  "escuderos",
+  "escudos_tela",
+  "escudos_torre",
+  "estribos",
+  "eupseong",
+  "farimba",
+  "fereteres",
+  "flota_cilicia",
+  "fortaleza",
+  "fuertes_colina",
+  "furor_celta",
+  "ganaderia_estepa",
+  "gbeto",
+  "genitour",
+  "ghulam",
+  "gran_muralla",
+  "gran_ruta_troncal",
+  "grua",
+  "guardia_pluma_blanca",
+  "guardias_frontera",
+  "guerras_floridas",
+  "hauberk",
+  "herederos_reales",
+  "herejia",
+  "holcanes",
+  "honda_andina",
+  "howdah",
+  "huszar_magiar",
+  "inquisicion",
+  "invasor_pastos",
+  "jabalineros_hulche",
+  "jaguar",
+  "jenizaro",
+  "jinete_xianbei",
+  "kamandaran",
+  "kamayuk",
+  "karambit",
+  "kasbah",
+  "kataparuto",
+  "keshik",
+  "kipchak",
+  "konnik",
+  "kshatriyas",
+  "legado_lechitico",
+  "legionario",
+  "leitis",
+  "leva_masa",
+  "mahayana",
+  "mameluco",
+  "mangudai",
+  "mercenarios_cumanos",
+  "merodeadores",
+  "milicia_flamenca",
+  "misionero",
+  "monaspa",
+  "motores_torsion",
+  "nomadas",
+  "obuch",
+  "pagoda_hierro",
+  "paiks",
+  "paladin",
+  "papel_moneda",
+  "pirotecnia",
+  "primera_cruzada",
+  "privilegios_szlachta",
+  "ratha",
+  "rattan",
+  "reformas_husitas",
+  "revolucion_flamenca",
+  "ruta_seda",
+  "sacerdote_guerrero",
+  "samurai",
+  "serjeant",
+  "serpiente_enroscada",
+  "shatagni",
+  "shinkichon",
+  "shotel",
+  "sierra_dos_manos",
+  "sipahi",
+  "supremacia",
+  "tactica_wagenburg",
+  "tacticas_acantilados",
+  "taladro",
+  "talasocracia",
+  "tarkan",
+  "tigre_agazapado",
+  "tigui",
+  "tirisadai",
+  "torre_muralla",
+  "torres_svan",
+  "tuntian",
+  "urumi",
+  "vinedos_borgonones",
+  "yasama"
+ ],
+ "effects": [],
+ "id": "jemeres",
+ "legacy_effects": [
+  {
+   "descripcion": "Sin edificios requeridos para avanzar de edad o desbloquear edificios",
+   "efecto": {
+    "edificios_requeridos": false
+   },
+   "id": "sin_requisitos"
+  },
+  {
+   "descripcion": "Elefantes de combate +10% velocidad",
+   "efecto": {
+    "aplica_a": [
+     "elefante_combate"
+    ],
+    "velocidad_bonus": 0.1
+   },
+   "id": "elefantes_rapidos"
+  },
+  {
+   "descripcion": "Granjeros no transportan: la comida va directa al stock, -5% ritmo",
+   "efecto": {
+    "entrega_directa": true,
+    "ritmo_trabajo": 0.95
+   },
+   "id": "granja_directa"
+  },
+  {
+   "descripcion": "Aldeanos (y reyes) pueden guarecerse en casas",
+   "efecto": {
+    "guarnicion_casas": true
+   },
+   "id": "casas_refugio"
+  },
+  {
+   "descripcion": "Sin cañón de bombardeo ni gremios/expiación/imprenta (ids fuera del repo)",
+   "efecto": {
+    "nota_ids_faltantes": [
+     "canon_bombardeo",
+     "gremios",
+     "expiacion",
+     "imprenta"
+    ]
+   },
+   "id": "huecos_sin_id"
+  },
+  {
+   "descripcion": "Maravilla: Angkor Wat. Set arquitectónico: sudeste asiático",
+   "efecto": {
+    "maravilla": "Angkor Wat",
+    "set_arquitectonico": "sudeste_asiatico"
+   },
+   "id": "maravilla_set"
+  },
+  {
+   "team_bonus": {
+    "descripcion": "Escorpiones +1 alcance (aliados)",
+    "efecto": {
+     "alcance_escorpion": 1,
+     "aplica_a": [
+      "escorpion"
+     ]
+    }
+   }
+  }
+ ],
+ "name": "Jemeres",
+ "type": "civ",
+ "unique_techs": [
+  "espadas_colmillos",
+  "doble_ballesta"
+ ],
+ "unique_units": [
+  "elefante_balista"
+ ]
+}

@@ -1,0 +1,21 @@
+{
+ "id": "guerrillero_elite_up",
+ "type": "tech",
+ "name": "Guerrillero de Elite",
+ "at": "arqueria",
+ "cost": {
+  "wood": 230,
+  "gold": 130
+ },
+ "research_time": 50,
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "guerrillero",
+   "to": "guerrillero_elite"
+  }
+ ]
+}

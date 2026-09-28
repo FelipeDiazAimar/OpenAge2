@@ -1,0 +1,22 @@
+{
+  "id": "caballeria_ligera_up",
+  "type": "tech",
+  "name": "Caballería ligera",
+  "cost": {
+    "food": 150,
+    "gold": 50
+  },
+  "research_time": 45,
+  "at": "establo",
+  "description": "Mejora Scout a caballo a Caballería ligera",
+  "requires": {
+    "age": "castillos"
+  },
+  "effects": [
+    {
+      "op": "replace_entity",
+      "from": "scout",
+      "to": "caballeria_ligera"
+    }
+  ]
+}

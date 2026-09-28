@@ -1,0 +1,26 @@
+{
+ "id": "gambesones",
+ "type": "tech",
+ "name": "Gambesones",
+ "cost": {
+  "food": 50,
+  "gold": 100
+ },
+ "research_time": 25,
+ "at": "cuartel",
+ "description": "Línea de milicia +1 armadura contra proyectiles",
+ "requires": {
+  "age": "castillos",
+  "techs": [
+   "suministros"
+  ]
+ },
+ "effects": [
+  {
+   "target": "id:milicia|id:hombre_armas|id:espadachin_mandoble|id:campeon",
+   "op": "add",
+   "path": "abilities.Armor.classes.pierce",
+   "value": 1
+  }
+ ]
+}

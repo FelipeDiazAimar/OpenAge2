@@ -1,0 +1,23 @@
+{
+ "id": "ruta_seda",
+ "type": "tech",
+ "name": "Ruta de la seda (Silk Road)",
+ "cost": {
+  "food": 250,
+  "gold": 250
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Unidades de comercio cuestan -50%.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "descuento_comercio": 0.5,
+  "aplica_a": [
+   "carreta_comercio",
+   "coca_comercio"
+  ]
+ }
+}

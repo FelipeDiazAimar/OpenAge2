@@ -1,0 +1,22 @@
+{
+ "id": "holcanes",
+ "type": "tech",
+ "name": "Holcanes (El Dorado)",
+ "cost": {
+  "food": 750,
+  "gold": 450
+ },
+ "research_time": 70,
+ "at": "castillo",
+ "description": "Guerreros águila +40 HP.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "hp_aguila": 40,
+  "aplica_a": [
+   "guerrero_aguila"
+  ]
+ }
+}

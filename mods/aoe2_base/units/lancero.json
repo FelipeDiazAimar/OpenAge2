@@ -1,41 +1,42 @@
 {
-  "id": "lancero",
-  "type": "unit",
-  "extends": "infanteria_base",
-  "name": "Lancero",
-  "requires": {
-    "age": "feudal"
+ "id": "lancero",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Lancero",
+ "requires": {
+  "age": "feudal"
+ },
+ "cost": {
+  "food": 35,
+  "wood": 25
+ },
+ "train_time": 22,
+ "pop_cost": 1,
+ "hotkey": "W",
+ "abilities": {
+  "Hitpoints": {
+   "max": 45
   },
-  "cost": {
-    "food": 35,
-    "wood": 25
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
   },
-  "train_time": 22,
-  "pop_cost": 1,
-  "hotkey": "W",
-  "abilities": {
-    "Hitpoints": {
-      "max": 45
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "Move": {
-      "speed": 0.9
-    },
-    "Vision": {
-      "sight": 4.0
-    },
-    "Attack": {
-      "damage": {
-        "melee": 3,
-        "caballeria": 3
-      },
-      "range": 0,
-      "reload": 2.0
-    }
+  "Move": {
+   "speed": 0.9
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 3,
+    "caballeria": 3
+   },
+   "range": 0,
+   "reload": 2.0
   }
+ },
+ "upgrades_to": "piquero"
 }

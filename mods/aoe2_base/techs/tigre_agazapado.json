@@ -1,0 +1,23 @@
+{
+ "id": "tigre_agazapado",
+ "type": "tech",
+ "name": "Tigre Agazapado (Sitting Tiger)",
+ "cost": {
+  "food": 600,
+  "gold": 300
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Trabuquetes de tracción y Lou Chuan disparan proyectiles adicionales.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "proyectiles_extra": 1,
+  "aplica_a": [
+   "trabuquete_traccion",
+   "lou_chuan"
+  ]
+ }
+}

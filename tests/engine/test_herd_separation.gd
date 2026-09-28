@@ -96,3 +96,37 @@ func test_separation_does_not_cut_corners() -> void:
 	_steps(s, 5)
 	var p: Vector2i = s.world.entities[a]["pos"]
 	assert_eq(Vector2i(p.x / 1000, p.y / 1000), Vector2i(10, 10), "no cruza la esquina en diagonal: %s" % p)
+
+
+
+## Ticks hasta que n aldeanos con una orden de grupo terminan de moverse.
+func _group_ticks(n: int) -> int:
+	var r := Registry.new()
+	r.load_mods("res://mods")
+	var s := Sim.new(r, 60, 60)
+	s.add_player(0, "britones", 0)
+	var ids := []
+	for i in n:
+		ids.append(s.spawn("aldeano", 0, Vector2i(5 + i, 5)))
+	s.queue_command(0, "move", {"ids": ids, "pos": [45500, 40500]})
+	for t in range(1, 3000):
+		s.step()
+		if t > 5 and ids.all(func(id): return not s.world.comp(id, "Move")["moving"]):
+			return t
+	return -1
+
+
+func test_walkers_on_same_path_do_not_drag() -> void:
+	# En marcha no se empujan: el grupo llega como un aldeano solo.
+	var solo := _group_ticks(1)
+	var group := _group_ticks(3)
+	assert_true(group <= solo + 3, "grupo %d ticks, solo %d" % [group, solo])
+
+func test_idle_unit_steps_aside_for_walker() -> void:
+	var s := _sim()
+	var idle := s.spawn("aldeano", 0, Vector2i(10, 10))
+	var w := s.spawn("aldeano", 0, Vector2i(5, 10))
+	s.queue_command(0, "move", {"ids": [w], "pos": [15500, 10500]})
+	_steps(s, 200)
+	assert_true(s.world.entities[w]["pos"].x >= 15000, "el que camina llega: %s" % s.world.entities[w]["pos"])
+	assert_true(s.world.entities.has(idle))

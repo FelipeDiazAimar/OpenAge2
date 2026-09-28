@@ -1,0 +1,22 @@
+{
+ "id": "caballeria_ordo",
+ "type": "tech",
+ "name": "Caballería Ordo (Ordo Cavalry)",
+ "cost": {
+  "food": 600,
+  "gold": 300
+ },
+ "research_time": 45,
+ "at": "castillo",
+ "description": "Caballería cuerpo a cuerpo regenera 150% HP por minuto en combate.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "regen_combate_por_minuto": 1.5,
+  "aplica_a": [
+   "tag:caballeria_melee"
+  ]
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "id": "urumi",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Espadachin Urumi",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 65,
+  "gold": 20
+ },
+ "train_time": 9,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {
+  "walk": "sprite:uniques/urumi/walk",
+  "attack": "sprite:uniques/urumi/attack",
+  "idle": "sprite:uniques/urumi/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 55
+  },
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 1.1
+  },
+  "Vision": {
+   "sight": 3.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 9,
+    "infanteria": 2,
+    "edificio": 1
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "dravidianos"
+  }
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "id": "banca",
+ "type": "tech",
+ "name": "Banca",
+ "cost": {
+  "food": 300,
+  "gold": 200
+ },
+ "research_time": 70,
+ "at": "mercado",
+ "description": "Adaptación: carretas +25% oro por distancia, acumula con Acuñación (tributo 1:1 sin tasa en el mod)",
+ "requires": {
+  "age": "imperial",
+  "techs": [
+   "acunacion"
+  ]
+ },
+ "effects": [
+  {
+   "target": "id:carreta_comercio",
+   "op": "mul",
+   "path": "abilities.Trade.gold_per_tile",
+   "value": 1.25
+  }
+ ]
+}

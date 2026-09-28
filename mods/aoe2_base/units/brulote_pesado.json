@@ -1,0 +1,44 @@
+{
+ "id": "brulote_pesado",
+ "type": "unit",
+ "extends": "barco_base",
+ "name": "Brulote Pesado",
+ "requires": {
+  "age": "imperial"
+ },
+ "cost": {
+  "wood": 70,
+  "gold": 50
+ },
+ "train_time": 25,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {
+  "idle": "sprite:brulote_pesado/idle",
+  "walk": "sprite:brulote_pesado/walk"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 70
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 5
+   }
+  },
+  "Move": {
+   "speed": 1.6
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 140
+   },
+   "range": 0,
+   "reload": 3.0
+  }
+ }
+}

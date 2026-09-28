@@ -1,0 +1,27 @@
+{
+ "id": "mejora_galera_guerra",
+ "type": "tech",
+ "name": "Galera de Guerra",
+ "cost": {
+  "food": 230,
+  "gold": 100
+ },
+ "research_time": 50,
+ "at": "muelle",
+ "description": "Galera→Galera de Guerra; Piquete→Brulote; +fuego a Barco de Fuego",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "galera",
+   "to": "galera_guerra"
+  },
+  {
+   "op": "replace_entity",
+   "from": "piquete_demoledor",
+   "to": "brulote"
+  }
+ ]
+}

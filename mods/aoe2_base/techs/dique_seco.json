@@ -1,0 +1,26 @@
+{
+ "id": "dique_seco",
+ "type": "tech",
+ "name": "Dique seco (Dry Dock)",
+ "cost": {
+  "food": 600,
+  "gold": 400
+ },
+ "research_time": 60,
+ "at": "muelle",
+ "description": "Barcos +15% velocidad",
+ "requires": {
+  "age": "imperial",
+  "techs": [
+   "carenado"
+  ]
+ },
+ "effects": [
+  {
+   "target": "tag:barco",
+   "op": "mul",
+   "path": "abilities.Move.speed",
+   "value": 1.15
+  }
+ ]
+}

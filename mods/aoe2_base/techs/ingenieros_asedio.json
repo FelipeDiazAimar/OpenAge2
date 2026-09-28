@@ -1,0 +1,29 @@
+{
+ "id": "ingenieros_asedio",
+ "type": "tech",
+ "name": "Ingenieros de asedio (Siege Engineers)",
+ "cost": {
+  "food": 500,
+  "wood": 600
+ },
+ "research_time": 60,
+ "at": "universidad",
+ "description": "Asedio a distancia +1 alcance; asedio +20% daño vs edificios",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "target": "tag:asedio",
+   "op": "mul",
+   "path": "abilities.Attack.damage.edificio",
+   "value": 1.2
+  },
+  {
+   "target": "id:catapulta",
+   "op": "add",
+   "path": "abilities.Attack.range",
+   "value": 1
+  }
+ ]
+}

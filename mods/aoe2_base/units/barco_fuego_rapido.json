@@ -1,0 +1,45 @@
+{
+ "id": "barco_fuego_rapido",
+ "type": "unit",
+ "extends": "barco_base",
+ "name": "Barco de Fuego Rápido",
+ "requires": {
+  "age": "imperial"
+ },
+ "cost": {
+  "wood": 75,
+  "gold": 45
+ },
+ "train_time": 34,
+ "pop_cost": 1,
+ "hotkey": "R",
+ "graphics": {
+  "idle": "sprite:barco_fuego_rapido/idle",
+  "walk": "sprite:barco_fuego_rapido/walk"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 140
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 8
+   }
+  },
+  "Move": {
+   "speed": 1.43
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 1,
+    "pierce": 3
+   },
+   "range": 2.0,
+   "reload": 0.5
+  }
+ }
+}

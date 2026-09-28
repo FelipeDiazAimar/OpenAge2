@@ -1,0 +1,22 @@
+{
+  "id": "arquero_caballo_pesado_up",
+  "type": "tech",
+  "name": "Arquero a caballo pesado",
+  "cost": {
+    "food": 900,
+    "gold": 500
+  },
+  "research_time": 50,
+  "at": "arqueria",
+  "description": "Mejora Arquero a caballo a Arquero a caballo pesado",
+  "requires": {
+    "age": "imperial"
+  },
+  "effects": [
+    {
+      "op": "replace_entity",
+      "from": "arquero_caballo",
+      "to": "arquero_caballo_pesado"
+    }
+  ]
+}

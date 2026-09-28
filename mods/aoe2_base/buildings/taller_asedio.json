@@ -29,10 +29,28 @@
     "Train": {
       "units": [
         "ariete",
-        "catapulta"
+        "catapulta",
+        "carro_guerra",
+        "escorpion",
+        "torre_asedio",
+        "canon_asedio",
+        "houfnice"
       ],
       "queue": 5
     },
-    "RallyPoint": {}
+    "RallyPoint": {},
+    "Research": {
+      "techs": [
+        "mejora_escorpion_pesado",
+        "mejora_onagro",
+        "mejora_onagro_asedio",
+        "mejora_ariete_cubierto",
+        "mejora_houfnice",
+        "mejora_ariete_asedio"
+      ]
+    }
+  },
+  "graphics": {
+    "idle": "sprite:buildings/siege/b_west_siege_workshop_age3_x1"
   }
 }

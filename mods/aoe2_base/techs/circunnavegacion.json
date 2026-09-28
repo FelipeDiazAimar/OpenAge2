@@ -1,0 +1,27 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 250,
+  "wood": 150
+ },
+ "description": "Mapa entero explorado; barcos se crean 33% más rápido.",
+ "effects": [
+  {
+   "op": "mul",
+   "path": "train_time",
+   "target": "tag:barco",
+   "value": 0.67
+  }
+ ],
+ "id": "circunnavegacion",
+ "legacy_effects": {
+  "mapa_explorado": true,
+  "nota": "Reemplaza a Carraca (Carrack) desde The Last Chieftains"
+ },
+ "name": "Circunnavegación (Circumnavigation)",
+ "requires": {
+  "age": "castillos"
+ },
+ "research_time": 32,
+ "type": "tech"
+}

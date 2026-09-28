@@ -1,0 +1,25 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 400,
+  "gold": 300
+ },
+ "description": "Linea de arqueros pasa a costar 50 madera sin oro (25M/45O -> 50M).",
+ "effects": [],
+ "id": "kamandaran",
+ "legacy_effects": {
+  "aplica_a": [
+   "arquero",
+   "ballestero"
+  ],
+  "coste_final_madera": 50,
+  "coste_final_oro": 0,
+  "coste_linea_arqueros_madera": 50
+ },
+ "name": "Kamandaran",
+ "requires": {
+  "age": "castillos"
+ },
+ "research_time": 40,
+ "type": "tech"
+}

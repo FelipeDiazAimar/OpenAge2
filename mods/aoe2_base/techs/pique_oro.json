@@ -1,0 +1,26 @@
+{
+ "id": "pique_oro",
+ "type": "tech",
+ "name": "Pique de oro",
+ "cost": {
+  "food": 175,
+  "wood": 75
+ },
+ "research_time": 75,
+ "at": "campamento_minero",
+ "description": "Aldeanos extraen oro 15% más rápido",
+ "requires": {
+  "age": "castillos",
+  "techs": [
+   "mineria_oro"
+  ]
+ },
+ "effects": [
+  {
+   "target": "tag:aldeano",
+   "op": "mul",
+   "path": "abilities.Gather.rates.gold",
+   "value": 1.15
+  }
+ ]
+}

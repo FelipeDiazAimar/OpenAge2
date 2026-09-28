@@ -1,0 +1,21 @@
+{
+ "id": "mercenarios_cumanos",
+ "type": "tech",
+ "name": "Mercenarios cumanos (Cuman Mercenaries)",
+ "cost": {
+  "food": 650,
+  "gold": 400
+ },
+ "research_time": 40,
+ "at": "castillo",
+ "description": "Todo el equipo puede crear 5 Kipchaks de élite gratis por cada castillo propio.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "kipchaks_gratis_por_castillo": 5,
+  "alcance_equipo": true,
+  "unidad": "kipchak_elite"
+ }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "camello_pesado_up",
+  "type": "tech",
+  "name": "Camello Pesado",
+  "cost": {
+    "food": 325,
+    "gold": 360
+  },
+  "research_time": 50,
+  "at": "establo",
+  "description": "Mejora Camello a Camello Pesado",
+  "requires": {
+    "age": "imperial"
+  },
+  "effects": [
+    {
+      "op": "replace_entity",
+      "from": "camello",
+      "to": "camello_pesado"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "camello_pesado",
+  "type": "unit",
+  "extends": "caballeria_base",
+  "name": "Camello Pesado",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "food": 55,
+    "gold": 60
+  },
+  "train_time": 22,
+  "pop_cost": 1,
+  "hotkey": "E",
+  "graphics": {
+    "attack": "sprite:camello_pesado/attack",
+    "idle": "sprite:camello_pesado/idle",
+    "walk": "sprite:camello_pesado/walk"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 120
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 0
+      }
+    },
+    "Move": {
+      "speed": 1.45
+    },
+    "Vision": {
+      "sight": 5.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 7,
+        "caballeria": 18
+      },
+      "range": 0,
+      "reload": 2.0
+    }
+  }
+}

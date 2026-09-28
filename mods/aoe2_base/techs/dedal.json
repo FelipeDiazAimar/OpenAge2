@@ -1,0 +1,28 @@
+{
+ "id": "dedal",
+ "type": "tech",
+ "name": "Dedal (Thumb Ring)",
+ "cost": {
+  "food": 300,
+  "wood": 250
+ },
+ "research_time": 45,
+ "at": "arqueria",
+ "description": "Arqueros +18% cadencia de disparo",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [
+  {
+   "target": "tag:arqueros",
+   "op": "mul",
+   "path": "abilities.Attack.reload",
+   "value": 0.85
+  }
+ ],
+ "legacy_effects": {
+  "cadencia_arqueros": 0.1765,
+  "precision_vs_quieto": 1.0,
+  "categoria": "arqueros"
+ }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "torre_asedio",
+  "type": "unit",
+  "extends": "asedio_base",
+  "name": "Torre de Asedio",
+  "requires": {
+    "age": "castillos"
+  },
+  "cost": {
+    "wood": 100,
+    "gold": 120
+  },
+  "train_time": 36,
+  "pop_cost": 3,
+  "hotkey": "R",
+  "graphics": {
+    "walk": "sprite:torre_asedio/walk",
+    "idle": "sprite:torre_asedio/idle"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 175
+    },
+    "Armor": {
+      "classes": {
+        "melee": -2,
+        "pierce": 10
+      }
+    },
+    "Move": {
+      "speed": 0.96
+    },
+    "Vision": {
+      "sight": 6.0
+    }
+  }
+}

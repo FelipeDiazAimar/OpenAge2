@@ -1,0 +1,46 @@
+{
+ "id": "galera_guerra",
+ "type": "unit",
+ "extends": "barco_base",
+ "name": "Galera de Guerra",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 90,
+  "gold": 30
+ },
+ "train_time": 36,
+ "pop_cost": 1,
+ "hotkey": "W",
+ "upgrades_to": "galeon",
+ "graphics": {
+  "idle": "sprite:galera_guerra/idle",
+  "walk": "sprite:galera_guerra/walk"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 135
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 6
+   }
+  },
+  "Move": {
+   "speed": 1.43
+  },
+  "Vision": {
+   "sight": 8.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 7
+   },
+   "range": 6.0,
+   "reload": 3.0,
+   "projectile_speed": 12.0
+  }
+ }
+}

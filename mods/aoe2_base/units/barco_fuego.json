@@ -1,0 +1,46 @@
+{
+ "id": "barco_fuego",
+ "type": "unit",
+ "extends": "barco_base",
+ "name": "Barco de Fuego",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 75,
+  "gold": 45
+ },
+ "train_time": 36,
+ "pop_cost": 1,
+ "hotkey": "R",
+ "upgrades_to": "barco_fuego_rapido",
+ "graphics": {
+  "idle": "sprite:barco_fuego/idle",
+  "walk": "sprite:barco_fuego/walk"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 120
+  },
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 6
+   }
+  },
+  "Move": {
+   "speed": 1.35
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 1,
+    "pierce": 2
+   },
+   "range": 2.0,
+   "reload": 0.5
+  }
+ }
+}

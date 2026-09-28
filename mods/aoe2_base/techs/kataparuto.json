@@ -1,0 +1,23 @@
+{
+ "at": "castillo",
+ "cost": {
+  "gold": 300,
+  "wood": 550
+ },
+ "description": "Trabuquetes empaquetan/desempaquetan ~4x mas rapido (11s -> 3s) y disparan 33% mas rapido.",
+ "effects": [],
+ "id": "kataparuto",
+ "legacy_effects": {
+  "aplica_a": [
+   "trebuchet"
+  ],
+  "cadencia_trabuquete": 0.33,
+  "empaque_trabuquete_sec": 3
+ },
+ "name": "Kataparuto",
+ "requires": {
+  "age": "imperial"
+ },
+ "research_time": 60,
+ "type": "tech"
+}

@@ -1,0 +1,20 @@
+{
+ "id": "almenas",
+ "type": "tech",
+ "name": "Almenas (Crenellations)",
+ "cost": {
+  "food": 600,
+  "stone": 400
+ },
+ "research_time": 60,
+ "at": "castillo",
+ "description": "Castillos +3 alcance; la infantería en guarnición dispara flechas.",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "alcance_castillo_extra": 3,
+  "infanteria_guarnicion_dispara": true
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "id": "fortaleza",
+ "type": "tech",
+ "name": "Fortaleza (Stronghold)",
+ "cost": {
+  "food": 250,
+  "gold": 200
+ },
+ "research_time": 30,
+ "at": "castillo",
+ "description": "Castillos y torres disparan +33%; los castillos curan infantería aliada cercana.",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [],
+ "legacy_effects": {
+  "cadencia_castillos_torres": 0.33,
+  "castillo_cura_infanteria": true,
+  "cura_hp_min": 30,
+  "radio_cura": 7
+ }
+}

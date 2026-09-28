@@ -1,0 +1,51 @@
+{
+ "id": "ballestero_genoves",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Ballestero Genovés",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 45,
+  "gold": 45
+ },
+ "train_time": 19,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "graphics": {
+  "walk": "sprite:uniques/ballestero_genoves/walk",
+  "attack": "sprite:uniques/ballestero_genoves/attack",
+  "idle": "sprite:uniques/ballestero_genoves/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 45
+  },
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 0
+   }
+  },
+  "Move": {
+   "speed": 0.96
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 6,
+    "caballeria": 5,
+    "barco": 4
+   },
+   "range": 4.0,
+   "reload": 3.0,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "italianos"
+  }
+ }
+}

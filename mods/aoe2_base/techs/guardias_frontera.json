@@ -1,0 +1,23 @@
+{
+ "at": "castillo",
+ "cost": {
+  "food": 700,
+  "gold": 800
+ },
+ "description": "Camellos y arqueros en elefante +4 armadura cuerpo a cuerpo.",
+ "effects": [],
+ "id": "guardias_frontera",
+ "legacy_effects": {
+  "aplica_a": [
+   "camello",
+   "arquero_elefante"
+  ],
+  "armadura_melee": 4
+ },
+ "name": "Guardias de Frontera (Frontier Guards)",
+ "requires": {
+  "age": "imperial"
+ },
+ "research_time": 60,
+ "type": "tech"
+}

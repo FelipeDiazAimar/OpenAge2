@@ -1,40 +1,54 @@
 {
-  "id": "establo",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Establo",
-  "cost": {
-    "wood": 175
+ "id": "establo",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Establo",
+ "cost": {
+  "wood": 175
+ },
+ "build_time": 50,
+ "footprint": [
+  3,
+  3
+ ],
+ "requires": {
+  "age": "feudal"
+ },
+ "build_menu": "militar",
+ "hotkey": "E",
+ "abilities": {
+  "Hitpoints": {
+   "max": 1200
   },
-  "build_time": 50,
-  "footprint": [
-    3,
-    3
-  ],
-  "requires": {
-    "age": "feudal"
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
   },
-  "build_menu": "militar",
-  "hotkey": "E",
-  "abilities": {
-    "Hitpoints": {
-      "max": 1200
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "Train": {
-      "units": [
-        "scout",
-        "jinete",
-        "paladin",
-        "paladin_franco"
-      ],
-      "queue": 5
-    },
-    "RallyPoint": {}
+  "Train": {
+    "units": [
+     "scout",
+     "jinete",
+     "camello",
+     "paladin",
+    "paladin_franco",
+    "huszar_magiar"
+   ],
+   "queue": 5
+  },
+  "RallyPoint": {},
+  "Research": {
+    "techs": [
+     "pureza_sangre",
+     "ganaderia",
+     "caballeria_ligera_up",
+     "husar_up",
+     "camello_pesado_up"
+    ]
   }
+ },
+ "graphics": {
+  "idle": "sprite:buildings/stable/b_west_stable_age3_x1"
+ }
 }

@@ -1,31 +1,31 @@
 {
-  "id": "granja",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Granja",
-  "cost": {
-    "wood": 60
+ "id": "granja",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Granja",
+ "cost": {
+  "wood": 60
+ },
+ "build_time": 10,
+ "footprint": [
+  2,
+  2
+ ],
+ "build_menu": "economico",
+ "hotkey": "A",
+ "abilities": {
+  "Hitpoints": {
+   "max": 300
   },
-  "build_time": 10,
-  "footprint": [
-    2,
-    2
-  ],
-  "build_menu": "economico",
-  "hotkey": "A",
-  "abilities": {
-    "Hitpoints": {
-      "max": 300
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "Farm": {
-      "food": 250,
-      "rate_key": "food_farm"
-    }
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "Farm": {
+   "food": 175,
+   "rate_key": "food_farm"
   }
+ }
 }

@@ -1,42 +1,56 @@
 {
-  "id": "arqueria",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Arquería",
-  "cost": {
-    "wood": 175
+ "id": "arqueria",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Arquería",
+ "cost": {
+  "wood": 175
+ },
+ "build_time": 50,
+ "footprint": [
+  3,
+  3
+ ],
+ "requires": {
+  "age": "feudal"
+ },
+ "build_menu": "militar",
+ "hotkey": "W",
+ "graphics": {
+  "idle": "sprite:buildings/archery/b_west_archery_range_age2_x1"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 1200
   },
-  "build_time": 50,
-  "footprint": [
-    3,
-    3
-  ],
-  "requires": {
-    "age": "feudal"
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
   },
-  "build_menu": "militar",
-  "hotkey": "W",
-  "graphics": {
-    "idle": "sprite:buildings/archery/b_west_archery_range_age2_x1"
+  "Train": {
+   "units": [
+    "arquero",
+    "arquero_caballo",
+    "guerrillero",
+    "ballestero",
+    "arquero_compuesto",
+    "artillero_manual",
+    "jinete_xianbei",
+    "jenizaro",
+    "genitour"
+   ],
+   "queue": 5
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 1200
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "Train": {
-      "units": [
-        "arquero",
-        "guerrillero",
-        "ballestero"
-      ],
-      "queue": 5
-    },
-    "RallyPoint": {}
+  "RallyPoint": {},
+  "Research": {
+   "techs": [
+    "dedal",
+    "arquero_caballo_pesado_up",
+    "arbalestero_up",
+    "guerrillero_elite_up"
+   ]
   }
+ }
 }

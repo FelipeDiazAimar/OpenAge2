@@ -1,0 +1,46 @@
+{
+  "id": "caballeria_ligera",
+  "type": "unit",
+  "extends": "caballeria_base",
+  "name": "Caballería ligera",
+  "requires": {
+    "age": "castillos"
+  },
+  "cost": {
+    "food": 80
+  },
+  "train_time": 30,
+  "pop_cost": 1,
+  "hotkey": "R",
+  "upgrades_to": "husar",
+  "graphics": {
+    "attack": "sprite:caballeria_ligera/attack",
+    "idle": "sprite:caballeria_ligera/idle",
+    "walk": "sprite:caballeria_ligera/walk"
+  },
+  "abilities": {
+    "Hitpoints": {
+      "max": 60
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 2
+      }
+    },
+    "Move": {
+      "speed": 1.5
+    },
+    "Vision": {
+      "sight": 8.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 7,
+        "monje": 10
+      },
+      "range": 0,
+      "reload": 2.0
+    }
+  }
+}

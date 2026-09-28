@@ -1,0 +1,45 @@
+{
+ "id": "centurion",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Centurión",
+ "cost": {
+  "food": 75,
+  "gold": 85
+ },
+ "train_time": 24,
+ "pop_cost": 1,
+ "hotkey": "C",
+ "graphics": {
+  "walk": "sprite:uniques/centurion/walk",
+  "attack": "sprite:uniques/centurion/attack",
+  "idle": "sprite:uniques/centurion/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 110
+  },
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 3
+   }
+  },
+  "Move": {
+   "speed": 1.35
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 13
+   },
+   "range": 0,
+   "reload": 1.9
+  },
+  "Unique": {
+   "civ": "romanos"
+  }
+ }
+}

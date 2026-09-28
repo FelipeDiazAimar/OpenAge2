@@ -1,0 +1,173 @@
+{
+ "source": "u_shp_heavy_demo_ship_x1",
+ "dirs": 16,
+ "per_dir": 1,
+ "kept_per_dir": 1,
+ "step": 2,
+ "size": [
+  148,
+  112
+ ],
+ "frames": [
+  {
+   "png": "p_000.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_001.png",
+   "mask": null,
+   "dir": 1,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_002.png",
+   "mask": null,
+   "dir": 2,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_003.png",
+   "mask": null,
+   "dir": 3,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_004.png",
+   "mask": null,
+   "dir": 4,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_005.png",
+   "mask": null,
+   "dir": 5,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_006.png",
+   "mask": null,
+   "dir": 6,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_007.png",
+   "mask": null,
+   "dir": 7,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_008.png",
+   "mask": null,
+   "dir": 8,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_009.png",
+   "mask": null,
+   "dir": 9,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_010.png",
+   "mask": null,
+   "dir": 10,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_011.png",
+   "mask": null,
+   "dir": 11,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_012.png",
+   "mask": null,
+   "dir": 12,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_013.png",
+   "mask": null,
+   "dir": 13,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_014.png",
+   "mask": null,
+   "dir": 14,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  },
+  {
+   "png": "p_015.png",
+   "mask": null,
+   "dir": 15,
+   "sub": 0,
+   "hotspot": [
+    74,
+    74
+   ]
+  }
+ ]
+}

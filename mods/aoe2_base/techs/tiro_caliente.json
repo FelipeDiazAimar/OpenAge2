@@ -1,0 +1,29 @@
+{
+ "id": "tiro_caliente",
+ "type": "tech",
+ "name": "Tiro caliente (Heated Shot)",
+ "cost": {
+  "food": 350,
+  "gold": 100
+ },
+ "research_time": 30,
+ "at": "universidad",
+ "description": "Torres y castillos +daño vs barcos",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [
+  {
+   "target": "id:torre_vigia",
+   "op": "add",
+   "path": "abilities.Attack.damage.barco",
+   "value": 6
+  },
+  {
+   "target": "id:castillo",
+   "op": "add",
+   "path": "abilities.Attack.damage.barco",
+   "value": 4
+  }
+ ]
+}

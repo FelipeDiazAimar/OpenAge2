@@ -1,0 +1,294 @@
+{
+ "color": "#a93226",
+ "disabled": [
+   "carreta_husita",
+   "centurion",
+   "houfnice",
+   "liao_dao",
+   "mejora_houfnice",
+  "acero_wootz",
+  "aguila",
+  "aldeana",
+  "almenas",
+  "anarquia",
+  "arambai",
+  "arcabuz",
+  "arco_recurvo",
+  "armadura_arq_3",
+  "armadura_lamelar",
+  "armadura_ming_guang",
+  "armadura_seda",
+  "arquero_camello",
+  "arquero_compuesto",
+  "arquero_emplumado",
+  "arquero_fuego",
+  "arquero_tiro_largo",
+  "arquitectura",
+  "artilleria",
+  "asedio_timurido",
+  "ataque_arq_3",
+  "ateismo",
+  "atlatl",
+  "bagains",
+  "balistas",
+  "ballestero_genoves",
+  "barco_tortuga",
+  "barcos_dragon",
+  "bastiones_fortificados",
+  "bimaristan",
+  "blindaje",
+  "bombas_trueno",
+  "boyar",
+  "caballeria_aznauri",
+  "caballeria_manipur",
+  "caballeria_ordo",
+  "caballeria_tigre",
+  "caballero_teutonico",
+  "caballerosidad",
+  "camellos_magrebies",
+  "canon_organo",
+  "carabela",
+  "cargador_virotes",
+  "carreta_guerra",
+  "carro_guerra",
+  "catafracta",
+  "chakram",
+  "chatras",
+  "chu_ko_nu",
+  "circunnavegacion",
+  "coheteria",
+  "comitatenses",
+  "condotiero",
+  "conquistador",
+  "contrapesos",
+  "coustillier",
+  "cuerpo_medico",
+  "detinets",
+  "doble_ballesta",
+  "drakkar",
+  "druzhina",
+  "ejercito_corvino",
+  "elefante_balista",
+  "elefante_combate",
+  "escudos_tela",
+  "escudos_torre",
+  "espadachin_mandoble",
+  "espadas_colmillos",
+  "estribos",
+  "eupseong",
+  "farimba",
+  "fereteres",
+  "flota_cilicia",
+  "fortaleza",
+  "fuego_griego",
+  "fuertes_colina",
+  "furor_celta",
+  "ganaderia_estepa",
+  "gbeto",
+  "genitour",
+  "ghulam",
+  "gran_muralla",
+  "gran_ruta_troncal",
+  "guardia_pluma_blanca",
+  "guardias_frontera",
+  "guerras_floridas",
+  "hachas_barbas",
+  "hauberk",
+  "herederos_reales",
+  "herejia",
+  "holcanes",
+  "honda_andina",
+  "howdah",
+  "huscarle",
+  "huszar_magiar",
+  "iluminacion",
+  "ingenieros_asedio",
+  "inquisicion",
+  "invasor_nordico",
+  "invasor_pastos",
+  "jabalineros_hulche",
+  "jaguar",
+  "jefatura",
+  "jenizaro",
+  "jinete_xianbei",
+  "kamayuk",
+  "karambit",
+  "kasbah",
+  "kataparuto",
+  "keshik",
+  "kipchak",
+  "konnik",
+  "kshatriyas",
+  "legado_lechitico",
+  "legionario",
+  "leitis",
+  "leva_masa",
+  "logistica",
+  "mahayana",
+  "mameluco",
+  "mangudai",
+  "maquina_guerra",
+  "mercenarios_cumanos",
+  "merodeadores",
+  "milicia_flamenca",
+  "misionero",
+  "monaspa",
+  "motores_torsion",
+  "muralla_fortificada",
+  "nomadas",
+  "obuch",
+  "pagoda_hierro",
+  "paiks",
+  "paladin",
+  "paladin_franco",
+  "papel_moneda",
+  "perfusion",
+  "pirotecnia",
+  "primera_cruzada",
+  "privilegios_szlachta",
+  "punteria",
+  "ratha",
+  "rattan",
+  "redencion",
+  "reformas_husitas",
+  "revolucion_flamenca",
+  "ruta_seda",
+  "sacerdote_guerrero",
+  "samurai",
+  "santidad",
+  "serjeant",
+  "serpiente_enroscada",
+  "shatagni",
+  "shinkichon",
+  "shotel",
+  "sipahi",
+  "supremacia",
+  "tactica_wagenburg",
+  "tacticas_acantilados",
+  "taladro",
+  "talasocracia",
+  "tarkan",
+  "tigre_agazapado",
+  "tigui",
+  "tirisadai",
+  "torre_muralla",
+  "torres_svan",
+  "tuntian",
+  "urumi",
+  "vinedos_borgonones",
+  "yasama"
+ ],
+ "effects": [
+  {
+   "op": "mul",
+   "path": "abilities.Hitpoints.max",
+   "target": "id:centro_urbano|id:muelle",
+   "value": 2.0
+  }
+ ],
+ "id": "persas",
+ "legacy_effects": [
+  {
+   "descripcion": "Empieza con +50 comida, +50 madera.",
+   "efecto": {
+    "comida_inicial": 50,
+    "madera_inicial": 50
+   },
+   "id": "inicio_recursos"
+  },
+  {
+   "descripcion": "Centros urbanos y muelles trabajan 5%/10%/15%/20% mas rapido en Oscura/Feudal/Castillos/Imperial (aldeano ~25s -> ~20.8s en Imperial).",
+   "efecto": {
+    "ritmo_oscura": 0.05,
+    "ritmo_feudal": 0.1,
+    "ritmo_castillos": 0.15,
+    "ritmo_imperial": 0.2,
+    "aplica_a": [
+     "centro_urbano",
+     "muelle"
+    ]
+   },
+   "id": "tc_muelle_rapidos"
+  },
+  {
+   "descripcion": "Tacticas partas disponible en Castillos; Caravanserai construible en Imperial.",
+   "efecto": {
+    "caravanserai_imperial": true,
+    "tacticas_partas_castillos": true
+   },
+   "id": "partos_caravanserai"
+  },
+  {
+   "descripcion": "UU Elefante de guerra: 170F/85O, 25s, HP 450/600, atk 15/20 (+dano en area y bonus vs edificios), arm 1/2 (3 elite perforante), vel 0.6->0.8. Elite: 1350F/800O, 75s.",
+   "efecto": {
+    "coste": {
+     "oro": 85,
+     "comida": 170
+    },
+    "elite_coste": {
+     "oro": 800,
+     "comida": 1350
+    },
+    "elite_tiempo_sec": 75,
+    "hp": [
+     450,
+     600
+    ],
+    "ataque": [
+     15,
+     20
+    ],
+    "unidad": "elefante_guerra"
+   },
+   "id": "uu_elefante_guerra"
+  },
+  {
+   "descripcion": "Savar: mejora unica de caballero que reemplaza al paladin (mas armadura, mejora mas barata).",
+   "efecto": {
+    "reemplaza_a": "paladin",
+    "unidad": "savar"
+   },
+   "id": "mejora_savar"
+  },
+  {
+   "descripcion": "Ausencias clave: sin arbalestero, sin bracer, sin mandoble, sin paladin, sin keep/aspilleras/torre bombardeo/muro fortificado, sin ingenieros de asedio, sin redencion/santidad/iluminacion/herejia.",
+   "efecto": {
+    "sin": [
+     "arbalestero",
+     "bracer",
+     "mandoble",
+     "paladin",
+     "keep",
+     "torre_bombardeo",
+     "ingenieros_asedio",
+     "redencion",
+     "herejia"
+    ]
+   },
+   "id": "ausencias_clave"
+  },
+  {
+   "team_bonus": {
+    "descripcion": "Linea de caballero +2 ataque vs arqueros (aliados).",
+    "efecto": {
+     "aplica_a": [
+      "jinete",
+      "caballero",
+      "savar"
+     ],
+     "ataque_vs_arqueros": 2
+    },
+    "id": "caballeria_vs_arqueros"
+   }
+  }
+ ],
+ "name": "Persas",
+ "type": "civ",
+ "unique_techs": [
+  "kamandaran",
+  "ciudadelas"
+ ],
+ "unique_units": [
+  "elefante_guerra"
+ ]
+}

@@ -1,0 +1,25 @@
+{
+ "id": "mejora_brulote_pesado",
+ "type": "tech",
+ "name": "Brulote Pesado",
+ "cost": {
+  "wood": 200,
+  "gold": 300
+ },
+ "research_time": 50,
+ "at": "muelle",
+ "description": "Brulote→Brulote Pesado",
+ "requires": {
+  "age": "imperial",
+  "techs": [
+   "mejora_galera_guerra"
+  ]
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "brulote",
+   "to": "brulote_pesado"
+  }
+ ]
+}

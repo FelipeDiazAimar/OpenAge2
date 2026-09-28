@@ -1,33 +1,44 @@
 {
-  "id": "campamento_minero",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Campamento Minero",
-  "cost": {
-    "wood": 100
+ "id": "campamento_minero",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Campamento Minero",
+ "cost": {
+  "wood": 100
+ },
+ "build_time": 35,
+ "footprint": [
+  2,
+  2
+ ],
+ "build_menu": "economico",
+ "hotkey": "E",
+ "abilities": {
+  "Hitpoints": {
+   "max": 600
   },
-  "build_time": 35,
-  "footprint": [
-    2,
-    2
-  ],
-  "build_menu": "economico",
-  "hotkey": "E",
-  "abilities": {
-    "Hitpoints": {
-      "max": 600
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "DropSite": {
-      "accepts": [
-        "gold",
-        "stone"
-      ]
-    }
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
+  },
+  "DropSite": {
+   "accepts": [
+    "gold",
+    "stone"
+   ]
+  },
+  "Research": {
+   "techs": [
+    "mineria_oro",
+    "pique_oro",
+    "mineria_piedra",
+    "pique_piedra"
+   ]
   }
+ },
+ "graphics": {
+  "idle": "sprite:buildings/mining/b_west_mining_camp_age2_x1"
+ }
 }
