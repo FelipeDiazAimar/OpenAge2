@@ -3,6 +3,7 @@
  "type": "unit",
  "extends": "caballeria_base",
  "name": "Arquero a caballo pesado",
+ "tags": ["arqueros_montados"],
  "requires": {
   "age": "imperial"
  },

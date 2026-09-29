@@ -48,10 +48,11 @@
   "RallyPoint": {},
   "Research": {
    "techs": [
-    "dedal",
-    "arquero_caballo_pesado_up",
-    "arbalestero_up",
-    "guerrillero_elite_up"
+     "dedal",
+     "arquero_caballo_pesado_up",
+     "arbalestero_up",
+     "guerrillero_elite_up",
+     "tacticas_partas"
    ]
   }
  }

@@ -218,6 +218,7 @@
     "pierce": 11
    },
    "range": 8.0,
+   "min_range": 1.0,
    "reload": 2.0,
    "projectile_speed": 7.0
   }
