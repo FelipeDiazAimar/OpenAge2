@@ -1,0 +1,35 @@
+{
+ "id": "tacticas_partas",
+ "type": "tech",
+ "name": "Tácticas Partas (Parthian Tactics)",
+ "cost": {
+  "food": 200,
+  "gold": 250
+ },
+ "research_time": 65,
+ "at": "arqueria",
+ "description": "Arqueros montados +1/+2 armadura y bonus vs lanceros",
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "target": "tag:arqueros_montados",
+   "op": "add",
+   "path": "abilities.Armor.classes.melee",
+   "value": 1
+  },
+  {
+   "target": "tag:arqueros_montados",
+   "op": "add",
+   "path": "abilities.Armor.classes.pierce",
+   "value": 2
+  },
+  {
+   "target": "tag:arqueros_montados",
+   "op": "add",
+   "path": "abilities.Attack.damage.piquero",
+   "value": 2
+  }
+ ]
+}

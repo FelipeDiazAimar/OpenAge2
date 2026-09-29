@@ -1,0 +1,29 @@
+{
+ "id": "matacanes",
+ "type": "tech",
+ "name": "Matacanes (Murder Holes)",
+ "cost": {
+  "food": 200,
+  "stone": 100
+ },
+ "research_time": 35,
+ "at": "universidad",
+ "description": "Torres y castillos eliminan rango minimo",
+ "requires": {
+  "age": "castillos"
+ },
+ "effects": [
+  {
+   "target": "id:torre_vigia",
+   "op": "set",
+   "path": "abilities.Attack.min_range",
+   "value": 0
+  },
+  {
+   "target": "id:castillo",
+   "op": "set",
+   "path": "abilities.Attack.min_range",
+   "value": 0
+  }
+ ]
+}
