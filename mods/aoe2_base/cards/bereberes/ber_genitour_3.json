@@ -1,0 +1,1 @@
+{"id":"ber_genitour_3","name":"Genitours del Equipo","civ":"bereberes","age":3,"type":"unidad","cost":{"madera":0,"alimento":100,"oro":100,"piedra":0},"effect":{"target":"id:genitour","op":"add","path":"abilities.Attack.damage.pierce","value":1},"icon":"arco","rarity":"rara","desc":"Genitour +1 ataque perforante. Bonus de equipo para aliados."}

@@ -1,0 +1,1 @@
+{"id":"eti_torre_3","name":"Torres de Yeha","civ":"etiopes","age":3,"type":"edificio","cost":{"madera":0,"alimento":0,"oro":80,"piedra":100},"effect":{"target":"id:torre_vigia","op":"add","path":"abilities.Hitpoints.max","value":300},"icon":"torre","rarity":"rara","desc":"Torre vigía +300 HP máximos. Torres con Motores de Torsión."}

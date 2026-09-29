@@ -1,0 +1,1 @@
+{"id":"ber_kasbah_3","name":"Kasbah Inexpugnable","civ":"bereberes","age":3,"type":"edificio","cost":{"madera":0,"alimento":0,"oro":80,"piedra":100},"effect":{"target":"id:castillo","op":"add","path":"abilities.Hitpoints.max","value":300},"icon":"castillo","rarity":"rara","desc":"Castillo +300 HP máximos. Ecos de la Kasbah única."}

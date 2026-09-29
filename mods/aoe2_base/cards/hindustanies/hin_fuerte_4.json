@@ -1,0 +1,1 @@
+{"id":"hin_fuerte_4","name":"Fuerte Rojo","civ":"hindustanies","age":4,"type":"edificio","cost":{"madera":150,"alimento":0,"oro":0,"piedra":200},"effect":{"target":"id:castillo","op":"add","path":"abilities.Garrison.capacity","value":5},"icon":"castillo","rarity":"epica","desc":"Castillo +5 capacidad de guarnición. Muros del sultanato."}

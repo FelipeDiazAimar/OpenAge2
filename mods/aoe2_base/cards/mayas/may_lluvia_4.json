@@ -1,0 +1,1 @@
+{"id":"may_lluvia_4","name":"Lluvia de Flechas","civ":"mayas","age":4,"type":"mejora","cost":{"madera":0,"alimento":250,"oro":200,"piedra":0},"effect":{"target":"tag:arquero","op":"add","path":"abilities.Attack.damage.pierce","value":2},"icon":"diana","rarity":"epica","desc":"Arqueros +2 ataque perforante. Arqueros 30% baratos en Imperial."}

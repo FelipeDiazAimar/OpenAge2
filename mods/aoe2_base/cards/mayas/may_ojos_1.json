@@ -1,0 +1,1 @@
+{"id":"may_ojos_1","name":"Ojos del Jaguar","civ":"mayas","age":1,"type":"mejora","cost":{"madera":0,"alimento":40,"oro":20,"piedra":0},"effect":{"target":"tag:arquero","op":"add","path":"abilities.Vision.sight","value":1},"icon":"antorcha","rarity":"comun","desc":"Arqueros +1 línea de visión. Vigías del águila exploradora."}

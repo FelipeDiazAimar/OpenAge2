@@ -1,0 +1,1 @@
+{"id":"mal_lanza_2","name":"Lanzas del Níger","civ":"malienses","age":2,"type":"unidad","cost":{"madera":0,"alimento":80,"oro":40,"piedra":0},"effect":{"target":"tag:infanteria","op":"add","path":"abilities.Attack.damage.melee","value":1},"icon":"lanza","rarity":"comun","desc":"Infantería +1 ataque cuerpo a cuerpo. Hierro del Sahel."}

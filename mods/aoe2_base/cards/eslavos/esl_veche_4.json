@@ -1,0 +1,1 @@
+{"id":"esl_veche_4","name":"Veche de Nóvgorod","civ":"eslavos","age":4,"type":"edificio","cost":{"madera":150,"alimento":0,"oro":0,"piedra":200},"effect":{"target":"id:centro_urbano","op":"add","path":"abilities.Garrison.capacity","value":5},"icon":"campana","rarity":"epica","desc":"Centro Urbano +5 capacidad de guarnición. Asamblea que puebla."}

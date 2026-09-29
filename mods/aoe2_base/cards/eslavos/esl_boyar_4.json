@@ -1,0 +1,1 @@
+{"id":"esl_boyar_4","name":"Boyar de Élite","civ":"eslavos","age":4,"type":"unidad","cost":{"madera":0,"alimento":300,"oro":250,"piedra":0},"effect":{"target":"id:boyar","op":"add","path":"abilities.Hitpoints.max","value":40},"icon":"caballo","rarity":"epica","desc":"Boyar +40 HP máximos. Élite de la estepa nevada."}

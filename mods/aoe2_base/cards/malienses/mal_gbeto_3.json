@@ -1,0 +1,1 @@
+{"id":"mal_gbeto_3","name":"Cuchillos Gbeto","civ":"malienses","age":3,"type":"unidad","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"id:gbeto","op":"add","path":"abilities.Attack.damage.melee","value":2},"icon":"daga","rarity":"rara","desc":"Gbeto +2 ataque cuerpo a cuerpo. Unidad única certera."}

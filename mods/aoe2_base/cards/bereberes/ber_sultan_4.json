@@ -1,0 +1,1 @@
+{"id":"ber_sultan_4","name":"Guardia del Sultán","civ":"bereberes","age":4,"type":"mejora","cost":{"madera":0,"alimento":250,"oro":200,"piedra":0},"effect":{"target":"tag:caballeria","op":"add","path":"abilities.Hitpoints.max","value":30},"icon":"caballo","rarity":"epica","desc":"Caballería +30 HP máximos. Establo 20% barato en Imperial."}

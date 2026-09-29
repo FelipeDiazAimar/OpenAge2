@@ -1,0 +1,1 @@
+{"id":"may_maiz_2","name":"Cosecha de Maíz","civ":"mayas","age":2,"type":"recurso","cost":{"madera":0,"alimento":60,"oro":0,"piedra":0},"effect":{"target":"tag:granja","op":"add","path":"abilities.Farm.food","value":75},"icon":"granja","rarity":"comun","desc":"Granjas +75 de alimento. Recursos que duran 15% más."}

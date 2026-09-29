@@ -1,0 +1,1 @@
+{"id":"mal_recluta_1","name":"Reclutas de Malí","civ":"malienses","age":1,"type":"unidad","cost":{"madera":0,"alimento":60,"oro":0,"piedra":0},"effect":{"target":"tag:infanteria","op":"add","path":"abilities.Hitpoints.max","value":10},"icon":"escudo","rarity":"comun","desc":"Infantería +10 HP máximos. Primer escudo del Mansa."}

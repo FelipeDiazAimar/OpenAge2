@@ -1,0 +1,1 @@
+{"id":"ber_drom_3","name":"Trote del Dromedario","civ":"bereberes","age":3,"type":"mejora","cost":{"madera":0,"alimento":100,"oro":50,"piedra":0},"effect":{"target":"tag:caballeria","op":"add","path":"abilities.Move.speed","value":0.05},"icon":"botas","rarity":"comun","desc":"Caballería +0.05 velocidad. Aldeanos veloces desde Feudal."}

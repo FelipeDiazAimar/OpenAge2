@@ -1,0 +1,1 @@
+{"id":"azt_templo_4","name":"Pirámide Eterna","civ":"aztecas","age":4,"type":"edificio","cost":{"madera":150,"alimento":0,"oro":0,"piedra":200},"effect":{"target":"id:castillo","op":"add","path":"abilities.Garrison.capacity","value":5},"icon":"castillo","rarity":"epica","desc":"Castillo +5 capacidad de guarnición. Pirámide que nunca cae."}

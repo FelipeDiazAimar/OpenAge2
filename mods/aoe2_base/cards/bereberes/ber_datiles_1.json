@@ -1,0 +1,1 @@
+{"id":"ber_datiles_1","name":"Dátiles del Oasis","civ":"bereberes","age":1,"type":"recurso","cost":{"madera":0,"alimento":30,"oro":0,"piedra":0},"effect":{"target":"tag:aldeano","op":"mul","path":"abilities.Gather.rates.alimento","value":1.1},"icon":"datil","rarity":"comun","desc":"Aldeanos recolectan alimento 10% más rápido. Oasis que nutre."}

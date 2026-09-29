@@ -1,0 +1,1 @@
+{"id":"ita_condotiero_3","name":"Contrata de Condotieros","civ":"italianos","age":3,"type":"unidad","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"id:condotiero","op":"add","path":"abilities.Attack.damage.melee","value":2},"icon":"espada","rarity":"rara","desc":"Condotiero +2 ataque cuerpo a cuerpo. Mercenarios de contrato."}

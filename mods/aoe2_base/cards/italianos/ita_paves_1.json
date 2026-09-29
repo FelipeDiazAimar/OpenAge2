@@ -1,0 +1,1 @@
+{"id":"ita_paves_1","name":"Pavés Temprano","civ":"italianos","age":1,"type":"unidad","cost":{"madera":0,"alimento":60,"oro":0,"piedra":0},"effect":{"target":"tag:arquero","op":"add","path":"abilities.Hitpoints.max","value":5},"icon":"escudo","rarity":"comun","desc":"Arqueros +5 HP máximos. Primer escudo pavés italiano."}

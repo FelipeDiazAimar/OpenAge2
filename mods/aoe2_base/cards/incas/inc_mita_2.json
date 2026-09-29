@@ -1,0 +1,1 @@
+{"id":"inc_mita_2","name":"Mita Comunal","civ":"incas","age":2,"type":"mejora","cost":{"madera":0,"alimento":80,"oro":40,"piedra":0},"effect":{"target":"tag:infanteria","op":"add","path":"abilities.Move.speed","value":0.05},"icon":"botas","rarity":"comun","desc":"Infantería +0.05 velocidad. Mita que abarata la comida militar."}

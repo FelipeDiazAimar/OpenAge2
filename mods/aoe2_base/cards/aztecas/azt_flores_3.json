@@ -1,0 +1,1 @@
+{"id":"azt_flores_3","name":"Guerras Floridas","civ":"aztecas","age":3,"type":"mejora","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"tag:infanteria","op":"add","path":"abilities.Attack.damage.melee","value":2},"icon":"flor","rarity":"rara","desc":"Infantería +2 ataque cuerpo a cuerpo. Rito que forja guerreros."}

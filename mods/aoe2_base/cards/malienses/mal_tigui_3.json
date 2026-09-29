@@ -1,0 +1,1 @@
+{"id":"mal_tigui_3","name":"Sabios Tigui","civ":"malienses","age":3,"type":"edificio","cost":{"madera":120,"alimento":0,"oro":80,"piedra":0},"effect":{"target":"id:universidad","op":"add","path":"abilities.Hitpoints.max","value":300},"icon":"libro","rarity":"rara","desc":"Universidad +300 HP máximos. Universidades 80% veloces."}

@@ -1,0 +1,1 @@
+{"id":"mag_forja_1","name":"Fragua del Herrero","civ":"magiares","age":1,"type":"mejora","cost":{"madera":40,"alimento":0,"oro":0,"piedra":0},"effect":{"target":"tag:caballeria","op":"add","path":"abilities.Attack.damage.melee","value":1},"icon":"herreria","rarity":"comun","desc":"Caballería +1 ataque cuerpo a cuerpo. Forja gratis del clan."}

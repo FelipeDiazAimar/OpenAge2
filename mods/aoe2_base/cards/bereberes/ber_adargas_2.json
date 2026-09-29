@@ -1,0 +1,1 @@
+{"id":"ber_adargas_2","name":"Adargas de Cuero","civ":"bereberes","age":2,"type":"mejora","cost":{"madera":0,"alimento":90,"oro":50,"piedra":0},"effect":{"target":"tag:caballeria","op":"add","path":"abilities.Armor.classes.melee","value":1},"icon":"escudo","rarity":"comun","desc":"Caballería +1 armadura cuerpo a cuerpo. Cuero del Magreb."}

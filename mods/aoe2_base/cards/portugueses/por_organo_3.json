@@ -1,0 +1,1 @@
+{"id":"por_organo_3","name":"Órganos de Pólvora","civ":"portugueses","age":3,"type":"unidad","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"id:canon_organo","op":"add","path":"abilities.Attack.damage.pierce","value":1},"icon":"canon","rarity":"rara","desc":"Cañón de órgano +1 ataque perforante. Unidad única tronante."}

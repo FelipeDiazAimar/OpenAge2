@@ -1,0 +1,1 @@
+{"id":"azt_jaguar_4","name":"Jaguar de Élite","civ":"aztecas","age":4,"type":"unidad","cost":{"madera":0,"alimento":300,"oro":250,"piedra":0},"effect":{"target":"id:jaguar","op":"add","path":"abilities.Hitpoints.max","value":30},"icon":"garra","rarity":"epica","desc":"Guerrero jaguar +30 HP máximos. Élite del templo."}

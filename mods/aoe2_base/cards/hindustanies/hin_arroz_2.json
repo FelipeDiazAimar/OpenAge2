@@ -1,0 +1,1 @@
+{"id":"hin_arroz_2","name":"Arrozales del Indo","civ":"hindustanies","age":2,"type":"recurso","cost":{"madera":0,"alimento":60,"oro":0,"piedra":0},"effect":{"target":"tag:granja","op":"add","path":"abilities.Farm.food","value":75},"icon":"granja","rarity":"comun","desc":"Granjas +75 de alimento. Arrozales que no se agotan."}

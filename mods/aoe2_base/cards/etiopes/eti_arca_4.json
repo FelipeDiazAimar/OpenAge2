@@ -1,0 +1,1 @@
+{"id":"eti_arca_4","name":"Arca de la Alianza","civ":"etiopes","age":4,"type":"recurso","cost":{"madera":0,"alimento":0,"oro":0,"piedra":0},"effect":{"target":"id:jugador","op":"add","path":"res.gold","value":500},"icon":"reliquia","rarity":"epica","desc":"Recibe 500 de oro al instante. Tesoro guardado en Aksum."}

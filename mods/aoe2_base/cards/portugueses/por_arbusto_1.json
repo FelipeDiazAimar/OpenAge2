@@ -1,0 +1,1 @@
+{"id":"por_arbusto_1","name":"Leña del Arbusto","civ":"portugueses","age":1,"type":"mejora","cost":{"madera":0,"alimento":40,"oro":20,"piedra":0},"effect":{"target":"tag:aldeano","op":"mul","path":"abilities.Gather.rates.madera","value":1.1},"icon":"hacha","rarity":"comun","desc":"Aldeanos talan madera 10% más rápido. Arbustos que dan madera."}

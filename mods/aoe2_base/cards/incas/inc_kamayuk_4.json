@@ -1,0 +1,1 @@
+{"id":"inc_kamayuk_4","name":"Kamayuk de Élite","civ":"incas","age":4,"type":"unidad","cost":{"madera":0,"alimento":300,"oro":250,"piedra":0},"effect":{"target":"id:kamayuk","op":"add","path":"abilities.Hitpoints.max","value":30},"icon":"lanza","rarity":"epica","desc":"Kamayuk +30 HP máximos. Guardia de élite del Sapa Inca."}

@@ -1,0 +1,1 @@
+{"id":"mag_lobo_1","name":"Cazadores de Lobos","civ":"magiares","age":1,"type":"mejora","cost":{"madera":0,"alimento":40,"oro":20,"piedra":0},"effect":{"target":"tag:caballeria","op":"add","path":"abilities.Vision.sight","value":1},"icon":"antorcha","rarity":"comun","desc":"Caballería +1 línea de visión. Aldeanos matan lobos de un golpe."}

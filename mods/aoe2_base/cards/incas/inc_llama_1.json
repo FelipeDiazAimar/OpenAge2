@@ -1,0 +1,1 @@
+{"id":"inc_llama_1","name":"Caravana de Llamas","civ":"incas","age":1,"type":"mejora","cost":{"madera":0,"alimento":40,"oro":20,"piedra":0},"effect":{"target":"tag:infanteria","op":"add","path":"abilities.Vision.sight","value":1},"icon":"antorcha","rarity":"comun","desc":"Infantería +1 línea de visión. Llama gratis que abre caminos."}

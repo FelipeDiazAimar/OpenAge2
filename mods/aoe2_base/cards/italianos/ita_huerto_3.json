@@ -1,0 +1,1 @@
+{"id":"ita_huerto_3","name":"Huertos Lombardos","civ":"italianos","age":3,"type":"recurso","cost":{"madera":0,"alimento":100,"oro":50,"piedra":0},"effect":{"target":"tag:aldeano","op":"mul","path":"abilities.Gather.rates.alimento","value":1.15},"icon":"trigo","rarity":"comun","desc":"Aldeanos recolectan alimento 15% más rápido. Avance de edad barato."}

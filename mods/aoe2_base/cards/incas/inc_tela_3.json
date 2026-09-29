@@ -1,0 +1,1 @@
+{"id":"inc_tela_3","name":"Escudos de Tela","civ":"incas","age":3,"type":"mejora","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"id:kamayuk","op":"add","path":"abilities.Hitpoints.max","value":20},"icon":"escudo","rarity":"rara","desc":"Kamayuk +20 HP máximos. Ecos de Escudos de Tela."}

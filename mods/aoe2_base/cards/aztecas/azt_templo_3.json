@@ -1,0 +1,1 @@
+{"id":"azt_templo_3","name":"Templo Mayor","civ":"aztecas","age":3,"type":"edificio","cost":{"madera":0,"alimento":0,"oro":80,"piedra":100},"effect":{"target":"id:monasterio","op":"add","path":"abilities.Hitpoints.max","value":300},"icon":"templo","rarity":"rara","desc":"Monasterio +300 HP máximos. Monjes que ganan HP por tecnología."}

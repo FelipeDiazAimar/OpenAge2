@@ -1,0 +1,1 @@
+{"id":"mal_tata_2","name":"Tata de Barro","civ":"malienses","age":2,"type":"edificio","cost":{"madera":100,"alimento":0,"oro":0,"piedra":0},"effect":{"target":"id:cuartel","op":"add","path":"abilities.Hitpoints.max","value":200},"icon":"cuartel","rarity":"comun","desc":"Cuartel +200 HP máximos. Muros de barro baratos."}

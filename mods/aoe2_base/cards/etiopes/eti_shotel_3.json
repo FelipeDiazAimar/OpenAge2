@@ -1,0 +1,1 @@
+{"id":"eti_shotel_3","name":"Hojas Shotel","civ":"etiopes","age":3,"type":"unidad","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"id:shotel","op":"add","path":"abilities.Attack.damage.melee","value":2},"icon":"espada","rarity":"rara","desc":"Shotel +2 ataque cuerpo a cuerpo. Espadas curvas del negus."}

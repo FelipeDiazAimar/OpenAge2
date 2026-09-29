@@ -1,0 +1,1 @@
+{"id":"eti_canastos_1","name":"Canastos de Aksum","civ":"etiopes","age":1,"type":"mejora","cost":{"madera":0,"alimento":40,"oro":20,"piedra":0},"effect":{"target":"id:aldeano","op":"add","path":"abilities.Gather.capacity","value":3},"icon":"cesta","rarity":"comun","desc":"Aldeanos +3 capacidad de carga. Tributo del reino antiguo."}

@@ -1,0 +1,1 @@
+{"id":"esl_trigo_4","name":"Graneros del Dniéper","civ":"eslavos","age":4,"type":"recurso","cost":{"madera":0,"alimento":200,"oro":150,"piedra":0},"effect":{"target":"tag:granja","op":"add","path":"abilities.Farm.food","value":150},"icon":"granja","rarity":"epica","desc":"Granjas +150 de alimento. Cosecha imperial inagotable."}

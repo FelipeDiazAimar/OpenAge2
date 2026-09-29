@@ -1,0 +1,1 @@
+{"id":"ber_camello_3","name":"Arqueros en Camello","civ":"bereberes","age":3,"type":"unidad","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"id:arquero_camello","op":"add","path":"abilities.Attack.damage.pierce","value":2},"icon":"camello","rarity":"rara","desc":"Arquero a camello +2 ataque perforante. Unidad única del desierto."}

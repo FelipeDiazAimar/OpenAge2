@@ -1,0 +1,1 @@
+{"id":"por_feitoria_3","name":"Feitoria de Goa","civ":"portugueses","age":3,"type":"recurso","cost":{"madera":0,"alimento":100,"oro":50,"piedra":0},"effect":{"target":"tag:aldeano","op":"mul","path":"abilities.Gather.rates.oro","value":1.15},"icon":"mercado","rarity":"comun","desc":"Aldeanos extraen oro 15% más rápido. Factorías de especias."}

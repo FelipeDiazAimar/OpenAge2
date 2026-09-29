@@ -1,0 +1,1 @@
+{"id":"ita_arsenal_4","name":"Gran Arsenal","civ":"italianos","age":4,"type":"edificio","cost":{"madera":150,"alimento":0,"oro":150,"piedra":100},"effect":{"target":"tag:barco","op":"add","path":"abilities.Hitpoints.max","value":30},"icon":"barco","rarity":"epica","desc":"Barcos +30 HP máximos. Flota del Adriático indestructible."}

@@ -1,0 +1,1 @@
+{"id":"hin_trote_4","name":"Trote del Desierto","civ":"hindustanies","age":4,"type":"mejora","cost":{"madera":0,"alimento":200,"oro":180,"piedra":0},"effect":{"target":"tag:caballeria","op":"mul","path":"abilities.Move.speed","value":1.1},"icon":"herradura","rarity":"epica","desc":"Caballería 10% más rápida. Camellos que vuelan sobre la arena."}

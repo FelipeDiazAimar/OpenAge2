@@ -1,0 +1,1 @@
+{"id":"inc_kamayuk_3","name":"Muro de Kamayuks","civ":"incas","age":3,"type":"unidad","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"id:kamayuk","op":"add","path":"abilities.Attack.damage.melee","value":2},"icon":"lanza","rarity":"rara","desc":"Kamayuk +2 ataque cuerpo a cuerpo. Picas largas del inca."}

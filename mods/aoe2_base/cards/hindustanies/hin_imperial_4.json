@@ -1,0 +1,1 @@
+{"id":"hin_imperial_4","name":"Camello Imperial","civ":"hindustanies","age":4,"type":"unidad","cost":{"madera":0,"alimento":300,"oro":250,"piedra":0},"effect":{"target":"id:camello_pesado","op":"add","path":"abilities.Attack.damage.melee","value":3},"icon":"camello","rarity":"epica","desc":"Camello pesado +3 ataque cuerpo a cuerpo. Camino al Camello Imperial."}

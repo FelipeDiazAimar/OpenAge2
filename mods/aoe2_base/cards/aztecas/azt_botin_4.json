@@ -1,0 +1,1 @@
+{"id":"azt_botin_4","name":"Botín de Tenochtitlan","civ":"aztecas","age":4,"type":"recurso","cost":{"madera":0,"alimento":200,"oro":150,"piedra":0},"effect":{"target":"tag:granja","op":"add","path":"abilities.Farm.food","value":150},"icon":"corona","rarity":"epica","desc":"Granjas +150 de alimento. Tributo imperial inagotable."}

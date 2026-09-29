@@ -1,0 +1,1 @@
+{"id":"inc_qollqa_3","name":"Qollqas del Estado","civ":"incas","age":3,"type":"edificio","cost":{"madera":120,"alimento":0,"oro":80,"piedra":0},"effect":{"target":"id:cuartel","op":"add","path":"abilities.Hitpoints.max","value":300},"icon":"cuartel","rarity":"rara","desc":"Cuartel +300 HP máximos. Almacenes que abaratan ejércitos."}

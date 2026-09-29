@@ -1,0 +1,1 @@
+{"id":"inc_casa_2","name":"Casas de Diez","civ":"incas","age":2,"type":"edificio","cost":{"madera":100,"alimento":0,"oro":0,"piedra":0},"effect":{"target":"id:casa","op":"add","path":"abilities.Hitpoints.max","value":200},"icon":"casa","rarity":"comun","desc":"Casa +200 HP máximos. Casas que albergan 10 población."}

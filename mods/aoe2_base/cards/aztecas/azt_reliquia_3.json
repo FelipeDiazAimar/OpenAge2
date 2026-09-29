@@ -1,0 +1,1 @@
+{"id":"azt_reliquia_3","name":"Reliquias del Sol","civ":"aztecas","age":3,"type":"recurso","cost":{"madera":0,"alimento":100,"oro":50,"piedra":0},"effect":{"target":"tag:aldeano","op":"mul","path":"abilities.Gather.rates.oro","value":1.15},"icon":"reliquia","rarity":"comun","desc":"Aldeanos extraen oro 15% más rápido. Reliquias que dan +33% oro."}

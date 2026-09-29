@@ -1,0 +1,1 @@
+{"id":"azt_tamemes_1","name":"Tamemes Cargadores","civ":"aztecas","age":1,"type":"mejora","cost":{"madera":0,"alimento":40,"oro":20,"piedra":0},"effect":{"target":"id:aldeano","op":"add","path":"abilities.Gather.capacity","value":3},"icon":"cesta","rarity":"comun","desc":"Aldeanos +3 capacidad de carga. Hombros que llevan el tributo."}

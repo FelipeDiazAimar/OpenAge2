@@ -1,0 +1,1 @@
+{"id":"ita_bolonia_3","name":"Universidad de Bolonia","civ":"italianos","age":3,"type":"edificio","cost":{"madera":120,"alimento":0,"oro":80,"piedra":0},"effect":{"target":"id:universidad","op":"add","path":"abilities.Hitpoints.max","value":300},"icon":"libro","rarity":"rara","desc":"Universidad +300 HP máximos. Sabios con tecnologías 25% baratas."}

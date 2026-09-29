@@ -1,0 +1,1 @@
+{"id":"hin_cana_3","name":"Caña del Ganges","civ":"hindustanies","age":3,"type":"recurso","cost":{"madera":0,"alimento":100,"oro":50,"piedra":0},"effect":{"target":"tag:aldeano","op":"mul","path":"abilities.Gather.rates.alimento","value":1.15},"icon":"trigo","rarity":"comun","desc":"Aldeanos recolectan alimento 15% más rápido. Vega del Ganges."}

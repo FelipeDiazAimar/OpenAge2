@@ -1,0 +1,1 @@
+{"id":"esl_trineo_1","name":"Trineos de Leña","civ":"eslavos","age":1,"type":"mejora","cost":{"madera":0,"alimento":40,"oro":20,"piedra":0},"effect":{"target":"id:aldeano","op":"add","path":"abilities.Gather.capacity","value":3},"icon":"cesta","rarity":"comun","desc":"Aldeanos +3 capacidad de carga. Trineos sobre la nieve."}

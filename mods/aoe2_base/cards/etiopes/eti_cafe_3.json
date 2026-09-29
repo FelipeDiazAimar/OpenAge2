@@ -1,0 +1,1 @@
+{"id":"eti_cafe_3","name":"Café de Kaffa","civ":"etiopes","age":3,"type":"recurso","cost":{"madera":0,"alimento":100,"oro":50,"piedra":0},"effect":{"target":"tag:aldeano","op":"mul","path":"abilities.Gather.rates.alimento","value":1.15},"icon":"cesta","rarity":"comun","desc":"Aldeanos recolectan alimento 15% más rápido. Grano de altura."}

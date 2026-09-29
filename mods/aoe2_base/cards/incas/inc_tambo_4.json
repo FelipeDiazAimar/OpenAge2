@@ -1,0 +1,1 @@
+{"id":"inc_tambo_4","name":"Tambos del Capac Ñan","civ":"incas","age":4,"type":"recurso","cost":{"madera":0,"alimento":200,"oro":150,"piedra":0},"effect":{"target":"tag:granja","op":"add","path":"abilities.Farm.food","value":150},"icon":"granja","rarity":"epica","desc":"Granjas +150 de alimento. Camino real siempre abastecido."}

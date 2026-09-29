@@ -1,0 +1,1 @@
+{"id":"mal_farimba_3","name":"Caballería Farimba","civ":"malienses","age":3,"type":"mejora","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"tag:caballeria","op":"add","path":"abilities.Attack.damage.melee","value":2},"icon":"caballo","rarity":"rara","desc":"Caballería +2 ataque cuerpo a cuerpo. Ecos de Farimba."}

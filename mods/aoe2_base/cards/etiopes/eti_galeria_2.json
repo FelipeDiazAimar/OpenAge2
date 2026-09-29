@@ -1,0 +1,1 @@
+{"id":"eti_galeria_2","name":"Galerías de Gondar","civ":"etiopes","age":2,"type":"edificio","cost":{"madera":100,"alimento":0,"oro":0,"piedra":0},"effect":{"target":"id:arqueria","op":"add","path":"abilities.Hitpoints.max","value":200},"icon":"arqueria","rarity":"comun","desc":"Arquería +200 HP máximos. Base de la lluvia de flechas."}

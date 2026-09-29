@@ -1,0 +1,1 @@
+{"id":"may_pluma_3","name":"Plumas del Quetzal","civ":"mayas","age":3,"type":"unidad","cost":{"madera":0,"alimento":150,"oro":120,"piedra":0},"effect":{"target":"id:arquero_emplumado","op":"add","path":"abilities.Attack.damage.pierce","value":1},"icon":"pluma","rarity":"rara","desc":"Arquero emplumado +1 ataque perforante. Unidad única veloz."}

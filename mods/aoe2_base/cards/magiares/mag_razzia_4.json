@@ -1,0 +1,1 @@
+{"id":"mag_razzia_4","name":"Razzias del Oeste","civ":"magiares","age":4,"type":"recurso","cost":{"madera":0,"alimento":0,"oro":0,"piedra":0},"effect":{"target":"id:jugador","op":"add","path":"res.gold","value":500},"icon":"oro","rarity":"epica","desc":"Recibe 500 de oro al instante. Botín de las correrías."}

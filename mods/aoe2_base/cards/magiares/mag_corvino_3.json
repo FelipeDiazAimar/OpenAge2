@@ -1,0 +1,1 @@
+{"id":"mag_corvino_3","name":"Ejército Corvino","civ":"magiares","age":3,"type":"mejora","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"tag:caballeria","op":"add","path":"abilities.Armor.classes.melee","value":1},"icon":"cuervo","rarity":"rara","desc":"Caballería +1 armadura cuerpo a cuerpo. Cuervos del rey Matías."}

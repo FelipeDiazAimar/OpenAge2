@@ -1,0 +1,1 @@
+{"id":"por_nao_4","name":"Naos del Océano","civ":"portugueses","age":4,"type":"mejora","cost":{"madera":150,"alimento":0,"oro":150,"piedra":100},"effect":{"target":"tag:barco","op":"mul","path":"abilities.Move.speed","value":1.1},"icon":"vela","rarity":"epica","desc":"Barcos 10% más rápidos. Velas que dominan mareas."}

@@ -1,0 +1,1 @@
+{"id":"mal_mansa_4","name":"Peregrinación del Mansa","civ":"malienses","age":4,"type":"recurso","cost":{"madera":0,"alimento":0,"oro":0,"piedra":0},"effect":{"target":"id:jugador","op":"add","path":"res.gold","value":500},"icon":"oro","rarity":"epica","desc":"Recibe 500 de oro al instante. Hajj del Mansa Musa."}

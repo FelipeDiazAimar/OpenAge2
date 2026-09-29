@@ -1,0 +1,1 @@
+{"id":"azt_sol_4","name":"Sacrificio al Sol","civ":"aztecas","age":4,"type":"mejora","cost":{"madera":0,"alimento":250,"oro":200,"piedra":0},"effect":{"target":"tag:infanteria","op":"add","path":"abilities.Attack.damage.melee","value":3},"icon":"sol","rarity":"epica","desc":"Infantería +3 ataque cuerpo a cuerpo. Culmen de las Guerras Floridas."}

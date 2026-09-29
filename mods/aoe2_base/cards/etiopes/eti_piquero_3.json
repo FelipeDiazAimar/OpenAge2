@@ -1,0 +1,1 @@
+{"id":"eti_piquero_3","name":"Piqueros del Negus","civ":"etiopes","age":3,"type":"unidad","cost":{"madera":0,"alimento":100,"oro":100,"piedra":0},"effect":{"target":"id:piquero","op":"add","path":"abilities.Attack.damage.melee","value":2},"icon":"lanza","rarity":"rara","desc":"Piquero +2 ataque cuerpo a cuerpo. Mejora gratis e instantánea."}

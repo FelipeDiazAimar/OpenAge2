@@ -1,0 +1,1 @@
+{"id":"eti_herederos_3","name":"Herederos Reales","civ":"etiopes","age":3,"type":"mejora","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"tag:arquero","op":"add","path":"abilities.Armor.classes.pierce","value":1},"icon":"escudo","rarity":"rara","desc":"Arqueros +1 armadura antiproyectil. Sangre salomónica."}

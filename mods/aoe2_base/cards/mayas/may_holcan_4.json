@@ -1,0 +1,1 @@
+{"id":"may_holcan_4","name":"Holcanes de Élite","civ":"mayas","age":4,"type":"unidad","cost":{"madera":0,"alimento":300,"oro":250,"piedra":0},"effect":{"target":"id:arquero_emplumado","op":"add","path":"abilities.Hitpoints.max","value":30},"icon":"pluma","rarity":"epica","desc":"Arquero emplumado +30 HP máximos. Culmen de Holcanes."}

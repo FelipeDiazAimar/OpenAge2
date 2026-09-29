@@ -1,0 +1,1 @@
+{"id":"por_circun_3","name":"Circunnavegación","civ":"portugueses","age":3,"type":"mejora","cost":{"madera":0,"alimento":100,"oro":100,"piedra":0},"effect":{"target":"tag:barco","op":"mul","path":"abilities.Move.speed","value":1.05},"icon":"vela","rarity":"rara","desc":"Barcos 5% más rápidos. La vuelta al mundo lusa."}

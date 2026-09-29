@@ -1,0 +1,1 @@
+{"id":"azt_jaguar_3","name":"Furia del Jaguar","civ":"aztecas","age":3,"type":"unidad","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"id:jaguar","op":"add","path":"abilities.Attack.damage.melee","value":2},"icon":"garra","rarity":"rara","desc":"Guerrero jaguar +2 ataque cuerpo a cuerpo. Cazador de infantería."}

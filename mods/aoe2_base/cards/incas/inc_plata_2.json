@@ -1,0 +1,1 @@
+{"id":"inc_plata_2","name":"Plata de Potosí","civ":"incas","age":2,"type":"recurso","cost":{"madera":50,"alimento":50,"oro":0,"piedra":0},"effect":{"target":"tag:aldeano","op":"mul","path":"abilities.Gather.rates.oro","value":1.15},"icon":"oro","rarity":"comun","desc":"Aldeanos extraen oro 15% más rápido. Plata del cerro rico."}

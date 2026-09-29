@@ -1,0 +1,1 @@
+{"id":"ita_arsenal_2","name":"Atarazanas del Arsenal","civ":"italianos","age":2,"type":"edificio","cost":{"madera":100,"alimento":0,"oro":0,"piedra":0},"effect":{"target":"id:arqueria","op":"add","path":"abilities.Hitpoints.max","value":200},"icon":"arqueria","rarity":"rara","desc":"Arquería +200 HP máximos. Arsenal que arma ballesteros."}

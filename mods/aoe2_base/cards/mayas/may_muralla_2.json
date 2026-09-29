@@ -1,0 +1,1 @@
+{"id":"may_muralla_2","name":"Murallas de Tikal","civ":"mayas","age":2,"type":"edificio","cost":{"madera":0,"alimento":0,"oro":0,"piedra":100},"effect":{"target":"id:muro","op":"add","path":"abilities.Hitpoints.max","value":200},"icon":"muro","rarity":"comun","desc":"Muro +200 HP máximos. Murallas 50% baratas para el equipo."}

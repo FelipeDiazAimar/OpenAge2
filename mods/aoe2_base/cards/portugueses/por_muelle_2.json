@@ -1,0 +1,1 @@
+{"id":"por_muelle_2","name":"Muelle de Belém","civ":"portugueses","age":2,"type":"edificio","cost":{"madera":100,"alimento":0,"oro":0,"piedra":0},"effect":{"target":"id:muelle","op":"add","path":"abilities.Hitpoints.max","value":200},"icon":"muelle","rarity":"comun","desc":"Muelle +200 HP máximos. Puerto que arma carabelas."}

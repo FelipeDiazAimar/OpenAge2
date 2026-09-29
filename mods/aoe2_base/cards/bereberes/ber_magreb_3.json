@@ -1,0 +1,1 @@
+{"id":"ber_magreb_3","name":"Camellos Magrebíes","civ":"bereberes","age":3,"type":"mejora","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"id:camello","op":"add","path":"abilities.Hitpoints.max","value":20},"icon":"camello","rarity":"rara","desc":"Camello +20 HP máximos. Camellos que regeneran y resisten."}

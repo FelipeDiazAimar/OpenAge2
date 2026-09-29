@@ -1,0 +1,1 @@
+{"id":"mag_lena_1","name":"Leña del Danubio","civ":"magiares","age":1,"type":"recurso","cost":{"madera":0,"alimento":30,"oro":0,"piedra":0},"effect":{"target":"tag:aldeano","op":"mul","path":"abilities.Gather.rates.madera","value":1.1},"icon":"hacha","rarity":"comun","desc":"Aldeanos talan madera 10% más rápido. Madera para establos."}

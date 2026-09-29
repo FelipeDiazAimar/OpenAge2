@@ -1,0 +1,1 @@
+{"id":"por_grumete_1","name":"Grumetes de Lisboa","civ":"portugueses","age":1,"type":"unidad","cost":{"madera":0,"alimento":60,"oro":0,"piedra":0},"effect":{"target":"tag:barco","op":"add","path":"abilities.Hitpoints.max","value":15},"icon":"barco","rarity":"comun","desc":"Barcos +15 HP máximos. Barcos con +10% vida."}

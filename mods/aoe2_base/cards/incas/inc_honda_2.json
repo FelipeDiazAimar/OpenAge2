@@ -1,0 +1,1 @@
+{"id":"inc_honda_2","name":"Honda Andina","civ":"incas","age":2,"type":"unidad","cost":{"madera":0,"alimento":80,"oro":40,"piedra":0},"effect":{"target":"id:guerrillero","op":"add","path":"abilities.Attack.damage.pierce","value":1},"icon":"honda","rarity":"comun","desc":"Guerrillero +1 ataque perforante. Piedras que vuelan lejos."}

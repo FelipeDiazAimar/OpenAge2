@@ -1,0 +1,1 @@
+{"id":"esl_boyar_3","name":"Honor Boyar","civ":"eslavos","age":3,"type":"unidad","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"id:boyar","op":"add","path":"abilities.Attack.damage.melee","value":2},"icon":"espada","rarity":"rara","desc":"Boyar +2 ataque cuerpo a cuerpo. Nobleza acorazada."}

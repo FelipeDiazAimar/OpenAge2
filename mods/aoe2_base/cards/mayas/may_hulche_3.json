@@ -1,0 +1,1 @@
+{"id":"may_hulche_3","name":"Jabalinas Hulche","civ":"mayas","age":3,"type":"mejora","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"id:guerrillero","op":"add","path":"abilities.Attack.damage.pierce","value":2},"icon":"jabalina","rarity":"rara","desc":"Guerrillero +2 ataque perforante. Ecos de Jabalineros Hulche."}

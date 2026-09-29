@@ -1,0 +1,1 @@
+{"id":"azt_atlatl_2","name":"Atlatl de Caza","civ":"aztecas","age":2,"type":"unidad","cost":{"madera":0,"alimento":80,"oro":40,"piedra":0},"effect":{"target":"id:guerrillero","op":"add","path":"abilities.Attack.damage.pierce","value":1},"icon":"daga","rarity":"comun","desc":"Guerrillero +1 ataque perforante. Ecos del Atlatl único."}

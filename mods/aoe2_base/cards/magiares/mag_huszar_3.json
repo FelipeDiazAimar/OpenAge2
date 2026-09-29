@@ -1,0 +1,1 @@
+{"id":"mag_huszar_3","name":"Huszares Alados","civ":"magiares","age":3,"type":"unidad","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"id:huszar_magiar","op":"add","path":"abilities.Attack.damage.melee","value":2},"icon":"caballo","rarity":"rara","desc":"Huszar magiar +2 ataque cuerpo a cuerpo. Unidad única veloz."}

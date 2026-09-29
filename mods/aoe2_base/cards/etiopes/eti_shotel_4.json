@@ -1,0 +1,1 @@
+{"id":"eti_shotel_4","name":"Shotel de Élite","civ":"etiopes","age":4,"type":"unidad","cost":{"madera":0,"alimento":300,"oro":250,"piedra":0},"effect":{"target":"id:shotel","op":"add","path":"abilities.Hitpoints.max","value":30},"icon":"espada","rarity":"epica","desc":"Shotel +30 HP máximos. Guardia de élite de Aksum."}

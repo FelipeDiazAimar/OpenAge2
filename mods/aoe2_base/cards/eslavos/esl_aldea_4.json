@@ -1,0 +1,1 @@
+{"id":"esl_aldea_4","name":"Aldeas Nuevas","civ":"eslavos","age":4,"type":"mejora","cost":{"madera":0,"alimento":0,"oro":0,"piedra":0},"effect":{"target":"id:jugador","op":"add","path":"res.wood","value":500},"icon":"madera","rarity":"epica","desc":"Recibe 500 de madera al instante. Cuarteles que dan población."}

@@ -1,0 +1,1 @@
+{"id":"ber_jinetes_2","name":"Jinetes del Desierto","civ":"bereberes","age":2,"type":"unidad","cost":{"madera":0,"alimento":100,"oro":60,"piedra":0},"effect":{"target":"tag:caballeria","op":"add","path":"abilities.Attack.damage.melee","value":1},"icon":"lanza","rarity":"comun","desc":"Caballería +1 ataque cuerpo a cuerpo. Establo barato en Castillos."}

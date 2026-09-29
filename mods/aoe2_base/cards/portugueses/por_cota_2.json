@@ -1,0 +1,1 @@
+{"id":"por_cota_2","name":"Cotas de Lisboa","civ":"portugueses","age":2,"type":"mejora","cost":{"madera":0,"alimento":90,"oro":50,"piedra":0},"effect":{"target":"tag:arquero","op":"add","path":"abilities.Armor.classes.pierce","value":1},"icon":"escudo","rarity":"comun","desc":"Arqueros +1 armadura antiproyectil. Hierro del arsenal."}

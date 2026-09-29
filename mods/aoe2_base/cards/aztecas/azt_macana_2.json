@@ -1,0 +1,1 @@
+{"id":"azt_macana_2","name":"Macanas de Obsidiana","civ":"aztecas","age":2,"type":"unidad","cost":{"madera":0,"alimento":90,"oro":50,"piedra":0},"effect":{"target":"tag:infanteria","op":"add","path":"abilities.Attack.damage.melee","value":1},"icon":"maza","rarity":"comun","desc":"Infantería +1 ataque cuerpo a cuerpo. Obsidiana que corta algodón."}

@@ -1,0 +1,1 @@
+{"id":"esl_onagro_4","name":"Onagros del Volga","civ":"eslavos","age":4,"type":"mejora","cost":{"madera":0,"alimento":250,"oro":200,"piedra":0},"effect":{"target":"id:onagro","op":"add","path":"abilities.Attack.damage.melee","value":10},"icon":"onagro","rarity":"epica","desc":"Onagro +10 ataque. Asedio barato que aplasta muros."}

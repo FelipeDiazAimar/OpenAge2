@@ -1,0 +1,1 @@
+{"id":"mag_pasto_1","name":"Pastos Nómadas","civ":"magiares","age":1,"type":"recurso","cost":{"madera":0,"alimento":30,"oro":0,"piedra":0},"effect":{"target":"tag:aldeano","op":"mul","path":"abilities.Gather.rates.alimento","value":1.1},"icon":"oveja","rarity":"comun","desc":"Aldeanos recolectan alimento 10% más rápido. Rebaños de la horda."}

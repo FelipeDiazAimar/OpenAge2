@@ -1,0 +1,1 @@
+{"id":"hin_camello_1","name":"Crías de Camello","civ":"hindustanies","age":1,"type":"unidad","cost":{"madera":0,"alimento":60,"oro":0,"piedra":0},"effect":{"target":"tag:caballeria","op":"add","path":"abilities.Hitpoints.max","value":15},"icon":"caballo","rarity":"comun","desc":"Caballería +15 HP máximos. Primer paso del establo del desierto."}

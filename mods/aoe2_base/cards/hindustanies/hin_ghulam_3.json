@@ -1,0 +1,1 @@
+{"id":"hin_ghulam_3","name":"Guardia Ghulam","civ":"hindustanies","age":3,"type":"unidad","cost":{"madera":0,"alimento":120,"oro":100,"piedra":0},"effect":{"target":"id:ghulam","op":"add","path":"abilities.Attack.damage.melee","value":2},"icon":"espada","rarity":"rara","desc":"Ghulam +2 ataque cuerpo a cuerpo. Esclavos soldados de élite."}

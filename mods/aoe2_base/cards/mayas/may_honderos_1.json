@@ -1,0 +1,1 @@
+{"id":"may_honderos_1","name":"Honderos Jóvenes","civ":"mayas","age":1,"type":"unidad","cost":{"madera":0,"alimento":60,"oro":0,"piedra":0},"effect":{"target":"tag:arquero","op":"add","path":"abilities.Hitpoints.max","value":5},"icon":"arco","rarity":"comun","desc":"Arqueros +5 HP máximos. Levas baratas que aguantan."}
