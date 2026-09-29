@@ -1,0 +1,12 @@
+{
+  "id": "deco_nieve_pino",
+  "type": "resource",
+  "name": "Pino nevado decorativo",
+  "tags": [
+    "decoracion"
+  ],
+  "graphics": {
+    "idle": "sprite:nature/snowpine"
+  },
+  "_todo": "colocacion en MapGen"
+}

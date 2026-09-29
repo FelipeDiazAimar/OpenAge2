@@ -5,6 +5,7 @@
   "tags": ["recurso"],
   "graphics": {
     "death": "sprite:animals/cow/death",
+    "decay": "sprite:animals/cow/decay",
     "idle": "sprite:animals/cow/idle",
     "walk": "sprite:animals/cow/walk"
   },

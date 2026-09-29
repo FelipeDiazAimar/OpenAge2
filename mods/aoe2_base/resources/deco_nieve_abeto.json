@@ -1,0 +1,12 @@
+{
+  "id": "deco_nieve_abeto",
+  "type": "resource",
+  "name": "Abeto nevado decorativo",
+  "tags": [
+    "decoracion"
+  ],
+  "graphics": {
+    "idle": "sprite:nature/snowspruce"
+  },
+  "_todo": "colocacion en MapGen"
+}

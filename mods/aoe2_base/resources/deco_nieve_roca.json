@@ -1,0 +1,12 @@
+{
+  "id": "deco_nieve_roca",
+  "type": "resource",
+  "name": "Roca nevada decorativa",
+  "tags": [
+    "decoracion"
+  ],
+  "graphics": {
+    "idle": "sprite:nature/snowrock"
+  },
+  "_todo": "colocacion en MapGen"
+}
