@@ -23,6 +23,8 @@ static func order_gather(sim, id: int, target: int) -> void:
 	var kind := str(src["params"]["rate_key"])
 	if not (g["params"]["rates"] as Dictionary).has(kind):
 		return
+	if w.has_ability(id, "Naval") and not bool(src["params"].get("water", false)):
+		return # un barco solo pesca en el agua
 	if not _may_take(sim, id, target):
 		return # oveja de otro jugador
 	if _farm_busy(sim, target, id):
@@ -172,7 +174,7 @@ static func _gather_tick(sim, id: int, g: Dictionary) -> void:
 static func _go_drop(sim, id: int, g: Dictionary) -> void:
 	var w = sim.world
 	var pos: Vector2i = w.entities[id]["pos"]
-	var d := _nearest_dropsite(sim, int(w.entities[id]["owner"]), str(g["carry_res"]), pos)
+	var d := _nearest_dropsite(sim, int(w.entities[id]["owner"]), str(g["carry_res"]), pos, w.has_ability(id, "Naval"))
 	if d < 0:
 		g["state"] = "idle"
 		return
@@ -217,7 +219,8 @@ static func _retarget(sim, id: int, g: Dictionary) -> void:
 		var p: Dictionary = src["params"]
 		if bool(p.get("hostile", false)) and not bool(src["killed"]):
 			continue # AoE2: no ataca un jabalí por su cuenta
-		if bool(p.get("water", false)) or not _may_take(sim, id, c) or _farm_busy(sim, c, id):
+		# Barcos: solo peces; en tierra, los peces no se buscan solos (AoE2).
+		if bool(p.get("water", false)) != w.has_ability(id, "Naval") or not _may_take(sim, id, c) or _farm_busy(sim, c, id):
 			continue
 		var dd := FP.dist(pos, w.entities[c]["pos"])
 		if best < 0 or dd < best_d:
@@ -232,12 +235,15 @@ static func _retarget(sim, id: int, g: Dictionary) -> void:
 		g["target"] = -1
 
 
-static func _nearest_dropsite(sim, owner: int, res: String, pos: Vector2i) -> int:
+## naval: los barcos solo descargan en muelles.
+static func _nearest_dropsite(sim, owner: int, res: String, pos: Vector2i, naval: bool = false) -> int:
 	var w = sim.world
 	var best := -1
 	var best_d := 0
 	for d in w.ids_with("DropSite"):
 		if int(w.entities[d]["owner"]) != owner or w.has_ability(d, "Foundation"):
+			continue
+		if naval and not w.has_ability(d, "Dock"):
 			continue
 		if not (w.comp(d, "DropSite")["params"]["accepts"] as Array).has(res):
 			continue

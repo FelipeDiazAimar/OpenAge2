@@ -127,3 +127,49 @@ func test_villager_builds_dock_from_shore() -> void:
 		docks.append(id)
 	assert_eq(docks.size(), 1)
 	assert_true(s.is_built(docks[0]), "lo construye desde la orilla")
+
+
+func test_fishing_boat_round_trip_to_dock() -> void:
+	var s := _sim()
+	s.spawn("centro_urbano", 0, Vector2i(5, 18)) # más cerca, pero en tierra
+	var d := s.spawn("muelle", 0, Vector2i(15, 10))
+	var fish := s.spawn("deep_fish", -1, Vector2i(22, 22))
+	var boat := s.spawn("barco_pesquero", 0, Vector2i(18, 14))
+	s.queue_command(0, "gather", {"ids": [boat], "target": fish})
+	_steps(s, 700)
+	assert_true(s.res_of(0)["food"] > 200, "descarga en el muelle: %d" % s.res_of(0)["food"])
+	assert_true(s.grid.is_water(_tile(s, boat)))
+	assert_true(d > 0)
+
+
+func test_boat_rejects_land_resources_and_villager_fishes_from_shore() -> void:
+	var s := _sim()
+	s.spawn("centro_urbano", 0, Vector2i(8, 18))
+	var tree := s.spawn("tree", -1, Vector2i(12, 20))
+	var boat := s.spawn("barco_pesquero", 0, Vector2i(18, 14))
+	s.queue_command(0, "gather", {"ids": [boat], "target": tree})
+	_steps(s, 5)
+	assert_eq(s.world.comp(boat, "Gather")["state"], "idle", "un barco no tala")
+	var shore := s.spawn("shore_fish", -1, Vector2i(15, 20))
+	var v := s.spawn("aldeano", 0, Vector2i(12, 22))
+	s.queue_command(0, "gather", {"ids": [v], "target": shore})
+	_steps(s, 120)
+	assert_eq(s.world.comp(v, "Gather")["state"], "gathering", "llega a la orilla y pesca")
+	_steps(s, 400)
+	assert_true(s.res_of(0)["food"] > 200, "el aldeano pesca desde la orilla")
+	assert_false(s.grid.is_water(_tile(s, v)))
+
+
+func test_galley_sinks_fishing_boat_and_shoots_shore() -> void:
+	var s := _sim()
+	var gal := s.spawn("galera", 0, Vector2i(20, 12))
+	var boat := s.spawn("barco_pesquero", 1, Vector2i(26, 28))
+	s.queue_command(0, "attack", {"ids": [gal], "target": boat})
+	_steps(s, 600)
+	assert_false(s.world.entities.has(boat), "hunde al pesquero")
+	assert_true(s.grid.is_water(_tile(s, gal)))
+	var v := s.spawn("aldeano", 1, Vector2i(13, 20))
+	s.queue_command(0, "attack", {"ids": [gal], "target": v})
+	_steps(s, 400)
+	assert_true(not s.world.entities.has(v) or int(s.world.comp(v, "Hitpoints")["hp"]) < 25, "dispara a la orilla")
+	assert_true(s.grid.is_water(_tile(s, gal)), "sin salir del agua")
