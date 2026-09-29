@@ -119,6 +119,7 @@ const ABILITIES := {
 	"RelicHolder": {},
 	"Market": {},
 	"Dock": {},
+	"Gate": {},
 	"Demolish": {},
 }
 

@@ -137,8 +137,8 @@ func can_place(pid: int, def_id: String, tile: Vector2i) -> String:
 			for x in size.x:
 				if not grid.is_walkable(tile + Vector2i(x, y)):
 					return "lugar ocupado"
-	for f in world.ids_with("Farm"):
-		# Las granjas no bloquean la grilla: se comprueba su huella aparte.
+	for f in world.ids_with("Farm") + world.ids_with("Gate"):
+		# Granjas y puertas no bloquean la grilla: se comprueba su huella aparte.
 		var fs := footprint_of(def_for(f))
 		var fo := Grid.tile_of(world.entities[f]["pos"] - fs * (FP.SCALE / 2))
 		if fo.x < tile.x + size.x and tile.x < fo.x + fs.x and fo.y < tile.y + size.y and tile.y < fo.y + fs.y:
@@ -208,6 +208,23 @@ func reseed_farm(id: int) -> bool:
 	src["amount"] = FP.from_data(float(world.comp(id, "Farm")["params"]["food"]))
 	events.append({"type": "reseed", "id": id, "owner": owner})
 	return true
+
+
+## Puerta: la grilla la deja libre para todos; aquí se cierra a los enemigos
+## de su dueño (dueño y aliados pasan, como en AoE2).
+func _gate_blocks(id: int, t: Vector2i) -> bool:
+	for g in world.ids_with("Gate"):
+		var def := def_for(g)
+		var size := footprint_of(def)
+		var o := Grid.tile_of(world.entities[g]["pos"] - size * (FP.SCALE / 2))
+		if t.x >= o.x and t.y >= o.y and t.x < o.x + size.x and t.y < o.y + size.y:
+			var owner := int(world.entities[id]["owner"])
+			var closed := owner < 0 or is_enemy(owner, int(world.entities[g]["owner"]))
+			var atk: Dictionary = world.comp(id, "Attack")
+			if closed and owner >= 0 and not atk.is_empty() and not world.has_ability(id, "Gather"):
+				CombatSystem.order_attack(self, id, g) # como en AoE2: a romper la puerta
+			return closed
+	return false
 
 
 ## Edificio terminado (no es cimiento).
@@ -311,8 +328,8 @@ func spawn(def_id: String, owner: int, tile: Vector2i) -> int:
 		var ab: Dictionary = def.get("abilities", {})
 		if ab.has("Dock"):
 			grid.naval.block_rect(tile, size) # el muelle está sobre el agua
-		elif not ab.has("Farm"):
-			grid.block_rect(tile, size) # las granjas se pisan
+		elif not ab.has("Farm") and not ab.has("Gate"):
+			grid.block_rect(tile, size) # las granjas se pisan; las puertas, según quién
 		var b := world.spawn(def, owner, tile * FP.SCALE + size * (FP.SCALE / 2))
 		if ab.has("Farm"):
 			_add_farm_food(b)
@@ -390,7 +407,7 @@ func remove(id: int) -> void:
 			var size := Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
 			if world.has_ability(id, "Dock"):
 				grid.naval.block_rect(Grid.tile_of(pos - size * (FP.SCALE / 2)), size, false)
-			elif not world.has_ability(id, "Farm"):
+			elif not world.has_ability(id, "Farm") and not world.has_ability(id, "Gate"):
 				grid.block_rect(Grid.tile_of(pos - size * (FP.SCALE / 2)), size, false)
 		"resource":
 			if _blocks_tile(def_for(id)):
@@ -467,7 +484,7 @@ func step() -> void:
 	cmds.sort_custom(func(a, b): return a["pid"] < b["pid"] or (a["pid"] == b["pid"] and a["seq"] < b["seq"]))
 	for c in cmds:
 		_apply(c)
-	MoveSystem.step(world)
+	MoveSystem.step(world, _gate_blocks)
 	SeparationSystem.step(self)
 	CombatSystem.step(self)
 	MonkSystem.step(self)

@@ -20,6 +20,7 @@
     "Hitpoints": {
       "max": 2750
     },
+    "Gate": {},
     "Armor": {
       "classes": {
         "melee": 3,

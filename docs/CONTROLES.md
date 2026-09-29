@@ -90,7 +90,8 @@ investigación, ejército) y ataca cuando junta tropas.
   los aldeanos nuevos lo recolectan; sobre un cimiento, lo construyen).
 - **Muros**: elige Muro (W, A en la página militar) y arrastra con el clic izquierdo de un punto a
   otro: se colocan todos los tramos (vista previa verde/roja) y los aldeanos los levantan en cadena.
-  Las diagonales también cierran el paso. Las puertas por ahora no se abren.
+  Las diagonales también cierran el paso. Las **puertas** dejan pasar a tu gente y a tus aliados;
+  los enemigos se detienen y tienen que romperlas.
 - **Minimapa** (abajo a la derecha): clic o arrastre para mover la cámara.
 - **Clic en recursos, animales o enemigos**: el panel muestra cuánto les queda o su vida.
 - **Reparar**: clic derecho de aldeanos sobre un edificio propio dañado (cuesta la mitad de su

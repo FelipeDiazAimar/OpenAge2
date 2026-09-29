@@ -27,13 +27,16 @@ static func order_move(world, grid, id: int, dest: Vector2i) -> void:
 	m["moving"] = not pts.is_empty()
 
 
-static func step(world) -> void:
+## blocked_at(id, casilla): casillas que esa unidad no puede pisar aunque la
+## grilla las marque libres (puertas enemigas).
+static func step(world, blocked_at: Callable = Callable()) -> void:
 	for id in world.ids_with("Move"):
 		var m: Dictionary = world.comp(id, "Move")
 		if not m["moving"]:
 			continue
 		var budget: int = m["step"]
 		var pos: Vector2i = world.entities[id]["pos"]
+		var start: Vector2i = pos
 		var wps: Array = m["waypoints"]
 		while budget > 0 and not wps.is_empty():
 			var t: Vector2i = wps[0]
@@ -49,6 +52,11 @@ static func step(world) -> void:
 				pos += Vector2i(d.x * budget / dist, d.y * budget / dist)
 				m["facing"] = d
 				budget = 0
+		if blocked_at.is_valid() and Grid.tile_of(pos) != Grid.tile_of(start) and blocked_at.call(id, Grid.tile_of(pos)):
+			# Puerta cerrada para esta unidad: se detiene delante.
+			wps.clear()
+			m["moving"] = false
+			continue
 		world.set_pos(id, pos)
 		if wps.is_empty():
 			m["moving"] = false
