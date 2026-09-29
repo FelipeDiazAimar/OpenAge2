@@ -253,5 +253,5 @@ func _on_tech() -> void:
 		_status.text = "Tecnologías no encontradas (falta TechViewer.tscn)"
 
 func _on_new_engine() -> void:
-	# Botón beta conservado: abre la escena v2 del nuevo motor.
-	get_tree().change_scene_to_file("res://game/scenes/Match.tscn")
+	# Jugar: primero la pantalla "Nueva partida" (civilizaciones, IA, opciones).
+	get_tree().change_scene_to_file("res://game/scenes/Setup.tscn")

@@ -20,15 +20,17 @@ const CommandPanel := preload("res://engine/ui/CommandPanel.gd")
 const AIPlayer := preload("res://engine/ai/AIPlayer.gd")
 const GroundLayer := preload("res://engine/render2d/GroundLayer.gd")
 const Minimap := preload("res://engine/ui/Minimap.gd")
+const MatchConfig := preload("res://game/MatchConfig.gd")
 
 const MAP_SIZE := 144
-const MAP_SEED := 1234
+const MAP_SEED := 1234 # por defecto; la partida usa map_seed (MatchConfig)
 const START_OFFSETS: Array[Vector2i] = [
 	Vector2i(-33, -33), Vector2i(33, 33), Vector2i(33, -33), Vector2i(-33, 33),
 	Vector2i(0, -46), Vector2i(0, 46), Vector2i(-46, 0), Vector2i(46, 0),
 ]
 const VILLAGER_OFFSETS: Array[Vector2i] = [Vector2i(3, -1), Vector2i(-1, 3), Vector2i(3, 3)]
 const SCOUT_OFFSET := Vector2i(-4, -1)
+## Jugadores por defecto (sin pantalla previa); ver MatchConfig.
 const SLOTS := [{"civ": "britones", "team": 0}, {"civ": "francos", "team": 1, "ai": true}]
 const PLAYER_COLORS: Array[Color] = [
 	Color("#2a4bff"), Color("#ff2020"), Color("#20c020"), Color("#ffe020"),
@@ -37,6 +39,9 @@ const PLAYER_COLORS: Array[Color] = [
 const DRAG_MIN := 6.0
 
 var local_pid := 0
+## Jugadores y opciones de esta partida (de MatchConfig).
+var slots: Array = []
+var map_seed := MAP_SEED
 var registry
 var sim
 var layer
@@ -71,13 +76,16 @@ func _ready() -> void:
 	if not registry.load_mods("res://mods"):
 		_show_error("Error cargando mods:\n" + "\n".join(PackedStringArray(registry.errors.slice(0, 8))))
 		return
+	slots = MatchConfig.active_slots().duplicate(true)
+	map_seed = MatchConfig.map_seed
 	sim = Sim.new(registry, MAP_SIZE, MAP_SIZE)
 	sim.debug_enabled = true # partida local: tropas de prueba con F9
-	for i in SLOTS.size():
-		sim.add_player(i, SLOTS[i]["civ"], SLOTS[i]["team"])
+	sim.pop_max = MatchConfig.pop_max
+	for i in slots.size():
+		sim.add_player(i, str(slots[i]["civ"]), int(slots[i]["team"]))
 	_spawn_start()
-	for i in SLOTS.size():
-		if bool(SLOTS[i].get("ai", false)):
+	for i in slots.size():
+		if bool(slots[i].get("ai", false)):
 			ais.append(AIPlayer.new(sim, i))
 
 	RenderingServer.set_default_clear_color(Color.BLACK)
@@ -85,7 +93,7 @@ func _ready() -> void:
 	var locator := AssetLocator.new()
 	var terrain := TerrainLayer.new()
 	add_child(terrain)
-	terrain.setup(sim, registry, locator, MAP_SEED)
+	terrain.setup(sim, registry, locator, map_seed)
 	ground = GroundLayer.new()
 	add_child(ground) # tierra bajo los edificios, entre terreno y entidades
 	ground.setup(sim, locator)
@@ -494,7 +502,7 @@ func _spawn_start() -> void:
 	var starts: Array[Vector2i] = []
 	for i in sim.players.size():
 		starts.append(_start_tile(i))
-	MapGen.generate(sim, MAP_SEED, starts)
+	MapGen.generate(sim, map_seed, starts, MatchConfig.lake)
 
 
 func _build_help() -> void:
