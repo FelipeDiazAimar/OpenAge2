@@ -15,7 +15,8 @@
  "hotkey": "R",
  "graphics": {
   "idle": "sprite:barco_fuego_rapido/idle",
-  "walk": "sprite:barco_fuego_rapido/walk"
+  "walk": "sprite:barco_fuego_rapido/walk",
+  "sail": "sprite:ships_sails/u_shp_sail_medi_boat_4_x1"
  },
  "abilities": {
   "Hitpoints": {

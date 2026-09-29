@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/elefante_balista/walk",
   "attack": "sprite:uniques/elefante_balista/attack",
-  "idle": "sprite:uniques/elefante_balista/idle"
+  "idle": "sprite:uniques/elefante_balista/idle",
+  "death": "sprite:uniques/elefante_balista/death",
+  "decay": "sprite:uniques/elefante_balista/decay"
  },
  "abilities": {
   "Hitpoints": {

@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/centurion/walk",
   "attack": "sprite:uniques/centurion/attack",
-  "idle": "sprite:uniques/centurion/idle"
+  "idle": "sprite:uniques/centurion/idle",
+  "death": "sprite:uniques/centurion/death",
+  "decay": "sprite:uniques/centurion/decay"
  },
  "abilities": {
   "Hitpoints": {

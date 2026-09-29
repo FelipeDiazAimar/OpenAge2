@@ -13,7 +13,9 @@
   "train_time": 36,
   "pop_cost": 1,
   "hotkey": "Q",
-  "graphics": {},
+  "graphics": {
+    "death": "sprite:uniques/carabela_elite/death"
+  },
   "abilities": {
     "Hitpoints": {
       "max": 165

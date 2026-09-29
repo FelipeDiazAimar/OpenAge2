@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/urumi/walk",
   "attack": "sprite:uniques/urumi/attack",
-  "idle": "sprite:uniques/urumi/idle"
+  "idle": "sprite:uniques/urumi/idle",
+  "death": "sprite:uniques/urumi/death",
+  "decay": "sprite:uniques/urumi/decay"
  },
  "abilities": {
   "Hitpoints": {

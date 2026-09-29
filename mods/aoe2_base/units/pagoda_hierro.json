@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/pagoda_hierro/walk",
   "attack": "sprite:uniques/pagoda_hierro/attack",
-  "idle": "sprite:uniques/pagoda_hierro/idle"
+  "idle": "sprite:uniques/pagoda_hierro/idle",
+  "death": "sprite:uniques/pagoda_hierro/death",
+  "decay": "sprite:uniques/pagoda_hierro/decay"
  },
  "abilities": {
   "Hitpoints": {

@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/sacerdote_guerrero/walk",
   "attack": "sprite:uniques/sacerdote_guerrero/attack",
-  "idle": "sprite:uniques/sacerdote_guerrero/idle"
+  "idle": "sprite:uniques/sacerdote_guerrero/idle",
+  "death": "sprite:uniques/sacerdote_guerrero/death",
+  "decay": "sprite:uniques/sacerdote_guerrero/decay"
  },
  "abilities": {
   "Hitpoints": {

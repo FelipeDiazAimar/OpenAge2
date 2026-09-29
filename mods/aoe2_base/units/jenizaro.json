@@ -1,49 +1,51 @@
 {
-  "id": "jenizaro",
-  "type": "unit",
-  "extends": "arqueros_base",
-  "name": "Jenízaro",
-  "requires": {
-    "age": "castillos"
+ "id": "jenizaro",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Jenízaro",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 60,
+  "gold": 55
+ },
+ "train_time": 17,
+ "pop_cost": 1,
+ "hotkey": "N",
+ "graphics": {
+  "attack": "sprite:uniques/janissary/attack",
+  "walk": "sprite:uniques/janissary/walk",
+  "idle": "sprite:uniques/janissary/idle",
+  "death": "sprite:uniques/janissary/death",
+  "decay": "sprite:uniques/janissary/decay"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 44
   },
-  "cost": {
-    "food": 60,
-    "gold": 55
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 0
+   }
   },
-  "train_time": 17,
-  "pop_cost": 1,
-  "hotkey": "N",
-  "graphics": {
-    "attack": "sprite:uniques/janissary/attack",
-    "walk": "sprite:uniques/janissary/walk",
-    "idle": "sprite:uniques/janissary/idle"
+  "Move": {
+   "speed": 0.96
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 44
-    },
-    "Armor": {
-      "classes": {
-        "melee": 1,
-        "pierce": 0
-      }
-    },
-    "Move": {
-      "speed": 0.96
-    },
-    "Vision": {
-      "sight": 8.0
-    },
-    "Attack": {
-      "damage": {
-        "pierce": 17
-      },
-      "range": 7.0,
-      "reload": 3.45,
-      "projectile_speed": 12.0
-    },
-    "Unique": {
-      "civ": "turcos"
-    }
+  "Vision": {
+   "sight": 8.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 17
+   },
+   "range": 7.0,
+   "reload": 3.45,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "turcos"
   }
+ }
 }

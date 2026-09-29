@@ -10,6 +10,9 @@
  "train_time": 60,
  "pop_cost": 1,
  "hotkey": "W",
+ "graphics": {
+  "sail": "sprite:ships_sails/u_shp_sail_medi_boat_4_x1"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 120

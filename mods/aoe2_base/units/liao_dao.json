@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/liao_dao/walk",
   "attack": "sprite:uniques/liao_dao/attack",
-  "idle": "sprite:uniques/liao_dao/idle"
+  "idle": "sprite:uniques/liao_dao/idle",
+  "death": "sprite:uniques/liao_dao/death",
+  "decay": "sprite:uniques/liao_dao/decay"
  },
  "abilities": {
   "Hitpoints": {

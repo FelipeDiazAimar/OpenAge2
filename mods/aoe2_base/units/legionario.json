@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/legionario/walk",
   "attack": "sprite:uniques/legionario/attack",
-  "idle": "sprite:uniques/legionario/idle"
+  "idle": "sprite:uniques/legionario/idle",
+  "death": "sprite:uniques/legionario/death",
+  "decay": "sprite:uniques/legionario/decay"
  },
  "abilities": {
   "Hitpoints": {

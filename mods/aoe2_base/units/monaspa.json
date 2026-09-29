@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/monaspa/walk",
   "attack": "sprite:uniques/monaspa/attack",
-  "idle": "sprite:uniques/monaspa/idle"
+  "idle": "sprite:uniques/monaspa/idle",
+  "death": "sprite:uniques/monaspa/death",
+  "decay": "sprite:uniques/monaspa/decay"
  },
  "abilities": {
   "Hitpoints": {

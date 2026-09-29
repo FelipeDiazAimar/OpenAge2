@@ -8,6 +8,7 @@
   "graphics": {
     "attack": "sprite:animals/wolf/attack",
     "death": "sprite:animals/wolf/death",
+    "decay": "sprite:animals/wolf/decay",
     "idle": "sprite:animals/wolf/idle",
     "walk": "sprite:animals/wolf/walk"
   },

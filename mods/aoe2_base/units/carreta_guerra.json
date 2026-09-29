@@ -15,7 +15,9 @@
  "hotkey": "E",
  "graphics": {
   "walk": "sprite:uniques/carreta_guerra/walk",
-  "idle": "sprite:uniques/carreta_guerra/idle"
+  "idle": "sprite:uniques/carreta_guerra/idle",
+  "death": "sprite:uniques/carreta_guerra/death",
+  "decay": "sprite:uniques/carreta_guerra/decay"
  },
  "abilities": {
   "Hitpoints": {

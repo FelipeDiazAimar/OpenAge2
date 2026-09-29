@@ -12,7 +12,8 @@
   "graphics": {
     "idle": "sprite:fishingship/idle",
     "walk": "sprite:fishingship/walk",
-    "death": "sprite:fishingship/death"
+    "death": "sprite:fishingship/death",
+    "sail": "sprite:ships_sails/u_shp_sail_medi_boat_4_x1"
   },
   "abilities": {
     "Hitpoints": {

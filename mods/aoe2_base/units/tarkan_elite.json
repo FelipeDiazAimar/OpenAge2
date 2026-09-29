@@ -13,7 +13,13 @@
   "train_time": 14,
   "pop_cost": 1,
   "hotkey": "W",
-  "graphics": {},
+  "graphics": {
+    "walk": "sprite:uniques/tarkan_elite/walk",
+    "attack": "sprite:uniques/tarkan_elite/attack",
+    "idle": "sprite:uniques/tarkan_elite/idle",
+    "death": "sprite:uniques/tarkan_elite/death",
+    "decay": "sprite:uniques/tarkan_elite/decay"
+  },
   "abilities": {
     "Hitpoints": {
       "max": 150

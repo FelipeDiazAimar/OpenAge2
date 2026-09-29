@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/canon_organo/walk",
   "attack": "sprite:uniques/canon_organo/attack",
-  "idle": "sprite:uniques/canon_organo/idle"
+  "idle": "sprite:uniques/canon_organo/idle",
+  "death": "sprite:uniques/canon_organo/death",
+  "decay": "sprite:uniques/canon_organo/decay"
  },
  "abilities": {
   "Hitpoints": {

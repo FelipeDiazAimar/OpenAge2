@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/karambit/walk",
   "attack": "sprite:uniques/karambit/attack",
-  "idle": "sprite:uniques/karambit/idle"
+  "idle": "sprite:uniques/karambit/idle",
+  "death": "sprite:uniques/karambit/death",
+  "decay": "sprite:uniques/karambit/decay"
  },
  "abilities": {
   "Hitpoints": {

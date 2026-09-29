@@ -18,7 +18,8 @@
  "hotkey": "R",
  "graphics": {
   "idle": "sprite:galeon_artillado/idle",
-  "walk": "sprite:galeon_artillado/walk"
+  "walk": "sprite:galeon_artillado/walk",
+  "sail": "sprite:ships_sails/u_shp_sail_medi_ship_5_x1"
  },
  "abilities": {
   "Hitpoints": {

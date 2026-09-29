@@ -16,7 +16,7 @@
  "graphics": {
   "idle": "sprite:galeon/idle",
   "walk": "sprite:galeon/walk",
-  "sail": "sprite:ships_sails/u_shp_sail_medi_ship_4_x1"
+   "sail": "sprite:ships_sails/u_shp_sail_medi_ship_5_x1"
  },
  "abilities": {
   "Hitpoints": {

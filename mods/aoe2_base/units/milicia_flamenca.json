@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/milicia_flamenca/walk",
   "attack": "sprite:uniques/milicia_flamenca/attack",
-  "idle": "sprite:uniques/milicia_flamenca/idle"
+  "idle": "sprite:uniques/milicia_flamenca/idle",
+  "death": "sprite:uniques/milicia_flamenca/death",
+  "decay": "sprite:uniques/milicia_flamenca/decay"
  },
  "abilities": {
   "Hitpoints": {

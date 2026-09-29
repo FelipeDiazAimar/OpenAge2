@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/ratha/walk",
   "attack": "sprite:uniques/ratha/attack",
-  "idle": "sprite:uniques/ratha/idle"
+  "idle": "sprite:uniques/ratha/idle",
+  "death": "sprite:uniques/ratha/death",
+  "decay": "sprite:uniques/ratha/decay"
  },
  "abilities": {
   "Hitpoints": {

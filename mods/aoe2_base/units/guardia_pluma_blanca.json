@@ -10,7 +10,14 @@
  "train_time": 11,
  "pop_cost": 1,
  "hotkey": "Q",
- "graphics": {},
+ "graphics": {
+  "walk": "sprite:uniques/guardia_pluma_blanca/walk",
+  "attack": "sprite:uniques/guardia_pluma_blanca/attack",
+  "idle": "sprite:uniques/guardia_pluma_blanca/idle",
+  "death": "sprite:uniques/guardia_pluma_blanca/death",
+  "decay": "sprite:uniques/guardia_pluma_blanca/decay"
+ },
+ "_nota": "reuse temporal jian shielded (u_inf_jian_swordman_shielded walk/attack/idleA_x1) hasta asset propio; Guardia Pluma Blanca no existe en DE",
  "abilities": {
   "Hitpoints": {
    "max": 95

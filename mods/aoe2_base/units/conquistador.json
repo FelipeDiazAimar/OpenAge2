@@ -1,49 +1,51 @@
 {
-  "id": "conquistador",
-  "type": "unit",
-  "extends": "arqueros_base",
-  "name": "Conquistador",
-  "requires": {
-    "age": "castillos"
+ "id": "conquistador",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Conquistador",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 60,
+  "gold": 70
+ },
+ "train_time": 24,
+ "pop_cost": 1,
+ "hotkey": "C",
+ "graphics": {
+  "attack": "sprite:uniques/conquistador/attack",
+  "walk": "sprite:uniques/conquistador/walk",
+  "idle": "sprite:uniques/conquistador/idle",
+  "death": "sprite:uniques/conquistador/death",
+  "decay": "sprite:uniques/conquistador/decay"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 55
   },
-  "cost": {
-    "food": 60,
-    "gold": 70
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 2
+   }
   },
-  "train_time": 24,
-  "pop_cost": 1,
-  "hotkey": "C",
-  "graphics": {
-    "attack": "sprite:uniques/conquistador/attack",
-    "walk": "sprite:uniques/conquistador/walk",
-    "idle": "sprite:uniques/conquistador/idle"
+  "Move": {
+   "speed": 1.3
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 55
-    },
-    "Armor": {
-      "classes": {
-        "melee": 2,
-        "pierce": 2
-      }
-    },
-    "Move": {
-      "speed": 1.3
-    },
-    "Vision": {
-      "sight": 8.0
-    },
-    "Attack": {
-      "damage": {
-        "pierce": 16
-      },
-      "range": 6.0,
-      "reload": 2.9,
-      "projectile_speed": 12.0
-    },
-    "Unique": {
-      "civ": "espanoles"
-    }
+  "Vision": {
+   "sight": 8.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 16
+   },
+   "range": 6.0,
+   "reload": 2.9,
+   "projectile_speed": 12.0
+  },
+  "Unique": {
+   "civ": "espanoles"
   }
+ }
 }

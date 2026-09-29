@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/caballeria_tigre/walk",
   "attack": "sprite:uniques/caballeria_tigre/attack",
-  "idle": "sprite:uniques/caballeria_tigre/idle"
+  "idle": "sprite:uniques/caballeria_tigre/idle",
+  "death": "sprite:uniques/caballeria_tigre/death",
+  "decay": "sprite:uniques/caballeria_tigre/decay"
  },
  "abilities": {
   "Hitpoints": {

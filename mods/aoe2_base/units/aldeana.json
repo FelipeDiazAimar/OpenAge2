@@ -9,14 +9,24 @@
  "train_time": 20,
  "pop_cost": 1,
  "hotkey": "C",
- "graphics": {
-  "walk": "sprite:aldeana/walk",
-  "idle": "sprite:aldeana/idle",
-  "attack": "sprite:aldeana/attack",
-  "task": "sprite:aldeana/walk",
-  "death": "sprite:aldeana/death",
-  "decay": "sprite:aldeana/decay"
- },
+  "graphics": {
+   "walk": "sprite:aldeana/walk",
+   "idle": "sprite:aldeana/idle",
+   "attack": "sprite:aldeana/attack",
+   "task": "sprite:aldeana/task",
+   "death": "sprite:aldeana/death",
+   "decay": "sprite:aldeana/decay",
+   "builder": "sprite:aldeana/builder",
+   "build": "sprite:aldeana/builder",
+   "task_wood": "sprite:aldeana/lumber",
+   "task_gold": "sprite:aldeana/miner_gold",
+   "task_stone": "sprite:aldeana/miner_gold",
+   "task_food_forage": "sprite:aldeana/forager",
+   "task_food_farm": "sprite:aldeana/task",
+   "task_food_fish": "sprite:aldeana/fisher",
+   "task_food_hunt": "sprite:aldeana/hunter",
+   "task_food_herd": "sprite:aldeana/shepherd"
+  },
  "abilities": {
   "Hitpoints": {
    "max": 25
