@@ -19,6 +19,7 @@ const ProjectileLayer := preload("res://engine/render2d/ProjectileLayer.gd")
 const CommandPanel := preload("res://engine/ui/CommandPanel.gd")
 const AIPlayer := preload("res://engine/ai/AIPlayer.gd")
 const GroundLayer := preload("res://engine/render2d/GroundLayer.gd")
+const Minimap := preload("res://engine/ui/Minimap.gd")
 
 const MAP_SIZE := 144
 const MAP_SEED := 1234
@@ -45,6 +46,7 @@ var bar
 var projectiles
 var panel
 var ground
+var minimap
 var selected: Array[int] = []
 ## Rivales de la IA (piensan tras cada tick de la simulación).
 var ais: Array = []
@@ -378,6 +380,7 @@ func _process(delta: float) -> void:
 		panel.refresh()
 		ground.refresh()
 		_update_rally()
+	minimap.refresh()
 	if placing != "":
 		var def: Dictionary = sim.players[local_pid]["defs"].get_def(placing)
 		var tile := _place_tile(def, Iso.to_tiles(get_global_mouse_position()))
@@ -501,6 +504,12 @@ func _build_help() -> void:
 	bar.setup(sim, local_pid)
 	bar.set_anchors_and_offsets_preset(Control.PRESET_TOP_WIDE)
 	ui.add_child(bar)
+	minimap = Minimap.new()
+	minimap.setup(sim, local_pid, layer.colors, cam)
+	minimap.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT)
+	minimap.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	minimap.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	ui.add_child(minimap)
 	panel = CommandPanel.new()
 	panel.setup(sim, local_pid)
 	panel.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)
