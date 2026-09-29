@@ -44,7 +44,7 @@
   }
  },
  "graphics": {
-  "idle": "sprite:buildings/university/b_west_university_age3_x1",
+  "idle": "sprite:buildings/university/b_west_university_age{age}_x1",
   "destruction": "sprite:buildings/university/b_west_university_age3_destruction_x1",
   "rubble": "sprite:buildings/university/b_west_university_age3_rubble_x1"
  }

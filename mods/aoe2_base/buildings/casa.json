@@ -14,7 +14,7 @@
  "build_menu": "economico",
  "hotkey": "Q",
  "graphics": {
-  "idle": "sprite:buildings/house/b_west_house_age3_x1",
+  "idle": "sprite:buildings/house/b_west_house_age{age}_x1",
   "destruction": "sprite:buildings/house/b_west_house_age3_destruction_x1",
   "rubble": "sprite:buildings/house/b_west_house_age3_rubble_x1"
  },

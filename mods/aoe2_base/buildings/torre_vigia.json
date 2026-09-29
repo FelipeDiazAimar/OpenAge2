@@ -17,7 +17,7 @@
  "build_menu": "militar",
  "hotkey": "D",
  "graphics": {
-  "idle": "sprite:buildings/tower/b_west_tower_age2_x1",
+  "idle": "sprite:buildings/tower/b_west_tower_age{age}_x1",
   "destruction": "sprite:buildings/tower/b_west_tower_age2_destruction_x1",
   "rubble": "sprite:buildings/tower/b_west_tower_age2_rubble_x1"
  },

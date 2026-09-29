@@ -17,7 +17,7 @@
  "build_menu": "economico",
  "hotkey": "S",
  "graphics": {
-  "idle": "sprite:buildings/smith/b_west_blacksmith_age2_x1",
+  "idle": "sprite:buildings/smith/b_west_blacksmith_age{age}_x1",
   "destruction": "sprite:buildings/smith/b_west_blacksmith_age2_destruction_x1",
   "rubble": "sprite:buildings/smith/b_west_blacksmith_age2_rubble_x1"
  },

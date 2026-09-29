@@ -58,7 +58,7 @@
   }
  },
  "graphics": {
-  "idle": "sprite:buildings/dock/b_west_dock_age3_x1",
+  "idle": "sprite:buildings/dock/b_west_dock_age{age}_x1",
   "destruction": "sprite:buildings/dock/b_west_dock_age3_destruction_x1"
  }
 }
