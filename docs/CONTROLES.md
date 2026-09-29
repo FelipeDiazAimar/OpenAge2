@@ -88,6 +88,11 @@ investigación, ejército) y ataca cuando junta tropas.
   = cancelar (devuelve el coste). Sin casas, la cola se detiene.
 - **Punto de reunión**: con un edificio seleccionado, clic derecho en el mapa (sobre un recurso,
   los aldeanos nuevos lo recolectan; sobre un cimiento, lo construyen).
+- **Muros**: elige Muro (W, A en la página militar) y arrastra con el clic izquierdo de un punto a
+  otro: se colocan todos los tramos (vista previa verde/roja) y los aldeanos los levantan en cadena.
+  Las diagonales también cierran el paso. Las puertas por ahora no se abren.
+- **Minimapa** (abajo a la derecha): clic o arrastre para mover la cámara.
+- **Clic en recursos, animales o enemigos**: el panel muestra cuánto les queda o su vida.
 - **Reparar**: clic derecho de aldeanos sobre un edificio propio dañado (cuesta la mitad de su
   coste en proporción al daño; se detiene si no alcanzan los recursos).
 - **Guarecer**: clic derecho de militares (aldeanos: **Alt**+clic derecho) sobre un edificio propio

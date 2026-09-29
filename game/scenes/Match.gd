@@ -62,6 +62,8 @@ const SPEEDS := [1.0, 1.5, 1.7, 2.0]
 var game_speed := 1.7
 ## Edificio en colocación (def id) o "".
 var placing := ""
+## Muro en línea: casilla donde empezó el arrastre (-1: no arrastrando).
+var _line_start := Vector2i(-1, -1)
 
 var _acc := 0.0
 var _press_pos := Vector2.ZERO
@@ -226,7 +228,52 @@ func start_placing(def_id: String) -> void:
 
 func cancel_placing() -> void:
 	placing = ""
+	_line_start = Vector2i(-1, -1)
 	layer.hide_ghost()
+	overlay.set_line_preview([], [])
+
+
+## Edificios de 1 casilla (muros): se colocan arrastrando una línea.
+func _is_line(def_id: String) -> bool:
+	var def: Dictionary = sim.players[local_pid]["defs"].get_def(def_id)
+	var fp: Array = def.get("footprint", [0, 0])
+	return int(fp[0]) == 1 and int(fp[1]) == 1
+
+
+## Casillas de a a b en línea (Bresenham), como los muros de AoE2.
+static func line_tiles(a: Vector2i, b: Vector2i) -> Array:
+	var out: Array = []
+	var d := (b - a).abs()
+	var sx := 1 if b.x >= a.x else -1
+	var sy := 1 if b.y >= a.y else -1
+	var err := d.x - d.y
+	var p := a
+	for i in d.x + d.y + 2:
+		out.append(p)
+		if p == b:
+			break
+		var e2 := 2 * err
+		if e2 > -d.y:
+			err -= d.y
+			p.x += sx
+		if e2 < d.x:
+			err += d.x
+			p.y += sy
+	return out
+
+
+## Coloca el muro en todas las casillas libres de la línea. Se ordena de
+## atrás hacia adelante: los aldeanos terminan en el primer tramo y siguen
+## solos por los cimientos cercanos.
+func place_line(a: Vector2i, b: Vector2i) -> int:
+	var n := 0
+	var tiles := line_tiles(a, b)
+	tiles.reverse()
+	for t in tiles:
+		if sim.can_place(local_pid, placing, t) == "":
+			sim.queue_command(local_pid, "place", {"ids": _builders(), "def": placing, "tile": [t.x, t.y]})
+			n += 1
+	return n
 
 
 ## Esquina de la huella con el ratón en el centro del edificio.
@@ -392,7 +439,12 @@ func _process(delta: float) -> void:
 	if placing != "":
 		var def: Dictionary = sim.players[local_pid]["defs"].get_def(placing)
 		var tile := _place_tile(def, Iso.to_tiles(get_global_mouse_position()))
-		layer.show_ghost(def, tile, sim.can_place(local_pid, placing, tile) == "")
+		if _line_start.x >= 0:
+			layer.hide_ghost()
+			var tiles := line_tiles(_line_start, Vector2i(Iso.to_tiles(get_global_mouse_position()).floor()))
+			overlay.set_line_preview(tiles, tiles.map(func(t): return sim.can_place(local_pid, placing, t) == ""))
+		else:
+			layer.show_ghost(def, tile, sim.can_place(local_pid, placing, tile) == "")
 	_frames += 1
 	if _shot_path != "" and _frames >= maxi(1, _shot_frames):
 		_save_screenshot(_shot_path)
@@ -440,6 +492,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		var wp := get_global_mouse_position()
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if placing != "":
+				var t := Vector2i(Iso.to_tiles(wp).floor())
+				if _is_line(placing):
+					if event.pressed:
+						_line_start = t
+					elif _line_start.x >= 0:
+						place_line(_line_start, t)
+						_line_start = Vector2i(-1, -1)
+						overlay.set_line_preview([], [])
+						if not event.shift_pressed:
+							cancel_placing()
+					return
 				if event.pressed:
 					place_at(Iso.to_tiles(wp), event.shift_pressed)
 				return

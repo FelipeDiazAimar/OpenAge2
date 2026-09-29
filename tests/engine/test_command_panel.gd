@@ -271,3 +271,32 @@ func test_match_click_on_resource_inspects() -> void:
 	assert_true(m.panel._status.text.begins_with("Madera: "))
 	assert_true(m.ground != null, "capa de suelo bajo edificios")
 	m.queue_free()
+
+
+func test_match_wall_line() -> void:
+	var m = load(MATCH).instantiate()
+	Engine.get_main_loop().root.add_child(m)
+	assert_eq(m.line_tiles(Vector2i(0, 0), Vector2i(4, 0)).size(), 5, "horizontal")
+	assert_eq(m.line_tiles(Vector2i(0, 0), Vector2i(3, 3)).size(), 4, "diagonal: nadie pasa entre esquinas")
+	m.sim.players[m.local_pid]["age"] = 1
+	m.sim.add_res(m.local_pid, "stone", 1000000)
+	var vs: Array = []
+	for id in m.sim.world.entities:
+		var e: Dictionary = m.sim.world.entities[id]
+		if e["def_id"] == "aldeano" and e["owner"] == m.local_pid:
+			vs.append(id)
+	m.select(vs)
+	m.start_placing("muro")
+	var c: Vector2i = m._start_tile(m.local_pid)
+	var a := c + Vector2i(6, -4)
+	var n: int = m.place_line(a, a + Vector2i(0, 6))
+	assert_true(n >= 5, "tramos colocados: %d" % n)
+	for i in 900:
+		m.tick_once()
+	var built := 0
+	for id in m.sim.world.entities:
+		var e: Dictionary = m.sim.world.entities[id]
+		if e["def_id"] == "muro" and e["owner"] == m.local_pid and m.sim.is_built(id):
+			built += 1
+	assert_true(built >= n - 1, "los aldeanos levantan el muro tramo a tramo: %d/%d" % [built, n])
+	m.queue_free()
