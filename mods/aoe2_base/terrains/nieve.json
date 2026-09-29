@@ -1,0 +1,7 @@
+{
+  "id": "nieve",
+  "type": "terrain",
+  "name": "Nieve",
+  "texture": "terrain:g_sno",
+  "color": "#e8eef2"
+}

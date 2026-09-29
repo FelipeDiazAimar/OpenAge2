@@ -1,0 +1,7 @@
+{
+  "id": "bosque_nevado",
+  "type": "terrain",
+  "name": "Bosque nevado",
+  "texture": "terrain:g_snf",
+  "color": "#ccd6c2"
+}

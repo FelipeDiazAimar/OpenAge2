@@ -1,0 +1,7 @@
+{
+  "id": "hielo",
+  "type": "terrain",
+  "name": "Hielo",
+  "texture": "terrain:g_ice",
+  "color": "#aecfe0"
+}

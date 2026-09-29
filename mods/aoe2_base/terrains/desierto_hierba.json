@@ -1,0 +1,7 @@
+{
+  "id": "desierto_hierba",
+  "type": "terrain",
+  "name": "Hierba desértica",
+  "texture": "terrain:g_grs",
+  "color": "#bfae6b"
+}

@@ -1,0 +1,7 @@
+{
+  "id": "roca",
+  "type": "terrain",
+  "name": "Roca",
+  "texture": "terrain:g_rck",
+  "color": "#8d8d8d"
+}

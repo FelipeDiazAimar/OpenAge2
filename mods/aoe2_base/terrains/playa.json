@@ -1,0 +1,7 @@
+{
+  "id": "playa",
+  "type": "terrain",
+  "name": "Playa",
+  "texture": "terrain:g_bch",
+  "color": "#d9c27a"
+}

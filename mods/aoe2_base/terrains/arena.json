@@ -1,0 +1,7 @@
+{
+  "id": "arena",
+  "type": "terrain",
+  "name": "Arena",
+  "texture": "terrain:g_snd",
+  "color": "#e0c888"
+}

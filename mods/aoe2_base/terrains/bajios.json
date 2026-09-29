@@ -1,0 +1,7 @@
+{
+  "id": "bajios",
+  "type": "terrain",
+  "name": "Bajíos",
+  "texture": "terrain:g_sha",
+  "color": "#7fb3b0"
+}

@@ -1,0 +1,7 @@
+{
+  "id": "agua",
+  "type": "terrain",
+  "name": "Agua",
+  "texture": "terrain:g_wtr",
+  "color": "#3a6fd8"
+}

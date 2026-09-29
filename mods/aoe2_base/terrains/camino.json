@@ -1,0 +1,7 @@
+{
+  "id": "camino",
+  "type": "terrain",
+  "name": "Camino",
+  "texture": "terrain:g_rd1",
+  "color": "#a98d5f"
+}

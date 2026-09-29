@@ -55,5 +55,5 @@ func test_hash_is_stable_between_loads() -> void:
 
 func test_terrains_defined() -> void:
 	var r := _reg()
-	assert_eq(r.ids_of_type("terrain"), ["dirt", "forest_floor", "grass", "grass_dry"])
+	assert_eq(r.ids_of_type("terrain"), ["agua", "arena", "bajios", "bosque_nevado", "camino", "desierto_hierba", "dirt", "forest_floor", "grass", "grass_dry", "hielo", "nieve", "playa", "roca"])
 	assert_eq(r.get_def("grass")["texture"], "terrain:g_gr2")
