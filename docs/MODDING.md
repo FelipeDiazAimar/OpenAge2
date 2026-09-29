@@ -57,7 +57,7 @@ El motor nuevo lee `mods/<mod>/` (el juego viejo sigue leyendo `data/` hasta la 
   cola (componente `Queue`, también de tiempo de ejecución). Las unidades necesitan `train_time` y
   `pop_cost`; las techs `research_time`, `at` y `effects`; las edades `index`, `research_time` y
   `prerequisite_buildings {any_of, count}` (tipos distintos de edificio terminados).
-- Población: `ProvidesPop {amount}` en edificios terminados, tope 200.
+- Población: `ProvidesPop {amount}` en edificios terminados; sin tope por defecto (`Sim.pop_max`, 0 = sin límite; 200 como en AoE2).
 - Menú de construir: `"build_menu": "economico" | "militar"` y `"hotkey": "Q"` en el edificio
   (tecla dentro de su página; sin `build_menu` va a la económica).
 - Mejoras de línea: una tech con `{"op": "replace_entity", "from": "lancero", "to": "piquero"}`

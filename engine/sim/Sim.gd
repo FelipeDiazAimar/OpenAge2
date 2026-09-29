@@ -21,7 +21,8 @@ const Rng := preload("res://engine/sim/Rng.gd")
 
 const INPUT_DELAY := 2
 const START_RES := {"wood": 200, "food": 200, "gold": 100, "stone": 200}
-const POP_MAX := 200
+## Tope de población de la partida (0 = sin límite; AoE2 usa 200).
+var pop_max := 0
 
 var registry
 var world := World.new()
@@ -424,7 +425,7 @@ func population(pid: int) -> Vector2i:
 	for id in world.ids_with("ProvidesPop"):
 		if int(world.entities[id]["owner"]) == pid and is_built(id):
 			cap += int(world.comp(id, "ProvidesPop")["params"]["amount"])
-	return Vector2i(used, mini(cap, POP_MAX))
+	return Vector2i(used, cap if pop_max <= 0 else mini(cap, pop_max))
 
 
 func gatherer_counts(pid: int) -> Dictionary:

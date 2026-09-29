@@ -290,3 +290,12 @@ func test_enemy_payloads_are_inert() -> void:
 	assert_eq(_items(s, tc).size() + _items(s, bs).size(), 0)
 	assert_eq(s.world.comp(tc, "Queue")["rally"], Vector2i(-1, -1))
 	assert_eq(s.res_of(1)["food"], 5000)
+
+
+func test_population_unlimited_by_default() -> void:
+	var s := _sim()
+	for i in 45:
+		s.spawn("casa", 0, Vector2i(2 * (i % 15) + 1, 2 * (i / 15) + 1))
+	assert_eq(s.population(0).y, 225, "sin tope: 45 casas × 5")
+	s.pop_max = 200
+	assert_eq(s.population(0).y, 200, "con tope de AoE2")

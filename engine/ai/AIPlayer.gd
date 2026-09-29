@@ -27,7 +27,6 @@ const AGE_VILLS := [20, 30, 40]
 const SEARCH_R := 26000 # radio de búsqueda de recursos alrededor del TC
 const DEFENSE_R := 16000
 const RES := ["food", "wood", "gold", "stone"]
-const POP_CAP := 200
 
 var sim
 var pid := 0
@@ -260,7 +259,7 @@ func _train_villagers() -> void:
 
 
 func _houses() -> void:
-	if _pop.y >= POP_CAP or _pending("casa") or not _ready("casa"):
+	if (sim.pop_max > 0 and _pop.y >= sim.pop_max) or _pending("casa") or not _ready("casa"):
 		return
 	var margin := 3 + 3 * _built("centro_urbano").size()
 	if _pop.y - _pop.x > margin:
