@@ -158,11 +158,15 @@ func _dock_error(tile: Vector2i, size: Vector2i) -> String:
 			var t := tile + Vector2i(x, y)
 			if not grid.is_water(t) or not grid.naval.is_walkable(t):
 				return "el muelle va en el agua"
-	for y in range(tile.y - 1, tile.y + size.y + 1):
-		for x in range(tile.x - 1, tile.x + size.x + 1):
-			var t := Vector2i(x, y)
-			var inner := x >= tile.x and y >= tile.y and x < tile.x + size.x and y < tile.y + size.y
-			if not inner and grid.in_bounds(t) and not grid.is_water(t):
+	# Costa útil: una casilla de tierra libre pegada (no en diagonal) a la huella,
+	# desde donde los aldeanos lo construyen y descargan.
+	for i in size.x:
+		for t in [tile + Vector2i(i, -1), tile + Vector2i(i, size.y)]:
+			if grid.is_walkable(t):
+				return ""
+	for i in size.y:
+		for t in [tile + Vector2i(-1, i), tile + Vector2i(size.x, i)]:
+			if grid.is_walkable(t):
 				return ""
 	return "el muelle debe tocar la costa"
 
@@ -1004,5 +1008,7 @@ func _cmd_debug_spawn(payload: Dictionary) -> void:
 		if placed >= want:
 			break
 		var tile: Vector2i = center + off / FP.SCALE
-		if grid.is_walkable(tile) and spawn(str(payload.get("def", "")), owner, tile) >= 0:
+		var ddef: Dictionary = registry.get_def(str(payload.get("def", "")))
+		var dom = grid.for_unit((ddef.get("tags", []) as Array).has("barco"))
+		if dom.is_walkable(tile) and spawn(str(payload.get("def", "")), owner, tile) >= 0:
 			placed += 1

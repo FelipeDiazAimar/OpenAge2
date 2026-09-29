@@ -3,6 +3,7 @@ extends "res://tests/engine/TestCase.gd"
 const Registry := preload("res://engine/data/Registry.gd")
 const Sim := preload("res://engine/sim/Sim.gd")
 const Grid := preload("res://engine/sim/Grid.gd")
+const MapGen := preload("res://engine/sim/MapGen.gd")
 
 
 ## Mapa 40×40 con un lago rectangular x 15..29, y 5..34.
@@ -173,3 +174,65 @@ func test_galley_sinks_fishing_boat_and_shoots_shore() -> void:
 	_steps(s, 400)
 	assert_true(not s.world.entities.has(v) or int(s.world.comp(v, "Hitpoints")["hp"]) < 25, "dispara a la orilla")
 	assert_true(s.grid.is_water(_tile(s, gal)), "sin salir del agua")
+
+
+func test_land_villager_skips_dock_for_berries() -> void:
+	var s := _sim()
+	s.spawn("centro_urbano", 0, Vector2i(3, 20))
+	s.spawn("muelle", 0, Vector2i(15, 10))
+	var bush := s.spawn("berry_bush", -1, Vector2i(12, 12))
+	var v := s.spawn("aldeano", 0, Vector2i(12, 13))
+	s.queue_command(0, "gather", {"ids": [v], "target": bush})
+	for i in 400:
+		s.step()
+		if s.world.comp(v, "Gather")["state"] == "to_drop":
+			break
+	var d: int = s.world.comp(v, "Gather")["dropsite"]
+	assert_eq(s.world.entities[d]["def_id"], "centro_urbano", "las bayas van al centro, no al muelle")
+
+
+func test_unreachable_dropsite_falls_back() -> void:
+	var s := _sim()
+	var tc := s.spawn("centro_urbano", 0, Vector2i(3, 25))
+	var camp := s.spawn("campamento_maderero", 0, Vector2i(3, 3))
+	for t in [Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2), Vector2i(2, 3), Vector2i(5, 3),
+			Vector2i(2, 4), Vector2i(5, 4), Vector2i(2, 5), Vector2i(3, 5), Vector2i(4, 5), Vector2i(5, 5)]:
+		s.grid.set_blocked(t, true) # campamento encerrado
+	var tree := s.spawn("tree", -1, Vector2i(8, 12))
+	var v := s.spawn("aldeano", 0, Vector2i(8, 13))
+	s.queue_command(0, "gather", {"ids": [v], "target": tree})
+	_steps(s, 900)
+	assert_true(s.res_of(0)["wood"] > 200, "descarga en el centro urbano: %d" % s.res_of(0)["wood"])
+	assert_true(tc > 0 and camp > 0)
+
+
+func test_dock_over_ships_and_debug_spawn_domain() -> void:
+	var s := _sim()
+	s.players[0]["res"]["wood"] = 5000 * 1000
+	var mine := s.spawn("galera", 0, Vector2i(16, 11))
+	var theirs := s.spawn("galera", 1, Vector2i(16, 25))
+	assert_eq(s.can_place(0, "muelle", Vector2i(15, 24)), "hay unidades de otro jugador")
+	var d := s.place_foundation(0, "muelle", Vector2i(15, 10))
+	assert_true(d >= 0)
+	assert_true(s.grid.is_water(_tile(s, mine)), "mi barco sale al agua")
+	assert_false(_tile(s, mine).x >= 15 and _tile(s, mine).x < 18 and _tile(s, mine).y >= 10 and _tile(s, mine).y < 13)
+	s.debug_enabled = true
+	s.queue_command(0, "debug_spawn", {"def": "galera", "n": 3, "pos": [5500, 5500], "owner": 0})
+	_steps(s, 3)
+	for id in s.world.ids_with("Naval"):
+		assert_true(s.grid.is_water(_tile(s, id)), "ningún barco en tierra")
+	assert_true(theirs > 0)
+
+
+func test_lake_skips_occupied_and_start_tiles() -> void:
+	var r := Registry.new()
+	r.load_mods("res://mods")
+	var s := Sim.new(r, 60, 60)
+	s.add_player(0, "britones", 0)
+	s.add_player(1, "francos", 1)
+	var tc := s.spawn("centro_urbano", 0, Vector2i(28, 28))
+	var starts: Array[Vector2i] = [Vector2i(30, 30), Vector2i(50, 50)]
+	MapGen.generate(s, 1, starts)
+	assert_false(s.grid.is_water(Vector2i(30, 30)), "no inunda el inicio")
+	s.remove(tc)
+	assert_false(s.grid.is_water(Vector2i(29, 29)))

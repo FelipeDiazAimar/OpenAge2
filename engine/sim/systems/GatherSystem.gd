@@ -174,7 +174,10 @@ static func _gather_tick(sim, id: int, g: Dictionary) -> void:
 static func _go_drop(sim, id: int, g: Dictionary) -> void:
 	var w = sim.world
 	var pos: Vector2i = w.entities[id]["pos"]
-	var d := _nearest_dropsite(sim, int(w.entities[id]["owner"]), str(g["carry_res"]), pos, w.has_ability(id, "Naval"))
+	var naval: bool = w.has_ability(id, "Naval")
+	# En tierra, el muelle solo sirve para descargar pescado (como en AoE2).
+	var dock_ok: bool = naval or str(g["kind"]) == "food_fish"
+	var d := _nearest_dropsite(sim, int(w.entities[id]["owner"]), str(g["carry_res"]), pos, naval, dock_ok, int(g.get("bad_drop", -1)))
 	if d < 0:
 		g["state"] = "idle"
 		return
@@ -195,10 +198,16 @@ static func _to_drop(sim, id: int, g: Dictionary) -> void:
 	if bool(w.comp(id, "Move").get("moving", false)):
 		return
 	if _rect_dist(w.entities[id]["pos"], _rect(sim, d)) > DROP_REACH:
-		g["state"] = "idle"
+		# Inalcanzable: se prueba una vez con el siguiente depósito más cercano.
+		if int(g.get("bad_drop", -1)) == d:
+			g["state"] = "idle"
+			return
+		g["bad_drop"] = d
+		_go_drop(sim, id, g)
 		return
 	sim.add_res(int(w.entities[id]["owner"]), str(g["carry_res"]), int(g["carry"]))
 	g["carry"] = 0
+	g["bad_drop"] = -1
 	var t: int = g["target"]
 	if w.entities.has(t):
 		g["state"] = "to_resource"
@@ -235,15 +244,16 @@ static func _retarget(sim, id: int, g: Dictionary) -> void:
 		g["target"] = -1
 
 
-## naval: los barcos solo descargan en muelles.
-static func _nearest_dropsite(sim, owner: int, res: String, pos: Vector2i, naval: bool = false) -> int:
+## naval: los barcos solo descargan en muelles; dock_ok: si un muelle sirve;
+## skip: depósito que resultó inalcanzable.
+static func _nearest_dropsite(sim, owner: int, res: String, pos: Vector2i, naval: bool = false, dock_ok: bool = true, skip: int = -1) -> int:
 	var w = sim.world
 	var best := -1
 	var best_d := 0
 	for d in w.ids_with("DropSite"):
 		if int(w.entities[d]["owner"]) != owner or w.has_ability(d, "Foundation"):
 			continue
-		if naval and not w.has_ability(d, "Dock"):
+		if d == skip or (naval and not w.has_ability(d, "Dock")) or (not dock_ok and w.has_ability(d, "Dock")):
 			continue
 		if not (w.comp(d, "DropSite")["params"]["accepts"] as Array).has(res):
 			continue

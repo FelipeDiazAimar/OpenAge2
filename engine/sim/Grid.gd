@@ -41,6 +41,8 @@ func is_water(c: Vector2i) -> bool:
 func set_water(c: Vector2i, v: bool = true) -> void:
 	if not in_bounds(c) or naval == null:
 		return
+	if v and not is_water(c) and not is_walkable(c):
+		return # ocupada (edificio, recurso): no se inunda
 	_water[c.y * width + c.x] = 1 if v else 0
 	set_blocked(c, v)
 	naval.set_blocked(c, not v)

@@ -4,6 +4,7 @@ extends RefCounted
 ## mapa. Deja un claro alrededor de cada centro urbano.
 
 const Rng := preload("res://engine/sim/Rng.gd")
+const Grid := preload("res://engine/sim/Grid.gd")
 
 const CLEAR_R := 7
 const PER_PLAYER := [["gold_mine", 10, 7], ["stone_mine", 11, 5], ["berry_bush", 9, 6], ["tree", 15, 45]]
@@ -26,7 +27,7 @@ static func generate(sim, p_seed: int, starts: Array[Vector2i], lake: bool = tru
 	# El azar de la partida (conversiones) sale de la semilla del mapa.
 	sim.rng = Rng.new(p_seed ^ 0x5EED1234)
 	if lake:
-		_lake(sim, rng, Vector2i(sim.grid.width / 2, sim.grid.height / 2), LAKE_R)
+		_lake(sim, rng, Vector2i(sim.grid.width / 2, sim.grid.height / 2), LAKE_R, starts)
 	var reserved := {}
 	for s in starts:
 		for dy in range(-CLEAR_R - 1, CLEAR_R + 2):
@@ -64,13 +65,17 @@ static func generate(sim, p_seed: int, starts: Array[Vector2i], lake: bool = tru
 
 ## Lago circular de radio r en c; peces de orilla junto a la costa y de
 ## altamar en el centro. Va antes que el resto: nada de tierra cae en el agua.
-static func _lake(sim, rng, c: Vector2i, r: int) -> void:
+static func _lake(sim, rng, c: Vector2i, r: int, starts: Array[Vector2i]) -> void:
 	var g = sim.grid
 	for y in range(c.y - r, c.y + r + 1):
 		for x in range(c.x - r, c.x + r + 1):
-			var d := Vector2i(x, y) - c
-			if d.x * d.x + d.y * d.y <= r * r:
-				g.set_water(Vector2i(x, y))
+			var t := Vector2i(x, y)
+			var d := t - c
+			if d.x * d.x + d.y * d.y > r * r or not _far_from_starts(t, starts, CLEAR_R + 2):
+				continue # nunca en el claro de un inicio
+			if sim.world.spatial.query_radius(Grid.center_of(t), 700).size() > 0:
+				continue # ni bajo unidades o edificios ya colocados
+			g.set_water(t)
 	var shore: Array[Vector2i] = []
 	var deep: Array[Vector2i] = []
 	for y in range(c.y - r, c.y + r + 1):
@@ -128,9 +133,9 @@ static func _herd(sim, rng, used: Dictionary, c: Vector2i, dist: int, def_id: St
 			return # si el ancla quedó junto a un bosque, se completa con otra
 
 
-static func _far_from_starts(t: Vector2i, starts: Array[Vector2i]) -> bool:
+static func _far_from_starts(t: Vector2i, starts: Array[Vector2i], min_dist: int = LOOSE_MIN_DIST) -> bool:
 	for s in starts:
-		if maxi(absi(t.x - s.x), absi(t.y - s.y)) < LOOSE_MIN_DIST:
+		if maxi(absi(t.x - s.x), absi(t.y - s.y)) < min_dist:
 			return false
 	return true
 
