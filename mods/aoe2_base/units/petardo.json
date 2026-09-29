@@ -1,37 +1,36 @@
 {
-  "id": "petardo",
-  "type": "unit",
-  "name": "Petardo",
-  "cost": {
-    "food": 65,
-    "gold": 20
+ "id": "petardo",
+ "type": "unit",
+ "name": "Petardo",
+ "cost": {
+  "food": 65,
+  "gold": 20
+ },
+ "train_time": 25,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {
+  "walk": "sprite:petardo/walk",
+  "idle": "sprite:petardo/idle"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 50
   },
-  "train_time": 25,
-  "pop_cost": 1,
-  "hotkey": "Q",
-  "graphics": {
-    "attack": "sprite:petard/attack",
-    "idle": "sprite:petard/idle",
-    "walk": "sprite:petard/walk"
+  "Move": {
+   "speed": 0.8
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 50
-    },
-    "Move": {
-      "speed": 0.8
-    },
-    "Vision": {
-      "sight": 3.0
-    },
-    "Attack": {
-      "damage": {
-        "melee": 25,
-        "edificio": 500
-      },
-      "range": 0,
-      "reload": 5.0
-    },
-    "Demolish": {}
-  }
+  "Vision": {
+   "sight": 3.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 25,
+    "edificio": 500
+   },
+   "range": 0,
+   "reload": 5.0
+  },
+  "Demolish": {}
+ }
 }
