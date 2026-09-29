@@ -1,0 +1,45 @@
+{
+  "id": "mameluco_elite",
+  "type": "unit",
+  "extends": "caballeria_base",
+  "name": "Mameluco de Élite",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "food": 55,
+    "gold": 85
+  },
+  "train_time": 21,
+  "pop_cost": 1,
+  "hotkey": "E",
+  "graphics": {},
+  "abilities": {
+    "Hitpoints": {
+      "max": 80
+    },
+    "Armor": {
+      "classes": {
+        "melee": 1,
+        "pierce": 0
+      }
+    },
+    "Move": {
+      "speed": 1.4
+    },
+    "Vision": {
+      "sight": 5.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 10,
+        "caballeria": 3
+      },
+      "range": 3.0,
+      "reload": 2.0
+    },
+    "Unique": {
+      "civ": "sarracenos"
+    }
+  }
+}

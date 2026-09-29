@@ -1,43 +1,47 @@
 {
-  "id": "catafracta",
-  "type": "unit",
-  "extends": "caballeria_base",
-  "name": "Catafracta",
-  "cost": {
-    "food": 70,
-    "gold": 75
+ "id": "catafracta",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Catafracta",
+ "cost": {
+  "food": 70,
+  "gold": 75
+ },
+ "train_time": 20,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "abilities": {
+  "Hitpoints": {
+   "max": 150
   },
-  "train_time": 20,
-  "pop_cost": 1,
-  "hotkey": "Q",
-  "abilities": {
-    "Hitpoints": {
-      "max": 150
-    },
-    "Armor": {
-      "classes": {
-        "melee": 2,
-        "pierce": 1
-      }
-    },
-    "Move": {
-      "speed": 1.35
-    },
-    "Vision": {
-      "sight": 4.0
-    },
-    "Attack": {
-      "damage": {
-        "melee": 12,
-        "infanteria": 9,
-        "milicia": 9,
-        "piquero": 9
-      },
-      "range": 0,
-      "reload": 2.0
-    },
-    "Unique": {
-      "civ": "bizantinos"
-    }
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 1
+   }
+  },
+  "Move": {
+   "speed": 1.35
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 12,
+    "infanteria": 9,
+    "milicia": 9,
+    "piquero": 9
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "bizantinos"
   }
+ },
+ "graphics": {
+  "death": "sprite:catafracta/death",
+  "decay": "sprite:catafracta/decay"
+ }
 }

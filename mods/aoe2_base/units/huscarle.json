@@ -1,42 +1,46 @@
 {
-  "id": "huscarle",
-  "type": "unit",
-  "extends": "infanteria_base",
-  "name": "Huscarle",
-  "requires": {
-    "age": "castillos"
+ "id": "huscarle",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Huscarle",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 80,
+  "gold": 40
+ },
+ "train_time": 16,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "abilities": {
+  "Hitpoints": {
+   "max": 65
   },
-  "cost": {
-    "food": 80,
-    "gold": 40
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 6
+   }
   },
-  "train_time": 16,
-  "pop_cost": 1,
-  "hotkey": "E",
-  "abilities": {
-    "Hitpoints": {
-      "max": 65
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 6
-      }
-    },
-    "Move": {
-      "speed": 1.0
-    },
-    "Vision": {
-      "sight": 5.0
-    },
-    "Attack": {
-      "damage": {
-        "melee": 10,
-        "edificio": 2,
-        "arquero": 2
-      },
-      "range": 0,
-      "reload": 2.0
-    }
+  "Move": {
+   "speed": 1.0
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 10,
+    "edificio": 2,
+    "arquero": 2
+   },
+   "range": 0,
+   "reload": 2.0
   }
+ },
+ "graphics": {
+  "death": "sprite:huscarle/death",
+  "decay": "sprite:huscarle/decay"
+ }
 }

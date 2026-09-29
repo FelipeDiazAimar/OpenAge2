@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/genitour/walk",
   "attack": "sprite:uniques/genitour/attack",
-  "idle": "sprite:uniques/genitour/idle"
+  "idle": "sprite:uniques/genitour/idle",
+  "death": "sprite:uniques/genitour/death",
+  "decay": "sprite:uniques/genitour/decay"
  },
  "abilities": {
   "Hitpoints": {

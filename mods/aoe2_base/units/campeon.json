@@ -1,41 +1,45 @@
 {
-  "id": "campeon",
-  "type": "unit",
-  "extends": "infanteria_base",
-  "name": "Campeón",
-  "requires": {
-    "age": "imperial"
+ "id": "campeon",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Campeón",
+ "requires": {
+  "age": "imperial"
+ },
+ "cost": {
+  "food": 60,
+  "gold": 20
+ },
+ "train_time": 21,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "abilities": {
+  "Hitpoints": {
+   "max": 75
   },
-  "cost": {
-    "food": 60,
-    "gold": 20
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 1
+   }
   },
-  "train_time": 21,
-  "pop_cost": 1,
-  "hotkey": "Q",
-  "abilities": {
-    "Hitpoints": {
-      "max": 75
-    },
-    "Armor": {
-      "classes": {
-        "melee": 1,
-        "pierce": 1
-      }
-    },
-    "Move": {
-      "speed": 0.9
-    },
-    "Vision": {
-      "sight": 4.0
-    },
-    "Attack": {
-      "damage": {
-        "melee": 13,
-        "edificio": 4
-      },
-      "range": 0,
-      "reload": 2.0
-    }
+  "Move": {
+   "speed": 0.9
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 13,
+    "edificio": 4
+   },
+   "range": 0,
+   "reload": 2.0
   }
+ },
+ "graphics": {
+  "death": "sprite:campeon/death",
+  "decay": "sprite:campeon/decay"
+ }
 }

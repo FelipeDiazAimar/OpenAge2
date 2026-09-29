@@ -11,7 +11,8 @@
   "hotkey": "Q",
   "graphics": {
     "idle": "sprite:fishingship/idle",
-    "walk": "sprite:fishingship/walk"
+    "walk": "sprite:fishingship/walk",
+    "death": "sprite:fishingship/death"
   },
   "abilities": {
     "Hitpoints": {

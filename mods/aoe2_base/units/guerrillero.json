@@ -36,5 +36,9 @@
    "projectile_speed": 12.0
   }
  },
- "upgrades_to": "guerrillero_elite"
+ "upgrades_to": "guerrillero_elite",
+ "graphics": {
+  "death": "sprite:guerrillero/death",
+  "decay": "sprite:guerrillero/decay"
+ }
 }

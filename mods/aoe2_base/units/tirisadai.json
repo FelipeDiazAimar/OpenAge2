@@ -13,10 +13,11 @@
  "train_time": 40,
  "pop_cost": 1,
  "hotkey": "E",
- "graphics": {
-  "walk": "sprite:uniques/tirisadai/walk",
-  "idle": "sprite:uniques/tirisadai/idle"
- },
+  "graphics": {
+   "walk": "sprite:uniques/tirisadai/walk",
+   "idle": "sprite:uniques/tirisadai/idle",
+   "death": "sprite:uniques/tirisadai/death"
+  },
  "abilities": {
   "Hitpoints": {
    "max": 250

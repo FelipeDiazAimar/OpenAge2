@@ -38,6 +38,8 @@
  "graphics": {
   "walk": "sprite:uniques/paladin/walk",
   "attack": "sprite:uniques/paladin/attack",
-  "idle": "sprite:uniques/paladin/idle"
+  "idle": "sprite:uniques/paladin/idle",
+  "death": "sprite:uniques/paladin/death",
+  "decay": "sprite:uniques/paladin/decay"
  }
 }

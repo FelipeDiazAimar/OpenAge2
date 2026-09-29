@@ -1,0 +1,45 @@
+{
+  "id": "invasor_pastos_elite",
+  "type": "unit",
+  "extends": "infanteria_base",
+  "name": "Invasor de Pastos de Élite",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "food": 70,
+    "gold": 25
+  },
+  "train_time": 10,
+  "pop_cost": 1,
+  "hotkey": "E",
+  "graphics": {},
+  "abilities": {
+    "Hitpoints": {
+      "max": 85
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 1
+      }
+    },
+    "Move": {
+      "speed": 1.25
+    },
+    "Vision": {
+      "sight": 5.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 15,
+        "edificio": 3
+      },
+      "range": 0,
+      "reload": 2.0
+    },
+    "Unique": {
+      "civ": "celtas"
+    }
+  }
+}

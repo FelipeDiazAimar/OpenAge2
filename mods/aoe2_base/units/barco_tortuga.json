@@ -13,9 +13,10 @@
  "train_time": 50,
  "pop_cost": 1,
  "hotkey": "E",
- "graphics": {
-  "walk": "sprite:uniques/barco_tortuga/walk"
- },
+  "graphics": {
+   "walk": "sprite:uniques/barco_tortuga/walk",
+   "death": "sprite:uniques/barco_tortuga/death"
+  },
  "abilities": {
   "Hitpoints": {
    "max": 200

@@ -1,0 +1,44 @@
+{
+  "id": "caballero_teutonico_elite",
+  "type": "unit",
+  "extends": "infanteria_base",
+  "name": "Caballero Teutónico de Élite",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "food": 85,
+    "gold": 40
+  },
+  "train_time": 9,
+  "pop_cost": 1,
+  "hotkey": "Q",
+  "graphics": {},
+  "abilities": {
+    "Hitpoints": {
+      "max": 100
+    },
+    "Armor": {
+      "classes": {
+        "melee": 10,
+        "pierce": 2
+      }
+    },
+    "Move": {
+      "speed": 0.75
+    },
+    "Vision": {
+      "sight": 5.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 17
+      },
+      "range": 0,
+      "reload": 2.0
+    },
+    "Unique": {
+      "civ": "teutones"
+    }
+  }
+}

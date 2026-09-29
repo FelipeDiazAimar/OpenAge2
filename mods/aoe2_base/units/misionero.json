@@ -9,10 +9,12 @@
  "train_time": 51,
  "pop_cost": 1,
  "hotkey": "Q",
-  "graphics": {
-    "walk": "sprite:monk_missionary/walk",
-    "idle": "sprite:monk_missionary/idle",
-    "attack": "sprite:monk_missionary/attack",
+   "graphics": {
+     "walk": "sprite:monk_missionary/walk",
+     "idle": "sprite:monk_missionary/idle",
+     "attack": "sprite:monk_missionary/attack",
+     "death": "sprite:monk_missionary/death",
+     "decay": "sprite:monk_missionary/decay",
     "task": "sprite:monk_missionary/attack"
   },
  "abilities": {

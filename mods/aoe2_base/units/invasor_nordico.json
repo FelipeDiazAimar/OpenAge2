@@ -1,47 +1,51 @@
 {
-  "id": "invasor_nordico",
-  "type": "unit",
-  "extends": "infanteria_base",
-  "name": "Invasor nórdico",
-  "requires": {
-    "age": "castillos"
+ "id": "invasor_nordico",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Invasor nórdico",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "food": 65,
+  "gold": 35
+ },
+ "train_time": 16,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "abilities": {
+  "Hitpoints": {
+   "max": 60
   },
-  "cost": {
-    "food": 65,
-    "gold": 35
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 1
+   }
   },
-  "train_time": 16,
-  "pop_cost": 1,
-  "hotkey": "E",
-  "abilities": {
-    "Hitpoints": {
-      "max": 60
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 1
-      }
-    },
-    "Move": {
-      "speed": 1.05
-    },
-    "Vision": {
-      "sight": 5.0
-    },
-    "Attack": {
-      "damage": {
-        "melee": 8,
-        "caballeria": 4,
-        "caballero": 4,
-        "jinete": 4,
-        "edificio": 3
-      },
-      "range": 0,
-      "reload": 2.0
-    },
-    "Unique": {
-      "civ": "vikingos"
-    }
+  "Move": {
+   "speed": 1.05
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 8,
+    "caballeria": 4,
+    "caballero": 4,
+    "jinete": 4,
+    "edificio": 3
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "vikingos"
   }
+ },
+ "graphics": {
+  "death": "sprite:invasor_nordico/death",
+  "decay": "sprite:invasor_nordico/decay"
+ }
 }

@@ -13,10 +13,11 @@
  "train_time": 36,
  "pop_cost": 1,
  "hotkey": "Q",
- "graphics": {
-  "walk": "sprite:uniques/carabela/walk",
-  "idle": "sprite:uniques/carabela/idle"
- },
+  "graphics": {
+   "walk": "sprite:uniques/carabela/walk",
+   "idle": "sprite:uniques/carabela/idle",
+   "death": "sprite:uniques/carabela/death"
+  },
  "abilities": {
   "Hitpoints": {
    "max": 143
@@ -46,5 +47,6 @@
   "Unique": {
    "civ": "portugueses"
   }
- }
+ },
+ "upgrades_to": "carabela_elite"
 }

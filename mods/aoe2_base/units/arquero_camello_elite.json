@@ -1,0 +1,46 @@
+{
+  "id": "arquero_camello_elite",
+  "type": "unit",
+  "extends": "arqueros_base",
+  "name": "Arquero en Camello de Élite",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "wood": 50,
+    "gold": 60
+  },
+  "train_time": 25,
+  "pop_cost": 1,
+  "hotkey": "E",
+  "graphics": {},
+  "abilities": {
+    "Hitpoints": {
+      "max": 60
+    },
+    "Armor": {
+      "classes": {
+        "melee": 1,
+        "pierce": 1
+      }
+    },
+    "Move": {
+      "speed": 1.4
+    },
+    "Vision": {
+      "sight": 5.0
+    },
+    "Attack": {
+      "damage": {
+        "pierce": 8,
+        "caballeria_arquera": 6
+      },
+      "range": 4.0,
+      "reload": 2.0,
+      "projectile_speed": 12.0
+    },
+    "Unique": {
+      "civ": "bereberes"
+    }
+  }
+}

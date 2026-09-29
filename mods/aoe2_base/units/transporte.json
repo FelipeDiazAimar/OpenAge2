@@ -14,7 +14,8 @@
  "hotkey": "T",
  "graphics": {
   "idle": "sprite:transporte/idle",
-  "walk": "sprite:transporte/walk"
+  "walk": "sprite:transporte/walk",
+  "sail": "sprite:ships_sails/u_shp_sail_medi_ship_4_x1"
  },
  "abilities": {
   "Hitpoints": {

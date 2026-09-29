@@ -1,41 +1,45 @@
 {
-  "id": "paladin_franco",
-  "type": "unit",
-  "extends": "caballeria_base",
-  "name": "Paladín franco",
-  "cost": {
-    "food": 60,
-    "gold": 75
+ "id": "paladin_franco",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Paladín franco",
+ "cost": {
+  "food": 60,
+  "gold": 75
+ },
+ "train_time": 30,
+ "pop_cost": 1,
+ "hotkey": "E",
+ "abilities": {
+  "Hitpoints": {
+   "max": 192
   },
-  "train_time": 30,
-  "pop_cost": 1,
-  "hotkey": "E",
-  "abilities": {
-    "Hitpoints": {
-      "max": 192
-    },
-    "Armor": {
-      "classes": {
-        "melee": 2,
-        "pierce": 3
-      }
-    },
-    "Move": {
-      "speed": 1.35
-    },
-    "Vision": {
-      "sight": 5.0
-    },
-    "Attack": {
-      "damage": {
-        "melee": 14,
-        "arquero": 3
-      },
-      "range": 0,
-      "reload": 2.0
-    },
-    "Unique": {
-      "civ": "francos"
-    }
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 3
+   }
+  },
+  "Move": {
+   "speed": 1.35
+  },
+  "Vision": {
+   "sight": 5.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 14,
+    "arquero": 3
+   },
+   "range": 0,
+   "reload": 2.0
+  },
+  "Unique": {
+   "civ": "francos"
   }
+ },
+ "graphics": {
+  "death": "sprite:paladin_franco/death",
+  "decay": "sprite:paladin_franco/decay"
+ }
 }

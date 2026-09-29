@@ -12,7 +12,9 @@
   "hotkey": "Q",
   "graphics": {
     "idle": "sprite:cart/idle",
-    "walk": "sprite:cart/walk"
+    "walk": "sprite:cart/walk",
+    "death": "sprite:cart/death",
+    "decay": "sprite:cart/decay"
   },
   "abilities": {
     "Hitpoints": {

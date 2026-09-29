@@ -1,0 +1,45 @@
+{
+  "id": "samurai_elite",
+  "type": "unit",
+  "extends": "infanteria_base",
+  "name": "Samurai de Élite",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "food": 60,
+    "gold": 30
+  },
+  "train_time": 9,
+  "pop_cost": 1,
+  "hotkey": "R",
+  "graphics": {},
+  "abilities": {
+    "Hitpoints": {
+      "max": 80
+    },
+    "Armor": {
+      "classes": {
+        "melee": 1,
+        "pierce": 1
+      }
+    },
+    "Move": {
+      "speed": 1.0
+    },
+    "Vision": {
+      "sight": 5.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 12,
+        "edificio": 3
+      },
+      "range": 0,
+      "reload": 2.0
+    },
+    "Unique": {
+      "civ": "japoneses"
+    }
+  }
+}

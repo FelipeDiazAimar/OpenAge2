@@ -1,42 +1,46 @@
 {
-  "id": "hombre_armas",
-  "type": "unit",
-  "extends": "infanteria_base",
-  "name": "Hombre de Armas",
-  "requires": {
-    "age": "feudal"
+ "id": "hombre_armas",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Hombre de Armas",
+ "requires": {
+  "age": "feudal"
+ },
+ "cost": {
+  "food": 60,
+  "gold": 20
+ },
+ "train_time": 21,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "upgrades_to": "espadachin_mandoble",
+ "abilities": {
+  "Hitpoints": {
+   "max": 55
   },
-  "cost": {
-    "food": 60,
-    "gold": 20
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 1
+   }
   },
-  "train_time": 21,
-  "pop_cost": 1,
-  "hotkey": "Q",
-  "upgrades_to": "espadachin_mandoble",
-  "abilities": {
-    "Hitpoints": {
-      "max": 55
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 1
-      }
-    },
-    "Move": {
-      "speed": 0.9
-    },
-    "Vision": {
-      "sight": 4.0
-    },
-    "Attack": {
-      "damage": {
-        "melee": 6,
-        "edificio": 2
-      },
-      "range": 0,
-      "reload": 2.0
-    }
+  "Move": {
+   "speed": 0.9
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 6,
+    "edificio": 2
+   },
+   "range": 0,
+   "reload": 2.0
   }
+ },
+ "graphics": {
+  "death": "sprite:hombre_armas/death",
+  "decay": "sprite:hombre_armas/decay"
+ }
 }

@@ -1,43 +1,45 @@
 {
-  "id": "arquero",
-  "type": "unit",
-  "extends": "arqueros_base",
-  "name": "Arquero",
-  "cost": {
-    "wood": 25,
-    "gold": 45
+ "id": "arquero",
+ "type": "unit",
+ "extends": "arqueros_base",
+ "name": "Arquero",
+ "cost": {
+  "wood": 25,
+  "gold": 45
+ },
+ "train_time": 27,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {
+  "attack": "sprite:archer/attack",
+  "idle": "sprite:archer/idle",
+  "walk": "sprite:archer/walk",
+  "death": "sprite:arquero/death",
+  "decay": "sprite:arquero/decay"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 30
   },
-  "train_time": 27,
-  "pop_cost": 1,
-  "hotkey": "Q",
-  "graphics": {
-    "attack": "sprite:archer/attack",
-    "idle": "sprite:archer/idle",
-    "walk": "sprite:archer/walk"
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 30
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "Move": {
-      "speed": 0.96
-    },
-    "Vision": {
-      "sight": 6.0
-    },
-    "Attack": {
-      "damage": {
-        "pierce": 4
-      },
-      "range": 5.0,
-      "reload": 2.0,
-      "projectile_speed": 12.0
-    }
+  "Move": {
+   "speed": 0.96
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 4
+   },
+   "range": 5.0,
+   "reload": 2.0,
+   "projectile_speed": 12.0
   }
+ }
 }

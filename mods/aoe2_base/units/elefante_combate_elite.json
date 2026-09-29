@@ -1,0 +1,42 @@
+{
+  "id": "elefante_combate_elite",
+  "type": "unit",
+  "extends": "caballeria_base",
+  "name": "Elefante de Combate de Élite",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "food": 100,
+    "gold": 70
+  },
+  "train_time": 24,
+  "pop_cost": 1,
+  "hotkey": "Q",
+  "graphics": {},
+  "abilities": {
+    "Hitpoints": {
+      "max": 300
+    },
+    "Armor": {
+      "classes": {
+        "melee": 2,
+        "pierce": 3
+      }
+    },
+    "Move": {
+      "speed": 0.9
+    },
+    "Vision": {
+      "sight": 5.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 14,
+        "edificio": 7
+      },
+      "range": 0,
+      "reload": 2.0
+    }
+  }
+}

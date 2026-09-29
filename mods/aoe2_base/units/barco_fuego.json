@@ -16,7 +16,8 @@
  "upgrades_to": "barco_fuego_rapido",
  "graphics": {
   "idle": "sprite:barco_fuego/idle",
-  "walk": "sprite:barco_fuego/walk"
+  "walk": "sprite:barco_fuego/walk",
+  "sail": "sprite:ships_sails/u_shp_sail_medi_ship_4_x1"
  },
  "abilities": {
   "Hitpoints": {

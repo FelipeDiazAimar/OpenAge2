@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/coustillier/walk",
   "attack": "sprite:uniques/coustillier/attack",
-  "idle": "sprite:uniques/coustillier/idle"
+  "idle": "sprite:uniques/coustillier/idle",
+  "death": "sprite:uniques/coustillier/death",
+  "decay": "sprite:uniques/coustillier/decay"
  },
  "abilities": {
   "Hitpoints": {

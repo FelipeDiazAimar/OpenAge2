@@ -35,5 +35,9 @@
    "projectile_speed": 12.0
   }
  },
- "upgrades_to": "arbalestero"
+ "upgrades_to": "arbalestero",
+ "graphics": {
+  "death": "sprite:ballestero/death",
+  "decay": "sprite:ballestero/decay"
+ }
 }

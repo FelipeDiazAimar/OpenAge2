@@ -13,7 +13,9 @@
   "graphics": {
     "attack": "sprite:ram/attack",
     "idle": "sprite:ram/idle",
-    "walk": "sprite:ram/walk"
+    "walk": "sprite:ram/walk",
+    "death": "sprite:ram/death",
+    "decay": "sprite:ram/decay"
   },
   "abilities": {
     "Hitpoints": {

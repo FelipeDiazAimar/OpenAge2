@@ -1,0 +1,45 @@
+{
+  "id": "tarkan_elite",
+  "type": "unit",
+  "extends": "caballeria_base",
+  "name": "Tarkan de Élite",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "food": 60,
+    "gold": 60
+  },
+  "train_time": 14,
+  "pop_cost": 1,
+  "hotkey": "W",
+  "graphics": {},
+  "abilities": {
+    "Hitpoints": {
+      "max": 150
+    },
+    "Armor": {
+      "classes": {
+        "melee": 1,
+        "pierce": 4
+      }
+    },
+    "Move": {
+      "speed": 1.35
+    },
+    "Vision": {
+      "sight": 7.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 11,
+        "edificio": 10
+      },
+      "range": 0,
+      "reload": 2.0
+    },
+    "Unique": {
+      "civ": "hunos"
+    }
+  }
+}

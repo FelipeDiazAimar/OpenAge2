@@ -1,43 +1,45 @@
 {
-  "id": "milicia",
-  "type": "unit",
-  "extends": "infanteria_base",
-  "name": "Milicia",
-  "cost": {
-    "food": 60,
-    "gold": 20
+ "id": "milicia",
+ "type": "unit",
+ "extends": "infanteria_base",
+ "name": "Milicia",
+ "cost": {
+  "food": 60,
+  "gold": 20
+ },
+ "train_time": 21,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "graphics": {
+  "attack": "sprite:militia/attack",
+  "idle": "sprite:militia/idle",
+  "walk": "sprite:militia/walk",
+  "death": "sprite:milicia/death",
+  "decay": "sprite:milicia/decay"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 45
   },
-  "train_time": 21,
-  "pop_cost": 1,
-  "hotkey": "Q",
-  "graphics": {
-    "attack": "sprite:militia/attack",
-    "idle": "sprite:militia/idle",
-    "walk": "sprite:militia/walk"
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 1
+   }
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 45
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 1
-      }
-    },
-    "Move": {
-      "speed": 0.9
-    },
-    "Vision": {
-      "sight": 4.0
-    },
-    "Attack": {
-      "damage": {
-        "melee": 4,
-        "edificio": 2
-      },
-      "range": 0,
-      "reload": 2.0
-    }
+  "Move": {
+   "speed": 0.9
+  },
+  "Vision": {
+   "sight": 4.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 4,
+    "edificio": 2
+   },
+   "range": 0,
+   "reload": 2.0
   }
+ }
 }

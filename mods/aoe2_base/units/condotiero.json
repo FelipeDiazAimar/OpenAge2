@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/condotiero/walk",
   "attack": "sprite:uniques/condotiero/attack",
-  "idle": "sprite:uniques/condotiero/idle"
+  "idle": "sprite:uniques/condotiero/idle",
+  "death": "sprite:condotiero/death",
+  "decay": "sprite:condotiero/decay"
  },
  "abilities": {
   "Hitpoints": {

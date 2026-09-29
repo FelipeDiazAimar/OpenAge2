@@ -1,0 +1,21 @@
+{
+  "id": "lobo",
+  "type": "unit",
+  "name": "Lobo",
+  "tags": ["gaia", "hostil"],
+  "train_time": 0,
+  "pop_cost": 0,
+  "graphics": {
+    "attack": "sprite:animals/wolf/attack",
+    "death": "sprite:animals/wolf/death",
+    "idle": "sprite:animals/wolf/idle",
+    "walk": "sprite:animals/wolf/walk"
+  },
+  "abilities": {
+    "Hitpoints": {"max": 25},
+    "Move": {"speed": 1.3},
+    "Attack": {"damage": {"melee": 3}, "range": 0, "reload": 2.0}
+  },
+  "_todo_ia": "sesion sim cablea agresividad gaia vs aldeanos",
+  "_hooks_sim": ["sim: aggro_range + retaliate", "Move/Attack ya genericos"]
+}

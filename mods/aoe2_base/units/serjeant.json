@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/serjeant/walk",
   "attack": "sprite:uniques/serjeant/attack",
-  "idle": "sprite:uniques/serjeant/idle"
+  "idle": "sprite:uniques/serjeant/idle",
+  "death": "sprite:uniques/serjeant/death",
+  "decay": "sprite:uniques/serjeant/decay"
  },
  "abilities": {
   "Hitpoints": {

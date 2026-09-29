@@ -1,0 +1,45 @@
+{
+  "id": "elefante_guerra_elite",
+  "type": "unit",
+  "extends": "caballeria_base",
+  "name": "Elefante de Guerra de Élite",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "food": 200,
+    "gold": 75
+  },
+  "train_time": 31,
+  "pop_cost": 1,
+  "hotkey": "Q",
+  "graphics": {},
+  "abilities": {
+    "Hitpoints": {
+      "max": 600
+    },
+    "Armor": {
+      "classes": {
+        "melee": 1,
+        "pierce": 3
+      }
+    },
+    "Move": {
+      "speed": 0.8
+    },
+    "Vision": {
+      "sight": 5.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 20,
+        "edificio": 10
+      },
+      "range": 0,
+      "reload": 2.0
+    },
+    "Unique": {
+      "civ": "persas"
+    }
+  }
+}

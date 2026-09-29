@@ -12,6 +12,7 @@
   "graphics": {
     "builder": "sprite:villager/builder",
     "death": "sprite:villager/death",
+    "decay": "sprite:villager/decay",
     "fight": "sprite:villager/fight",
     "fisher": "sprite:villager/fisher",
     "forager": "sprite:villager/forager",

@@ -1,0 +1,46 @@
+{
+  "id": "shotel_elite",
+  "type": "unit",
+  "extends": "infanteria_base",
+  "name": "Shotel de Élite",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "food": 50,
+    "gold": 30
+  },
+  "train_time": 8,
+  "pop_cost": 1,
+  "hotkey": "W",
+  "graphics": {},
+  "abilities": {
+    "Hitpoints": {
+      "max": 50
+    },
+    "Armor": {
+      "classes": {
+        "melee": 1,
+        "pierce": 1
+      }
+    },
+    "Move": {
+      "speed": 1.2
+    },
+    "Vision": {
+      "sight": 4.0
+    },
+    "Attack": {
+      "damage": {
+        "melee": 18,
+        "aguila": 2,
+        "edificio": 1
+      },
+      "range": 0,
+      "reload": 2.0
+    },
+    "Unique": {
+      "civ": "etiopes"
+    }
+  }
+}

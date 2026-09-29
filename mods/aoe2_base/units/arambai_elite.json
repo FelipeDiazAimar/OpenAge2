@@ -1,0 +1,46 @@
+{
+  "id": "arambai_elite",
+  "type": "unit",
+  "extends": "arqueros_base",
+  "name": "Arambai de Élite",
+  "requires": {
+    "age": "imperial"
+  },
+  "cost": {
+    "wood": 75,
+    "gold": 60
+  },
+  "train_time": 21,
+  "pop_cost": 1,
+  "hotkey": "W",
+  "graphics": {},
+  "abilities": {
+    "Hitpoints": {
+      "max": 65
+    },
+    "Armor": {
+      "classes": {
+        "melee": 0,
+        "pierce": 2
+      }
+    },
+    "Move": {
+      "speed": 1.3
+    },
+    "Vision": {
+      "sight": 6.0
+    },
+    "Attack": {
+      "damage": {
+        "pierce": 14,
+        "ariete": 2
+      },
+      "range": 5.0,
+      "reload": 2.0,
+      "projectile_speed": 12.0
+    },
+    "Unique": {
+      "civ": "birmanos"
+    }
+  }
+}

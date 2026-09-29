@@ -47,5 +47,6 @@
   "Unique": {
    "civ": "persas"
   }
- }
+ },
+ "upgrades_to": "elefante_guerra_elite"
 }

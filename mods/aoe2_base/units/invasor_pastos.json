@@ -47,5 +47,6 @@
   "Unique": {
    "civ": "celtas"
   }
- }
+ },
+ "upgrades_to": "invasor_pastos_elite"
 }

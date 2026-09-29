@@ -10,6 +10,10 @@
   "train_time": 46,
   "pop_cost": 3,
   "hotkey": "W",
+  "graphics": {
+    "death": "sprite:mangonel/death",
+    "decay": "sprite:mangonel/decay"
+  },
   "abilities": {
     "Hitpoints": {
       "max": 50

@@ -42,5 +42,6 @@
    "range": 0,
    "reload": 2.0
   }
- }
+ },
+ "upgrades_to": "elefante_combate_elite"
 }

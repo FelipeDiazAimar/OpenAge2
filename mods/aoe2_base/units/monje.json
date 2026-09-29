@@ -13,6 +13,8 @@
     "idle": "sprite:monk/idle",
     "task": "sprite:monk/task",
     "walk": "sprite:monk/walk",
+    "death": "sprite:monk/death",
+    "decay": "sprite:monk/decay",
     "task_food_farm": "sprite:monk/task"
   },
   "abilities": {

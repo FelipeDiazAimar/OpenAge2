@@ -38,5 +38,9 @@
    "reload": 2.0
   }
  },
- "upgrades_to": "piquero"
+ "upgrades_to": "piquero",
+ "graphics": {
+  "death": "sprite:lancero/death",
+  "decay": "sprite:lancero/decay"
+ }
 }

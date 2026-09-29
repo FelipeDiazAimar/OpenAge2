@@ -16,7 +16,8 @@
  "upgrades_to": "galeon",
  "graphics": {
   "idle": "sprite:galera_guerra/idle",
-  "walk": "sprite:galera_guerra/walk"
+  "walk": "sprite:galera_guerra/walk",
+  "sail": "sprite:ships_sails/u_shp_sail_medi_ship_4_x1"
  },
  "abilities": {
   "Hitpoints": {

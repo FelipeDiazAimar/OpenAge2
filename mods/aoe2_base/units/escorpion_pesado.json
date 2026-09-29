@@ -16,7 +16,9 @@
   "graphics": {
     "walk": "sprite:escorpion_pesado/walk",
     "attack": "sprite:escorpion_pesado/attack",
-    "idle": "sprite:escorpion_pesado/idle"
+    "idle": "sprite:escorpion_pesado/idle",
+    "death": "sprite:escorpion_pesado/death",
+    "decay": "sprite:escorpion_pesado/decay"
   },
   "abilities": {
     "Hitpoints": {

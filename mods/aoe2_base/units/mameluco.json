@@ -47,5 +47,6 @@
   "Unique": {
    "civ": "sarracenos"
   }
- }
+ },
+ "upgrades_to": "mameluco_elite"
 }

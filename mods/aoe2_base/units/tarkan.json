@@ -47,5 +47,6 @@
   "Unique": {
    "civ": "hunos"
   }
- }
+ },
+ "upgrades_to": "tarkan_elite"
 }
