@@ -100,3 +100,18 @@ func test_ai_deterministic() -> void:
 		_run(s, [AIPlayer.new(s, 0), AIPlayer.new(s, 1)], 1500)
 		hashes.append(s.state_hash())
 	assert_eq(hashes[0], hashes[1])
+
+
+func test_match_has_ai_opponent() -> void:
+	var m = load("res://game/scenes/Match.tscn").instantiate()
+	Engine.get_main_loop().root.add_child(m)
+	assert_eq(m.ais.size(), 1, "el jugador 2 es la IA")
+	var tc := -1
+	for id in m.sim.world.entities:
+		var e: Dictionary = m.sim.world.entities[id]
+		if e["def_id"] == "centro_urbano" and int(e["owner"]) == 1:
+			tc = id
+	for i in 30:
+		m.tick_once()
+	assert_true((m.sim.world.comp(tc, "Queue")["items"] as Array).size() > 0, "la IA ya entrena aldeanos")
+	m.queue_free()

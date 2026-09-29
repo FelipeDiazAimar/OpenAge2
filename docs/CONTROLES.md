@@ -67,6 +67,9 @@ Proyecto → Configuración → Mapa de entrada, o edita la sección `[input]` d
 
 ## Motor nuevo ("Partida (nuevo motor, beta)")
 
+El jugador 2 (rojo) es la **IA**: juega con las mismas reglas (economía, casas, edades,
+investigación, ejército) y ataca cuando junta tropas.
+
 - Clic izquierdo: seleccionar (arrastrar para seleccionar varias unidades propias).
 - Clic derecho: sobre un enemigo, **atacar**; sobre un recurso, recolectar (aldeanos); en el suelo, mover.
 - Clic derecho sobre un **animal** con aldeanos: cazar (ciervo/jabalí se matan primero y luego se

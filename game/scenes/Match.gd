@@ -17,6 +17,7 @@ const ResourceBar := preload("res://engine/ui/ResourceBar.gd")
 const TerrainImporter := preload("res://engine/assets/TerrainImporter.gd")
 const ProjectileLayer := preload("res://engine/render2d/ProjectileLayer.gd")
 const CommandPanel := preload("res://engine/ui/CommandPanel.gd")
+const AIPlayer := preload("res://engine/ai/AIPlayer.gd")
 
 const MAP_SIZE := 144
 const MAP_SEED := 1234
@@ -26,7 +27,7 @@ const START_OFFSETS: Array[Vector2i] = [
 ]
 const VILLAGER_OFFSETS: Array[Vector2i] = [Vector2i(3, -1), Vector2i(-1, 3), Vector2i(3, 3)]
 const SCOUT_OFFSET := Vector2i(-4, -1)
-const SLOTS := [{"civ": "britones", "team": 0}, {"civ": "francos", "team": 1}]
+const SLOTS := [{"civ": "britones", "team": 0}, {"civ": "francos", "team": 1, "ai": true}]
 const PLAYER_COLORS: Array[Color] = [
 	Color("#2a4bff"), Color("#ff2020"), Color("#20c020"), Color("#ffe020"),
 	Color("#00c8ff"), Color("#c800ff"), Color("#969696"), Color("#ff8c00"),
@@ -43,6 +44,8 @@ var bar
 var projectiles
 var panel
 var selected: Array[int] = []
+## Rivales de la IA (piensan tras cada tick de la simulación).
+var ais: Array = []
 ## Edificio en colocación (def id) o "".
 var placing := ""
 
@@ -64,6 +67,9 @@ func _ready() -> void:
 	for i in SLOTS.size():
 		sim.add_player(i, SLOTS[i]["civ"], SLOTS[i]["team"])
 	_spawn_start()
+	for i in SLOTS.size():
+		if bool(SLOTS[i].get("ai", false)):
+			ais.append(AIPlayer.new(sim, i))
 
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	_import_terrain()
@@ -129,6 +135,8 @@ func _import_terrain() -> void:
 func tick_once() -> void:
 	layer.snapshot()
 	sim.step()
+	for ai in ais:
+		ai.tick()
 	layer.sync(1.0, 0.0)
 	projectiles.sync(1.0)
 	panel.refresh()
@@ -339,6 +347,8 @@ func _process(delta: float) -> void:
 	while _acc >= dt:
 		layer.snapshot()
 		sim.step()
+		for ai in ais:
+			ai.tick()
 		_acc -= dt
 		ticked = true
 	layer.sync(_acc / dt, delta)
