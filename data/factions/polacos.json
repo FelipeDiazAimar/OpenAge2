@@ -1,128 +1,106 @@
 {
-    "debilidades":  [
-                        "Sin Paladin",
-                        "Caballeria pesada limitada"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Bono de equipo: ver descripcion de civi",
-                       "id":  "polacos_equipo",
-                       "efecto":  {
-
-                                  }
-                   },
-    "id":  "polacos",
-    "bonus":  [
-                  {
-                      "descripcion":  "Aldeanos regeneran 10/15/20 PV por minuto en Feudal/Castillos/Imperial",
-                      "id":  "aldeanos_regeneran",
-                      "efecto":  {
-                                     "regen_feudal":  10,
-                                     "regen_castillos":  15,
-                                     "regen_imperial":  20
-                                 }
-                  },
-                  {
-                      "descripcion":  "Folwark (mejora gratis de molino): +5 población y 10% comida de granjas adyacentes; mineros de piedra generan +33% oro además de piedra",
-                      "id":  "folwark_y_piedra_oro",
-                      "efecto":  {
-                                     "folwark_pop":  5,
-                                     "folwark_comida_granjas":  0.1,
-                                     "oro_extra_piedra":  0.33
-                                 }
-                  },
-                  {
-                      "descripcion":  "Pura sangre y mejoras de línea scout cuestan -50% comida",
-                      "id":  "sangre_scout_barato",
-                      "efecto":  {
-                                     "descuento_comida":  0.5,
-                                     "aplica_a":  [
-                                                      "pureza_sangre",
-                                                      "scout",
-                                                      "jinete"
-                                                  ]
-                                 }
-                  }
-              ],
-    "roof_color":  "#888888",
-    "name":  "Polacos",
-    "descripcion":  "Polacos: Aldeanos regeneran 10/15/20 PV por minuto en Feudal/Castillos/Imperial Folwark (mejora gratis de molino): +5 población y 10% comida de granjas adyacentes; mineros de piedra generan +33% oro además de piedra",
-    "unique_techs":  [
-                         {
-                             "descripcion":  "",
-                             "nombre":  "privilegios_szlachta",
-                             "id":  "privilegios_szlachta"
-                         },
-                         {
-                             "descripcion":  "",
-                             "nombre":  "legado_lechitico",
-                             "id":  "legado_lechitico"
-                         }
-                     ],
-    "ventajas":  [
-                     "Aldeanos regeneran 10/15/20 PV por minuto en Feudal/Casti...",
-                     "Folwark (mejora gratis de molino): +5 población y 10% com...",
-                     "Pura sangre y mejoras de línea scout cuestan -50% comida"
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  15,
-                        "id":  "polacos_elite",
-                        "armor_pierce":  1,
-                        "attack_elite":  12,
-                        "cost":  {
-                                     "gold":  30,
-                                     "food":  60
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  10,
-                        "armor_melee":  1,
-                        "name":  "Elite Polacos",
-                        "hp":  80,
-                        "hp_elite":  100
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-
-                                     },
-                      "castillo":  {
-
-                                   },
-                      "cuartel":  {
-
-                                  },
-                      "establo":  {
-
-                                  },
-                      "taller_asedio":  {
-
-                                        },
-                      "puerto":  {
-
-                                 },
-                      "herreria":  {
-
-                                   },
-                      "arqueria":  {
-
-                                   },
-                      "universidad":  {
-
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "carreta_husita",
-                                                    "centurion",
-                                                    "houfnice",
-                                                    "liao_dao",
-                                                    "mejora_houfnice",
-                                                    "acero_wootz",
-                                                    "aguila",
-                                                    "aldeana",
-                                                    "almenas",
-                                                    "anarquia",
-                                                    "arambai",
-                                                    "arcabuz",
-                                                    "arco_recurvo",
-                                                    "armadura_arq_3",
-                                                    "armadura_cab_3"
-                                                ]
-                  }
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "descripcion": "Bono de equipo: ver descripcion de civi",
+  "id": "polacos_equipo",
+  "efecto": {}
+ },
+ "id": "polacos",
+ "bonus": [
+  {
+   "descripcion": "Aldeanos regeneran 10/15/20 PV por minuto en Feudal/Castillos/Imperial",
+   "id": "aldeanos_regeneran",
+   "efecto": {
+    "regen_feudal": 10,
+    "regen_castillos": 15,
+    "regen_imperial": 20
+   }
+  },
+  {
+   "descripcion": "Folwark (mejora gratis de molino): +5 población y 10% comida de granjas adyacentes; mineros de piedra generan +33% oro además de piedra",
+   "id": "folwark_y_piedra_oro",
+   "efecto": {
+    "folwark_pop": 5,
+    "folwark_comida_granjas": 0.1,
+    "oro_extra_piedra": 0.33
+   }
+  },
+  {
+   "descripcion": "Pura sangre y mejoras de línea scout cuestan -50% comida",
+   "id": "sangre_scout_barato",
+   "efecto": {
+    "descuento_comida": 0.5,
+    "aplica_a": [
+     "pureza_sangre",
+     "scout",
+     "jinete"
+    ]
+   }
+  }
+ ],
+ "roof_color": "#888888",
+ "name": "Polacos",
+ "descripcion": "Polacos: Aldeanos regeneran 10/15/20 PV por minuto en Feudal/Castillos/Imperial Folwark (mejora gratis de molino): +5 población y 10% comida de granjas adyacentes; mineros de piedra generan +33% oro además de piedra",
+ "unique_techs": [
+  {
+   "descripcion": "",
+   "nombre": "privilegios_szlachta",
+   "id": "privilegios_szlachta"
+  },
+  {
+   "descripcion": "",
+   "nombre": "legado_lechitico",
+   "id": "legado_lechitico"
+  }
+ ],
+ "ventajas": [
+  "Aldeanos regeneran 10/15/20 PV por minuto en Feudal/Casti...",
+  "Folwark (mejora gratis de molino): +5 población y 10% com...",
+  "Pura sangre y mejoras de línea scout cuestan -50% comida"
+ ],
+ "unique_unit": {
+  "id": "obuch",
+  "name": "Obuch",
+  "hp": 80,
+  "attack": 8,
+  "armor_melee": 2,
+  "armor_pierce": 2,
+  "cost": {
+   "food": 55,
+   "gold": 20
+  },
+  "train_time_sec": 12,
+  "trained_at": "castillo"
+ },
+ "tech_tree": {
+  "monasterio": {},
+  "castillo": {},
+  "cuartel": {},
+  "establo": {},
+  "taller_asedio": {},
+  "puerto": {},
+  "herreria": {},
+  "arqueria": {},
+  "universidad": {},
+  "no_disponible_resumen": [
+   "carreta_husita",
+   "centurion",
+   "houfnice",
+   "liao_dao",
+   "mejora_houfnice",
+   "acero_wootz",
+   "aguila",
+   "aldeana",
+   "almenas",
+   "anarquia",
+   "arambai",
+   "arcabuz",
+   "arco_recurvo",
+   "armadura_arq_3",
+   "armadura_cab_3"
+  ]
+ }
 }

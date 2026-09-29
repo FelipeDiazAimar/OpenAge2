@@ -1,139 +1,117 @@
 {
-    "debilidades":  [
-                        "Sin Paladin",
-                        "Caballeria pesada limitada"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Bono de equipo: ver descripcion de civi",
-                       "id":  "dravidianos_equipo",
-                       "efecto":  {
-
-                                  }
-                   },
-    "id":  "dravidianos",
-    "bonus":  [
-                  {
-                      "descripcion":  "+200 madera al avanzar de edad (Feudal/Castillos/Imperial)",
-                      "id":  "madera_200_edad",
-                      "efecto":  {
-                                     "madera_extra_por_edad":  200,
-                                     "edades":  [
-                                                    "feudal",
-                                                    "castillos",
-                                                    "imperial"
-                                                ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Pescadores y barcos pesqueros +15 capacidad",
-                      "id":  "pesca_15",
-                      "efecto":  {
-                                     "capacidad_pesca_extra":  15,
-                                     "aplica_a":  [
-                                                      "aldeano_pescador",
-                                                      "barco_pesquero"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Tecnologías del cuartel -50% coste",
-                      "id":  "cuartel_barato_50",
-                      "efecto":  {
-                                     "descuento_tecs_cuartel":  0.5
-                                 }
-                  },
-                  {
-                      "descripcion":  "Guerrillero y arquero elefante atacan 25% más rápido",
-                      "id":  "guerrillero_rapido_25",
-                      "efecto":  {
-                                     "cadencia_guerrillero_bonus":  0.25,
-                                     "aplica_a":  [
-                                                      "guerrillero",
-                                                      "arquero_elefante"
-                                                  ]
-                                 }
-                  }
-              ],
-    "roof_color":  "#ff8c00",
-    "name":  "Dravidianos",
-    "descripcion":  "Dravidianos: +200 madera al avanzar de edad (Feudal/Castillos/Imperial) Pescadores y barcos pesqueros +15 capacidad",
-    "unique_techs":  [
-                         {
-                             "descripcion":  "",
-                             "nombre":  "cuerpo_medico",
-                             "id":  "cuerpo_medico"
-                         },
-                         {
-                             "descripcion":  "",
-                             "nombre":  "acero_wootz",
-                             "id":  "acero_wootz"
-                         }
-                     ],
-    "ventajas":  [
-                     "+200 madera al avanzar de edad (Feudal/Castillos/Imperial)",
-                     "Pescadores y barcos pesqueros +15 capacidad",
-                     "Tecnologías del cuartel -50% coste"
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  15,
-                        "id":  "dravidianos_elite",
-                        "armor_pierce":  1,
-                        "attack_elite":  12,
-                        "cost":  {
-                                     "gold":  30,
-                                     "food":  60
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  10,
-                        "armor_melee":  1,
-                        "name":  "Elite Dravidianos",
-                        "hp":  80,
-                        "hp_elite":  100
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-
-                                     },
-                      "castillo":  {
-
-                                   },
-                      "cuartel":  {
-
-                                  },
-                      "establo":  {
-
-                                  },
-                      "taller_asedio":  {
-
-                                        },
-                      "puerto":  {
-
-                                 },
-                      "herreria":  {
-
-                                   },
-                      "arqueria":  {
-
-                                   },
-                      "universidad":  {
-
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "carreta_husita",
-                                                    "centurion",
-                                                    "houfnice",
-                                                    "liao_dao",
-                                                    "mejora_houfnice",
-                                                    "aguila",
-                                                    "aldeana",
-                                                    "almenas",
-                                                    "anarquia",
-                                                    "arambai",
-                                                    "arcabuz",
-                                                    "arco_recurvo",
-                                                    "armadura_cab_3",
-                                                    "armadura_lamelar",
-                                                    "armadura_ming_guang"
-                                                ]
-                  }
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "descripcion": "Bono de equipo: ver descripcion de civi",
+  "id": "dravidianos_equipo",
+  "efecto": {}
+ },
+ "id": "dravidianos",
+ "bonus": [
+  {
+   "descripcion": "+200 madera al avanzar de edad (Feudal/Castillos/Imperial)",
+   "id": "madera_200_edad",
+   "efecto": {
+    "madera_extra_por_edad": 200,
+    "edades": [
+     "feudal",
+     "castillos",
+     "imperial"
+    ]
+   }
+  },
+  {
+   "descripcion": "Pescadores y barcos pesqueros +15 capacidad",
+   "id": "pesca_15",
+   "efecto": {
+    "capacidad_pesca_extra": 15,
+    "aplica_a": [
+     "aldeano_pescador",
+     "barco_pesquero"
+    ]
+   }
+  },
+  {
+   "descripcion": "Tecnologías del cuartel -50% coste",
+   "id": "cuartel_barato_50",
+   "efecto": {
+    "descuento_tecs_cuartel": 0.5
+   }
+  },
+  {
+   "descripcion": "Guerrillero y arquero elefante atacan 25% más rápido",
+   "id": "guerrillero_rapido_25",
+   "efecto": {
+    "cadencia_guerrillero_bonus": 0.25,
+    "aplica_a": [
+     "guerrillero",
+     "arquero_elefante"
+    ]
+   }
+  }
+ ],
+ "roof_color": "#ff8c00",
+ "name": "Dravidianos",
+ "descripcion": "Dravidianos: +200 madera al avanzar de edad (Feudal/Castillos/Imperial) Pescadores y barcos pesqueros +15 capacidad",
+ "unique_techs": [
+  {
+   "descripcion": "",
+   "nombre": "cuerpo_medico",
+   "id": "cuerpo_medico"
+  },
+  {
+   "descripcion": "",
+   "nombre": "acero_wootz",
+   "id": "acero_wootz"
+  }
+ ],
+ "ventajas": [
+  "+200 madera al avanzar de edad (Feudal/Castillos/Imperial)",
+  "Pescadores y barcos pesqueros +15 capacidad",
+  "Tecnologías del cuartel -50% coste"
+ ],
+ "unique_unit": {
+  "id": "urumi",
+  "name": "Espadachin Urumi",
+  "hp": 55,
+  "attack": 9,
+  "armor_melee": 1,
+  "armor_pierce": 0,
+  "cost": {
+   "food": 65,
+   "gold": 20
+  },
+  "train_time_sec": 9,
+  "trained_at": "castillo"
+ },
+ "tech_tree": {
+  "monasterio": {},
+  "castillo": {},
+  "cuartel": {},
+  "establo": {},
+  "taller_asedio": {},
+  "puerto": {},
+  "herreria": {},
+  "arqueria": {},
+  "universidad": {},
+  "no_disponible_resumen": [
+   "carreta_husita",
+   "centurion",
+   "houfnice",
+   "liao_dao",
+   "mejora_houfnice",
+   "aguila",
+   "aldeana",
+   "almenas",
+   "anarquia",
+   "arambai",
+   "arcabuz",
+   "arco_recurvo",
+   "armadura_cab_3",
+   "armadura_lamelar",
+   "armadura_ming_guang"
+  ]
+ }
 }
