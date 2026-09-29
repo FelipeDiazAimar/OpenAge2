@@ -1,0 +1,21 @@
+{
+ "id": "samurai_elite_up",
+ "type": "tech",
+ "name": "Samurai de Élite",
+ "at": "castillo",
+ "cost": {
+  "food": 750,
+  "gold": 650
+ },
+ "research_time": 60,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "samurai",
+   "to": "samurai_elite"
+  }
+ ]
+}

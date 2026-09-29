@@ -1,0 +1,21 @@
+{
+ "id": "carabela_elite_up",
+ "type": "tech",
+ "name": "Carabela de Élite",
+ "at": "castillo",
+ "cost": {
+  "food": 700,
+  "gold": 525
+ },
+ "research_time": 48,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "carabela",
+   "to": "carabela_elite"
+  }
+ ]
+}

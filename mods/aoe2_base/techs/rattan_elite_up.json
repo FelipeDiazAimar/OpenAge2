@@ -1,0 +1,21 @@
+{
+ "id": "rattan_elite_up",
+ "type": "tech",
+ "name": "Rattan de Élite",
+ "at": "castillo",
+ "cost": {
+  "food": 1000,
+  "gold": 750
+ },
+ "research_time": 45,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "rattan",
+   "to": "rattan_elite"
+  }
+ ]
+}

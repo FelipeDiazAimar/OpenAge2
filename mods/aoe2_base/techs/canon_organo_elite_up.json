@@ -1,0 +1,21 @@
+{
+ "id": "canon_organo_elite_up",
+ "type": "tech",
+ "name": "Cañón de Órgano de Élite",
+ "at": "castillo",
+ "cost": {
+  "food": 1200,
+  "gold": 500
+ },
+ "research_time": 36,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "canon_organo",
+   "to": "canon_organo_elite"
+  }
+ ]
+}

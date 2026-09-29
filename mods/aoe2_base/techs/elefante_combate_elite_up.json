@@ -1,0 +1,21 @@
+{
+ "id": "elefante_combate_elite_up",
+ "type": "tech",
+ "name": "Elefante de Combate de Élite",
+ "at": "castillo",
+ "cost": {
+  "food": 1200,
+  "gold": 900
+ },
+ "research_time": 100,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "elefante_combate",
+   "to": "elefante_combate_elite"
+  }
+ ]
+}

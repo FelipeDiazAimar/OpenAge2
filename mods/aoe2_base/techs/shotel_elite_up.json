@@ -1,0 +1,21 @@
+{
+ "id": "shotel_elite_up",
+ "type": "tech",
+ "name": "Shotel de Élite",
+ "at": "castillo",
+ "cost": {
+  "food": 900,
+  "gold": 450
+ },
+ "research_time": 45,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "shotel",
+   "to": "shotel_elite"
+  }
+ ]
+}

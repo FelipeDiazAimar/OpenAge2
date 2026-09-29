@@ -1,0 +1,21 @@
+{
+ "id": "invasor_pastos_elite_up",
+ "type": "tech",
+ "name": "Invasor de Pastos de Élite",
+ "at": "castillo",
+ "cost": {
+  "food": 600,
+  "gold": 550
+ },
+ "research_time": 55,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "invasor_pastos",
+   "to": "invasor_pastos_elite"
+  }
+ ]
+}

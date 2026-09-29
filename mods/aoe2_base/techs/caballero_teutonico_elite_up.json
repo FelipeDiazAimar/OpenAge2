@@ -1,0 +1,21 @@
+{
+ "id": "caballero_teutonico_elite_up",
+ "type": "tech",
+ "name": "Caballero Teutónico de Élite",
+ "at": "castillo",
+ "cost": {
+  "food": 950,
+  "gold": 500
+ },
+ "research_time": 50,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "caballero_teutonico",
+   "to": "caballero_teutonico_elite"
+  }
+ ]
+}

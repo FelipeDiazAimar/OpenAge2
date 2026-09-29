@@ -1,0 +1,21 @@
+{
+ "id": "arquero_camello_elite_up",
+ "type": "tech",
+ "name": "Arquero en Camello de Élite",
+ "at": "castillo",
+ "cost": {
+  "wood": 1000,
+  "gold": 500
+ },
+ "research_time": 45,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "arquero_camello",
+   "to": "arquero_camello_elite"
+  }
+ ]
+}

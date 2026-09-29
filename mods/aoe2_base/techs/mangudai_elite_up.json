@@ -1,0 +1,21 @@
+{
+ "id": "mangudai_elite_up",
+ "type": "tech",
+ "name": "Mangudai de Élite",
+ "at": "castillo",
+ "cost": {
+  "food": 1100,
+  "gold": 675
+ },
+ "research_time": 50,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "mangudai",
+   "to": "mangudai_elite"
+  }
+ ]
+}

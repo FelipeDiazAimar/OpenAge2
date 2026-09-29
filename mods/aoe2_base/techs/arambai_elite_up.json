@@ -1,0 +1,21 @@
+{
+ "id": "arambai_elite_up",
+ "type": "tech",
+ "name": "Arambai de Élite",
+ "at": "castillo",
+ "cost": {
+  "food": 1000,
+  "gold": 750
+ },
+ "research_time": 65,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "arambai",
+   "to": "arambai_elite"
+  }
+ ]
+}

@@ -1,0 +1,21 @@
+{
+ "id": "gbeto_elite_up",
+ "type": "tech",
+ "name": "Gbeto de Élite",
+ "at": "castillo",
+ "cost": {
+  "food": 900,
+  "gold": 600
+ },
+ "research_time": 50,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "gbeto",
+   "to": "gbeto_elite"
+  }
+ ]
+}

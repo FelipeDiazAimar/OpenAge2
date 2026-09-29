@@ -1,0 +1,21 @@
+{
+ "id": "mameluco_elite_up",
+ "type": "tech",
+ "name": "Mameluco de Élite",
+ "at": "castillo",
+ "cost": {
+  "food": 600,
+  "gold": 500
+ },
+ "research_time": 50,
+ "requires": {
+  "age": "imperial"
+ },
+ "effects": [
+  {
+   "op": "replace_entity",
+   "from": "mameluco",
+   "to": "mameluco_elite"
+  }
+ ]
+}
