@@ -98,6 +98,8 @@ Proyecto → Configuración → Mapa de entrada, o edita la sección `[input]` d
   más cercano y trae oro según la distancia.
 - **Descargar**: aldeanos con carga, clic derecho sobre un depósito propio que la acepte; después
   vuelven a su recurso.
+- **Muelle**: se coloca en el agua pegado a la costa (vista previa roja si no). Los barcos pesqueros
+  pescan con clic derecho sobre los peces y descargan en el muelle; los de guerra atacan desde el agua.
 - **Mejoras de línea** (p. ej. Piquero): convierten las unidades existentes y el edificio pasa a
   entrenar la versión mejorada.
 - **S**: detener. Flechas / borde de pantalla / botón medio: cámara. Rueda: zoom. Esc: menú.

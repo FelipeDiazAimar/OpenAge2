@@ -72,3 +72,8 @@ El motor nuevo lee `mods/<mod>/` (el juego viejo sigue leyendo `data/` hasta la 
 - Comercio: `Trade {gold_base, gold_per_tile}` en la carreta y `Market {}` en el mercado; oro por
   viaje = gold_base + gold_per_tile × casillas entre mercados (solo con mercados de otros jugadores
   no enemigos).
+- Agua y barcos: las unidades con la etiqueta `barco` navegan solo por agua (grilla naval); el resto
+  no entra al agua. `Dock {}` marca el muelle: toda su huella en agua y tocando la costa; los barcos
+  salen al agua y descargan solo en muelles. Recursos con `"water": true` (peces) solo los buscan
+  solos los barcos; los aldeanos pescan desde la orilla si se les ordena.
+- Render: `sim.grid.is_water(casilla)` dice qué casillas son agua (para dibujarlas).
