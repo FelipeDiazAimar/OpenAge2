@@ -17,7 +17,9 @@
  "build_menu": "militar",
  "hotkey": "W",
  "graphics": {
-  "idle": "sprite:buildings/archery/b_west_archery_range_age2_x1"
+  "idle": "sprite:buildings/archery/b_west_archery_range_age2_x1",
+  "destruction": "sprite:buildings/archery/b_west_archery_range_age2_destruction_x1",
+  "rubble": "sprite:buildings/archery/b_west_archery_range_age2_rubble_x1"
  },
  "abilities": {
   "Hitpoints": {

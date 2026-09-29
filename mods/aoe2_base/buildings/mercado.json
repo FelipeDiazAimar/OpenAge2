@@ -17,7 +17,9 @@
  "build_menu": "economico",
  "hotkey": "D",
  "graphics": {
-  "idle": "sprite:buildings/market/b_west_market_age2_x1"
+  "idle": "sprite:buildings/market/b_west_market_age2_x1",
+  "destruction": "sprite:buildings/market/b_west_market_age2_destruction_x1",
+  "rubble": "sprite:buildings/market/b_west_market_age2_rubble_x1"
  },
  "abilities": {
   "Hitpoints": {

@@ -1,56 +1,58 @@
 {
-  "id": "taller_asedio",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Taller de Asedio",
-  "cost": {
-    "wood": 200
+ "id": "taller_asedio",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Taller de Asedio",
+ "cost": {
+  "wood": 200
+ },
+ "build_time": 60,
+ "footprint": [
+  3,
+  3
+ ],
+ "requires": {
+  "age": "castillos"
+ },
+ "build_menu": "militar",
+ "hotkey": "R",
+ "abilities": {
+  "Hitpoints": {
+   "max": 1200
   },
-  "build_time": 60,
-  "footprint": [
-    3,
-    3
-  ],
-  "requires": {
-    "age": "castillos"
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
   },
-  "build_menu": "militar",
-  "hotkey": "R",
-  "abilities": {
-    "Hitpoints": {
-      "max": 1200
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "Train": {
-      "units": [
-        "ariete",
-        "catapulta",
-        "carro_guerra",
-        "escorpion",
-        "torre_asedio",
-        "canon_asedio",
-        "houfnice"
-      ],
-      "queue": 5
-    },
-    "RallyPoint": {},
-    "Research": {
-      "techs": [
-        "mejora_escorpion_pesado",
-        "mejora_onagro",
-        "mejora_onagro_asedio",
-        "mejora_ariete_cubierto",
-        "mejora_houfnice",
-        "mejora_ariete_asedio"
-      ]
-    }
+  "Train": {
+   "units": [
+    "ariete",
+    "catapulta",
+    "carro_guerra",
+    "escorpion",
+    "torre_asedio",
+    "canon_asedio",
+    "houfnice"
+   ],
+   "queue": 5
   },
-  "graphics": {
-    "idle": "sprite:buildings/siege/b_west_siege_workshop_age3_x1"
+  "RallyPoint": {},
+  "Research": {
+   "techs": [
+    "mejora_escorpion_pesado",
+    "mejora_onagro",
+    "mejora_onagro_asedio",
+    "mejora_ariete_cubierto",
+    "mejora_houfnice",
+    "mejora_ariete_asedio"
+   ]
   }
+ },
+ "graphics": {
+  "idle": "sprite:buildings/siege/b_west_siege_workshop_age3_x1",
+  "destruction": "sprite:buildings/siege/b_west_siege_workshop_age3_destruction_x1",
+  "rubble": "sprite:buildings/siege/b_west_siege_workshop_age3_rubble_x1"
+ }
 }

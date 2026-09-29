@@ -1,49 +1,51 @@
 {
-  "id": "universidad",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Universidad",
-  "cost": {
-    "wood": 200
+ "id": "universidad",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Universidad",
+ "cost": {
+  "wood": 200
+ },
+ "build_time": 70,
+ "footprint": [
+  3,
+  3
+ ],
+ "requires": {
+  "age": "castillos"
+ },
+ "build_menu": "economico",
+ "hotkey": "G",
+ "abilities": {
+  "Hitpoints": {
+   "max": 1200
   },
-  "build_time": 70,
-  "footprint": [
-    3,
-    3
-  ],
-  "requires": {
-    "age": "castillos"
-  },
-  "build_menu": "economico",
-  "hotkey": "G",
-  "abilities": {
-    "Hitpoints": {
-      "max": 1200
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-   "Research": {
-    "techs": [
-     "balistica",
-     "quimica",
-     "tiro_caliente",
-     "grua",
-     "torre_vigilancia",
-     "torre_guardia",
-     "torre_muralla",
-     "arquitectura",
-     "muralla_fortificada",
-     "albanileria",
-     "ingenieros_asedio",
-     "aspilleras"
-    ]
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
    }
   },
-  "graphics": {
-    "idle": "sprite:buildings/university/b_west_university_age3_x1"
+  "Research": {
+   "techs": [
+    "balistica",
+    "quimica",
+    "tiro_caliente",
+    "grua",
+    "torre_vigilancia",
+    "torre_guardia",
+    "torre_muralla",
+    "arquitectura",
+    "muralla_fortificada",
+    "albanileria",
+    "ingenieros_asedio",
+    "aspilleras"
+   ]
   }
+ },
+ "graphics": {
+  "idle": "sprite:buildings/university/b_west_university_age3_x1",
+  "destruction": "sprite:buildings/university/b_west_university_age3_destruction_x1",
+  "rubble": "sprite:buildings/university/b_west_university_age3_rubble_x1"
+ }
 }

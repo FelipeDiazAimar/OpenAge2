@@ -27,11 +27,11 @@
    }
   },
   "Train": {
-    "units": [
-     "scout",
-     "jinete",
-     "camello",
-     "paladin",
+   "units": [
+    "scout",
+    "jinete",
+    "camello",
+    "paladin",
     "paladin_franco",
     "huszar_magiar"
    ],
@@ -39,16 +39,18 @@
   },
   "RallyPoint": {},
   "Research": {
-    "techs": [
-     "pureza_sangre",
-     "ganaderia",
-     "caballeria_ligera_up",
-     "husar_up",
-     "camello_pesado_up"
-    ]
+   "techs": [
+    "pureza_sangre",
+    "ganaderia",
+    "caballeria_ligera_up",
+    "husar_up",
+    "camello_pesado_up"
+   ]
   }
  },
  "graphics": {
-  "idle": "sprite:buildings/stable/b_west_stable_age3_x1"
+  "idle": "sprite:buildings/stable/b_west_stable_age3_x1",
+  "destruction": "sprite:buildings/stable/b_west_stable_age3_destruction_x1",
+  "rubble": "sprite:buildings/stable/b_west_stable_age3_rubble_x1"
  }
 }

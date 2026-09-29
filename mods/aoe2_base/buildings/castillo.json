@@ -17,7 +17,9 @@
  "build_menu": "militar",
  "hotkey": "F",
  "graphics": {
-  "idle": "sprite:buildings/castle/b_west_castle_age3_x1"
+  "idle": "sprite:buildings/castle/b_west_castle_age3_x1",
+  "destruction": "sprite:buildings/castle/b_west_castle_age3_destruction_x1",
+  "rubble": "sprite:buildings/castle/b_west_castle_age3_rubble_x1"
  },
  "abilities": {
   "Hitpoints": {

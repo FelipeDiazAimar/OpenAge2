@@ -1,55 +1,57 @@
 {
-  "id": "herreria",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Herrería",
-  "cost": {
-    "wood": 150
+ "id": "herreria",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Herrería",
+ "cost": {
+  "wood": 150
+ },
+ "build_time": 50,
+ "footprint": [
+  3,
+  3
+ ],
+ "requires": {
+  "age": "feudal"
+ },
+ "build_menu": "economico",
+ "hotkey": "S",
+ "graphics": {
+  "idle": "sprite:buildings/smith/b_west_blacksmith_age2_x1",
+  "destruction": "sprite:buildings/smith/b_west_blacksmith_age2_destruction_x1",
+  "rubble": "sprite:buildings/smith/b_west_blacksmith_age2_rubble_x1"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 1200
   },
-  "build_time": 50,
-  "footprint": [
-    3,
-    3
-  ],
-  "requires": {
-    "age": "feudal"
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
   },
-  "build_menu": "economico",
-  "hotkey": "S",
-  "graphics": {
-    "idle": "sprite:buildings/smith/b_west_blacksmith_age2_x1"
-  },
-  "abilities": {
-    "Hitpoints": {
-      "max": 1200
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "Research": {
-      "techs": [
-        "forja",
-        "hierro_fundido",
-        "alto_horno",
-        "armadura_inf_1",
-        "armadura_inf_2",
-        "armadura_inf_3",
-        "ataque_arq_1",
-        "ataque_arq_2",
-        "ataque_arq_3",
-        "armadura_arq_1",
-        "armadura_arq_2",
-        "armadura_arq_3",
-        "ataque_cab_1",
-        "ataque_cab_2",
-        "ataque_cab_3",
-        "armadura_cab_1",
-        "armadura_cab_2",
-        "armadura_cab_3"
-      ]
-    }
+  "Research": {
+   "techs": [
+    "forja",
+    "hierro_fundido",
+    "alto_horno",
+    "armadura_inf_1",
+    "armadura_inf_2",
+    "armadura_inf_3",
+    "ataque_arq_1",
+    "ataque_arq_2",
+    "ataque_arq_3",
+    "armadura_arq_1",
+    "armadura_arq_2",
+    "armadura_arq_3",
+    "ataque_cab_1",
+    "ataque_cab_2",
+    "ataque_cab_3",
+    "armadura_cab_1",
+    "armadura_cab_2",
+    "armadura_cab_3"
+   ]
   }
+ }
 }

@@ -37,6 +37,8 @@
   }
  },
  "graphics": {
-  "idle": "sprite:buildings/lumber/b_west_lumber_camp_age2_x1"
+  "idle": "sprite:buildings/lumber/b_west_lumber_camp_age2_x1",
+  "destruction": "sprite:buildings/lumber/b_west_lumber_camp_age2_destruction_x1",
+  "rubble": "sprite:buildings/lumber/b_west_lumber_camp_age2_rubble_x1"
  }
 }

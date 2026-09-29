@@ -1,41 +1,93 @@
 {
-  "id": "maravilla",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Maravilla",
-  "cost": {
-    "wood": 1000,
-    "gold": 1000,
-    "stone": 1000
+ "id": "maravilla",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Maravilla",
+ "cost": {
+  "wood": 1000,
+  "gold": 1000,
+  "stone": 1000
+ },
+ "build_time": 300,
+ "footprint": [
+  5,
+  5
+ ],
+ "requires": {
+  "age": "imperial"
+ },
+ "build_menu": "economico",
+ "hotkey": "X",
+ "abilities": {
+  "Hitpoints": {
+   "max": 5000
   },
-  "build_time": 300,
-  "footprint": [
-    5,
-    5
-  ],
-  "requires": {
-    "age": "imperial"
+  "Armor": {
+   "classes": {
+    "melee": 2,
+    "pierce": 8
+   }
   },
-  "build_menu": "economico",
-  "hotkey": "X",
-  "abilities": {
-    "Hitpoints": {
-      "max": 5000
-    },
-    "Armor": {
-      "classes": {
-        "melee": 2,
-        "pierce": 8
-      }
-    },
-    "Vision": {
-      "sight": 6.0
-    },
-    "Wonder": {
-      "victory_time": 600
-    }
+  "Vision": {
+   "sight": 6.0
   },
-  "graphics": {
-    "idle": "sprite:buildings/wonder/b_west_wonder_britons_x1"
+  "Wonder": {
+   "victory_time": 600
   }
+ },
+ "graphics": {
+  "idle": "sprite:buildings/wonder/b_west_wonder_britons_x1",
+  "destruction": "sprite:buildings/wonder/b_west_wonder_britons_destruction_x1",
+  "rubble": "sprite:buildings/wonder/b_west_wonder_britons_rubble_x1",
+  "wonders_by_civ": {
+   "armenios": "sprite:buildings/wonder/b_medi_wonder_armenians_x1",
+   "aztecas": "sprite:buildings/wonder/b_meso_wonder_aztecs_x1",
+   "bengalies": "sprite:buildings/wonder/b_indi_wonder_bengalis_x1",
+   "bereberes": "sprite:buildings/wonder/b_orie_wonder_berbers_x1",
+   "birmanos": "sprite:buildings/wonder/b_seas_wonder_burmese_x1",
+   "bizantinos": "sprite:buildings/wonder/b_medi_wonder_byzantines_x1",
+   "bohemios": "sprite:buildings/wonder/b_slav_wonder_bohemians_x1",
+   "borgoñones": "sprite:buildings/wonder/b_west_wonder_burgundians_x1",
+   "britones": "sprite:buildings/wonder/b_west_wonder_britons_x1",
+   "bulgaros": "sprite:buildings/wonder/b_slav_wonder_bulgarians_x1",
+   "celtas": "sprite:buildings/wonder/b_west_wonder_celts_x1",
+   "chinos": "sprite:buildings/wonder/b_asia_wonder_chinese_x1",
+   "coreanos": "sprite:buildings/wonder/b_asia_wonder_koreans_x1",
+   "cumanos": "sprite:buildings/wonder/b_ceas_wonder_cumans_x1",
+   "eslavos": "sprite:buildings/wonder/b_slav_wonder_slavs_x1",
+   "etiopes": "sprite:buildings/wonder/b_afri_wonder_ethiopians_x1",
+   "francos": "sprite:buildings/wonder/b_west_wonder_franks_x1",
+   "georgianos": "sprite:buildings/wonder/b_medi_wonder_georgians_x1",
+   "godos": "sprite:buildings/wonder/b_east_wonder_goths_x1",
+   "gurjaras": "sprite:buildings/wonder/b_indi_wonder_gurjaras_x1",
+   "hindustanies": "sprite:buildings/wonder/b_indi_wonder_hindustanis_x1",
+   "hunos": "sprite:buildings/wonder/b_east_wonder_huns_x1",
+   "incas": "sprite:buildings/wonder/b_meso_wonder_incas_x1",
+   "italianos": "sprite:buildings/wonder/b_medi_wonder_italians_x1",
+   "japoneses": "sprite:buildings/wonder/b_asia_wonder_japanese_x1",
+   "jemeres": "sprite:buildings/wonder/b_seas_wonder_khmer_x1",
+   "jurchens": "sprite:buildings/wonder/b_asia_wonder_jurchens_x1",
+   "khitans": "sprite:buildings/wonder/b_asia_wonder_khitans_x1",
+   "lituanos": "sprite:buildings/wonder/b_slav_wonder_lithuanians_x1",
+   "magiares": "sprite:buildings/wonder/b_slav_wonder_magyars_x1",
+   "malayos": "sprite:buildings/wonder/b_seas_wonder_malay_x1",
+   "malienses": "sprite:buildings/wonder/b_afri_wonder_malians_x1",
+   "mayas": "sprite:buildings/wonder/b_meso_wonder_mayans_x1",
+   "mongoles": "sprite:buildings/wonder/b_asia_wonder_mongols_x1",
+   "persas": "sprite:buildings/wonder/b_orie_wonder_persians_x1",
+   "polacos": "sprite:buildings/wonder/b_slav_wonder_poles_x1",
+   "portugueses": "sprite:buildings/wonder/b_medi_wonder_portuguese_x1",
+   "sarracenos": "sprite:buildings/wonder/b_orie_wonder_saracens_x1",
+   "shu": "sprite:buildings/wonder/b_asia_wonder_shu_x1",
+   "sicilianos": "sprite:buildings/wonder/b_medi_wonder_sicilians_x1",
+   "tartaros": "sprite:buildings/wonder/b_ceas_wonder_tatars_x1",
+   "teutones": "sprite:buildings/wonder/b_east_wonder_teutons_x1",
+   "turcos": "sprite:buildings/wonder/b_orie_wonder_turks_x1",
+   "vietnamitas": "sprite:buildings/wonder/b_asia_wonder_vietnamese_x1",
+   "vikingos": "sprite:buildings/wonder/b_east_wonder_vikings_x1",
+   "wei": "sprite:buildings/wonder/b_asia_wonder_wei_x1",
+   "wu": "sprite:buildings/wonder/b_asia_wonder_wu_x1",
+   "espanoles": "sprite:buildings/wonder/b_medi_wonder_spanish_x1"
+  }
+ }
 }

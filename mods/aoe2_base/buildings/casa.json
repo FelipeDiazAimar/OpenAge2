@@ -1,33 +1,35 @@
 {
-  "id": "casa",
-  "type": "building",
-  "extends": "edificio_base",
-  "name": "Casa",
-  "cost": {
-    "wood": 25
+ "id": "casa",
+ "type": "building",
+ "extends": "edificio_base",
+ "name": "Casa",
+ "cost": {
+  "wood": 25
+ },
+ "build_time": 20,
+ "footprint": [
+  2,
+  2
+ ],
+ "build_menu": "economico",
+ "hotkey": "Q",
+ "graphics": {
+  "idle": "sprite:buildings/house/b_west_house_age3_x1",
+  "destruction": "sprite:buildings/house/b_west_house_age3_destruction_x1",
+  "rubble": "sprite:buildings/house/b_west_house_age3_rubble_x1"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 550
   },
-  "build_time": 20,
-  "footprint": [
-    2,
-    2
-  ],
-  "build_menu": "economico",
-  "hotkey": "Q",
-  "graphics": {
-    "idle": "sprite:buildings/house/b_west_house_age3_x1"
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 0
+   }
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 550
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 0
-      }
-    },
-    "ProvidesPop": {
-      "amount": 5
-    }
+  "ProvidesPop": {
+   "amount": 5
   }
+ }
 }

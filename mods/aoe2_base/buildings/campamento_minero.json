@@ -39,6 +39,8 @@
   }
  },
  "graphics": {
-  "idle": "sprite:buildings/mining/b_west_mining_camp_age2_x1"
+  "idle": "sprite:buildings/mining/b_west_mining_camp_age2_x1",
+  "destruction": "sprite:buildings/mining/b_west_mining_camp_age2_destruction_x1",
+  "rubble": "sprite:buildings/mining/b_west_mining_camp_age2_rubble_x1"
  }
 }
