@@ -1,0 +1,23 @@
+{
+ "source": "b_seas_market_age3_rubble_x1",
+ "dirs": 1,
+ "per_dir": 1,
+ "kept_per_dir": 1,
+ "step": 2,
+ "size": [
+  408,
+  248
+ ],
+ "frames": [
+  {
+   "png": "p_000.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 0,
+   "hotspot": [
+    218,
+    142
+   ]
+  }
+ ]
+}

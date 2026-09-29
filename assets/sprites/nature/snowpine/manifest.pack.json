@@ -1,0 +1,153 @@
+{
+ "source": "n_tree_snow_pine_x1",
+ "dirs": 1,
+ "per_dir": 27,
+ "kept_per_dir": 14,
+ "step": 2,
+ "size": [
+  116,
+  176
+ ],
+ "frames": [
+  {
+   "png": "p_000.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 0,
+   "hotspot": [
+    58,
+    162
+   ]
+  },
+  {
+   "png": "p_001.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 1,
+   "hotspot": [
+    58,
+    162
+   ]
+  },
+  {
+   "png": "p_002.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 2,
+   "hotspot": [
+    58,
+    162
+   ]
+  },
+  {
+   "png": "p_003.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 3,
+   "hotspot": [
+    58,
+    162
+   ]
+  },
+  {
+   "png": "p_004.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 4,
+   "hotspot": [
+    58,
+    162
+   ]
+  },
+  {
+   "png": "p_005.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 5,
+   "hotspot": [
+    58,
+    162
+   ]
+  },
+  {
+   "png": "p_006.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 6,
+   "hotspot": [
+    58,
+    162
+   ]
+  },
+  {
+   "png": "p_007.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 7,
+   "hotspot": [
+    58,
+    162
+   ]
+  },
+  {
+   "png": "p_008.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 8,
+   "hotspot": [
+    58,
+    162
+   ]
+  },
+  {
+   "png": "p_009.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 9,
+   "hotspot": [
+    58,
+    162
+   ]
+  },
+  {
+   "png": "p_010.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 10,
+   "hotspot": [
+    58,
+    162
+   ]
+  },
+  {
+   "png": "p_011.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 11,
+   "hotspot": [
+    58,
+    162
+   ]
+  },
+  {
+   "png": "p_012.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 12,
+   "hotspot": [
+    58,
+    162
+   ]
+  },
+  {
+   "png": "p_013.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 13,
+   "hotspot": [
+    58,
+    162
+   ]
+  }
+ ]
+}

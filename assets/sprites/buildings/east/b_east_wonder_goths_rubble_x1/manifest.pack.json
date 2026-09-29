@@ -1,0 +1,23 @@
+{
+ "source": "b_east_wonder_goths_rubble_x1",
+ "dirs": 1,
+ "per_dir": 1,
+ "kept_per_dir": 1,
+ "step": 2,
+ "size": [
+  420,
+  224
+ ],
+ "frames": [
+  {
+   "png": "p_000.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 0,
+   "hotspot": [
+    214,
+    118
+   ]
+  }
+ ]
+}

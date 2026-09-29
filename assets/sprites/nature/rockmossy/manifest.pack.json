@@ -1,0 +1,63 @@
+{
+ "source": "n_rock_mossy_x1",
+ "dirs": 1,
+ "per_dir": 9,
+ "kept_per_dir": 5,
+ "step": 2,
+ "size": [
+  172,
+  120
+ ],
+ "frames": [
+  {
+   "png": "p_000.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 0,
+   "hotspot": [
+    84,
+    76
+   ]
+  },
+  {
+   "png": "p_001.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 1,
+   "hotspot": [
+    84,
+    76
+   ]
+  },
+  {
+   "png": "p_002.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 2,
+   "hotspot": [
+    84,
+    76
+   ]
+  },
+  {
+   "png": "p_003.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 3,
+   "hotspot": [
+    84,
+    76
+   ]
+  },
+  {
+   "png": "p_004.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 4,
+   "hotspot": [
+    84,
+    76
+   ]
+  }
+ ]
+}

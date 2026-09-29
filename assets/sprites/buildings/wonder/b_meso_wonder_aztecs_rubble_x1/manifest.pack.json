@@ -1,0 +1,23 @@
+{
+ "source": "b_meso_wonder_aztecs_rubble_x1",
+ "dirs": 1,
+ "per_dir": 1,
+ "kept_per_dir": 1,
+ "step": 2,
+ "size": [
+  552,
+  276
+ ],
+ "frames": [
+  {
+   "png": "p_000.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 0,
+   "hotspot": [
+    270,
+    146
+   ]
+  }
+ ]
+}

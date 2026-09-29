@@ -1,0 +1,33 @@
+{
+ "source": "b_east_house_age3_rubble_x1",
+ "dirs": 1,
+ "per_dir": 3,
+ "kept_per_dir": 2,
+ "step": 2,
+ "size": [
+  240,
+  120
+ ],
+ "frames": [
+  {
+   "png": "p_000.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 0,
+   "hotspot": [
+    130,
+    74
+   ]
+  },
+  {
+   "png": "p_001.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 1,
+   "hotspot": [
+    130,
+    74
+   ]
+  }
+ ]
+}
