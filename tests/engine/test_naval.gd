@@ -85,3 +85,45 @@ func test_domains_deterministic() -> void:
 		_steps(s, 150)
 		hashes.append(s.state_hash())
 	assert_eq(hashes[0], hashes[1])
+
+
+func test_dock_only_on_coast() -> void:
+	var s := _sim()
+	s.players[0]["res"]["wood"] = 5000 * 1000
+	assert_eq(s.can_place(0, "muelle", Vector2i(15, 10)), "", "en el agua junto a la orilla")
+	assert_eq(s.can_place(0, "muelle", Vector2i(20, 15)), "el muelle debe tocar la costa", "mar adentro")
+	assert_eq(s.can_place(0, "muelle", Vector2i(13, 10)), "el muelle va en el agua", "medio en tierra")
+	assert_eq(s.can_place(0, "casa", Vector2i(16, 10)), "lugar ocupado", "una casa no va en el agua")
+	var d := s.spawn("muelle", 0, Vector2i(15, 10))
+	assert_false(s.grid.naval.is_walkable(Vector2i(16, 11)), "bloquea a los barcos")
+	s.remove(d)
+	assert_true(s.grid.naval.is_walkable(Vector2i(16, 11)))
+	assert_false(s.grid.is_walkable(Vector2i(16, 11)), "sigue siendo agua")
+
+
+func test_dock_trains_ships_on_water() -> void:
+	var s := _sim()
+	s.players[0]["res"]["wood"] = 5000 * 1000
+	s.players[0]["res"]["food"] = 5000 * 1000
+	var d := s.spawn("muelle", 0, Vector2i(15, 10))
+	s.spawn("casa", 0, Vector2i(5, 5))
+	s.queue_command(0, "train", {"id": d, "def": "barco_pesquero"})
+	_steps(s, 600)
+	var boats := []
+	for id in s.world.ids_with("Naval"):
+		boats.append(id)
+	assert_eq(boats.size(), 1, "sale el barco")
+	assert_true(s.grid.is_water(_tile(s, boats[0])), "en el agua")
+
+
+func test_villager_builds_dock_from_shore() -> void:
+	var s := _sim()
+	var v := s.spawn("aldeano", 0, Vector2i(13, 11))
+	s.players[0]["res"]["wood"] = 5000 * 1000
+	s.queue_command(0, "place", {"ids": [v], "def": "muelle", "tile": [15, 10]})
+	_steps(s, 700)
+	var docks := []
+	for id in s.world.ids_with("Dock"):
+		docks.append(id)
+	assert_eq(docks.size(), 1)
+	assert_true(s.is_built(docks[0]), "lo construye desde la orilla")

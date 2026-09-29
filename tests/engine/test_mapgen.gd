@@ -92,3 +92,19 @@ func test_animals_per_player() -> void:
 			assert_eq(own_sheep, 4, "4 ovejas propias junto al TC (semilla %d)" % sd)
 			assert_eq(_count_near(s, c, "boar", 18), 2, "2 jabalíes (semilla %d)" % sd)
 			assert_true(_count_near(s, c, "deer", 24) >= 3, "ciervos (semilla %d)" % sd)
+
+
+func test_mapgen_water() -> void:
+	var s := _gen(5)
+	var c := Vector2i(72, 72)
+	assert_true(s.grid.is_water(c), "lago en el centro")
+	var fish := 0
+	for id in s.world.entities:
+		var e: Dictionary = s.world.entities[id]
+		var t := Grid.tile_of(e["pos"])
+		if e["def_id"] == "shore_fish" or e["def_id"] == "deep_fish":
+			fish += 1
+			assert_true(s.grid.is_water(t), "peces en el agua")
+		elif str(e["type"]) != "unit":
+			assert_false(s.grid.is_water(t), "%s fuera del agua" % e["def_id"])
+	assert_eq(fish, MapGen.SHORE_FISH + MapGen.DEEP_FISH)

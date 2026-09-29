@@ -127,10 +127,15 @@ func can_place(pid: int, def_id: String, tile: Vector2i) -> String:
 	if not can_afford(pid, def.get("cost", {})):
 		return "recursos insuficientes"
 	var size := footprint_of(def)
-	for y in size.y:
-		for x in size.x:
-			if not grid.is_walkable(tile + Vector2i(x, y)):
-				return "lugar ocupado"
+	if (def.get("abilities", {}) as Dictionary).has("Dock"):
+		var err := _dock_error(tile, size)
+		if err != "":
+			return err
+	else:
+		for y in size.y:
+			for x in size.x:
+				if not grid.is_walkable(tile + Vector2i(x, y)):
+					return "lugar ocupado"
 	for f in world.ids_with("Farm"):
 		# Las granjas no bloquean la grilla: se comprueba su huella aparte.
 		var fs := footprint_of(def_for(f))
@@ -144,6 +149,22 @@ func can_place(pid: int, def_id: String, tile: Vector2i) -> String:
 		if o >= 0 and o != pid:
 			return "hay unidades de otro jugador" # (AoE2) no se las aparta
 	return ""
+
+
+## Muelle (AoE2): toda la huella en agua libre y tocando la costa.
+func _dock_error(tile: Vector2i, size: Vector2i) -> String:
+	for y in size.y:
+		for x in size.x:
+			var t := tile + Vector2i(x, y)
+			if not grid.is_water(t) or not grid.naval.is_walkable(t):
+				return "el muelle va en el agua"
+	for y in range(tile.y - 1, tile.y + size.y + 1):
+		for x in range(tile.x - 1, tile.x + size.x + 1):
+			var t := Vector2i(x, y)
+			var inner := x >= tile.x and y >= tile.y and x < tile.x + size.x and y < tile.y + size.y
+			if not inner and grid.in_bounds(t) and not grid.is_water(t):
+				return ""
+	return "el muelle debe tocar la costa"
 
 
 ## Entidades cuya casilla cae dentro del rectángulo (orden por id).
@@ -283,7 +304,9 @@ func spawn(def_id: String, owner: int, tile: Vector2i) -> int:
 	if str(def["type"]) == "building":
 		var size := Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
 		var ab: Dictionary = def.get("abilities", {})
-		if not ab.has("Farm"):
+		if ab.has("Dock"):
+			grid.naval.block_rect(tile, size) # el muelle está sobre el agua
+		elif not ab.has("Farm"):
 			grid.block_rect(tile, size) # las granjas se pisan
 		var b := world.spawn(def, owner, tile * FP.SCALE + size * (FP.SCALE / 2))
 		if ab.has("Farm"):
@@ -360,7 +383,9 @@ func remove(id: int) -> void:
 		"building":
 			var def := def_for(id)
 			var size := Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
-			if not world.has_ability(id, "Farm"):
+			if world.has_ability(id, "Dock"):
+				grid.naval.block_rect(Grid.tile_of(pos - size * (FP.SCALE / 2)), size, false)
+			elif not world.has_ability(id, "Farm"):
 				grid.block_rect(Grid.tile_of(pos - size * (FP.SCALE / 2)), size, false)
 		"resource":
 			if _blocks_tile(def_for(id)):

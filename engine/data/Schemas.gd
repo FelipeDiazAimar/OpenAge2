@@ -118,6 +118,7 @@ const ABILITIES := {
 	"Relic": {"gold_per_sec": {"type": "number", "required": true}},
 	"RelicHolder": {},
 	"Market": {},
+	"Dock": {},
 	"Demolish": {},
 }
 

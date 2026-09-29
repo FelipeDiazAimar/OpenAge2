@@ -39,6 +39,7 @@
    "queue": 5
   },
   "RallyPoint": {},
+  "Dock": {},
   "DropSite": {
    "accepts": [
     "food"

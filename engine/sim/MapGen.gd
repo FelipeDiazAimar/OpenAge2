@@ -15,12 +15,18 @@ const LOOSE_GOLD := 6
 const LOOSE_STONE := 4
 const LOOSE_MIN_DIST := 20 # minas sueltas lejos de los inicios (como Arabia)
 const RELICS := 5 # reliquias lejos de los inicios
+## Lago en el centro del mapa (muelles y pesca) con peces de orilla y de altamar.
+const LAKE_R := 7
+const SHORE_FISH := 6
+const DEEP_FISH := 4
 
 
-static func generate(sim, p_seed: int, starts: Array[Vector2i]) -> void:
+static func generate(sim, p_seed: int, starts: Array[Vector2i], lake: bool = true) -> void:
 	var rng := Rng.new(p_seed)
 	# El azar de la partida (conversiones) sale de la semilla del mapa.
 	sim.rng = Rng.new(p_seed ^ 0x5EED1234)
+	if lake:
+		_lake(sim, rng, Vector2i(sim.grid.width / 2, sim.grid.height / 2), LAKE_R)
 	var reserved := {}
 	for s in starts:
 		for dy in range(-CLEAR_R - 1, CLEAR_R + 2):
@@ -54,6 +60,40 @@ static func generate(sim, p_seed: int, starts: Array[Vector2i]) -> void:
 		if sim.spawn("reliquia", -1, t) >= 0:
 			used[t] = true
 			placed += 1
+
+
+## Lago circular de radio r en c; peces de orilla junto a la costa y de
+## altamar en el centro. Va antes que el resto: nada de tierra cae en el agua.
+static func _lake(sim, rng, c: Vector2i, r: int) -> void:
+	var g = sim.grid
+	for y in range(c.y - r, c.y + r + 1):
+		for x in range(c.x - r, c.x + r + 1):
+			var d := Vector2i(x, y) - c
+			if d.x * d.x + d.y * d.y <= r * r:
+				g.set_water(Vector2i(x, y))
+	var shore: Array[Vector2i] = []
+	var deep: Array[Vector2i] = []
+	for y in range(c.y - r, c.y + r + 1):
+		for x in range(c.x - r, c.x + r + 1):
+			var t := Vector2i(x, y)
+			if not g.is_water(t):
+				continue
+			var coast := false
+			for n in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+				coast = coast or (g.in_bounds(t + n) and not g.is_water(t + n))
+			var d := t - c
+			if coast:
+				shore.append(t)
+			elif d.x * d.x + d.y * d.y <= (r - 3) * (r - 3):
+				deep.append(t)
+	for spec in [[shore, "shore_fish", SHORE_FISH], [deep, "deep_fish", DEEP_FISH]]:
+		var tiles: Array = spec[0]
+		for i in int(spec[2]):
+			if tiles.is_empty():
+				break
+			var t: Vector2i = tiles[rng.range_i(0, tiles.size() - 1)]
+			tiles.erase(t)
+			sim.spawn(str(spec[1]), -1, t)
 
 
 ## Grupo de n animales alrededor de un punto a `dist` casillas de c (±2).
