@@ -7,35 +7,88 @@ extends Node2D
 const Iso := preload("res://engine/render2d/Iso.gd")
 const SHADER := preload("res://engine/render2d/terrain.gdshader")
 const LAYERS := ["grass", "grass_dry", "dirt", "forest_floor"]
+const MAX_LAYERS := 8
 const TILES_PER_TEX := 12.0
 
 var width := 0
 var height := 0
 var control: Image
+var control2: Image
 var _mat: ShaderMaterial
+var _t := 0.0
+var _water := 0
 
 
 func setup(sim, registry, locator, p_seed: int) -> void:
 	width = sim.grid.width
 	height = sim.grid.height
 	z_index = -100
+	var layers: Array = _resolve_layers(registry)
 	control = build_control(sim, p_seed)
+	control2 = build_control2(sim, p_seed, layers)
+	_water = _water_mask(registry, layers)
 	_mat = ShaderMaterial.new()
 	_mat.shader = SHADER
 	_mat.set_shader_parameter("control_tex", ImageTexture.create_from_image(control))
+	_mat.set_shader_parameter("control_tex2", ImageTexture.create_from_image(control2))
 	_mat.set_shader_parameter("noise_tex", _noise(p_seed))
 	_mat.set_shader_parameter("map_size", Vector2(width, height))
 	_mat.set_shader_parameter("tiles_per_tex", TILES_PER_TEX)
-	for i in LAYERS.size():
-		var def: Dictionary = registry.get_def(LAYERS[i])
-		if def.is_empty():
-			push_warning("TerrainLayer: el mod no define el terreno '%s'; se usa un color genérico" % LAYERS[i])
-		var tex: Texture2D = locator.terrain(str(def.get("texture", "")))
+	_mat.set_shader_parameter("t_scroll", 0.0)
+	_mat.set_shader_parameter("water_mask", _water)
+	_t = 0.0
+	for i in MAX_LAYERS:
+		var tex: Texture2D = null
+		if i < layers.size():
+			var def: Dictionary = registry.get_def(layers[i])
+			if def.is_empty():
+				push_warning("TerrainLayer: el mod no define el terreno '%s'; se usa un color genérico" % layers[i])
+			tex = locator.terrain(str(def.get("texture", "")))
+			if tex == null:
+				tex = _flat(Color(str(def.get("color", "#6a8a3a"))))
 		if tex == null:
-			tex = _flat(Color(str(def.get("color", "#6a8a3a"))))
+			tex = _mat.get_shader_parameter("tex_0") as Texture2D
+			if tex == null:
+				tex = _flat(Color("#6a8a3a"))
 		_mat.set_shader_parameter("tex_%d" % i, tex)
 	material = _mat
 	queue_redraw()
+
+
+func _process(delta: float) -> void:
+	if _mat == null:
+		return
+	_t += delta
+	_mat.set_shader_parameter("t_scroll", _t)
+
+
+## Orden estable con base grass=0; cap 8. Sin API de listado -> LAYERS fijo (pixel-idéntico).
+static func _resolve_layers(registry) -> Array:
+	if registry != null and registry.has_method("terrains"):
+		var all: Array = registry.call("terrains")
+		all = all.filter(func(t): return t != null and str(t) != "")
+		all.sort_custom(func(a, b): return str(a) < str(b))
+		all.erase("grass")
+		all.push_front("grass")
+		if all.size() > MAX_LAYERS:
+			push_warning("TerrainLayer: %d terrenos, cap %d (primeros 8)" % [all.size(), MAX_LAYERS])
+			all = all.slice(0, MAX_LAYERS)
+		if not all.is_empty():
+			return all
+	return LAYERS.duplicate()
+
+
+static func _is_water(def: Dictionary) -> bool:
+	return str(def.get("kind", "")) == "water" or bool(def.get("scroll", false))
+
+
+static func _water_mask(registry, layers: Array) -> int:
+	var m := 0
+	for i in layers.size():
+		var def: Dictionary = registry.get_def(layers[i])
+		if _is_water(def):
+			m |= (1 << i)
+	return m
 
 
 func material_param(p_name: String) -> Variant:
@@ -76,6 +129,16 @@ static func build_control(sim, p_seed: int) -> Image:
 			var r := smoothstep(0.15, 0.45, dry.get_noise_2d(x, y))
 			var g := smoothstep(0.35, 0.6, dirt.get_noise_2d(x, y))
 			img.set_pixel(x, y, Color(r, g, forest[y * w + x], 1.0))
+	return img
+
+
+## Pesos capas 4-7 (RGBA). Recorte: ceros = inertes = pixel-idéntico hoy.
+## Futuro: pintar aquí por def sin tocar build_control (mismo ruido/semillas).
+static func build_control2(sim, p_seed: int, layers: Array) -> Image:
+	var w: int = sim.grid.width
+	var h: int = sim.grid.height
+	var img := Image.create(w, h, false, Image.FORMAT_RGBA8)
+	img.fill(Color(0, 0, 0, 0))
 	return img
 
 

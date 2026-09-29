@@ -66,6 +66,15 @@ func set_color(c: Color) -> void:
 	queue_redraw()
 
 
+## Avance de edad: invalida packs con {age} para re-resolver en _pack.
+func refresh_age(p_age: int) -> void:
+	if p_age == owner_age:
+		return
+	owner_age = p_age
+	_anims.clear()
+	queue_redraw()
+
+
 func setup(id: int, def: Dictionary, p_color: Color, locator, p_civ: String = "", p_age: int = 1) -> void:
 	entity_id = id
 	kind = str(def.get("type", "unit"))
@@ -221,6 +230,10 @@ func _apply_progress(fr: Dictionary) -> void:
 ## Andamio de obra por footprint (1x1..5x5,8x8); {} si no hay pack.
 func _scaffold_pack() -> Dictionary:
 	var n := maxi(footprint.x, footprint.y)
+	if n == 6:
+		n = 5
+	elif n == 7:
+		n = 8
 	var key := "b_misc_foundation_%dx%d_x1" % [n, n]
 	if not _anims.has(key):
 		_anims[key] = _locator.sprite("sprite:buildings/scaffolds/" + key)

@@ -19,6 +19,8 @@ var rubbles: Array = []
 var _prev: Dictionary = {}
 ## Comida inicial por mina (id -> amount) para la fracción visual.
 var _mine_max: Dictionary = {}
+## Edad cacheada por jugador para refrescar looks {age} al avanzar.
+var _ages: Dictionary = {}
 ## Carcasas recientes: id -> segundos desde la muerte (animación death y luego decay).
 var _dying: Dictionary = {}
 const DEATH_TIME := 1.2
@@ -48,6 +50,19 @@ func sync(alpha: float, delta: float) -> void:
 			_spawn_rubble(ev)
 		elif str(ev.get("type", "")) == "carcass":
 			_dying[int(ev["id"])] = 0.0
+	for p in range(sim.players.size()):
+		var na := int(sim.age_of(p))
+		if not _ages.has(p):
+			_ages[p] = na
+		elif int(_ages[p]) != na:
+			_ages[p] = na
+			for vid in views:
+				var vv = views[vid]
+				var e2: Dictionary = w.entities.get(vid, {})
+				if e2.is_empty():
+					continue
+				if str(vv.kind) == "building" and int(e2.get("owner", -1)) == p:
+					vv.refresh_age(na)
 	for c in corpses.duplicate():
 		c["t"] += delta
 		c["view"].update_view(false, Vector2.ZERO, delta, "death")
@@ -206,6 +221,10 @@ func _spawn_rubble(ev: Dictionary) -> void:
 	add_child(v)
 	v.update_view(false, Vector2.ZERO, 0.0, "destruction")
 	rubbles.append({"view": v, "t": 0.0, "rubble": str(gfx.get("rubble", ""))})
+	while rubbles.size() > 40:
+		var old_rb: Dictionary = rubbles[0]
+		rubbles.erase(old_rb)
+		(old_rb["view"] as Node).queue_free()
 
 
 ## Entidad bajo el punto (coordenadas de mundo del canvas). Prioriza unidades.
