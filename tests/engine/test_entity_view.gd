@@ -33,10 +33,10 @@ func test_walk_and_idle_pick_direction() -> void:
 	assert_true(v.has_sprite())
 	v.update_view(true, Vector2(1, 0), 0.016)
 	assert_eq(v.current_anim(), "walk")
-	assert_eq(v.current_slot(), 8)
+	assert_eq(v.current_slot(), 0, "a la derecha: slot Este")
 	v.update_view(false, Vector2.ZERO, 0.016)
 	assert_eq(v.current_anim(), "idle")
-	assert_eq(v.current_slot(), 8, "quieto conserva el rumbo")
+	assert_eq(v.current_slot(), 0, "quieto conserva el rumbo")
 	v.free()
 
 

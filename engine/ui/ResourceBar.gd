@@ -10,6 +10,7 @@ const COLORS := {"wood": Color("#9a6a35"), "food": Color("#d0503a"), "gold": Col
 var sim
 var pid := 0
 var _labels: Dictionary = {}
+var _speed: Label
 
 
 func setup(p_sim, p_pid: int) -> void:
@@ -39,7 +40,16 @@ func setup(p_sim, p_pid: int) -> void:
 		box.add_child(l)
 		hb.add_child(box)
 		_labels[key] = l
+	_speed = Label.new()
+	_speed.add_theme_color_override("font_color", Color(1.0, 0.93, 0.78, 0.8))
+	hb.add_child(_speed)
+	set_speed(1.7)
 	refresh()
+
+
+## Velocidad de juego (como el DE: 1,7 = Normal).
+func set_speed(v: float) -> void:
+	_speed.text = "Velocidad %s (+/-)" % str(v)
 
 
 func refresh() -> void:

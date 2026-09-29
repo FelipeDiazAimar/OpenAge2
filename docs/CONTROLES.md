@@ -105,6 +105,8 @@ investigación, ejército) y ataca cuando junta tropas.
   pescan con clic derecho sobre los peces y descargan en el muelle; los de guerra atacan desde el agua.
 - **Mejoras de línea** (p. ej. Piquero): convierten las unidades existentes y el edificio pasa a
   entrenar la versión mejorada.
+- **+ / -**: velocidad de juego (1,0 · 1,5 · **1,7 = Normal del DE** · 2,0). Los tiempos de los datos
+  (velocidades, recolección, construcción) son los del AoE2 en segundos de juego.
 - **S**: detener. Flechas / borde de pantalla / botón medio: cámara. Rueda: zoom. Esc: menú.
 - **F9** / **Shift+F9**: tropas de prueba (5 milicias + 5 arqueros) propias / enemigas bajo el cursor,
   hasta que exista producción en los edificios.

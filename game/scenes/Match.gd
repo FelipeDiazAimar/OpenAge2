@@ -46,6 +46,11 @@ var panel
 var selected: Array[int] = []
 ## Rivales de la IA (piensan tras cada tick de la simulación).
 var ais: Array = []
+## Velocidad de juego como en AoE2 DE: la simulación cuenta segundos de juego
+## (10 ticks = 1 s) y la partida los corre a esta velocidad. "Normal" del DE es
+## 1,7 (1,0 es "Lenta"). + / - la cambian.
+const SPEEDS := [1.0, 1.5, 1.7, 2.0]
+var game_speed := 1.7
 ## Edificio en colocación (def id) o "".
 var placing := ""
 
@@ -341,7 +346,7 @@ func _monk_command(id: int) -> bool:
 func _process(delta: float) -> void:
 	if sim == null:
 		return
-	var dt := 1.0 / World.TICK_RATE
+	var dt := 1.0 / (World.TICK_RATE * game_speed)
 	_acc += delta
 	var ticked := false
 	while _acc >= dt:
@@ -351,7 +356,7 @@ func _process(delta: float) -> void:
 			ai.tick()
 		_acc -= dt
 		ticked = true
-	layer.sync(_acc / dt, delta)
+	layer.sync(_acc / dt, delta * game_speed) # animaciones al ritmo del juego
 	projectiles.sync(_acc / dt)
 	if ticked:
 		bar.refresh() # la economía solo cambia por tick (10 Hz), no por frame
@@ -394,6 +399,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		var plain_key: bool = not (event.ctrl_pressed or event.alt_pressed or event.meta_pressed)
 		if plain_key and placing == "" and panel.press_key(OS.get_keycode_string(event.keycode)):
 			return # menú de construir (va antes que S = detener)
+		if event.keycode in [KEY_PLUS, KEY_KP_ADD, KEY_EQUAL, KEY_MINUS, KEY_KP_SUBTRACT]:
+			var up: bool = event.keycode in [KEY_PLUS, KEY_KP_ADD, KEY_EQUAL]
+			set_game_speed(SPEEDS[clampi(SPEEDS.find(game_speed) + (1 if up else -1), 0, SPEEDS.size() - 1)])
+			return
 		if event.keycode == KEY_S and not selected.is_empty():
 			sim.queue_command(local_pid, "stop", {"ids": selected.duplicate()})
 			return
@@ -442,6 +451,12 @@ func _train_hotkey(key: String) -> bool:
 			sim.queue_command(local_pid, "train", {"id": b, "def": str(u)})
 			return true
 	return false
+
+
+func set_game_speed(v: float) -> void:
+	game_speed = v
+	if bar != null and bar.has_method("set_speed"):
+		bar.set_speed(v)
 
 
 func _start_tile(pid: int) -> Vector2i:

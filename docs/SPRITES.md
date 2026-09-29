@@ -51,7 +51,7 @@ move assets\sprites\tmp\u_inf_militia_idleA_x1 assets\sprites\militia\idle
   `user://aoe2_assets/sprites/<pack>/<anim>/` y luego en `res://assets/sprites/<pack>/<anim>/`.
 - Formato: el mismo `manifest.pack.json` + `p_*.png` (+ `m_*.png` máscara) de `--pack`.
 - Proyección isométrica 2:1 con casilla de 96×48 (sprites `x1`). Direcciones: 16 slots,
-  W=0 antihorario (S=4, E=8, N=12). Sin pack, el render dibuja un placeholder.
+  E=0 en sentido horario (SE=2, S=4, SW=6, W=8, NW=10, N=12, NE=14). Sin pack, el render dibuja un placeholder.
 - Probar: menú → "Partida (nuevo motor, beta)", o
   `godot --path . res://game/scenes/Match.tscn -- --screenshot=user://f1.png --frames=90`.
 - Recursos y edificios con packs de **1 dirección y varios frames** (p. ej. `nature/oak` con 42

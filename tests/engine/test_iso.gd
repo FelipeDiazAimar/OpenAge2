@@ -13,12 +13,14 @@ func test_projection_roundtrip() -> void:
 
 
 func test_dir16_cardinals_and_negative_angles() -> void:
-	assert_eq(Iso.dir16(Vector2(-1, 0)), 0, "W")
-	assert_eq(Iso.dir16(Vector2(-1, 1)), 2, "SW")
+	# Orden de los .sld del DE: E=0 y horario (una unidad que va a la derecha
+	# mira a la derecha).
+	assert_eq(Iso.dir16(Vector2(1, 0)), 0, "E")
+	assert_eq(Iso.dir16(Vector2(1, 1)), 2, "SE")
 	assert_eq(Iso.dir16(Vector2(0, 1)), 4, "S")
-	assert_eq(Iso.dir16(Vector2(1, 1)), 6, "SE")
-	assert_eq(Iso.dir16(Vector2(1, 0)), 8, "E")
-	assert_eq(Iso.dir16(Vector2(1, -1)), 10, "NE")
+	assert_eq(Iso.dir16(Vector2(-1, 1)), 6, "SW")
+	assert_eq(Iso.dir16(Vector2(-1, 0)), 8, "W")
+	assert_eq(Iso.dir16(Vector2(-1, -1)), 10, "NW")
 	assert_eq(Iso.dir16(Vector2(0, -1)), 12, "N")
-	assert_eq(Iso.dir16(Vector2(-1, -1)), 14, "NW")
-	assert_eq(Iso.dir16(Vector2(-10, -1)), 0, "casi W por arriba no da negativo")
+	assert_eq(Iso.dir16(Vector2(1, -1)), 14, "NE")
+	assert_eq(Iso.dir16(Vector2(10, -1)), 0, "casi E por arriba no da negativo")

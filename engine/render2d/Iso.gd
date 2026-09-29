@@ -20,8 +20,9 @@ static func to_tiles(screen: Vector2) -> Vector2:
 	return Vector2((a + b) * 0.5, (b - a) * 0.5)
 
 
-## Slot de sprite (0..15) para un rumbo en pantalla. Orden del archivo DE:
-## W=0 y antihorario (S=4, E=8, N=12).
+## Slot de sprite (0..15) para un rumbo en pantalla. Orden de los .sld del DE
+## (comprobado con los sprites): E=0 y en sentido horario (SE=2, S=4, SW=6,
+## W=8, NW=10, N=12, NE=14).
 static func dir16(screen_delta: Vector2) -> int:
-	var compass := rad_to_deg(atan2(screen_delta.x, -screen_delta.y))
-	return posmod(int(round((270.0 - compass) / 22.5)), 16)
+	var compass := rad_to_deg(atan2(screen_delta.x, -screen_delta.y)) # 0=N, 90=E
+	return posmod(int(round((compass - 90.0) / 22.5)), 16)

@@ -101,3 +101,19 @@ func test_scout_start_attack_and_debug_troops() -> void:
 		m.tick_once()
 	assert_eq(m.sim.world.comp(mine, "Attack")["target"], enemy, "clic derecho sobre enemigo = atacar")
 	m.queue_free()
+
+
+func test_game_speed_normal_is_1_7() -> void:
+	var m = load(MATCH).instantiate()
+	Engine.get_main_loop().root.add_child(m)
+	assert_eq(m.game_speed, 1.7, "Normal del AoE2 DE")
+	var t0: int = m.sim.world.tick
+	for i in 10:
+		m._process(0.1)
+	assert_eq(int(m.sim.world.tick) - t0, 17, "1 s real = 1,7 s de juego (17 ticks)")
+	m.set_game_speed(1.0)
+	t0 = m.sim.world.tick
+	for i in 10:
+		m._process(0.1)
+	assert_eq(int(m.sim.world.tick) - t0, 10)
+	m.queue_free()
