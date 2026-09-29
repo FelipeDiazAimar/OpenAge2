@@ -18,6 +18,7 @@ const TerrainImporter := preload("res://engine/assets/TerrainImporter.gd")
 const ProjectileLayer := preload("res://engine/render2d/ProjectileLayer.gd")
 const CommandPanel := preload("res://engine/ui/CommandPanel.gd")
 const AIPlayer := preload("res://engine/ai/AIPlayer.gd")
+const GroundLayer := preload("res://engine/render2d/GroundLayer.gd")
 
 const MAP_SIZE := 144
 const MAP_SEED := 1234
@@ -43,6 +44,7 @@ var overlay
 var bar
 var projectiles
 var panel
+var ground
 var selected: Array[int] = []
 ## Rivales de la IA (piensan tras cada tick de la simulación).
 var ais: Array = []
@@ -82,6 +84,9 @@ func _ready() -> void:
 	var terrain := TerrainLayer.new()
 	add_child(terrain)
 	terrain.setup(sim, registry, locator, MAP_SEED)
+	ground = GroundLayer.new()
+	add_child(ground) # tierra bajo los edificios, entre terreno y entidades
+	ground.setup(sim, locator)
 	layer = EntityLayer.new()
 	add_child(layer)
 	var colors := {}
@@ -145,6 +150,7 @@ func tick_once() -> void:
 	layer.sync(1.0, 0.0)
 	projectiles.sync(1.0)
 	panel.refresh()
+	ground.refresh()
 	_update_rally()
 
 
@@ -167,6 +173,15 @@ func select(ids: Array) -> void:
 
 
 ## Bandera del punto de reunión del edificio seleccionado.
+## Muestra información de una entidad que no es propia (sin seleccionarla
+## para órdenes).
+func inspect(id: int) -> void:
+	select([])
+	panel.show_info(id)
+	if layer.views.has(id):
+		layer.views[id].selected = true
+
+
 func _update_rally() -> void:
 	var b := _selected_building()
 	if b < 0:
@@ -361,6 +376,7 @@ func _process(delta: float) -> void:
 	if ticked:
 		bar.refresh() # la economía solo cambia por tick (10 Hz), no por frame
 		panel.refresh()
+		ground.refresh()
 		_update_rally()
 	if placing != "":
 		var def: Dictionary = sim.players[local_pid]["defs"].get_def(placing)
@@ -426,6 +442,8 @@ func _unhandled_input(event: InputEvent) -> void:
 					var id: int = layer.pick(wp)
 					if id >= 0 and int(sim.world.entities[id]["owner"]) == local_pid:
 						select([id])
+					elif id >= 0:
+						inspect(id) # recurso, animal o ajeno: solo información
 					else:
 						select([])
 				else:

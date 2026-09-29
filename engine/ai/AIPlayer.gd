@@ -12,10 +12,10 @@ const Grid := preload("res://engine/sim/Grid.gd")
 
 const THINK_EVERY := 10
 ## Aldeanos objetivo por edad.
-const VILL_TARGET := [24, 34, 42, 48]
+const VILL_TARGET := [30, 38, 46, 52]
 ## Reparto de aldeanos por edad (proporciones).
 const RATIOS := [
-	{"food": 5, "wood": 5, "gold": 0, "stone": 0},
+	{"food": 6, "wood": 4, "gold": 0, "stone": 0},
 	{"food": 5, "wood": 4, "gold": 2, "stone": 0},
 	{"food": 5, "wood": 3, "gold": 3, "stone": 1},
 	{"food": 5, "wood": 3, "gold": 3, "stone": 1},
@@ -23,7 +23,7 @@ const RATIOS := [
 ## Tamaño de ejército para salir a atacar, por edad.
 const ATTACK_ARMY := [7, 10, 16, 22]
 ## Aldeanos para avanzar a la edad i+1.
-const AGE_VILLS := [19, 28, 38]
+const AGE_VILLS := [20, 30, 40]
 const SEARCH_R := 26000 # radio de búsqueda de recursos alrededor del TC
 const DEFENSE_R := 16000
 const RES := ["food", "wood", "gold", "stone"]
@@ -231,8 +231,18 @@ func _resume_foundations() -> void:
 
 # --- economía --------------------------------------------------------------
 
+## ¿Ya se hizo clic en la próxima edad?
+func _aging() -> bool:
+	var a: Dictionary = sim.next_age(pid)
+	return not a.is_empty() and sim.is_pending(pid, str(a["id"]))
+
+
 func _train_villagers() -> void:
 	var target: int = VILL_TARGET[mini(_age, VILL_TARGET.size() - 1)]
+	# Como en AoE2: con los aldeanos de la edad, se junta la comida del clic
+	# antes de seguir; tras el clic, se sigue produciendo.
+	if _age < AGE_VILLS.size() and not _aging():
+		target = mini(target, AGE_VILLS[_age] + 2)
 	var queued := 0
 	for tc in _built("centro_urbano"):
 		for it in sim.world.comp(tc, "Queue")["items"]:
@@ -264,7 +274,7 @@ func _houses() -> void:
 func _dropsites() -> void:
 	if _vills.size() >= 6:
 		_camp_near("campamento_maderero", ["tree"], 5)
-	if _vills.size() >= 9:
+	if _vills.size() >= 7:
 		_camp_near("molino", ["berry_bush"], 4)
 	if _vills.size() >= 16 or _age >= 1:
 		_camp_near("campamento_minero", ["gold_mine"], 4)
@@ -317,9 +327,27 @@ func _farms() -> void:
 		_cooldown("granja", 30)
 
 
+## Arranque de AoE2: casi todos a la comida (ovejas, bayas, ciervos) para
+## no parar el centro urbano; la madera justa para casas y campamentos.
+const OPENING := {"food": 7, "wood": 3, "gold": 0, "stone": 0}
+
+
+## Apertura por cantidad de aldeanos (como un jugador de AoE2): los primeros
+## 6 a la comida, los 4 siguientes a la madera y luego mitad y mitad.
+const OPENING_STEPS := [[6, 6, 0], [10, 6, 4]]
+
+
 ## Aldeanos que se quieren en un recurso ahora.
 func _wanted(res: String) -> int:
 	var ratio: Dictionary = RATIOS[mini(_age, RATIOS.size() - 1)]
+	var n := _vills.size()
+	if _age == 0:
+		for step in OPENING_STEPS:
+			if n <= int(step[0]):
+				var want := {"food": int(step[1]), "wood": int(step[2]), "gold": 0, "stone": 0}
+				return mini(int(want[res]), n)
+		if n < 14:
+			ratio = OPENING
 	var total := 0
 	for k in ratio:
 		total += int(ratio[k])
@@ -378,8 +406,12 @@ func _resource_for(res: String, v: int) -> int:
 			if bool(p.get("tame", false)) and owner != pid and owner >= 0:
 				continue
 			if not bool(src["killed"]) and not bool(p.get("tame", false)):
-				continue # ciervos: no los caza
-			score -= 20000 # ovejas y carcasas primero (se echan a perder)
+				# Ciervos: solo cerca de casa (la carne viaja poco).
+				if _dist_tiles(Grid.tile_of(w.entities[c]["pos"]), _home) > 14:
+					continue
+				score -= 8000
+			else:
+				score -= 20000 # ovejas y carcasas primero (se echan a perder)
 		if w.has_ability(c, "Farm"):
 			if owner != pid or not sim.is_built(c) or (_busy_farms.has(c) and int(_busy_farms[c]) != v):
 				continue

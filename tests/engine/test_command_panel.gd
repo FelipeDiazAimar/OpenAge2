@@ -237,3 +237,37 @@ func test_match_right_click_monk_relic_and_drop() -> void:
 		m.tick_once()
 	assert_eq(s.world.comp(v, "Gather")["state"], "to_drop", "con carga sobre el TC: descargar")
 	m.queue_free()
+
+
+func test_inspect_resource_shows_amount() -> void:
+	var s := _sim()
+	var mine := s.spawn("gold_mine", -1, Vector2i(10, 10))
+	var p := CommandPanel.new()
+	p.setup(s, 0)
+	p.show_info(mine)
+	assert_true(p.visible)
+	assert_true(p.buttons.is_empty(), "sin órdenes")
+	assert_true(p._status.text.begins_with("Oro: "), "muestra cuánto oro queda: %s" % p._status.text)
+	s.world.comp(mine, "ResourceSource")["amount"] = 123000
+	p.refresh()
+	assert_true(p._status.text.begins_with("Oro: 123 /"))
+	var foe := s.spawn("milicia", 1, Vector2i(20, 20))
+	p.show_info(foe)
+	assert_true(p._title.text.ends_with("(jugador 2)"))
+	assert_true(p._status.text.begins_with("Vida: 45 / 45"))
+	p.free()
+
+
+func test_match_click_on_resource_inspects() -> void:
+	var m = load(MATCH).instantiate()
+	Engine.get_main_loop().root.add_child(m)
+	var tree := -1
+	for id in m.sim.world.entities:
+		if m.sim.world.entities[id]["def_id"] == "tree":
+			tree = id
+			break
+	m.inspect(tree)
+	assert_true(m.selected.is_empty(), "no se selecciona para órdenes")
+	assert_true(m.panel._status.text.begins_with("Madera: "))
+	assert_true(m.ground != null, "capa de suelo bajo edificios")
+	m.queue_free()

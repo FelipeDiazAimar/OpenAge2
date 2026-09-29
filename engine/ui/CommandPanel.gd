@@ -28,6 +28,8 @@ var _ids: Array = []
 var _building := -1
 var _queue_sig := ""
 var _state_sig := ""
+## Entidad ajena en inspección (recurso, animal, enemigo): solo información.
+var _inspect := -1
 ## Página abierta del menú de construir ("" = elegir página).
 var page := ""
 
@@ -80,10 +82,48 @@ func _defs():
 	return sim.players[pid]["defs"]
 
 
+## Muestra qué es una entidad ajena y cuánto le queda (sin órdenes).
+func show_info(id: int) -> void:
+	show_for([])
+	if id < 0 or not sim.world.entities.has(id):
+		return
+	_inspect = id
+	_ids = [id]
+	visible = true
+	var def: Dictionary = sim.def_for(id)
+	_title.text = str(def.get("name", def.get("id", "")))
+	var owner := int(sim.world.entities[id]["owner"])
+	if owner >= 0 and owner != pid:
+		_title.text += " (jugador %d)" % (owner + 1)
+	refresh()
+
+
+## Texto de estado de una entidad: recurso restante y/o vida.
+func info_text(id: int) -> String:
+	var w = sim.world
+	if not w.entities.has(id):
+		return ""
+	var parts := PackedStringArray()
+	var src: Dictionary = w.comp(id, "ResourceSource")
+	if not src.is_empty():
+		var p: Dictionary = src["params"]
+		var names := {"food": "Comida", "wood": "Madera", "gold": "Oro", "stone": "Piedra"}
+		var res := str(names.get(str(p["resource"]), p["resource"]))
+		if bool(p.get("infinite", false)):
+			parts.append("%s: sin límite" % res)
+		else:
+			parts.append("%s: %d / %d" % [res, int(src["amount"]) / 1000, int(round(float(p["amount"])))])
+	var hp: Dictionary = w.comp(id, "Hitpoints")
+	if not hp.is_empty():
+		parts.append("Vida: %d / %d" % [int(hp["hp"]), int(hp["max"])])
+	return "   ".join(parts)
+
+
 ## Selección nueva: reconstruye los botones (keep_page: conserva la página).
 func show_for(ids: Array, keep_page: bool = false) -> void:
 	if not keep_page:
 		page = ""
+	_inspect = -1
 	_ids = ids.duplicate()
 	for c in _grid.get_children():
 		c.queue_free()
@@ -247,6 +287,12 @@ func _state_signature() -> String:
 func refresh() -> void:
 	if not visible:
 		return
+	if _inspect >= 0:
+		if not sim.world.entities.has(_inspect):
+			show_for([])
+			return
+		_status.text = info_text(_inspect)
+		return
 	if _state_signature() != _state_sig:
 		show_for(_ids, true)
 		return
@@ -254,7 +300,7 @@ func refresh() -> void:
 		var why: String = _checks[btn].call()
 		btn.disabled = why != ""
 		btn.tooltip_text = why
-	_status.text = ""
+	_status.text = info_text(_ids[0]) if _ids.size() == 1 else ""
 	var w = sim.world
 	if _ids.size() == 1 and w.entities.has(_ids[0]):
 		var f: Dictionary = w.comp(_ids[0], "Foundation")
