@@ -1,7 +1,7 @@
 extends "res://tests/engine/TestCase.gd"
-## engine/sim y engine/data deben ser deterministas y sin dependencias visuales.
+## engine/sim, engine/data y engine/ai deben ser deterministas y sin dependencias visuales.
 
-const DIRS := ["res://engine/sim", "res://engine/data"]
+const DIRS := ["res://engine/sim", "res://engine/data", "res://engine/ai"]
 const FORBIDDEN := ["Node2D", "Node3D", "Sprite2D", "Sprite3D", "Time.", "randf(", "randi(",
 	"randomize(", "OS.get_ticks", "RandomNumberGenerator"]
 
