@@ -47,6 +47,13 @@ var _bld: Dictionary = {} # def_id -> [ids] (incluye cimientos)
 var _res: Dictionary = {}
 var _pop := Vector2i.ZERO
 var _age := 0
+## Aldeanos que ya recibieron una orden en este turno (no se reasignan).
+var _taken: Dictionary = {}
+## Recursos cerca de casa (una sola búsqueda por turno) y granjas ocupadas.
+var _near_res: Array = []
+var _busy_farms: Dictionary = {}
+## Amenaza junto a casa en este turno (-1: ninguna).
+var _threat := -1
 
 
 func _init(p_sim, p_pid: int) -> void:
@@ -82,7 +89,9 @@ func _scan() -> void:
 	_vills.clear()
 	_army.clear()
 	_bld.clear()
+	_taken.clear()
 	_tc = -1
+	_threat = -1
 	for id in w.ids_with("Hitpoints"):
 		var e: Dictionary = w.entities[id]
 		if int(e["owner"]) != pid or _inside(id):
@@ -107,6 +116,20 @@ func _scan() -> void:
 	_res = sim.res_of(pid)
 	_pop = sim.population(pid)
 	_age = sim.age_of(pid)
+	_near_res = []
+	for c in w.spatial.query_radius(Grid.center_of(_home), SEARCH_R):
+		if w.has_ability(c, "ResourceSource"):
+			_near_res.append(c)
+	_busy_farms.clear()
+	for o in w.ids_with("Gather"):
+		var t: int = w.comp(o, "Gather")["target"]
+		if t >= 0 and w.has_ability(t, "Farm"):
+			_busy_farms[t] = o
+	# Olvida obras que ya no existen o que alguien retomó.
+	for f in _dead_sites.keys():
+		if not w.entities.has(f) or sim.is_built(f):
+			_dead_sites.erase(f)
+			_site_tries.erase(f)
 
 
 func _inside(id: int) -> bool:
@@ -115,7 +138,7 @@ func _inside(id: int) -> bool:
 
 
 func _count(def_id: String) -> int:
-	return (_bld.get(def_id, []) as Array).size()
+	return (_bld.get(def_id, []) as Array).filter(func(b): return not _dead_sites.has(b)).size()
 
 
 func _built(def_id: String) -> Array:
@@ -186,19 +209,24 @@ func _resume_foundations() -> void:
 		for f in _bld[d]:
 			if sim.is_built(f) or busy.has(f) or _dead_sites.has(f) or not _ready("f%d" % f):
 				continue
+			var bs := _builders(Grid.tile_of(w.entities[f]["pos"]), 1)
+			if bs.is_empty():
+				continue # nadie libre: no cuenta como intento
 			var prog: int = w.comp(f, "Foundation")["progress"]
 			var tries: Array = _site_tries.get(f, [0, -1])
 			if prog == int(tries[1]):
 				tries[0] = int(tries[0]) + 1
+			else:
+				tries[0] = 0
 			tries[1] = prog
 			_site_tries[f] = tries
 			if int(tries[0]) >= 4:
-				_dead_sites[f] = true
+				_dead_sites[f] = true # 4 envíos sin avance: inalcanzable
+				_taken.erase(bs[0])
+				_cool.erase("v%d" % bs[0])
 				continue
-			var bs := _builders(Grid.tile_of(w.entities[f]["pos"]), 1)
-			if not bs.is_empty():
-				_cmd("build", {"ids": bs, "target": f})
-				_cooldown("f%d" % f, 150)
+			_cmd("build", {"ids": bs, "target": f})
+			_cooldown("f%d" % f, 150)
 
 
 # --- economía --------------------------------------------------------------
@@ -255,7 +283,7 @@ func _camp_near(def_id: String, res_defs: Array, near_enough: int) -> void:
 	# ¿Ya hay un depósito que acepte ese recurso cerca?
 	var res := str(sim.world.comp(r, "ResourceSource")["params"]["resource"])
 	for d in sim.world.ids_with("DropSite"):
-		if int(sim.world.entities[d]["owner"]) != pid:
+		if int(sim.world.entities[d]["owner"]) != pid or _dead_sites.has(d):
 			continue
 		if not (sim.world.comp(d, "DropSite")["params"]["accepts"] as Array).has(res):
 			continue
@@ -270,7 +298,7 @@ func _farms() -> void:
 		return
 	var food_want := _wanted("food")
 	var natural := 0
-	for c in sim.world.spatial.query_radius(sim.world.entities[_tc]["pos"] if _tc >= 0 else Grid.center_of(_home), SEARCH_R):
+	for c in _near_res:
 		var src: Dictionary = sim.world.comp(c, "ResourceSource")
 		if src.is_empty() or sim.world.has_ability(c, "Farm"):
 			continue
@@ -306,7 +334,7 @@ func _assign_idle() -> void:
 		var b: Dictionary = w.comp(v, "Build")
 		if str(g["state"]) != "idle" or str(b["state"]) != "idle" or bool(w.comp(v, "Move")["moving"]):
 			continue
-		if not w.comp(v, "Garrisoned").is_empty() or not _ready("v%d" % v):
+		if not w.comp(v, "Garrisoned").is_empty() or not _ready("v%d" % v) or _taken.has(v):
 			continue
 		var order: Array = RES.duplicate()
 		order.sort_custom(func(a, c): return _wanted(a) - int(counts[a]) > _wanted(c) - int(counts[c]))
@@ -316,7 +344,12 @@ func _assign_idle() -> void:
 				_cmd("gather", {"ids": [v], "target": t})
 				counts[res] = int(counts[res]) + 1
 				_cooldown("v%d" % v, 40)
+				_taken[v] = true
+				if w.has_ability(t, "Farm"):
+					_busy_farms[t] = v
 				break
+		if not _taken.has(v):
+			_cooldown("v%d" % v, 100) # nada a mano: no volver a buscar cada turno
 
 
 ## Mejor recurso de ese tipo para el aldeano v (comida: ovejas propias,
@@ -326,7 +359,10 @@ func _resource_for(res: String, v: int) -> int:
 	var from: Vector2i = w.entities[v]["pos"]
 	var best := -1
 	var best_score := 0
-	for c in w.spatial.query_radius(Grid.center_of(_home), SEARCH_R):
+	var pool: Array = _near_res
+	if pool.is_empty() or not _pool_has(res):
+		pool = w.spatial.query_radius(from, SEARCH_R * 3) # se acabó cerca de casa
+	for c in pool:
 		var src: Dictionary = w.comp(c, "ResourceSource")
 		if src.is_empty():
 			continue
@@ -345,7 +381,7 @@ func _resource_for(res: String, v: int) -> int:
 				continue # ciervos: no los caza
 			score -= 20000 # ovejas y carcasas primero (se echan a perder)
 		if w.has_ability(c, "Farm"):
-			if owner != pid or not sim.is_built(c) or _farm_taken(c, v):
+			if owner != pid or not sim.is_built(c) or (_busy_farms.has(c) and int(_busy_farms[c]) != v):
 				continue
 			score += 5000 # granjas después de lo natural
 		if best < 0 or score < best_score:
@@ -354,9 +390,11 @@ func _resource_for(res: String, v: int) -> int:
 	return best
 
 
-func _farm_taken(farm: int, except: int) -> bool:
-	for o in sim.world.ids_with("Gather"):
-		if o != except and int(sim.world.comp(o, "Gather")["target"]) == farm:
+## ¿Queda algo de ese recurso en la lista del turno?
+func _pool_has(res: String) -> bool:
+	var w = sim.world
+	for c in _near_res:
+		if w.entities.has(c) and str(w.comp(c, "ResourceSource")["params"]["resource"]) == res:
 			return true
 	return false
 
@@ -388,6 +426,9 @@ func _place(def_id: String, near: Vector2i, rmin: int, rmax: int, n: int, margin
 		return false
 	var tile := _spot(def_id, near, rmin, rmax, margin)
 	if tile.x < 0:
+		for b in builders:
+			_taken.erase(b) # no se usaron
+			_cool.erase("v%d" % b)
 		return false
 	_cmd("place", {"ids": builders, "def": def_id, "tile": [tile.x, tile.y]})
 	_spend(def.get("cost", {}))
@@ -427,6 +468,8 @@ func _builders(near: Vector2i, n: int) -> Array:
 	for v in _vills:
 		if str(w.comp(v, "Build")["state"]) != "idle" or not w.comp(v, "Garrisoned").is_empty():
 			continue
+		if _taken.has(v) or not _ready("v%d" % v):
+			continue # ya tiene orden en este turno o hace muy poco
 		var idle: bool = str(w.comp(v, "Gather")["state"]) == "idle"
 		var d := FP.dist(w.entities[v]["pos"], Grid.center_of(near))
 		cands.append([0 if idle else 1, d, v])
@@ -434,11 +477,13 @@ func _builders(near: Vector2i, n: int) -> Array:
 	var out: Array = []
 	for c in cands.slice(0, n):
 		out.append(c[2])
+		_taken[c[2]] = true
+		_cooldown("v%d" % c[2], 60)
 	return out
 
 
 func _military_buildings() -> void:
-	if _tc < 0:
+	if _vills.is_empty():
 		return
 	if _vills.size() >= 14 and _count("cuartel") == 0:
 		_place("cuartel", _home, 6, 16, 2)
@@ -514,17 +559,13 @@ func _train_army() -> void:
 ## Enemigos con ataque cerca de un centro urbano propio: todo el ejército va;
 ## sin ejército y con varios enemigos, campana.
 func _defend() -> void:
-	if _tc < 0:
-		return
 	var w = sim.world
 	var threat := -1
 	var threats := 0
 	var best_d := 0
-	var c: Vector2i = w.entities[_tc]["pos"]
+	var c: Vector2i = w.entities[_tc]["pos"] if _tc >= 0 else Grid.center_of(_home)
 	for e in w.spatial.query_radius(c, DEFENSE_R):
-		if not w.has_ability(e, "Attack") or not w.has_ability(e, "Hitpoints"):
-			continue
-		if not sim.is_enemy(pid, int(w.entities[e]["owner"])) or str(w.entities[e]["type"]) != "unit":
+		if not _is_military_target(e):
 			continue
 		threats += 1
 		var d := FP.dist(c, w.entities[e]["pos"])
@@ -532,19 +573,37 @@ func _defend() -> void:
 			threat = e
 			best_d = d
 	var bell_on := bool(sim.players[pid].get("bell", false))
+	_threat = threat
 	if threat >= 0:
-		var idle := _army.filter(func(a): return int(w.comp(a, "Attack")["target"]) < 0)
-		if not idle.is_empty():
-			_cmd("attack", {"ids": idle, "target": threat})
-		if threats >= 3 and _army.size() < threats and not bell_on and _ready("bell"):
+		# Vuelven todos los que no estén ya peleando cerca de casa.
+		var back := _army.filter(func(a):
+			var t: int = w.comp(a, "Attack")["target"]
+			return t < 0 or not w.entities.has(t) or FP.dist(c, w.entities[t]["pos"]) > DEFENSE_R)
+		if not back.is_empty() and _ready("defend"):
+			_cmd("attack", {"ids": back, "target": threat})
+			_cooldown("defend", 20)
+		if _tc >= 0 and threats >= 3 and _army.size() < threats and not bell_on and _ready("bell"):
 			_cmd("bell", {"id": _tc})
 			_cooldown("bell", 100)
-	elif bell_on and _ready("bell"):
+	elif bell_on and _tc >= 0 and _ready("bell"):
 		_cmd("bell", {"id": _tc})
 		_cooldown("bell", 100)
 
 
+## Enemigo militar que el ejército de tierra puede alcanzar (no barcos,
+## no aldeanos, no guarecidos).
+func _is_military_target(e: int) -> bool:
+	var w = sim.world
+	if not w.has_ability(e, "Attack") or not w.has_ability(e, "Hitpoints") or w.has_ability(e, "Gather"):
+		return false
+	if w.has_ability(e, "Naval") or _enemy_hidden(e):
+		return false
+	return sim.is_enemy(pid, int(w.entities[e]["owner"])) and str(w.entities[e]["type"]) == "unit"
+
+
 func _attack() -> void:
+	if _threat >= 0:
+		return # primero defender la casa
 	var need: int = ATTACK_ARMY[mini(_age, ATTACK_ARMY.size() - 1)]
 	if _army.size() >= need:
 		_attacking = true
@@ -574,12 +633,12 @@ func _nearest_enemy(from: Vector2i) -> int:
 	var best_score := 0
 	for e in w.ids_with("Hitpoints"):
 		var ent: Dictionary = w.entities[e]
-		if not sim.is_enemy(pid, int(ent["owner"])) or _enemy_hidden(e):
-			continue
+		if not sim.is_enemy(pid, int(ent["owner"])) or _enemy_hidden(e) or w.has_ability(e, "Naval"):
+			continue # (los barcos no los alcanza un ejército de tierra)
 		var score := FP.dist(from, ent["pos"])
 		if str(ent["type"]) == "building":
 			score += 8000
-		elif not w.has_ability(e, "Attack"):
+		elif not w.has_ability(e, "Attack") or w.has_ability(e, "Gather"):
 			score += 4000
 		if best < 0 or score < best_score:
 			best = e

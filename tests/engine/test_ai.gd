@@ -58,10 +58,14 @@ func test_ai_economy() -> void:
 func test_ai_does_not_mutate_shared_defs() -> void:
 	var r := Registry.new()
 	r.load_mods("res://mods")
-	var before: Dictionary = r.get_def("feudal")["cost"].duplicate(true)
 	var s := _match(r)
-	_run(s, [AIPlayer.new(s, 0)], 2000)
-	assert_eq(r.get_def("feudal")["cost"], before, "la IA no toca las definiciones")
+	var reg_before := JSON.stringify(r.defs)
+	var p_before := JSON.stringify(s.players[0]["defs"].defs)
+	_run(s, [AIPlayer.new(s, 0)], 2500)
+	assert_eq(JSON.stringify(r.defs), reg_before, "la IA no toca las definiciones del registro")
+	# (las del jugador solo cambian por investigaciones propias)
+	if s.researched(0).is_empty():
+		assert_eq(JSON.stringify(s.players[0]["defs"].defs), p_before)
 
 
 func test_ai_ages_up_and_attacks() -> void:
@@ -115,3 +119,83 @@ func test_match_has_ai_opponent() -> void:
 		m.tick_once()
 	assert_true((m.sim.world.comp(tc, "Queue")["items"] as Array).size() > 0, "la IA ya entrena aldeanos")
 	m.queue_free()
+
+
+func _small(r: Registry) -> Sim:
+	var s := Sim.new(r, 60, 60)
+	s.add_player(0, "britones", 0)
+	s.add_player(1, "francos", 1)
+	return s
+
+
+func test_ai_single_villager_does_not_abandon_foundations() -> void:
+	var r := Registry.new()
+	r.load_mods("res://mods")
+	var s := _small(r)
+	s.spawn("centro_urbano", 0, Vector2i(10, 10))
+	for i in 14:
+		s.spawn("aldeano", 0, Vector2i(20 + i % 4, 20 + i / 4))
+	for k in ["food", "wood", "gold", "stone"]:
+		s.players[0]["res"][k] = 2000 * 1000
+	var ai := AIPlayer.new(s, 0)
+	_run(s, [ai], 1500)
+	assert_true(_count(s, 0, "cuartel") >= 1, "levanta el cuartel")
+	var stuck := 0
+	for id in s.world.ids_with("Foundation"):
+		if int(s.world.entities[id]["owner"]) == 0 and int(s.world.comp(id, "Foundation")["progress"]) == 0:
+			stuck += 1
+	assert_true(stuck <= 1, "sin cimientos abandonados: %d" % stuck)
+	assert_true(ai._dead_sites.is_empty(), "ninguna obra dada por perdida")
+
+
+func test_ai_land_army_ignores_ships() -> void:
+	var r := Registry.new()
+	r.load_mods("res://mods")
+	var s := _small(r)
+	for y in range(20, 40):
+		for x in range(20, 40):
+			s.grid.set_water(Vector2i(x, y))
+	s.spawn("centro_urbano", 0, Vector2i(4, 4))
+	var ship := s.spawn("barco_pesquero", 1, Vector2i(26, 26))
+	var enemy_tc := s.spawn("centro_urbano", 1, Vector2i(50, 4))
+	for i in 10:
+		s.spawn("milicia", 0, Vector2i(10 + i % 5, 12 + i / 5))
+	var ai := AIPlayer.new(s, 0)
+	_run(s, [ai], 1500)
+	assert_true(int(s.world.comp(enemy_tc, "Hitpoints")["hp"]) < 2400, "va por el TC, no por el barco")
+	assert_true(s.world.entities.has(ship))
+
+
+func test_ai_defends_home_even_while_attacking() -> void:
+	var r := Registry.new()
+	r.load_mods("res://mods")
+	var s := _small(r)
+	s.spawn("centro_urbano", 0, Vector2i(4, 4))
+	s.spawn("centro_urbano", 1, Vector2i(50, 50))
+	var army := []
+	for i in 10:
+		army.append(s.spawn("milicia", 0, Vector2i(10 + i % 5, 10 + i / 5)))
+	var ai := AIPlayer.new(s, 0)
+	_run(s, [ai], 40)
+	assert_true(ai._attacking)
+	var raider := s.spawn("milicia", 1, Vector2i(9, 6))
+	_run(s, [ai], 30)
+	var defenders := army.filter(func(a): return s.world.entities.has(a) and int(s.world.comp(a, "Attack")["target"]) == raider)
+	assert_true(defenders.size() > 0 or not s.world.entities.has(raider), "defiende la casa")
+
+
+func test_ai_survives_losing_town_center() -> void:
+	var r := Registry.new()
+	r.load_mods("res://mods")
+	var s := _small(r)
+	var tc := s.spawn("centro_urbano", 0, Vector2i(10, 10))
+	for i in 15:
+		s.spawn("aldeano", 0, Vector2i(20 + i % 4, 20 + i / 4))
+	s.spawn("tree", -1, Vector2i(30, 30))
+	for k in ["food", "wood", "gold", "stone"]:
+		s.players[0]["res"][k] = 1000 * 1000
+	var ai := AIPlayer.new(s, 0)
+	_run(s, [ai], 200)
+	s.kill(tc)
+	_run(s, [ai], 1500)
+	assert_true(_count(s, 0, "cuartel", false) >= 1, "sin TC igual arma un cuartel")
