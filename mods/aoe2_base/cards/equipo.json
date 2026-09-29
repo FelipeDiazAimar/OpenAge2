@@ -36,7 +36,7 @@
     "effect": {
       "target": "id:cuartel",
       "op": "mul",
-      "path": "abilities.Train.time",
+      "path": "abilities.train_time",
       "value": 0.8
     },
     "icon": "espada",
@@ -58,7 +58,7 @@
     "effect": {
       "target": "id:arqueria",
       "op": "mul",
-      "path": "abilities.Train.time",
+      "path": "abilities.train_time",
       "value": 0.8
     },
     "icon": "arco",
@@ -102,7 +102,7 @@
     "effect": {
       "target": "id:muelle",
       "op": "mul",
-      "path": "cost.wood",
+      "path": "cost.madera",
       "value": 0.85
     },
     "icon": "muelle",
@@ -146,7 +146,7 @@
     "effect": {
       "target": "id:carreta_comercio",
       "op": "mul",
-      "path": "abilities.Trade.gold_per_distance",
+      "path": "abilities.Trade.gold_per_tile",
       "value": 1.25
     },
     "icon": "comercio",

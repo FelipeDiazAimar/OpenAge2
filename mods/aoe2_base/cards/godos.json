@@ -18,7 +18,7 @@
     "age": 1,
     "type": "mejora",
     "cost": {"madera": 0, "alimento": 50, "oro": 0, "piedra": 0},
-    "effect": {"target": "id:telar", "op": "set", "path": "cost.food", "value": 0},
+    "effect": {"target": "id:telar", "op": "set", "path": "cost.alimento", "value": 0},
     "icon": "telar",
     "rarity": "comun",
     "desc": "Telar gratis para el pueblo godo: aldeanos más resistentes desde el inicio."
@@ -30,7 +30,7 @@
     "age": 1,
     "type": "unidad",
     "cost": {"madera": 0, "alimento": 50, "oro": 0, "piedra": 0},
-    "effect": {"target": "tag:infanteria", "op": "mul", "path": "cost.food", "value": 0.9},
+    "effect": {"target": "tag:infanteria", "op": "mul", "path": "cost.alimento", "value": 0.9},
     "icon": "espada",
     "rarity": "comun",
     "desc": "La infantería goda cuesta menos alimento: milicia lista para el asalto temprano."
@@ -66,7 +66,7 @@
     "age": 2,
     "type": "mejora",
     "cost": {"madera": 0, "alimento": 100, "oro": 50, "piedra": 0},
-    "effect": {"target": "tag:infanteria", "op": "mul", "path": "cost.food", "value": 0.8},
+    "effect": {"target": "tag:infanteria", "op": "mul", "path": "cost.alimento", "value": 0.8},
     "icon": "espada",
     "rarity": "comun",
     "desc": "Bonus de civilización: infantería un 20% más barata en alimento."
@@ -114,7 +114,7 @@
     "age": 2,
     "type": "edificio",
     "cost": {"madera": 100, "alimento": 0, "oro": 0, "piedra": 0},
-    "effect": {"target": "id:cuartel", "op": "mul", "path": "abilities.Train.time", "value": 0.8},
+    "effect": {"target": "id:cuartel", "op": "mul", "path": "abilities.train_time", "value": 0.8},
     "icon": "cuartel",
     "rarity": "rara",
     "desc": "El cuartel trabaja un 20% más rápido, como el bonus de equipo godo."
@@ -222,7 +222,7 @@
     "age": 4,
     "type": "edificio",
     "cost": {"madera": 0, "alimento": 300, "oro": 200, "piedra": 0},
-    "effect": {"target": "id:cuartel", "op": "mul", "path": "abilities.Train.time", "value": 0.67},
+    "effect": {"target": "id:cuartel", "op": "mul", "path": "abilities.train_time", "value": 0.67},
     "icon": "cuartel",
     "rarity": "epica",
     "desc": "Tecnología única imperial: el cuartel produce mucho más rápido."

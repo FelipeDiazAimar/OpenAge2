@@ -102,7 +102,7 @@
     "effect": {
       "target": "tag:aldeano",
       "op": "mul",
-      "path": "cost.food",
+      "path": "cost.alimento",
       "value": 0.5
     },
     "icon": "aldeano",
@@ -322,7 +322,7 @@
     "effect": {
       "target": "id:carreta_comercio",
       "op": "mul",
-      "path": "abilities.Trade.gold_per_distance",
+      "path": "abilities.Trade.gold_per_tile",
       "value": 1.25
     },
     "icon": "comercio",

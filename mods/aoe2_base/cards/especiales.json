@@ -212,7 +212,7 @@
     "effect": {
       "target": "id:carreta_comercio",
       "op": "mul",
-      "path": "abilities.Trade.gold_per_distance",
+      "path": "abilities.Trade.gold_per_tile",
       "value": 1.5
     },
     "icon": "comercio",
@@ -256,7 +256,7 @@
     "effect": {
       "target": "id:maravilla",
       "op": "mul",
-      "path": "cost.stone",
+      "path": "cost.piedra",
       "value": 0.8
     },
     "icon": "maravilla",

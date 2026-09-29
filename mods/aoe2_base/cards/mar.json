@@ -58,7 +58,7 @@
     "effect": {
       "target": "id:muelle",
       "op": "mul",
-      "path": "cost.wood",
+      "path": "cost.madera",
       "value": 0.85
     },
     "icon": "ancla",
