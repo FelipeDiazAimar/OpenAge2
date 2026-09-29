@@ -1,0 +1,136 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "eslavos_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "eslavos",
+    "bonus":  [
+                  {
+                      "descripcion":  "Granjeros trabajan 15% más rápido (0.41 -\u003e 0.47 comida/s aprox.)",
+                      "id":  "granjeros_15",
+                      "efecto":  {
+                                     "velocidad_granja":  0.15
+                                 }
+                  },
+                  {
+                      "descripcion":  "Incendio y Gambesones gratis (ahorro 725 comida + 545 oro aprox.)",
+                      "id":  "incendio_gambesones_gratis",
+                      "efecto":  {
+                                     "tecnologias_gratis":  [
+                                                                "incendio",
+                                                                "gambesones"
+                                                            ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Unidades de taller de asedio 15% más baratas",
+                      "id":  "asedio_barato_15",
+                      "efecto":  {
+                                     "descuento_asedio":  0.15,
+                                     "aplica_a":  [
+                                                      "ariete",
+                                                      "mangonel",
+                                                      "onagro",
+                                                      "escorpion",
+                                                      "torre_asedio"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Monjes se mueven 20% más rápido (0.7 -\u003e 0.84 casillas/s)",
+                      "id":  "monjes_rapidos_20",
+                      "efecto":  {
+                                     "velocidad_monje":  0.2
+                                 }
+                  }
+              ],
+    "roof_color":  "#5a7ab4",
+    "name":  "Eslavos",
+    "descripcion":  "Eslavos: Granjeros trabajan 15% más rápido (0.41 -\u003e 0.47 comida/s aprox.) Incendio y Gambesones gratis (ahorro 725 comida + 545 oro aprox.)",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "detinets",
+                             "id":  "detinets"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "druzhina",
+                             "id":  "druzhina"
+                         }
+                     ],
+    "ventajas":  [
+                     "Granjeros trabajan 15% más rápido (0.41 -\u003e 0.47 comida/s ...",
+                     "Incendio y Gambesones gratis (ahorro 725 comida + 545 oro...",
+                     "Unidades de taller de asedio 15% más baratas"
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  15,
+                        "id":  "boyar",
+                        "armor_pierce":  2,
+                        "attack_elite":  14,
+                        "cost":  {
+                                     "gold":  70,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  12,
+                        "armor_melee":  4,
+                        "name":  "Boyar",
+                        "hp":  100,
+                        "hp_elite":  120
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_lamelar",
+                                                    "armadura_ming_guang"
+                                                ]
+                  }
+}

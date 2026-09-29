@@ -1,0 +1,130 @@
+{
+    "debilidades":  [
+                        "Sin mejora de Arbalestero ni Tácticas partas; arqueros a pie débile...",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "lituanos_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "lituanos",
+    "bonus":  [
+                  {
+                      "descripcion":  "Empieza con +150 de comida; cada Centro Urbano nuevo otorga +100 de comida",
+                      "id":  "comida_inicial_tc",
+                      "efecto":  {
+                                     "comida_inicial":  150,
+                                     "comida_por_tc":  100
+                                 }
+                  },
+                  {
+                      "descripcion":  "Lanceros y guerrilleros +10% velocidad de movimiento",
+                      "id":  "basura_rapida",
+                      "efecto":  {
+                                     "velocidad":  0.1,
+                                     "aplica_a":  [
+                                                      "lancero",
+                                                      "guerrillero"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Línea de caballero y Leitis +1 ataque por reliquia en monasterio (máx. +4)",
+                      "id":  "ataque_reliquias",
+                      "efecto":  {
+                                     "ataque_por_reliquia":  1,
+                                     "maximo":  4,
+                                     "aplica_a":  [
+                                                      "jinete",
+                                                      "paladin",
+                                                      "leitis"
+                                                  ]
+                                 }
+                  }
+              ],
+    "roof_color":  "#3d7a44",
+    "name":  "Lituanos",
+    "descripcion":  "Lituanos: Empieza con +150 de comida; cada Centro Urbano nuevo otorga +100 de comida Lanceros y guerrilleros +10% velocidad de movimiento",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "fuertes_colina",
+                             "id":  "fuertes_colina"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "escudos_torre",
+                             "id":  "escudos_torre"
+                         }
+                     ],
+    "ventajas":  [
+                     "Empieza con +150 de comida; cada Centro Urbano nuevo otor...",
+                     "Lanceros y guerrilleros +10% velocidad de movimiento",
+                     "Línea de caballero y Leitis +1 ataque por reliquia en mon..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  15,
+                        "id":  "lituanos_elite",
+                        "armor_pierce":  1,
+                        "attack_elite":  12,
+                        "cost":  {
+                                     "gold":  30,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  10,
+                        "armor_melee":  1,
+                        "name":  "Elite Lituanos",
+                        "hp":  80,
+                        "hp_elite":  100
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "alto_horno",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_inf_3"
+                                                ]
+                  }
+}

@@ -1,0 +1,117 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "bengalies_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "bengalies",
+    "bonus":  [
+                  {
+                      "descripcion":  "Elefantes reciben -25% daño bonus y resisten mejor la conversión; TCs generan 2 aldeanos al avanzar de edad",
+                      "id":  "elefantes_duros_poblamiento",
+                      "efecto":  {
+                                     "reduccion_dano_bonus_elefante":  0.25,
+                                     "resistencia_conversion":  true,
+                                     "aldeanos_por_edad":  2
+                                 }
+                  },
+                  {
+                      "descripcion":  "Caballería +2 ataque vs guerrilleros; barcos regeneran 15 PV/min; monjes +3/+3 armadura",
+                      "id":  "caballeria_barcos_monjes",
+                      "efecto":  {
+                                     "ataque_cab_vs_guerrillero":  2,
+                                     "regen_barcos_min":  15,
+                                     "armadura_monje_melee":  3,
+                                     "armadura_monje_perforante":  3
+                                 }
+                  }
+              ],
+    "roof_color":  "#888888",
+    "name":  "Bengalíes",
+    "descripcion":  "Bengalíes: Elefantes reciben -25% daño bonus y resisten mejor la conversión; TCs generan 2 aldeanos al avanzar de edad Caballería +2 ataque vs guerrilleros; barcos regeneran 15 PV/min; monjes +3/+3 armadura",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "paiks",
+                             "id":  "paiks"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "mahayana",
+                             "id":  "mahayana"
+                         }
+                     ],
+    "ventajas":  [
+                     "Elefantes reciben -25% daño bonus y resisten mejor la con...",
+                     "Caballería +2 ataque vs guerrilleros; barcos regeneran 15...",
+                     "Unidad unica versatil"
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  18,
+                        "id":  "ratha",
+                        "armor_pierce":  3,
+                        "attack_elite":  14,
+                        "cost":  {
+                                     "gold":  60,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  12,
+                        "armor_melee":  3,
+                        "name":  "Ratha",
+                        "hp":  115,
+                        "hp_elite":  135
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_inf_3",
+                                                    "armadura_lamelar"
+                                                ]
+                  }
+}

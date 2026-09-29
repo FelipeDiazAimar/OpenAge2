@@ -1,0 +1,120 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "coreanos_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "coreanos",
+    "bonus":  [
+                  {
+                      "descripcion":  "Mejoras de armadura de arquero y de torres gratis (torre bombardeo requiere Química)",
+                      "id":  "mejoras_arquero_torre_gratis",
+                      "efecto":  {
+                                     "armadura_arquero_coste":  0,
+                                     "torres_coste":  0,
+                                     "requiere_quimica":  [
+                                                              "torre_bombardeo"
+                                                          ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Barcos de guerra -20% madera",
+                      "id":  "barcos_guerra_madera_20",
+                      "efecto":  {
+                                     "descuento_barcos_madera":  0.2,
+                                     "aplica_a":  [
+                                                      "galera",
+                                                      "barco_tortuga"
+                                                  ]
+                                 }
+                  }
+              ],
+    "roof_color":  "#2f6fd0",
+    "name":  "Coreanos",
+    "descripcion":  "Coreanos: Mejoras de armadura de arquero y de torres gratis (torre bombardeo requiere Química) Barcos de guerra -20% madera",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "eupseong",
+                             "id":  "eupseong"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "shinkichon",
+                             "id":  "shinkichon"
+                         }
+                     ],
+    "ventajas":  [
+                     "Mejoras de armadura de arquero y de torres gratis (torre ...",
+                     "Barcos de guerra -20% madera",
+                     "Unidad unica versatil"
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  21,
+                        "id":  "carreta_guerra",
+                        "armor_pierce":  3,
+                        "attack_elite":  11,
+                        "cost":  {
+                                     "gold":  60,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  9,
+                        "armor_melee":  0,
+                        "name":  "Carreta de Guerra",
+                        "hp":  150,
+                        "hp_elite":  170
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "alto_horno",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_cab_3"
+                                                ]
+                  }
+}

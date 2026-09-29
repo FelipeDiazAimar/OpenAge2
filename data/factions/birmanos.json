@@ -1,0 +1,134 @@
+{
+    "debilidades":  [
+                        "Sin Arbalestero ni arcabucero; sin cañón pesado demo ni fuego rápid...",
+                        "Sin Paladin"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "birmanos_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "birmanos",
+    "bonus":  [
+                  {
+                      "descripcion":  "Tecnologías del campamento maderero gratis (ahorro ~350 comida + 250 madera)",
+                      "id":  "madera_gratis",
+                      "efecto":  {
+                                     "coste":  0,
+                                     "edificio":  "campamento_maderero"
+                                 }
+                  },
+                  {
+                      "descripcion":  "Infantería +1/+2/+3 ataque en Feudal/Castillos/Imperial",
+                      "id":  "infanteria_ataque_edad",
+                      "efecto":  {
+                                     "ataque_castillos":  2,
+                                     "ataque_feudal":  1,
+                                     "ataque_imperial":  3,
+                                     "aplica_a":  "tag:infanteria"
+                                 }
+                  },
+                  {
+                      "descripcion":  "Elefantes de combate +1/+1 armadura (base, acumulable con Howdah)",
+                      "id":  "elefante_blindado",
+                      "efecto":  {
+                                     "aplica_a":  [
+                                                      "elefante_combate"
+                                                  ],
+                                     "armadura_cuerpo":  1,
+                                     "armadura_proyectil":  1
+                                 }
+                  },
+                  {
+                      "descripcion":  "Tecnologías del monasterio -50% coste",
+                      "id":  "monasterio_barato",
+                      "efecto":  {
+                                     "descuento_monasterio":  0.5
+                                 }
+                  }
+              ],
+    "roof_color":  "#c0392b",
+    "name":  "Birmanos",
+    "descripcion":  "Birmanos: Tecnologías del campamento maderero gratis (ahorro ~350 comida + 250 madera) Infantería +1/+2/+3 ataque en Feudal/Castillos/Imperial",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "caballeria_manipur",
+                             "id":  "caballeria_manipur"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "howdah",
+                             "id":  "howdah"
+                         }
+                     ],
+    "ventajas":  [
+                     "Tecnologías del campamento maderero gratis (ahorro ~350 c...",
+                     "Infantería +1/+2/+3 ataque en Feudal/Castillos/Imperial",
+                     "Elefantes de combate +1/+1 armadura (base, acumulable con..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  21,
+                        "id":  "arambai",
+                        "armor_pierce":  1,
+                        "attack_elite":  14,
+                        "cost":  {
+                                     "gold":  60,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  12,
+                        "armor_melee":  0,
+                        "name":  "Arambai",
+                        "hp":  60,
+                        "hp_elite":  80
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_arq_2",
+                                                    "armadura_arq_3",
+                                                    "armadura_lamelar",
+                                                    "armadura_ming_guang"
+                                                ]
+                  }
+}

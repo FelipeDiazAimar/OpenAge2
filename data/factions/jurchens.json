@@ -1,0 +1,136 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "jurchens_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "jurchens",
+    "bonus":  [
+                  {
+                      "descripcion":  "La carne de caza y ganado no decae (ciervo, jabalí, oveja, etc. conservan el 100% de su alimento)",
+                      "id":  "carne_sin_decaer",
+                      "efecto":  {
+                                     "decaimiento_carne":  0.0
+                                 }
+                  },
+                  {
+                      "descripcion":  "Unidades montadas y Lanceros de fuego atacan 25% más rápido desde Feudal",
+                      "id":  "caballeria_rapida_25",
+                      "efecto":  {
+                                     "cadencia_bonus":  0.25,
+                                     "desde_edad":  "feudal",
+                                     "aplica_a":  [
+                                                      "tag:caballeria",
+                                                      "lancero_fuego"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Ingenieros de asedio disponible en Castillos (una edad antes)",
+                      "id":  "ingenieros_castillos",
+                      "efecto":  {
+                                     "ingenieros_asedio_edad":  "castillos"
+                                 }
+                  },
+                  {
+                      "descripcion":  "Tecnologías de asedio y fortificación cuestan -75% madera y se investigan 100% más rápido",
+                      "id":  "asedio_barato_rapido",
+                      "efecto":  {
+                                     "descuento_madera":  0.75,
+                                     "velocidad_investigacion":  1.0,
+                                     "aplica_a":  [
+                                                      "tag:tec_asedio",
+                                                      "tag:tec_fortificacion"
+                                                  ]
+                                 }
+                  }
+              ],
+    "roof_color":  "#8b5a2b",
+    "name":  "Yurchenios",
+    "descripcion":  "Yurchenios: La carne de caza y ganado no decae (ciervo, jabalí, oveja, etc. conservan el 100% de su alimento) Unidades montadas y Lanceros de fuego atacan 25% más rápido desde Feudal",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "bastiones_fortificados",
+                             "id":  "bastiones_fortificados"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "bombas_trueno",
+                             "id":  "bombas_trueno"
+                         }
+                     ],
+    "ventajas":  [
+                     "La carne de caza y ganado no decae (ciervo, jabalí, oveja...",
+                     "Unidades montadas y Lanceros de fuego atacan 25% más rápi...",
+                     "Ingenieros de asedio disponible en Castillos (una edad an..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  14,
+                        "id":  "pagoda_hierro",
+                        "armor_pierce":  3,
+                        "attack_elite":  15,
+                        "cost":  {
+                                     "gold":  55,
+                                     "food":  80
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  13,
+                        "armor_melee":  2,
+                        "name":  "Pagoda de Hierro",
+                        "hp":  140,
+                        "hp_elite":  160
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_inf_3",
+                                                    "armadura_lamelar"
+                                                ]
+                  }
+}

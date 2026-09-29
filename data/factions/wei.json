@@ -1,0 +1,128 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "wei_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "wei",
+    "bonus":  [
+                  {
+                      "descripcion":  "Un aldeano gratis por cada tecnología económica investigada",
+                      "id":  "aldeano_por_tec_eco",
+                      "efecto":  {
+                                     "aldeanos_gratis_por_tec_eco":  1
+                                 }
+                  },
+                  {
+                      "descripcion":  "Caballería Hei Guang y Jinete Xianbei +20%/30% HP en Castillos/Imperial",
+                      "id":  "caballeria_pesada_hp",
+                      "efecto":  {
+                                     "hp_bonus_castillos":  0.2,
+                                     "hp_bonus_imperial":  0.3,
+                                     "aplica_a":  [
+                                                      "caballeria_hei_guang",
+                                                      "jinete_xianbei"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Trabuquetes de tracción y Lou Chuan -25% coste",
+                      "id":  "asedio_barato",
+                      "efecto":  {
+                                     "descuento_asedio":  0.25,
+                                     "aplica_a":  [
+                                                      "trabuquete_traccion",
+                                                      "lou_chuan"
+                                                  ]
+                                 }
+                  }
+              ],
+    "roof_color":  "#2e5fa3",
+    "name":  "Wei",
+    "descripcion":  "Wei: Un aldeano gratis por cada tecnología económica investigada Caballería Hei Guang y Jinete Xianbei +20%/30% HP en Castillos/Imperial",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "tuntian",
+                             "id":  "tuntian"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "armadura_ming_guang",
+                             "id":  "armadura_ming_guang"
+                         }
+                     ],
+    "ventajas":  [
+                     "Un aldeano gratis por cada tecnología económica investigada",
+                     "Caballería Hei Guang y Jinete Xianbei +20%/30% HP en Cast...",
+                     "Trabuquetes de tracción y Lou Chuan -25% coste"
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  15,
+                        "id":  "wei_elite",
+                        "armor_pierce":  1,
+                        "attack_elite":  12,
+                        "cost":  {
+                                     "gold":  30,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  10,
+                        "armor_melee":  1,
+                        "name":  "Elite Wei",
+                        "hp":  80,
+                        "hp_elite":  100
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_cab_3",
+                                                    "armadura_lamelar"
+                                                ]
+                  }
+}

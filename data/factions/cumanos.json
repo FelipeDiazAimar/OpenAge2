@@ -1,0 +1,135 @@
+{
+    "debilidades":  [
+                        "Caballeria pesada limitada",
+                        "Roster con huecos en Imperial"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "cumanos_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "cumanos",
+    "bonus":  [
+                  {
+                      "descripcion":  "Segundo Centro Urbano disponible desde la Edad Feudal (tiempo de construcción 270 s)",
+                      "id":  "centro_urbano_feudal",
+                      "efecto":  {
+                                     "tc_extra_feudal":  1,
+                                     "tiempo_construccion_s":  270
+                                 }
+                  },
+                  {
+                      "descripcion":  "Galerías de tiro y Establos cuestan -75 de madera",
+                      "id":  "edificios_madera_75",
+                      "efecto":  {
+                                     "descuento_madera":  75,
+                                     "aplica_a":  [
+                                                      "galeria_tiro",
+                                                      "establo"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Taller de asedio y Ariete disponibles en Feudal; Ariete cubierto disponible en Castillos",
+                      "id":  "asedio_feudal",
+                      "efecto":  {
+                                     "taller_asedio_feudal":  true,
+                                     "ariete_feudal":  true,
+                                     "ariete_cubierto_castillos":  true
+                                 }
+                  },
+                  {
+                      "descripcion":  "Unidades montadas +5%/+10%/+15% velocidad en Feudal/Castillos/Imperial",
+                      "id":  "velocidad_montadas",
+                      "efecto":  {
+                                     "velocidad_feudal":  0.05,
+                                     "velocidad_castillos":  0.1,
+                                     "velocidad_imperial":  0.15
+                                 }
+                  }
+              ],
+    "roof_color":  "#c19a2e",
+    "name":  "Cumanos",
+    "descripcion":  "Cumanos: Segundo Centro Urbano disponible desde la Edad Feudal (tiempo de construcción 270 s) Galerías de tiro y Establos cuestan -75 de madera",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "ganaderia_estepa",
+                             "id":  "ganaderia_estepa"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "mercenarios_cumanos",
+                             "id":  "mercenarios_cumanos"
+                         }
+                     ],
+    "ventajas":  [
+                     "Segundo Centro Urbano disponible desde la Edad Feudal (ti...",
+                     "Galerías de tiro y Establos cuestan -75 de madera",
+                     "Taller de asedio y Ariete disponibles en Feudal; Ariete c..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  20,
+                        "id":  "kipchak",
+                        "armor_pierce":  0,
+                        "attack_elite":  7,
+                        "cost":  {
+                                     "gold":  35,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  5,
+                        "armor_melee":  0,
+                        "name":  "Kipchak",
+                        "hp":  45,
+                        "hp_elite":  65
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_lamelar",
+                                                    "armadura_ming_guang"
+                                                ]
+                  }
+}

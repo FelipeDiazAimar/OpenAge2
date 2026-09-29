@@ -1,0 +1,142 @@
+{
+    "debilidades":  [
+                        "Sin equivalente en repo (sin ID): sin Húsar, sin Ariete/Onagro de a...",
+                        "Sin Paladin"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "bohemios_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "bohemios",
+    "bonus":  [
+                  {
+                      "descripcion":  "Herrería y Universidad -100 madera",
+                      "id":  "herreria_uni_100",
+                      "efecto":  {
+                                     "descuento_madera_herreria":  100,
+                                     "descuento_madera_universidad":  100
+                                 }
+                  },
+                  {
+                      "descripcion":  "Química y Arcabucero disponibles en Castillos",
+                      "id":  "quimica_castillos",
+                      "efecto":  {
+                                     "quimica_edad":  "castillos",
+                                     "arcabucero_edad":  "castillos"
+                                 }
+                  },
+                  {
+                      "descripcion":  "Línea del lancero +25% daño bonus",
+                      "id":  "lanceros_bonus_25",
+                      "efecto":  {
+                                     "dano_bonus_lancero":  0.25,
+                                     "aplica_a":  [
+                                                      "lancero",
+                                                      "piquero",
+                                                      "alabardero"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Fervor y Santidad también afectan a aldeanos",
+                      "id":  "fervor_aldeanos",
+                      "efecto":  {
+                                     "fervor_aldeanos":  true,
+                                     "santidad_aldeanos":  true,
+                                     "aplica_a":  [
+                                                      "aldeano"
+                                                  ]
+                                 }
+                  }
+              ],
+    "roof_color":  "#6d8a2a",
+    "name":  "Bohemios",
+    "descripcion":  "Bohemios: Herrería y Universidad -100 madera Química y Arcabucero disponibles en Castillos",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "tactica_wagenburg",
+                             "id":  "tactica_wagenburg"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "reformas_husitas",
+                             "id":  "reformas_husitas"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "mejora_houfnice",
+                             "id":  "mejora_houfnice"
+                         }
+                     ],
+    "ventajas":  [
+                     "Herrería y Universidad -100 madera",
+                     "Química y Arcabucero disponibles en Castillos",
+                     "Línea del lancero +25% daño bonus"
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  30,
+                        "id":  "carreta_husita",
+                        "armor_pierce":  7,
+                        "attack_elite":  12,
+                        "cost":  {
+                                     "gold":  80,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  10,
+                        "armor_melee":  0,
+                        "name":  "Carreta Husita",
+                        "hp":  160,
+                        "hp_elite":  180
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "centurion",
+                                                    "liao_dao",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_cab_3",
+                                                    "armadura_lamelar",
+                                                    "armadura_ming_guang",
+                                                    "armadura_seda",
+                                                    "arquero_camello"
+                                                ]
+                  }
+}

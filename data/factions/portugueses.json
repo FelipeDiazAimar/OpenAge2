@@ -1,0 +1,122 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Roster con huecos en Imperial"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "portugueses_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "portugueses",
+    "bonus":  [
+                  {
+                      "descripcion":  "Todas las unidades -20% coste de oro",
+                      "id":  "unidades_oro_20",
+                      "efecto":  {
+                                     "aplica_a":  "todas_las_unidades",
+                                     "descuento_oro":  0.2
+                                 }
+                  },
+                  {
+                      "descripcion":  "Recolectores de arbusto generan 0.33 madera por cada 1 comida además de la comida",
+                      "id":  "forraje_madera",
+                      "efecto":  {
+                                     "madera_por_comida":  0.33
+                                 }
+                  },
+                  {
+                      "descripcion":  "Puede construir Feitoria en Imperial: cuesta 20 población, genera recursos pasivos",
+                      "id":  "feitoria",
+                      "efecto":  {
+                                     "coste_poblacion":  20,
+                                     "edificio_unico":  "feitoria",
+                                     "era":  "imperial"
+                                 }
+                  }
+              ],
+    "roof_color":  "#2e8b57",
+    "name":  "Portugueses",
+    "descripcion":  "Portugueses: Todas las unidades -20% coste de oro Recolectores de arbusto generan 0.33 madera por cada 1 comida además de la comida",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "circunnavegacion",
+                             "id":  "circunnavegacion"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "arcabuz",
+                             "id":  "arcabuz"
+                         }
+                     ],
+    "ventajas":  [
+                     "Todas las unidades -20% coste de oro",
+                     "Recolectores de arbusto generan 0.33 madera por cada 1 co...",
+                     "Puede construir Feitoria en Imperial: cuesta 20 población..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  21,
+                        "id":  "canon_organo",
+                        "armor_pierce":  4,
+                        "attack_elite":  18,
+                        "cost":  {
+                                     "gold":  60,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  16,
+                        "armor_melee":  2,
+                        "name":  "Cañón de Órgano",
+                        "hp":  60,
+                        "hp_elite":  80
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "arambai",
+                                                    "arco_recurvo",
+                                                    "armadura_lamelar",
+                                                    "armadura_ming_guang",
+                                                    "armadura_seda",
+                                                    "arquero_camello"
+                                                ]
+                  }
+}

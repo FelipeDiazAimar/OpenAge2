@@ -1,0 +1,130 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "shu_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "shu",
+    "bonus":  [
+                  {
+                      "descripcion":  "Leñadores generan 0.7 de comida por cada 10 de madera",
+                      "id":  "lenadores_comida",
+                      "efecto":  {
+                                     "comida_por_madera":  0.07
+                                 }
+                  },
+                  {
+                      "descripcion":  "Tecnologías de arqueros (galería y herrería) -25% coste",
+                      "id":  "tecs_arqueros_baratas",
+                      "efecto":  {
+                                     "descuento_tecs_arqueros":  0.25,
+                                     "aplica_a":  [
+                                                      "dedal",
+                                                      "ataque_arq_1",
+                                                      "ataque_arq_2",
+                                                      "ataque_arq_3",
+                                                      "armadura_arq_1",
+                                                      "armadura_arq_2",
+                                                      "armadura_arq_3",
+                                                      "balistica"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Asedio terrestre y Lou Chuan +10%/15% velocidad en Castillos/Imperial",
+                      "id":  "asedio_rapido",
+                      "efecto":  {
+                                     "velocidad_asedio_castillos":  0.1,
+                                     "velocidad_asedio_imperial":  0.15
+                                 }
+                  }
+              ],
+    "roof_color":  "#2e8b57",
+    "name":  "Shu",
+    "descripcion":  "Shu: Leñadores generan 0.7 de comida por cada 10 de madera Tecnologías de arqueros (galería y herrería) -25% coste",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "serpiente_enroscada",
+                             "id":  "serpiente_enroscada"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "cargador_virotes",
+                             "id":  "cargador_virotes"
+                         }
+                     ],
+    "ventajas":  [
+                     "Leñadores generan 0.7 de comida por cada 10 de madera",
+                     "Tecnologías de arqueros (galería y herrería) -25% coste",
+                     "Asedio terrestre y Lou Chuan +10%/15% velocidad en Castil..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  15,
+                        "id":  "shu_elite",
+                        "armor_pierce":  1,
+                        "attack_elite":  12,
+                        "cost":  {
+                                     "gold":  30,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  10,
+                        "armor_melee":  1,
+                        "name":  "Elite Shu",
+                        "hp":  80,
+                        "hp_elite":  100
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_lamelar",
+                                                    "armadura_ming_guang"
+                                                ]
+                  }
+}

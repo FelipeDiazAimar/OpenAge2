@@ -1,0 +1,134 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "bulgaros_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "bulgaros",
+    "bonus":  [
+                  {
+                      "descripcion":  "Línea de milicia se mejora gratis al avanzar de edad",
+                      "id":  "milicia_gratis",
+                      "efecto":  {
+                                     "aplica_a":  [
+                                                      "milicia",
+                                                      "hombre_de_armas",
+                                                      "espadachin_mandoble"
+                                                  ],
+                                     "coste_mejora":  0
+                                 }
+                  },
+                  {
+                      "descripcion":  "Centros Urbanos -50% piedra (excepto inicial: 275 -\u003e 138 piedra)",
+                      "id":  "tc_piedra_50",
+                      "efecto":  {
+                                     "aplica_a":  [
+                                                      "centro_urbano"
+                                                  ],
+                                     "coste_base_piedra":  275,
+                                     "coste_final_piedra":  138,
+                                     "descuento_piedra":  0.5,
+                                     "excluye_inicial":  true
+                                 }
+                  },
+                  {
+                      "descripcion":  "Tecnologías de Herrería y Taller Asedio -50% comida",
+                      "id":  "herreria_asedio_comida_50",
+                      "efecto":  {
+                                     "aplica_a":  [
+                                                      "herreria",
+                                                      "taller_asedio"
+                                                  ],
+                                     "descuento_comida":  0.5
+                                 }
+                  }
+              ],
+    "roof_color":  "#b03a2a",
+    "name":  "Búlgaros",
+    "descripcion":  "Búlgaros: Línea de milicia se mejora gratis al avanzar de edad Centros Urbanos -50% piedra (excepto inicial: 275 -\u003e 138 piedra)",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "estribos",
+                             "id":  "estribos"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "bagains",
+                             "id":  "bagains"
+                         }
+                     ],
+    "ventajas":  [
+                     "Línea de milicia se mejora gratis al avanzar de edad",
+                     "Centros Urbanos -50% piedra (excepto inicial: 275 -\u003e 138 ...",
+                     "Tecnologías de Herrería y Taller Asedio -50% comida"
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  16,
+                        "id":  "konnik",
+                        "armor_pierce":  2,
+                        "attack_elite":  15,
+                        "cost":  {
+                                     "gold":  70,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  13,
+                        "armor_melee":  2,
+                        "name":  "Konnik",
+                        "hp":  120,
+                        "hp_elite":  140
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "alto_horno",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_arq_3"
+                                                ]
+                  }
+}

@@ -1,0 +1,134 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "mayas_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "mayas",
+    "bonus":  [
+                  {
+                      "descripcion":  "Empiezan con +1 aldeano pero -50 comida",
+                      "id":  "aldeano_extra_menos_comida",
+                      "efecto":  {
+                                     "aldeanos_iniciales_extra":  1,
+                                     "comida_inicial_menos":  50
+                                 }
+                  },
+                  {
+                      "descripcion":  "Los recursos duran 15% más (veta 100 -\u003e 115 efectivo)",
+                      "id":  "recursos_duran_15",
+                      "efecto":  {
+                                     "duracion_recursos_bonus":  0.15
+                                 }
+                  },
+                  {
+                      "descripcion":  "Arqueros a pie (no guerrillero) 10%/20%/30% más baratos en Feudal/Castillos/Imperial",
+                      "id":  "arqueros_baratos_edad",
+                      "efecto":  {
+                                     "descuento_feudal":  0.1,
+                                     "descuento_castillos":  0.2,
+                                     "descuento_imperial":  0.3,
+                                     "aplica_a":  [
+                                                      "arquero",
+                                                      "ballestero",
+                                                      "arquero_emplumado"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Empiezan con explorador águila en vez de scout a caballo (scout deshabilitado)",
+                      "id":  "explorador_aguila",
+                      "efecto":  {
+                                     "explorador_inicial":  "guerrero_aguila"
+                                 }
+                  }
+              ],
+    "roof_color":  "#3498db",
+    "name":  "Mayas",
+    "descripcion":  "Mayas: Empiezan con +1 aldeano pero -50 comida Los recursos duran 15% más (veta 100 -\u003e 115 efectivo)",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "jabalineros_hulche",
+                             "id":  "jabalineros_hulche"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "holcanes",
+                             "id":  "holcanes"
+                         }
+                     ],
+    "ventajas":  [
+                     "Empiezan con +1 aldeano pero -50 comida",
+                     "Los recursos duran 15% más (veta 100 -\u003e 115 efectivo)",
+                     "Arqueros a pie (no guerrillero) 10%/20%/30% más baratos e..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  16,
+                        "id":  "arquero_emplumado",
+                        "armor_pierce":  1,
+                        "attack_elite":  7,
+                        "cost":  {
+                                     "gold":  46,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  5,
+                        "armor_melee":  0,
+                        "name":  "Arquero Emplumado",
+                        "hp":  50,
+                        "hp_elite":  70
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "alabardero",
+                                                    "alabardero_up",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo"
+                                                ]
+                  }
+}

@@ -1,0 +1,135 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "romanos_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "romanos",
+    "bonus":  [
+                  {
+                      "descripcion":  "Aldeanos 5% más rápidos: recolectan, construyen y reparan 5% más rápido",
+                      "id":  "aldeanos_5",
+                      "efecto":  {
+                                     "velocidad_aldeano_bonus":  0.05
+                                 }
+                  },
+                  {
+                      "descripcion":  "Galeras y dromones +1/+1 armadura",
+                      "id":  "galera_blindada_1",
+                      "efecto":  {
+                                     "armadura_galera_melee":  1,
+                                     "armadura_galera_pierce":  1,
+                                     "aplica_a":  [
+                                                      "galera",
+                                                      "dromon"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Infantería recibe doble efecto de mejoras de armadura de herrería",
+                      "id":  "herreria_doble_infanteria",
+                      "efecto":  {
+                                     "factor_armadura_herreria_infanteria":  2.0
+                                 }
+                  },
+                  {
+                      "descripcion":  "Escorpiones -50% coste de oro",
+                      "id":  "escorpion_oro_50",
+                      "efecto":  {
+                                     "descuento_escorpion_oro":  0.5,
+                                     "aplica_a":  [
+                                                      "escorpion",
+                                                      "escorpion_pesado"
+                                                  ]
+                                 }
+                  }
+              ],
+    "roof_color":  "#b22222",
+    "name":  "Romanos",
+    "descripcion":  "Romanos: Aldeanos 5% más rápidos: recolectan, construyen y reparan 5% más rápido Galeras y dromones +1/+1 armadura",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "balistas",
+                             "id":  "balistas"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "comitatenses",
+                             "id":  "comitatenses"
+                         }
+                     ],
+    "ventajas":  [
+                     "Aldeanos 5% más rápidos: recolectan, construyen y reparan...",
+                     "Galeras y dromones +1/+1 armadura",
+                     "Infantería recibe doble efecto de mejoras de armadura de ..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  14,
+                        "id":  "legionario",
+                        "armor_pierce":  1,
+                        "attack_elite":  14,
+                        "cost":  {
+                                     "gold":  20,
+                                     "food":  50
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  12,
+                        "armor_melee":  1,
+                        "name":  "Legionario",
+                        "hp":  75,
+                        "hp_elite":  95
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_lamelar",
+                                                    "armadura_ming_guang",
+                                                    "armadura_seda"
+                                                ]
+                  }
+}

@@ -1,0 +1,139 @@
+{
+    "debilidades":  [
+                        "Ausencias clave: sin redencion, sin ingenieros de asedio, sin canon...",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "chinos_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "chinos",
+    "bonus":  [
+                  {
+                      "descripcion":  "Empieza con +3 aldeanos pero -200 comida, -50 madera.",
+                      "id":  "inicio_aldeanos",
+                      "efecto":  {
+                                     "aldeanos_extra":  3,
+                                     "comida_inicial":  -200,
+                                     "madera_inicial":  -50
+                                 }
+                  },
+                  {
+                      "descripcion":  "Centros urbanos sostienen 15 de poblacion (+10) y +7 linea de vision.",
+                      "id":  "tc_poblacion",
+                      "efecto":  {
+                                     "pop_tc":  15,
+                                     "vision_tc":  7,
+                                     "aplica_a":  [
+                                                      "centro_urbano"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Tecnologias 5%/10%/15% mas baratas en Feudal/Castillos/Imperial.",
+                      "id":  "tecnologias_descuento",
+                      "efecto":  {
+                                     "descuento_feudal":  0.05,
+                                     "descuento_castillos":  0.1,
+                                     "descuento_imperial":  0.15
+                                 }
+                  },
+                  {
+                      "descripcion":  "Linea de galera de fuego y lanceros de fuego +5%/+10% velocidad en Castillos/Imperial.",
+                      "id":  "fuego_rapido",
+                      "efecto":  {
+                                     "vel_castillos":  0.05,
+                                     "vel_imperial":  0.1,
+                                     "aplica_a":  [
+                                                      "galera_fuego",
+                                                      "lancero_fuego"
+                                                  ]
+                                 }
+                  }
+              ],
+    "roof_color":  "#b7950b",
+    "name":  "Chinos",
+    "descripcion":  "Chinos: Empieza con +3 aldeanos pero -200 comida, -50 madera. Centros urbanos sostienen 15 de poblacion (+10) y +7 linea de vision.",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "gran_muralla",
+                             "id":  "gran_muralla"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "coheteria",
+                             "id":  "coheteria"
+                         }
+                     ],
+    "ventajas":  [
+                     "Empieza con +3 aldeanos pero -200 comida, -50 madera.",
+                     "Centros urbanos sostienen 15 de poblacion (+10) y +7 line...",
+                     "Tecnologias 5%/10%/15% mas baratas en Feudal/Castillos/Im..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  16,
+                        "id":  "chu_ko_nu",
+                        "armor_pierce":  0,
+                        "attack_elite":  10,
+                        "cost":  {
+                                     "gold":  35,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  8,
+                        "armor_melee":  0,
+                        "name":  "Chu Ko Nu",
+                        "hp":  45,
+                        "hp_elite":  65
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_lamelar",
+                                                    "armadura_ming_guang"
+                                                ]
+                  }
+}

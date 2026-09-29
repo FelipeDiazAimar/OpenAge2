@@ -1,0 +1,138 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "armenios_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "armenios",
+    "bonus":  [
+                  {
+                      "descripcion":  "Carretas mula -25% coste; sus tecnologías 40% más efectivas",
+                      "id":  "carreta_mula_25",
+                      "efecto":  {
+                                     "descuento_carreta_mula":  0.25,
+                                     "bonus_tecs_carreta_mula":  0.4
+                                 }
+                  },
+                  {
+                      "descripcion":  "Mejoras de milicia y lancero disponibles una edad antes (excepto hombre de armas)",
+                      "id":  "cuartel_adelantado",
+                      "efecto":  {
+                                     "edad_antes":  1,
+                                     "aplica_a":  [
+                                                      "espadachin_mandoble",
+                                                      "campeon",
+                                                      "lancero",
+                                                      "piquero",
+                                                      "alabardero"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Primera iglesia fortificada recibe reliquia gratis",
+                      "id":  "iglesia_reliquia",
+                      "efecto":  {
+                                     "reliquia_gratis_primera_iglesia":  1
+                                 }
+                  },
+                  {
+                      "descripcion":  "Galeras y dromones disparan 1 proyectil adicional",
+                      "id":  "galera_doble_proyectil",
+                      "efecto":  {
+                                     "proyectil_extra":  1,
+                                     "aplica_a":  [
+                                                      "galera",
+                                                      "dromon"
+                                                  ]
+                                 }
+                  }
+              ],
+    "roof_color":  "#4682b4",
+    "name":  "Armenios",
+    "descripcion":  "Armenios: Carretas mula -25% coste; sus tecnologías 40% más efectivas Mejoras de milicia y lancero disponibles una edad antes (excepto hombre de armas)",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "flota_cilicia",
+                             "id":  "flota_cilicia"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "fereteres",
+                             "id":  "fereteres"
+                         }
+                     ],
+    "ventajas":  [
+                     "Carretas mula -25% coste; sus tecnologías 40% más efectivas",
+                     "Mejoras de milicia y lancero disponibles una edad antes (...",
+                     "Primera iglesia fortificada recibe reliquia gratis"
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  10,
+                        "id":  "arquero_compuesto",
+                        "armor_pierce":  0,
+                        "attack_elite":  6,
+                        "cost":  {
+                                     "gold":  45,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  4,
+                        "armor_melee":  2,
+                        "name":  "Arquero Compuesto",
+                        "hp":  50,
+                        "hp_elite":  70
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_lamelar",
+                                                    "armadura_ming_guang"
+                                                ]
+                  }
+}

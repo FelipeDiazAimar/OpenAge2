@@ -1,0 +1,152 @@
+{
+    "debilidades":  [
+                        "Ausencias clave: sin arbalestero, sin bracer, sin mandoble, sin pal...",
+                        "Sin Paladin"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "persas_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "persas",
+    "bonus":  [
+                  {
+                      "descripcion":  "Empieza con +50 comida, +50 madera.",
+                      "id":  "inicio_recursos",
+                      "efecto":  {
+                                     "comida_inicial":  50,
+                                     "madera_inicial":  50
+                                 }
+                  },
+                  {
+                      "descripcion":  "Centros urbanos y muelles trabajan 5%/10%/15%/20% mas rapido en Oscura/Feudal/Castillos/Imperial (aldeano ~25s -\u003e ~20.8s en Imperial).",
+                      "id":  "tc_muelle_rapidos",
+                      "efecto":  {
+                                     "ritmo_oscura":  0.05,
+                                     "ritmo_feudal":  0.1,
+                                     "ritmo_castillos":  0.15,
+                                     "ritmo_imperial":  0.2,
+                                     "aplica_a":  [
+                                                      "centro_urbano",
+                                                      "muelle"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Tacticas partas disponible en Castillos; Caravanserai construible en Imperial.",
+                      "id":  "partos_caravanserai",
+                      "efecto":  {
+                                     "caravanserai_imperial":  true,
+                                     "tacticas_partas_castillos":  true
+                                 }
+                  },
+                  {
+                      "descripcion":  "UU Elefante de guerra: 170F/85O, 25s, HP 450/600, atk 15/20 (+dano en area y bonus vs edificios), arm 1/2 (3 elite perforante), vel 0.6-\u003e0.8. Elite: 1350F/800O, 75s.",
+                      "id":  "uu_elefante_guerra",
+                      "efecto":  {
+                                     "coste":  {
+                                                   "oro":  85,
+                                                   "comida":  170
+                                               },
+                                     "elite_coste":  {
+                                                         "oro":  800,
+                                                         "comida":  1350
+                                                     },
+                                     "elite_tiempo_sec":  75,
+                                     "hp":  [
+                                                450,
+                                                600
+                                            ],
+                                     "ataque":  [
+                                                    15,
+                                                    20
+                                                ],
+                                     "unidad":  "elefante_guerra"
+                                 }
+                  }
+              ],
+    "roof_color":  "#a93226",
+    "name":  "Persas",
+    "descripcion":  "Persas: Empieza con +50 comida, +50 madera. Centros urbanos y muelles trabajan 5%/10%/15%/20% mas rapido en Oscura/Feudal/Castillos/Imperial (aldeano ~25s -\u003e ~20.8s en Imperial).",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "kamandaran",
+                             "id":  "kamandaran"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "ciudadelas",
+                             "id":  "ciudadelas"
+                         }
+                     ],
+    "ventajas":  [
+                     "Empieza con +50 comida, +50 madera.",
+                     "Centros urbanos y muelles trabajan 5%/10%/15%/20% mas rap...",
+                     "Tacticas partas disponible en Castillos; Caravanserai con..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  31,
+                        "id":  "elefante_guerra",
+                        "armor_pierce":  2,
+                        "attack_elite":  17,
+                        "cost":  {
+                                     "gold":  75,
+                                     "food":  200
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  15,
+                        "armor_melee":  1,
+                        "name":  "Elefante de Guerra",
+                        "hp":  450,
+                        "hp_elite":  470
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_arq_3",
+                                                    "armadura_lamelar"
+                                                ]
+                  }
+}

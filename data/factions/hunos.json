@@ -1,0 +1,134 @@
+{
+    "debilidades":  [
+                        "Sin Campeón, placas de infantería, armadura de arquero de anillo, R...",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "hunos_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "hunos",
+    "bonus":  [
+                  {
+                      "descripcion":  "Inicio con -100 madera pero sin necesidad de casas: pop cap al máximo desde el inicio",
+                      "id":  "sin_casas_pob_max",
+                      "efecto":  {
+                                     "madera_inicial":  -100,
+                                     "casas_requeridas":  false,
+                                     "nota":  "no expresable en effects (regla de inicio de partida)"
+                                 }
+                  },
+                  {
+                      "descripcion":  "En mapas nómadas, el primer Centro Urbano genera un Caballo huno de exploración",
+                      "id":  "caballo_huno_nomada",
+                      "efecto":  {
+                                     "caballo_explorador_nomada":  true,
+                                     "nota":  "no expresable en effects (regla de inicio de partida)"
+                                 }
+                  },
+                  {
+                      "descripcion":  "Arqueros a caballo 10% más baratos en Castillos, 20% en Imperial",
+                      "id":  "arqueros_montados_baratos",
+                      "efecto":  {
+                                     "descuento_ca_castillos":  0.1,
+                                     "descuento_ca_imperial":  0.2,
+                                     "nota":  "a legacy por ser condicional por edad (sin arqueros a caballo en el mod)"
+                                 }
+                  },
+                  {
+                      "descripcion":  "Trebuquetes +35% precisión contra unidades y objetivos pequeños",
+                      "id":  "trebuquetes_precisos",
+                      "efecto":  {
+                                     "precision_trebuquete_vs_unidades":  0.35,
+                                     "aplica_a":  [
+                                                      "trebuchet"
+                                                  ]
+                                 }
+                  }
+              ],
+    "roof_color":  "#7a4a1e",
+    "name":  "Hunos",
+    "descripcion":  "Hunos: Inicio con -100 madera pero sin necesidad de casas: pop cap al máximo desde el inicio En mapas nómadas, el primer Centro Urbano genera un Caballo huno de exploración",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "merodeadores",
+                             "id":  "merodeadores"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "ateismo",
+                             "id":  "ateismo"
+                         }
+                     ],
+    "ventajas":  [
+                     "Inicio con -100 madera pero sin necesidad de casas: pop c...",
+                     "En mapas nómadas, el primer Centro Urbano genera un Cabal...",
+                     "Arqueros a caballo 10% más baratos en Castillos, 20% en I..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  14,
+                        "id":  "tarkan",
+                        "armor_pierce":  3,
+                        "attack_elite":  10,
+                        "cost":  {
+                                     "gold":  60,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  8,
+                        "armor_melee":  1,
+                        "name":  "Tarkan",
+                        "hp":  100,
+                        "hp_elite":  120
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_arq_3",
+                                                    "armadura_inf_3"
+                                                ]
+                  }
+}

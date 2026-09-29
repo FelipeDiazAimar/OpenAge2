@@ -1,0 +1,128 @@
+{
+    "debilidades":  [
+                        "Caballeria pesada limitada",
+                        "Roster con huecos en Imperial"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "magiares_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "magiares",
+    "bonus":  [
+                  {
+                      "descripcion":  "Forja, Fundición y Alto Horno gratis (ahorro 150F + 220F/120O + 350F/250O)",
+                      "id":  "forja_gratis",
+                      "efecto":  {
+                                     "tecnologias_gratis":  [
+                                                                "forja",
+                                                                "hierro_fundido",
+                                                                "alto_horno"
+                                                            ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Línea de exploradores 15% más barata (explorador 80F -\u003e 68F)",
+                      "id":  "exploradores_baratos_15",
+                      "efecto":  {
+                                     "descuento_explorador":  0.15,
+                                     "aplica_a":  [
+                                                      "jinete_explorador",
+                                                      "caballeria_ligera",
+                                                      "husar"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Aldeanos matan depredadores (lobos) de un golpe",
+                      "id":  "mata_lobos",
+                      "efecto":  {
+                                     "aldeano_vs_depredador_un_golpe":  true
+                                 }
+                  }
+              ],
+    "roof_color":  "#a03a5a",
+    "name":  "Magiares",
+    "descripcion":  "Magiares: Forja, Fundición y Alto Horno gratis (ahorro 150F + 220F/120O + 350F/250O) Línea de exploradores 15% más barata (explorador 80F -\u003e 68F)",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "ejercito_corvino",
+                             "id":  "ejercito_corvino"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "arco_recurvo",
+                             "id":  "arco_recurvo"
+                         }
+                     ],
+    "ventajas":  [
+                     "Forja, Fundición y Alto Horno gratis (ahorro 150F + 220F/...",
+                     "Línea de exploradores 15% más barata (explorador 80F -\u003e 68F)",
+                     "Aldeanos matan depredadores (lobos) de un golpe"
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  14,
+                        "id":  "huszar_magiar",
+                        "armor_pierce":  2,
+                        "attack_elite":  11,
+                        "cost":  {
+                                     "gold":  45,
+                                     "food":  35
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  9,
+                        "armor_melee":  0,
+                        "name":  "Húsar Magiar",
+                        "hp":  75,
+                        "hp_elite":  95
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "armadura_inf_3",
+                                                    "armadura_lamelar",
+                                                    "armadura_ming_guang"
+                                                ]
+                  }
+}

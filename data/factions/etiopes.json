@@ -1,0 +1,126 @@
+{
+    "debilidades":  [
+                        "Roster con huecos en Imperial",
+                        "Roster con huecos en Imperial"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "etiopes_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "etiopes",
+    "bonus":  [
+                  {
+                      "descripcion":  "Línea de arqueros a pie dispara 18% más rápido",
+                      "id":  "arqueros_18_rapido",
+                      "efecto":  {
+                                     "velocidad_disparo_arqueros":  0.18,
+                                     "aplica_a":  [
+                                                      "arquero",
+                                                      "ballestero",
+                                                      "guerrillero"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "+100 comida +100 oro al avanzar de edad",
+                      "id":  "recursos_por_edad",
+                      "efecto":  {
+                                     "comida_por_edad":  100,
+                                     "oro_por_edad":  100
+                                 }
+                  },
+                  {
+                      "descripcion":  "Mejora Piquero gratis e instantánea",
+                      "id":  "piquero_gratis",
+                      "efecto":  {
+                                     "piquero_coste":  0,
+                                     "piquero_tiempo_sec":  0
+                                 }
+                  }
+              ],
+    "roof_color":  "#6a1b1b",
+    "name":  "Etíopes",
+    "descripcion":  "Etíopes: Línea de arqueros a pie dispara 18% más rápido +100 comida +100 oro al avanzar de edad",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "herederos_reales",
+                             "id":  "herederos_reales"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "motores_torsion",
+                             "id":  "motores_torsion"
+                         }
+                     ],
+    "ventajas":  [
+                     "Línea de arqueros a pie dispara 18% más rápido",
+                     "+100 comida +100 oro al avanzar de edad",
+                     "Mejora Piquero gratis e instantánea"
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  8,
+                        "id":  "shotel",
+                        "armor_pierce":  0,
+                        "attack_elite":  18,
+                        "cost":  {
+                                     "gold":  30,
+                                     "food":  50
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  16,
+                        "armor_melee":  0,
+                        "name":  "Shotel",
+                        "hp":  45,
+                        "hp_elite":  65
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_lamelar",
+                                                    "armadura_ming_guang",
+                                                    "armadura_seda"
+                                                ]
+                  }
+}

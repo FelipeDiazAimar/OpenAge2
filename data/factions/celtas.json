@@ -1,0 +1,129 @@
+{
+    "debilidades":  [
+                        "Ausencias clave DE: sin Paladín, sin Pureza de sangre, sin última a...",
+                        "Sin Paladin"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "celtas_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "celtas",
+    "bonus":  [
+                  {
+                      "descripcion":  "Leñadores +15% velocidad de recolección",
+                      "id":  "lenadores_15",
+                      "efecto":  {
+                                     "recoleccion_madera_bonus":  0.15
+                                 }
+                  },
+                  {
+                      "descripcion":  "Infantería +5/10/15/20% velocidad en Alta/Feudal/Castillos/Imperial (algunas fuentes dan 15% plano; DE actual escalado por edad)",
+                      "id":  "infanteria_rapida_edad",
+                      "efecto":  {
+                                     "velocidad_infanteria_alta":  0.05,
+                                     "velocidad_infanteria_feudal":  0.1,
+                                     "velocidad_infanteria_castillos":  0.15,
+                                     "velocidad_infanteria_imperial":  0.2
+                                 }
+                  },
+                  {
+                      "descripcion":  "Armas de asedio disparan +25% más rápido (fuentes antiguas: +20%)",
+                      "id":  "asedio_cadencia_25",
+                      "efecto":  {
+                                     "cadencia_asedio_bonus":  0.25
+                                 }
+                  },
+                  {
+                      "descripcion":  "Ovejas/ganado no convertibles si hay 1 unidad celta en línea de visión",
+                      "id":  "ganado_no_robable",
+                      "efecto":  {
+                                     "ganado_no_convertible_en_ldv":  true
+                                 }
+                  }
+              ],
+    "roof_color":  "#2f9e44",
+    "name":  "Celtas",
+    "descripcion":  "Celtas: Leñadores +15% velocidad de recolección Infantería +5/10/15/20% velocidad en Alta/Feudal/Castillos/Imperial (algunas fuentes dan 15% plano; DE actual escalado por edad)",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "fortaleza",
+                             "id":  "fortaleza"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "furor_celta",
+                             "id":  "furor_celta"
+                         }
+                     ],
+    "ventajas":  [
+                     "Leñadores +15% velocidad de recolección",
+                     "Infantería +5/10/15/20% velocidad en Alta/Feudal/Castillo...",
+                     "Armas de asedio disparan +25% más rápido (fuentes antigua..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  10,
+                        "id":  "invasor_pastos",
+                        "armor_pierce":  1,
+                        "attack_elite":  13,
+                        "cost":  {
+                                     "gold":  25,
+                                     "food":  70
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  11,
+                        "armor_melee":  0,
+                        "name":  "Invasor de Pastos",
+                        "hp":  70,
+                        "hp_elite":  90
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_cab_3",
+                                                    "armadura_lamelar"
+                                                ]
+                  }
+}

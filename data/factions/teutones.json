@@ -1,0 +1,131 @@
+{
+    "debilidades":  [
+                        "Ausencias clave DE: sin Húsar, sin Arbalesta, sin Husbandry (veloci...",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "teutones_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "teutones",
+    "bonus":  [
+                  {
+                      "descripcion":  "Monjes curan al doble de distancia (rango x2)",
+                      "id":  "monjes_doble_alcance",
+                      "efecto":  {
+                                     "rango_curacion_monje_factor":  2.0
+                                 }
+                  },
+                  {
+                      "descripcion":  "Torres albergan el doble de unidades (5 -\u003e 10)",
+                      "id":  "torres_doble_guarnicion",
+                      "efecto":  {
+                                     "capacidad_torre_factor":  2.0,
+                                     "capacidad_base":  5,
+                                     "capacidad_final":  10
+                                 }
+                  },
+                  {
+                      "descripcion":  "Matacanes (Murder Holes) y Medicina herbal gratis",
+                      "id":  "matacanes_medicina_gratis",
+                      "efecto":  {
+                                     "matacanes_coste":  0,
+                                     "medicina_herbal_coste":  0
+                                 }
+                  },
+                  {
+                      "descripcion":  "Granjas 40% más baratas: 60 madera -\u003e 36 madera",
+                      "id":  "granjas_40",
+                      "efecto":  {
+                                     "descuento_granja_madera":  0.4,
+                                     "coste_base_madera":  60,
+                                     "coste_final_madera":  36
+                                 }
+                  }
+              ],
+    "roof_color":  "#6c757d",
+    "name":  "Teutones",
+    "descripcion":  "Teutones: Monjes curan al doble de distancia (rango x2) Torres albergan el doble de unidades (5 -\u003e 10)",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "blindaje",
+                             "id":  "blindaje"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "almenas",
+                             "id":  "almenas"
+                         }
+                     ],
+    "ventajas":  [
+                     "Monjes curan al doble de distancia (rango x2)",
+                     "Torres albergan el doble de unidades (5 -\u003e 10)",
+                     "Matacanes (Murder Holes) y Medicina herbal gratis"
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  12,
+                        "id":  "caballero_teutonico",
+                        "armor_pierce":  2,
+                        "attack_elite":  14,
+                        "cost":  {
+                                     "gold":  40,
+                                     "food":  85
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  12,
+                        "armor_melee":  5,
+                        "name":  "Caballero Teutónico",
+                        "hp":  80,
+                        "hp_elite":  100
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_lamelar",
+                                                    "armadura_ming_guang",
+                                                    "armadura_seda"
+                                                ]
+                  }
+}

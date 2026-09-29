@@ -1,0 +1,146 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "malayos_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "malayos",
+    "bonus":  [
+                  {
+                      "descripcion":  "Avance de edad +66% más rápido (solo 60% del tiempo habitual)",
+                      "id":  "avance_rapido_66",
+                      "efecto":  {
+                                     "aplica_a":  [
+                                                      "feudal",
+                                                      "castillos",
+                                                      "imperial"
+                                                  ],
+                                     "avance_edad_factor":  0.6,
+                                     "avance_edad_rapidez":  0.66
+                                 }
+                  },
+                  {
+                      "descripcion":  "Trampas de peces 33% más baratas y 3x alimento (715 -\u003e 2145)",
+                      "id":  "trampas_peces_3x",
+                      "efecto":  {
+                                     "alimento_trampa_base":  715,
+                                     "alimento_trampa_final":  2145,
+                                     "aplica_a":  [
+                                                      "trampa_peces"
+                                                  ],
+                                     "descuento_trampa_madera":  0.33,
+                                     "multiplicador_alimento":  3.0
+                                 }
+                  },
+                  {
+                      "descripcion":  "Elefantes de combate 25% más baratos en Castillos, 35% en Imperial",
+                      "id":  "elefantes_baratos",
+                      "efecto":  {
+                                     "aplica_a":  [
+                                                      "elefante_combate"
+                                                  ],
+                                     "descuento_castillos":  0.25,
+                                     "descuento_imperial":  0.35
+                                 }
+                  },
+                  {
+                      "descripcion":  "Armaduras de infantería gratis (cota malla, cota anillas)",
+                      "id":  "armadura_inf_gratis",
+                      "efecto":  {
+                                     "aplica_a":  [
+                                                      "armadura_inf_1",
+                                                      "armadura_inf_2"
+                                                  ],
+                                     "coste":  0
+                                 }
+                  }
+              ],
+    "roof_color":  "#0a7a8a",
+    "name":  "Malayos",
+    "descripcion":  "Malayos: Avance de edad +66% más rápido (solo 60% del tiempo habitual) Trampas de peces 33% más baratas y 3x alimento (715 -\u003e 2145)",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "talasocracia",
+                             "id":  "talasocracia"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "leva_masa",
+                             "id":  "leva_masa"
+                         }
+                     ],
+    "ventajas":  [
+                     "Avance de edad +66% más rápido (solo 60% del tiempo habit...",
+                     "Trampas de peces 33% más baratas y 3x alimento (715 -\u003e 2145)",
+                     "Elefantes de combate 25% más baratos en Castillos, 35% en..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  6,
+                        "id":  "karambit",
+                        "armor_pierce":  1,
+                        "attack_elite":  10,
+                        "cost":  {
+                                     "gold":  15,
+                                     "food":  25
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  8,
+                        "armor_melee":  1,
+                        "name":  "Karambit",
+                        "hp":  40,
+                        "hp_elite":  60
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_arq_3",
+                                                    "armadura_lamelar"
+                                                ]
+                  }
+}

@@ -1,0 +1,145 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "wu_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "wu",
+    "bonus":  [
+                  {
+                      "descripcion":  "Cuartel, Galería, Establo, Taller, Castillo y Muelle dan +55 comida al construirlos",
+                      "id":  "comida_edificios_militares",
+                      "efecto":  {
+                                     "comida_al_construir":  55,
+                                     "aplica_a":  [
+                                                      "cuartel",
+                                                      "galeria_tiro",
+                                                      "establo",
+                                                      "taller_asedio",
+                                                      "castillo",
+                                                      "muelle"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Infantería regenera 10/15/30 HP por minuto en Feudal/Castillos/Imperial",
+                      "id":  "regeneracion_infanteria",
+                      "efecto":  {
+                                     "regen_feudal":  10,
+                                     "regen_castillos":  15,
+                                     "regen_imperial":  30,
+                                     "aplica_a":  "tag:infanteria"
+                                 }
+                  },
+                  {
+                      "descripcion":  "Espadachín Jian y Caballería Hei Guang +2 ataque en Imperial",
+                      "id":  "ataque_jian_heiguang_imperial",
+                      "efecto":  {
+                                     "ataque_bonus":  2,
+                                     "edad":  "imperial",
+                                     "aplica_a":  [
+                                                      "espadachin_jian",
+                                                      "caballeria_hei_guang"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Carenado y Dique seco gratis (solo coste de pasar de edad)",
+                      "id":  "muelle_gratis",
+                      "efecto":  {
+                                     "tecs_gratis":  [
+                                                         "carenado",
+                                                         "dique_seco"
+                                                     ]
+                                 }
+                  }
+              ],
+    "roof_color":  "#2e8b57",
+    "name":  "Wu",
+    "descripcion":  "Wu: Cuartel, Galería, Establo, Taller, Castillo y Muelle dan +55 comida al construirlos Infantería regenera 10/15/30 HP por minuto en Feudal/Castillos/Imperial",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "tacticas_acantilados",
+                             "id":  "tacticas_acantilados"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "tigre_agazapado",
+                             "id":  "tigre_agazapado"
+                         }
+                     ],
+    "ventajas":  [
+                     "Cuartel, Galería, Establo, Taller, Castillo y Muelle dan ...",
+                     "Infantería regenera 10/15/30 HP por minuto en Feudal/Cast...",
+                     "Espadachín Jian y Caballería Hei Guang +2 ataque en Imperial"
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  15,
+                        "id":  "wu_elite",
+                        "armor_pierce":  1,
+                        "attack_elite":  12,
+                        "cost":  {
+                                     "gold":  30,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  10,
+                        "armor_melee":  1,
+                        "name":  "Elite Wu",
+                        "hp":  80,
+                        "hp_elite":  100
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_arq_3",
+                                                    "armadura_lamelar"
+                                                ]
+                  }
+}

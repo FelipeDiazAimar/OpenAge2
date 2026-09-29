@@ -1,0 +1,130 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Roster con huecos en Imperial"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "bereberes_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "bereberes",
+    "bonus":  [
+                  {
+                      "descripcion":  "Aldeanos +5% velocidad en Alta Edad Media, +10% desde Feudal",
+                      "id":  "aldeanos_rapidos_10",
+                      "efecto":  {
+                                     "velocidad_aldeano_dark":  0.05,
+                                     "velocidad_aldeano_feudal_mas":  0.1
+                                 }
+                  },
+                  {
+                      "descripcion":  "Unidades de establo -15% coste en Castillos / -20% en Imperial",
+                      "id":  "establo_barato_15_20",
+                      "efecto":  {
+                                     "descuento_establo_castillos":  0.15,
+                                     "descuento_establo_imperial":  0.2,
+                                     "aplica_a":  [
+                                                      "jinete",
+                                                      "caballero",
+                                                      "camello",
+                                                      "caballeria_ligera",
+                                                      "husar",
+                                                      "arquero_camello",
+                                                      "genitour"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Barcos +10% velocidad (duplicado en effects como tag:barco_guerra x1.1)",
+                      "id":  "barcos_rapidos_10",
+                      "efecto":  {
+                                     "velocidad_barcos":  0.1
+                                 }
+                  }
+              ],
+    "roof_color":  "#c8862a",
+    "name":  "Bereberes",
+    "descripcion":  "Bereberes: Aldeanos +5% velocidad en Alta Edad Media, +10% desde Feudal Unidades de establo -15% coste en Castillos / -20% en Imperial",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "kasbah",
+                             "id":  "kasbah"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "camellos_magrebies",
+                             "id":  "camellos_magrebies"
+                         }
+                     ],
+    "ventajas":  [
+                     "Aldeanos +5% velocidad en Alta Edad Media, +10% desde Feudal",
+                     "Unidades de establo -15% coste en Castillos / -20% en Imp...",
+                     "Barcos +10% velocidad (duplicado en effects como tag:barc..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  25,
+                        "id":  "arquero_camello",
+                        "armor_pierce":  1,
+                        "attack_elite":  9,
+                        "cost":  {
+                                     "gold":  60,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  7,
+                        "armor_melee":  0,
+                        "name":  "Arquero en Camello",
+                        "hp":  55,
+                        "hp_elite":  75
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo",
+                                                    "armadura_lamelar",
+                                                    "armadura_ming_guang",
+                                                    "armadura_seda"
+                                                ]
+                  }
+}

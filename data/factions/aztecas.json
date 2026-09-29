@@ -1,0 +1,127 @@
+{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "id":  "aztecas_equipo",
+                       "efecto":  {
+
+                                  }
+                   },
+    "id":  "aztecas",
+    "bonus":  [
+                  {
+                      "descripcion":  "Unidades militares 15% más rápidas de entrenar (train_time x0.85: milicia 21s -\u003e 17.9s)",
+                      "id":  "milicia_rapida_15",
+                      "efecto":  {
+                                     "train_time_factor":  0.85,
+                                     "aplica_a":  "tag:militar"
+                                 }
+                  },
+                  {
+                      "descripcion":  "Empiezan con +50 oro",
+                      "id":  "oro_inicial_50",
+                      "efecto":  {
+                                     "oro_inicial_extra":  50
+                                 }
+                  },
+                  {
+                      "descripcion":  "Monjes +5 HP por cada tecnología de monasterio investigada (hasta ~100 HP a pleno)",
+                      "id":  "monjes_hp_monasterio",
+                      "efecto":  {
+                                     "hp_monje_por_tech":  5
+                                 }
+                  },
+                  {
+                      "descripcion":  "Empiezan con explorador águila en vez de scout a caballo (scout deshabilitado)",
+                      "id":  "explorador_aguila",
+                      "efecto":  {
+                                     "explorador_inicial":  "guerrero_aguila"
+                                 }
+                  }
+              ],
+    "roof_color":  "#d35400",
+    "name":  "Aztecas",
+    "descripcion":  "Aztecas: Unidades militares 15% más rápidas de entrenar (train_time x0.85: milicia 21s -\u003e 17.9s) Empiezan con +50 oro",
+    "unique_techs":  [
+                         {
+                             "descripcion":  "",
+                             "nombre":  "atlatl",
+                             "id":  "atlatl"
+                         },
+                         {
+                             "descripcion":  "",
+                             "nombre":  "guerras_floridas",
+                             "id":  "guerras_floridas"
+                         }
+                     ],
+    "ventajas":  [
+                     "Unidades militares 15% más rápidas de entrenar (train_tim...",
+                     "Empiezan con +50 oro",
+                     "Monjes +5 HP por cada tecnología de monasterio investigad..."
+                 ],
+    "unique_unit":  {
+                        "train_time_sec":  12,
+                        "id":  "jaguar",
+                        "armor_pierce":  1,
+                        "attack_elite":  12,
+                        "cost":  {
+                                     "gold":  30,
+                                     "food":  60
+                                 },
+                        "trained_at":  "castillo",
+                        "attack":  10,
+                        "armor_melee":  1,
+                        "name":  "Guerrero Jaguar",
+                        "hp":  50,
+                        "hp_elite":  70
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+
+                                     },
+                      "castillo":  {
+
+                                   },
+                      "cuartel":  {
+
+                                  },
+                      "establo":  {
+
+                                  },
+                      "taller_asedio":  {
+
+                                        },
+                      "puerto":  {
+
+                                 },
+                      "herreria":  {
+
+                                   },
+                      "arqueria":  {
+
+                                   },
+                      "universidad":  {
+
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "carreta_husita",
+                                                    "centurion",
+                                                    "houfnice",
+                                                    "liao_dao",
+                                                    "mejora_houfnice",
+                                                    "acero_wootz",
+                                                    "aguila",
+                                                    "alabardero",
+                                                    "alabardero_up",
+                                                    "aldeana",
+                                                    "almenas",
+                                                    "anarquia",
+                                                    "arambai",
+                                                    "arcabuz",
+                                                    "arco_recurvo"
+                                                ]
+                  }
+}
