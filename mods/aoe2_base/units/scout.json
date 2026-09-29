@@ -1,44 +1,46 @@
 {
-  "id": "scout",
-  "type": "unit",
-  "extends": "caballeria_base",
-  "name": "Scout a caballo",
-  "cost": {
-    "food": 80
+ "id": "scout",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Scout a caballo",
+ "cost": {
+  "food": 80
+ },
+ "train_time": 30,
+ "pop_cost": 1,
+ "hotkey": "Q",
+ "upgrades_to": "caballeria_ligera",
+ "graphics": {
+  "attack": "sprite:scout/attack",
+  "idle": "sprite:scout/idle",
+  "walk": "sprite:scout/walk",
+  "death": "sprite:scout/death",
+  "decay": "sprite:scout/decay"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 45
   },
-  "train_time": 30,
-  "pop_cost": 1,
-  "hotkey": "Q",
-  "upgrades_to": "caballeria_ligera",
-  "graphics": {
-    "attack": "sprite:scout/attack",
-    "idle": "sprite:scout/idle",
-    "walk": "sprite:scout/walk"
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 2
+   }
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 45
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 2
-      }
-    },
-    "Move": {
-      "speed": 1.2
-    },
-    "Vision": {
-      "sight": 6.0
-    },
-    "Attack": {
-      "damage": {
-        "melee": 3,
-        "arquero": 2,
-        "monje": 6
-      },
-      "range": 0,
-      "reload": 2.0
-    }
+  "Move": {
+   "speed": 1.2
+  },
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 3,
+    "arquero": 2,
+    "monje": 6
+   },
+   "range": 0,
+   "reload": 2.0
   }
+ }
 }

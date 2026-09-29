@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/huszar_magiar/walk",
   "attack": "sprite:uniques/huszar_magiar/attack",
-  "idle": "sprite:uniques/huszar_magiar/idle"
+  "idle": "sprite:uniques/huszar_magiar/idle",
+  "death": "sprite:uniques/huszar_magiar/death",
+  "decay": "sprite:uniques/huszar_magiar/decay"
  },
  "abilities": {
   "Hitpoints": {

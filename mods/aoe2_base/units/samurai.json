@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/samurai/walk",
   "attack": "sprite:uniques/samurai/attack",
-  "idle": "sprite:uniques/samurai/idle"
+  "idle": "sprite:uniques/samurai/idle",
+  "death": "sprite:uniques/samurai/death",
+  "decay": "sprite:uniques/samurai/decay"
  },
  "abilities": {
   "Hitpoints": {

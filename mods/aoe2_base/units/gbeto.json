@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/gbeto/walk",
   "attack": "sprite:uniques/gbeto/attack",
-  "idle": "sprite:uniques/gbeto/idle"
+  "idle": "sprite:uniques/gbeto/idle",
+  "death": "sprite:uniques/gbeto/death",
+  "decay": "sprite:uniques/gbeto/decay"
  },
  "abilities": {
   "Hitpoints": {

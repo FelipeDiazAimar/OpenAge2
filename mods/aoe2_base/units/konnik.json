@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/konnik/walk",
   "attack": "sprite:uniques/konnik/attack",
-  "idle": "sprite:uniques/konnik/idle"
+  "idle": "sprite:uniques/konnik/idle",
+  "death": "sprite:uniques/konnik/death",
+  "decay": "sprite:uniques/konnik/decay"
  },
  "abilities": {
   "Hitpoints": {

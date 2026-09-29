@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/keshik/walk",
   "attack": "sprite:uniques/keshik/attack",
-  "idle": "sprite:uniques/keshik/idle"
+  "idle": "sprite:uniques/keshik/idle",
+  "death": "sprite:uniques/keshik/death",
+  "decay": "sprite:uniques/keshik/decay"
  },
  "abilities": {
   "Hitpoints": {

@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/boyar/walk",
   "attack": "sprite:uniques/boyar/attack",
-  "idle": "sprite:uniques/boyar/idle"
+  "idle": "sprite:uniques/boyar/idle",
+  "death": "sprite:uniques/boyar/death",
+  "decay": "sprite:uniques/boyar/decay"
  },
  "abilities": {
   "Hitpoints": {

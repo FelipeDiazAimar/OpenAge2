@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/rattan/walk",
   "attack": "sprite:uniques/rattan/attack",
-  "idle": "sprite:uniques/rattan/idle"
+  "idle": "sprite:uniques/rattan/idle",
+  "death": "sprite:uniques/rattan/death",
+  "decay": "sprite:uniques/rattan/decay"
  },
  "abilities": {
   "Hitpoints": {

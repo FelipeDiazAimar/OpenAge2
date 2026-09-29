@@ -15,7 +15,9 @@
  "hotkey": "H",
  "graphics": {
   "walk": "sprite:uniques/carreta_husita/walk",
-  "idle": "sprite:uniques/carreta_husita/idle"
+  "idle": "sprite:uniques/carreta_husita/idle",
+  "death": "sprite:uniques/carreta_husita/death",
+  "decay": "sprite:uniques/carreta_husita/decay"
  },
  "abilities": {
   "Hitpoints": {

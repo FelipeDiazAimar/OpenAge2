@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/carro_guerra/walk",
   "attack": "sprite:uniques/carro_guerra/attack",
-  "idle": "sprite:uniques/carro_guerra/idle"
+  "idle": "sprite:uniques/carro_guerra/idle",
+  "death": "sprite:uniques/carro_guerra/death",
+  "decay": "sprite:uniques/carro_guerra/decay"
  },
  "abilities": {
   "Hitpoints": {

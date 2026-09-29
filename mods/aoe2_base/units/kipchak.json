@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/kipchak/walk",
   "attack": "sprite:uniques/kipchak/attack",
-  "idle": "sprite:uniques/kipchak/idle"
+  "idle": "sprite:uniques/kipchak/idle",
+  "death": "sprite:uniques/kipchak/death",
+  "decay": "sprite:uniques/kipchak/decay"
  },
  "abilities": {
   "Hitpoints": {

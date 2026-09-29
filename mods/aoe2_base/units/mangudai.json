@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/mangudai/walk",
   "attack": "sprite:uniques/mangudai/attack",
-  "idle": "sprite:uniques/mangudai/idle"
+  "idle": "sprite:uniques/mangudai/idle",
+  "death": "sprite:uniques/mangudai/death",
+  "decay": "sprite:uniques/mangudai/decay"
  },
  "abilities": {
   "Hitpoints": {

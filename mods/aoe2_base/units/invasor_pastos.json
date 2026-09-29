@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/invasor_pastos/walk",
   "attack": "sprite:uniques/invasor_pastos/attack",
-  "idle": "sprite:uniques/invasor_pastos/idle"
+  "idle": "sprite:uniques/invasor_pastos/idle",
+  "death": "sprite:uniques/invasor_pastos/death",
+  "decay": "sprite:uniques/invasor_pastos/decay"
  },
  "abilities": {
   "Hitpoints": {

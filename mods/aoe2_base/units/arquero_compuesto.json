@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/arquero_compuesto/walk",
   "attack": "sprite:uniques/arquero_compuesto/attack",
-  "idle": "sprite:uniques/arquero_compuesto/idle"
+  "idle": "sprite:uniques/arquero_compuesto/idle",
+  "death": "sprite:uniques/arquero_compuesto/death",
+  "decay": "sprite:uniques/arquero_compuesto/decay"
  },
  "abilities": {
   "Hitpoints": {

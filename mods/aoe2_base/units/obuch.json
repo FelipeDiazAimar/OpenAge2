@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/obuch/walk",
   "attack": "sprite:uniques/obuch/attack",
-  "idle": "sprite:uniques/obuch/idle"
+  "idle": "sprite:uniques/obuch/idle",
+  "death": "sprite:uniques/obuch/death",
+  "decay": "sprite:uniques/obuch/decay"
  },
  "abilities": {
   "Hitpoints": {

@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:guerrillero_elite/walk",
   "attack": "sprite:guerrillero_elite/attack",
-  "idle": "sprite:guerrillero_elite/idle"
+  "idle": "sprite:guerrillero_elite/idle",
+  "death": "sprite:guerrillero_elite/death",
+  "decay": "sprite:guerrillero_elite/decay"
  },
  "abilities": {
   "Hitpoints": {

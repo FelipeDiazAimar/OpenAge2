@@ -9,12 +9,14 @@
  "train_time": 20,
  "pop_cost": 1,
  "hotkey": "C",
-  "graphics": {
-    "walk": "sprite:aldeana/walk",
-    "idle": "sprite:aldeana/idle",
-    "attack": "sprite:aldeana/attack",
-    "task": "sprite:aldeana/walk"
-  },
+ "graphics": {
+  "walk": "sprite:aldeana/walk",
+  "idle": "sprite:aldeana/idle",
+  "attack": "sprite:aldeana/attack",
+  "task": "sprite:aldeana/walk",
+  "death": "sprite:aldeana/death",
+  "decay": "sprite:aldeana/decay"
+ },
  "abilities": {
   "Hitpoints": {
    "max": 25

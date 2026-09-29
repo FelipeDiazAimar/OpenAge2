@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/arambai/walk",
   "attack": "sprite:uniques/arambai/attack",
-  "idle": "sprite:uniques/arambai/idle"
+  "idle": "sprite:uniques/arambai/idle",
+  "death": "sprite:uniques/arambai/death",
+  "decay": "sprite:uniques/arambai/decay"
  },
  "abilities": {
   "Hitpoints": {

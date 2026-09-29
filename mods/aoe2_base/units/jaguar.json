@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/jaguar/walk",
   "attack": "sprite:uniques/jaguar/attack",
-  "idle": "sprite:uniques/jaguar/idle"
+  "idle": "sprite:uniques/jaguar/idle",
+  "death": "sprite:uniques/jaguar/death",
+  "decay": "sprite:uniques/jaguar/decay"
  },
  "abilities": {
   "Hitpoints": {

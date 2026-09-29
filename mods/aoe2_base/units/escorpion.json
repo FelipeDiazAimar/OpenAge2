@@ -1,49 +1,51 @@
 {
-  "id": "escorpion",
-  "type": "unit",
-  "extends": "asedio_base",
-  "name": "Escorpión",
-  "requires": {
-    "age": "castillos"
+ "id": "escorpion",
+ "type": "unit",
+ "extends": "asedio_base",
+ "name": "Escorpión",
+ "requires": {
+  "age": "castillos"
+ },
+ "cost": {
+  "wood": 75,
+  "gold": 75
+ },
+ "train_time": 30,
+ "pop_cost": 3,
+ "hotkey": "E",
+ "upgrades_to": "escorpion_pesado",
+ "graphics": {
+  "walk": "sprite:escorpion/walk",
+  "attack": "sprite:escorpion/attack",
+  "idle": "sprite:escorpion/idle",
+  "death": "sprite:escorpion/death",
+  "decay": "sprite:escorpion/decay"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 40
   },
-  "cost": {
-    "wood": 75,
-    "gold": 75
+  "Armor": {
+   "classes": {
+    "melee": 0,
+    "pierce": 7
+   }
   },
-  "train_time": 30,
-  "pop_cost": 3,
-  "hotkey": "E",
-  "upgrades_to": "escorpion_pesado",
-  "graphics": {
-    "walk": "sprite:escorpion/walk",
-    "attack": "sprite:escorpion/attack",
-    "idle": "sprite:escorpion/idle"
+  "Move": {
+   "speed": 0.65
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 40
-    },
-    "Armor": {
-      "classes": {
-        "melee": 0,
-        "pierce": 7
-      }
-    },
-    "Move": {
-      "speed": 0.65
-    },
-    "Vision": {
-      "sight": 6.0
-    },
-    "Attack": {
-      "damage": {
-        "pierce": 11,
-        "edificio": 3
-      },
-      "range": 7.0,
-      "reload": 3.6,
-      "min_range": 2.0,
-      "projectile_speed": 6.0
-    }
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 11,
+    "edificio": 3
+   },
+   "range": 7.0,
+   "reload": 3.6,
+   "min_range": 2.0,
+   "projectile_speed": 6.0
   }
+ }
 }

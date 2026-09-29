@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/ballestero_genoves/walk",
   "attack": "sprite:uniques/ballestero_genoves/attack",
-  "idle": "sprite:uniques/ballestero_genoves/idle"
+  "idle": "sprite:uniques/ballestero_genoves/idle",
+  "death": "sprite:uniques/ballestero_genoves/death",
+  "decay": "sprite:uniques/ballestero_genoves/decay"
  },
  "abilities": {
   "Hitpoints": {

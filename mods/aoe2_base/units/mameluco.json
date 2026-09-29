@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/mameluco/walk",
   "attack": "sprite:uniques/mameluco/attack",
-  "idle": "sprite:uniques/mameluco/idle"
+  "idle": "sprite:uniques/mameluco/idle",
+  "death": "sprite:uniques/mameluco/death",
+  "decay": "sprite:uniques/mameluco/decay"
  },
  "abilities": {
   "Hitpoints": {

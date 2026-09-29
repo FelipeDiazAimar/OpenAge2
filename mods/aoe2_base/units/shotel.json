@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/shotel/walk",
   "attack": "sprite:uniques/shotel/attack",
-  "idle": "sprite:uniques/shotel/idle"
+  "idle": "sprite:uniques/shotel/idle",
+  "death": "sprite:uniques/shotel/death",
+  "decay": "sprite:uniques/shotel/decay"
  },
  "abilities": {
   "Hitpoints": {

@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/ghulam/walk",
   "attack": "sprite:uniques/ghulam/attack",
-  "idle": "sprite:uniques/ghulam/idle"
+  "idle": "sprite:uniques/ghulam/idle",
+  "death": "sprite:uniques/ghulam/death",
+  "decay": "sprite:uniques/ghulam/decay"
  },
  "abilities": {
   "Hitpoints": {

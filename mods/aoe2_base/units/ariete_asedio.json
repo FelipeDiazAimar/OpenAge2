@@ -1,46 +1,48 @@
 {
-  "id": "ariete_asedio",
-  "type": "unit",
-  "extends": "asedio_base",
-  "name": "Ariete de Asedio",
-  "requires": {
-    "age": "imperial"
+ "id": "ariete_asedio",
+ "type": "unit",
+ "extends": "asedio_base",
+ "name": "Ariete de Asedio",
+ "requires": {
+  "age": "imperial"
+ },
+ "cost": {
+  "wood": 160,
+  "gold": 75
+ },
+ "train_time": 36,
+ "pop_cost": 3,
+ "hotkey": "Q",
+ "graphics": {
+  "walk": "sprite:ariete_asedio/walk",
+  "attack": "sprite:ariete_asedio/attack",
+  "idle": "sprite:ariete_asedio/idle",
+  "death": "sprite:ariete_asedio/death",
+  "decay": "sprite:ariete_asedio/decay"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 270
   },
-  "cost": {
-    "wood": 160,
-    "gold": 75
+  "Armor": {
+   "classes": {
+    "melee": -3,
+    "pierce": 10
+   }
   },
-  "train_time": 36,
-  "pop_cost": 3,
-  "hotkey": "Q",
-  "graphics": {
-    "walk": "sprite:ariete_asedio/walk",
-    "attack": "sprite:ariete_asedio/attack",
-    "idle": "sprite:ariete_asedio/idle"
+  "Move": {
+   "speed": 0.6
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 270
-    },
-    "Armor": {
-      "classes": {
-        "melee": -3,
-        "pierce": 10
-      }
-    },
-    "Move": {
-      "speed": 0.6
-    },
-    "Vision": {
-      "sight": 3.0
-    },
-    "Attack": {
-      "damage": {
-        "melee": 4,
-        "edificio": 200
-      },
-      "range": 0,
-      "reload": 5.0
-    }
+  "Vision": {
+   "sight": 3.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 4,
+    "edificio": 200
+   },
+   "range": 0,
+   "reload": 5.0
   }
+ }
 }

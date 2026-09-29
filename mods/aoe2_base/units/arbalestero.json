@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:arbalestero/walk",
   "attack": "sprite:arbalestero/attack",
-  "idle": "sprite:arbalestero/idle"
+  "idle": "sprite:arbalestero/idle",
+  "death": "sprite:arbalestero/death",
+  "decay": "sprite:arbalestero/decay"
  },
  "abilities": {
   "Hitpoints": {

@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/houfnice/walk",
   "attack": "sprite:uniques/houfnice/attack",
-  "idle": "sprite:uniques/houfnice/idle"
+  "idle": "sprite:uniques/houfnice/idle",
+  "death": "sprite:uniques/houfnice/death",
+  "decay": "sprite:uniques/houfnice/decay"
  },
  "abilities": {
   "Hitpoints": {

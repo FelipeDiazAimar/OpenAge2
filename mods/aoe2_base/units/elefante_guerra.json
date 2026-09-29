@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/elefante_guerra/walk",
   "attack": "sprite:uniques/elefante_guerra/attack",
-  "idle": "sprite:uniques/elefante_guerra/idle"
+  "idle": "sprite:uniques/elefante_guerra/idle",
+  "death": "sprite:uniques/elefante_guerra/death",
+  "decay": "sprite:uniques/elefante_guerra/decay"
  },
  "abilities": {
   "Hitpoints": {

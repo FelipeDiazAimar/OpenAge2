@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:aguila/walk",
   "attack": "sprite:aguila/attack",
-  "idle": "sprite:aguila/idle"
+  "idle": "sprite:aguila/idle",
+  "death": "sprite:aguila/death",
+  "decay": "sprite:aguila/decay"
  },
  "abilities": {
   "Hitpoints": {

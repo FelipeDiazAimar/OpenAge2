@@ -17,7 +17,9 @@
  "graphics": {
   "walk": "sprite:piquero/walk",
   "attack": "sprite:piquero/attack",
-  "idle": "sprite:piquero/idle"
+  "idle": "sprite:piquero/idle",
+  "death": "sprite:piquero/death",
+  "decay": "sprite:piquero/decay"
  },
  "abilities": {
   "Hitpoints": {

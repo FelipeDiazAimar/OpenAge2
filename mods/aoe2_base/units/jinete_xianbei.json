@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/jinete_xianbei/walk",
   "attack": "sprite:uniques/jinete_xianbei/attack",
-  "idle": "sprite:uniques/jinete_xianbei/idle"
+  "idle": "sprite:uniques/jinete_xianbei/idle",
+  "death": "sprite:uniques/jinete_xianbei/death",
+  "decay": "sprite:uniques/jinete_xianbei/decay"
  },
  "abilities": {
   "Hitpoints": {

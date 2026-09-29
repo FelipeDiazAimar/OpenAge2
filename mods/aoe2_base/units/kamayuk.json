@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/kamayuk/walk",
   "attack": "sprite:uniques/kamayuk/attack",
-  "idle": "sprite:uniques/kamayuk/idle"
+  "idle": "sprite:uniques/kamayuk/idle",
+  "death": "sprite:uniques/kamayuk/death",
+  "decay": "sprite:uniques/kamayuk/decay"
  },
  "abilities": {
   "Hitpoints": {

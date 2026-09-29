@@ -1,47 +1,49 @@
 {
-  "id": "ariete_cubierto",
-  "type": "unit",
-  "extends": "asedio_base",
-  "name": "Ariete Cubierto",
-  "requires": {
-    "age": "imperial"
+ "id": "ariete_cubierto",
+ "type": "unit",
+ "extends": "asedio_base",
+ "name": "Ariete Cubierto",
+ "requires": {
+  "age": "imperial"
+ },
+ "cost": {
+  "wood": 160,
+  "gold": 75
+ },
+ "train_time": 36,
+ "pop_cost": 3,
+ "hotkey": "Q",
+ "upgrades_to": "ariete_asedio",
+ "graphics": {
+  "walk": "sprite:ariete_cubierto/walk",
+  "attack": "sprite:ariete_cubierto/attack",
+  "idle": "sprite:ariete_cubierto/idle",
+  "death": "sprite:ariete_cubierto/death",
+  "decay": "sprite:ariete_cubierto/decay"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 200
   },
-  "cost": {
-    "wood": 160,
-    "gold": 75
+  "Armor": {
+   "classes": {
+    "melee": -3,
+    "pierce": 9
+   }
   },
-  "train_time": 36,
-  "pop_cost": 3,
-  "hotkey": "Q",
-  "upgrades_to": "ariete_asedio",
-  "graphics": {
-    "walk": "sprite:ariete_cubierto/walk",
-    "attack": "sprite:ariete_cubierto/attack",
-    "idle": "sprite:ariete_cubierto/idle"
+  "Move": {
+   "speed": 0.5
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 200
-    },
-    "Armor": {
-      "classes": {
-        "melee": -3,
-        "pierce": 9
-      }
-    },
-    "Move": {
-      "speed": 0.5
-    },
-    "Vision": {
-      "sight": 3.0
-    },
-    "Attack": {
-      "damage": {
-        "melee": 3,
-        "edificio": 160
-      },
-      "range": 0,
-      "reload": 5.0
-    }
+  "Vision": {
+   "sight": 3.0
+  },
+  "Attack": {
+   "damage": {
+    "melee": 3,
+    "edificio": 160
+   },
+   "range": 0,
+   "reload": 5.0
   }
+ }
 }

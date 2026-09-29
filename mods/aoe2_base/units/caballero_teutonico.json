@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/caballero_teutonico/walk",
   "attack": "sprite:uniques/caballero_teutonico/attack",
-  "idle": "sprite:uniques/caballero_teutonico/idle"
+  "idle": "sprite:uniques/caballero_teutonico/idle",
+  "death": "sprite:uniques/caballero_teutonico/death",
+  "decay": "sprite:uniques/caballero_teutonico/decay"
  },
  "abilities": {
   "Hitpoints": {

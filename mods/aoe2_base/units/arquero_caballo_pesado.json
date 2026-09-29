@@ -1,47 +1,49 @@
 {
-  "id": "arquero_caballo_pesado",
-  "type": "unit",
-  "extends": "caballeria_base",
-  "name": "Arquero a caballo pesado",
-  "requires": {
-    "age": "imperial"
+ "id": "arquero_caballo_pesado",
+ "type": "unit",
+ "extends": "caballeria_base",
+ "name": "Arquero a caballo pesado",
+ "requires": {
+  "age": "imperial"
+ },
+ "cost": {
+  "wood": 40,
+  "gold": 60
+ },
+ "train_time": 27,
+ "pop_cost": 1,
+ "hotkey": "T",
+ "graphics": {
+  "attack": "sprite:arquero_caballo_pesado/attack",
+  "idle": "sprite:arquero_caballo_pesado/idle",
+  "walk": "sprite:arquero_caballo_pesado/walk",
+  "death": "sprite:arquero_caballo_pesado/death",
+  "decay": "sprite:arquero_caballo_pesado/decay"
+ },
+ "abilities": {
+  "Hitpoints": {
+   "max": 60
   },
-  "cost": {
-    "wood": 40,
-    "gold": 60
+  "Armor": {
+   "classes": {
+    "melee": 1,
+    "pierce": 0
+   }
   },
-  "train_time": 27,
-  "pop_cost": 1,
-  "hotkey": "T",
-  "graphics": {
-    "attack": "sprite:arquero_caballo_pesado/attack",
-    "idle": "sprite:arquero_caballo_pesado/idle",
-    "walk": "sprite:arquero_caballo_pesado/walk"
+  "Move": {
+   "speed": 1.4
   },
-  "abilities": {
-    "Hitpoints": {
-      "max": 60
-    },
-    "Armor": {
-      "classes": {
-        "melee": 1,
-        "pierce": 0
-      }
-    },
-    "Move": {
-      "speed": 1.4
-    },
-    "Vision": {
-      "sight": 6.0
-    },
-    "Attack": {
-      "damage": {
-        "pierce": 7,
-        "piquero": 4
-      },
-      "range": 4.0,
-      "reload": 2.0,
-      "projectile_speed": 7.0
-    }
+  "Vision": {
+   "sight": 6.0
+  },
+  "Attack": {
+   "damage": {
+    "pierce": 7,
+    "piquero": 4
+   },
+   "range": 4.0,
+   "reload": 2.0,
+   "projectile_speed": 7.0
   }
+ }
 }

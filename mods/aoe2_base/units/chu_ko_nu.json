@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/chu_ko_nu/walk",
   "attack": "sprite:uniques/chu_ko_nu/attack",
-  "idle": "sprite:uniques/chu_ko_nu/idle"
+  "idle": "sprite:uniques/chu_ko_nu/idle",
+  "death": "sprite:uniques/chu_ko_nu/death",
+  "decay": "sprite:uniques/chu_ko_nu/decay"
  },
  "abilities": {
   "Hitpoints": {

@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/arquero_camello/walk",
   "attack": "sprite:uniques/arquero_camello/attack",
-  "idle": "sprite:uniques/arquero_camello/idle"
+  "idle": "sprite:uniques/arquero_camello/idle",
+  "death": "sprite:uniques/arquero_camello/death",
+  "decay": "sprite:uniques/arquero_camello/decay"
  },
  "abilities": {
   "Hitpoints": {

@@ -13,7 +13,9 @@
  "graphics": {
   "walk": "sprite:uniques/arquero_fuego/walk",
   "attack": "sprite:uniques/arquero_fuego/attack",
-  "idle": "sprite:uniques/arquero_fuego/idle"
+  "idle": "sprite:uniques/arquero_fuego/idle",
+  "death": "sprite:uniques/arquero_fuego/death",
+  "decay": "sprite:uniques/arquero_fuego/decay"
  },
  "abilities": {
   "Hitpoints": {

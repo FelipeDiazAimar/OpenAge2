@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/chakram/walk",
   "attack": "sprite:uniques/chakram/attack",
-  "idle": "sprite:uniques/chakram/idle"
+  "idle": "sprite:uniques/chakram/idle",
+  "death": "sprite:uniques/chakram/death",
+  "decay": "sprite:uniques/chakram/decay"
  },
  "abilities": {
   "Hitpoints": {

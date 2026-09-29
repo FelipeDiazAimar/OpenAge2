@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/arquero_emplumado/walk",
   "attack": "sprite:uniques/arquero_emplumado/attack",
-  "idle": "sprite:uniques/arquero_emplumado/idle"
+  "idle": "sprite:uniques/arquero_emplumado/idle",
+  "death": "sprite:uniques/arquero_emplumado/death",
+  "decay": "sprite:uniques/arquero_emplumado/decay"
  },
  "abilities": {
   "Hitpoints": {

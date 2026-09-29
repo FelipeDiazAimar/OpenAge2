@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:alabardero/walk",
   "attack": "sprite:alabardero/attack",
-  "idle": "sprite:alabardero/idle"
+  "idle": "sprite:alabardero/idle",
+  "death": "sprite:alabardero/death",
+  "decay": "sprite:alabardero/decay"
  },
  "abilities": {
   "Hitpoints": {

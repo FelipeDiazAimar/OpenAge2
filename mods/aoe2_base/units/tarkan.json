@@ -16,7 +16,9 @@
  "graphics": {
   "walk": "sprite:uniques/tarkan/walk",
   "attack": "sprite:uniques/tarkan/attack",
-  "idle": "sprite:uniques/tarkan/idle"
+  "idle": "sprite:uniques/tarkan/idle",
+  "death": "sprite:uniques/tarkan/death",
+  "decay": "sprite:uniques/tarkan/decay"
  },
  "abilities": {
   "Hitpoints": {
