@@ -332,9 +332,23 @@ func smart_command(world_pos: Vector2) -> void:
 	if selected.is_empty():
 		return
 	var id: int = layer.pick(world_pos)
+	var mpos := [int(round(Iso.to_tiles(world_pos).x * 1000.0)), int(round(Iso.to_tiles(world_pos).y * 1000.0))]
+	# Transporte con pasajeros: clic derecho en tierra = desembarcar allí.
+	var ships: Array = selected.filter(func(s): return sim.world.has_ability(s, "Naval") and sim.world.has_ability(s, "Garrison") \
+		and not (sim.world.comp(s, "Garrison")["units"] as Array).is_empty())
+	if not ships.is_empty() and not sim.grid.is_water(Vector2i(Iso.to_tiles(world_pos).floor())):
+		sim.queue_command(local_pid, "unload", {"ids": ships, "pos": mpos})
+		return
+	# Tropa de tierra sobre un transporte propio: subir.
+	if id >= 0 and int(sim.world.entities[id]["owner"]) == local_pid and sim.world.has_ability(id, "Naval") \
+			and sim.world.has_ability(id, "Garrison"):
+		var riders: Array = selected.filter(func(s): return sim.world.has_ability(s, "Garrisonable") and not sim.world.has_ability(s, "Naval"))
+		if not riders.is_empty():
+			sim.queue_command(local_pid, "garrison", {"ids": riders, "target": id})
+			return
 	var b := _selected_building()
 	if b >= 0:
-		var t := [int(round(Iso.to_tiles(world_pos).x * 1000.0)), int(round(Iso.to_tiles(world_pos).y * 1000.0))]
+		var t := mpos
 		sim.queue_command(local_pid, "rally", {"ids": [b], "pos": t, "target": id})
 		return
 	if id >= 0 and sim.world.has_ability(id, "Foundation") and int(sim.world.entities[id]["owner"]) == local_pid:

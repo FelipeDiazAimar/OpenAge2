@@ -134,14 +134,16 @@ func test_garrison_deterministic() -> void:
 
 
 func test_no_garrison_into_units() -> void:
+	# Solo los transportes (barco con Garrison) llevan pasajeros; ni una
+	# galera ni un aldeano.
 	var s := _sim()
-	var ship := s.spawn("transporte", 0, Vector2i(10, 10))
+	var galley := s.spawn("galera", 0, Vector2i(10, 10))
+	var other := s.spawn("aldeano", 0, Vector2i(12, 10))
 	var v := s.spawn("aldeano", 0, Vector2i(11, 10))
-	if ship >= 0:
-		s.queue_command(0, "garrison", {"ids": [v], "target": ship})
-		_steps(s, 20)
-		assert_false(_inside(s, v), "un barco no es un edificio (por ahora)")
-		s.kill(ship)
+	s.queue_command(0, "garrison", {"ids": [v], "target": galley})
+	s.queue_command(0, "garrison", {"ids": [v], "target": other})
+	_steps(s, 20)
+	assert_false(_inside(s, v))
 	assert_true(s.world.entities.has(v))
 
 

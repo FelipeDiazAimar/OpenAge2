@@ -533,7 +533,15 @@ func _apply(c: Dictionary) -> void:
 			_cmd_monk(int(c["pid"]), c["payload"], "Heal")
 		"ungarrison":
 			for b in _own_ids(int(c["pid"]), c["payload"].get("ids"), "Garrison"):
-				GarrisonSystem.eject(self, b)
+				if world.has_ability(b, "Naval"):
+					GarrisonSystem.order_unload(self, b, world.entities[b]["pos"])
+				else:
+					GarrisonSystem.eject(self, b)
+		"unload":
+			var pos: Variant = c["payload"].get("pos")
+			if pos is Array and pos.size() == 2 and _num_ok(pos[0]) and _num_ok(pos[1]):
+				for b in _own_ids(int(c["pid"]), c["payload"].get("ids"), "Garrison"):
+					GarrisonSystem.order_unload(self, b, Vector2i(int(pos[0]), int(pos[1])))
 		"bell":
 			_cmd_bell(int(c["pid"]), c["payload"])
 		"train":

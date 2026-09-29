@@ -16,6 +16,10 @@ const CombatSystem := preload("res://engine/sim/systems/CombatSystem.gd")
 const BuildSystem := preload("res://engine/sim/systems/BuildSystem.gd")
 
 const REACH := 800
+## Un barco de transporte recoge desde la orilla: un poco más de alcance.
+const SHIP_REACH := 1700
+## Desembarco: casillas de tierra a lo sumo a esta distancia del barco.
+const UNLOAD_R := 2
 ## Radio de la campana alrededor del centro urbano que la toca.
 const BELL_R := 30000
 
@@ -43,8 +47,12 @@ static func garrison_error(sim, id: int, b: int) -> String:
 	var w = sim.world
 	if not w.has_ability(id, "Garrisonable") or not w.has_ability(id, "Move") or is_inside(w, id):
 		return "no puede guarecerse"
-	if not w.entities.has(b) or str(w.entities[b]["type"]) != "building":
-		return "no es un edificio" # (los barcos de transporte, más adelante)
+	if not w.entities.has(b):
+		return "no existe"
+	if str(w.entities[b]["type"]) != "building":
+		# Transporte: barco con Garrison; solo sube tropa de tierra.
+		if not (w.has_ability(b, "Naval") and w.has_ability(b, "Garrison")) or w.has_ability(id, "Naval"):
+			return "no es un edificio"
 	if not w.has_ability(b, "Garrison") or not sim.is_built(b):
 		return "no admite guarnición"
 	if int(w.entities[b]["owner"]) != int(w.entities[id]["owner"]):
@@ -70,14 +78,29 @@ static func order_garrison(sim, id: int, b: int) -> void:
 	w.add_component(id, "Garrisoned", {"params": {}, "in": b, "inside": false})
 	var pos: Vector2i = w.entities[id]["pos"]
 	var r := GatherSystem._rect(sim, b)
-	if GatherSystem._rect_dist(pos, r) > REACH:
+	if GatherSystem._rect_dist(pos, r) > _reach(w, b):
 		var lo: Vector2i = r[0]
 		var hi: Vector2i = r[1]
 		MoveSystem.order_move(w, sim.grid, id, Vector2i(clampi(pos.x, lo.x, hi.x - 1), clampi(pos.y, lo.y, hi.y - 1)))
 
 
+static func _reach(w, b: int) -> int:
+	return SHIP_REACH if w.has_ability(b, "Naval") else REACH
+
+
 static func step(sim) -> void:
 	var w = sim.world
+	# Los pasajeros viajan con el barco; desembarco pendiente.
+	for ship in w.ids_with("Naval"):
+		var gar: Dictionary = w.comp(ship, "Garrison")
+		if gar.is_empty():
+			continue
+		for u in gar["units"]:
+			w.entities[u]["pos"] = w.entities[ship]["pos"]
+		var un: Dictionary = w.comp(ship, "Unload")
+		if not un.is_empty() and not bool(w.comp(ship, "Move")["moving"]):
+			_unload(sim, ship, un["pos"])
+			w.remove_component(ship, "Unload")
 	for id in w.ids_with("Garrisoned"):
 		var g: Dictionary = w.comp(id, "Garrisoned")
 		if bool(g["inside"]):
@@ -91,7 +114,7 @@ static func step(sim) -> void:
 			continue
 		var gar: Dictionary = w.comp(b, "Garrison")
 		var full: bool = (gar["units"] as Array).size() >= int(gar["params"]["capacity"])
-		if full or GatherSystem._rect_dist(w.entities[id]["pos"], GatherSystem._rect(sim, b)) > REACH:
+		if full or GatherSystem._rect_dist(w.entities[id]["pos"], GatherSystem._rect(sim, b)) > _reach(w, b):
 			w.remove_component(id, "Garrisoned") # lleno o inalcanzable
 			continue
 		_enter(sim, id, b, g)
@@ -155,11 +178,46 @@ static func eject(sim, b: int, only: Callable = Callable(), force: bool = false)
 	gar["units"] = keep
 
 
-## Una entidad desaparece: si era edificio, salen sus guarecidos; si estaba
-## dentro, deja su plaza.
+## Barco de transporte: ir hacia la orilla junto a pos y bajar a todos.
+static func order_unload(sim, ship: int, pos: Vector2i) -> void:
+	var w = sim.world
+	if not w.has_ability(ship, "Naval") or (w.comp(ship, "Garrison").get("units", []) as Array).is_empty():
+		return
+	w.add_component(ship, "Unload", {"params": {}, "pos": pos})
+	MoveSystem.order_move(w, sim.grid, ship, pos)
+
+
+## Baja a los pasajeros a tierra junto al barco (si hay costa cerca).
+static func _unload(sim, ship: int, target: Vector2i) -> void:
+	var w = sim.world
+	var st := Grid.tile_of(w.entities[ship]["pos"])
+	var goal := Grid.tile_of(target)
+	var gar: Dictionary = w.comp(ship, "Garrison")
+	var keep: Array = []
+	for u in (gar["units"] as Array).duplicate():
+		var t: Vector2i = sim.exit_tile(st, Vector2i.ONE, goal)
+		if t.x < 0 or maxi(absi(t.x - st.x), absi(t.y - st.y)) > UNLOAD_R:
+			keep.append(u) # sin costa al lado: siguen a bordo
+			continue
+		var p := Grid.center_of(t)
+		w.entities[u]["pos"] = p
+		w.spatial.insert(u, p)
+		w.remove_component(u, "Garrisoned")
+	gar["units"] = keep
+
+
+## Una entidad desaparece: si era edificio, salen sus guarecidos (en un barco
+## que se hunde, mueren con él); si estaba dentro, deja su plaza.
 static func on_remove(sim, id: int) -> void:
 	var w = sim.world
-	if w.has_ability(id, "Garrison"):
+	if w.has_ability(id, "Garrison") and w.has_ability(id, "Naval"):
+		var gar: Dictionary = w.comp(id, "Garrison")
+		var aboard: Array = (gar["units"] as Array).duplicate()
+		gar["units"] = []
+		for u in aboard:
+			w.remove_component(u, "Garrisoned")
+			sim.kill(u)
+	elif w.has_ability(id, "Garrison"):
 		eject(sim, id, Callable(), true)
 	var g: Dictionary = w.comp(id, "Garrisoned")
 	if not g.is_empty() and bool(g["inside"]) and w.has_ability(int(g["in"]), "Garrison"):
@@ -198,6 +256,8 @@ static func ring_bell(sim, pid: int, tc: int) -> void:
 		var best := -1
 		var best_d := 0
 		for b in w.ids_with("Garrison"):
+			if str(w.entities[b]["type"]) != "building":
+				continue # la campana no manda a los barcos
 			if garrison_error(sim, v, b) != "" or free_slots(w, b) <= 0:
 				continue
 			var d := GatherSystem._rect_dist(e["pos"], GatherSystem._rect(sim, b))

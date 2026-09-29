@@ -106,6 +106,9 @@ investigación, ejército) y ataca cuando junta tropas.
   más cercano y trae oro según la distancia.
 - **Descargar**: aldeanos con carga, clic derecho sobre un depósito propio que la acepte; después
   vuelven a su recurso.
+- **Barco de transporte**: con tropas de tierra seleccionadas, clic derecho sobre tu transporte para
+  subir (desde la orilla); con el transporte seleccionado, clic derecho en tierra para cruzar y bajar.
+  Si se hunde, los pasajeros mueren con él.
 - **Muelle**: se coloca en el agua pegado a la costa (vista previa roja si no). Los barcos pesqueros
   pescan con clic derecho sobre los peces y descargan en el muelle; los de guerra atacan desde el agua.
 - **Mejoras de línea** (p. ej. Piquero): convierten las unidades existentes y el edificio pasa a

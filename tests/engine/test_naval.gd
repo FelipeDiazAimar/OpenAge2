@@ -236,3 +236,39 @@ func test_lake_skips_occupied_and_start_tiles() -> void:
 	assert_false(s.grid.is_water(Vector2i(30, 30)), "no inunda el inicio")
 	s.remove(tc)
 	assert_false(s.grid.is_water(Vector2i(29, 29)))
+
+
+func test_transport_carries_units_across_lake() -> void:
+	var s := _sim()
+	var ship := s.spawn("transporte", 0, Vector2i(15, 20))
+	var ids := []
+	for i in 3:
+		ids.append(s.spawn("milicia", 0, Vector2i(12, 19 + i)))
+	s.queue_command(0, "garrison", {"ids": ids, "target": ship})
+	_steps(s, 80)
+	assert_eq((s.world.comp(ship, "Garrison")["units"] as Array).size(), 3, "suben desde la orilla")
+	# Cruza al otro lado (x 30+ es tierra) y desembarca.
+	s.queue_command(0, "unload", {"ids": [ship], "pos": [31500, 20500]})
+	_steps(s, 400)
+	for u in ids:
+		assert_true(s.world.comp(u, "Garrisoned").is_empty(), "bajaron")
+		var t := _tile(s, u)
+		assert_true(t.x >= 30 and not s.grid.is_water(t), "del otro lado, en tierra: %s" % t)
+
+
+func test_sinking_transport_kills_passengers_and_bell_ignores_ships() -> void:
+	var s := _sim()
+	var ship := s.spawn("transporte", 0, Vector2i(15, 20))
+	var u := s.spawn("milicia", 0, Vector2i(13, 20))
+	s.queue_command(0, "garrison", {"ids": [u], "target": ship})
+	_steps(s, 60)
+	assert_true(bool(s.world.comp(u, "Garrisoned").get("inside", false)))
+	s.kill(ship)
+	assert_false(s.world.entities.has(u), "se hunde con el barco")
+	var tc := s.spawn("centro_urbano", 0, Vector2i(3, 3))
+	var ship2 := s.spawn("transporte", 0, Vector2i(15, 8))
+	var v := s.spawn("aldeano", 0, Vector2i(13, 8))
+	s.queue_command(0, "bell", {"id": tc})
+	_steps(s, 150)
+	assert_true((s.world.comp(ship2, "Garrison")["units"] as Array).is_empty(), "la campana no manda al barco")
+	assert_true(v > 0)
