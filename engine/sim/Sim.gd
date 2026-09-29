@@ -42,7 +42,7 @@ var rng := Rng.new(0x5EED1234)
 
 func _init(p_registry, map_w: int, map_h: int) -> void:
 	registry = p_registry
-	grid = Grid.new(map_w, map_h)
+	grid = Grid.new(map_w, map_h).with_naval()
 
 
 func add_player(pid: int, civ: String, team: int) -> void:
@@ -213,7 +213,7 @@ func place_foundation(pid: int, def_id: String, tile: Vector2i) -> int:
 
 
 func _eject(id: int, tile: Vector2i, size: Vector2i) -> void:
-	var t := exit_tile(tile, size, Grid.tile_of(world.entities[id]["pos"]))
+	var t := exit_tile(tile, size, Grid.tile_of(world.entities[id]["pos"]), world.has_ability(id, "Naval"))
 	if t.x < 0:
 		return
 	world.set_pos(id, Grid.center_of(t))
@@ -225,7 +225,8 @@ func _eject(id: int, tile: Vector2i, size: Vector2i) -> void:
 ## Casilla libre alrededor de una huella, la más cercana a goal (desempate
 ## y, x), dentro de la zona conectada con más casillas libres alrededor: así
 ## nadie aparece en un hueco cerrado. (-1, -1) si no hay ninguna.
-func exit_tile(origin: Vector2i, size: Vector2i, goal: Vector2i) -> Vector2i:
+func exit_tile(origin: Vector2i, size: Vector2i, goal: Vector2i, naval: bool = false) -> Vector2i:
+	var g = grid.for_unit(naval)
 	var cands: Array[Vector2i] = []
 	var count := {}
 	for r in range(1, 10):
@@ -233,10 +234,10 @@ func exit_tile(origin: Vector2i, size: Vector2i, goal: Vector2i) -> Vector2i:
 			for x in range(origin.x - r, origin.x + size.x + r):
 				var inner := x > origin.x - r and x < origin.x + size.x + r - 1 and y > origin.y - r and y < origin.y + size.y + r - 1
 				var t := Vector2i(x, y)
-				if inner or not grid.is_walkable(t):
+				if inner or not g.is_walkable(t):
 					continue
 				cands.append(t)
-				var rg: int = grid.region_of(t)
+				var rg: int = g.region_of(t)
 				count[rg] = int(count.get(rg, 0)) + 1
 		if r >= 3 and not cands.is_empty():
 			break
@@ -251,7 +252,7 @@ func exit_tile(origin: Vector2i, size: Vector2i, goal: Vector2i) -> Vector2i:
 	var best := Vector2i(-1, -1)
 	var best_key := 0
 	for t in cands:
-		if grid.region_of(t) != region:
+		if g.region_of(t) != region:
 			continue
 		var d := t - goal
 		var key: int = (d.x * d.x + d.y * d.y) * 16777216 + t.y * 4096 + t.x
@@ -291,8 +292,12 @@ func spawn(def_id: String, owner: int, tile: Vector2i) -> int:
 			world.add_component(b, "Queue", ProductionSystem.new_queue())
 		return b
 	if _blocks_tile(def):
-		grid.set_blocked(tile, true)
-	return world.spawn(def, owner, Grid.center_of(tile))
+		# Peces: obstáculo en el agua (grilla naval); el resto, en tierra.
+		grid.for_unit(grid.is_water(tile)).set_blocked(tile, true)
+	var u := world.spawn(def, owner, Grid.center_of(tile))
+	if (def.get("tags", []) as Array).has("barco"):
+		world.add_component(u, "Naval", {"params": {}})
+	return u
 
 
 ## Recursos fijos (árboles, minas, bayas) bloquean su casilla; los animales
@@ -359,7 +364,8 @@ func remove(id: int) -> void:
 				grid.block_rect(Grid.tile_of(pos - size * (FP.SCALE / 2)), size, false)
 		"resource":
 			if _blocks_tile(def_for(id)):
-				grid.set_blocked(Grid.tile_of(pos), false)
+				var t := Grid.tile_of(pos)
+				grid.for_unit(grid.is_water(t)).set_blocked(t, false)
 	world.despawn(id)
 
 

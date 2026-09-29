@@ -10,6 +10,8 @@ static func order_move(world, grid, id: int, dest: Vector2i) -> void:
 	var m: Dictionary = world.comp(id, "Move")
 	if m.is_empty():
 		return
+	if world.has_ability(id, "Naval") and grid.naval != null:
+		grid = grid.naval # los barcos solo navegan por agua
 	var pos: Vector2i = world.entities[id]["pos"]
 	var start := Grid.tile_of(pos)
 	var dest_tile := Grid.tile_of(dest)

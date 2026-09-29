@@ -39,7 +39,7 @@ func despawn(id: int) -> void:
 
 ## Componentes de tiempo de ejecución: no vienen de la definición y se
 ## conservan al convertir una entidad.
-const RUNTIME := ["Foundation", "Queue", "Garrisoned", "Garrison", "Held", "Carrying", "RelicTask"]
+const RUNTIME := ["Foundation", "Queue", "Garrisoned", "Garrison", "Held", "Carrying", "RelicTask", "Naval"]
 
 
 ## Mejora de línea (milicia -> hombre de armas): la entidad pasa a def; cada

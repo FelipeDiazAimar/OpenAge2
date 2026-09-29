@@ -83,7 +83,8 @@ static func _release(sim, b: int, q: Dictionary, def_id: String) -> int:
 	var goal := origin + Vector2i(size.x / 2, size.y)
 	if rally != NO_RALLY:
 		goal = Grid.tile_of(rally)
-	var tile: Vector2i = sim.exit_tile(origin, size, goal)
+	var udef: Dictionary = sim.players[owner]["defs"].get_def(sim.players[owner]["defs"].resolve_unit(def_id))
+	var tile: Vector2i = sim.exit_tile(origin, size, goal, (udef.get("tags", []) as Array).has("barco"))
 	if tile.x < 0:
 		return -1
 	var unit_id: String = sim.players[owner]["defs"].resolve_unit(def_id)

@@ -1,5 +1,7 @@
 extends RefCounted
 ## Grilla de casillas: caminabilidad y conversiones casilla <-> milésimas.
+## La grilla de tierra tiene una hermana `naval` (misma medida) para los
+## barcos: el agua bloquea la de tierra y es lo único libre en la naval.
 
 const FP := preload("res://engine/sim/FixedPoint.gd")
 
@@ -11,12 +13,42 @@ var _regions_dirty := true
 var _next_label := 0
 ## Cuántas veces se re-etiquetó el mapa completo (para tests de rendimiento).
 var relabel_count := 0
+## Grilla de los barcos (null en la propia grilla naval).
+var naval = null
+var _water := PackedByteArray()
 
 
 func _init(w: int, h: int) -> void:
 	width = w
 	height = h
 	_blocked.resize(w * h)
+
+
+## Crea la grilla naval (todo bloqueado hasta que haya agua).
+func with_naval():
+	naval = get_script().new(width, height)
+	naval._blocked.fill(1)
+	naval._regions_dirty = true
+	_water.resize(width * height)
+	return self
+
+
+func is_water(c: Vector2i) -> bool:
+	return in_bounds(c) and not _water.is_empty() and _water[c.y * width + c.x] == 1
+
+
+## Agua: bloquea la tierra y abre el paso a los barcos.
+func set_water(c: Vector2i, v: bool = true) -> void:
+	if not in_bounds(c) or naval == null:
+		return
+	_water[c.y * width + c.x] = 1 if v else 0
+	set_blocked(c, v)
+	naval.set_blocked(c, not v)
+
+
+## Grilla de un dominio: la naval para barcos, esta para el resto.
+func for_unit(is_naval: bool):
+	return naval if is_naval and naval != null else self
 
 
 func in_bounds(c: Vector2i) -> bool:
