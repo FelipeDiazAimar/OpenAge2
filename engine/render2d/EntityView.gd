@@ -12,6 +12,7 @@ var entity_id := 0
 var kind := "unit"
 var def_id := ""
 var owner_civ := ""
+var owner_age := 1
 ## Fracción de comida restante en granjas (0..1): elige estadio visual.
 var farm_frac := 1.0
 ## Fracción de mina restante (0..1): oscurece al agotarse.
@@ -52,6 +53,7 @@ var _frame := 0
 var _has_mask := false
 var _sprite: Sprite2D
 var _ghost: Sprite2D
+var _sail: Sprite2D
 var _mat: ShaderMaterial
 
 
@@ -64,11 +66,12 @@ func set_color(c: Color) -> void:
 	queue_redraw()
 
 
-func setup(id: int, def: Dictionary, p_color: Color, locator, p_civ: String = "") -> void:
+func setup(id: int, def: Dictionary, p_color: Color, locator, p_civ: String = "", p_age: int = 1) -> void:
 	entity_id = id
 	kind = str(def.get("type", "unit"))
 	def_id = str(def.get("id", ""))
 	owner_civ = p_civ
+	owner_age = p_age
 	color = p_color
 	_locator = locator
 	_graphics = def.get("graphics", {})
@@ -77,6 +80,14 @@ func setup(id: int, def: Dictionary, p_color: Color, locator, p_civ: String = ""
 		if wb.has(owner_civ):
 			_graphics = _graphics.duplicate()
 			_graphics["idle"] = str(wb[owner_civ])
+		var db: Dictionary = _graphics.get("destruction_by_civ", {})
+		if db.has(owner_civ):
+			_graphics = _graphics.duplicate()
+			_graphics["destruction"] = str(db[owner_civ])
+		var rb: Dictionary = _graphics.get("rubble_by_civ", {})
+		if rb.has(owner_civ):
+			_graphics = _graphics.duplicate()
+			_graphics["rubble"] = str(rb[owner_civ])
 	if def.get("footprint") is Array:
 		footprint = Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
 	_sprite = Sprite2D.new()
@@ -92,6 +103,10 @@ func setup(id: int, def: Dictionary, p_color: Color, locator, p_civ: String = ""
 	_ghost.modulate = Color(1, 1, 1, 0.3)
 	add_child(_ghost)
 	add_child(_sprite)
+	_sail = Sprite2D.new()
+	_sail.centered = false
+	_sail.visible = false
+	add_child(_sail)
 
 
 func has_sprite() -> bool:
@@ -143,6 +158,8 @@ func update_view(moving: bool, facing_screen: Vector2, delta: float, action: Str
 		if _sprite.visible:
 			_sprite.visible = false
 			queue_redraw()
+		if _sail != null and _sail.visible:
+			_sail.visible = false
 		return
 	if want != _anim:
 		_anim = want
@@ -172,6 +189,7 @@ func update_view(moving: bool, facing_screen: Vector2, delta: float, action: Str
 	_mat.set_shader_parameter("has_mask", masked)
 	if fr["mask"] != null:
 		_mat.set_shader_parameter("mask_tex", fr["mask"])
+	_sync_sail(d, sub)
 	var mv := 1.0 - 0.45 * (1.0 - mine_frac)
 	if mine_frac < 0.999:
 		modulate = Color(mv, mv, mv, modulate.a)
@@ -213,10 +231,46 @@ func is_under_construction() -> bool:
 	return progress < 0.999
 
 
+## Vela sobre el casco: lee graphics.sail (ej. "sprite:ships_sails/medi_ship_4"),
+## mismo slot/sub que el casco, hotspot PROPIO del manifest de vela, sin máscara
+## de jugador. Oculta si no hay pack; si el def no trae "sail" no hace nada.
+func _sail_pack() -> Dictionary:
+	if not _anims.has("sail"):
+		_anims["sail"] = _locator.sprite(str(_graphics["sail"])) if _graphics.has("sail") else {}
+	return _anims["sail"]
+
+
+func _sync_sail(d: int, sub: int) -> void:
+	if _sail == null or not _graphics.has("sail"):
+		return
+	var sp := _sail_pack()
+	if sp.is_empty() or not _sprite.visible or is_under_construction():
+		_sail.visible = false
+		return
+	var sd := mini(d, int(sp["dirs"]) - 1)
+	var ss := mini(sub, int(sp["per_dir"]) - 1)
+	var fr: Dictionary = (sp["frames"] as Array)[sd * int(sp["per_dir"]) + ss]
+	_sail.texture = fr["tex"]
+	_sail.offset = -fr["hotspot"]
+	_sail.visible = true
+
+
 func _pack(anim: String) -> Dictionary:
 	if not _anims.has(anim):
-		_anims[anim] = _locator.sprite(str(_graphics[anim])) if _graphics.has(anim) else {}
+		_anims[anim] = _resolve_ref(str(_graphics.get(anim, "")))
 	return _anims[anim]
+
+
+## {age} = edad sim + 1 (1->2, 2->3, 3->4). Sin manifest cae a [want,3,2,4].
+func _resolve_ref(ref: String) -> Dictionary:
+	if not ref.contains("{age}"):
+		return _locator.sprite(ref)
+	var want := clampi(owner_age + 1, 2, 4)
+	for a in [want, 3, 2, 4]:
+		var pk: Dictionary = _locator.sprite(ref.replace("{age}", str(a)))
+		if not pk.is_empty():
+			return pk
+	return {}
 
 
 ## Textura de campo (granja) desde user://; null si aún no se importó.

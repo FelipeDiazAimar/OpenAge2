@@ -63,7 +63,7 @@ func test_damaged_units_show_hp_ratio() -> void:
 
 func test_no_ghost_corpse_without_death_anim() -> void:
 	var s := _sim()
-	var m := s.spawn("milicia", 1, Vector2i(10, 10))
+	var m := s.spawn("petardo", 1, Vector2i(10, 10))
 	var layer := EntityLayer.new()
 	layer.bind(s, AssetLocator.new(["user://nada"], ["user://nada"]), {0: Color.BLUE, 1: Color.RED})
 	layer.snapshot()

@@ -90,8 +90,9 @@ func sync(alpha: float, delta: float) -> void:
 			var pl: Array = sim.players
 			if int(e["owner"]) >= 0 and int(e["owner"]) < pl.size():
 				ociv = str((pl[int(e["owner"])] as Dictionary).get("civ", ""))
+			var oage: int = int(sim.age_of(int(e["owner"]))) if int(e["owner"]) >= 0 and int(e["owner"]) < pl.size() else 1
 			v = EntityView.new()
-			v.setup(id, sim.def_for(id), colors.get(e["owner"], Color(0.6, 0.6, 0.6)), locator, ociv)
+			v.setup(id, sim.def_for(id), colors.get(e["owner"], Color(0.6, 0.6, 0.6)), locator, ociv, oage)
 			if w.has_ability(id, "Farm"):
 				v.z_index = -1 # suelo: los granjeros se dibujan encima
 			add_child(v)
