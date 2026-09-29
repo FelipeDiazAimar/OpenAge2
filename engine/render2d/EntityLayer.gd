@@ -14,7 +14,11 @@ var colors: Dictionary = {}
 var views: Dictionary = {}
 ## Cadáveres (solo render): {view, t}. No se seleccionan.
 var corpses: Array = []
+## Escombros de edificios (destruction una vez + rubble quieto, permanente).
+var rubbles: Array = []
 var _prev: Dictionary = {}
+## Comida inicial por mina (id -> amount) para la fracción visual.
+var _mine_max: Dictionary = {}
 ## Carcasas recientes: id -> segundos desde la muerte (animación death y luego decay).
 var _dying: Dictionary = {}
 const DEATH_TIME := 1.2
@@ -41,6 +45,7 @@ func sync(alpha: float, delta: float) -> void:
 	for ev in sim.drain_events():
 		if str(ev.get("type", "")) == "death":
 			_spawn_corpse(ev)
+			_spawn_rubble(ev)
 		elif str(ev.get("type", "")) == "carcass":
 			_dying[int(ev["id"])] = 0.0
 	for c in corpses.duplicate():
@@ -51,11 +56,19 @@ func sync(alpha: float, delta: float) -> void:
 		if c["t"] >= CORPSE_TIME:
 			c["view"].queue_free()
 			corpses.erase(c)
+	for rb in rubbles:
+		rb["t"] = float(rb["t"]) + delta
+		if float(rb["t"]) > 2.0 and str(rb.get("rubble", "")) != "" and not bool(rb.get("settled", false)):
+			rb["settled"] = true
+			var rv = rb["view"]
+			rv.one_shot = false
+			rv.update_view(false, Vector2.ZERO, 0.0, "rubble")
 	for id in views.keys():
 		if not w.entities.has(id):
 			views[id].queue_free()
 			views.erase(id)
 			_dying.erase(id)
+			_mine_max.erase(id)
 	var ids: Array = w.entities.keys()
 	ids.sort()
 	var a := clampf(alpha, 0.0, 1.0)
@@ -73,8 +86,12 @@ func sync(alpha: float, delta: float) -> void:
 		if v != null and not v.visible:
 			v.visible = true
 		if v == null:
+			var ociv := ""
+			var pl: Array = sim.players
+			if int(e["owner"]) >= 0 and int(e["owner"]) < pl.size():
+				ociv = str((pl[int(e["owner"])] as Dictionary).get("civ", ""))
 			v = EntityView.new()
-			v.setup(id, sim.def_for(id), colors.get(e["owner"], Color(0.6, 0.6, 0.6)), locator)
+			v.setup(id, sim.def_for(id), colors.get(e["owner"], Color(0.6, 0.6, 0.6)), locator, ociv)
 			if w.has_ability(id, "Farm"):
 				v.z_index = -1 # suelo: los granjeros se dibujan encima
 			add_child(v)
@@ -119,6 +136,10 @@ func sync(alpha: float, delta: float) -> void:
 			var maxfood := float((fcomp.get("params", {}) as Dictionary).get("food", 0))
 			if maxfood > 0.0:
 				v.farm_frac = clampf(float(src.get("amount", 0)) / (maxfood * FP.SCALE), 0.0, 1.0)
+		if (str(v.def_id) == "gold_mine" or str(v.def_id) == "stone_mine") and not src.is_empty():
+			if not _mine_max.has(id):
+				_mine_max[id] = float(src.get("amount", 1))
+			v.mine_frac = clampf(float(src.get("amount", 0)) / maxf(float(_mine_max[id]), 1.0), 0.0, 1.0)
 		v.update_view(moving, facing, delta, action)
 
 
@@ -167,6 +188,23 @@ func _spawn_corpse(ev: Dictionary) -> void:
 	add_child(v)
 	v.update_view(false, Iso.to_screen(Vector2(ev["facing"])), 0.0, "death")
 	corpses.append({"view": v, "t": 0.0})
+
+
+## Escombro de edificio: animación de destrucción una vez (si hay pack) y
+## luego la pila de rubble quieta. Sin packs no hay escombro.
+func _spawn_rubble(ev: Dictionary) -> void:
+	var def: Dictionary = sim.registry.get_def(str(ev["def_id"]))
+	var gfx: Dictionary = def.get("graphics", {})
+	if def.is_empty() or str(def.get("type", "")) != "building" or not gfx.has("destruction"):
+		return
+	var v := EntityView.new()
+	v.setup(int(ev["id"]), def, colors.get(ev["owner"], Color(0.6, 0.6, 0.6)), locator)
+	v.one_shot = true
+	v.z_index = -1 # bajo las unidades vivas
+	v.position = Iso.milli_to_screen(ev["pos"])
+	add_child(v)
+	v.update_view(false, Vector2.ZERO, 0.0, "destruction")
+	rubbles.append({"view": v, "t": 0.0, "rubble": str(gfx.get("rubble", ""))})
 
 
 ## Entidad bajo el punto (coordenadas de mundo del canvas). Prioriza unidades.

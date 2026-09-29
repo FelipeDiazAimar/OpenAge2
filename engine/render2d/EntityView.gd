@@ -11,8 +11,11 @@ const FPS := {"walk": 10.0, "idle": 6.0, "task": 8.0, "attack": 10.0, "death": 8
 var entity_id := 0
 var kind := "unit"
 var def_id := ""
+var owner_civ := ""
 ## Fracción de comida restante en granjas (0..1): elige estadio visual.
 var farm_frac := 1.0
+## Fracción de mina restante (0..1): oscurece al agotarse.
+var mine_frac := 1.0
 var footprint := Vector2i.ONE
 var color := Color.WHITE
 var selected := false:
@@ -61,13 +64,19 @@ func set_color(c: Color) -> void:
 	queue_redraw()
 
 
-func setup(id: int, def: Dictionary, p_color: Color, locator) -> void:
+func setup(id: int, def: Dictionary, p_color: Color, locator, p_civ: String = "") -> void:
 	entity_id = id
 	kind = str(def.get("type", "unit"))
 	def_id = str(def.get("id", ""))
+	owner_civ = p_civ
 	color = p_color
 	_locator = locator
 	_graphics = def.get("graphics", {})
+	if def_id == "maravilla":
+		var wb: Dictionary = _graphics.get("wonders_by_civ", {})
+		if wb.has(owner_civ):
+			_graphics = _graphics.duplicate()
+			_graphics["idle"] = str(wb[owner_civ])
 	if def.get("footprint") is Array:
 		footprint = Vector2i(int(def["footprint"][0]), int(def["footprint"][1]))
 	_sprite = Sprite2D.new()
@@ -163,6 +172,9 @@ func update_view(moving: bool, facing_screen: Vector2, delta: float, action: Str
 	_mat.set_shader_parameter("has_mask", masked)
 	if fr["mask"] != null:
 		_mat.set_shader_parameter("mask_tex", fr["mask"])
+	var mv := 1.0 - 0.45 * (1.0 - mine_frac)
+	if mine_frac < 0.999:
+		modulate = Color(mv, mv, mv, modulate.a)
 
 
 ## Cimiento: solo la parte inferior del sprite (proporcional al avance) va
@@ -178,8 +190,23 @@ func _apply_progress(fr: Dictionary) -> void:
 	var h := size.y * clampf(0.1 + 0.9 * progress, 0.0, 1.0)
 	_sprite.region_rect = Rect2(0, size.y - h, size.x, h)
 	_sprite.offset = -fr["hotspot"] + Vector2(0, size.y - h)
-	_ghost.texture = tex
-	_ghost.offset = -fr["hotspot"]
+	var sc := _scaffold_pack()
+	if sc.is_empty():
+		_ghost.texture = tex
+		_ghost.offset = -fr["hotspot"]
+	else:
+		var f0: Dictionary = (sc["frames"] as Array)[0]
+		_ghost.texture = f0["tex"]
+		_ghost.offset = -f0["hotspot"]
+
+
+## Andamio de obra por footprint (1x1..5x5,8x8); {} si no hay pack.
+func _scaffold_pack() -> Dictionary:
+	var n := maxi(footprint.x, footprint.y)
+	var key := "b_misc_foundation_%dx%d_x1" % [n, n]
+	if not _anims.has(key):
+		_anims[key] = _locator.sprite("sprite:buildings/scaffolds/" + key)
+	return _anims[key]
 
 
 func is_under_construction() -> bool:
