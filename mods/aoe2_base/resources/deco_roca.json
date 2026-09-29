@@ -1,0 +1,12 @@
+{
+  "id": "deco_roca",
+  "type": "resource",
+  "name": "Roca decorativa",
+  "tags": [
+    "decoracion"
+  ],
+  "graphics": {
+    "idle": "sprite:nature/rock1"
+  },
+  "_todo": "colocacion en MapGen"
+}

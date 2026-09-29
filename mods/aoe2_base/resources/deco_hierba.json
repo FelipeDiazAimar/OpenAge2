@@ -1,0 +1,12 @@
+{
+  "id": "deco_hierba",
+  "type": "resource",
+  "name": "Hierba decorativa",
+  "tags": [
+    "decoracion"
+  ],
+  "graphics": {
+    "idle": "sprite:nature/grass"
+  },
+  "_todo": "colocacion en MapGen"
+}

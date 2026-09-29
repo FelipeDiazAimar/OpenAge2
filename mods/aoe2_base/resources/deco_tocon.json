@@ -1,0 +1,12 @@
+{
+  "id": "deco_tocon",
+  "type": "resource",
+  "name": "Tocón decorativo",
+  "tags": [
+    "decoracion"
+  ],
+  "graphics": {
+    "idle": "sprite:nature/stump"
+  },
+  "_todo": "colocacion en MapGen"
+}

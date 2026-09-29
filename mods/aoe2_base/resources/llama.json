@@ -1,0 +1,18 @@
+{
+  "id": "llama",
+  "type": "resource",
+  "name": "Llama",
+  "tags": ["recurso"],
+  "graphics": {
+    "death": "sprite:animals/llama/death",
+    "idle": "sprite:animals/llama/idle",
+    "walk": "sprite:animals/llama/walk"
+  },
+  "abilities": {
+    "ResourceSource": {"resource": "food", "amount": 100, "rate_key": "food_herd", "requires_kill": true, "tame": true},
+    "Hitpoints": {"max": 30},
+    "Move": {"speed": 0.7}
+  },
+  "_todo_ia": null,
+  "_hooks_sim": ["sim: tame cambia owner al aldeano", "sim: rate food_herd"]
+}

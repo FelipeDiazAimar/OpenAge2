@@ -1,0 +1,18 @@
+{
+  "id": "vaca",
+  "type": "resource",
+  "name": "Vaca",
+  "tags": ["recurso"],
+  "graphics": {
+    "death": "sprite:animals/cow/death",
+    "idle": "sprite:animals/cow/idle",
+    "walk": "sprite:animals/cow/walk"
+  },
+  "abilities": {
+    "ResourceSource": {"resource": "food", "amount": 150, "rate_key": "food_herd", "requires_kill": true, "tame": true},
+    "Hitpoints": {"max": 50},
+    "Move": {"speed": 0.7}
+  },
+  "_todo_ia": null,
+  "_hooks_sim": ["sim: tame cambia owner al aldeano", "sim: rate food_herd"]
+}

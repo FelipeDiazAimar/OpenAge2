@@ -1,0 +1,12 @@
+{
+  "id": "deco_flor",
+  "type": "resource",
+  "name": "Flor decorativa",
+  "tags": [
+    "decoracion"
+  ],
+  "graphics": {
+    "idle": "sprite:nature/flower"
+  },
+  "_todo": "colocacion en MapGen"
+}

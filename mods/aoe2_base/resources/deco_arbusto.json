@@ -1,0 +1,12 @@
+{
+  "id": "deco_arbusto",
+  "type": "resource",
+  "name": "Arbusto decorativo",
+  "tags": [
+    "decoracion"
+  ],
+  "graphics": {
+    "idle": "sprite:nature/bushd"
+  },
+  "_todo": "colocacion en MapGen"
+}
