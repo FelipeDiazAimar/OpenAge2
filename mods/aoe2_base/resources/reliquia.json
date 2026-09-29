@@ -9,5 +9,8 @@
     "Relic": {
       "gold_per_sec": 0.5
     }
+  },
+  "graphics": {
+    "idle": "sprite:relic/relic"
   }
 }
