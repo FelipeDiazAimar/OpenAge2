@@ -268,6 +268,14 @@ func _sync_sail(d: int, sub: int) -> void:
 	_sail.visible = true
 
 
+## Hundimiento (barco sin death), p 0..1: escora + y+ + fundido. Llamar
+## DESPUES de update_view. Sin estado ni packs nuevos.
+func tick_sink(p: float, base_y: float, drop: float) -> void:
+	rotation = p * 0.45
+	position.y = base_y + drop * p
+	modulate.a = clampf(1.0 - p, 0.0, 1.0)
+
+
 func _pack(anim: String) -> Dictionary:
 	if not _anims.has(anim):
 		_anims[anim] = _resolve_ref(str(_graphics.get(anim, "")))

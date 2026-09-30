@@ -7,6 +7,7 @@ const EntityView := preload("res://engine/render2d/EntityView.gd")
 const FP := preload("res://engine/sim/FixedPoint.gd")
 ## Segundos que un cadáver queda en el suelo (el último segundo se funde).
 const CORPSE_TIME := 5.0
+const SINK_TIME := 3.0 # hundimiento: escora + hundido + fundido
 
 var sim
 var locator
@@ -65,6 +66,14 @@ func sync(alpha: float, delta: float) -> void:
 					vv.refresh_age(na)
 	for c in corpses.duplicate():
 		c["t"] += delta
+		if bool(c.get("sink", false)):
+			var p := clampf(float(c["t"]) / SINK_TIME, 0.0, 1.0)
+			c["view"].update_view(false, c.get("face", Vector2.ZERO), delta, "")
+			c["view"].tick_sink(p, float(c["y0"]), 20.0)
+			if float(c["t"]) >= SINK_TIME:
+				c["view"].queue_free()
+				corpses.erase(c)
+			continue
 		c["view"].update_view(false, Vector2.ZERO, delta, "death")
 		if c["t"] > CORPSE_TIME - 1.0:
 			c["view"].modulate.a = clampf(CORPSE_TIME - c["t"], 0.0, 1.0)
@@ -189,12 +198,26 @@ func hide_ghost() -> void:
 		_ghost_def = ""
 
 
-## Cadáver: animación de muerte una vez (si hay pack) y fundido.
+## Cadáver: death + fundido. Barco = graphics con "sail"; sin death se hunde
+## ~3s con su idle/walk (escora + y+ + fundido) en vez de quedar de pie.
 func _spawn_corpse(ev: Dictionary) -> void:
 	var def: Dictionary = sim.registry.get_def(str(ev["def_id"]))
+	if def.is_empty():
+		return
+	var gfx: Dictionary = def.get("graphics", {})
+	if gfx.has("sail") and not gfx.has("death"):
+		var sv := EntityView.new()
+		sv.setup(int(ev["id"]), def, colors.get(ev["owner"], Color(0.6, 0.6, 0.6)), locator)
+		sv.z_index = -1
+		sv.position = Iso.milli_to_screen(ev["pos"])
+		add_child(sv)
+		var face := Iso.to_screen(Vector2(ev["facing"]))
+		sv.update_view(false, face, 0.0, "")
+		corpses.append({"view": sv, "t": 0.0, "sink": true, "y0": sv.position.y, "face": face})
+		return
 	# Sin animación de muerte no hay cadáver: si no, la unidad quedaría "de pie"
 	# (fantasma) varios segundos.
-	if def.is_empty() or not (def.get("graphics", {}) as Dictionary).has("death"):
+	if not gfx.has("death"):
 		return
 	var v := EntityView.new()
 	v.setup(int(ev["id"]), def, colors.get(ev["owner"], Color(0.6, 0.6, 0.6)), locator)
