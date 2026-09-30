@@ -14,8 +14,7 @@
   "pop_cost": 1,
   "hotkey": "E",
   "graphics": {
-    "death": "sprite:drakkar/death",
-    "sail": "sprite:ships_sails/u_shp_sail_medi_boat_4_x1"
+    "death": "sprite:drakkar/death"
   },
   "abilities": {
     "Hitpoints": {
