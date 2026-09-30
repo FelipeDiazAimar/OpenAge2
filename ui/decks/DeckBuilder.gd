@@ -23,6 +23,11 @@ var _filtro_edad: int = 0
 var _texto_busqueda: String = ""
 var _pagina: int = 0
 var _listo: bool = false
+var _civs_disponibles: Array = []
+var _filtro_civ: String = ""
+var _buscador_civ: LineEdit = null
+var _lista_civs: ItemList = null
+var _bonus_civ: Label = null
 # Arrastre manual (drag & drop sin la API de Godot, más predecible).
 var _arrastrando_desde := Vector2.ZERO
 var _arrastrando: Dictionary = {}
@@ -62,6 +67,15 @@ func set_civ(civ_nueva: String) -> void:
 	if not _listo:
 		return
 	_nuevo_mazo(false)
+	_actualizar_bonus_civ()
+
+
+func set_available_civs(civs: Array) -> void:
+	_civs_disponibles.clear()
+	for v in civs:
+		_civs_disponibles.append(str(v).strip_edges().to_lower())
+	_civs_disponibles.sort()
+	_refrescar_lista_civs()
 
 
 func _ready() -> void:
@@ -94,6 +108,10 @@ func _ready() -> void:
 	_lista_mazos.item_selected.connect(_on_mazo_elegido)
 	_listo = true
 	_nuevo_mazo(false)
+	_asegurar_picker_civ()
+	if _civs_disponibles.is_empty():
+		_civs_disponibles = _civs_auto()
+	_refrescar_lista_civs()
 
 
 func _nuevo_mazo(limpiar: bool) -> void:
@@ -572,3 +590,78 @@ func _icono_de(carta: Dictionary) -> String:
 	if _card_art != null and _card_art.has_method("icon_for"):
 		return str(_card_art.call("icon_for", str(carta.get("icon", ""))))
 	return "◆"
+
+
+func _asegurar_picker_civ() -> void:
+	if _lista_civs != null:
+		return
+	var padre := _lista_mazos.get_parent() as Control
+	if padre == null:
+		return
+	var t := Label.new()
+	t.text = "Civ:"
+	padre.add_child(t)
+	_buscador_civ = LineEdit.new()
+	_buscador_civ.placeholder_text = "Buscar civ..."
+	padre.add_child(_buscador_civ)
+	_buscador_civ.text_changed.connect(_on_filtro_civ)
+	_lista_civs = ItemList.new()
+	_lista_civs.custom_minimum_size = Vector2(0, 120)
+	padre.add_child(_lista_civs)
+	_lista_civs.item_selected.connect(_on_civ_elegida)
+	_bonus_civ = Label.new()
+	_bonus_civ.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	padre.add_child(_bonus_civ)
+
+
+func _civs_auto() -> Array:
+	var set := {}
+	set[_civ] = true
+	for c in _todas:
+		if c is Dictionary:
+			if c.has("civ") and str(c["civ"]) != "":
+				set[str(c["civ"]).to_lower()] = true
+			if c.has("civs") and c["civs"] is Array:
+				for v in c["civs"]:
+					set[str(v).to_lower()] = true
+	var a := set.keys()
+	a.sort()
+	return a
+
+
+func _civs_filtradas() -> Array:
+	var s: Array = []
+	for v in _civs_disponibles:
+		if _filtro_civ.is_empty() or _filtro_civ in str(v).to_lower():
+			s.append(str(v))
+	s.sort_custom(func(a, b): return str(a).to_lower() < str(b).to_lower())
+	return s
+
+
+func _refrescar_lista_civs() -> void:
+	if _lista_civs == null or not _listo:
+		return
+	_lista_civs.clear()
+	for v in _civs_filtradas():
+		var n: int = Validador.cards_for_civ(_todas, str(v)).size()
+		_lista_civs.add_item("%s (%d)" % [str(v), n])
+	_actualizar_bonus_civ()
+
+
+func _actualizar_bonus_civ() -> void:
+	if _bonus_civ == null or not _listo:
+		return
+	var n: int = Validador.cards_for_civ(_todas, _civ).size()
+	_bonus_civ.text = "%s: %d cartas" % [_civ, n]
+
+
+func _on_filtro_civ(t: String) -> void:
+	_filtro_civ = t.strip_edges().to_lower()
+	_refrescar_lista_civs()
+
+
+func _on_civ_elegida(idx: int) -> void:
+	var lista := _civs_filtradas()
+	if idx >= 0 and idx < lista.size():
+		set_civ(str(lista[idx]))
+		_refrescar_lista_civs()

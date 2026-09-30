@@ -1,0 +1,10 @@
+{
+ "id": "aguila_elite_up",
+ "type": "tech",
+ "name": "Aguila de Elite",
+ "at": "cuartel",
+ "cost": {"food": 800, "gold": 500},
+ "research_time": 50,
+ "requires": {"age": "imperial"},
+ "effects": [{"op": "replace_entity", "from": "aguila", "to": "aguila_elite"}]
+}

@@ -87,11 +87,11 @@ static func icon_for(nombre: String) -> String:
 			return "⚓"
 		"arco_largo", "arquero_tiro_largo", "arqueria", "guerrillero":
 			return "🏹"
-		"armadura":
+		"armadura", "buff_defensa", "defensa_buff":
 			return "🛡"
 		"balistica", "diana":
 			return "🎯"
-		"bota", "botas":
+		"bota", "botas", "buff_velocidad", "velocidad_buff":
 			return "🥾"
 		"camello":
 			return "🐪"
@@ -149,6 +149,22 @@ static func icon_for(nombre: String) -> String:
 			return "🔱"
 		"yelmo":
 			return "🪖"
+		"envio_madera", "enviar_madera", "send_wood":
+			return "🪵"
+		"envio_alimento", "envio_comida", "enviar_alimento", "send_food":
+			return "🌾"
+		"envio_oro", "enviar_oro", "send_gold":
+			return "🪙"
+		"envio_piedra", "enviar_piedra", "send_stone":
+			return "🪨"
+		"jugar_carta", "jugar", "play_card":
+			return "🃏"
+		"bloqueada_edad", "req_edad", "edad_bloqueada":
+			return "🔒"
+		"bloqueada_oro", "req_oro", "sin_oro":
+			return "💰"
+		"buff_ataque", "ataque_buff":
+			return "💪"
 		_:
 			return "◆"
 

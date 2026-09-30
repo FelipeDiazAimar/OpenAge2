@@ -266,3 +266,23 @@ static func _cap(s: String) -> String:
 	if s.is_empty():
 		return s
 	return s.substr(0, 1).to_upper() + s.substr(1)
+## Ayuda runtime: coste/edad al jugar y envío (recursos o buff por edad).
+static func play_hint(card: Dictionary) -> String:
+	var edad: int = int(card.get("age", card.get("edad", 0)))
+	var coste: String = str(card.get("cost", card.get("coste", ""))).strip_edges()
+	var base: String = explain_effect(card)
+	if edad > 0 and coste != "" and coste != "<null>":
+		return "%s Cuesta %s y pide edad %d." % [base, coste, edad]
+	if edad > 0:
+		return "%s Pide edad %d." % [base, edad]
+	if coste != "" and coste != "<null>":
+		return "%s Cuesta %s." % [base, coste]
+	return base
+## Error típico al jugar: "sin_oro", "edad_insuficiente".
+static func error_tip(code: String) -> String:
+	match code.strip_edges().to_lower():
+		"sin_oro", "sin oro":
+			return "Sin oro: pide un envío de oro o ahorra antes de jugar."
+		"edad_insuficiente", "edad":
+			return "Edad insuficiente: avanza de edad antes de jugarla."
+	return "No se puede jugar: revisa coste y edad."

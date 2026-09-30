@@ -183,10 +183,13 @@ func _cargar_civilizaciones() -> void:
 		var datos: Variant = _leer_json(RUTA_FACCIONES + "/" + str(archivo))
 		if not (datos is Dictionary):
 			continue
+		var tt: Dictionary = {} if not (datos.get("tech_tree") is Dictionary) else (datos["tech_tree"] as Dictionary).duplicate()
+		if tt.has("puerto") and not tt.has("muelle"):
+			tt["muelle"] = tt["puerto"]
 		_civs.append({
 			"id": str(datos.get("id", str(archivo).get_basename())),
 			"nombre": str(datos.get("name", datos.get("id", "?"))),
-			"tech_tree": datos.get("tech_tree", {}),
+			"tech_tree": tt,
 		})
 	_civs.sort_custom(func(a: Dictionary, b: Dictionary) -> bool:
 		return str(a["nombre"]) < str(b["nombre"]))
