@@ -199,6 +199,7 @@ func update_view(moving: bool, facing_screen: Vector2, delta: float, action: Str
 	if fr["mask"] != null:
 		_mat.set_shader_parameter("mask_tex", fr["mask"])
 	_sync_sail(d, sub)
+	# mine_frac solo minas: berry_bush excluido (no entra).
 	var mv := 1.0 - 0.45 * (1.0 - mine_frac)
 	if mine_frac < 0.999:
 		modulate = Color(mv, mv, mv, modulate.a)

@@ -9,8 +9,12 @@ const Grid := preload("res://engine/sim/Grid.gd")
 
 const MAP_SIZE := Vector2(260, 130)
 const EVERY := 5 # ticks entre redibujos
-const GRASS := Color("#4f7d31")
-const WATER := Color("#2d5fa8")
+const GRASS := Color("#87a244")
+const WATER := Color("#3a6fd8")
+const TERRAIN_COLORS := {
+	"agua": Color("#3a6fd8"), "bajios": Color("#7fb3b0"), "playa": Color("#d9c27a"), "arena": Color("#e0c888"), "grass": Color("#87a244"), "grass_dry": Color("#b09955"), "desierto_hierba": Color("#bfae6b"),
+	"forest_floor": Color("#5f6b2e"), "dirt": Color("#c19b59"), "camino": Color("#a98d5f"), "roca": Color("#8d8d8d"), "nieve": Color("#e8eef2"), "bosque_nevado": Color("#ccd6c2"), "hielo": Color("#aecfe0"),
+}
 const RES_COLORS := {
 	"tree": Color("#1d4a17"), "gold_mine": Color("#e0c040"), "stone_mine": Color("#a8a8a8"),
 	"berry_bush": Color("#c84848"), "shore_fish": Color("#8fc0f0"), "deep_fish": Color("#8fc0f0"),
@@ -58,10 +62,17 @@ func _build_base() -> void:
 	_base.fill(GRASS)
 	for y in h:
 		for x in w:
-			if sim.grid.is_water(Vector2i(x, y)):
-				_base.set_pixel(x, y, WATER)
+			_base.set_pixel(x, y, _tcol(Vector2i(x, y)))
 	_img = _base.duplicate()
 	_tex = ImageTexture.create_from_image(_img)
+
+
+func _tcol(t: Vector2i) -> Color:
+	var tid := ""
+	if sim.grid.has_method("get_terrain"): tid = str(sim.grid.get_terrain(t))
+	elif sim.grid.has_method("terrain_at"): tid = str(sim.grid.terrain_at(t))
+	if TERRAIN_COLORS.has(tid): return TERRAIN_COLORS[tid]
+	return WATER if sim.grid.is_water(t) else GRASS
 
 
 ## Redibuja las entidades (cada EVERY ticks, o ya si force).
