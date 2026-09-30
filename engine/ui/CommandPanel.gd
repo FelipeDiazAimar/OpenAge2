@@ -20,7 +20,9 @@ var pid := 0
 ## "kind:id" -> Button (para refrescar estados y para pruebas).
 var buttons: Dictionary = {}
 var _checks: Dictionary = {}
+var _tips: Dictionary = {}
 var _title: Label
+var _scroll: ScrollContainer
 var _grid: GridContainer
 var _queue_box: HBoxContainer
 var _status: Label
@@ -53,7 +55,12 @@ func setup(p_sim, p_pid: int) -> void:
 	_grid.columns = COLS
 	_grid.add_theme_constant_override("h_separation", 4)
 	_grid.add_theme_constant_override("v_separation", 4)
-	vb.add_child(_grid)
+	_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_scroll = ScrollContainer.new()
+	_scroll.custom_minimum_size = Vector2(516, 240)
+	_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	vb.add_child(_scroll)
+	_scroll.add_child(_grid)
 	_queue_box = HBoxContainer.new()
 	vb.add_child(_queue_box)
 	_status = _label(13)
@@ -133,6 +140,7 @@ func show_for(ids: Array, keep_page: bool = false) -> void:
 	_state_sig = _state_signature()
 	buttons.clear()
 	_checks.clear()
+	_tips.clear()
 	_building = -1
 	var w = sim.world
 	var alive: Array = _ids.filter(func(i): return w.entities.has(i))
@@ -272,6 +280,8 @@ func _add(kind: String, id: String, text: String, check: Callable) -> void:
 	_grid.add_child(btn)
 	buttons["%s:%s" % [kind, id]] = btn
 	_checks[btn] = check
+	_tips[btn] = text.replace("\n", " - ")
+	btn.tooltip_text = _tips[btn]
 
 
 ## Por tick: habilitado/motivo de cada botón, cola y avance de obra.
@@ -299,7 +309,7 @@ func refresh() -> void:
 	for btn in _checks:
 		var why: String = _checks[btn].call()
 		btn.disabled = why != ""
-		btn.tooltip_text = why
+		btn.tooltip_text = why if why != "" else str(_tips.get(btn, ""))
 	_status.text = info_text(_ids[0]) if _ids.size() == 1 else ""
 	var w = sim.world
 	if _ids.size() == 1 and w.entities.has(_ids[0]):

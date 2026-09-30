@@ -85,27 +85,15 @@ static func validate_deck(cartas: Array, civ: String) -> Array[String]:
 	return errores
 
 
-## Lee todos los *.json de la carpeta de cartas, ordenados por nombre.
-## Cada archivo puede contener un Diccionario o un Array de cartas.
+## Lee todos los *.json de la carpeta de cartas, ordenados por nombre,
+## incluyendo subdirectorios (una carta por civi). Cada archivo puede
+## contener un Diccionario o un Array de cartas.
 static func load_all_cards() -> Array:
 	var resultado: Array = []
-	var dir := DirAccess.open(CARDS_DIR)
-	# Si no hay carpeta, devuelve lista vacia sin romper.
-	if dir == null:
-		return resultado
-	var archivos: Array[String] = []
-	# Recoge solo ficheros .json.
-	dir.list_dir_begin()
-	var f: String = dir.get_next()
-	while f != "":
-		if not dir.current_is_dir() and f.ends_with(".json"):
-			archivos.append(f)
-		f = dir.get_next()
-	dir.list_dir_end()
-	archivos.sort()
-	# Carga cada fichero en orden.
-	for nombre in archivos:
-		var ruta: String = CARDS_DIR + "/" + nombre
+	var rutas: Array[String] = []
+	_recoger_json(CARDS_DIR, rutas)
+	rutas.sort()
+	for ruta in rutas:
 		var texto: String = FileAccess.get_file_as_string(ruta)
 		if texto.strip_edges().is_empty():
 			continue
@@ -116,6 +104,23 @@ static func load_all_cards() -> Array:
 		elif parsed is Dictionary:
 			resultado.append(parsed)
 	return resultado
+
+
+static func _recoger_json(ruta: String, rutas: Array[String]) -> void:
+	var dir := DirAccess.open(ruta)
+	# Si no hay carpeta, devuelve lista vacia sin romper.
+	if dir == null:
+		return
+	# Recoge solo ficheros .json (y baja a subdirectorios).
+	dir.list_dir_begin()
+	var f: String = dir.get_next()
+	while f != "":
+		if dir.current_is_dir():
+			_recoger_json(ruta + "/" + f, rutas)
+		elif f.ends_with(".json"):
+			rutas.append(ruta + "/" + f)
+		f = dir.get_next()
+	dir.list_dir_end()
 
 
 ## Filtra las cartas jugables por una civ (las propias mas las de "todas").

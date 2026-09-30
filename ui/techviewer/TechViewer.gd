@@ -12,12 +12,10 @@ const ESCENA_MENU := "res://ui/menus/MainMenu.tscn"
 # Orden canónico de edades (I-IV) y de edificios del visor.
 const ORDEN_EDADES := {"alta_edad_media": 0, "feudal": 1, "castillos": 2, "imperial": 3}
 const NUMEROS_EDAD := ["I", "II", "III", "IV"]
-const ORDEN_EDIFICIOS: Array = ["herreria", "universidad", "monasterio", "castillo"]
+const ORDEN_EDIFICIOS: Array = ["herreria", "arqueria", "cuartel", "establo", "taller_asedio", "universidad", "monasterio", "muelle", "centro_urbano", "molino", "campamento_maderero", "campamento_minero", "mercado", "castillo"]
 const NOMBRES_EDIFICIOS := {
-	"herreria": "Herrería",
-	"universidad": "Universidad",
-	"monasterio": "Monasterio",
-	"castillo": "Castillo",
+	"herreria": "Herrería", "arqueria": "Arquería", "cuartel": "Cuartel", "establo": "Establo", "taller_asedio": "Taller de asedio", "universidad": "Universidad", "monasterio": "Monasterio",
+	"muelle": "Muelle", "centro_urbano": "Centro urbano", "molino": "Molino", "campamento_maderero": "Camp. maderero", "campamento_minero": "Camp. minero", "mercado": "Mercado", "castillo": "Castillo",
 }
 const ORDEN_COSTE: Array = ["food", "wood", "gold", "stone"]
 const ETIQUETAS_COSTE := {"food": "comida", "wood": "madera", "gold": "oro", "stone": "piedra"}
@@ -296,6 +294,7 @@ func _valor_texto(v: Variant) -> String:
 func _limpiar(contenedor: Container) -> void:
 	# Vacía un contenedor liberando sus hijos.
 	for hijo in contenedor.get_children():
+		contenedor.remove_child(hijo)
 		hijo.queue_free()
 
 
@@ -318,20 +317,20 @@ func _construir_arbol() -> void:
 			var lote: Array = de_edad.filter(func(t: Dictionary) -> bool: return str(t["edificio"]) == str(edificio))
 			if lote.is_empty():
 				continue
-			_contenido.add_child(_crear_cabecera_edificio(edificio, lote.size()))
+			for tec in lote:
+				if _esta_vetada(str(tec["id"]), str(tec["edificio"])):
+					total_vetadas += 1
+			var visibles: Array = lote.filter(func(t: Dictionary) -> bool: return not (_ocultar_vetadas and _esta_vetada(str(t["id"]), str(t["edificio"]))))
+			if visibles.is_empty(): continue
+			_contenido.add_child(_crear_cabecera_edificio(edificio, visibles.size()))
 			var rejilla := GridContainer.new()
 			rejilla.columns = 2
 			rejilla.add_theme_constant_override("h_separation", 8)
 			rejilla.add_theme_constant_override("v_separation", 8)
 			rejilla.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			_contenido.add_child(rejilla)
-			for tec in lote:
-				var vetada := _esta_vetada(str(tec["id"]), str(tec["edificio"]))
-				if vetada:
-					total_vetadas += 1
-					if _ocultar_vetadas:
-						continue
-				rejilla.add_child(_crear_tarjeta(tec, vetada, nombre_civ))
+			for tec in visibles:
+				rejilla.add_child(_crear_tarjeta(tec, _esta_vetada(str(tec["id"]), str(tec["edificio"])), nombre_civ))
 	_actualizar_info(nombre_civ, total_vetadas)
 
 

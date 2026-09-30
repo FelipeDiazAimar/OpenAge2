@@ -17,6 +17,8 @@ const PLAYER_COLORS: Array[Color] = [Color("#2a4bff"), Color("#ff2020"), Color("
 var civs: Array = []
 var rows: Array = [] # [{civ: OptionButton, team: OptionButton, ai: OptionButton, box}]
 var _rows_box: VBoxContainer
+var _filter: LineEdit
+var _civ_filter := ""
 var _pop: OptionButton
 var _seed: SpinBox
 var _lake: CheckBox
@@ -47,6 +49,12 @@ func _ready() -> void:
 	var title := MenuStyle.titulo_medieval("Nueva partida", 44)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vb.add_child(title)
+	vb.add_child(_terrain_preview())
+	_filter = LineEdit.new()
+	_filter.placeholder_text = "Buscar civilización… (filtra las 50+ del mod)"
+	_filter.text_changed.connect(_on_civ_filter)
+	_filter.custom_minimum_size = Vector2(320, 0)
+	vb.add_child(_filter)
 	_rows_box = VBoxContainer.new()
 	_rows_box.add_theme_constant_override("separation", 8)
 	vb.add_child(_rows_box)
@@ -104,12 +112,50 @@ func _ready() -> void:
 	play.call_deferred("grab_focus")
 
 
+## Preview de mapa: un swatch por terreno con el color de cada def (sin fallback gris/negro).
+func _terrain_preview() -> HBoxContainer:
+	var r := Registry.new()
+	r.load_mods("res://mods")
+	var bar := HBoxContainer.new()
+	bar.add_theme_constant_override("separation", 4)
+	for id in r.ids_of_type("terrain"):
+		var def: Dictionary = r.get_def(id)
+		var sw := ColorRect.new()
+		sw.color = Color(str(def.get("color", "#6a8a3a")))
+		sw.custom_minimum_size = Vector2(20, 20)
+		sw.tooltip_text = "%s (%s)" % [str(def.get("name", id)), str(id)]
+		bar.add_child(sw)
+	return bar
+
+
 func _load_civs() -> void:
 	var r := Registry.new()
 	r.load_mods("res://mods")
 	for id in r.ids_of_type("civ"):
 		civs.append([id, str(r.get_def(id).get("name", id))])
 	civs.sort_custom(func(a, b): return str(a[1]) < str(b[1]))
+
+
+func _fill_civ_items(ob: OptionButton, keep_id: String) -> void:
+	ob.clear()
+	var q := _civ_filter.strip_edges().to_lower()
+	for c in civs:
+		if q != "" and not (str(c[0]).to_lower().contains(q) or str(c[1]).to_lower().contains(q)):
+			continue
+		ob.add_item(str(c[1]))
+		ob.set_item_metadata(ob.item_count - 1, str(c[0]))
+		if str(c[0]) == keep_id:
+			ob.select(ob.item_count - 1)
+	if ob.item_count > 0 and ob.selected < 0:
+		ob.select(0)
+
+
+func _on_civ_filter(t: String) -> void:
+	_civ_filter = t
+	for r in rows:
+		var ob: OptionButton = r["civ"]
+		var keep := str(ob.get_item_metadata(ob.selected)) if ob.item_count > 0 and ob.selected >= 0 else ""
+		_fill_civ_items(ob, keep)
 
 
 func _label(t: String) -> Label:
@@ -134,10 +180,8 @@ func _add_row(slot: Dictionary) -> void:
 	box.add_child(name)
 	var civ := OptionButton.new()
 	civ.custom_minimum_size = Vector2(220, 0)
-	for c in civs:
-		civ.add_item(str(c[1]))
-		if str(c[0]) == str(slot.get("civ", "")):
-			civ.select(civ.item_count - 1)
+	civ.clip_text = true # popup nativo con scroll para la lista larga
+	_fill_civ_items(civ, str(slot.get("civ", "")))
 	box.add_child(civ)
 	var team := OptionButton.new()
 	for t in MAX_PLAYERS:
@@ -176,7 +220,8 @@ func _update_buttons() -> void:
 func chosen_slots() -> Array:
 	var out: Array = []
 	for r in rows:
-		out.append({"civ": civs[r["civ"].selected][0], "team": r["team"].selected, "ai": r["ai"].selected == 1})
+		var ob: OptionButton = r["civ"]
+		out.append({"civ": str(ob.get_item_metadata(ob.selected)), "team": r["team"].selected, "ai": r["ai"].selected == 1})
 	return out
 
 

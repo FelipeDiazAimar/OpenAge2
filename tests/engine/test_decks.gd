@@ -40,7 +40,8 @@ func _leer_json(ruta: String) -> Variant:
 	return JSON.parse_string(texto)
 
 
-## Carga todas las cartas reales de mods/aoe2_base/cards/*.json en orden.
+## Carga todas las cartas reales de mods/aoe2_base/cards/*.json en orden,
+## incluyendo subdirectorios (una carta por civi).
 func _todas_las_cartas() -> Array:
 	var salida: Array = []
 	var dir := DirAccess.open(CARDS_DIR)
@@ -48,19 +49,32 @@ func _todas_las_cartas() -> Array:
 	if dir == null:
 		return salida
 	var archivos: Array[String] = []
-	for f in dir.get_files():
-		if f.ends_with(".json"):
-			archivos.append(f)
+	_recoger(CARDS_DIR, archivos)
 	archivos.sort()
 	assert_true(archivos.size() > 0, "hay json de cartas en " + CARDS_DIR)
 	for f in archivos:
-		var parsed: Variant = _leer_json(CARDS_DIR + "/" + f)
+		var parsed: Variant = _leer_json(f)
 		if parsed is Array:
 			for c in (parsed as Array):
 				salida.append(c)
 		elif parsed is Dictionary:
 			salida.append(parsed)
 	return salida
+
+
+func _recoger(ruta: String, archivos: Array[String]) -> void:
+	var dir := DirAccess.open(ruta)
+	if dir == null:
+		return
+	dir.list_dir_begin()
+	var f: String = dir.get_next()
+	while f != "":
+		if dir.current_is_dir():
+			_recoger(ruta + "/" + f, archivos)
+		elif f.ends_with(".json"):
+			archivos.append(ruta + "/" + f)
+		f = dir.get_next()
+	dir.list_dir_end()
 
 
 func test_validador_acepta_mazo_valido_20() -> void:

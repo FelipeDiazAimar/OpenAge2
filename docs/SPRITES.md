@@ -100,3 +100,24 @@ move assets\sprites\tmp\u_inf_militia_idleA_x1 assets\sprites\militia\idle
   g_fc1-3, g_wt*.dds). En el clon, EntityView._draw() pinta la granja
   (def_id == granja) como rombo con textura de campo del DE (fc1 en obra, fm1 maduro; tierra plana si faltan) en vez del
   fallback azul. Maravilla usa wonder/b_west_wonder_britons_x1.
+
+## Velas
+- `ships_sails`: pack `ships/sail_<anim>`; unidades navales usan `graphics.sail` aparte del casco; si falta, nave sin vela.
+## Destruction / rubble
+- Cada edificio: `graphics.destruction` (`<bldg>/destruction`, anim 1 vez) + `graphics.rubble` (`<bldg>/rubble`, variante fija por id).
+## Maravillas por civi
+- `wonder/wonder_<civi>` por civilizacion; con `destruction`/`rubble` propios igual que edificios.
+## Elites con sprite propio
+- La elite no retinta: `graphics` apunta a pack propio (`<unit>_elite/<anim>`), fallback a linea base si falta.
+## Faenas femeninas
+- `villager_female/<task>` espejo de `villager/<task>` (`lumber`, `miner_gold`, `forager`, `fisher`, `farmer`); fallback a faena masculina.
+## Proyectiles reserva
+- Packs `projectiles/<flecha,piedra,virote>/` ya cableados en `graphics.projectile`; placeholder si falta el PNG.
+## Fauna / deco
+- `animals/<lobo,gaviota,pez>/` + `deco/<rocas,flores,ruinas>/` como variantes 1-dir fijas por id (como `nature/oak`).
+## Edades {age} + refresh
+- Packs con `{age}` (`<bldg>_<age>/`) se re-resuelven al avanzar de edad con `refresh` sin recrear la entidad.
+## Minas por etapas + andamios
+- `nature/<goldmine,stonemine>_<pct>` por % restante; `scaffold/<bldg>` visible solo en obra, se oculta al terminar.
+## Terrenos nuevos (14)
+- 14 texturas `terrain:g_*` nuevas; limite shader: mezcla 4 capas (base + 3 overlays); resto cae a `color` respaldo.
