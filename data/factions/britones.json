@@ -40,10 +40,10 @@
    }
   }
  ],
- "unique_unit": {
-  "id": "arquero_tiro_largo",
-  "name": "Arquero de tiro largo",
-  "hp": 40,
+  "unique_unit": {
+   "id": "arquero_tiro_largo",
+   "name": "Arquero de tiro largo",
+   "hp": 35,
   "hp_elite": 45,
   "attack": 6,
   "attack_elite": 7,
@@ -57,7 +57,7 @@
    "wood": 35,
    "gold": 40
   },
-  "train_time_sec": 27,
+  "train_time_sec": 19,
   "trained_at": "castillo",
   "mejora_elite_cost": {
    "food": 850,

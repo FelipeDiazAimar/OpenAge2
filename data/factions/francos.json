@@ -40,12 +40,12 @@
    }
   }
  ],
- "unique_unit": {
-  "id": "paladin_franco",
-  "name": "Paladín franco",
-  "hp": 160,
-  "hp_elite": 180,
-  "attack": 12,
+  "unique_unit": {
+   "id": "paladin_franco",
+   "name": "Paladín franco",
+   "hp": 192,
+   "hp_elite": 180,
+   "attack": 14,
   "attack_elite": 14,
   "armor_melee": 2,
   "armor_melee_elite": 3,
@@ -53,7 +53,7 @@
   "range": 1.2,
   "sight": 6.0,
   "cost": {
-   "food": 75,
+   "food": 60,
    "gold": 75
   },
   "train_time_sec": 30,

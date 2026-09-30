@@ -108,8 +108,8 @@
   "armor_pierce": 1,
   "attack_elite": 7,
   "cost": {
-   "gold": 46,
-   "food": 60
+   "wood": 46,
+   "gold": 46
   },
   "trained_at": "castillo",
   "attack": 5,

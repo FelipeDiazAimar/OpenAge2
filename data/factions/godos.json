@@ -42,12 +42,12 @@
    }
   }
  ],
- "unique_unit": {
-  "id": "huscarle",
-  "name": "Huscarle",
-  "hp": 60,
-  "hp_elite": 70,
-  "attack": 8,
+  "unique_unit": {
+   "id": "huscarle",
+   "name": "Huscarle",
+   "hp": 65,
+   "hp_elite": 70,
+   "attack": 10,
   "attack_elite": 10,
   "armor_melee": 0,
   "armor_melee_elite": 1,
@@ -56,8 +56,8 @@
   "bonus_vs_arquero": 6,
   "bonus_vs_arquero_elite": 8,
   "cost": {
-   "food": 55,
-   "gold": 25
+   "food": 80,
+   "gold": 40
   },
   "train_time_sec": 16,
   "trained_at": "castillo",
