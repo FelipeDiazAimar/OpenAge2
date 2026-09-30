@@ -129,3 +129,15 @@ func test_lockstep_rejects_foreign_pid() -> void:
 func test_lockstep_detects_desync() -> void:
 	var peers := _run(120, 3, 11, true)
 	assert_true(peers[0]["ls"].desync_tick > 0, "detecta la desincronización")
+
+
+func test_lockstep_hash_check_after_player_left() -> void:
+	var net: Array = []
+	var p = _peer(0, [0, 1, 2], net)
+	var ls = p["ls"]
+	ls._record_hash(0, 50, "a")
+	ls._record_hash(1, 50, "b")
+	assert_eq(ls.desync_tick, -1, "falta la huella del jugador 2")
+	ls.player_left(2)
+	assert_eq(ls.desync_tick, 50, "al irse el 2, se comparan las que hay")
+	assert_true(ls._hashes.is_empty(), "no quedan huellas colgadas")

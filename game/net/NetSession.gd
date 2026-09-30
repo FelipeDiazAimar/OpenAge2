@@ -34,6 +34,14 @@ var _mp: SceneMultiplayer
 var _peer: ENetMultiplayerPeer
 var _udp: PacketPeerUDP
 var _announce_t := 0.0
+## Paquetes que llegan antes de que la partida (Match) escuche: otra PC puede
+## cargar el mapa más rápido y mandar sus primeros turnos antes.
+var _pending: Array = []
+## Jugadores (pids) que se fueron durante la partida: Match los aplica al
+## arrancar por si se fueron antes de que escuchara `peer_left`.
+var gone: Array = []
+## Civilizaciones válidas (las pone la sala); vacío = no se valida.
+var valid_civs: Array = []
 
 
 ## mp: SceneMultiplayer propio (pruebas con dos sesiones en un proceso);
@@ -87,7 +95,10 @@ func leave() -> void:
 	_api().multiplayer_peer = null
 	_peer = null
 	slots = []
+	_pending = []
+	gone = []
 	in_game = false
+	is_host = false
 	stop_discovery()
 
 
@@ -115,7 +126,8 @@ func _on_peer_connected(_id: int) -> void:
 
 func _on_peer_disconnected(id: int) -> void:
 	if in_game:
-		if pid_of_peer.has(id):
+		if pid_of_peer.has(id) and not gone.has(int(pid_of_peer[id])):
+			gone.append(int(pid_of_peer[id]))
 			peer_left.emit(int(pid_of_peer[id]))
 		return
 	if is_host:
@@ -145,8 +157,8 @@ func _request(req: Dictionary) -> void:
 ## Cambios del anfitrión sobre cualquier hueco (IA incluida) o del jugador
 ## sobre el suyo.
 func _apply_set(s: Dictionary, req: Dictionary) -> void:
-	if req.has("civ"):
-		s["civ"] = str(req["civ"]).left(40)
+	if req.has("civ") and (valid_civs.is_empty() or valid_civs.has(str(req["civ"]))):
+		s["civ"] = str(req["civ"])
 	if req.has("team"):
 		s["team"] = clampi(int(req["team"]), 0, MAX_PLAYERS - 1)
 	if req.has("ready"):
@@ -228,7 +240,12 @@ func start(map_seed: int, pop_max: int, lake: bool) -> String:
 		cfg["slots"].append({"civ": s["civ"], "team": int(s["team"]), "ai": bool(s["ai"]), "name": s["name"]})
 		if int(s["peer"]) > 0:
 			cfg["peers"][str(s["peer"])] = i
-	_start.rpc(cfg)
+	# Solo a quienes tienen lugar en la sala; nadie más entra ya.
+	for peer in cfg["peers"]:
+		if int(peer) != 1:
+			_start.rpc_id(int(peer), cfg)
+	if _peer != null:
+		_peer.refuse_new_connections = true
 	_start(cfg)
 	return ""
 
@@ -262,8 +279,20 @@ func send(pkt: Dictionary) -> void:
 @rpc("any_peer", "call_remote", "reliable")
 func _net_packet(pkt: Dictionary) -> void:
 	var from := _api().get_remote_sender_id()
-	if pid_of_peer.has(from):
+	if not pid_of_peer.has(from):
+		return
+	if packet.get_connections().is_empty():
+		_pending.append([int(pid_of_peer[from]), pkt])
+	else:
 		packet.emit(int(pid_of_peer[from]), pkt)
+
+
+## Entrega los paquetes guardados (llamar tras conectar `packet`).
+func flush_pending() -> void:
+	var q := _pending
+	_pending = []
+	for p in q:
+		packet.emit(p[0], p[1])
 
 
 # --- descubrimiento LAN -------------------------------------------------------

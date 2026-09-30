@@ -63,12 +63,17 @@ func test_join_lobby_ready_and_start() -> void:
 	assert_eq(got[1]["slots"].size(), 3)
 	assert_true(got[1]["slots"][2]["ai"])
 	assert_eq(c.human_pids(), [0, 1])
-	# Paquetes del lockstep: llegan con el pid de quien los mandó.
+	# Paquetes del lockstep: llegan con el pid de quien los mandó. Los que
+	# llegan antes de que la partida escuche se guardan.
 	var recv := []
-	h.packet.connect(func(pid, pkt): recv.append([pid, pkt]))
 	c.send({"k": "turn", "tick": 0, "cmds": []})
-	assert_true(_pump(p, func(): return not recv.is_empty()))
+	assert_true(_pump(p, func(): return not h._pending.is_empty()), "guardado sin oyente")
+	h.packet.connect(func(pid, pkt): recv.append([pid, pkt]))
+	h.flush_pending()
+	assert_eq(recv.size(), 1, "entregado al conectar")
 	assert_eq(recv[0][0], 1, "pid del cliente")
+	c.send({"k": "turn", "tick": 1, "cmds": []})
+	assert_true(_pump(p, func(): return recv.size() == 2))
 	_close(p)
 
 

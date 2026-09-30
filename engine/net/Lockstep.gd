@@ -127,6 +127,11 @@ func try_step() -> bool:
 
 func player_left(pid: int) -> void:
 	left[pid] = true
+	# Huellas que solo esperaban a este jugador: compararlas ya.
+	var ticks: Array = _hashes.keys()
+	ticks.sort()
+	for t in ticks:
+		_check_hash(int(t))
 
 
 func _record_hash(pid: int, t: int, h: String) -> void:
@@ -135,6 +140,13 @@ func _record_hash(pid: int, t: int, h: String) -> void:
 	if not _hashes.has(t):
 		_hashes[t] = {}
 	_hashes[t][pid] = h
+	_check_hash(t)
+
+
+## Compara las huellas del tick t si ya están las de todos los que siguen.
+func _check_hash(t: int) -> void:
+	if not _hashes.has(t):
+		return
 	var got: Dictionary = _hashes[t]
 	var all := true
 	for p in humans:

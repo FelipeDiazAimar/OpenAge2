@@ -23,6 +23,7 @@ const Minimap := preload("res://engine/ui/Minimap.gd")
 const MatchConfig := preload("res://game/MatchConfig.gd")
 const MatchSetup := preload("res://game/MatchSetup.gd")
 const MatchLogger := preload("res://game/diag/MatchLogger.gd")
+const Lockstep := preload("res://engine/net/Lockstep.gd")
 
 const MAP_SIZE := 144
 const MAP_SEED := 1234 # por defecto; la partida usa map_seed (MatchConfig)
@@ -53,6 +54,11 @@ var selected: Array[int] = []
 var ais: Array = []
 ## Registro de diagnóstico de la partida (null si está apagado).
 var logger
+## Partida en red: sesión y lockstep (null en partida local).
+var net
+var lockstep
+var _wait_label: Label
+var _banner_ms := 0 # hasta cuándo se ve un aviso (desconexión, red)
 ## Velocidad de juego como en AoE2 DE: la simulación cuenta segundos de juego
 ## (10 ticks = 1 s) y la partida los corre a esta velocidad. "Normal" del DE es
 ## 1,7 (1,0 es "Lenta"). + / - la cambian.
@@ -78,7 +84,25 @@ func _ready() -> void:
 		return
 	slots = MatchConfig.active_slots().duplicate(true)
 	map_seed = MatchConfig.map_seed
+	net = MatchConfig.net
+	if net != null:
+		local_pid = int(net.local_pid)
+		if local_pid < 0: # esta PC no tiene lugar en la partida
+			push_error("Partida en red sin lugar para esta PC")
+			MatchConfig.net = null
+			get_tree().change_scene_to_file.call_deferred("res://ui/menus/MainMenu.tscn")
+			return
 	sim = MatchSetup.build(registry, match_cfg())
+	if net != null:
+		sim.debug_enabled = false # sin tropas de prueba en red
+		lockstep = Lockstep.new(sim, local_pid, net.human_pids(), net.send)
+		lockstep.on_desync = _on_desync
+		net.packet.connect(lockstep.receive)
+		net.peer_left.connect(_on_peer_left)
+		net.failed.connect(func(why): _show_banner("Red: %s. Esc para volver al menú." % why))
+		net.flush_pending()
+		for p in net.gone:
+			lockstep.player_left(int(p))
 	var ai_pids := []
 	for i in slots.size():
 		if bool(slots[i].get("ai", false)):
@@ -153,13 +177,26 @@ func _import_terrain() -> void:
 		print("[Match] importadas %d texturas de terreno del AoE2 DE" % n)
 
 
-## Un tick de simulación y de las IA (medidos para el registro).
-func _step_sim() -> void:
+## Orden del jugador local: directa en partida local; por el lockstep en red.
+func _cmd(type: String, payload: Dictionary) -> void:
+	if lockstep != null:
+		lockstep.submit(type, payload)
+	else:
+		sim.queue_command(local_pid, type, payload)
+
+
+## Un tick de simulación y de las IA (medidos para el registro). En red, solo
+## si llegaron los turnos de todos; devuelve si avanzó.
+func _step_sim() -> bool:
+	if lockstep != null:
+		lockstep.end_turn()
+		if not lockstep.can_step():
+			return false
 	if logger == null:
 		sim.step()
 		for ai in ais:
 			ai.tick()
-		return
+		return true
 	logger.phase = "simulación"
 	var t0 := Time.get_ticks_usec()
 	sim.step()
@@ -170,6 +207,29 @@ func _step_sim() -> void:
 	var t2 := Time.get_ticks_usec()
 	logger.phase = "dibujo"
 	logger.after_tick(t1 - t0, t2 - t1)
+	return true
+
+
+func _on_desync(tick: int, hashes: Dictionary) -> void:
+	push_error("Desincronización en el tick %d: %s" % [tick, hashes])
+	if logger != null:
+		logger._note("desincronizacion", {"hashes": hashes})
+	_show_banner("¡Desincronización en el tick %d! (queda en el registro de la partida)" % tick)
+
+
+func _on_peer_left(pid: int) -> void:
+	if lockstep != null:
+		lockstep.player_left(pid)
+	var name := str(slots[pid].get("name", "Jugador %d" % (pid + 1))) if pid < slots.size() else "?"
+	_show_banner("%s se desconectó" % name)
+
+
+func _show_banner(text: String) -> void:
+	if _wait_label == null:
+		return
+	_wait_label.text = text
+	_wait_label.visible = true
+	_banner_ms = Time.get_ticks_msec() + 6000
 
 
 func tick_once() -> void:
@@ -186,8 +246,8 @@ func tick_once() -> void:
 ## 5 arqueros del jugador pid cerca de `tiles`.
 func debug_troops(pid: int, tiles: Vector2) -> void:
 	var pos := [int(round(tiles.x * 1000.0)), int(round(tiles.y * 1000.0))]
-	sim.queue_command(local_pid, "debug_spawn", {"def": "milicia", "n": 5, "pos": pos, "owner": pid})
-	sim.queue_command(local_pid, "debug_spawn", {"def": "arquero", "n": 5, "pos": pos, "owner": pid})
+	_cmd("debug_spawn", {"def": "milicia", "n": 5, "pos": pos, "owner": pid})
+	_cmd("debug_spawn", {"def": "arquero", "n": 5, "pos": pos, "owner": pid})
 
 
 func select(ids: Array) -> void:
@@ -290,7 +350,7 @@ func place_line(a: Vector2i, b: Vector2i) -> int:
 			chosen.append(tiles[i])
 	chosen.reverse() # los aldeanos terminan en el primer tramo y siguen en cadena
 	for t in chosen:
-		sim.queue_command(local_pid, "place", {"ids": _builders(), "def": placing, "tile": [t.x, t.y]})
+		_cmd("place", {"ids": _builders(), "def": placing, "tile": [t.x, t.y]})
 	return chosen.size()
 
 
@@ -325,7 +385,7 @@ func place_at(tiles: Vector2, keep: bool = false) -> void:
 	var def: Dictionary = sim.players[local_pid]["defs"].get_def(placing)
 	var tile := _place_tile(def, tiles)
 	if sim.can_place(local_pid, placing, tile) == "":
-		sim.queue_command(local_pid, "place", {"ids": _builders(), "def": placing, "tile": [tile.x, tile.y]})
+		_cmd("place", {"ids": _builders(), "def": placing, "tile": [tile.x, tile.y]})
 		if not keep:
 			cancel_placing()
 
@@ -337,28 +397,28 @@ func _on_panel_action(kind: String, arg: Variant) -> void:
 			start_placing(str(arg))
 		"train":
 			if b >= 0:
-				sim.queue_command(local_pid, "train", {"id": b, "def": str(arg)})
+				_cmd("train", {"id": b, "def": str(arg)})
 		"research":
 			if b >= 0:
-				sim.queue_command(local_pid, "research", {"id": b, "tech": str(arg)})
+				_cmd("research", {"id": b, "tech": str(arg)})
 		"age_up":
 			if b >= 0:
-				sim.queue_command(local_pid, "age_up", {"id": b})
+				_cmd("age_up", {"id": b})
 		"cancel":
 			if b >= 0:
-				sim.queue_command(local_pid, "cancel", {"id": b, "index": int(arg)})
+				_cmd("cancel", {"id": b, "index": int(arg)})
 		"ungarrison":
 			if selected.size() == 1:
-				sim.queue_command(local_pid, "ungarrison", {"ids": [selected[0]]})
+				_cmd("ungarrison", {"ids": [selected[0]]})
 		"bell":
 			if selected.size() == 1:
-				sim.queue_command(local_pid, "bell", {"id": selected[0]})
+				_cmd("bell", {"id": selected[0]})
 
 
 func issue_move(tiles: Vector2) -> void:
 	if selected.is_empty():
 		return
-	sim.queue_command(local_pid, "move", {"ids": selected.duplicate(), "pos": [int(round(tiles.x * 1000.0)), int(round(tiles.y * 1000.0))]})
+	_cmd("move", {"ids": selected.duplicate(), "pos": [int(round(tiles.x * 1000.0)), int(round(tiles.y * 1000.0))]})
 
 
 ## Clic derecho estilo AoE2: sobre un enemigo, atacar; sobre un recurso, los
@@ -375,23 +435,23 @@ func smart_command(world_pos: Vector2) -> void:
 	var ships: Array = selected.filter(func(s): return sim.world.has_ability(s, "Naval") and sim.world.has_ability(s, "Garrison") \
 		and not (sim.world.comp(s, "Garrison")["units"] as Array).is_empty())
 	if not ships.is_empty() and not sim.grid.is_water(Vector2i(Iso.to_tiles(world_pos).floor())):
-		sim.queue_command(local_pid, "unload", {"ids": ships, "pos": mpos})
+		_cmd("unload", {"ids": ships, "pos": mpos})
 		return
 	# Tropa de tierra sobre un transporte propio: subir.
 	if id >= 0 and int(sim.world.entities[id]["owner"]) == local_pid and sim.world.has_ability(id, "Naval") \
 			and sim.world.has_ability(id, "Garrison"):
 		var riders: Array = selected.filter(func(s): return sim.world.has_ability(s, "Garrisonable") and not sim.world.has_ability(s, "Naval"))
 		if not riders.is_empty():
-			sim.queue_command(local_pid, "garrison", {"ids": riders, "target": id})
+			_cmd("garrison", {"ids": riders, "target": id})
 			return
 	var b := _selected_building()
 	if b >= 0:
 		var t := mpos
-		sim.queue_command(local_pid, "rally", {"ids": [b], "pos": t, "target": id})
+		_cmd("rally", {"ids": [b], "pos": t, "target": id})
 		return
 	if id >= 0 and sim.world.has_ability(id, "Foundation") and int(sim.world.entities[id]["owner"]) == local_pid:
 		if not _builders().is_empty():
-			sim.queue_command(local_pid, "build", {"ids": _builders(), "target": id})
+			_cmd("build", {"ids": _builders(), "target": id})
 			return
 	if _monk_command(id):
 		return
@@ -399,24 +459,24 @@ func smart_command(world_pos: Vector2) -> void:
 	var mkt_owner := int(sim.world.entities[id]["owner"]) if id >= 0 else -1
 	if id >= 0 and not carts.is_empty() and sim.world.has_ability(id, "Market") and mkt_owner != local_pid \
 			and not sim.is_enemy(local_pid, mkt_owner):
-		sim.queue_command(local_pid, "trade", {"ids": carts, "target": id})
+		_cmd("trade", {"ids": carts, "target": id})
 		return
 	if id >= 0 and sim.world.has_ability(id, "Hitpoints") and sim.is_enemy(local_pid, int(sim.world.entities[id]["owner"])):
 		var attackers: Array = selected.filter(func(s): return sim.world.has_ability(s, "Attack"))
 		if not attackers.is_empty():
-			sim.queue_command(local_pid, "attack", {"ids": attackers, "target": id})
+			_cmd("attack", {"ids": attackers, "target": id})
 			return
 	if id >= 0 and sim.world.has_ability(id, "ResourceSource"):
 		var gatherers: Array = selected.filter(func(s): return sim.world.has_ability(s, "Gather"))
 		if not gatherers.is_empty():
-			sim.queue_command(local_pid, "gather", {"ids": gatherers, "target": id})
+			_cmd("gather", {"ids": gatherers, "target": id})
 			return
 	if id >= 0 and int(sim.world.entities[id]["owner"]) == local_pid and str(sim.world.entities[id]["type"]) == "building":
 		# Edificio propio: dañado = reparar (aldeanos); con guarnición = guarecer.
 		var hp: Dictionary = sim.world.comp(id, "Hitpoints")
 		var repairers: Array = selected.filter(func(s): return sim.world.has_ability(s, "Repair"))
 		if not repairers.is_empty() and not hp.is_empty() and int(hp["hp"]) < int(hp["max"]) and sim.is_built(id):
-			sim.queue_command(local_pid, "repair", {"ids": repairers, "target": id})
+			_cmd("repair", {"ids": repairers, "target": id})
 			return
 		# Aldeanos solo con Alt (como en AoE2): si no, el clic derecho no los mete.
 		var alt := Input.is_key_pressed(KEY_ALT)
@@ -425,12 +485,12 @@ func smart_command(world_pos: Vector2) -> void:
 		var carriers: Array = selected.filter(func(s): return sim.world.has_ability(s, "Gather") \
 			and int(sim.world.comp(s, "Gather")["carry"]) > 0 and accepts.has(str(sim.world.comp(s, "Gather")["carry_res"])))
 		if not alt and not carriers.is_empty() and sim.is_built(id):
-			sim.queue_command(local_pid, "drop", {"ids": carriers, "target": id})
+			_cmd("drop", {"ids": carriers, "target": id})
 			if carriers.size() == selected.size():
 				return # si hay más unidades, siguen con su orden (guarecer)
 		var garrisonable: Array = selected.filter(func(s): return sim.world.has_ability(s, "Garrisonable") and (alt or not sim.world.has_ability(s, "Gather")))
 		if not garrisonable.is_empty() and sim.world.has_ability(id, "Garrison"):
-			sim.queue_command(local_pid, "garrison", {"ids": garrisonable, "target": id})
+			_cmd("garrison", {"ids": garrisonable, "target": id})
 			return
 	issue_move(Iso.to_tiles(world_pos))
 
@@ -446,23 +506,23 @@ func _monk_command(id: int) -> bool:
 	if w.has_ability(id, "Relic"):
 		var free: Array = monks.filter(func(s): return not w.has_ability(s, "Carrying"))
 		if not free.is_empty():
-			sim.queue_command(local_pid, "pick_relic", {"ids": [free[0]], "target": id})
+			_cmd("pick_relic", {"ids": [free[0]], "target": id})
 		return true
 	var carrying: Array = monks.filter(func(s): return w.has_ability(s, "Carrying"))
 	if not carrying.is_empty() and w.has_ability(id, "RelicHolder") and owner == local_pid:
-		sim.queue_command(local_pid, "store_relic", {"ids": carrying, "target": id})
+		_cmd("store_relic", {"ids": carrying, "target": id})
 		return true
 	if str(w.entities[id]["type"]) != "unit":
 		return false
 	if sim.is_enemy(local_pid, owner):
-		sim.queue_command(local_pid, "convert", {"ids": monks, "target": id})
+		_cmd("convert", {"ids": monks, "target": id})
 		var attackers: Array = selected.filter(func(s): return w.has_ability(s, "Attack"))
 		if not attackers.is_empty():
-			sim.queue_command(local_pid, "attack", {"ids": attackers, "target": id})
+			_cmd("attack", {"ids": attackers, "target": id})
 		return true
 	var hp: Dictionary = w.comp(id, "Hitpoints")
 	if not hp.is_empty() and int(hp["hp"]) < int(hp["max"]) and sim.team_of(owner) == sim.team_of(local_pid):
-		sim.queue_command(local_pid, "heal", {"ids": monks, "target": id})
+		_cmd("heal", {"ids": monks, "target": id})
 		return true
 	return false
 
@@ -477,9 +537,16 @@ func _process(delta: float) -> void:
 		logger.frame(delta)
 	while _acc >= dt:
 		layer.snapshot()
-		_step_sim()
+		if not _step_sim():
+			_acc = minf(_acc, dt * 3) # esperando turnos: no acumular atraso
+			break
 		_acc -= dt
 		ticked = true
+	if lockstep != null and _wait_label != null and lockstep.desync_tick < 0 and Time.get_ticks_msec() > _banner_ms:
+		var w: Array = lockstep.waiting_for()
+		_wait_label.visible = not w.is_empty() and _acc >= dt
+		if _wait_label.visible:
+			_wait_label.text = "Esperando a " + ", ".join(w.map(func(p): return str(slots[p].get("name", p + 1)) if p < slots.size() else str(p)))
 	layer.sync(_acc / dt, delta * game_speed) # animaciones al ritmo del juego
 	projectiles.sync(_acc / dt)
 	if ticked:
@@ -526,6 +593,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		if logger != null:
 			logger.finish("volvió al menú")
+		if net != null:
+			net.leave()
+			net.get_parent().remove_child(net)
+			net.queue_free()
+			MatchConfig.net = null
 		get_tree().change_scene_to_file("res://ui/menus/MainMenu.tscn")
 		return
 	if event is InputEventKey and event.pressed and event.keycode == KEY_F12 and logger != null:
@@ -539,12 +611,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		var plain_key: bool = not (event.ctrl_pressed or event.alt_pressed or event.meta_pressed)
 		if plain_key and placing == "" and panel.press_key(OS.get_keycode_string(event.keycode)):
 			return # menú de construir (va antes que S = detener)
-		if event.keycode in [KEY_PLUS, KEY_KP_ADD, KEY_EQUAL, KEY_MINUS, KEY_KP_SUBTRACT]:
+		if event.keycode in [KEY_PLUS, KEY_KP_ADD, KEY_EQUAL, KEY_MINUS, KEY_KP_SUBTRACT] and net == null:
 			var up: bool = event.keycode in [KEY_PLUS, KEY_KP_ADD, KEY_EQUAL]
 			set_game_speed(SPEEDS[clampi(SPEEDS.find(game_speed) + (1 if up else -1), 0, SPEEDS.size() - 1)])
 			return
 		if event.keycode == KEY_S and not selected.is_empty():
-			sim.queue_command(local_pid, "stop", {"ids": selected.duplicate()})
+			_cmd("stop", {"ids": selected.duplicate()})
 			return
 		var plain: bool = not (event.ctrl_pressed or event.alt_pressed or event.meta_pressed)
 		if plain and placing == "" and _train_hotkey(OS.get_keycode_string(event.keycode)):
@@ -601,7 +673,7 @@ func _train_hotkey(key: String) -> bool:
 	for u in sim.trainable_units(local_pid, b):
 		var d: Dictionary = sim.players[local_pid]["defs"].get_def(str(u))
 		if str(d.get("hotkey", "")) == key and sim.train_error(local_pid, b, str(u)) == "":
-			sim.queue_command(local_pid, "train", {"id": b, "def": str(u)})
+			_cmd("train", {"id": b, "def": str(u)})
 			return true
 	return false
 
@@ -618,7 +690,8 @@ func _start_tile(pid: int) -> Vector2i:
 
 ## Opciones de esta partida (para armarla y para el registro).
 func match_cfg() -> Dictionary:
-	return {"slots": slots, "map_seed": map_seed, "pop_max": MatchConfig.pop_max, "lake": MatchConfig.lake}
+	return {"slots": slots, "map_seed": map_seed, "pop_max": MatchConfig.pop_max, "lake": MatchConfig.lake,
+		"red": net != null}
 
 
 func _build_help() -> void:
@@ -634,6 +707,15 @@ func _build_help() -> void:
 	minimap.grow_horizontal = Control.GROW_DIRECTION_BEGIN
 	minimap.grow_vertical = Control.GROW_DIRECTION_BEGIN
 	ui.add_child(minimap)
+	_wait_label = Label.new()
+	_wait_label.visible = false
+	_wait_label.add_theme_font_size_override("font_size", 22)
+	_wait_label.add_theme_color_override("font_color", Color(1, 0.85, 0.4))
+	_wait_label.add_theme_color_override("font_outline_color", Color.BLACK)
+	_wait_label.add_theme_constant_override("outline_size", 5)
+	_wait_label.set_anchors_and_offsets_preset(Control.PRESET_CENTER_TOP)
+	_wait_label.position.y = 80
+	ui.add_child(_wait_label)
 	panel = CommandPanel.new()
 	panel.setup(sim, local_pid)
 	panel.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_LEFT)

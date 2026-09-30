@@ -1,31 +1,48 @@
-# LAN 8 jugadores - Guía (gratis, sin internet)
+# Partidas en red (LAN)
 
-## Host (tu PC)
-1. Abre el juego en Godot: F5
-2. Multijugador -> Crear LAN -> mapa Arabia -> Abrir
-3. Te muestra: `Host OK en 192.168.1.X:7778`
-4. Pasa esa IP a tus amigos (misma WiFi/Ethernet).
+## Jugar
 
-## Unirse (PCs amigos)
-1. Misma red WiFi.
-2. Multijugador -> Buscar LAN (escucha UDP 7777) o Unirse por IP.
-3. Elige color/civ/equipo -> Listo.
+1. Todas las PC deben tener **la misma versión del juego y los mismos mods**
+   (la sala compara la huella de los datos; si difiere, marca
+   "¡datos distintos!" y no deja empezar).
+2. Menú → Nueva partida → **Multijugador LAN**.
+3. Una PC pulsa **Crear partida** (será el anfitrión). Se muestra su IP.
+4. Las demás eligen la partida en la lista (doble clic) o escriben la IP del
+   anfitrión y pulsan **Unirse**.
+5. Cada jugador elige civilización y equipo y marca **Estoy listo**. El
+   anfitrión puede agregar/quitar IA, cambiar la semilla, la población máxima
+   y el lago, y pulsa **¡Empezar!** cuando todos estén listos.
 
-## Firewall Windows (solo una vez)
-Permitir `Godot` en red privada. O abrir:
-- UDP 7777 (descubrimiento)
-- TCP 7778 (partida)
+Puertos: **7778/UDP** (partida, ENet) y **7777/UDP** (anuncio en la LAN).
+Si el firewall de Windows pregunta, permitir en redes privadas. Si la lista
+no muestra la partida, unirse por IP funciona igual.
 
-Comando (admin PowerShell):
-```
-New-NetFirewallRule -DisplayName "OpenAge UDP" -Direction Inbound -Protocol UDP -LocalPort 7777 -Action Allow
-New-NetFirewallRule -DisplayName "OpenAge TCP" -Direction Inbound -Protocol TCP -LocalPort 7778 -Action Allow
-```
+## Cómo funciona (lockstep)
 
-## Test sin amigos
-```
-godot --headless --test lan_8_bots --map arabia --ticks 3600
-```
-Simula 8 bots, debe terminar sin desync.
+Cada PC ejecuta la misma simulación determinista (`engine/sim`). Por la red
+solo viajan las órdenes:
 
-Máximo: 8 jugadores (1 host + 7). Latencia LAN típica <50ms.
+- Una orden dada en el tick T se aplica en T + 2 (`Sim.INPUT_DELAY`) en todas
+  las PC. Cada PC envía un "turno" por tick, aunque no tenga órdenes.
+- El tick N solo se simula cuando llegaron los turnos N − 2 de todos los
+  humanos (`engine/net/Lockstep.gd`). Si alguien se atrasa, los demás
+  esperan y aparece "Esperando a …".
+- Las IA corren igual en todas las PC; sus órdenes no viajan.
+- Cada 50 ticks se comparan las huellas del estado. Si difieren aparece
+  "¡Desincronización!" y queda anotado en el registro de la partida
+  (`docs/REGISTRO.md`), con los hashes de cada jugador.
+- Si un jugador se desconecta, se avisa y la partida sigue sin esperarlo (sus
+  unidades quedan quietas).
+- En red no se cambia la velocidad del juego (+/−).
+
+Código: `game/net/NetSession.gd` (sala, ENet, anuncio), `engine/net/Lockstep.gd`
+(turnos y huellas), `game/scenes/Lobby.gd` (UI de la sala), `Match._cmd` (toda
+orden local pasa por ahí).
+
+## Diagnosticar una desincronización
+
+1. Juntar el registro de cada PC (`%APPDATA%/Godot/app_userdata/OpenAge-LAN/logs/partidas`).
+2. `godot --headless --path . -s tools/replay_log.gd -- <registro> --estado`
+   en cada uno: el primer tick donde los estados difieren apunta al sistema
+   no determinista (buscar `Time`, `randi`, iteración de diccionarios sin
+   ordenar, floats).

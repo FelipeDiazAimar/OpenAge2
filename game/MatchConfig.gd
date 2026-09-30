@@ -14,6 +14,8 @@ static var pop_max := 0
 static var lake := true
 ## Registro de diagnóstico de la partida (las pruebas lo apagan).
 static var diagnostics := true
+## Partida en red: la NetSession de la sala (null = partida local).
+static var net = null
 
 
 static func active_slots() -> Array:
@@ -22,6 +24,7 @@ static func active_slots() -> Array:
 
 static func reset() -> void:
 	slots = []
+	net = null
 	map_seed = DEFAULT_SEED
 	pop_max = 0
 	lake = true
