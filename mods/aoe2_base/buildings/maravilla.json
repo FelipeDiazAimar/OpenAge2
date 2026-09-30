@@ -35,7 +35,8 @@
    "victory_time": 600
   }
  },
- "graphics": {
+  "_nota": "Fallback verificado 2026-09-30: DE no trae b_*_wonder_dravidians/chola/tamil ni romans/latin (solo flag waypoint + s_roman_ruins + heroe chola). Dravidianos->gurjaras (b_indi set indio, triple idle/destruction/rubble verificado en assets). Romanos->bizantinos (continuidad Roma oriental, b_medi triple verificado; italianos solo tiene idle en assets).",
+  "graphics": {
   "idle": "sprite:buildings/wonder/b_west_wonder_britons_x1",
   "destruction": "sprite:buildings/wonder/b_west_wonder_britons_destruction_x1",
   "rubble": "sprite:buildings/wonder/b_west_wonder_britons_rubble_x1",
@@ -53,7 +54,8 @@
    "celtas": "sprite:buildings/wonder/b_west_wonder_celts_x1",
    "chinos": "sprite:buildings/wonder/b_asia_wonder_chinese_x1",
    "coreanos": "sprite:buildings/wonder/b_asia_wonder_koreans_x1",
-   "cumanos": "sprite:buildings/wonder/b_ceas_wonder_cumans_x1",
+    "cumanos": "sprite:buildings/wonder/b_ceas_wonder_cumans_x1",
+    "dravidianos": "sprite:buildings/wonder/b_indi_wonder_gurjaras_x1",
    "eslavos": "sprite:buildings/wonder/b_slav_wonder_slavs_x1",
    "etiopes": "sprite:buildings/wonder/b_afri_wonder_ethiopians_x1",
    "francos": "sprite:buildings/wonder/b_west_wonder_franks_x1",
@@ -76,7 +78,8 @@
    "mongoles": "sprite:buildings/wonder/b_asia_wonder_mongols_x1",
    "persas": "sprite:buildings/wonder/b_orie_wonder_persians_x1",
    "polacos": "sprite:buildings/wonder/b_slav_wonder_poles_x1",
-   "portugueses": "sprite:buildings/wonder/b_medi_wonder_portuguese_x1",
+    "portugueses": "sprite:buildings/wonder/b_medi_wonder_portuguese_x1",
+    "romanos": "sprite:buildings/wonder/b_medi_wonder_byzantines_x1",
    "sarracenos": "sprite:buildings/wonder/b_orie_wonder_saracens_x1",
    "shu": "sprite:buildings/wonder/b_asia_wonder_shu_x1",
    "sicilianos": "sprite:buildings/wonder/b_medi_wonder_sicilians_x1",
@@ -89,7 +92,9 @@
    "wu": "sprite:buildings/wonder/b_asia_wonder_wu_x1",
    "espanoles": "sprite:buildings/wonder/b_medi_wonder_spanish_x1"
   },
-  "destruction_by_civ": {
+   "destruction_by_civ": {
+    "dravidianos": "sprite:buildings/wonder/b_indi_wonder_gurjaras_destruction_x1",
+    "romanos": "sprite:buildings/wonder/b_medi_wonder_byzantines_destruction_x1",
    "aztecas": "sprite:buildings/wonder/b_meso_wonder_aztecs_destruction_x1",
    "bengalies": "sprite:buildings/wonder/b_indi_wonder_bengalis_destruction_x1",
    "birmanos": "sprite:buildings/wonder/b_seas_wonder_burmese_destruction_x1",
@@ -117,7 +122,9 @@
    "wei": "sprite:buildings/wonder/b_asia_wonder_wei_destruction_x1",
    "wu": "sprite:buildings/wonder/b_asia_wonder_wu_destruction_x1"
   },
-  "rubble_by_civ": {
+   "rubble_by_civ": {
+    "dravidianos": "sprite:buildings/wonder/b_indi_wonder_gurjaras_rubble_x1",
+    "romanos": "sprite:buildings/wonder/b_medi_wonder_byzantines_rubble_x1",
    "aztecas": "sprite:buildings/wonder/b_meso_wonder_aztecs_rubble_x1",
    "bengalies": "sprite:buildings/wonder/b_indi_wonder_bengalis_rubble_x1",
    "birmanos": "sprite:buildings/wonder/b_seas_wonder_burmese_rubble_x1",

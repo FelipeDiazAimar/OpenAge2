@@ -121,3 +121,15 @@ move assets\sprites\tmp\u_inf_militia_idleA_x1 assets\sprites\militia\idle
 - `nature/<goldmine,stonemine>_<pct>` por % restante; `scaffold/<bldg>` visible solo en obra, se oculta al terminar.
 ## Terrenos nuevos (14)
 - 14 texturas `terrain:g_*` nuevas; limite shader: mezcla 4 capas (base + 3 overlays); resto cae a `color` respaldo.
+
+## Ciclo actual — changelog visual
+- Velas por barco: tabla `barco|sail` (`graphics.sail` → `ships/sail_<tipo>`); sin pack = casco solo.
+- Maravillas por civi: `wonder/wonder_<civi>/` + `destruction` (1 vez) + `rubble` (fijo por id).
+- Elites con sprite propio: `graphics` → `<unit>_elite/<anim>`; sin retinte, fallback a base.
+- Pluma-jian: pack `pluma_jian/<anim>` en `graphics`; fallback a linea base si falta PNG.
+- Andamios 6/7: `scaffold/<bldg>` visible solo en obra (6 de 7); hide al completar.
+- Cap escombros 40: `rubble` max 40 vivos; exceso recicla el mas antiguo.
+- Edades {age}+refresh: `<bldg>_<age>/` re-resuelto con `refresh` sin recrear entidad.
+- Minas por etapas: `nature/<goldmine,stonemine>_<pct>` por % restante (variante fija).
+- Terrenos 14 + limite shader: 14 `terrain:g_*`; mezcla max 4 capas, resto a `color`.
+- Presets 50 + mapa isla: 50 presets (`map_presets/*.json`); `isla` = anillo playa + interior bosque/oro/piedra.

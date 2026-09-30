@@ -1,0 +1,12 @@
+{
+  "id": "deco_agua_juncos",
+  "type": "resource",
+  "name": "Juncos decorativos",
+  "tags": [
+    "decoracion"
+  ],
+  "graphics": {
+    "idle": "sprite:nature/n_tree_reeds_x1"
+  },
+  "_todo": "colocacion en MapGen (agua)"
+}

@@ -14,6 +14,8 @@
   "pop_cost": 1,
   "hotkey": "Q",
   "graphics": {
+    "walk": "sprite:uniques/carabela_elite/walk",
+    "idle": "sprite:uniques/carabela_elite/idle",
     "death": "sprite:uniques/carabela_elite/death"
   },
   "abilities": {

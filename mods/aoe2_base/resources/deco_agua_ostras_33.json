@@ -1,0 +1,12 @@
+{
+  "id": "deco_agua_ostras_33",
+  "type": "resource",
+  "name": "Ostras decorativas (joven)",
+  "tags": [
+    "decoracion"
+  ],
+  "graphics": {
+    "idle": "sprite:nature/n_oysters_33_x1"
+  },
+  "_todo": "colocacion en MapGen (agua)"
+}

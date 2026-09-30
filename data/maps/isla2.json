@@ -1,0 +1,22 @@
+{
+  "_comment": "Isla 2: fixture test de capas nuevas. Base procedural como isla.json; 'layers' pinta en orden (la ultima gana). Formas: border/border_ring por distancia al borde; rect x/y/w/h; circle d<=r; ring in<d<=out (d2 enteros); arc_e = ring + x>=cx.",
+  "name": "Isla 2 (test capas)",
+  "size_tiles": [72, 72],
+  "terrain": "grass",
+  "start_resources": {"wood_patches": 6, "gold_piles": 4, "stone_piles": 3, "forage": 3, "boars": 2, "shore_fish": 6},
+  "water": true,
+  "relics": 3,
+  "seed": 1234,
+  "layers": [
+    {"terrain": "dirt", "shape": "rect", "x": 6, "y": 49, "w": 60, "h": 6, "desc": "base de tierra bajo el camino"},
+    {"terrain": "camino", "shape": "rect", "x": 6, "y": 50, "w": 60, "h": 4, "desc": "camino de tierra horizontal sur"},
+    {"terrain": "nieve", "shape": "rect", "x": 6, "y": 6, "w": 16, "h": 16, "desc": "parche nieve esquina NO"},
+    {"terrain": "hielo", "shape": "rect", "x": 10, "y": 10, "w": 8, "h": 8, "desc": "nucleo hielo dentro de nieve"},
+    {"terrain": "playa", "shape": "border_ring", "inner": 3, "outer": 5, "desc": "playa junto al agua perimetral"},
+    {"terrain": "playa", "shape": "ring", "center": [36, 36], "inner": 7, "outer": 9, "desc": "playa alrededor del lago"},
+    {"terrain": "bajios", "shape": "arc_e", "center": [36, 36], "inner": 7, "outer": 8, "desc": "bajios vado este del lago"},
+    {"terrain": "agua", "shape": "border", "width": 3, "desc": "agua perimetral"},
+    {"terrain": "agua", "shape": "circle", "center": [36, 36], "radius": 6, "desc": "lago interior"},
+    {"terrain": "roca", "shape": "rect", "x": 54, "y": 56, "w": 12, "h": 12, "desc": "macizo roca esquina SE"}
+  ]
+}

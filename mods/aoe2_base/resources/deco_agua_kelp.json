@@ -1,0 +1,12 @@
+{
+  "id": "deco_agua_kelp",
+  "type": "resource",
+  "name": "Algas kelp decorativas",
+  "tags": [
+    "decoracion"
+  ],
+  "graphics": {
+    "idle": "sprite:nature/n_plant_kelp_seaweeds_x1"
+  },
+  "_todo": "colocacion en MapGen (agua)"
+}
