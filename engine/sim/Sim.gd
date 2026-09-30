@@ -488,6 +488,8 @@ func state_hash() -> String:
 
 
 func queue_command(pid: int, type: String, payload: Dictionary) -> void:
+	if on_command.is_valid():
+		on_command.call(world.tick, pid, type, payload) # registro de la partida
 	var t := world.tick + INPUT_DELAY
 	if not _pending.has(t):
 		_pending[t] = []
@@ -495,24 +497,45 @@ func queue_command(pid: int, type: String, payload: Dictionary) -> void:
 	_seq += 1
 
 
+## Diagnóstico (no afecta la simulación): quién recibe cada orden encolada y
+## qué sistema está corriendo (PHASES[phase_id]) por si la partida se traba.
+var on_command := Callable()
+const PHASES := ["", "órdenes", "movimiento", "separación", "combate", "monjes", "reliquias",
+	"comercio", "recolección", "construcción", "guarnición", "producción", "rebaños"]
+var phase_id := 0
+
+
 func step() -> void:
 	world.tick += 1
+	phase_id = 1
 	var cmds: Array = _pending.get(world.tick, [])
 	_pending.erase(world.tick)
 	cmds.sort_custom(func(a, b): return a["pid"] < b["pid"] or (a["pid"] == b["pid"] and a["seq"] < b["seq"]))
 	for c in cmds:
 		_apply(c)
+	phase_id = 2
 	MoveSystem.step(world, _gate_blocks)
+	phase_id = 3
 	SeparationSystem.step(self)
+	phase_id = 4
 	CombatSystem.step(self)
+	phase_id = 5
 	MonkSystem.step(self)
+	phase_id = 6
 	RelicSystem.step(self)
+	phase_id = 7
 	TradeSystem.step(self)
+	phase_id = 8
 	GatherSystem.step(self)
+	phase_id = 9
 	BuildSystem.step(self)
+	phase_id = 10
 	GarrisonSystem.step(self)
+	phase_id = 11
 	ProductionSystem.step(self)
+	phase_id = 12
 	HerdSystem.step(self)
+	phase_id = 0
 
 
 ## Desplazamientos (milésimas) para repartir un grupo: casillas en espiral

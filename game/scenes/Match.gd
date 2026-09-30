@@ -21,15 +21,11 @@ const AIPlayer := preload("res://engine/ai/AIPlayer.gd")
 const GroundLayer := preload("res://engine/render2d/GroundLayer.gd")
 const Minimap := preload("res://engine/ui/Minimap.gd")
 const MatchConfig := preload("res://game/MatchConfig.gd")
+const MatchSetup := preload("res://game/MatchSetup.gd")
+const MatchLogger := preload("res://game/diag/MatchLogger.gd")
 
 const MAP_SIZE := 144
 const MAP_SEED := 1234 # por defecto; la partida usa map_seed (MatchConfig)
-const START_OFFSETS: Array[Vector2i] = [
-	Vector2i(-33, -33), Vector2i(33, 33), Vector2i(33, -33), Vector2i(-33, 33),
-	Vector2i(0, -46), Vector2i(0, 46), Vector2i(-46, 0), Vector2i(46, 0),
-]
-const VILLAGER_OFFSETS: Array[Vector2i] = [Vector2i(3, -1), Vector2i(-1, 3), Vector2i(3, 3)]
-const SCOUT_OFFSET := Vector2i(-4, -1)
 ## Jugadores por defecto (sin pantalla previa); ver MatchConfig.
 const SLOTS := [{"civ": "britones", "team": 0}, {"civ": "francos", "team": 1, "ai": true}]
 const PLAYER_COLORS: Array[Color] = [
@@ -55,6 +51,8 @@ var minimap
 var selected: Array[int] = []
 ## Rivales de la IA (piensan tras cada tick de la simulación).
 var ais: Array = []
+## Registro de diagnóstico de la partida (null si está apagado).
+var logger
 ## Velocidad de juego como en AoE2 DE: la simulación cuenta segundos de juego
 ## (10 ticks = 1 s) y la partida los corre a esta velocidad. "Normal" del DE es
 ## 1,7 (1,0 es "Lenta"). + / - la cambian.
@@ -80,15 +78,16 @@ func _ready() -> void:
 		return
 	slots = MatchConfig.active_slots().duplicate(true)
 	map_seed = MatchConfig.map_seed
-	sim = Sim.new(registry, MAP_SIZE, MAP_SIZE)
-	sim.debug_enabled = true # partida local: tropas de prueba con F9
-	sim.pop_max = MatchConfig.pop_max
-	for i in slots.size():
-		sim.add_player(i, str(slots[i]["civ"]), int(slots[i]["team"]))
-	_spawn_start()
+	sim = MatchSetup.build(registry, match_cfg())
+	var ai_pids := []
 	for i in slots.size():
 		if bool(slots[i].get("ai", false)):
 			ais.append(AIPlayer.new(sim, i))
+			ai_pids.append(i)
+	if MatchConfig.diagnostics:
+		logger = MatchLogger.new()
+		add_child(logger)
+		logger.start(sim, match_cfg(), local_pid, ai_pids, registry)
 
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	_import_terrain()
@@ -154,11 +153,28 @@ func _import_terrain() -> void:
 		print("[Match] importadas %d texturas de terreno del AoE2 DE" % n)
 
 
-func tick_once() -> void:
-	layer.snapshot()
+## Un tick de simulación y de las IA (medidos para el registro).
+func _step_sim() -> void:
+	if logger == null:
+		sim.step()
+		for ai in ais:
+			ai.tick()
+		return
+	logger.phase = "simulación"
+	var t0 := Time.get_ticks_usec()
 	sim.step()
+	var t1 := Time.get_ticks_usec()
+	logger.phase = "ia"
 	for ai in ais:
 		ai.tick()
+	var t2 := Time.get_ticks_usec()
+	logger.phase = "dibujo"
+	logger.after_tick(t1 - t0, t2 - t1)
+
+
+func tick_once() -> void:
+	layer.snapshot()
+	_step_sim()
 	layer.sync(1.0, 0.0)
 	projectiles.sync(1.0)
 	panel.refresh()
@@ -457,11 +473,11 @@ func _process(delta: float) -> void:
 	var dt := 1.0 / (World.TICK_RATE * game_speed)
 	_acc += delta
 	var ticked := false
+	if logger != null:
+		logger.frame(delta)
 	while _acc >= dt:
 		layer.snapshot()
-		sim.step()
-		for ai in ais:
-			ai.tick()
+		_step_sim()
 		_acc -= dt
 		ticked = true
 	layer.sync(_acc / dt, delta * game_speed) # animaciones al ritmo del juego
@@ -508,7 +524,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			return
 		if panel.back():
 			return
+		if logger != null:
+			logger.finish("volvió al menú")
 		get_tree().change_scene_to_file("res://ui/menus/MainMenu.tscn")
+		return
+	if event is InputEventKey and event.pressed and event.keycode == KEY_F12 and logger != null:
+		var shot: String = logger.mark(get_viewport(), "F12")
+		print("[registro] marca guardada: ", ProjectSettings.globalize_path(shot))
 		return
 	if event is InputEventKey and event.pressed and not event.echo:
 		if event.keycode == KEY_F9:
@@ -591,20 +613,12 @@ func set_game_speed(v: float) -> void:
 
 
 func _start_tile(pid: int) -> Vector2i:
-	return Vector2i(MAP_SIZE / 2, MAP_SIZE / 2) + START_OFFSETS[pid % START_OFFSETS.size()]
+	return MatchSetup.start_tile(pid, MAP_SIZE)
 
 
-func _spawn_start() -> void:
-	for i in sim.players.size():
-		var c := _start_tile(i)
-		sim.spawn("centro_urbano", i, c - Vector2i(2, 2))
-		for off in VILLAGER_OFFSETS:
-			sim.spawn("aldeano", i, c + off)
-		sim.spawn("scout", i, c + SCOUT_OFFSET)
-	var starts: Array[Vector2i] = []
-	for i in sim.players.size():
-		starts.append(_start_tile(i))
-	MapGen.generate(sim, map_seed, starts, MatchConfig.lake)
+## Opciones de esta partida (para armarla y para el registro).
+func match_cfg() -> Dictionary:
+	return {"slots": slots, "map_seed": map_seed, "pop_max": MatchConfig.pop_max, "lake": MatchConfig.lake}
 
 
 func _build_help() -> void:

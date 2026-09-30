@@ -12,6 +12,8 @@ static var map_seed := DEFAULT_SEED
 ## 0 = sin tope de población.
 static var pop_max := 0
 static var lake := true
+## Registro de diagnóstico de la partida (las pruebas lo apagan).
+static var diagnostics := true
 
 
 static func active_slots() -> Array:

@@ -41,8 +41,11 @@ func _run_all() -> int:
 			var mname: String = m["name"]
 			if not mname.begins_with("test_"):
 				continue
-			# La configuración de partida es estática: cada prueba empieza limpia.
-			load("res://game/MatchConfig.gd").reset()
+			# La configuración de partida es estática: cada prueba empieza limpia
+			# (y sin escribir registros de partida en la carpeta del jugador).
+			var mc = load("res://game/MatchConfig.gd")
+			mc.reset()
+			mc.diagnostics = false
 			var inst = script.new()
 			inst.current = "%s::%s" % [f.get_basename(), mname]
 			inst.call(mname)
