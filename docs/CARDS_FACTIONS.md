@@ -17,3 +17,10 @@
 2. `path res.*` se acepta (`res.wood/food/gold/stone` en neutrales) pero **sin lector real** en validador/juego; además claves `wood/food` ≠ `madera/alimento` de `cost`.
 3. `type:building` rechazaría (válido es `edificio`); `id:jugador` como target sin entidad `jugador` definida. `cost` carta usa `madera/alimento/oro/piedra` pero `unique_unit.cost` en faction usa `food/gold` (esquemas distintos).
 4. Desfase conteo: `DeckValidator._recoger_json` es recursivo (cartas por civ en subdirs `eslavos/`, `aztecas/`…), `CivGallery._contar_cartas` no baja a subdirs → cifras de galería infra-cuentan. Const `FACTIONS_DIR` en CivGallery mal nombrada (apunta a cards).
+
+## 4. Sincronización código (verificado en `game/cards/DeckValidator.gd`, `Deck.gd`, presets y `mods/aoe2_base/buildings/muelle.json`)
+- Runtime: no existe `CardSystem` (0 ficheros `**/*CardSystem*`); solo `Deck.gd` (mazo 1-25, `MAX_CARDS=25`) + `DeckValidator` + UI (`CardWidget`/`CardArt`/`DeckTips`). Aplicador de efectos: pendiente.
+- `res.*`: aceptado (`DeckValidator` L66-70, L139-147 `is_effect_path_valido`), pero sin consumidor en `game/` (`RES_PATH_PREFIX` solo en validador; sin `apply_card`). Estado: validado, no aplicado.
+- `type:building`: sigue INVÁLIDO; `TIPOS_VALIDOS` L9 = `[unidad, mejora, recurso, edificio]`. §3.3 correcto, sin cambio.
+- Presets: 54 ficheros (50 civ + `camp_conquistador/fiordo/sangre` + `mixto`); `francos.json` = 20 ids. §1 válido.
+- `puerto/muelle`: entidad real `buildings/muelle.json` (`id:muelle`); `puerto` solo `icon`/nombre carta (`wu/sici/drav_*_puerto_2` → `target id:muelle`). Sin alias en código.

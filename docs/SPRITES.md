@@ -122,14 +122,18 @@ move assets\sprites\tmp\u_inf_militia_idleA_x1 assets\sprites\militia\idle
 ## Terrenos nuevos (14)
 - 14 texturas `terrain:g_*` nuevas; limite shader: mezcla 4 capas (base + 3 overlays); resto cae a `color` respaldo.
 
-## Ciclo actual — changelog visual
-- Velas por barco: tabla `barco|sail` (`graphics.sail` → `ships/sail_<tipo>`); sin pack = casco solo.
-- Maravillas por civi: `wonder/wonder_<civi>/` + `destruction` (1 vez) + `rubble` (fijo por id).
-- Elites con sprite propio: `graphics` → `<unit>_elite/<anim>`; sin retinte, fallback a base.
-- Pluma-jian: pack `pluma_jian/<anim>` en `graphics`; fallback a linea base si falta PNG.
-- Andamios 6/7: `scaffold/<bldg>` visible solo en obra (6 de 7); hide al completar.
-- Cap escombros 40: `rubble` max 40 vivos; exceso recicla el mas antiguo.
-- Edades {age}+refresh: `<bldg>_<age>/` re-resuelto con `refresh` sin recrear entidad.
-- Minas por etapas: `nature/<goldmine,stonemine>_<pct>` por % restante (variante fija).
-- Terrenos 14 + limite shader: 14 `terrain:g_*`; mezcla max 4 capas, resto a `color`.
-- Presets 50 + mapa isla: 50 presets (`map_presets/*.json`); `isla` = anillo playa + interior bosque/oro/piedra.
+## Ciclo actual - changelog visual
+- Velas: `graphics.sail` -> `sprite:ships_sails/<base>` (hotspot propio); 9 barcos cableados, resto casco solo.
+- Destruction/rubble: `graphics.destruction` (anim 1 vez) + `graphics.rubble` (fijo); cap 40 con FIFO.
+- Maravillas por civi: `wonders_by_civ/destruction_by_civ/rubble_by_civ` en maravilla.json; fallback britons (dravidianos/romanos).
+- Elites: packs `uniques/<unit>_elite/<anim>`; fallback a linea base.
+- Pluma: `uniques/guardia_pluma_blanca/` (reuse jian swordman, documentado en la def; no existe en el DE).
+- Andamios: `buildings/scaffolds/b_misc_foundation_NxN` (6->5, 7->8); ghost en obra.
+- Edades {age} + refresh_age al avanzar de edad.
+- Minas por etapas: `mine_frac` oscurece al agotarse.
+- Terrenos: 14 defs; shader mezcla 8 (0-3 base + 4-7 agua/playa/bajios/nieve por ruido); orden fijo.
+- Granja: farmland `g_fm1/g_fc1-3` por fraccion de comida (fc1 en obra).
+- Proyectiles: dibujo procedural (sin sprites cableados).
+- Fauna/deco: packs listos en `animals/` y `nature/`; colocacion pendiente (sim).
+- Presets: `game/cards/presets/*.json` (50 civis).
+- Cartas: loader recursivo (1092 visibles); `effect` se valida pero no se ejecuta en partida (pendiente runtime sim).
