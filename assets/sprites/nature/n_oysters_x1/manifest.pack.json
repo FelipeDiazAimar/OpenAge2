@@ -1,0 +1,53 @@
+{
+ "source": "n_oysters_x1",
+ "dirs": 4,
+ "per_dir": 1,
+ "kept_per_dir": 1,
+ "step": 2,
+ "size": [
+  94,
+  60
+ ],
+ "frames": [
+  {
+   "png": "p_000.png",
+   "mask": null,
+   "dir": 0,
+   "sub": 0,
+   "hotspot": [
+    50,
+    32
+   ]
+  },
+  {
+   "png": "p_001.png",
+   "mask": null,
+   "dir": 1,
+   "sub": 0,
+   "hotspot": [
+    50,
+    32
+   ]
+  },
+  {
+   "png": "p_002.png",
+   "mask": null,
+   "dir": 2,
+   "sub": 0,
+   "hotspot": [
+    50,
+    32
+   ]
+  },
+  {
+   "png": "p_003.png",
+   "mask": null,
+   "dir": 3,
+   "sub": 0,
+   "hotspot": [
+    50,
+    32
+   ]
+  }
+ ]
+}
