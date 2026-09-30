@@ -53,6 +53,8 @@ static func garrison_error(sim, id: int, b: int) -> String:
 		# Transporte: barco con Garrison; solo sube tropa de tierra.
 		if not (w.has_ability(b, "Naval") and w.has_ability(b, "Garrison")) or w.has_ability(id, "Naval"):
 			return "no es un edificio"
+		if w.has_ability(id, "Carrying"):
+			return "no sube con una reliquia"
 	if not w.has_ability(b, "Garrison") or not sim.is_built(b):
 		return "no admite guarnición"
 	if int(w.entities[b]["owner"]) != int(w.entities[id]["owner"]):
@@ -191,7 +193,8 @@ static func order_unload(sim, ship: int, pos: Vector2i) -> void:
 static func _unload(sim, ship: int, target: Vector2i) -> void:
 	var w = sim.world
 	var st := Grid.tile_of(w.entities[ship]["pos"])
-	var goal := Grid.tile_of(target)
+	# Se baja en la costa más cercana al barco; el clic solo decide adónde navega.
+	var goal := st
 	var gar: Dictionary = w.comp(ship, "Garrison")
 	var keep: Array = []
 	for u in (gar["units"] as Array).duplicate():

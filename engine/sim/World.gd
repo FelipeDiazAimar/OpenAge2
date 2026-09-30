@@ -154,6 +154,8 @@ func state_hash() -> String:
 			st += "c%d" % components["Carrying"][id]["relic"]
 		if has_ability(id, "RelicHolder"):
 			st += "r%s" % [components["RelicHolder"][id]["relics"]]
+		if has_ability(id, "Unload"):
+			st += "U%s" % [components["Unload"][id]["pos"]]
 		if has_ability(id, "Garrisoned"):
 			st += "G%d:%s" % [components["Garrisoned"][id]["in"], components["Garrisoned"][id]["inside"]]
 		if has_ability(id, "Garrison"):

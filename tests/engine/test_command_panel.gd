@@ -300,3 +300,23 @@ func test_match_wall_line() -> void:
 			built += 1
 	assert_true(built >= n - 1, "los aldeanos levantan el muro tramo a tramo: %d/%d" % [built, n])
 	m.queue_free()
+
+
+func test_wall_line_respects_cumulative_cost() -> void:
+	var m = load(MATCH).instantiate()
+	Engine.get_main_loop().root.add_child(m)
+	m.sim.players[m.local_pid]["age"] = 1
+	m.sim.players[m.local_pid]["res"]["stone"] = 12 * 1000 # 2 tramos de 5
+	var vs: Array = []
+	for id in m.sim.world.entities:
+		var e: Dictionary = m.sim.world.entities[id]
+		if e["def_id"] == "aldeano" and e["owner"] == m.local_pid:
+			vs.append(id)
+	m.select(vs)
+	m.start_placing("muro")
+	var c: Vector2i = m._start_tile(m.local_pid)
+	var a := c + Vector2i(6, -4)
+	var ok: Array = m._line_ok(m.line_tiles(a, a + Vector2i(0, 5)))
+	assert_eq(ok.filter(func(x): return x).size(), 2, "solo los que se pueden pagar")
+	assert_true(ok[0] and ok[1], "desde donde empezó el arrastre")
+	m.queue_free()

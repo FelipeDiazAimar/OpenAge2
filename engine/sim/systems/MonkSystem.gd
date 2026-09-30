@@ -161,6 +161,14 @@ static func _convert(sim, id: int, t: int, c: Dictionary) -> void:
 	if not m.is_empty():
 		(m["waypoints"] as Array).clear()
 		m["moving"] = false
+	w.remove_component(t, "Unload")
+	var gar: Dictionary = w.comp(t, "Garrison")
+	if w.has_ability(t, "Naval") and not gar.is_empty():
+		var aboard: Array = (gar["units"] as Array).duplicate()
+		gar["units"] = []
+		for u in aboard:
+			w.remove_component(u, "Garrisoned")
+			sim.kill(u) # los pasajeros no cambian de bando: mueren (AoE2)
 	w.entities[t]["owner"] = owner
 	var def: Dictionary = sim.players[owner]["defs"].get_def(str(w.entities[t]["def_id"]))
 	if not def.is_empty():

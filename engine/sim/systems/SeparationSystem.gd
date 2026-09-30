@@ -61,6 +61,8 @@ static func _try_move(sim, id: int, to: Vector2i) -> void:
 	var b := Grid.tile_of(to)
 	if not g.is_walkable(b):
 		return
+	if a != b and sim.gate_closed_for(id, b):
+		return # (una puerta enemiga no se cruza a empujones)
 	if a.x != b.x and a.y != b.y:
 		if not g.is_walkable(Vector2i(b.x, a.y)) or not g.is_walkable(Vector2i(a.x, b.y)):
 			return

@@ -266,14 +266,36 @@ static func line_tiles(a: Vector2i, b: Vector2i) -> Array:
 ## atrás hacia adelante: los aldeanos terminan en el primer tramo y siguen
 ## solos por los cimientos cercanos.
 func place_line(a: Vector2i, b: Vector2i) -> int:
-	var n := 0
+	var ok := _line_ok(line_tiles(a, b))
+	var chosen: Array = []
 	var tiles := line_tiles(a, b)
-	tiles.reverse()
+	for i in tiles.size():
+		if bool(ok[i]):
+			chosen.append(tiles[i])
+	chosen.reverse() # los aldeanos terminan en el primer tramo y siguen en cadena
+	for t in chosen:
+		sim.queue_command(local_pid, "place", {"ids": _builders(), "def": placing, "tile": [t.x, t.y]})
+	return chosen.size()
+
+
+## Tramos que se pueden pagar y colocar, en orden desde el inicio del arrastre.
+func _line_ok(tiles: Array) -> Array:
+	var def: Dictionary = sim.players[local_pid]["defs"].get_def(placing)
+	var cost: Dictionary = sim.cost_milli(def.get("cost", {}))
+	var res: Dictionary = (sim.players[local_pid]["res"] as Dictionary).duplicate()
+	var out: Array = []
 	for t in tiles:
-		if sim.can_place(local_pid, placing, t) == "":
-			sim.queue_command(local_pid, "place", {"ids": _builders(), "def": placing, "tile": [t.x, t.y]})
-			n += 1
-	return n
+		var afford := true
+		for k in cost:
+			afford = afford and int(res.get(k, 0)) >= int(cost[k])
+		var free: String = sim.can_place(local_pid, placing, t)
+		var fits: bool = free == "" or free == "recursos insuficientes"
+		var yes: bool = afford and fits
+		if yes:
+			for k in cost:
+				res[k] = int(res[k]) - int(cost[k])
+		out.append(yes)
+	return out
 
 
 ## Esquina de la huella con el ratón en el centro del edificio.
@@ -456,7 +478,10 @@ func _process(delta: float) -> void:
 		if _line_start.x >= 0:
 			layer.hide_ghost()
 			var tiles := line_tiles(_line_start, Vector2i(Iso.to_tiles(get_global_mouse_position()).floor()))
-			overlay.set_line_preview(tiles, tiles.map(func(t): return sim.can_place(local_pid, placing, t) == ""))
+			overlay.set_line_preview(tiles, _line_ok(tiles))
+			if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+				_line_start = Vector2i(-1, -1) # se soltó sobre la interfaz
+				overlay.set_line_preview([], [])
 		else:
 			layer.show_ghost(def, tile, sim.can_place(local_pid, placing, tile) == "")
 	_frames += 1

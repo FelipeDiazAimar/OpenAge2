@@ -79,6 +79,9 @@ func refresh(force: bool = false) -> void:
 		var d := str(w.entities[id]["def_id"])
 		var c: Color = RES_COLORS.get(d, ANIMAL if w.has_ability(id, "Move") else Color("#7a9a40"))
 		_plot(Grid.tile_of(w.entities[id]["pos"]), c, 1)
+	for id in w.ids_with("Relic"):
+		if not w.has_ability(id, "Held"):
+			_plot(Grid.tile_of(w.entities[id]["pos"]), RES_COLORS["reliquia"], 2)
 	for id in w.ids_with("Hitpoints"):
 		var e: Dictionary = w.entities[id]
 		var owner := int(e["owner"])

@@ -39,3 +39,19 @@ func test_match_uses_config() -> void:
 	assert_eq(m.sim.team_of(1), m.sim.team_of(2), "aliados en el equipo 2")
 	m.queue_free()
 	MatchConfig.reset()
+
+
+func test_filter_never_changes_the_chosen_civ() -> void:
+	MatchConfig.reset()
+	var s = load(SETUP).instantiate()
+	Engine.get_main_loop().root.add_child(s)
+	if s._filter != null:
+		s._filter.text = "fran"
+		s._on_civ_filter("fran")
+		s._on_civ_filter("zzzzz")
+		s._on_civ_filter("")
+	assert_eq(s.chosen_slots()[0]["civ"], "britones", "el filtro no cambia la civ")
+	assert_eq(s.chosen_slots()[1]["civ"], "francos")
+	s._add.pressed.emit()
+	assert_true(s.chosen_slots()[2]["ai"], "los jugadores 2 a 4 son IA en local")
+	s.queue_free()

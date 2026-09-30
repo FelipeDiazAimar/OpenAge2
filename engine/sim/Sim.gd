@@ -213,18 +213,36 @@ func reseed_farm(id: int) -> bool:
 ## Puerta: la grilla la deja libre para todos; aquí se cierra a los enemigos
 ## de su dueño (dueño y aliados pasan, como en AoE2).
 func _gate_blocks(id: int, t: Vector2i) -> bool:
+	var g := _gate_at(t)
+	if g < 0 or not _gate_closes(id, g):
+		return false
+	var atk: Dictionary = world.comp(id, "Attack")
+	if not atk.is_empty() and not world.has_ability(id, "Gather") and int(atk["target"]) != g:
+		CombatSystem.order_attack(self, id, g) # como en AoE2: a romper la puerta
+	return true
+
+
+## ¿Hay una puerta cerrada para esta unidad en la casilla t? (sin efectos)
+func gate_closed_for(id: int, t: Vector2i) -> bool:
+	var g := _gate_at(t)
+	return g >= 0 and _gate_closes(id, g)
+
+
+## Puerta terminada en la casilla t (-1: ninguna). Un cimiento aún no cierra.
+func _gate_at(t: Vector2i) -> int:
 	for g in world.ids_with("Gate"):
-		var def := def_for(g)
-		var size := footprint_of(def)
+		if not is_built(g):
+			continue
+		var size := footprint_of(def_for(g))
 		var o := Grid.tile_of(world.entities[g]["pos"] - size * (FP.SCALE / 2))
 		if t.x >= o.x and t.y >= o.y and t.x < o.x + size.x and t.y < o.y + size.y:
-			var owner := int(world.entities[id]["owner"])
-			var closed := owner < 0 or is_enemy(owner, int(world.entities[g]["owner"]))
-			var atk: Dictionary = world.comp(id, "Attack")
-			if closed and owner >= 0 and not atk.is_empty() and not world.has_ability(id, "Gather"):
-				CombatSystem.order_attack(self, id, g) # como en AoE2: a romper la puerta
-			return closed
-	return false
+			return g
+	return -1
+
+
+func _gate_closes(id: int, g: int) -> bool:
+	var owner := int(world.entities[id]["owner"])
+	return owner < 0 or is_enemy(owner, int(world.entities[g]["owner"]))
 
 
 ## Edificio terminado (no es cimiento).
@@ -616,6 +634,7 @@ func _cmd_move(pid: int, payload: Dictionary) -> void:
 		CombatSystem.stop(self, ids[i])
 		BuildSystem.stop(self, ids[i])
 		GarrisonSystem.cancel(world, ids[i])
+		world.remove_component(ids[i], "Unload")
 		MonkSystem.stop(self, ids[i])
 		RelicSystem.cancel(world, ids[i])
 		TradeSystem.stop(self, ids[i])
@@ -657,6 +676,7 @@ func _cmd_stop(pid: int, payload: Dictionary) -> void:
 		CombatSystem.stop(self, id)
 		BuildSystem.stop(self, id)
 		GarrisonSystem.cancel(world, id)
+		world.remove_component(id, "Unload")
 		MonkSystem.stop(self, id)
 		RelicSystem.cancel(world, id)
 		TradeSystem.stop(self, id)

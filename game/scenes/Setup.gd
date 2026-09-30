@@ -140,7 +140,8 @@ func _fill_civ_items(ob: OptionButton, keep_id: String) -> void:
 	ob.clear()
 	var q := _civ_filter.strip_edges().to_lower()
 	for c in civs:
-		if q != "" and not (str(c[0]).to_lower().contains(q) or str(c[1]).to_lower().contains(q)):
+		# La ya elegida siempre queda en la lista: filtrar no cambia la elección.
+		if q != "" and str(c[0]) != keep_id and not (str(c[0]).to_lower().contains(q) or str(c[1]).to_lower().contains(q)):
 			continue
 		ob.add_item(str(c[1]))
 		ob.set_item_metadata(ob.item_count - 1, str(c[0]))
@@ -153,9 +154,7 @@ func _fill_civ_items(ob: OptionButton, keep_id: String) -> void:
 func _on_civ_filter(t: String) -> void:
 	_civ_filter = t
 	for r in rows:
-		var ob: OptionButton = r["civ"]
-		var keep := str(ob.get_item_metadata(ob.selected)) if ob.item_count > 0 and ob.selected >= 0 else ""
-		_fill_civ_items(ob, keep)
+		_fill_civ_items(r["civ"], str(r["civ_id"]))
 
 
 func _label(t: String) -> Label:
@@ -181,7 +180,8 @@ func _add_row(slot: Dictionary) -> void:
 	var civ := OptionButton.new()
 	civ.custom_minimum_size = Vector2(220, 0)
 	civ.clip_text = true # popup nativo con scroll para la lista larga
-	_fill_civ_items(civ, str(slot.get("civ", "")))
+	var civ_id := str(slot.get("civ", civs[0][0] if not civs.is_empty() else ""))
+	_fill_civ_items(civ, civ_id)
 	box.add_child(civ)
 	var team := OptionButton.new()
 	for t in MAX_PLAYERS:
@@ -192,12 +192,15 @@ func _add_row(slot: Dictionary) -> void:
 	ai.add_item("Tú")
 	ai.add_item("IA")
 	ai.select(1 if bool(slot.get("ai", false)) else 0)
-	ai.disabled = i == 0 # el jugador 1 es quien juega en esta PC
-	if i == 0:
-		ai.select(0)
+	# Local: el jugador 1 es quien juega en esta PC y el resto, la IA
+	# (otros humanos llegan con el lobby LAN).
+	ai.disabled = true
+	ai.select(0 if i == 0 else 1)
 	box.add_child(ai)
 	_rows_box.add_child(box)
-	rows.append({"civ": civ, "team": team, "ai": ai, "box": box})
+	var row := {"civ": civ, "civ_id": civ_id, "team": team, "ai": ai, "box": box}
+	civ.item_selected.connect(func(idx: int): row["civ_id"] = str(civ.get_item_metadata(idx)))
+	rows.append(row)
 	_update_buttons()
 
 
@@ -220,8 +223,7 @@ func _update_buttons() -> void:
 func chosen_slots() -> Array:
 	var out: Array = []
 	for r in rows:
-		var ob: OptionButton = r["civ"]
-		out.append({"civ": str(ob.get_item_metadata(ob.selected)), "team": r["team"].selected, "ai": r["ai"].selected == 1})
+		out.append({"civ": str(r["civ_id"]), "team": r["team"].selected, "ai": r["ai"].selected == 1})
 	return out
 
 

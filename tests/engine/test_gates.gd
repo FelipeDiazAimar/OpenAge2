@@ -70,3 +70,26 @@ func test_enemy_army_breaks_the_gate() -> void:
 	s.queue_command(1, "move", {"ids": foes, "pos": [30500, 19500]})
 	_steps(s, 1200)
 	assert_false(s.world.entities.has(gate), "la rompen al chocar con ella")
+
+
+func test_crowd_cannot_be_pushed_through_enemy_gate() -> void:
+	var s := _sim()
+	s.spawn("puerta", 0, Vector2i(20, 19))
+	var foes := []
+	for i in 10:
+		foes.append(s.spawn("aldeano", 1, Vector2i(14 + i % 3, 18 + i / 3)))
+	for k in 6:
+		s.queue_command(1, "move", {"ids": foes, "pos": [30500, 19500]})
+		_steps(s, 200)
+	for f in foes:
+		var t := Grid.tile_of(s.world.entities[f]["pos"])
+		assert_true(t.x < 20, "nadie cruza a empujones: %s" % t)
+
+
+func test_gate_foundation_does_not_block() -> void:
+	var s := _sim()
+	s.place_foundation(0, "puerta", Vector2i(20, 19))
+	var foe := s.spawn("aldeano", 1, Vector2i(10, 19))
+	s.queue_command(1, "move", {"ids": [foe], "pos": [30500, 19500]})
+	_steps(s, 400)
+	assert_true(Grid.tile_of(s.world.entities[foe]["pos"]).x >= 28, "un cimiento todavía no cierra")

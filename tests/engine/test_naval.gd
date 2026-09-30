@@ -272,3 +272,58 @@ func test_sinking_transport_kills_passengers_and_bell_ignores_ships() -> void:
 	_steps(s, 150)
 	assert_true((s.world.comp(ship2, "Garrison")["units"] as Array).is_empty(), "la campana no manda al barco")
 	assert_true(v > 0)
+
+
+func _loaded_ship(s: Sim, n: int) -> Array:
+	var ship := s.spawn("transporte", 0, Vector2i(15, 20))
+	var ids := []
+	for i in n:
+		ids.append(s.spawn("milicia", 0, Vector2i(12, 19 + i)))
+	s.queue_command(0, "garrison", {"ids": ids, "target": ship})
+	_steps(s, 80)
+	return [ship, ids]
+
+
+func test_unload_with_inland_click() -> void:
+	var s := _sim()
+	var r := _loaded_ship(s, 2)
+	s.queue_command(0, "unload", {"ids": [r[0]], "pos": [37500, 20500]})
+	_steps(s, 400)
+	for u in r[1]:
+		assert_true(s.world.comp(u, "Garrisoned").is_empty(), "bajan aunque el clic sea tierra adentro")
+
+
+func test_move_cancels_pending_unload() -> void:
+	var s := _sim()
+	var r := _loaded_ship(s, 2)
+	s.queue_command(0, "unload", {"ids": [r[0]], "pos": [31500, 20500]})
+	_steps(s, 5)
+	s.queue_command(0, "move", {"ids": [r[0]], "pos": [22500, 30500]})
+	_steps(s, 300)
+	assert_eq((s.world.comp(r[0], "Garrison")["units"] as Array).size(), 2, "siguen a bordo")
+	assert_false(s.world.has_ability(r[0], "Unload"))
+
+
+func test_converted_transport_loses_passengers() -> void:
+	var s := _sim()
+	var r := _loaded_ship(s, 1)
+	var monk := s.spawn("monje", 1, Vector2i(31, 20))
+	s.world.set_pos(monk, Vector2i(30500, 20500))
+	s.world.set_pos(r[0], Vector2i(25500, 20500))
+	s.queue_command(1, "convert", {"ids": [monk], "target": r[0]})
+	_steps(s, 150)
+	assert_eq(int(s.world.entities[r[0]]["owner"]), 1)
+	assert_false(s.world.entities.has(r[1][0]), "los pasajeros no cambian de bando")
+
+
+func test_relic_carrier_cannot_board() -> void:
+	var s := _sim()
+	var ship := s.spawn("transporte", 0, Vector2i(15, 20))
+	var monk := s.spawn("monje", 0, Vector2i(12, 20))
+	var relic := s.spawn("reliquia", -1, Vector2i(11, 20))
+	s.queue_command(0, "pick_relic", {"ids": [monk], "target": relic})
+	_steps(s, 40)
+	assert_true(s.world.has_ability(monk, "Carrying"))
+	s.queue_command(0, "garrison", {"ids": [monk], "target": ship})
+	_steps(s, 60)
+	assert_true(s.world.comp(monk, "Garrisoned").is_empty(), "con la reliquia no sube")
