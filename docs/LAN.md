@@ -17,6 +17,15 @@ Puertos: **7778/UDP** (partida, ENet) y **7777/UDP** (anuncio en la LAN).
 Si el firewall de Windows pregunta, permitir en redes privadas. Si la lista
 no muestra la partida, unirse por IP funciona igual.
 
+Abrir los puertos a mano (PowerShell como administrador, una sola vez):
+
+```
+New-NetFirewallRule -DisplayName "OpenAge descubrimiento" -Direction Inbound -Protocol UDP -LocalPort 7777 -Action Allow
+New-NetFirewallRule -DisplayName "OpenAge partida" -Direction Inbound -Protocol UDP -LocalPort 7778 -Action Allow
+```
+
+Máximo 8 jugadores (humanos + IA).
+
 ## Cómo funciona (lockstep)
 
 Cada PC ejecuta la misma simulación determinista (`engine/sim`). Por la red
