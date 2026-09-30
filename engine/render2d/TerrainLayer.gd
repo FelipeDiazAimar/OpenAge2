@@ -62,20 +62,17 @@ func _process(delta: float) -> void:
 	_mat.set_shader_parameter("t_scroll", _t)
 
 
-## Orden estable con base grass=0; cap 8. Sin API de listado -> LAYERS fijo (pixel-idéntico).
+## Orden FIJO 0-7 = [grass,grass_dry,dirt,forest_floor,agua,playa,bajios,nieve]:
+## 0-3 idéntico a LAYERS (pixel-idéntico hoy); 4-7 activan guards de build_control2.
+## Visual: parches de agua/playa/bajíos/nieve donde el ruido de control2 pegue.
 static func _resolve_layers(registry) -> Array:
-	if registry != null and registry.has_method("terrains"):
-		var all: Array = registry.call("terrains")
-		all = all.filter(func(t): return t != null and str(t) != "")
-		all.sort_custom(func(a, b): return str(a) < str(b))
-		all.erase("grass")
-		all.push_front("grass")
-		if all.size() > MAX_LAYERS:
-			push_warning("TerrainLayer: %d terrenos, cap %d (primeros 8)" % [all.size(), MAX_LAYERS])
-			all = all.slice(0, MAX_LAYERS)
-		if not all.is_empty():
-			return all
-	return LAYERS.duplicate()
+	var fixed: Array = ["grass", "grass_dry", "dirt", "forest_floor", "agua", "playa", "bajios", "nieve"]
+	if registry != null and registry.has_method("get_def"):
+		for t in fixed:
+			if (registry.call("get_def", str(t)) as Dictionary).is_empty():
+				push_warning("TerrainLayer: falta '%s'; fallback fijo 8 (flat)" % str(t))
+				break
+	return fixed.slice(0, MAX_LAYERS)
 
 
 static func _is_water(def: Dictionary) -> bool:

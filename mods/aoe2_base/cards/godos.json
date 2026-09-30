@@ -6,7 +6,7 @@
     "age": 1,
     "type": "recurso",
     "cost": {"madera": 0, "alimento": 50, "oro": 0, "piedra": 0},
-    "effect": {"target": "id:jabali|id:ciervo", "op": "add", "path": "abilities.ResourceSource.amount", "value": 15},
+    "effect": {"target": "id:boar|id:ciervo", "op": "add", "path": "abilities.ResourceSource.amount", "value": 15},
     "icon": "carne",
     "rarity": "comun",
     "desc": "Los cazadores aprovechan cada presa: +15 de alimento en jabalí y ciervo."
@@ -42,7 +42,7 @@
     "age": 1,
     "type": "recurso",
     "cost": {"madera": 25, "alimento": 0, "oro": 0, "piedra": 0},
-    "effect": {"target": "tag:aldeano", "op": "mul", "path": "abilities.Gather.rates.caza", "value": 1.15},
+    "effect": {"target": "tag:aldeano", "op": "mul", "path": "abilities.Gather.rates.food_hunt", "value": 1.15},
     "icon": "arco",
     "rarity": "comun",
     "desc": "Cazadores godos un 15% más rápidos recogiendo de la presa."
@@ -78,7 +78,7 @@
     "age": 2,
     "type": "unidad",
     "cost": {"madera": 0, "alimento": 150, "oro": 100, "piedra": 0},
-    "effect": {"target": "id:hombre_de_armas", "op": "add", "path": "abilities.Attack.damage.melee", "value": 1},
+    "effect": {"target": "id:hombre_armas", "op": "add", "path": "abilities.Attack.damage.melee", "value": 1},
     "icon": "hacha",
     "rarity": "rara",
     "desc": "+1 de ataque cuerpo a cuerpo para hombres de armas."
@@ -174,7 +174,7 @@
     "age": 3,
     "type": "recurso",
     "cost": {"madera": 75, "alimento": 0, "oro": 0, "piedra": 0},
-    "effect": {"target": "id:jabali", "op": "disable", "path": "abilities.Attack", "value": true},
+    "effect": {"target": "id:boar", "op": "disable", "path": "abilities.Attack", "value": true},
     "icon": "jabali",
     "rarity": "rara",
     "desc": "Los cazadores dominan la bestia: el jabalí ya no contraataca."
