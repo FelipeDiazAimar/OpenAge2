@@ -1,13 +1,13 @@
-{
+﻿{
     "debilidades":  [
                         "Sin Paladin",
                         "Caballeria pesada limitada"
                     ],
     "team_bonus":  {
-                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "descripcion":  "Reparar edificios -25% coste (aliados)",
                        "id":  "georgianos_equipo",
                        "efecto":  {
-
+                                      "descuento_reparacion":  0.25
                                   }
                    },
     "id":  "georgianos",
@@ -52,14 +52,25 @@
     "descripcion":  "Georgianos: Empiezan con una Carreta de mulas (sustituye campamentos de madera/minería) Iglesias fortificadas (sustituyen monasterio) dan +10% ritmo de trabajo a aldeanos en radio de 9 casillas",
     "unique_techs":  [
                          {
-                             "descripcion":  "",
-                             "nombre":  "torres_svan",
-                             "id":  "torres_svan"
+                             "id":  "torres_svan",
+                             "nombre":  "Torres svan (Svan Towers)",
+                             "descripcion":  "Fortificaciones +2 ataque; torres dano perforante.",
+                             "edificio":  "castillo",
+                             "edad":  "castillos",
+                             "efectos":  {
+                                             "dano_perforante_torres":  true,
+                                             "ataque_fortificaciones":  2
+                                         }
                          },
                          {
-                             "descripcion":  "",
-                             "nombre":  "caballeria_aznauri",
-                             "id":  "caballeria_aznauri"
+                             "id":  "caballeria_aznauri",
+                             "nombre":  "Caballeria aznauri (Aznauri Cavalry)",
+                             "descripcion":  "Unidades montadas ocupan menos poblacion.",
+                             "edificio":  "castillo",
+                             "edad":  "imperial",
+                             "efectos":  {
+                                             "menos_poblacion_montadas":  true
+                                         }
                          }
                      ],
     "ventajas":  [
@@ -85,48 +96,92 @@
                     },
     "tech_tree":  {
                       "monasterio":  {
-
+                                         "fervor":  true,
+                                         "teocracia":  true,
+                                         "monje":  true,
+                                         "herejia":  true,
+                                         "iluminacion":  true,
+                                         "santidad":  true,
+                                         "redencion":  true
                                      },
                       "castillo":  {
-
+                                       "torres_svan":  true,
+                                       "monaspa":  true,
+                                       "caballeria_aznauri":  true
                                    },
                       "cuartel":  {
-
+                                      "milicia":  true,
+                                      "lancero":  true,
+                                      "piquero":  true,
+                                      "campeon":  true,
+                                      "espadachin_mandoble":  true,
+                                      "alabardero":  true,
+                                      "huscarle":  false,
+                                      "hombre_de_armas":  true
                                   },
                       "establo":  {
-
+                                      "caballero":  true,
+                                      "husar":  true,
+                                      "jinete":  true,
+                                      "camello_pesado":  true,
+                                      "paladin":  false,
+                                      "caballeria_ligera":  true,
+                                      "camello":  true
                                   },
                       "taller_asedio":  {
-
+                                            "mangana":  true,
+                                            "escorpion_pesado":  true,
+                                            "escorpion":  true,
+                                            "trabuquete":  true,
+                                            "onagro":  true,
+                                            "ariete":  true,
+                                            "ariete_blindado":  true,
+                                            "canon_artillado":  true
                                         },
                       "puerto":  {
-
+                                     "barco_pesquero":  true,
+                                     "galeon":  true,
+                                     "galera_guerra":  true,
+                                     "brulote":  true
                                  },
                       "herreria":  {
-
+                                       "forja":  true,
+                                       "armadura_arq_2":  true,
+                                       "ataque_arq_1":  true,
+                                       "alto_horno":  true,
+                                       "armadura_inf_3":  true,
+                                       "ataque_cab_3":  true,
+                                       "ataque_cab_1":  true,
+                                       "ataque_arq_3":  true,
+                                       "ataque_arq_2":  true,
+                                       "armadura_arq_3":  true,
+                                       "hierro_fundido":  true,
+                                       "armadura_cab_2":  true,
+                                       "armadura_inf_2":  true,
+                                       "armadura_cab_3":  true,
+                                       "armadura_arq_1":  true,
+                                       "ataque_cab_2":  true,
+                                       "armadura_inf_1":  true,
+                                       "armadura_cab_1":  true
                                    },
                       "arqueria":  {
-
+                                       "guerrillero":  true,
+                                       "arquero":  true,
+                                       "ballestero":  true,
+                                       "guerrillero_elite":  true,
+                                       "artillero_manual":  true
                                    },
                       "universidad":  {
-
+                                          "torre_guardia":  true,
+                                          "torre_vigilancia":  true,
+                                          "muralla_fortificada":  true,
+                                          "balistica":  true,
+                                          "quimica":  true,
+                                          "albanileria":  true,
+                                          "arquitectura":  true
                                       },
                       "no_disponible_resumen":  [
-                                                    "carreta_husita",
-                                                    "centurion",
-                                                    "houfnice",
-                                                    "liao_dao",
-                                                    "mejora_houfnice",
-                                                    "acero_wootz",
-                                                    "aguila",
-                                                    "aldeana",
-                                                    "almenas",
-                                                    "anarquia",
-                                                    "arambai",
-                                                    "arcabuz",
-                                                    "arco_recurvo",
-                                                    "armadura_arq_3",
-                                                    "armadura_cab_3"
+                                                    "paladin"
                                                 ]
                   }
 }

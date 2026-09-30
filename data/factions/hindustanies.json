@@ -1,141 +1,236 @@
 {
-    "debilidades":  [
-                        "Sin Paladin",
-                        "Caballeria pesada limitada"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Bono de equipo: ver descripcion de civi",
-                       "id":  "hindustanies_equipo",
-                       "efecto":  {
-
-                                  }
-                   },
-    "id":  "hindustanies",
-    "bonus":  [
-                  {
-                      "descripcion":  "Aldeanos 8/13/18/23% más baratos en Alta Edad Media/Feudal/Castillos/Imperial (50 comida -\u003e 46/43.5/41/38.5)",
-                      "id":  "aldeanos_baratos_edad",
-                      "efecto":  {
-                                     "descuento_aldeano_oscura":  0.08,
-                                     "descuento_aldeano_feudal":  0.13,
-                                     "descuento_aldeano_castillos":  0.18,
-                                     "descuento_aldeano_imperial":  0.23
-                                 }
-                  },
-                  {
-                      "descripcion":  "Camellos atacan 20% más rápido",
-                      "id":  "camellos_rapidos_20",
-                      "efecto":  {
-                                     "velocidad_ataque_camello":  0.2,
-                                     "aplica_a":  [
-                                                      "camello",
-                                                      "camello_pesado",
-                                                      "camello_imperial"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Unidades de pólvora +1/+1 armadura",
-                      "id":  "polvora_blindada",
-                      "efecto":  {
-                                     "armadura_polvora_melee":  1,
-                                     "armadura_polvora_antiproyectil":  1,
-                                     "aplica_a":  [
-                                                      "arcabucero",
-                                                      "canon_bombardeo",
-                                                      "galeon_artillado"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Puede construir Caravasar en Imperial (175 madera/50 comida; cura y acelera caravanas cercanas)",
-                      "id":  "caravasar",
-                      "efecto":  {
-                                     "edificio_desbloqueado":  "caravasar",
-                                     "edad":  "imperial"
-                                 }
-                  }
-              ],
-    "roof_color":  "#d4691e",
-    "name":  "Hindustaníes",
-    "descripcion":  "Hindustaníes: Aldeanos 8/13/18/23% más baratos en Alta Edad Media/Feudal/Castillos/Imperial (50 comida -\u003e 46/43.5/41/38.5) Camellos atacan 20% más rápido",
-    "unique_techs":  [
-                         {
-                             "descripcion":  "",
-                             "nombre":  "gran_ruta_troncal",
-                             "id":  "gran_ruta_troncal"
-                         },
-                         {
-                             "descripcion":  "",
-                             "nombre":  "shatagni",
-                             "id":  "shatagni"
-                         }
-                     ],
-    "ventajas":  [
-                     "Aldeanos 8/13/18/23% más baratos en Alta Edad Media/Feuda...",
-                     "Camellos atacan 20% más rápido",
-                     "Unidades de pólvora +1/+1 armadura"
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  9,
-                        "id":  "ghulam",
-                        "armor_pierce":  6,
-                        "attack_elite":  13,
-                        "cost":  {
-                                     "gold":  45,
-                                     "food":  30
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  11,
-                        "armor_melee":  0,
-                        "name":  "Ghulam",
-                        "hp":  70,
-                        "hp_elite":  90
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-
-                                     },
-                      "castillo":  {
-
-                                   },
-                      "cuartel":  {
-
-                                  },
-                      "establo":  {
-
-                                  },
-                      "taller_asedio":  {
-
-                                        },
-                      "puerto":  {
-
-                                 },
-                      "herreria":  {
-
-                                   },
-                      "arqueria":  {
-
-                                   },
-                      "universidad":  {
-
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "carreta_husita",
-                                                    "centurion",
-                                                    "houfnice",
-                                                    "liao_dao",
-                                                    "mejora_houfnice",
-                                                    "acero_wootz",
-                                                    "aguila",
-                                                    "aldeana",
-                                                    "almenas",
-                                                    "anarquia",
-                                                    "arambai",
-                                                    "arcabuz",
-                                                    "arco_recurvo",
-                                                    "armadura_inf_3",
-                                                    "armadura_lamelar"
-                                                ]
-                  }
+  "debilidades": [
+    "Sin Paladin",
+    "Caballeria pesada limitada"
+  ],
+  "team_bonus": {
+    "id": "camellos_asedio_2",
+    "descripcion": "Camellos y caballería ligera +2 ataque vs edificios estándar (aliados)",
+    "efecto": {
+      "ataque_vs_edificio": 2,
+      "aplica_a": [
+        "camello",
+        "camello_pesado",
+        "jinete_explorador",
+        "caballeria_ligera",
+        "husar"
+      ]
+    }
+  },
+  "id": "hindustanies",
+  "bonus": [
+    {
+      "descripcion": "Aldeanos 8/13/18/23% más baratos en Alta Edad Media/Feudal/Castillos/Imperial (50 comida -> 46/43.5/41/38.5)",
+      "id": "aldeanos_baratos_edad",
+      "efecto": {
+        "descuento_aldeano_oscura": 0.08,
+        "descuento_aldeano_feudal": 0.13,
+        "descuento_aldeano_castillos": 0.18,
+        "descuento_aldeano_imperial": 0.23
+      }
+    },
+    {
+      "descripcion": "Camellos atacan 20% más rápido",
+      "id": "camellos_rapidos_20",
+      "efecto": {
+        "velocidad_ataque_camello": 0.2,
+        "aplica_a": [
+          "camello",
+          "camello_pesado",
+          "camello_imperial"
+        ]
+      }
+    },
+    {
+      "descripcion": "Unidades de pólvora +1/+1 armadura",
+      "id": "polvora_blindada",
+      "efecto": {
+        "armadura_polvora_melee": 1,
+        "armadura_polvora_antiproyectil": 1,
+        "aplica_a": [
+          "arcabucero",
+          "canon_bombardeo",
+          "galeon_artillado"
+        ]
+      }
+    },
+    {
+      "descripcion": "Puede construir Caravasar en Imperial (175 madera/50 comida; cura y acelera caravanas cercanas)",
+      "id": "caravasar",
+      "efecto": {
+        "edificio_desbloqueado": "caravasar",
+        "edad": "imperial"
+      }
+    }
+  ],
+  "roof_color": "#d4691e",
+  "name": "Hindustaníes",
+  "descripcion": "Hindustaníes: Aldeanos 8/13/18/23% más baratos en Alta Edad Media/Feudal/Castillos/Imperial (50 comida -> 46/43.5/41/38.5) Camellos atacan 20% más rápido",
+  "unique_techs": [
+    {
+      "id": "gran_ruta_troncal",
+      "nombre": "Gran Ruta Troncal (Grand Trunk Road)",
+      "edificio": "castillo",
+      "edad": "castillos",
+      "coste": {
+        "food": 250,
+        "wood": 200
+      },
+      "tiempo_sec": 40,
+      "descripcion": "Todo ingreso de oro +10% más rápido; tarifa de mercado reducida al 10%.",
+      "efectos": {
+        "ingreso_oro_bonus": 0.1,
+        "tarifa_mercado": 0.1,
+        "aplica_a": [
+          "mineria_oro",
+          "reliquia",
+          "comercio"
+        ]
+      }
+    },
+    {
+      "id": "shatagni",
+      "nombre": "Shatagni",
+      "edificio": "castillo",
+      "edad": "imperial",
+      "coste": {
+        "food": 500,
+        "gold": 650
+      },
+      "tiempo_sec": 60,
+      "descripcion": "Arcabuceros +2 alcance.",
+      "efectos": {
+        "alcance_arcabucero": 2,
+        "aplica_a": [
+          "arcabucero"
+        ]
+      }
+    }
+  ],
+  "ventajas": [
+    "Aldeanos 8/13/18/23% más baratos en Alta Edad Media/Feuda...",
+    "Camellos atacan 20% más rápido",
+    "Unidades de pólvora +1/+1 armadura"
+  ],
+  "unique_unit": {
+    "train_time_sec": 9,
+    "id": "ghulam",
+    "armor_pierce": 6,
+    "attack_elite": 13,
+    "cost": {
+      "gold": 45,
+      "food": 30
+    },
+    "trained_at": "castillo",
+    "attack": 11,
+    "armor_melee": 0,
+    "name": "Ghulam",
+    "hp": 70,
+    "hp_elite": 90
+  },
+  "tech_tree": {
+    "cuartel": {
+      "milicia": true,
+      "hombre_de_armas": true,
+      "espadachin_mandoble": true,
+      "campeon": true,
+      "lancero": true,
+      "piquero": true,
+      "alabardero": true,
+      "huscarle": false,
+      "hachero_franco": false
+    },
+    "arqueria": {
+      "arquero": true,
+      "ballestero": false,
+      "guerrillero": true,
+      "guerrillero_elite": true,
+      "artillero_manual": true,
+      "arquero_tiro_largo": false,
+      "hachero_franco": false
+    },
+    "establo": {
+      "jinete": true,
+      "caballeria_ligera": true,
+      "husar": true,
+      "caballero": true,
+      "paladin": false,
+      "paladin_franco": false,
+      "camello": true,
+      "camello_pesado": true,
+      "catafracta": false
+    },
+    "taller_asedio": {
+      "ariete": true,
+      "ariete_blindado": true,
+      "escorpion": true,
+      "escorpion_pesado": true,
+      "mangana": true,
+      "onagro": true,
+      "canon_artillado": true,
+      "trabuquete": true
+    },
+    "monasterio": {
+      "monje": true,
+      "redencion": true,
+      "fervor": true,
+      "santidad": true,
+      "iluminacion": true,
+      "teocracia": true,
+      "herejia": false
+    },
+    "castillo": {
+      "ghulam": true,
+      "gran_ruta_troncal": true,
+      "shatagni": true
+    },
+    "herreria": {
+      "forja": true,
+      "hierro_fundido": true,
+      "alto_horno": true,
+      "armadura_inf_1": true,
+      "armadura_inf_2": true,
+      "armadura_inf_3": false,
+      "ataque_arq_1": true,
+      "ataque_arq_2": true,
+      "ataque_arq_3": true,
+      "armadura_arq_1": true,
+      "armadura_arq_2": true,
+      "armadura_arq_3": true,
+      "ataque_cab_1": true,
+      "ataque_cab_2": true,
+      "ataque_cab_3": true,
+      "armadura_cab_1": true,
+      "armadura_cab_2": true,
+      "armadura_cab_3": true
+    },
+    "universidad": {
+      "balistica": true,
+      "quimica": true,
+      "torre_vigilancia": true,
+      "torre_guardia": true,
+      "torre_muralla": false,
+      "arquitectura": true,
+      "muralla_fortificada": true,
+      "albanileria": true
+    },
+    "puerto": {
+      "barco_pesquero": true,
+      "galera_guerra": true,
+      "galeon": true,
+      "brulote": true
+    },
+    "no_disponible_resumen": [
+      "armadura_inf_3",
+      "arquero_tiro_largo",
+      "ballestero",
+      "catafracta",
+      "hachero_franco",
+      "herejia",
+      "huscarle",
+      "paladin",
+      "paladin_franco",
+      "torre_muralla"
+    ]
+  }
 }

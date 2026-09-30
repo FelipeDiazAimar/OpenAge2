@@ -1,138 +1,218 @@
 {
-    "debilidades":  [
-                        "Sin Paladin",
-                        "Caballeria pesada limitada"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Bono de equipo: ver descripcion de civi",
-                       "id":  "italianos_equipo",
-                       "efecto":  {
-
-                                  }
-                   },
-    "id":  "italianos",
-    "bonus":  [
-                  {
-                      "descripcion":  "Avanzar de edad 15% más barato",
-                      "id":  "avance_edad_15",
-                      "efecto":  {
-                                     "descuento_avance_edad":  0.15
-                                 }
-                  },
-                  {
-                      "descripcion":  "Arqueros a pie (sin guerrillero) y condotieros +1/+1 armadura (efecto Pavés como bono civ)",
-                      "id":  "arqueros_paves_11",
-                      "efecto":  {
-                                     "armadura_arqueros":  1,
-                                     "antiproyectil_arqueros":  1,
-                                     "aplica_a":  [
-                                                      "arquero",
-                                                      "ballestero",
-                                                      "ballestero_genoves",
-                                                      "condotiero"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Tecnologías de muelle y universidad 25% más baratas",
-                      "id":  "muelle_uni_25",
-                      "efecto":  {
-                                     "descuento_muelle_universidad":  0.25
-                                 }
-                  },
-                  {
-                      "descripcion":  "Unidades de pólvora 20% más baratas",
-                      "id":  "polvora_barata_20",
-                      "efecto":  {
-                                     "descuento_polvora":  0.2,
-                                     "aplica_a":  [
-                                                      "arcabucero",
-                                                      "canon_bombardeo",
-                                                      "galeon_artillado"
-                                                  ]
-                                 }
-                  }
-              ],
-    "roof_color":  "#3d9e4d",
-    "name":  "Italianos",
-    "descripcion":  "Italianos: Avanzar de edad 15% más barato Arqueros a pie (sin guerrillero) y condotieros +1/+1 armadura (efecto Pavés como bono civ)",
-    "unique_techs":  [
-                         {
-                             "descripcion":  "",
-                             "nombre":  "ruta_seda",
-                             "id":  "ruta_seda"
-                         },
-                         {
-                             "descripcion":  "",
-                             "nombre":  "pirotecnia",
-                             "id":  "pirotecnia"
-                         }
-                     ],
-    "ventajas":  [
-                     "Avanzar de edad 15% más barato",
-                     "Arqueros a pie (sin guerrillero) y condotieros +1/+1 arma...",
-                     "Tecnologías de muelle y universidad 25% más baratas"
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  19,
-                        "id":  "ballestero_genoves",
-                        "armor_pierce":  0,
-                        "attack_elite":  8,
-                        "cost":  {
-                                     "gold":  45,
-                                     "food":  60
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  6,
-                        "armor_melee":  1,
-                        "name":  "Ballestero Genovés",
-                        "hp":  45,
-                        "hp_elite":  65
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-
-                                     },
-                      "castillo":  {
-
-                                   },
-                      "cuartel":  {
-
-                                  },
-                      "establo":  {
-
-                                  },
-                      "taller_asedio":  {
-
-                                        },
-                      "puerto":  {
-
-                                 },
-                      "herreria":  {
-
-                                   },
-                      "arqueria":  {
-
-                                   },
-                      "universidad":  {
-
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "carreta_husita",
-                                                    "centurion",
-                                                    "houfnice",
-                                                    "liao_dao",
-                                                    "mejora_houfnice",
-                                                    "acero_wootz",
-                                                    "aguila",
-                                                    "aldeana",
-                                                    "almenas",
-                                                    "anarquia",
-                                                    "arambai",
-                                                    "arcabuz",
-                                                    "arco_recurvo",
-                                                    "armadura_lamelar",
-                                                    "armadura_ming_guang"
-                                                ]
-                  }
+  "debilidades": [
+    "Sin Paladin",
+    "Caballeria pesada limitada"
+  ],
+  "team_bonus": {
+    "id": "condotiero_equipo",
+    "descripcion": "Condotieros disponibles en cuartel en Imperial (aliados)",
+    "efecto": {
+      "desbloquea": "condotiero",
+      "edificio": "cuartel",
+      "edad_minima": "imperial"
+    }
+  },
+  "id": "italianos",
+  "bonus": [
+    {
+      "descripcion": "Avanzar de edad 15% más barato",
+      "id": "avance_edad_15",
+      "efecto": {
+        "descuento_avance_edad": 0.15
+      }
+    },
+    {
+      "descripcion": "Arqueros a pie (sin guerrillero) y condotieros +1/+1 armadura (efecto Pavés como bono civ)",
+      "id": "arqueros_paves_11",
+      "efecto": {
+        "armadura_arqueros": 1,
+        "antiproyectil_arqueros": 1,
+        "aplica_a": [
+          "arquero",
+          "ballestero",
+          "ballestero_genoves",
+          "condotiero"
+        ]
+      }
+    },
+    {
+      "descripcion": "Tecnologías de muelle y universidad 25% más baratas",
+      "id": "muelle_uni_25",
+      "efecto": {
+        "descuento_muelle_universidad": 0.25
+      }
+    },
+    {
+      "descripcion": "Unidades de pólvora 20% más baratas",
+      "id": "polvora_barata_20",
+      "efecto": {
+        "descuento_polvora": 0.2,
+        "aplica_a": [
+          "arcabucero",
+          "canon_bombardeo",
+          "galeon_artillado"
+        ]
+      }
+    }
+  ],
+  "roof_color": "#3d9e4d",
+  "name": "Italianos",
+  "descripcion": "Italianos: Avanzar de edad 15% más barato Arqueros a pie (sin guerrillero) y condotieros +1/+1 armadura (efecto Pavés como bono civ)",
+  "unique_techs": [
+    {
+      "id": "ruta_seda",
+      "nombre": "Ruta de la seda (Silk Road)",
+      "edificio": "castillo",
+      "edad": "castillos",
+      "coste": {
+        "food": 250,
+        "gold": 250
+      },
+      "tiempo_sec": 60,
+      "descripcion": "Unidades de comercio cuestan -50%.",
+      "efectos": {
+        "descuento_comercio": 0.5,
+        "aplica_a": [
+          "carreta_comercio",
+          "coca_comercio"
+        ]
+      }
+    },
+    {
+      "id": "pirotecnia",
+      "nombre": "Pirotecnia (Pirotechnia)",
+      "edificio": "castillo",
+      "edad": "imperial",
+      "coste": {
+        "food": 650,
+        "gold": 500
+      },
+      "tiempo_sec": 50,
+      "descripcion": "Arcabuceros 90% precisión y +15% daño por atravesamiento.",
+      "efectos": {
+        "precision_arcabucero": 0.9,
+        "dano_atravesado": 0.15,
+        "aplica_a": [
+          "arcabucero"
+        ]
+      }
+    }
+  ],
+  "ventajas": [
+    "Avanzar de edad 15% más barato",
+    "Arqueros a pie (sin guerrillero) y condotieros +1/+1 arma...",
+    "Tecnologías de muelle y universidad 25% más baratas"
+  ],
+  "unique_unit": {
+    "train_time_sec": 19,
+    "id": "ballestero_genoves",
+    "armor_pierce": 0,
+    "attack_elite": 8,
+    "cost": {
+      "gold": 45,
+      "food": 60
+    },
+    "trained_at": "castillo",
+    "attack": 6,
+    "armor_melee": 1,
+    "name": "Ballestero Genovés",
+    "hp": 45,
+    "hp_elite": 65
+  },
+  "tech_tree": {
+    "cuartel": {
+      "milicia": true,
+      "hombre_de_armas": true,
+      "espadachin_mandoble": true,
+      "campeon": true,
+      "lancero": true,
+      "piquero": true,
+      "alabardero": true,
+      "huscarle": false
+    },
+    "arqueria": {
+      "arquero": true,
+      "ballestero": true,
+      "guerrillero": true,
+      "guerrillero_elite": true,
+      "artillero_manual": false,
+      "arquero_tiro_largo": false
+    },
+    "establo": {
+      "jinete": true,
+      "caballeria_ligera": true,
+      "husar": true,
+      "caballero": true,
+      "paladin": false,
+      "camello": true,
+      "camello_pesado": true,
+      "catafracta": false
+    },
+    "taller_asedio": {
+      "ariete": true,
+      "ariete_blindado": true,
+      "escorpion": true,
+      "escorpion_pesado": true,
+      "mangana": true,
+      "onagro": true,
+      "canon_artillado": false,
+      "trabuquete": true
+    },
+    "monasterio": {
+      "monje": true,
+      "redencion": true,
+      "fervor": true,
+      "santidad": true,
+      "iluminacion": true,
+      "teocracia": true,
+      "herejia": false
+    },
+    "castillo": {
+      "ballestero_genoves": true,
+      "ruta_seda": true,
+      "pirotecnia": true
+    },
+    "herreria": {
+      "forja": true,
+      "hierro_fundido": true,
+      "alto_horno": true,
+      "armadura_inf_1": true,
+      "armadura_inf_2": true,
+      "armadura_inf_3": true,
+      "ataque_arq_1": true,
+      "ataque_arq_2": true,
+      "ataque_arq_3": true,
+      "armadura_arq_1": true,
+      "armadura_arq_2": true,
+      "armadura_arq_3": true,
+      "ataque_cab_1": true,
+      "ataque_cab_2": true,
+      "ataque_cab_3": true,
+      "armadura_cab_1": true,
+      "armadura_cab_2": true,
+      "armadura_cab_3": true
+    },
+    "universidad": {
+      "balistica": true,
+      "quimica": true,
+      "torre_vigilancia": true,
+      "torre_guardia": true,
+      "torre_muralla": true,
+      "arquitectura": true,
+      "muralla_fortificada": true,
+      "albanileria": true
+    },
+    "puerto": {
+      "barco_pesquero": true,
+      "galera_guerra": true,
+      "galeon": true,
+      "brulote": true
+    },
+    "no_disponible_resumen": [
+      "artillero_manual",
+      "canon_artillado",
+      "herejia",
+      "paladin"
+    ]
+  }
 }

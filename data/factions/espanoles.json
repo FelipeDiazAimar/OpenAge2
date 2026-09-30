@@ -1,132 +1,215 @@
 {
-    "debilidades":  [
-                        "Caballeria pesada limitada",
-                        "Roster con huecos en Imperial"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Bono de equipo: ver descripcion de civi",
-                       "id":  "espanoles_equipo",
-                       "efecto":  {
-
-                                  }
-                   },
-    "id":  "espanoles",
-    "bonus":  [
-                  {
-                      "descripcion":  "Mejoras de herrería no cuestan oro",
-                      "id":  "herreria_sin_oro",
-                      "efecto":  {
-                                     "herreria_coste_oro":  0
-                                 }
-                  },
-                  {
-                      "descripcion":  "Unidades de pólvora disparan 18% más rápido (no aplica a conquistador)",
-                      "id":  "polvora_rapida_18",
-                      "efecto":  {
-                                     "cadencia_polvora_bonus":  0.18,
-                                     "aplica_a":  [
-                                                      "arcabucero",
-                                                      "canon_bombardeo",
-                                                      "galeon_artillado"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Galeón artillado persigue objetivos móviles, proyectiles más rápidos",
-                      "id":  "galeon_perseguidor",
-                      "efecto":  {
-                                     "galeon_tracking":  true,
-                                     "velocidad_proyectil_bonus":  0.2
-                                 }
-                  },
-                  {
-                      "descripcion":  "+20 oro por cada tecnología investigada",
-                      "id":  "oro_por_tech_20",
-                      "efecto":  {
-                                     "oro_por_tecnologia":  20
-                                 }
-                  }
-              ],
-    "roof_color":  "#c0392b",
-    "name":  "Españoles",
-    "descripcion":  "Españoles: Mejoras de herrería no cuestan oro Unidades de pólvora disparan 18% más rápido (no aplica a conquistador)",
-    "unique_techs":  [
-                         {
-                             "descripcion":  "",
-                             "nombre":  "inquisicion",
-                             "id":  "inquisicion"
-                         },
-                         {
-                             "descripcion":  "",
-                             "nombre":  "supremacia",
-                             "id":  "supremacia"
-                         }
-                     ],
-    "ventajas":  [
-                     "Mejoras de herrería no cuestan oro",
-                     "Unidades de pólvora disparan 18% más rápido (no aplica a ...",
-                     "Galeón artillado persigue objetivos móviles, proyectiles ..."
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  51,
-                        "id":  "misionero",
-                        "armor_pierce":  0,
-                        "attack_elite":  12,
-                        "cost":  {
-                                     "gold":  100,
-                                     "food":  60
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  10,
-                        "armor_melee":  0,
-                        "name":  "Misionero",
-                        "hp":  30,
-                        "hp_elite":  50
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-
-                                     },
-                      "castillo":  {
-
-                                   },
-                      "cuartel":  {
-
-                                  },
-                      "establo":  {
-
-                                  },
-                      "taller_asedio":  {
-
-                                        },
-                      "puerto":  {
-
-                                 },
-                      "herreria":  {
-
-                                   },
-                      "arqueria":  {
-
-                                   },
-                      "universidad":  {
-
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "carreta_husita",
-                                                    "centurion",
-                                                    "houfnice",
-                                                    "liao_dao",
-                                                    "mejora_houfnice",
-                                                    "acero_wootz",
-                                                    "aguila",
-                                                    "aldeana",
-                                                    "almenas",
-                                                    "anarquia",
-                                                    "arambai",
-                                                    "arcabuz",
-                                                    "arco_recurvo",
-                                                    "armadura_lamelar",
-                                                    "armadura_ming_guang"
-                                                ]
-                  }
+  "debilidades": [
+    "Caballeria pesada limitada",
+    "Roster con huecos en Imperial"
+  ],
+  "team_bonus": {
+    "id": "comercio_oro_25",
+    "descripcion": "Unidades de comercio generan +25% oro (aliados)",
+    "efecto": {
+      "oro_comercio_bonus": 0.25,
+      "aplica_a": [
+        "carreta_comercio"
+      ]
+    }
+  },
+  "id": "espanoles",
+  "bonus": [
+    {
+      "descripcion": "Mejoras de herrería no cuestan oro",
+      "id": "herreria_sin_oro",
+      "efecto": {
+        "herreria_coste_oro": 0
+      }
+    },
+    {
+      "descripcion": "Unidades de pólvora disparan 18% más rápido (no aplica a conquistador)",
+      "id": "polvora_rapida_18",
+      "efecto": {
+        "cadencia_polvora_bonus": 0.18,
+        "aplica_a": [
+          "arcabucero",
+          "canon_bombardeo",
+          "galeon_artillado"
+        ]
+      }
+    },
+    {
+      "descripcion": "Galeón artillado persigue objetivos móviles, proyectiles más rápidos",
+      "id": "galeon_perseguidor",
+      "efecto": {
+        "galeon_tracking": true,
+        "velocidad_proyectil_bonus": 0.2
+      }
+    },
+    {
+      "descripcion": "+20 oro por cada tecnología investigada",
+      "id": "oro_por_tech_20",
+      "efecto": {
+        "oro_por_tecnologia": 20
+      }
+    }
+  ],
+  "roof_color": "#c0392b",
+  "name": "Españoles",
+  "descripcion": "Españoles: Mejoras de herrería no cuestan oro Unidades de pólvora disparan 18% más rápido (no aplica a conquistador)",
+  "unique_techs": [
+    {
+      "id": "inquisicion",
+      "nombre": "Inquisición (Inquisition)",
+      "edificio": "castillo",
+      "edad": "castillos",
+      "coste": {
+        "food": 300,
+        "gold": 100
+      },
+      "tiempo_sec": 40,
+      "descripcion": "Monjes y misioneros convierten más rápido. Misioneros +1 alcance.",
+      "efectos": {
+        "conversion_rapida": true,
+        "alcance_misionero": 1,
+        "aplica_a": [
+          "monje",
+          "misionero"
+        ]
+      }
+    },
+    {
+      "id": "supremacia",
+      "nombre": "Supremacía (Supremacy)",
+      "edificio": "castillo",
+      "edad": "imperial",
+      "coste": {
+        "food": 400,
+        "gold": 250
+      },
+      "tiempo_sec": 60,
+      "descripcion": "Aldeanos +40 HP, +6 ataque, +2/+2 armadura.",
+      "efectos": {
+        "hp_aldeano": 40,
+        "ataque_aldeano": 6,
+        "armadura_aldeano": 2,
+        "antiproyectil_aldeano": 2,
+        "aplica_a": [
+          "aldeano"
+        ]
+      }
+    }
+  ],
+  "ventajas": [
+    "Mejoras de herrería no cuestan oro",
+    "Unidades de pólvora disparan 18% más rápido (no aplica a ...",
+    "Galeón artillado persigue objetivos móviles, proyectiles ..."
+  ],
+  "unique_unit": {
+    "train_time_sec": 51,
+    "id": "misionero",
+    "armor_pierce": 0,
+    "attack_elite": 12,
+    "cost": {
+      "gold": 100,
+      "food": 60
+    },
+    "trained_at": "castillo",
+    "attack": 10,
+    "armor_melee": 0,
+    "name": "Misionero",
+    "hp": 30,
+    "hp_elite": 50
+  },
+  "tech_tree": {
+    "cuartel": {
+      "milicia": true,
+      "hombre_de_armas": true,
+      "espadachin_mandoble": true,
+      "campeon": true,
+      "lancero": true,
+      "piquero": true,
+      "alabardero": true,
+      "huscarle": false
+    },
+    "arqueria": {
+      "arquero": true,
+      "ballestero": true,
+      "guerrillero": true,
+      "guerrillero_elite": true,
+      "artillero_manual": false,
+      "arquero_tiro_largo": false
+    },
+    "establo": {
+      "jinete": true,
+      "caballeria_ligera": true,
+      "husar": true,
+      "caballero": true,
+      "paladin": false,
+      "camello": true,
+      "camello_pesado": true,
+      "catafracta": false
+    },
+    "taller_asedio": {
+      "ariete": true,
+      "ariete_blindado": true,
+      "escorpion": true,
+      "escorpion_pesado": true,
+      "mangana": true,
+      "onagro": true,
+      "canon_artillado": false,
+      "trabuquete": true
+    },
+    "monasterio": {
+      "monje": true,
+      "redencion": true,
+      "fervor": true,
+      "santidad": true,
+      "iluminacion": true,
+      "teocracia": true,
+      "herejia": true
+    },
+    "castillo": {
+      "misionero": true,
+      "inquisicion": true,
+      "supremacia": true
+    },
+    "herreria": {
+      "forja": true,
+      "hierro_fundido": true,
+      "alto_horno": true,
+      "armadura_inf_1": true,
+      "armadura_inf_2": true,
+      "armadura_inf_3": true,
+      "ataque_arq_1": true,
+      "ataque_arq_2": true,
+      "ataque_arq_3": true,
+      "armadura_arq_1": true,
+      "armadura_arq_2": true,
+      "armadura_arq_3": true,
+      "ataque_cab_1": true,
+      "ataque_cab_2": true,
+      "ataque_cab_3": true,
+      "armadura_cab_1": true,
+      "armadura_cab_2": true,
+      "armadura_cab_3": true
+    },
+    "universidad": {
+      "balistica": true,
+      "quimica": true,
+      "torre_vigilancia": true,
+      "torre_guardia": true,
+      "torre_muralla": true,
+      "arquitectura": true,
+      "muralla_fortificada": true,
+      "albanileria": true
+    },
+    "puerto": {
+      "barco_pesquero": true,
+      "galera_guerra": true,
+      "galeon": true,
+      "brulote": true
+    },
+    "no_disponible_resumen": [
+      "artillero_manual",
+      "canon_artillado",
+      "paladin"
+    ]
+  }
 }

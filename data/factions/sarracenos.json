@@ -1,134 +1,214 @@
 {
-    "debilidades":  [
-                        "Sin Paladín (en disabled); sin Cavalier/Alabardero (solo jinete/lan...",
-                        "Sin Paladin"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Bono de equipo: ver descripcion de civi",
-                       "id":  "sarracenos_equipo",
-                       "efecto":  {
-
-                                  }
-                   },
-    "id":  "sarracenos",
-    "bonus":  [
-                  {
-                      "descripcion":  "Comisión de mercado 5% (30% base); mercados cuestan 75 madera",
-                      "id":  "tasa_mercado_5",
-                      "efecto":  {
-                                     "tasa_mercado":  0.05,
-                                     "coste_mercado_madera":  75,
-                                     "nota":  "a legacy: tasa de intercambio no expresable en effects"
-                                 }
-                  },
-                  {
-                      "descripcion":  "Barcos de transporte con doble HP y +20 capacidad",
-                      "id":  "transporte_reforzado",
-                      "efecto":  {
-                                     "hp_transporte_factor":  2.0,
-                                     "capacidad_transporte_extra":  20
-                                 }
-                  },
-                  {
-                      "descripcion":  "Galeras atacan 25% más rápido",
-                      "id":  "galeras_rapidas_25",
-                      "efecto":  {
-                                     "velocidad_ataque_galera":  0.25,
-                                     "aplica_a":  [
-                                                      "galera"
-                                                  ],
-                                     "nota":  "a legacy: cadencia no expresable con paths del mod"
-                                 }
-                  },
-                  {
-                      "descripcion":  "Unidades de camello +25% HP",
-                      "id":  "camellos_hp_25",
-                      "efecto":  {
-                                     "hp_camello_bonus":  0.25,
-                                     "nota":  "a legacy: sin unidades de camello en el mod"
-                                 }
-                  }
-              ],
-    "roof_color":  "#2a7a6a",
-    "name":  "Sarracenos",
-    "descripcion":  "Sarracenos: Comisión de mercado 5% (30% base); mercados cuestan 75 madera Barcos de transporte con doble HP y +20 capacidad",
-    "unique_techs":  [
-                         {
-                             "descripcion":  "",
-                             "nombre":  "bimaristan",
-                             "id":  "bimaristan"
-                         },
-                         {
-                             "descripcion":  "",
-                             "nombre":  "contrapesos",
-                             "id":  "contrapesos"
-                         }
-                     ],
-    "ventajas":  [
-                     "Comisión de mercado 5% (30% base); mercados cuestan 75 ma...",
-                     "Barcos de transporte con doble HP y +20 capacidad",
-                     "Galeras atacan 25% más rápido"
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  21,
-                        "id":  "mameluco",
-                        "armor_pierce":  0,
-                        "attack_elite":  10,
-                        "cost":  {
-                                     "gold":  85,
-                                     "food":  55
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  8,
-                        "armor_melee":  0,
-                        "name":  "Mameluco",
-                        "hp":  65,
-                        "hp_elite":  85
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-
-                                     },
-                      "castillo":  {
-
-                                   },
-                      "cuartel":  {
-
-                                  },
-                      "establo":  {
-
-                                  },
-                      "taller_asedio":  {
-
-                                        },
-                      "puerto":  {
-
-                                 },
-                      "herreria":  {
-
-                                   },
-                      "arqueria":  {
-
-                                   },
-                      "universidad":  {
-
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "carreta_husita",
-                                                    "centurion",
-                                                    "houfnice",
-                                                    "liao_dao",
-                                                    "mejora_houfnice",
-                                                    "acero_wootz",
-                                                    "aguila",
-                                                    "aldeana",
-                                                    "almenas",
-                                                    "anarquia",
-                                                    "arambai",
-                                                    "arcabuz",
-                                                    "arco_recurvo",
-                                                    "armadura_lamelar",
-                                                    "armadura_ming_guang"
-                                                ]
-                  }
+  "debilidades": [
+    "Sin Paladín (en disabled); sin Cavalier/Alabardero (solo jinete/lan...",
+    "Sin Paladin"
+  ],
+  "team_bonus": {
+    "id": "arqueros_vs_edificios_3",
+    "descripcion": "Arqueros a pie +3 ataque vs edificios estándar (aliados; en el árbol se muestra +2)",
+    "efecto": {
+      "ataque_arqueros_vs_edificio": 3,
+      "aplica_a": [
+        "arquero",
+        "ballestero"
+      ]
+    }
+  },
+  "id": "sarracenos",
+  "bonus": [
+    {
+      "descripcion": "Comisión de mercado 5% (30% base); mercados cuestan 75 madera",
+      "id": "tasa_mercado_5",
+      "efecto": {
+        "tasa_mercado": 0.05,
+        "coste_mercado_madera": 75,
+        "nota": "a legacy: tasa de intercambio no expresable en effects"
+      }
+    },
+    {
+      "descripcion": "Barcos de transporte con doble HP y +20 capacidad",
+      "id": "transporte_reforzado",
+      "efecto": {
+        "hp_transporte_factor": 2.0,
+        "capacidad_transporte_extra": 20
+      }
+    },
+    {
+      "descripcion": "Galeras atacan 25% más rápido",
+      "id": "galeras_rapidas_25",
+      "efecto": {
+        "velocidad_ataque_galera": 0.25,
+        "aplica_a": [
+          "galera"
+        ],
+        "nota": "a legacy: cadencia no expresable con paths del mod"
+      }
+    },
+    {
+      "descripcion": "Unidades de camello +25% HP",
+      "id": "camellos_hp_25",
+      "efecto": {
+        "hp_camello_bonus": 0.25,
+        "nota": "a legacy: sin unidades de camello en el mod"
+      }
+    }
+  ],
+  "roof_color": "#2a7a6a",
+  "name": "Sarracenos",
+  "descripcion": "Sarracenos: Comisión de mercado 5% (30% base); mercados cuestan 75 madera Barcos de transporte con doble HP y +20 capacidad",
+  "unique_techs": [
+    {
+      "id": "bimaristan",
+      "nombre": "Bimaristán (Bimaristan)",
+      "edificio": "castillo",
+      "edad": "castillos",
+      "coste": {
+        "wood": 300,
+        "gold": 200
+      },
+      "tiempo_sec": 50,
+      "descripcion": "Los monjes curan automáticamente a varias unidades cercanas (75 HP/min, radio 5).",
+      "efectos": {
+        "curacion_monje_area": true,
+        "tasa_hp_min": 75,
+        "radio_casillas": 5,
+        "nota": "curación en área no expresable con paths del mod"
+      }
+    },
+    {
+      "id": "contrapesos",
+      "nombre": "Contrapesos (Counterweights)",
+      "edificio": "castillo",
+      "edad": "imperial",
+      "coste": {
+        "food": 650,
+        "gold": 500
+      },
+      "tiempo_sec": 60,
+      "descripcion": "Trebuquetes y línea de mangonel +15% ataque.",
+      "efectos": {
+        "ataque_trebuquete_mangonel_bonus": 0.15,
+        "aplica_a": [
+          "trebuchet",
+          "catapulta"
+        ]
+      }
+    }
+  ],
+  "ventajas": [
+    "Comisión de mercado 5% (30% base); mercados cuestan 75 ma...",
+    "Barcos de transporte con doble HP y +20 capacidad",
+    "Galeras atacan 25% más rápido"
+  ],
+  "unique_unit": {
+    "train_time_sec": 21,
+    "id": "mameluco",
+    "armor_pierce": 0,
+    "attack_elite": 10,
+    "cost": {
+      "gold": 85,
+      "food": 55
+    },
+    "trained_at": "castillo",
+    "attack": 8,
+    "armor_melee": 0,
+    "name": "Mameluco",
+    "hp": 65,
+    "hp_elite": 85
+  },
+  "tech_tree": {
+    "cuartel": {
+      "milicia": true,
+      "hombre_de_armas": true,
+      "espadachin_mandoble": true,
+      "campeon": true,
+      "lancero": true,
+      "piquero": true,
+      "alabardero": true,
+      "huscarle": false
+    },
+    "arqueria": {
+      "arquero": true,
+      "ballestero": true,
+      "guerrillero": true,
+      "guerrillero_elite": true,
+      "artillero_manual": false,
+      "arquero_tiro_largo": false
+    },
+    "establo": {
+      "jinete": true,
+      "caballeria_ligera": true,
+      "husar": true,
+      "caballero": true,
+      "paladin": false,
+      "camello": true,
+      "camello_pesado": true,
+      "catafracta": false
+    },
+    "taller_asedio": {
+      "ariete": true,
+      "ariete_blindado": true,
+      "escorpion": true,
+      "escorpion_pesado": true,
+      "mangana": true,
+      "onagro": true,
+      "canon_artillado": false,
+      "trabuquete": true
+    },
+    "monasterio": {
+      "monje": true,
+      "redencion": true,
+      "fervor": true,
+      "santidad": true,
+      "iluminacion": true,
+      "teocracia": true,
+      "herejia": true
+    },
+    "castillo": {
+      "mameluco": true,
+      "bimaristan": true,
+      "contrapesos": true
+    },
+    "herreria": {
+      "forja": true,
+      "hierro_fundido": true,
+      "alto_horno": true,
+      "armadura_inf_1": true,
+      "armadura_inf_2": true,
+      "armadura_inf_3": true,
+      "ataque_arq_1": true,
+      "ataque_arq_2": true,
+      "ataque_arq_3": true,
+      "armadura_arq_1": true,
+      "armadura_arq_2": true,
+      "armadura_arq_3": true,
+      "ataque_cab_1": true,
+      "ataque_cab_2": true,
+      "ataque_cab_3": true,
+      "armadura_cab_1": true,
+      "armadura_cab_2": true,
+      "armadura_cab_3": true
+    },
+    "universidad": {
+      "balistica": true,
+      "quimica": true,
+      "torre_vigilancia": true,
+      "torre_guardia": true,
+      "torre_muralla": true,
+      "arquitectura": true,
+      "muralla_fortificada": true,
+      "albanileria": true
+    },
+    "puerto": {
+      "barco_pesquero": true,
+      "galera_guerra": true,
+      "galeon": true,
+      "brulote": true
+    },
+    "no_disponible_resumen": [
+      "artillero_manual",
+      "canon_artillado",
+      "paladin"
+    ]
+  }
 }

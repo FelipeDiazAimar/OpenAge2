@@ -1,13 +1,13 @@
-{
+﻿{
     "debilidades":  [
                         "Sin equivalente en repo (sin ID): sin Húsar, sin Ariete/Onagro de a...",
                         "Sin Paladin"
                     ],
     "team_bonus":  {
-                       "descripcion":  "Bono de equipo: ver descripcion de civi",
+                       "descripcion":  "Mercados trabajan 80% mas rapido (aliados)",
                        "id":  "bohemios_equipo",
                        "efecto":  {
-
+                                      "velocidad_mercado":  0.8
                                   }
                    },
     "id":  "bohemios",
@@ -57,19 +57,40 @@
     "descripcion":  "Bohemios: Herrería y Universidad -100 madera Química y Arcabucero disponibles en Castillos",
     "unique_techs":  [
                          {
-                             "descripcion":  "",
-                             "nombre":  "tactica_wagenburg",
-                             "id":  "tactica_wagenburg"
+                             "id":  "tactica_wagenburg",
+                             "nombre":  "Tactica Wagenburg (Wagenburg Tactics)",
+                             "descripcion":  "Unidades de polvora mas rapidas.",
+                             "edificio":  "castillo",
+                             "edad":  "castillos",
+                             "efectos":  {
+                                             "velocidad_polvora":  true,
+                                             "aplica_a":  [
+                                                              "artillero_manual",
+                                                              "canon_artillado",
+                                                              "carreta_husita",
+                                                              "houfnice"
+                                                          ]
+                                         }
                          },
                          {
-                             "descripcion":  "",
-                             "nombre":  "reformas_husitas",
-                             "id":  "reformas_husitas"
+                             "id":  "reformas_husitas",
+                             "nombre":  "Reformas husitas (Hussite Reforms)",
+                             "descripcion":  "Coste de oro de monjes y tecnologias de monasterio pasa a comida.",
+                             "edificio":  "castillo",
+                             "edad":  "imperial",
+                             "efectos":  {
+                                             "oro_a_comida_monasterio":  true
+                                         }
                          },
                          {
-                             "descripcion":  "",
-                             "nombre":  "mejora_houfnice",
-                             "id":  "mejora_houfnice"
+                             "id":  "mejora_houfnice",
+                             "nombre":  "Houfnice (mejora elite)",
+                             "descripcion":  "Mejora Canon de asedio a Houfnice: +PV, ataque y area.",
+                             "edificio":  "castillo",
+                             "edad":  "imperial",
+                             "efectos":  {
+                                             "mejora_houfnice":  true
+                                         }
                          }
                      ],
     "ventajas":  [
@@ -95,48 +116,95 @@
                     },
     "tech_tree":  {
                       "monasterio":  {
-
+                                         "fervor":  true,
+                                         "teocracia":  true,
+                                         "monje":  true,
+                                         "herejia":  true,
+                                         "iluminacion":  true,
+                                         "santidad":  true,
+                                         "redencion":  true
                                      },
                       "castillo":  {
-
+                                       "mejora_houfnice":  true,
+                                       "tactica_wagenburg":  true,
+                                       "houfnice":  true,
+                                       "reformas_husitas":  true,
+                                       "carreta_husita":  true
                                    },
                       "cuartel":  {
-
+                                      "milicia":  true,
+                                      "lancero":  true,
+                                      "piquero":  true,
+                                      "campeon":  true,
+                                      "espadachin_mandoble":  true,
+                                      "alabardero":  true,
+                                      "huscarle":  false,
+                                      "hombre_de_armas":  true
                                   },
                       "establo":  {
-
+                                      "caballero":  true,
+                                      "husar":  false,
+                                      "jinete":  true,
+                                      "camello_pesado":  true,
+                                      "paladin":  false,
+                                      "caballeria_ligera":  true,
+                                      "camello":  true
                                   },
                       "taller_asedio":  {
-
+                                            "mangana":  true,
+                                            "escorpion_pesado":  true,
+                                            "escorpion":  true,
+                                            "trabuquete":  true,
+                                            "onagro":  true,
+                                            "ariete":  true,
+                                            "ariete_blindado":  true,
+                                            "canon_artillado":  true
                                         },
                       "puerto":  {
-
+                                     "barco_pesquero":  true,
+                                     "galeon":  true,
+                                     "galera_guerra":  true,
+                                     "brulote":  true
                                  },
                       "herreria":  {
-
+                                       "forja":  true,
+                                       "armadura_arq_2":  true,
+                                       "ataque_arq_1":  true,
+                                       "alto_horno":  true,
+                                       "armadura_inf_3":  true,
+                                       "ataque_cab_3":  true,
+                                       "ataque_cab_1":  true,
+                                       "ataque_arq_3":  true,
+                                       "ataque_arq_2":  true,
+                                       "armadura_arq_3":  true,
+                                       "hierro_fundido":  true,
+                                       "armadura_cab_2":  true,
+                                       "armadura_inf_2":  true,
+                                       "armadura_cab_3":  true,
+                                       "armadura_arq_1":  true,
+                                       "ataque_cab_2":  true,
+                                       "armadura_inf_1":  true,
+                                       "armadura_cab_1":  true
                                    },
                       "arqueria":  {
-
+                                       "guerrillero":  true,
+                                       "arquero":  true,
+                                       "ballestero":  true,
+                                       "guerrillero_elite":  true,
+                                       "artillero_manual":  true
                                    },
                       "universidad":  {
-
+                                          "torre_guardia":  true,
+                                          "torre_vigilancia":  true,
+                                          "muralla_fortificada":  true,
+                                          "balistica":  true,
+                                          "quimica":  true,
+                                          "albanileria":  true,
+                                          "arquitectura":  true
                                       },
                       "no_disponible_resumen":  [
-                                                    "centurion",
-                                                    "liao_dao",
-                                                    "acero_wootz",
-                                                    "aguila",
-                                                    "aldeana",
-                                                    "almenas",
-                                                    "anarquia",
-                                                    "arambai",
-                                                    "arcabuz",
-                                                    "arco_recurvo",
-                                                    "armadura_cab_3",
-                                                    "armadura_lamelar",
-                                                    "armadura_ming_guang",
-                                                    "armadura_seda",
-                                                    "arquero_camello"
+                                                    "paladin",
+                                                    "husar"
                                                 ]
                   }
 }

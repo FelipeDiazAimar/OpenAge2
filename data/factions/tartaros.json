@@ -1,131 +1,216 @@
 {
-    "debilidades":  [
-                        "Sin línea de Paladín (solo hasta Caballero/Cavalier); Camello pesad...",
-                        "Sin Paladin"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Bono de equipo: ver descripcion de civi",
-                       "id":  "tartaros_equipo",
-                       "efecto":  {
-
-                                  }
-                   },
-    "id":  "tartaros",
-    "bonus":  [
-                  {
-                      "descripcion":  "Animales de pasto contienen +50% de alimento",
-                      "id":  "ganado_duradero",
-                      "efecto":  {
-                                     "alimento_ganado":  0.5
-                                 }
-                  },
-                  {
-                      "descripcion":  "Unidades +20% daño al atacar desde altura (+50% en vez de +25%)",
-                      "id":  "dano_altura",
-                      "efecto":  {
-                                     "dano_altura_bonus":  0.2,
-                                     "multiplicador_altura_final":  1.5
-                                 }
-                  },
-                  {
-                      "descripcion":  "Dedal y Tácticas partas gratis (sin coste de investigación)",
-                      "id":  "tecs_gratis",
-                      "efecto":  {
-                                     "tecnologias_gratis":  [
-                                                                "dedal",
-                                                                "tacticas_partas"
-                                                            ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "2 ovejas gratis junto a cada Centro Urbano nuevo desde Castillos",
-                      "id":  "ovejas_tc",
-                      "efecto":  {
-                                     "ovejas_por_tc":  2,
-                                     "desde_edad":  "castillos"
-                                 }
-                  }
-              ],
-    "roof_color":  "#7a2e2e",
-    "name":  "Tártaros",
-    "descripcion":  "Tártaros: Animales de pasto contienen +50% de alimento Unidades +20% daño al atacar desde altura (+50% en vez de +25%)",
-    "unique_techs":  [
-                         {
-                             "descripcion":  "",
-                             "nombre":  "armadura_seda",
-                             "id":  "armadura_seda"
-                         },
-                         {
-                             "descripcion":  "",
-                             "nombre":  "asedio_timurido",
-                             "id":  "asedio_timurido"
-                         }
-                     ],
-    "ventajas":  [
-                     "Animales de pasto contienen +50% de alimento",
-                     "Unidades +20% daño al atacar desde altura (+50% en vez de...",
-                     "Dedal y Tácticas partas gratis (sin coste de investigación)"
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  15,
-                        "id":  "keshik",
-                        "armor_pierce":  2,
-                        "attack_elite":  13,
-                        "cost":  {
-                                     "gold":  40,
-                                     "food":  60
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  11,
-                        "armor_melee":  1,
-                        "name":  "Keshik",
-                        "hp":  140,
-                        "hp_elite":  160
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-
-                                     },
-                      "castillo":  {
-
-                                   },
-                      "cuartel":  {
-
-                                  },
-                      "establo":  {
-
-                                  },
-                      "taller_asedio":  {
-
-                                        },
-                      "puerto":  {
-
-                                 },
-                      "herreria":  {
-
-                                   },
-                      "arqueria":  {
-
-                                   },
-                      "universidad":  {
-
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "carreta_husita",
-                                                    "centurion",
-                                                    "houfnice",
-                                                    "liao_dao",
-                                                    "mejora_houfnice",
-                                                    "acero_wootz",
-                                                    "aguila",
-                                                    "aldeana",
-                                                    "almenas",
-                                                    "anarquia",
-                                                    "arambai",
-                                                    "arcabuz",
-                                                    "arco_recurvo",
-                                                    "armadura_lamelar",
-                                                    "armadura_ming_guang"
-                                                ]
-                  }
+  "debilidades": [
+    "Sin línea de Paladín (solo hasta Caballero/Cavalier); Camello pesad...",
+    "Sin Paladin"
+  ],
+  "team_bonus": {
+    "id": "vision_arqueros_caballo",
+    "descripcion": "Arqueros a caballo +2 línea de visión (aliados)",
+    "efecto": {
+      "vision_arquero_caballo": 2.0
+    }
+  },
+  "id": "tartaros",
+  "bonus": [
+    {
+      "descripcion": "Animales de pasto contienen +50% de alimento",
+      "id": "ganado_duradero",
+      "efecto": {
+        "alimento_ganado": 0.5
+      }
+    },
+    {
+      "descripcion": "Unidades +20% daño al atacar desde altura (+50% en vez de +25%)",
+      "id": "dano_altura",
+      "efecto": {
+        "dano_altura_bonus": 0.2,
+        "multiplicador_altura_final": 1.5
+      }
+    },
+    {
+      "descripcion": "Dedal y Tácticas partas gratis (sin coste de investigación)",
+      "id": "tecs_gratis",
+      "efecto": {
+        "tecnologias_gratis": [
+          "dedal",
+          "tacticas_partas"
+        ]
+      }
+    },
+    {
+      "descripcion": "2 ovejas gratis junto a cada Centro Urbano nuevo desde Castillos",
+      "id": "ovejas_tc",
+      "efecto": {
+        "ovejas_por_tc": 2,
+        "desde_edad": "castillos"
+      }
+    }
+  ],
+  "roof_color": "#7a2e2e",
+  "name": "Tártaros",
+  "descripcion": "Tártaros: Animales de pasto contienen +50% de alimento Unidades +20% daño al atacar desde altura (+50% en vez de +25%)",
+  "unique_techs": [
+    {
+      "id": "armadura_seda",
+      "nombre": "Armadura de seda (Silk Armor)",
+      "edificio": "castillo",
+      "edad": "castillos",
+      "coste": {
+        "food": 400,
+        "gold": 300
+      },
+      "tiempo_sec": 40,
+      "descripcion": "Exploradores, lanceros de la estepa y arqueros a caballo +1/+1 armadura.",
+      "efectos": {
+        "armadura_cuerpo": 1,
+        "armadura_proyectil": 1,
+        "aplica_a": [
+          "scout",
+          "lancero_estepa",
+          "arquero_caballo",
+          "keshik"
+        ]
+      }
+    },
+    {
+      "id": "asedio_timurido",
+      "nombre": "Asedio timúrido (Timurid Siegecraft)",
+      "edificio": "castillo",
+      "edad": "imperial",
+      "coste": {
+        "wood": 500,
+        "gold": 400
+      },
+      "tiempo_sec": 50,
+      "descripcion": "Trabuquetes +2 alcance. Permite crear Camellos llameantes (suicida vs caballería).",
+      "efectos": {
+        "alcance_trabuquete": 2,
+        "desbloquea": [
+          "camello_llameante"
+        ]
+      }
+    }
+  ],
+  "ventajas": [
+    "Animales de pasto contienen +50% de alimento",
+    "Unidades +20% daño al atacar desde altura (+50% en vez de...",
+    "Dedal y Tácticas partas gratis (sin coste de investigación)"
+  ],
+  "unique_unit": {
+    "train_time_sec": 15,
+    "id": "keshik",
+    "armor_pierce": 2,
+    "attack_elite": 13,
+    "cost": {
+      "gold": 40,
+      "food": 60
+    },
+    "trained_at": "castillo",
+    "attack": 11,
+    "armor_melee": 1,
+    "name": "Keshik",
+    "hp": 140,
+    "hp_elite": 160
+  },
+  "tech_tree": {
+    "cuartel": {
+      "milicia": true,
+      "hombre_de_armas": true,
+      "espadachin_mandoble": true,
+      "campeon": true,
+      "lancero": true,
+      "piquero": true,
+      "alabardero": true,
+      "huscarle": false,
+      "hachero_franco": false
+    },
+    "arqueria": {
+      "arquero": true,
+      "ballestero": true,
+      "guerrillero": true,
+      "guerrillero_elite": true,
+      "artillero_manual": true,
+      "arquero_tiro_largo": false,
+      "hachero_franco": false
+    },
+    "establo": {
+      "jinete": true,
+      "caballeria_ligera": true,
+      "husar": true,
+      "caballero": true,
+      "paladin": false,
+      "paladin_franco": false,
+      "camello": true,
+      "camello_pesado": true,
+      "catafracta": false
+    },
+    "taller_asedio": {
+      "ariete": true,
+      "ariete_blindado": true,
+      "escorpion": true,
+      "escorpion_pesado": true,
+      "mangana": true,
+      "onagro": true,
+      "canon_artillado": true,
+      "trabuquete": true
+    },
+    "monasterio": {
+      "monje": true,
+      "redencion": true,
+      "fervor": true,
+      "santidad": true,
+      "iluminacion": true,
+      "teocracia": true,
+      "herejia": true
+    },
+    "castillo": {
+      "keshik": true,
+      "armadura_seda": true,
+      "asedio_timurido": true
+    },
+    "herreria": {
+      "forja": true,
+      "hierro_fundido": true,
+      "alto_horno": true,
+      "armadura_inf_1": true,
+      "armadura_inf_2": true,
+      "armadura_inf_3": true,
+      "ataque_arq_1": true,
+      "ataque_arq_2": true,
+      "ataque_arq_3": true,
+      "armadura_arq_1": true,
+      "armadura_arq_2": true,
+      "armadura_arq_3": true,
+      "ataque_cab_1": true,
+      "ataque_cab_2": true,
+      "ataque_cab_3": true,
+      "armadura_cab_1": true,
+      "armadura_cab_2": true,
+      "armadura_cab_3": true
+    },
+    "universidad": {
+      "balistica": true,
+      "quimica": true,
+      "torre_vigilancia": true,
+      "torre_guardia": true,
+      "torre_muralla": true,
+      "arquitectura": true,
+      "muralla_fortificada": true,
+      "albanileria": true
+    },
+    "puerto": {
+      "barco_pesquero": true,
+      "galera_guerra": true,
+      "galeon": true,
+      "brulote": true
+    },
+    "no_disponible_resumen": [
+      "arquero_tiro_largo",
+      "catafracta",
+      "hachero_franco",
+      "huscarle",
+      "paladin",
+      "paladin_franco"
+    ]
+  }
 }

@@ -1,123 +1,211 @@
 {
-    "debilidades":  [
-                        "Sin edificios requeridos para avanzar de edad o desbloquear edificios",
-                        "Sin cañón de bombardeo ni gremios/expiación/imprenta (ids fuera del..."
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Bono de equipo: ver descripcion de civi",
-                       "id":  "jemeres_equipo",
-                       "efecto":  {
-
-                                  }
-                   },
-    "id":  "jemeres",
-    "bonus":  [
-                  {
-                      "descripcion":  "Elefantes de combate +10% velocidad",
-                      "id":  "elefantes_rapidos",
-                      "efecto":  {
-                                     "aplica_a":  [
-                                                      "elefante_combate"
-                                                  ],
-                                     "velocidad_bonus":  0.1
-                                 }
-                  },
-                  {
-                      "descripcion":  "Granjeros no transportan: la comida va directa al stock, -5% ritmo",
-                      "id":  "granja_directa",
-                      "efecto":  {
-                                     "entrega_directa":  true,
-                                     "ritmo_trabajo":  0.95
-                                 }
-                  },
-                  {
-                      "descripcion":  "Aldeanos (y reyes) pueden guarecerse en casas",
-                      "id":  "casas_refugio",
-                      "efecto":  {
-                                     "guarnicion_casas":  true
-                                 }
-                  }
-              ],
-    "roof_color":  "#7d3c98",
-    "name":  "Jemeres",
-    "descripcion":  "Jemeres: Elefantes de combate +10% velocidad Granjeros no transportan: la comida va directa al stock, -5% ritmo",
-    "unique_techs":  [
-                         {
-                             "descripcion":  "",
-                             "nombre":  "espadas_colmillos",
-                             "id":  "espadas_colmillos"
-                         },
-                         {
-                             "descripcion":  "",
-                             "nombre":  "doble_ballesta",
-                             "id":  "doble_ballesta"
-                         }
-                     ],
-    "ventajas":  [
-                     "Elefantes de combate +10% velocidad",
-                     "Granjeros no transportan: la comida va directa al stock, ...",
-                     "Aldeanos (y reyes) pueden guarecerse en casas"
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  25,
-                        "id":  "elefante_balista",
-                        "armor_pierce":  0,
-                        "attack_elite":  11,
-                        "cost":  {
-                                     "gold":  80,
-                                     "food":  100
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  9,
-                        "armor_melee":  0,
-                        "name":  "Elefante con Balista",
-                        "hp":  250,
-                        "hp_elite":  270
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-
-                                     },
-                      "castillo":  {
-
-                                   },
-                      "cuartel":  {
-
-                                  },
-                      "establo":  {
-
-                                  },
-                      "taller_asedio":  {
-
-                                        },
-                      "puerto":  {
-
-                                 },
-                      "herreria":  {
-
-                                   },
-                      "arqueria":  {
-
-                                   },
-                      "universidad":  {
-
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "carreta_husita",
-                                                    "centurion",
-                                                    "houfnice",
-                                                    "liao_dao",
-                                                    "mejora_houfnice",
-                                                    "acero_wootz",
-                                                    "aguila",
-                                                    "aldeana",
-                                                    "almenas",
-                                                    "arambai",
-                                                    "arcabuz",
-                                                    "arco_recurvo",
-                                                    "armadura_inf_3",
-                                                    "armadura_lamelar",
-                                                    "armadura_ming_guang"
-                                                ]
-                  }
+  "debilidades": [
+    "Sin edificios requeridos para avanzar de edad o desbloquear edificios",
+    "Sin cañón de bombardeo ni gremios/expiación/imprenta (ids fuera del..."
+  ],
+  "team_bonus": {
+    "id": "jemeres_equipo",
+    "descripcion": "Escorpiones +1 alcance (aliados)",
+    "efecto": {
+      "alcance_escorpion": 1,
+      "aplica_a": [
+        "escorpion"
+      ]
+    }
+  },
+  "id": "jemeres",
+  "bonus": [
+    {
+      "descripcion": "Elefantes de combate +10% velocidad",
+      "id": "elefantes_rapidos",
+      "efecto": {
+        "aplica_a": [
+          "elefante_combate"
+        ],
+        "velocidad_bonus": 0.1
+      }
+    },
+    {
+      "descripcion": "Granjeros no transportan: la comida va directa al stock, -5% ritmo",
+      "id": "granja_directa",
+      "efecto": {
+        "entrega_directa": true,
+        "ritmo_trabajo": 0.95
+      }
+    },
+    {
+      "descripcion": "Aldeanos (y reyes) pueden guarecerse en casas",
+      "id": "casas_refugio",
+      "efecto": {
+        "guarnicion_casas": true
+      }
+    }
+  ],
+  "roof_color": "#7d3c98",
+  "name": "Jemeres",
+  "descripcion": "Jemeres: Elefantes de combate +10% velocidad Granjeros no transportan: la comida va directa al stock, -5% ritmo",
+  "unique_techs": [
+    {
+      "id": "espadas_colmillos",
+      "nombre": "Espadas colmillos (Tusk Swords)",
+      "edificio": "castillo",
+      "edad": "castillos",
+      "coste": {
+        "gold": 450,
+        "wood": 300
+      },
+      "tiempo_sec": 40,
+      "descripcion": "Elefantes de combate +3 ataque.",
+      "efectos": {
+        "aplica_a": [
+          "elefante_combate"
+        ],
+        "ataque_bonus": 3
+      }
+    },
+    {
+      "id": "doble_ballesta",
+      "nombre": "Doble ballesta (Double Crossbow)",
+      "edificio": "castillo",
+      "edad": "imperial",
+      "coste": {
+        "gold": 400,
+        "wood": 700
+      },
+      "tiempo_sec": 40,
+      "descripcion": "Elefantes de balista y escorpiones disparan una segunda flecha a mitad de fuerza.",
+      "efectos": {
+        "aplica_a": [
+          "elefante_balista",
+          "escorpion"
+        ],
+        "fuerza_segundo_proyectil": 0.5,
+        "proyectil_extra": 1
+      }
+    }
+  ],
+  "ventajas": [
+    "Elefantes de combate +10% velocidad",
+    "Granjeros no transportan: la comida va directa al stock, ...",
+    "Aldeanos (y reyes) pueden guarecerse en casas"
+  ],
+  "unique_unit": {
+    "train_time_sec": 25,
+    "id": "elefante_balista",
+    "armor_pierce": 0,
+    "attack_elite": 11,
+    "cost": {
+      "gold": 80,
+      "food": 100
+    },
+    "trained_at": "castillo",
+    "attack": 9,
+    "armor_melee": 0,
+    "name": "Elefante con Balista",
+    "hp": 250,
+    "hp_elite": 270
+  },
+  "tech_tree": {
+    "cuartel": {
+      "milicia": true,
+      "hombre_de_armas": true,
+      "espadachin_mandoble": true,
+      "campeon": false,
+      "lancero": true,
+      "piquero": true,
+      "alabardero": true,
+      "huscarle": false,
+      "hachero_franco": false
+    },
+    "arqueria": {
+      "arquero": true,
+      "ballestero": true,
+      "guerrillero": true,
+      "guerrillero_elite": true,
+      "artillero_manual": true,
+      "arquero_tiro_largo": true,
+      "hachero_franco": false
+    },
+    "establo": {
+      "jinete": true,
+      "caballeria_ligera": true,
+      "husar": true,
+      "caballero": true,
+      "paladin": false,
+      "paladin_franco": false,
+      "camello": true,
+      "camello_pesado": true,
+      "catafracta": true
+    },
+    "taller_asedio": {
+      "ariete": true,
+      "ariete_blindado": true,
+      "escorpion": true,
+      "escorpion_pesado": true,
+      "mangana": true,
+      "onagro": true,
+      "canon_artillado": true,
+      "trabuquete": true
+    },
+    "monasterio": {
+      "monje": true,
+      "redencion": true,
+      "fervor": true,
+      "santidad": true,
+      "iluminacion": true,
+      "teocracia": true,
+      "herejia": false
+    },
+    "castillo": {
+      "elefante_balista": true,
+      "espadas_colmillos": true,
+      "doble_ballesta": true
+    },
+    "herreria": {
+      "forja": true,
+      "hierro_fundido": true,
+      "alto_horno": true,
+      "armadura_inf_1": true,
+      "armadura_inf_2": true,
+      "armadura_inf_3": false,
+      "ataque_arq_1": true,
+      "ataque_arq_2": true,
+      "ataque_arq_3": true,
+      "armadura_arq_1": true,
+      "armadura_arq_2": true,
+      "armadura_arq_3": true,
+      "ataque_cab_1": true,
+      "ataque_cab_2": true,
+      "ataque_cab_3": true,
+      "armadura_cab_1": true,
+      "armadura_cab_2": true,
+      "armadura_cab_3": true
+    },
+    "universidad": {
+      "balistica": true,
+      "quimica": true,
+      "torre_vigilancia": true,
+      "torre_guardia": true,
+      "torre_muralla": false,
+      "arquitectura": true,
+      "muralla_fortificada": true,
+      "albanileria": true
+    },
+    "puerto": {
+      "barco_pesquero": true,
+      "galera_guerra": true,
+      "galeon": true,
+      "brulote": true
+    },
+    "no_disponible_resumen": [
+      "armadura_inf_3",
+      "campeon",
+      "hachero_franco",
+      "herejia",
+      "huscarle",
+      "paladin",
+      "paladin_franco",
+      "torre_muralla"
+    ]
+  }
 }

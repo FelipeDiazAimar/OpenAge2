@@ -1,117 +1,201 @@
-{
- "debilidades": [
-  "Sin Paladin",
-  "Caballeria pesada limitada"
- ],
- "team_bonus": {
-  "descripcion": "Bono de equipo: ver descripcion de civi",
-  "id": "dravidianos_equipo",
-  "efecto": {}
- },
- "id": "dravidianos",
- "bonus": [
-  {
-   "descripcion": "+200 madera al avanzar de edad (Feudal/Castillos/Imperial)",
-   "id": "madera_200_edad",
-   "efecto": {
-    "madera_extra_por_edad": 200,
-    "edades": [
-     "feudal",
-     "castillos",
-     "imperial"
-    ]
-   }
-  },
-  {
-   "descripcion": "Pescadores y barcos pesqueros +15 capacidad",
-   "id": "pesca_15",
-   "efecto": {
-    "capacidad_pesca_extra": 15,
-    "aplica_a": [
-     "aldeano_pescador",
-     "barco_pesquero"
-    ]
-   }
-  },
-  {
-   "descripcion": "Tecnologías del cuartel -50% coste",
-   "id": "cuartel_barato_50",
-   "efecto": {
-    "descuento_tecs_cuartel": 0.5
-   }
-  },
-  {
-   "descripcion": "Guerrillero y arquero elefante atacan 25% más rápido",
-   "id": "guerrillero_rapido_25",
-   "efecto": {
-    "cadencia_guerrillero_bonus": 0.25,
-    "aplica_a": [
-     "guerrillero",
-     "arquero_elefante"
-    ]
-   }
-  }
- ],
- "roof_color": "#ff8c00",
- "name": "Dravidianos",
- "descripcion": "Dravidianos: +200 madera al avanzar de edad (Feudal/Castillos/Imperial) Pescadores y barcos pesqueros +15 capacidad",
- "unique_techs": [
-  {
-   "descripcion": "",
-   "nombre": "cuerpo_medico",
-   "id": "cuerpo_medico"
-  },
-  {
-   "descripcion": "",
-   "nombre": "acero_wootz",
-   "id": "acero_wootz"
-  }
- ],
- "ventajas": [
-  "+200 madera al avanzar de edad (Feudal/Castillos/Imperial)",
-  "Pescadores y barcos pesqueros +15 capacidad",
-  "Tecnologías del cuartel -50% coste"
- ],
- "unique_unit": {
-  "id": "urumi",
-  "name": "Espadachin Urumi",
-  "hp": 55,
-  "attack": 9,
-  "armor_melee": 1,
-  "armor_pierce": 0,
-  "cost": {
-   "food": 65,
-   "gold": 20
-  },
-  "train_time_sec": 9,
-  "trained_at": "castillo"
- },
- "tech_tree": {
-  "monasterio": {},
-  "castillo": {},
-  "cuartel": {},
-  "establo": {},
-  "taller_asedio": {},
-  "puerto": {},
-  "herreria": {},
-  "arqueria": {},
-  "universidad": {},
-  "no_disponible_resumen": [
-   "carreta_husita",
-   "centurion",
-   "houfnice",
-   "liao_dao",
-   "mejora_houfnice",
-   "aguila",
-   "aldeana",
-   "almenas",
-   "anarquia",
-   "arambai",
-   "arcabuz",
-   "arco_recurvo",
-   "armadura_cab_3",
-   "armadura_lamelar",
-   "armadura_ming_guang"
-  ]
- }
+﻿{
+    "debilidades":  [
+                        "Sin Paladin",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Muelles +5 poblacion (aliados)",
+                       "id":  "dravidianos_equipo",
+                       "efecto":  {
+                                      "pop_muelle":  5
+                                  }
+                   },
+    "id":  "dravidianos",
+    "bonus":  [
+                  {
+                      "descripcion":  "+200 madera al avanzar de edad (Feudal/Castillos/Imperial)",
+                      "id":  "madera_200_edad",
+                      "efecto":  {
+                                     "madera_extra_por_edad":  200,
+                                     "edades":  [
+                                                    "feudal",
+                                                    "castillos",
+                                                    "imperial"
+                                                ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Pescadores y barcos pesqueros +15 capacidad",
+                      "id":  "pesca_15",
+                      "efecto":  {
+                                     "capacidad_pesca_extra":  15,
+                                     "aplica_a":  [
+                                                      "aldeano_pescador",
+                                                      "barco_pesquero"
+                                                  ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Tecnologías del cuartel -50% coste",
+                      "id":  "cuartel_barato_50",
+                      "efecto":  {
+                                     "descuento_tecs_cuartel":  0.5
+                                 }
+                  },
+                  {
+                      "descripcion":  "Guerrillero y arquero elefante atacan 25% más rápido",
+                      "id":  "guerrillero_rapido_25",
+                      "efecto":  {
+                                     "cadencia_guerrillero_bonus":  0.25,
+                                     "aplica_a":  [
+                                                      "guerrillero",
+                                                      "arquero_elefante"
+                                                  ]
+                                 }
+                  }
+              ],
+    "roof_color":  "#ff8c00",
+    "name":  "Dravidianos",
+    "descripcion":  "Dravidianos: +200 madera al avanzar de edad (Feudal/Castillos/Imperial) Pescadores y barcos pesqueros +15 capacidad",
+    "unique_techs":  [
+                         {
+                             "id":  "cuerpo_medico",
+                             "nombre":  "Cuerpo medico (Medical Corps)",
+                             "descripcion":  "Elefantes regeneran HP.",
+                             "edificio":  "castillo",
+                             "edad":  "castillos",
+                             "efectos":  {
+                                             "regen_elefantes":  true,
+                                             "aplica_a":  [
+                                                              "elefante",
+                                                              "arquero_elefante"
+                                                          ]
+                                         }
+                         },
+                         {
+                             "id":  "acero_wootz",
+                             "nombre":  "Acero wootz (Wootz Steel)",
+                             "descripcion":  "Infanteria ignora armadura.",
+                             "edificio":  "castillo",
+                             "edad":  "imperial",
+                             "efectos":  {
+                                             "ignora_armadura":  true,
+                                             "aplica_a":  [
+                                                              "milicia",
+                                                              "urumi"
+                                                          ]
+                                         }
+                         }
+                     ],
+    "ventajas":  [
+                     "+200 madera al avanzar de edad (Feudal/Castillos/Imperial)",
+                     "Pescadores y barcos pesqueros +15 capacidad",
+                     "Tecnologías del cuartel -50% coste"
+                 ],
+    "unique_unit":  {
+                        "id":  "urumi",
+                        "name":  "Espadachin Urumi",
+                        "hp":  55,
+                        "attack":  9,
+                        "armor_melee":  1,
+                        "armor_pierce":  0,
+                        "cost":  {
+                                     "food":  65,
+                                     "gold":  20
+                                 },
+                        "train_time_sec":  9,
+                        "trained_at":  "castillo"
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+                                         "fervor":  true,
+                                         "teocracia":  true,
+                                         "monje":  true,
+                                         "herejia":  true,
+                                         "iluminacion":  true,
+                                         "santidad":  true,
+                                         "redencion":  true
+                                     },
+                      "castillo":  {
+                                       "urumi":  true,
+                                       "acero_wootz":  true,
+                                       "cuerpo_medico":  true
+                                   },
+                      "cuartel":  {
+                                      "milicia":  true,
+                                      "lancero":  true,
+                                      "piquero":  true,
+                                      "campeon":  true,
+                                      "espadachin_mandoble":  true,
+                                      "alabardero":  true,
+                                      "huscarle":  false,
+                                      "hombre_de_armas":  true
+                                  },
+                      "establo":  {
+                                      "caballero":  false,
+                                      "husar":  false,
+                                      "jinete":  true,
+                                      "camello_pesado":  true,
+                                      "paladin":  false,
+                                      "caballeria_ligera":  true,
+                                      "camello":  true
+                                  },
+                      "taller_asedio":  {
+                                            "mangana":  true,
+                                            "escorpion_pesado":  true,
+                                            "escorpion":  true,
+                                            "trabuquete":  true,
+                                            "onagro":  true,
+                                            "ariete":  true,
+                                            "ariete_blindado":  true,
+                                            "canon_artillado":  true
+                                        },
+                      "puerto":  {
+                                     "barco_pesquero":  true,
+                                     "galeon":  true,
+                                     "galera_guerra":  true,
+                                     "brulote":  true
+                                 },
+                      "herreria":  {
+                                       "forja":  true,
+                                       "armadura_arq_2":  true,
+                                       "ataque_arq_1":  true,
+                                       "alto_horno":  true,
+                                       "armadura_inf_3":  true,
+                                       "ataque_cab_3":  true,
+                                       "ataque_cab_1":  true,
+                                       "ataque_arq_3":  true,
+                                       "ataque_arq_2":  true,
+                                       "armadura_arq_3":  true,
+                                       "hierro_fundido":  true,
+                                       "armadura_cab_2":  true,
+                                       "armadura_inf_2":  true,
+                                       "armadura_cab_3":  true,
+                                       "armadura_arq_1":  true,
+                                       "ataque_cab_2":  true,
+                                       "armadura_inf_1":  true,
+                                       "armadura_cab_1":  true
+                                   },
+                      "arqueria":  {
+                                       "guerrillero":  true,
+                                       "arquero":  true,
+                                       "ballestero":  true,
+                                       "guerrillero_elite":  true,
+                                       "artillero_manual":  true
+                                   },
+                      "universidad":  {
+                                          "torre_guardia":  true,
+                                          "torre_vigilancia":  true,
+                                          "muralla_fortificada":  true,
+                                          "balistica":  true,
+                                          "quimica":  true,
+                                          "albanileria":  true,
+                                          "arquitectura":  true
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "caballero",
+                                                    "paladin",
+                                                    "husar"
+                                                ]
+                  }
 }

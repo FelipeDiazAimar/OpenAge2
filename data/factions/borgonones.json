@@ -1,109 +1,195 @@
-{
- "debilidades": [
-  "Sin equivalente en repo (sin ID): sin Arbalestero, sin Húsar? no — ...",
-  "Caballeria pesada limitada"
- ],
- "team_bonus": {
-  "descripcion": "Bono de equipo: ver descripcion de civi",
-  "id": "borgonones_equipo",
-  "efecto": {}
- },
- "id": "borgonones",
- "bonus": [
-  {
-   "descripcion": "Mejoras económicas 1 edad antes y -40% comida (excepto acuñación y banca)",
-   "id": "eco_temprana_40",
-   "efecto": {
-    "descuento_eco_comida": 0.4,
-    "edad_anticipada": 1,
-    "excluye": [
-     "acunacion",
-     "banca"
-    ]
-   }
-  },
-  {
-   "descripcion": "Tecnologías del establo -50% coste",
-   "id": "establo_barato_50",
-   "efecto": {
-    "descuento_establo": 0.5
-   }
-  },
-  {
-   "descripcion": "Mejora a Cavalier (jinete pesado) disponible en Castillos",
-   "id": "cavalier_castillos",
-   "efecto": {
-    "cavalier_edad": "castillos"
-   }
-  },
-  {
-   "descripcion": "Unidades de pólvora +25% ataque (aplica también al daño bonus)",
-   "id": "polvora_25",
-   "efecto": {
-    "ataque_polvora_bonus": 0.25
-   }
-  }
- ],
- "roof_color": "#7a1f3d",
- "name": "Borgoñones",
- "descripcion": "Borgoñones: Mejoras económicas 1 edad antes y -40% comida (excepto acuñación y banca) Tecnologías del establo -50% coste",
- "unique_techs": [
-  {
-   "descripcion": "",
-   "nombre": "vinedos_borgonones",
-   "id": "vinedos_borgonones"
-  },
-  {
-   "descripcion": "",
-   "nombre": "revolucion_flamenca",
-   "id": "revolucion_flamenca"
-  }
- ],
- "ventajas": [
-  "Mejoras económicas 1 edad antes y -40% comida (excepto ac...",
-  "Tecnologías del establo -50% coste",
-  "Mejora a Cavalier (jinete pesado) disponible en Castillos"
- ],
- "unique_unit": {
-  "id": "coustillier",
-  "name": "Coustillier",
-  "hp": 100,
-  "attack": 11,
-  "armor_melee": 2,
-  "armor_pierce": 2,
-  "cost": {
-   "food": 55,
-   "gold": 55
-  },
-  "train_time_sec": 21,
-  "trained_at": "castillo"
- },
- "tech_tree": {
-  "monasterio": {},
-  "castillo": {},
-  "cuartel": {},
-  "establo": {},
-  "taller_asedio": {},
-  "puerto": {},
-  "herreria": {},
-  "arqueria": {},
-  "universidad": {},
-  "no_disponible_resumen": [
-   "carreta_husita",
-   "centurion",
-   "houfnice",
-   "liao_dao",
-   "mejora_houfnice",
-   "acero_wootz",
-   "aguila",
-   "aldeana",
-   "almenas",
-   "anarquia",
-   "arambai",
-   "arcabuz",
-   "arco_recurvo",
-   "armadura_arq_3",
-   "armadura_lamelar"
-  ]
- }
+﻿{
+    "debilidades":  [
+                        "Sin equivalente en repo (sin ID): sin Arbalestero, sin Húsar? no — ...",
+                        "Caballeria pesada limitada"
+                    ],
+    "team_bonus":  {
+                       "descripcion":  "Reliquias generan 20 comida/min ademas de oro (aliados)",
+                       "id":  "borgonones_equipo",
+                       "efecto":  {
+                                      "reliquia_comida_min":  20
+                                  }
+                   },
+    "id":  "borgonones",
+    "bonus":  [
+                  {
+                      "descripcion":  "Mejoras económicas 1 edad antes y -40% comida (excepto acuñación y banca)",
+                      "id":  "eco_temprana_40",
+                      "efecto":  {
+                                     "descuento_eco_comida":  0.4,
+                                     "edad_anticipada":  1,
+                                     "excluye":  [
+                                                     "acunacion",
+                                                     "banca"
+                                                 ]
+                                 }
+                  },
+                  {
+                      "descripcion":  "Tecnologías del establo -50% coste",
+                      "id":  "establo_barato_50",
+                      "efecto":  {
+                                     "descuento_establo":  0.5
+                                 }
+                  },
+                  {
+                      "descripcion":  "Mejora a Cavalier (jinete pesado) disponible en Castillos",
+                      "id":  "cavalier_castillos",
+                      "efecto":  {
+                                     "cavalier_edad":  "castillos"
+                                 }
+                  },
+                  {
+                      "descripcion":  "Unidades de pólvora +25% ataque (aplica también al daño bonus)",
+                      "id":  "polvora_25",
+                      "efecto":  {
+                                     "ataque_polvora_bonus":  0.25
+                                 }
+                  }
+              ],
+    "roof_color":  "#7a1f3d",
+    "name":  "Borgoñones",
+    "descripcion":  "Borgoñones: Mejoras económicas 1 edad antes y -40% comida (excepto acuñación y banca) Tecnologías del establo -50% coste",
+    "unique_techs":  [
+                         {
+                             "id":  "vinedos_borgonones",
+                             "nombre":  "Vinedos borgonones (Burgundian Vineyards)",
+                             "descripcion":  "Granjeros generan oro ademas de comida.",
+                             "edificio":  "castillo",
+                             "edad":  "castillos",
+                             "efectos":  {
+                                             "oro_granjeros":  true
+                                         }
+                         },
+                         {
+                             "id":  "revolucion_flamenca",
+                             "nombre":  "Revolucion flamenca (Flemish Revolution)",
+                             "descripcion":  "Convierte aldeanos en Milicia flamenca; habilita Milicia flamenca.",
+                             "edificio":  "castillo",
+                             "edad":  "imperial",
+                             "efectos":  {
+                                             "convierte_aldeanos":  true,
+                                             "aplica_a":  [
+                                                              "aldeano",
+                                                              "milicia_flamenca"
+                                                          ]
+                                         }
+                         }
+                     ],
+    "ventajas":  [
+                     "Mejoras económicas 1 edad antes y -40% comida (excepto ac...",
+                     "Tecnologías del establo -50% coste",
+                     "Mejora a Cavalier (jinete pesado) disponible en Castillos"
+                 ],
+    "unique_unit":  {
+                        "id":  "coustillier",
+                        "name":  "Coustillier",
+                        "hp":  100,
+                        "attack":  11,
+                        "armor_melee":  2,
+                        "armor_pierce":  2,
+                        "cost":  {
+                                     "food":  55,
+                                     "gold":  55
+                                 },
+                        "train_time_sec":  21,
+                        "trained_at":  "castillo"
+                    },
+    "tech_tree":  {
+                      "monasterio":  {
+                                         "fervor":  true,
+                                         "herejia":  false,
+                                         "iluminacion":  true,
+                                         "teocracia":  false,
+                                         "monje":  true,
+                                         "santidad":  true,
+                                         "redencion":  true
+                                     },
+                      "castillo":  {
+                                       "coustillier":  true,
+                                       "revolucion_flamenca":  true,
+                                       "milicia_flamenca":  true,
+                                       "vinedos_borgonones":  true
+                                   },
+                      "cuartel":  {
+                                      "milicia":  true,
+                                      "lancero":  true,
+                                      "piquero":  true,
+                                      "campeon":  true,
+                                      "espadachin_mandoble":  true,
+                                      "alabardero":  true,
+                                      "huscarle":  false,
+                                      "hombre_de_armas":  true
+                                  },
+                      "establo":  {
+                                      "caballero":  true,
+                                      "husar":  true,
+                                      "jinete":  true,
+                                      "camello_pesado":  true,
+                                      "paladin":  true,
+                                      "caballeria_ligera":  true,
+                                      "camello":  true
+                                  },
+                      "taller_asedio":  {
+                                            "mangana":  true,
+                                            "escorpion_pesado":  false,
+                                            "escorpion":  true,
+                                            "trabuquete":  true,
+                                            "onagro":  false,
+                                            "ariete":  true,
+                                            "ariete_blindado":  true,
+                                            "canon_artillado":  true
+                                        },
+                      "puerto":  {
+                                     "barco_pesquero":  true,
+                                     "galeon":  true,
+                                     "galera_guerra":  true,
+                                     "brulote":  true
+                                 },
+                      "herreria":  {
+                                       "forja":  true,
+                                       "armadura_arq_2":  true,
+                                       "ataque_arq_1":  true,
+                                       "alto_horno":  true,
+                                       "armadura_inf_3":  true,
+                                       "ataque_cab_3":  true,
+                                       "ataque_cab_1":  true,
+                                       "ataque_arq_3":  false,
+                                       "ataque_arq_2":  true,
+                                       "armadura_arq_3":  false,
+                                       "hierro_fundido":  true,
+                                       "armadura_cab_2":  true,
+                                       "armadura_inf_2":  true,
+                                       "armadura_cab_3":  true,
+                                       "armadura_arq_1":  true,
+                                       "ataque_cab_2":  true,
+                                       "armadura_inf_1":  true,
+                                       "armadura_cab_1":  true
+                                   },
+                      "arqueria":  {
+                                       "ballestero":  false,
+                                       "artillero_manual":  true,
+                                       "arquero":  true,
+                                       "guerrillero_elite":  true,
+                                       "guerrillero":  true
+                                   },
+                      "universidad":  {
+                                          "torre_guardia":  true,
+                                          "torre_vigilancia":  true,
+                                          "muralla_fortificada":  true,
+                                          "balistica":  true,
+                                          "quimica":  true,
+                                          "albanileria":  true,
+                                          "arquitectura":  true
+                                      },
+                      "no_disponible_resumen":  [
+                                                    "ballestero",
+                                                    "paladin_no_bloodlines",
+                                                    "teocracia",
+                                                    "herejia",
+                                                    "escorpion_pesado",
+                                                    "onagro",
+                                                    "ataque_arq_3",
+                                                    "armadura_arq_3"
+                                                ]
+                  }
 }

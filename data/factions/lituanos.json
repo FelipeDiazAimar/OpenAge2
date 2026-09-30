@@ -1,108 +1,208 @@
 {
- "debilidades": [
-  "Sin mejora de Arbalestero ni Tácticas partas; arqueros a pie débile...",
-  "Caballeria pesada limitada"
- ],
- "team_bonus": {
-  "descripcion": "Bono de equipo: ver descripcion de civi",
-  "id": "lituanos_equipo",
-  "efecto": {}
- },
- "id": "lituanos",
- "bonus": [
-  {
-   "descripcion": "Empieza con +150 de comida; cada Centro Urbano nuevo otorga +100 de comida",
-   "id": "comida_inicial_tc",
-   "efecto": {
-    "comida_inicial": 150,
-    "comida_por_tc": 100
-   }
+  "debilidades": [
+    "Sin mejora de Arbalestero ni Tácticas partas; arqueros a pie débile...",
+    "Caballeria pesada limitada"
+  ],
+  "team_bonus": {
+    "id": "monasterios_rapidos",
+    "descripcion": "Monasterios trabajan 20% más rápido (aliados)",
+    "efecto": {
+      "velocidad_monasterio": 0.2
+    }
   },
-  {
-   "descripcion": "Lanceros y guerrilleros +10% velocidad de movimiento",
-   "id": "basura_rapida",
-   "efecto": {
-    "velocidad": 0.1,
-    "aplica_a": [
-     "lancero",
-     "guerrillero"
+  "id": "lituanos",
+  "bonus": [
+    {
+      "descripcion": "Empieza con +150 de comida; cada Centro Urbano nuevo otorga +100 de comida",
+      "id": "comida_inicial_tc",
+      "efecto": {
+        "comida_inicial": 150,
+        "comida_por_tc": 100
+      }
+    },
+    {
+      "descripcion": "Lanceros y guerrilleros +10% velocidad de movimiento",
+      "id": "basura_rapida",
+      "efecto": {
+        "velocidad": 0.1,
+        "aplica_a": [
+          "lancero",
+          "guerrillero"
+        ]
+      }
+    },
+    {
+      "descripcion": "Línea de caballero y Leitis +1 ataque por reliquia en monasterio (máx. +4)",
+      "id": "ataque_reliquias",
+      "efecto": {
+        "ataque_por_reliquia": 1,
+        "maximo": 4,
+        "aplica_a": [
+          "jinete",
+          "paladin",
+          "leitis"
+        ]
+      }
+    }
+  ],
+  "roof_color": "#3d7a44",
+  "name": "Lituanos",
+  "descripcion": "Lituanos: Empieza con +150 de comida; cada Centro Urbano nuevo otorga +100 de comida Lanceros y guerrilleros +10% velocidad de movimiento",
+  "unique_techs": [
+    {
+      "id": "fuertes_colina",
+      "nombre": "Fuertes de colina (Hill Forts)",
+      "edificio": "castillo",
+      "edad": "castillos",
+      "coste": {
+        "food": 250,
+        "gold": 250
+      },
+      "tiempo_sec": 40,
+      "descripcion": "Centros Urbanos +3 de alcance.",
+      "efectos": {
+        "alcance_centro_urbano": 3
+      }
+    },
+    {
+      "id": "escudos_torre",
+      "nombre": "Escudos de torre (Tower Shields)",
+      "edificio": "castillo",
+      "edad": "imperial",
+      "coste": {
+        "food": 500,
+        "gold": 200
+      },
+      "tiempo_sec": 40,
+      "descripcion": "Lanceros y guerrilleros +2 armadura antiproyectil.",
+      "efectos": {
+        "armadura_proyectil": 2,
+        "aplica_a": [
+          "lancero",
+          "guerrillero"
+        ]
+      }
+    }
+  ],
+  "ventajas": [
+    "Empieza con +150 de comida; cada Centro Urbano nuevo otor...",
+    "Lanceros y guerrilleros +10% velocidad de movimiento",
+    "Línea de caballero y Leitis +1 ataque por reliquia en mon..."
+  ],
+  "unique_unit": {
+    "id": "leitis",
+    "name": "Leitis",
+    "hp": 100,
+    "attack": 12,
+    "armor_melee": 1,
+    "armor_pierce": 2,
+    "cost": {
+      "food": 70,
+      "gold": 50
+    },
+    "train_time_sec": 20,
+    "trained_at": "castillo"
+  },
+  "tech_tree": {
+    "cuartel": {
+      "milicia": true,
+      "hombre_de_armas": true,
+      "espadachin_mandoble": true,
+      "campeon": true,
+      "lancero": true,
+      "piquero": true,
+      "alabardero": true,
+      "huscarle": false,
+      "hachero_franco": false
+    },
+    "arqueria": {
+      "arquero": true,
+      "ballestero": true,
+      "guerrillero": true,
+      "guerrillero_elite": true,
+      "artillero_manual": true,
+      "arquero_tiro_largo": false,
+      "hachero_franco": false
+    },
+    "establo": {
+      "jinete": true,
+      "caballeria_ligera": true,
+      "husar": true,
+      "caballero": true,
+      "paladin": true,
+      "paladin_franco": false,
+      "camello": true,
+      "camello_pesado": true,
+      "catafracta": false
+    },
+    "taller_asedio": {
+      "ariete": true,
+      "ariete_blindado": true,
+      "escorpion": true,
+      "escorpion_pesado": true,
+      "mangana": true,
+      "onagro": true,
+      "canon_artillado": true,
+      "trabuquete": true
+    },
+    "monasterio": {
+      "monje": true,
+      "redencion": true,
+      "fervor": true,
+      "santidad": true,
+      "iluminacion": true,
+      "teocracia": true,
+      "herejia": true
+    },
+    "castillo": {
+      "leitis": true,
+      "fuertes_colina": true,
+      "escudos_torre": true
+    },
+    "herreria": {
+      "forja": true,
+      "hierro_fundido": true,
+      "alto_horno": false,
+      "armadura_inf_1": true,
+      "armadura_inf_2": true,
+      "armadura_inf_3": false,
+      "ataque_arq_1": true,
+      "ataque_arq_2": true,
+      "ataque_arq_3": true,
+      "armadura_arq_1": true,
+      "armadura_arq_2": true,
+      "armadura_arq_3": true,
+      "ataque_cab_1": true,
+      "ataque_cab_2": true,
+      "ataque_cab_3": true,
+      "armadura_cab_1": true,
+      "armadura_cab_2": true,
+      "armadura_cab_3": true
+    },
+    "universidad": {
+      "balistica": true,
+      "quimica": true,
+      "torre_vigilancia": true,
+      "torre_guardia": true,
+      "torre_muralla": true,
+      "arquitectura": true,
+      "muralla_fortificada": true,
+      "albanileria": true
+    },
+    "puerto": {
+      "barco_pesquero": true,
+      "galera_guerra": true,
+      "galeon": true,
+      "brulote": true
+    },
+    "no_disponible_resumen": [
+      "alto_horno",
+      "armadura_inf_3",
+      "arquero_tiro_largo",
+      "catafracta",
+      "hachero_franco",
+      "huscarle",
+      "paladin_franco"
     ]
-   }
-  },
-  {
-   "descripcion": "Línea de caballero y Leitis +1 ataque por reliquia en monasterio (máx. +4)",
-   "id": "ataque_reliquias",
-   "efecto": {
-    "ataque_por_reliquia": 1,
-    "maximo": 4,
-    "aplica_a": [
-     "jinete",
-     "paladin",
-     "leitis"
-    ]
-   }
   }
- ],
- "roof_color": "#3d7a44",
- "name": "Lituanos",
- "descripcion": "Lituanos: Empieza con +150 de comida; cada Centro Urbano nuevo otorga +100 de comida Lanceros y guerrilleros +10% velocidad de movimiento",
- "unique_techs": [
-  {
-   "descripcion": "",
-   "nombre": "fuertes_colina",
-   "id": "fuertes_colina"
-  },
-  {
-   "descripcion": "",
-   "nombre": "escudos_torre",
-   "id": "escudos_torre"
-  }
- ],
- "ventajas": [
-  "Empieza con +150 de comida; cada Centro Urbano nuevo otor...",
-  "Lanceros y guerrilleros +10% velocidad de movimiento",
-  "Línea de caballero y Leitis +1 ataque por reliquia en mon..."
- ],
- "unique_unit": {
-  "id": "leitis",
-  "name": "Leitis",
-  "hp": 100,
-  "attack": 12,
-  "armor_melee": 1,
-  "armor_pierce": 2,
-  "cost": {
-   "food": 70,
-   "gold": 50
-  },
-  "train_time_sec": 20,
-  "trained_at": "castillo"
- },
- "tech_tree": {
-  "monasterio": {},
-  "castillo": {},
-  "cuartel": {},
-  "establo": {},
-  "taller_asedio": {},
-  "puerto": {},
-  "herreria": {},
-  "arqueria": {},
-  "universidad": {},
-  "no_disponible_resumen": [
-   "carreta_husita",
-   "centurion",
-   "houfnice",
-   "liao_dao",
-   "mejora_houfnice",
-   "acero_wootz",
-   "aguila",
-   "aldeana",
-   "almenas",
-   "alto_horno",
-   "anarquia",
-   "arambai",
-   "arcabuz",
-   "arco_recurvo",
-   "armadura_inf_3"
-  ]
- }
 }

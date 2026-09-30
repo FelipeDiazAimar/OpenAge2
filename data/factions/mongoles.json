@@ -1,140 +1,217 @@
 {
-    "debilidades":  [
-                        "Ausencias clave DE: sin Alabardero (solo Piquero), sin Cañón de ase...",
-                        "Sin Paladin"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Bono de equipo: ver descripcion de civi",
-                       "id":  "mongoles_equipo",
-                       "efecto":  {
-
-                                  }
-                   },
-    "id":  "mongoles",
-    "bonus":  [
-                  {
-                      "descripcion":  "Cazadores trabajan 40% más rápido (antes 50%)",
-                      "id":  "cazadores_40",
-                      "efecto":  {
-                                     "recoleccion_caza_bonus":  0.4
-                                 }
-                  },
-                  {
-                      "descripcion":  "Arqueros a caballo disparan 20% más rápido (algunas fuentes dan 25%; verificar en cliente DE actual)",
-                      "id":  "arq_caballeria_20",
-                      "efecto":  {
-                                     "cadencia_arq_caballeria_bonus":  0.2
-                                 }
-                  },
-                  {
-                      "descripcion":  "Caballería ligera, Húsar y Lancero estepario +30% PV (algunas fuentes: +20% en Castillos, +30% en Imperial)",
-                      "id":  "cab_ligera_hp_30",
-                      "efecto":  {
-                                     "hp_cab_ligera_bonus":  0.3,
-                                     "aplica_a":  [
-                                                      "scout",
-                                                      "caballeria_ligera",
-                                                      "husar",
-                                                      "lancero_estepario"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "UU Mangudai (arquero a caballo, castillo): 55M/65O aprox.; 60 PV; 6 atq (8 élite) + bonus vs asedio; cadencia alta; fuerte vs asedio/infantería, débil vs guerrilleros/piqueros/camellos",
-                      "id":  "uu_mangudai",
-                      "efecto":  {
-                                     "unidad":  "mangudai",
-                                     "coste":  {
-                                                   "wood":  55,
-                                                   "gold":  65
-                                               },
-                                     "hp":  60,
-                                     "ataque":  6,
-                                     "ataque_elite":  8,
-                                     "bonus_vs_asedio":  true
-                                 }
-                  }
-              ],
-    "roof_color":  "#d9480f",
-    "name":  "Mongoles",
-    "descripcion":  "Mongoles: Cazadores trabajan 40% más rápido (antes 50%) Arqueros a caballo disparan 20% más rápido (algunas fuentes dan 25%; verificar en cliente DE actual)",
-    "unique_techs":  [
-                         {
-                             "descripcion":  "",
-                             "nombre":  "nomadas",
-                             "id":  "nomadas"
-                         },
-                         {
-                             "descripcion":  "",
-                             "nombre":  "taladro",
-                             "id":  "taladro"
-                         }
-                     ],
-    "ventajas":  [
-                     "Cazadores trabajan 40% más rápido (antes 50%)",
-                     "Arqueros a caballo disparan 20% más rápido (algunas fuent...",
-                     "Caballería ligera, Húsar y Lancero estepario +30% PV (alg..."
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  26,
-                        "id":  "mangudai",
-                        "armor_pierce":  0,
-                        "attack_elite":  8,
-                        "cost":  {
-                                     "gold":  65,
-                                     "food":  60
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  6,
-                        "armor_melee":  0,
-                        "name":  "Mangudai",
-                        "hp":  60,
-                        "hp_elite":  80
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-
-                                     },
-                      "castillo":  {
-
-                                   },
-                      "cuartel":  {
-
-                                  },
-                      "establo":  {
-
-                                  },
-                      "taller_asedio":  {
-
-                                        },
-                      "puerto":  {
-
-                                 },
-                      "herreria":  {
-
-                                   },
-                      "arqueria":  {
-
-                                   },
-                      "universidad":  {
-
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "carreta_husita",
-                                                    "centurion",
-                                                    "houfnice",
-                                                    "liao_dao",
-                                                    "mejora_houfnice",
-                                                    "acero_wootz",
-                                                    "aguila",
-                                                    "aldeana",
-                                                    "almenas",
-                                                    "anarquia",
-                                                    "arambai",
-                                                    "arcabuz",
-                                                    "arco_recurvo",
-                                                    "armadura_arq_3",
-                                                    "armadura_cab_3"
-                                                ]
-                  }
+  "debilidades": [
+    "Ausencias clave DE: sin Alabardero (solo Piquero), sin Cañón de ase...",
+    "Sin Paladin"
+  ],
+  "team_bonus": {
+    "id": "exploracion_cab_2",
+    "descripcion": "Scout/Ligera/Húsar +2 línea de visión (aliados)",
+    "efecto": {
+      "vision_cab_ligera": 2.0
+    }
+  },
+  "id": "mongoles",
+  "bonus": [
+    {
+      "descripcion": "Cazadores trabajan 40% más rápido (antes 50%)",
+      "id": "cazadores_40",
+      "efecto": {
+        "recoleccion_caza_bonus": 0.4
+      }
+    },
+    {
+      "descripcion": "Arqueros a caballo disparan 20% más rápido (algunas fuentes dan 25%; verificar en cliente DE actual)",
+      "id": "arq_caballeria_20",
+      "efecto": {
+        "cadencia_arq_caballeria_bonus": 0.2
+      }
+    },
+    {
+      "descripcion": "Caballería ligera, Húsar y Lancero estepario +30% PV (algunas fuentes: +20% en Castillos, +30% en Imperial)",
+      "id": "cab_ligera_hp_30",
+      "efecto": {
+        "hp_cab_ligera_bonus": 0.3,
+        "aplica_a": [
+          "scout",
+          "caballeria_ligera",
+          "husar",
+          "lancero_estepario"
+        ]
+      }
+    },
+    {
+      "descripcion": "UU Mangudai (arquero a caballo, castillo): 55M/65O aprox.; 60 PV; 6 atq (8 élite) + bonus vs asedio; cadencia alta; fuerte vs asedio/infantería, débil vs guerrilleros/piqueros/camellos",
+      "id": "uu_mangudai",
+      "efecto": {
+        "unidad": "mangudai",
+        "coste": {
+          "wood": 55,
+          "gold": 65
+        },
+        "hp": 60,
+        "ataque": 6,
+        "ataque_elite": 8,
+        "bonus_vs_asedio": true
+      }
+    }
+  ],
+  "roof_color": "#d9480f",
+  "name": "Mongoles",
+  "descripcion": "Mongoles: Cazadores trabajan 40% más rápido (antes 50%) Arqueros a caballo disparan 20% más rápido (algunas fuentes dan 25%; verificar en cliente DE actual)",
+  "unique_techs": [
+    {
+      "id": "nomadas",
+      "nombre": "Nómadas (Nomads)",
+      "edificio": "castillo",
+      "edad": "castillos",
+      "coste": {
+        "wood": 300,
+        "gold": 150
+      },
+      "tiempo_sec": 40,
+      "descripcion": "Las casas destruidas conservan su espacio de población.",
+      "efectos": {
+        "casas_destruidas_conservan_pob": true,
+        "nota": "no aplica a cimientos sin terminar ni a castillos/TC"
+      }
+    },
+    {
+      "id": "taladro",
+      "nombre": "Taladro (Drill)",
+      "edificio": "castillo",
+      "edad": "imperial",
+      "coste": {
+        "wood": 500,
+        "gold": 450
+      },
+      "tiempo_sec": 60,
+      "descripcion": "Unidades del taller de asedio +50% velocidad de movimiento.",
+      "efectos": {
+        "velocidad_asedio_bonus": 0.5,
+        "aplica_a": [
+          "ariete",
+          "catapulta",
+          "trebuchet"
+        ]
+      }
+    }
+  ],
+  "ventajas": [
+    "Cazadores trabajan 40% más rápido (antes 50%)",
+    "Arqueros a caballo disparan 20% más rápido (algunas fuent...",
+    "Caballería ligera, Húsar y Lancero estepario +30% PV (alg..."
+  ],
+  "unique_unit": {
+    "train_time_sec": 26,
+    "id": "mangudai",
+    "armor_pierce": 0,
+    "attack_elite": 8,
+    "cost": {
+      "gold": 65,
+      "food": 60
+    },
+    "trained_at": "castillo",
+    "attack": 6,
+    "armor_melee": 0,
+    "name": "Mangudai",
+    "hp": 60,
+    "hp_elite": 80
+  },
+  "tech_tree": {
+    "cuartel": {
+      "milicia": true,
+      "hombre_de_armas": true,
+      "espadachin_mandoble": true,
+      "campeon": true,
+      "lancero": true,
+      "piquero": true,
+      "alabardero": true,
+      "huscarle": false
+    },
+    "arqueria": {
+      "arquero": true,
+      "ballestero": true,
+      "guerrillero": true,
+      "guerrillero_elite": true,
+      "artillero_manual": false,
+      "arquero_tiro_largo": false
+    },
+    "establo": {
+      "jinete": true,
+      "caballeria_ligera": true,
+      "husar": true,
+      "caballero": true,
+      "paladin": false,
+      "camello": true,
+      "camello_pesado": true,
+      "catafracta": false
+    },
+    "taller_asedio": {
+      "ariete": true,
+      "ariete_blindado": true,
+      "escorpion": true,
+      "escorpion_pesado": true,
+      "mangana": true,
+      "onagro": true,
+      "canon_artillado": false,
+      "trabuquete": true
+    },
+    "monasterio": {
+      "monje": true,
+      "redencion": true,
+      "fervor": true,
+      "santidad": true,
+      "iluminacion": true,
+      "teocracia": true,
+      "herejia": true
+    },
+    "castillo": {
+      "mangudai": true,
+      "nomadas": true,
+      "taladro": true
+    },
+    "herreria": {
+      "forja": true,
+      "hierro_fundido": true,
+      "alto_horno": true,
+      "armadura_inf_1": true,
+      "armadura_inf_2": true,
+      "armadura_inf_3": true,
+      "ataque_arq_1": true,
+      "ataque_arq_2": true,
+      "ataque_arq_3": true,
+      "armadura_arq_1": true,
+      "armadura_arq_2": true,
+      "armadura_arq_3": false,
+      "ataque_cab_1": true,
+      "ataque_cab_2": true,
+      "ataque_cab_3": true,
+      "armadura_cab_1": true,
+      "armadura_cab_2": true,
+      "armadura_cab_3": false
+    },
+    "universidad": {
+      "balistica": true,
+      "quimica": true,
+      "torre_vigilancia": true,
+      "torre_guardia": true,
+      "torre_muralla": true,
+      "arquitectura": true,
+      "muralla_fortificada": true,
+      "albanileria": true
+    },
+    "puerto": {
+      "barco_pesquero": true,
+      "galera_guerra": true,
+      "galeon": true,
+      "brulote": true
+    },
+    "no_disponible_resumen": [
+      "armadura_arq_3",
+      "armadura_cab_3",
+      "artillero_manual",
+      "canon_artillado",
+      "paladin"
+    ]
+  }
 }
