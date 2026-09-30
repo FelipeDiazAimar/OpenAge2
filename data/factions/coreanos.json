@@ -1,207 +1,207 @@
-{
-  "debilidades": [
-    "Sin Paladin",
-    "Caballeria pesada limitada"
-  ],
-  "team_bonus": {
-    "id": "aldeanos_vision_3",
-    "descripcion": "Aldeanos +3 línea de visión (aliados)",
-    "efecto": {
-      "vision_aldeano": 3.0,
-      "aplica_a": [
-        "aldeano"
-      ]
-    }
-  },
-  "id": "coreanos",
-  "bonus": [
-    {
-      "descripcion": "Mejoras de armadura de arquero y de torres gratis (torre bombardeo requiere Química)",
-      "id": "mejoras_arquero_torre_gratis",
-      "efecto": {
-        "armadura_arquero_coste": 0,
-        "torres_coste": 0,
-        "requiere_quimica": [
-          "torre_bombardeo"
-        ]
-      }
-    },
-    {
-      "descripcion": "Barcos de guerra -20% madera",
-      "id": "barcos_guerra_madera_20",
-      "efecto": {
-        "descuento_barcos_madera": 0.2,
-        "aplica_a": [
-          "galera",
-          "barco_tortuga"
-        ]
-      }
-    }
-  ],
-  "roof_color": "#2f6fd0",
-  "name": "Coreanos",
-  "descripcion": "Coreanos: Mejoras de armadura de arquero y de torres gratis (torre bombardeo requiere Química) Barcos de guerra -20% madera",
-  "unique_techs": [
-    {
-      "id": "eupseong",
-      "nombre": "Eupseong",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "food": 300,
-        "gold": 300
-      },
-      "tiempo_sec": 40,
-      "descripcion": "Torres (excepto bombardeo) +2 alcance.",
-      "efectos": {
-        "alcance_torres": 2,
-        "aplica_a": [
-          "torre_guardia",
-          "torre_muralla"
-        ]
-      }
-    },
-    {
-      "id": "shinkichon",
-      "nombre": "Shinkichon",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "food": 1100,
-        "gold": 800
-      },
-      "tiempo_sec": 60,
-      "descripcion": "Carretas de cohetes y barcos tortuga +1 alcance y proyectiles extra.",
-      "efectos": {
-        "alcance_cohetes": 1,
-        "proyectiles_extra_carreta": 6,
-        "proyectiles_extra_tortuga": 2,
-        "aplica_a": [
-          "carreta_cohetes",
-          "barco_tortuga"
-        ]
-      }
-    }
-  ],
-  "ventajas": [
-    "Mejoras de armadura de arquero y de torres gratis (torre ...",
-    "Barcos de guerra -20% madera",
-    "Unidad unica versatil"
-  ],
-  "unique_unit": {
-    "train_time_sec": 21,
-    "id": "carreta_guerra",
-    "armor_pierce": 3,
-    "attack_elite": 11,
-    "cost": {
-      "gold": 60,
-      "food": 60
-    },
-    "trained_at": "castillo",
-    "attack": 9,
-    "armor_melee": 0,
-    "name": "Carreta de Guerra",
-    "hp": 150,
-    "hp_elite": 170
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": true,
-      "alabardero": true,
-      "huscarle": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": true,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": false,
-      "arquero_tiro_largo": false
-    },
-    "establo": {
-      "jinete": true,
-      "caballeria_ligera": true,
-      "husar": true,
-      "caballero": true,
-      "paladin": false,
-      "camello": true,
-      "camello_pesado": true,
-      "catafracta": false
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": false,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": false,
-      "fervor": true,
-      "santidad": true,
-      "iluminacion": false,
-      "teocracia": true,
-      "herejia": false
-    },
-    "castillo": {
-      "carreta_guerra": true,
-      "eupseong": true,
-      "shinkichon": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": false,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": true,
-      "armadura_arq_1": true,
-      "armadura_arq_2": true,
-      "armadura_arq_3": true,
-      "ataque_cab_1": true,
-      "ataque_cab_2": true,
-      "ataque_cab_3": true,
-      "armadura_cab_1": true,
-      "armadura_cab_2": true,
-      "armadura_cab_3": false
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": true,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": true,
-      "arquitectura": true,
-      "muralla_fortificada": true,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "alto_horno",
-      "armadura_cab_3",
-      "artillero_manual",
-      "canon_artillado",
-      "herejia",
-      "iluminacion",
-      "paladin",
-      "redencion"
-    ]
+﻿{
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "id": "aldeanos_vision_3",
+  "descripcion": "Aldeanos +3 línea de visión (aliados)",
+  "efecto": {
+   "vision_aldeano": 3.0,
+   "aplica_a": [
+    "aldeano"
+   ]
   }
+ },
+ "id": "coreanos",
+ "bonus": [
+  {
+   "descripcion": "Mejoras de armadura de arquero y de torres gratis (torre bombardeo requiere Química)",
+   "id": "mejoras_arquero_torre_gratis",
+   "efecto": {
+    "armadura_arquero_coste": 0,
+    "torres_coste": 0,
+    "requiere_quimica": [
+     "torre_bombardeo"
+    ]
+   }
+  },
+  {
+   "descripcion": "Barcos de guerra -20% madera",
+   "id": "barcos_guerra_madera_20",
+   "efecto": {
+    "descuento_barcos_madera": 0.2,
+    "aplica_a": [
+     "galera",
+     "barco_tortuga"
+    ]
+   }
+  }
+ ],
+ "roof_color": "#2f6fd0",
+ "name": "Coreanos",
+ "descripcion": "Coreanos: Mejoras de armadura de arquero y de torres gratis (torre bombardeo requiere Química) Barcos de guerra -20% madera",
+ "unique_techs": [
+  {
+   "id": "eupseong",
+   "nombre": "Eupseong",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "food": 300,
+    "gold": 300
+   },
+   "tiempo_sec": 40,
+   "descripcion": "Torres (excepto bombardeo) +2 alcance.",
+   "efectos": {
+    "alcance_torres": 2,
+    "aplica_a": [
+     "torre_guardia",
+     "torre_muralla"
+    ]
+   }
+  },
+  {
+   "id": "shinkichon",
+   "nombre": "Shinkichon",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "food": 1100,
+    "gold": 800
+   },
+   "tiempo_sec": 60,
+   "descripcion": "Carretas de cohetes y barcos tortuga +1 alcance y proyectiles extra.",
+   "efectos": {
+    "alcance_cohetes": 1,
+    "proyectiles_extra_carreta": 6,
+    "proyectiles_extra_tortuga": 2,
+    "aplica_a": [
+     "carreta_cohetes",
+     "barco_tortuga"
+    ]
+   }
+  }
+ ],
+ "ventajas": [
+  "Mejoras de armadura de arquero y de torres gratis (torre ...",
+  "Barcos de guerra -20% madera",
+  "Unidad unica versatil"
+ ],
+ "unique_unit": {
+  "train_time_sec": 21,
+  "id": "carreta_guerra",
+  "armor_pierce": 3,
+  "attack_elite": 11,
+  "cost": {
+   "gold": 60,
+   "food": 60
+  },
+  "trained_at": "castillo",
+  "attack": 9,
+  "armor_melee": 0,
+  "name": "Carreta de Guerra",
+  "hp": 150,
+  "hp_elite": 170
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": true,
+   "alabardero": true,
+   "huscarle": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": false,
+   "arquero_tiro_largo": false
+  },
+  "establo": {
+   "jinete": true,
+   "caballeria_ligera": true,
+   "husar": true,
+   "caballero": true,
+   "paladin": false,
+   "camello": true,
+   "camello_pesado": true,
+   "catafracta": false
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": false,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": false,
+   "fervor": true,
+   "santidad": true,
+   "iluminacion": false,
+   "teocracia": true,
+   "herejia": false
+  },
+  "castillo": {
+   "carreta_guerra": true,
+   "eupseong": true,
+   "shinkichon": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": false,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": true,
+   "armadura_arq_1": true,
+   "armadura_arq_2": true,
+   "armadura_arq_3": true,
+   "ataque_cab_1": true,
+   "ataque_cab_2": true,
+   "ataque_cab_3": true,
+   "armadura_cab_1": true,
+   "armadura_cab_2": true,
+   "armadura_cab_3": false
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": true,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": true,
+   "arquitectura": true,
+   "muralla_fortificada": true,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "alto_horno",
+   "armadura_cab_3",
+   "artillero_manual",
+   "canon_artillado",
+   "herejia",
+   "iluminacion",
+   "paladin",
+   "redencion"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true
+  }
+ }
 }

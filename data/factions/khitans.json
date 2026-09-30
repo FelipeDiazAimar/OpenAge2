@@ -1,201 +1,201 @@
 ﻿{
-    "debilidades":  [
-                        "Sin Paladin",
-                        "Caballeria pesada limitada"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Contraguerrilla +rapidez de creacion en equipo (aliados)",
-                       "id":  "khitans_equipo",
-                       "efecto":  {
-                                      "velocidad_contra_equipo":  true
-                                  }
-                   },
-    "id":  "khitans",
-    "bonus":  [
-                  {
-                      "descripcion":  "Forja y Fundición de hierro tienen efecto doble (+2/+4 ataque cuerpo a cuerpo en vez de +1/+2)",
-                      "id":  "forja_doble",
-                      "efecto":  {
-                                     "multiplicador_forja":  2.0,
-                                     "aplica_a":  [
-                                                      "forja",
-                                                      "hierro_fundido"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Guerrilleros, Lanceros y Scouts se crean y mejoran 15% más rápido",
-                      "id":  "contraguerrilla_rapida_15",
-                      "efecto":  {
-                                     "velocidad_creacion":  0.15,
-                                     "aplica_a":  [
-                                                      "guerrillero",
-                                                      "lancero",
-                                                      "scout"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Mejora a Arquero a caballo pesado disponible en Castillos y cuesta -50%",
-                      "id":  "arquero_pesado_castillos",
-                      "efecto":  {
-                                     "edad":  "castillos",
-                                     "descuento":  0.5,
-                                     "aplica_a":  [
-                                                      "arquero_caballo_pesado"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Los Pastos sustituyen a las Granjas: 2 aldeanos por pasto, más comida total por madera",
-                      "id":  "pastos_granja",
-                      "efecto":  {
-                                     "edificio":  "pasto",
-                                     "sustituye_a":  "granja",
-                                     "aldeanos_por_edificio":  2
-                                 }
-                  }
-              ],
-    "roof_color":  "#4a6fa5",
-    "name":  "Kitanes",
-    "descripcion":  "Kitanes: Forja y Fundición de hierro tienen efecto doble (+2/+4 ataque cuerpo a cuerpo en vez de +1/+2) Guerrilleros, Lanceros y Scouts se crean y mejoran 15% más rápido",
-    "unique_techs":  [
-                         {
-                             "id":  "armadura_lamelar",
-                             "nombre":  "Armadura lamelar (Lamellar Armor)",
-                             "descripcion":  "Infanteria y guerrilleros reflejan dano cuerpo a cuerpo.",
-                             "edificio":  "castillo",
-                             "edad":  "castillos",
-                             "efectos":  {
-                                             "aplica_a":  [
-                                                              "milicia",
-                                                              "guerrillero",
-                                                              "liao_dao"
-                                                          ],
-                                             "refleja_dano":  true
-                                         }
-                         },
-                         {
-                             "id":  "caballeria_ordo",
-                             "nombre":  "Caballeria ordo (Ordo Cavalry)",
-                             "descripcion":  "Caballeria regenera HP en combate.",
-                             "edificio":  "castillo",
-                             "edad":  "imperial",
-                             "efectos":  {
-                                             "regen_caballeria_combate":  true
-                                         }
-                         }
-                     ],
-    "ventajas":  [
-                     "Forja y Fundición de hierro tienen efecto doble (+2/+4 at...",
-                     "Guerrilleros, Lanceros y Scouts se crean y mejoran 15% má...",
-                     "Mejora a Arquero a caballo pesado disponible en Castillos..."
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  12,
-                        "id":  "liao_dao",
-                        "armor_pierce":  1,
-                        "attack_elite":  11,
-                        "cost":  {
-                                     "gold":  40,
-                                     "food":  40
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  9,
-                        "armor_melee":  3,
-                        "name":  "Liao Dao",
-                        "hp":  75,
-                        "hp_elite":  95
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-                                         "fervor":  true,
-                                         "teocracia":  true,
-                                         "monje":  true,
-                                         "herejia":  true,
-                                         "iluminacion":  true,
-                                         "santidad":  true,
-                                         "redencion":  true
-                                     },
-                      "castillo":  {
-                                       "liao_dao":  true,
-                                       "armadura_lamelar":  true,
-                                       "caballeria_ordo":  true,
-                                       "trebucete_montado":  true
-                                   },
-                      "cuartel":  {
-                                      "milicia":  true,
-                                      "lancero":  true,
-                                      "piquero":  true,
-                                      "campeon":  true,
-                                      "espadachin_mandoble":  true,
-                                      "alabardero":  true,
-                                      "huscarle":  false,
-                                      "hombre_de_armas":  true
-                                  },
-                      "establo":  {
-                                      "caballero":  true,
-                                      "husar":  true,
-                                      "jinete":  true,
-                                      "camello_pesado":  true,
-                                      "paladin":  false,
-                                      "caballeria_ligera":  true,
-                                      "camello":  true
-                                  },
-                      "taller_asedio":  {
-                                            "mangana":  true,
-                                            "escorpion_pesado":  true,
-                                            "escorpion":  true,
-                                            "trabuquete":  true,
-                                            "onagro":  true,
-                                            "ariete":  true,
-                                            "ariete_blindado":  true,
-                                            "canon_artillado":  true
-                                        },
-                      "puerto":  {
-                                     "barco_pesquero":  true,
-                                     "galeon":  true,
-                                     "galera_guerra":  true,
-                                     "brulote":  true
-                                 },
-                      "herreria":  {
-                                       "forja":  true,
-                                       "armadura_arq_2":  true,
-                                       "ataque_arq_1":  true,
-                                       "alto_horno":  true,
-                                       "armadura_inf_3":  true,
-                                       "ataque_cab_3":  true,
-                                       "ataque_cab_1":  true,
-                                       "ataque_arq_3":  true,
-                                       "ataque_arq_2":  true,
-                                       "armadura_arq_3":  true,
-                                       "hierro_fundido":  true,
-                                       "armadura_cab_2":  true,
-                                       "armadura_inf_2":  true,
-                                       "armadura_cab_3":  true,
-                                       "armadura_arq_1":  true,
-                                       "ataque_cab_2":  true,
-                                       "armadura_inf_1":  true,
-                                       "armadura_cab_1":  true
-                                   },
-                      "arqueria":  {
-                                       "guerrillero":  true,
-                                       "arquero":  true,
-                                       "ballestero":  true,
-                                       "guerrillero_elite":  true,
-                                       "artillero_manual":  true
-                                   },
-                      "universidad":  {
-                                          "torre_guardia":  true,
-                                          "torre_vigilancia":  true,
-                                          "muralla_fortificada":  true,
-                                          "balistica":  true,
-                                          "quimica":  true,
-                                          "albanileria":  true,
-                                          "arquitectura":  true
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "paladin"
-                                                ]
-                  }
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "descripcion": "Contraguerrilla +rapidez de creacion en equipo (aliados)",
+  "id": "khitans_equipo",
+  "efecto": {
+   "velocidad_contra_equipo": true
+  }
+ },
+ "id": "khitans",
+ "bonus": [
+  {
+   "descripcion": "Forja y Fundición de hierro tienen efecto doble (+2/+4 ataque cuerpo a cuerpo en vez de +1/+2)",
+   "id": "forja_doble",
+   "efecto": {
+    "multiplicador_forja": 2.0,
+    "aplica_a": [
+     "forja",
+     "hierro_fundido"
+    ]
+   }
+  },
+  {
+   "descripcion": "Guerrilleros, Lanceros y Scouts se crean y mejoran 15% más rápido",
+   "id": "contraguerrilla_rapida_15",
+   "efecto": {
+    "velocidad_creacion": 0.15,
+    "aplica_a": [
+     "guerrillero",
+     "lancero",
+     "scout"
+    ]
+   }
+  },
+  {
+   "descripcion": "Mejora a Arquero a caballo pesado disponible en Castillos y cuesta -50%",
+   "id": "arquero_pesado_castillos",
+   "efecto": {
+    "edad": "castillos",
+    "descuento": 0.5,
+    "aplica_a": [
+     "arquero_caballo_pesado"
+    ]
+   }
+  },
+  {
+   "descripcion": "Los Pastos sustituyen a las Granjas: 2 aldeanos por pasto, más comida total por madera",
+   "id": "pastos_granja",
+   "efecto": {
+    "edificio": "pasto",
+    "sustituye_a": "granja",
+    "aldeanos_por_edificio": 2
+   }
+  }
+ ],
+ "roof_color": "#4a6fa5",
+ "name": "Kitanes",
+ "descripcion": "Kitanes: Forja y Fundición de hierro tienen efecto doble (+2/+4 ataque cuerpo a cuerpo en vez de +1/+2) Guerrilleros, Lanceros y Scouts se crean y mejoran 15% más rápido",
+ "unique_techs": [
+  {
+   "id": "armadura_lamelar",
+   "nombre": "Armadura lamelar (Lamellar Armor)",
+   "descripcion": "Infanteria y guerrilleros reflejan dano cuerpo a cuerpo.",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "efectos": {
+    "aplica_a": [
+     "milicia",
+     "guerrillero",
+     "liao_dao"
+    ],
+    "refleja_dano": true
+   }
+  },
+  {
+   "id": "caballeria_ordo",
+   "nombre": "Caballeria ordo (Ordo Cavalry)",
+   "descripcion": "Caballeria regenera HP en combate.",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "efectos": {
+    "regen_caballeria_combate": true
+   }
+  }
+ ],
+ "ventajas": [
+  "Forja y Fundición de hierro tienen efecto doble (+2/+4 at...",
+  "Guerrilleros, Lanceros y Scouts se crean y mejoran 15% má...",
+  "Mejora a Arquero a caballo pesado disponible en Castillos..."
+ ],
+ "unique_unit": {
+  "train_time_sec": 12,
+  "id": "liao_dao",
+  "armor_pierce": 1,
+  "attack_elite": 11,
+  "cost": {
+   "gold": 40,
+   "food": 40
+  },
+  "trained_at": "castillo",
+  "attack": 9,
+  "armor_melee": 3,
+  "name": "Liao Dao",
+  "hp": 75,
+  "hp_elite": 95
+ },
+ "tech_tree": {
+  "monasterio": {
+   "fervor": true,
+   "teocracia": true,
+   "monje": true,
+   "herejia": true,
+   "iluminacion": true,
+   "santidad": true,
+   "redencion": true
+  },
+  "castillo": {
+   "liao_dao": true,
+   "armadura_lamelar": true,
+   "caballeria_ordo": true,
+   "trebucete_montado": true
+  },
+  "cuartel": {
+   "milicia": true,
+   "lancero": true,
+   "piquero": true,
+   "campeon": true,
+   "espadachin_mandoble": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hombre_de_armas": true
+  },
+  "establo": {
+   "caballero": true,
+   "husar": true,
+   "jinete": true,
+   "camello_pesado": true,
+   "paladin": false,
+   "caballeria_ligera": true,
+   "camello": true
+  },
+  "taller_asedio": {
+   "mangana": true,
+   "escorpion_pesado": true,
+   "escorpion": true,
+   "trabuquete": true,
+   "onagro": true,
+   "ariete": true,
+   "ariete_blindado": true,
+   "canon_artillado": true
+  },
+  "herreria": {
+   "forja": true,
+   "armadura_arq_2": true,
+   "ataque_arq_1": true,
+   "alto_horno": true,
+   "armadura_inf_3": true,
+   "ataque_cab_3": true,
+   "ataque_cab_1": true,
+   "ataque_arq_3": true,
+   "ataque_arq_2": true,
+   "armadura_arq_3": true,
+   "hierro_fundido": true,
+   "armadura_cab_2": true,
+   "armadura_inf_2": true,
+   "armadura_cab_3": true,
+   "armadura_arq_1": true,
+   "ataque_cab_2": true,
+   "armadura_inf_1": true,
+   "armadura_cab_1": true
+  },
+  "arqueria": {
+   "guerrillero": true,
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true
+  },
+  "universidad": {
+   "torre_guardia": true,
+   "torre_vigilancia": true,
+   "muralla_fortificada": true,
+   "balistica": true,
+   "quimica": true,
+   "albanileria": true,
+   "arquitectura": true
+  },
+  "no_disponible_resumen": [
+   "paladin"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galeon": true,
+   "galera_guerra": true,
+   "brulote": true
+  }
+ }
 }

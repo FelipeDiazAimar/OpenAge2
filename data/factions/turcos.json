@@ -1,215 +1,215 @@
-{
-  "debilidades": [
-    "Sin Paladín, Rotación de cultivos ni Pique de piedra (en disabled);...",
-    "Sin Paladin"
-  ],
-  "team_bonus": {
-    "id": "polvora_rapida_25",
-    "descripcion": "Unidades de pólvora se crean 25% más rápido (aliados)",
-    "efecto": {
-      "velocidad_polvora": 0.25,
-      "nota": "a legacy: sin unidades de pólvora en el mod"
-    }
-  },
-  "id": "turcos",
-  "bonus": [
-    {
-      "descripcion": "Unidades de pólvora +25% HP",
-      "id": "polvora_hp_25",
-      "efecto": {
-        "hp_polvora_bonus": 0.25,
-        "nota": "a legacy: sin unidades de pólvora en el mod"
-      }
-    },
-    {
-      "descripcion": "Química gratis; tecnologías de pólvora 50% más baratas",
-      "id": "quimica_gratis_polvora_barata",
-      "efecto": {
-        "quimica_coste": 0,
-        "descuento_tec_polvora": 0.5,
-        "nota": "a legacy: sin techs de pólvora en el mod (quimica sí existe pero el bono es global)"
-      }
-    },
-    {
-      "descripcion": "Mejoras de Caballería ligera y Húsar gratis; línea scout +1 armadura antiproyectil (solo el scout existe en el mod: ver effects)",
-      "id": "caballeria_ligera_gratis",
-      "efecto": {
-        "mejora_caballeria_ligera_coste": 0,
-        "mejora_husar_coste": 0,
-        "armadura_pierce_scout": 1
-      }
-    },
-    {
-      "descripcion": "UU Jenízaro (pólvora, versión mejorada del arcabucero): 60F/55O, 44 HP, 17 atk, alcance 7, armadura 1/0, ROF 3.45, precisión 50%, 17s; élite 50 HP/22 atk/precisión 65%",
-      "id": "uu_jenizaro_stats",
-      "efecto": {
-        "coste": {
-          "food": 60,
-          "gold": 55
-        },
-        "hp": 44,
-        "ataque": 17,
-        "alcance": 7,
-        "elite_hp": 50,
-        "elite_ataque": 22,
-        "nota": "unidad aún sin JSON en el mod; stats de referencia DE"
-      }
-    }
-  ],
-  "roof_color": "#a02a3a",
-  "name": "Turcos",
-  "descripcion": "Turcos: Unidades de pólvora +25% HP Química gratis; tecnologías de pólvora 50% más baratas",
-  "unique_techs": [
-    {
-      "id": "sipahi",
-      "nombre": "Sipahi",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "food": 350,
-        "gold": 150
-      },
-      "tiempo_sec": 60,
-      "descripcion": "Arqueros montados +20 HP.",
-      "efectos": {
-        "hp_arqueros_montados": 20,
-        "nota": "a legacy: sin arqueros montados en el mod"
-      }
-    },
-    {
-      "id": "artilleria",
-      "nombre": "Artillería (Artillery)",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "food": 600,
-        "gold": 650
-      },
-      "tiempo_sec": 40,
-      "descripcion": "Torres de bombardeo, cañones de bombardeo y galeones artillados +2 alcance.",
-      "efectos": {
-        "alcance_bombardeo": 2,
-        "aplica_a": [
-          "torre_bombardeo",
-          "canon_bombardeo",
-          "galeon_artillado"
-        ],
-        "nota": "a legacy: sin artillería de pólvora en el mod"
-      }
-    }
-  ],
-  "ventajas": [
-    "Unidades de pólvora +25% HP",
-    "Química gratis; tecnologías de pólvora 50% más baratas",
-    "Mejoras de Caballería ligera y Húsar gratis; línea scout ..."
-  ],
-  "unique_unit": {
-    "id": "jenizaro",
-    "name": "Jenízaro",
-    "hp": 44,
-    "attack": 17,
-    "armor_melee": 1,
-    "armor_pierce": 0,
-    "cost": {
-      "food": 60,
-      "gold": 55
-    },
-    "train_time_sec": 17,
-    "trained_at": "castillo"
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": true,
-      "alabardero": true,
-      "huscarle": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": true,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": false,
-      "arquero_tiro_largo": false
-    },
-    "establo": {
-      "jinete": true,
-      "caballeria_ligera": true,
-      "husar": true,
-      "caballero": true,
-      "paladin": false,
-      "camello": true,
-      "camello_pesado": true,
-      "catafracta": false
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": false,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": true,
-      "fervor": true,
-      "santidad": true,
-      "iluminacion": true,
-      "teocracia": true,
-      "herejia": true
-    },
-    "castillo": {
-      "uu": true,
-      "sipahi": true,
-      "artilleria": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": true,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": true,
-      "armadura_arq_1": true,
-      "armadura_arq_2": true,
-      "armadura_arq_3": true,
-      "ataque_cab_1": true,
-      "ataque_cab_2": true,
-      "ataque_cab_3": true,
-      "armadura_cab_1": true,
-      "armadura_cab_2": true,
-      "armadura_cab_3": true
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": true,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": true,
-      "arquitectura": true,
-      "muralla_fortificada": true,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "artillero_manual",
-      "canon_artillado",
-      "paladin"
-    ]
+﻿{
+ "debilidades": [
+  "Sin Paladín, Rotación de cultivos ni Pique de piedra (en disabled);...",
+  "Sin Paladin"
+ ],
+ "team_bonus": {
+  "id": "polvora_rapida_25",
+  "descripcion": "Unidades de pólvora se crean 25% más rápido (aliados)",
+  "efecto": {
+   "velocidad_polvora": 0.25,
+   "nota": "a legacy: sin unidades de pólvora en el mod"
   }
+ },
+ "id": "turcos",
+ "bonus": [
+  {
+   "descripcion": "Unidades de pólvora +25% HP",
+   "id": "polvora_hp_25",
+   "efecto": {
+    "hp_polvora_bonus": 0.25,
+    "nota": "a legacy: sin unidades de pólvora en el mod"
+   }
+  },
+  {
+   "descripcion": "Química gratis; tecnologías de pólvora 50% más baratas",
+   "id": "quimica_gratis_polvora_barata",
+   "efecto": {
+    "quimica_coste": 0,
+    "descuento_tec_polvora": 0.5,
+    "nota": "a legacy: sin techs de pólvora en el mod (quimica sí existe pero el bono es global)"
+   }
+  },
+  {
+   "descripcion": "Mejoras de Caballería ligera y Húsar gratis; línea scout +1 armadura antiproyectil (solo el scout existe en el mod: ver effects)",
+   "id": "caballeria_ligera_gratis",
+   "efecto": {
+    "mejora_caballeria_ligera_coste": 0,
+    "mejora_husar_coste": 0,
+    "armadura_pierce_scout": 1
+   }
+  },
+  {
+   "descripcion": "UU Jenízaro (pólvora, versión mejorada del arcabucero): 60F/55O, 44 HP, 17 atk, alcance 7, armadura 1/0, ROF 3.45, precisión 50%, 17s; élite 50 HP/22 atk/precisión 65%",
+   "id": "uu_jenizaro_stats",
+   "efecto": {
+    "coste": {
+     "food": 60,
+     "gold": 55
+    },
+    "hp": 44,
+    "ataque": 17,
+    "alcance": 7,
+    "elite_hp": 50,
+    "elite_ataque": 22,
+    "nota": "unidad aún sin JSON en el mod; stats de referencia DE"
+   }
+  }
+ ],
+ "roof_color": "#a02a3a",
+ "name": "Turcos",
+ "descripcion": "Turcos: Unidades de pólvora +25% HP Química gratis; tecnologías de pólvora 50% más baratas",
+ "unique_techs": [
+  {
+   "id": "sipahi",
+   "nombre": "Sipahi",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "food": 350,
+    "gold": 150
+   },
+   "tiempo_sec": 60,
+   "descripcion": "Arqueros montados +20 HP.",
+   "efectos": {
+    "hp_arqueros_montados": 20,
+    "nota": "a legacy: sin arqueros montados en el mod"
+   }
+  },
+  {
+   "id": "artilleria",
+   "nombre": "Artillería (Artillery)",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "food": 600,
+    "gold": 650
+   },
+   "tiempo_sec": 40,
+   "descripcion": "Torres de bombardeo, cañones de bombardeo y galeones artillados +2 alcance.",
+   "efectos": {
+    "alcance_bombardeo": 2,
+    "aplica_a": [
+     "torre_bombardeo",
+     "canon_bombardeo",
+     "galeon_artillado"
+    ],
+    "nota": "a legacy: sin artillería de pólvora en el mod"
+   }
+  }
+ ],
+ "ventajas": [
+  "Unidades de pólvora +25% HP",
+  "Química gratis; tecnologías de pólvora 50% más baratas",
+  "Mejoras de Caballería ligera y Húsar gratis; línea scout ..."
+ ],
+ "unique_unit": {
+  "id": "jenizaro",
+  "name": "Jenízaro",
+  "hp": 44,
+  "attack": 17,
+  "armor_melee": 1,
+  "armor_pierce": 0,
+  "cost": {
+   "food": 60,
+   "gold": 55
+  },
+  "train_time_sec": 17,
+  "trained_at": "castillo"
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": true,
+   "alabardero": true,
+   "huscarle": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": false,
+   "arquero_tiro_largo": false
+  },
+  "establo": {
+   "jinete": true,
+   "caballeria_ligera": true,
+   "husar": true,
+   "caballero": true,
+   "paladin": false,
+   "camello": true,
+   "camello_pesado": true,
+   "catafracta": false
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": false,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": true,
+   "fervor": true,
+   "santidad": true,
+   "iluminacion": true,
+   "teocracia": true,
+   "herejia": true
+  },
+  "castillo": {
+   "uu": true,
+   "sipahi": true,
+   "artilleria": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": true,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": true,
+   "armadura_arq_1": true,
+   "armadura_arq_2": true,
+   "armadura_arq_3": true,
+   "ataque_cab_1": true,
+   "ataque_cab_2": true,
+   "ataque_cab_3": true,
+   "armadura_cab_1": true,
+   "armadura_cab_2": true,
+   "armadura_cab_3": true
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": true,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": true,
+   "arquitectura": true,
+   "muralla_fortificada": true,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "artillero_manual",
+   "canon_artillado",
+   "paladin"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true
+  }
+ }
 }

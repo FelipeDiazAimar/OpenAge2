@@ -1,216 +1,216 @@
-{
-  "debilidades": [
-    "Sin Arbalestero ni arcabucero; sin cañón pesado demo ni fuego rápid...",
-    "Sin Paladin"
-  ],
-  "team_bonus": {
-    "id": "birmanos_equipo",
-    "descripcion": "Reliquias visibles en el mapa desde el inicio (aliados)",
-    "efecto": {
-      "reliquias_visibles_inicio": true
-    }
-  },
-  "id": "birmanos",
-  "bonus": [
-    {
-      "descripcion": "Tecnologías del campamento maderero gratis (ahorro ~350 comida + 250 madera)",
-      "id": "madera_gratis",
-      "efecto": {
-        "coste": 0,
-        "edificio": "campamento_maderero"
-      }
-    },
-    {
-      "descripcion": "Infantería +1/+2/+3 ataque en Feudal/Castillos/Imperial",
-      "id": "infanteria_ataque_edad",
-      "efecto": {
-        "ataque_castillos": 2,
-        "ataque_feudal": 1,
-        "ataque_imperial": 3,
-        "aplica_a": "tag:infanteria"
-      }
-    },
-    {
-      "descripcion": "Elefantes de combate +1/+1 armadura (base, acumulable con Howdah)",
-      "id": "elefante_blindado",
-      "efecto": {
-        "aplica_a": [
-          "elefante_combate"
-        ],
-        "armadura_cuerpo": 1,
-        "armadura_proyectil": 1
-      }
-    },
-    {
-      "descripcion": "Tecnologías del monasterio -50% coste",
-      "id": "monasterio_barato",
-      "efecto": {
-        "descuento_monasterio": 0.5
-      }
-    }
-  ],
-  "roof_color": "#c0392b",
-  "name": "Birmanos",
-  "descripcion": "Birmanos: Tecnologías del campamento maderero gratis (ahorro ~350 comida + 250 madera) Infantería +1/+2/+3 ataque en Feudal/Castillos/Imperial",
-  "unique_techs": [
-    {
-      "id": "caballeria_manipur",
-      "nombre": "Caballería Manipur (Manipur Cavalry)",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "food": 300,
-        "gold": 300
-      },
-      "tiempo_sec": 40,
-      "descripcion": "Caballería +4 ataque contra arqueros.",
-      "efectos": {
-        "aplica_a": "tag:caballeria",
-        "ataque_vs_arqueros": 4
-      }
-    },
-    {
-      "id": "howdah",
-      "nombre": "Howdah",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "food": 400,
-        "wood": 300
-      },
-      "tiempo_sec": 40,
-      "descripcion": "Elefantes de combate +1/+1 armadura.",
-      "efectos": {
-        "aplica_a": [
-          "elefante_combate"
-        ],
-        "armadura_cuerpo": 1,
-        "armadura_proyectil": 1
-      }
-    }
-  ],
-  "ventajas": [
-    "Tecnologías del campamento maderero gratis (ahorro ~350 c...",
-    "Infantería +1/+2/+3 ataque en Feudal/Castillos/Imperial",
-    "Elefantes de combate +1/+1 armadura (base, acumulable con..."
-  ],
-  "unique_unit": {
-    "train_time_sec": 21,
-    "id": "arambai",
-    "armor_pierce": 1,
-    "attack_elite": 14,
-    "cost": {
-      "gold": 60,
-      "food": 60
-    },
-    "trained_at": "castillo",
-    "attack": 12,
-    "armor_melee": 0,
-    "name": "Arambai",
-    "hp": 60,
-    "hp_elite": 80
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": true,
-      "alabardero": true,
-      "huscarle": false,
-      "hachero_franco": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": true,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": true,
-      "arquero_tiro_largo": true,
-      "hachero_franco": false
-    },
-    "establo": {
-      "jinete": true,
-      "caballeria_ligera": true,
-      "husar": true,
-      "caballero": true,
-      "paladin": false,
-      "paladin_franco": false,
-      "camello": true,
-      "camello_pesado": true,
-      "catafracta": true
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": true,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": true,
-      "fervor": true,
-      "santidad": true,
-      "iluminacion": true,
-      "teocracia": true,
-      "herejia": false
-    },
-    "castillo": {
-      "arambai": true,
-      "caballeria_manipur": true,
-      "howdah": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": true,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": true,
-      "armadura_arq_1": true,
-      "armadura_arq_2": false,
-      "armadura_arq_3": false,
-      "ataque_cab_1": true,
-      "ataque_cab_2": true,
-      "ataque_cab_3": true,
-      "armadura_cab_1": true,
-      "armadura_cab_2": true,
-      "armadura_cab_3": true
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": true,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": false,
-      "arquitectura": true,
-      "muralla_fortificada": true,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "armadura_arq_2",
-      "armadura_arq_3",
-      "hachero_franco",
-      "herejia",
-      "huscarle",
-      "paladin",
-      "paladin_franco",
-      "torre_muralla"
-    ]
+﻿{
+ "debilidades": [
+  "Sin Arbalestero ni arcabucero; sin cañón pesado demo ni fuego rápid...",
+  "Sin Paladin"
+ ],
+ "team_bonus": {
+  "id": "birmanos_equipo",
+  "descripcion": "Reliquias visibles en el mapa desde el inicio (aliados)",
+  "efecto": {
+   "reliquias_visibles_inicio": true
   }
+ },
+ "id": "birmanos",
+ "bonus": [
+  {
+   "descripcion": "Tecnologías del campamento maderero gratis (ahorro ~350 comida + 250 madera)",
+   "id": "madera_gratis",
+   "efecto": {
+    "coste": 0,
+    "edificio": "campamento_maderero"
+   }
+  },
+  {
+   "descripcion": "Infantería +1/+2/+3 ataque en Feudal/Castillos/Imperial",
+   "id": "infanteria_ataque_edad",
+   "efecto": {
+    "ataque_castillos": 2,
+    "ataque_feudal": 1,
+    "ataque_imperial": 3,
+    "aplica_a": "tag:infanteria"
+   }
+  },
+  {
+   "descripcion": "Elefantes de combate +1/+1 armadura (base, acumulable con Howdah)",
+   "id": "elefante_blindado",
+   "efecto": {
+    "aplica_a": [
+     "elefante_combate"
+    ],
+    "armadura_cuerpo": 1,
+    "armadura_proyectil": 1
+   }
+  },
+  {
+   "descripcion": "Tecnologías del monasterio -50% coste",
+   "id": "monasterio_barato",
+   "efecto": {
+    "descuento_monasterio": 0.5
+   }
+  }
+ ],
+ "roof_color": "#c0392b",
+ "name": "Birmanos",
+ "descripcion": "Birmanos: Tecnologías del campamento maderero gratis (ahorro ~350 comida + 250 madera) Infantería +1/+2/+3 ataque en Feudal/Castillos/Imperial",
+ "unique_techs": [
+  {
+   "id": "caballeria_manipur",
+   "nombre": "Caballería Manipur (Manipur Cavalry)",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "food": 300,
+    "gold": 300
+   },
+   "tiempo_sec": 40,
+   "descripcion": "Caballería +4 ataque contra arqueros.",
+   "efectos": {
+    "aplica_a": "tag:caballeria",
+    "ataque_vs_arqueros": 4
+   }
+  },
+  {
+   "id": "howdah",
+   "nombre": "Howdah",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "food": 400,
+    "wood": 300
+   },
+   "tiempo_sec": 40,
+   "descripcion": "Elefantes de combate +1/+1 armadura.",
+   "efectos": {
+    "aplica_a": [
+     "elefante_combate"
+    ],
+    "armadura_cuerpo": 1,
+    "armadura_proyectil": 1
+   }
+  }
+ ],
+ "ventajas": [
+  "Tecnologías del campamento maderero gratis (ahorro ~350 c...",
+  "Infantería +1/+2/+3 ataque en Feudal/Castillos/Imperial",
+  "Elefantes de combate +1/+1 armadura (base, acumulable con..."
+ ],
+ "unique_unit": {
+  "train_time_sec": 21,
+  "id": "arambai",
+  "armor_pierce": 1,
+  "attack_elite": 14,
+  "cost": {
+   "gold": 60,
+   "food": 60
+  },
+  "trained_at": "castillo",
+  "attack": 12,
+  "armor_melee": 0,
+  "name": "Arambai",
+  "hp": 60,
+  "hp_elite": 80
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hachero_franco": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true,
+   "arquero_tiro_largo": true,
+   "hachero_franco": false
+  },
+  "establo": {
+   "jinete": true,
+   "caballeria_ligera": true,
+   "husar": true,
+   "caballero": true,
+   "paladin": false,
+   "paladin_franco": false,
+   "camello": true,
+   "camello_pesado": true,
+   "catafracta": true
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": true,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": true,
+   "fervor": true,
+   "santidad": true,
+   "iluminacion": true,
+   "teocracia": true,
+   "herejia": false
+  },
+  "castillo": {
+   "arambai": true,
+   "caballeria_manipur": true,
+   "howdah": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": true,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": true,
+   "armadura_arq_1": true,
+   "armadura_arq_2": false,
+   "armadura_arq_3": false,
+   "ataque_cab_1": true,
+   "ataque_cab_2": true,
+   "ataque_cab_3": true,
+   "armadura_cab_1": true,
+   "armadura_cab_2": true,
+   "armadura_cab_3": true
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": true,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": false,
+   "arquitectura": true,
+   "muralla_fortificada": true,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "armadura_arq_2",
+   "armadura_arq_3",
+   "hachero_franco",
+   "herejia",
+   "huscarle",
+   "paladin",
+   "paladin_franco",
+   "torre_muralla"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true
+  }
+ }
 }

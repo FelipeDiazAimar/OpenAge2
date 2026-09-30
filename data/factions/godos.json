@@ -1,242 +1,242 @@
-{
-  "id": "godos",
-  "name": "Godos",
-  "roof_color": "#8a2a2a",
-  "bonus": [
-    {
-      "id": "infanteria_barata",
-      "descripcion": "Infantería 20% más barata (35% en Imperial): milicia 60F/20O -> 48F/16O (39F/13O en Imperial)",
-      "efecto": {
-        "descuento_infanteria": 0.2,
-        "descuento_infanteria_imperial": 0.35,
-        "aplica_a": [
-          "milicia",
-          "hombre_de_armas",
-          "espadachin_mandoble",
-          "campeon",
-          "lancero",
-          "piquero",
-          "alabardero",
-          "huscarle"
-        ]
-      }
-    },
-    {
-      "id": "caza_15",
-      "descripcion": "Caza +15 alimento por presa (jabalí 350->365, ciervo 140->155)",
-      "efecto": {
-        "alimento_extra_caza": 15,
-        "aplica_a": [
-          "jabali",
-          "ciervo"
-        ]
-      }
-    },
-    {
-      "id": "telar_gratis",
-      "descripcion": "Telar gratis e instantáneo (ahorro 15 comida, 25s -> 0s)",
-      "efecto": {
-        "telar_coste": 0,
-        "telar_tiempo_sec": 0,
-        "ahorro_comida": 15
-      }
-    }
-  ],
-  "unique_unit": {
-    "id": "huscarle",
-    "name": "Huscarle",
-    "hp": 60,
-    "hp_elite": 70,
-    "attack": 8,
-    "attack_elite": 10,
-    "armor_melee": 0,
-    "armor_melee_elite": 1,
-    "armor_pierce": 6,
-    "armor_pierce_elite": 8,
-    "bonus_vs_arquero": 6,
-    "bonus_vs_arquero_elite": 8,
-    "cost": {
-      "food": 55,
-      "gold": 25
-    },
-    "train_time_sec": 16,
-    "trained_at": "castillo",
-    "entrenable_en_cuartel_con_anarquia": true,
-    "mejora_elite_cost": {
-      "food": 1200,
-      "gold": 600
-    },
-    "mejora_elite_tiempo_sec": 75
-  },
-  "unique_techs": [
-    {
-      "id": "anarquia",
-      "nombre": "Anarquía",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "food": 450,
-        "gold": 250
-      },
-      "tiempo_sec": 50,
-      "descripcion": "Huscarles entrenables en Cuartel (además del Castillo).",
-      "efectos": {
-        "huscarle_en_cuartel": true
-      }
-    },
-    {
-      "id": "perfusion",
-      "nombre": "Perfusión (Movilidad)",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "food": 600,
-        "gold": 400
-      },
-      "tiempo_sec": 60,
-      "descripcion": "Cuartel trabaja 50% más rápido (acumulable con team bonus 20%).",
-      "efectos": {
-        "velocidad_cuartel": 0.5
-      }
-    }
-  ],
-  "team_bonus": {
-    "id": "cuartel_rapido_20",
-    "descripcion": "Cuartel trabaja 20% más rápido (aliados)",
-    "efecto": {
-      "velocidad_cuartel": 0.2
-    }
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": true,
-      "alabardero": true,
-      "huscarle": true,
-      "hachero_franco": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": false,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": false,
-      "arquero_tiro_largo": false,
-      "hachero_franco": false
-    },
-    "establo": {
-      "jinete": true,
-      "caballeria_ligera": true,
-      "husar": true,
-      "caballero": false,
-      "paladin": false,
-      "paladin_franco": false,
-      "camello": false,
-      "camello_pesado": false,
-      "catafracta": false
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": false,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": false,
-      "fervor": false,
-      "santidad": false,
-      "iluminacion": false,
-      "teocracia": false,
-      "herejia": false
-    },
-    "castillo": {
-      "huscarle": true,
-      "anarquia": true,
-      "perfusion": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": true,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": false,
-      "ataque_arq_3": false,
-      "armadura_arq_1": true,
-      "armadura_arq_2": false,
-      "armadura_arq_3": false,
-      "ataque_cab_1": true,
-      "ataque_cab_2": true,
-      "ataque_cab_3": false,
-      "armadura_cab_1": true,
-      "armadura_cab_2": true,
-      "armadura_cab_3": false
-    },
-    "universidad": {
-      "balistica": false,
-      "quimica": false,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": false,
-      "arquitectura": false,
-      "muralla_fortificada": false,
-      "albanileria": false
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": false,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "ballestero",
-      "artillero_manual",
-      "arquero_tiro_largo",
-      "caballero",
-      "paladin",
-      "paladin_franco",
-      "camello",
-      "camello_pesado",
-      "catafracta",
-      "canon_artillado",
-      "hachero_franco",
-      "redencion",
-      "fervor",
-      "santidad",
-      "iluminacion",
-      "teocracia",
-      "herejia",
-      "ataque_arq_2",
-      "ataque_arq_3",
-      "armadura_arq_2",
-      "armadura_arq_3",
-      "balistica",
-      "quimica",
-      "torre_muralla",
-      "arquitectura",
-      "muralla_fortificada",
-      "galeon"
+﻿{
+ "id": "godos",
+ "name": "Godos",
+ "roof_color": "#8a2a2a",
+ "bonus": [
+  {
+   "id": "infanteria_barata",
+   "descripcion": "Infantería 20% más barata (35% en Imperial): milicia 60F/20O -> 48F/16O (39F/13O en Imperial)",
+   "efecto": {
+    "descuento_infanteria": 0.2,
+    "descuento_infanteria_imperial": 0.35,
+    "aplica_a": [
+     "milicia",
+     "hombre_de_armas",
+     "espadachin_mandoble",
+     "campeon",
+     "lancero",
+     "piquero",
+     "alabardero",
+     "huscarle"
     ]
+   }
   },
-  "ventajas": [
-    "Infantería barata",
-    "Huscarle anti-arqueros",
-    "Cuarteles veloces"
+  {
+   "id": "caza_15",
+   "descripcion": "Caza +15 alimento por presa (jabalí 350->365, ciervo 140->155)",
+   "efecto": {
+    "alimento_extra_caza": 15,
+    "aplica_a": [
+     "jabali",
+     "ciervo"
+    ]
+   }
+  },
+  {
+   "id": "telar_gratis",
+   "descripcion": "Telar gratis e instantáneo (ahorro 15 comida, 25s -> 0s)",
+   "efecto": {
+    "telar_coste": 0,
+    "telar_tiempo_sec": 0,
+    "ahorro_comida": 15
+   }
+  }
+ ],
+ "unique_unit": {
+  "id": "huscarle",
+  "name": "Huscarle",
+  "hp": 60,
+  "hp_elite": 70,
+  "attack": 8,
+  "attack_elite": 10,
+  "armor_melee": 0,
+  "armor_melee_elite": 1,
+  "armor_pierce": 6,
+  "armor_pierce_elite": 8,
+  "bonus_vs_arquero": 6,
+  "bonus_vs_arquero_elite": 8,
+  "cost": {
+   "food": 55,
+   "gold": 25
+  },
+  "train_time_sec": 16,
+  "trained_at": "castillo",
+  "entrenable_en_cuartel_con_anarquia": true,
+  "mejora_elite_cost": {
+   "food": 1200,
+   "gold": 600
+  },
+  "mejora_elite_tiempo_sec": 75
+ },
+ "unique_techs": [
+  {
+   "id": "anarquia",
+   "nombre": "Anarquía",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "food": 450,
+    "gold": 250
+   },
+   "tiempo_sec": 50,
+   "descripcion": "Huscarles entrenables en Cuartel (además del Castillo).",
+   "efectos": {
+    "huscarle_en_cuartel": true
+   }
+  },
+  {
+   "id": "perfusion",
+   "nombre": "Perfusión (Movilidad)",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "food": 600,
+    "gold": 400
+   },
+   "tiempo_sec": 60,
+   "descripcion": "Cuartel trabaja 50% más rápido (acumulable con team bonus 20%).",
+   "efectos": {
+    "velocidad_cuartel": 0.5
+   }
+  }
+ ],
+ "team_bonus": {
+  "id": "cuartel_rapido_20",
+  "descripcion": "Cuartel trabaja 20% más rápido (aliados)",
+  "efecto": {
+   "velocidad_cuartel": 0.2
+  }
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": true,
+   "alabardero": true,
+   "huscarle": true,
+   "hachero_franco": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": false,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": false,
+   "arquero_tiro_largo": false,
+   "hachero_franco": false
+  },
+  "establo": {
+   "jinete": true,
+   "caballeria_ligera": true,
+   "husar": true,
+   "caballero": false,
+   "paladin": false,
+   "paladin_franco": false,
+   "camello": false,
+   "camello_pesado": false,
+   "catafracta": false
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": false,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": false,
+   "fervor": false,
+   "santidad": false,
+   "iluminacion": false,
+   "teocracia": false,
+   "herejia": false
+  },
+  "castillo": {
+   "huscarle": true,
+   "anarquia": true,
+   "perfusion": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": true,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": false,
+   "ataque_arq_3": false,
+   "armadura_arq_1": true,
+   "armadura_arq_2": false,
+   "armadura_arq_3": false,
+   "ataque_cab_1": true,
+   "ataque_cab_2": true,
+   "ataque_cab_3": false,
+   "armadura_cab_1": true,
+   "armadura_cab_2": true,
+   "armadura_cab_3": false
+  },
+  "universidad": {
+   "balistica": false,
+   "quimica": false,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": false,
+   "arquitectura": false,
+   "muralla_fortificada": false,
+   "albanileria": false
+  },
+  "no_disponible_resumen": [
+   "ballestero",
+   "artillero_manual",
+   "arquero_tiro_largo",
+   "caballero",
+   "paladin",
+   "paladin_franco",
+   "camello",
+   "camello_pesado",
+   "catafracta",
+   "canon_artillado",
+   "hachero_franco",
+   "redencion",
+   "fervor",
+   "santidad",
+   "iluminacion",
+   "teocracia",
+   "herejia",
+   "ataque_arq_2",
+   "ataque_arq_3",
+   "armadura_arq_2",
+   "armadura_arq_3",
+   "balistica",
+   "quimica",
+   "torre_muralla",
+   "arquitectura",
+   "muralla_fortificada",
+   "galeon"
   ],
-  "debilidades": [
-    "Sin pólvora",
-    "Sin caballería pesada",
-    "Defensas flojas"
-  ]
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": false,
+   "brulote": true
+  }
+ },
+ "ventajas": [
+  "Infantería barata",
+  "Huscarle anti-arqueros",
+  "Cuarteles veloces"
+ ],
+ "debilidades": [
+  "Sin pólvora",
+  "Sin caballería pesada",
+  "Defensas flojas"
+ ]
 }

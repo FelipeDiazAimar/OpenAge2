@@ -1,184 +1,184 @@
 ﻿{
-    "debilidades":  [
-                        "Sin Paladin",
-                        "Caballeria pesada limitada"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Arqueros +precision/velocidad en equipo (aliados)",
-                       "id":  "shu_equipo",
-                       "efecto":  {
-                                      "mejora_arqueros_equipo":  true
-                                  }
-                   },
-    "id":  "shu",
-    "bonus":  [
-                  {
-                      "descripcion":  "Leñadores generan 0.7 de comida por cada 10 de madera",
-                      "id":  "lenadores_comida",
-                      "efecto":  {
-                                     "comida_por_madera":  0.07
-                                 }
-                  },
-                  {
-                      "descripcion":  "Tecnologías de arqueros (galería y herrería) -25% coste",
-                      "id":  "tecs_arqueros_baratas",
-                      "efecto":  {
-                                     "descuento_tecs_arqueros":  0.25,
-                                     "aplica_a":  [
-                                                      "dedal",
-                                                      "ataque_arq_1",
-                                                      "ataque_arq_2",
-                                                      "ataque_arq_3",
-                                                      "armadura_arq_1",
-                                                      "armadura_arq_2",
-                                                      "armadura_arq_3",
-                                                      "balistica"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Asedio terrestre y Lou Chuan +10%/15% velocidad en Castillos/Imperial",
-                      "id":  "asedio_rapido",
-                      "efecto":  {
-                                     "velocidad_asedio_castillos":  0.1,
-                                     "velocidad_asedio_imperial":  0.15
-                                 }
-                  }
-              ],
-    "roof_color":  "#2e8b57",
-    "name":  "Shu",
-    "descripcion":  "Shu: Leñadores generan 0.7 de comida por cada 10 de madera Tecnologías de arqueros (galería y herrería) -25% coste",
-    "unique_techs":  [
-                         {
-                             "id":  "serpiente_enroscada",
-                             "nombre":  "Serpiente enroscada (Coiled Serpent)",
-                             "descripcion":  "Carros y asedio Shu mas maniobrables y rapidos.",
-                             "edificio":  "castillo",
-                             "edad":  "castillos",
-                             "efectos":  {
-                                             "velocidad_asedio_shu":  true
-                                         }
-                         },
-                         {
-                             "id":  "cargador_virotes",
-                             "nombre":  "Cargador de virotes (Bolt Magazine)",
-                             "descripcion":  "Chu-ko-nu y carros disparan mas rapido.",
-                             "edificio":  "castillo",
-                             "edad":  "imperial",
-                             "efectos":  {
-                                             "cadencia_chukonu":  true
-                                         }
-                         }
-                     ],
-    "ventajas":  [
-                     "Leñadores generan 0.7 de comida por cada 10 de madera",
-                     "Tecnologías de arqueros (galería y herrería) -25% coste",
-                     "Asedio terrestre y Lou Chuan +10%/15% velocidad en Castil..."
-                 ],
-    "unique_unit":  {
-                        "id":  "carro_guerra",
-                        "name":  "Carro de Guerra",
-                        "hp":  65,
-                        "attack":  8,
-                        "armor_melee":  0,
-                        "armor_pierce":  5,
-                        "cost":  {
-                                     "food":  65,
-                                     "gold":  90
-                                 },
-                        "train_time_sec":  28,
-                        "trained_at":  "castillo"
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-                                         "fervor":  true,
-                                         "teocracia":  true,
-                                         "monje":  true,
-                                         "herejia":  true,
-                                         "iluminacion":  true,
-                                         "santidad":  true,
-                                         "redencion":  true
-                                     },
-                      "castillo":  {
-                                       "cargador_virotes":  true,
-                                       "guardia_pluma":  true,
-                                       "serpiente_enroscada":  true,
-                                       "carro_guerra":  true
-                                   },
-                      "cuartel":  {
-                                      "milicia":  true,
-                                      "lancero":  true,
-                                      "piquero":  true,
-                                      "campeon":  true,
-                                      "espadachin_mandoble":  true,
-                                      "alabardero":  true,
-                                      "huscarle":  false,
-                                      "hombre_de_armas":  true
-                                  },
-                      "establo":  {
-                                      "caballero":  false,
-                                      "husar":  true,
-                                      "jinete":  true,
-                                      "camello_pesado":  true,
-                                      "paladin":  false,
-                                      "caballeria_ligera":  true,
-                                      "camello":  true
-                                  },
-                      "taller_asedio":  {
-                                            "mangana":  true,
-                                            "escorpion_pesado":  true,
-                                            "escorpion":  true,
-                                            "trabuquete":  true,
-                                            "onagro":  true,
-                                            "ariete":  true,
-                                            "ariete_blindado":  true,
-                                            "canon_artillado":  true
-                                        },
-                      "puerto":  {
-                                     "barco_pesquero":  true,
-                                     "galeon":  true,
-                                     "galera_guerra":  true,
-                                     "brulote":  true
-                                 },
-                      "herreria":  {
-                                       "forja":  true,
-                                       "armadura_arq_2":  true,
-                                       "ataque_arq_1":  true,
-                                       "alto_horno":  true,
-                                       "armadura_inf_3":  true,
-                                       "ataque_cab_3":  true,
-                                       "ataque_cab_1":  true,
-                                       "ataque_arq_3":  true,
-                                       "ataque_arq_2":  true,
-                                       "armadura_arq_3":  true,
-                                       "hierro_fundido":  true,
-                                       "armadura_cab_2":  true,
-                                       "armadura_inf_2":  true,
-                                       "armadura_cab_3":  true,
-                                       "armadura_arq_1":  true,
-                                       "ataque_cab_2":  true,
-                                       "armadura_inf_1":  true,
-                                       "armadura_cab_1":  true
-                                   },
-                      "arqueria":  {
-                                       "guerrillero":  true,
-                                       "arquero":  true,
-                                       "ballestero":  true,
-                                       "guerrillero_elite":  true,
-                                       "artillero_manual":  true
-                                   },
-                      "universidad":  {
-                                          "torre_guardia":  true,
-                                          "torre_vigilancia":  true,
-                                          "muralla_fortificada":  true,
-                                          "balistica":  true,
-                                          "quimica":  true,
-                                          "albanileria":  true,
-                                          "arquitectura":  true
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "caballero",
-                                                    "paladin"
-                                                ]
-                  }
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "descripcion": "Arqueros +precision/velocidad en equipo (aliados)",
+  "id": "shu_equipo",
+  "efecto": {
+   "mejora_arqueros_equipo": true
+  }
+ },
+ "id": "shu",
+ "bonus": [
+  {
+   "descripcion": "Leñadores generan 0.7 de comida por cada 10 de madera",
+   "id": "lenadores_comida",
+   "efecto": {
+    "comida_por_madera": 0.07
+   }
+  },
+  {
+   "descripcion": "Tecnologías de arqueros (galería y herrería) -25% coste",
+   "id": "tecs_arqueros_baratas",
+   "efecto": {
+    "descuento_tecs_arqueros": 0.25,
+    "aplica_a": [
+     "dedal",
+     "ataque_arq_1",
+     "ataque_arq_2",
+     "ataque_arq_3",
+     "armadura_arq_1",
+     "armadura_arq_2",
+     "armadura_arq_3",
+     "balistica"
+    ]
+   }
+  },
+  {
+   "descripcion": "Asedio terrestre y Lou Chuan +10%/15% velocidad en Castillos/Imperial",
+   "id": "asedio_rapido",
+   "efecto": {
+    "velocidad_asedio_castillos": 0.1,
+    "velocidad_asedio_imperial": 0.15
+   }
+  }
+ ],
+ "roof_color": "#2e8b57",
+ "name": "Shu",
+ "descripcion": "Shu: Leñadores generan 0.7 de comida por cada 10 de madera Tecnologías de arqueros (galería y herrería) -25% coste",
+ "unique_techs": [
+  {
+   "id": "serpiente_enroscada",
+   "nombre": "Serpiente enroscada (Coiled Serpent)",
+   "descripcion": "Carros y asedio Shu mas maniobrables y rapidos.",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "efectos": {
+    "velocidad_asedio_shu": true
+   }
+  },
+  {
+   "id": "cargador_virotes",
+   "nombre": "Cargador de virotes (Bolt Magazine)",
+   "descripcion": "Chu-ko-nu y carros disparan mas rapido.",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "efectos": {
+    "cadencia_chukonu": true
+   }
+  }
+ ],
+ "ventajas": [
+  "Leñadores generan 0.7 de comida por cada 10 de madera",
+  "Tecnologías de arqueros (galería y herrería) -25% coste",
+  "Asedio terrestre y Lou Chuan +10%/15% velocidad en Castil..."
+ ],
+ "unique_unit": {
+  "id": "carro_guerra",
+  "name": "Carro de Guerra",
+  "hp": 65,
+  "attack": 8,
+  "armor_melee": 0,
+  "armor_pierce": 5,
+  "cost": {
+   "food": 65,
+   "gold": 90
+  },
+  "train_time_sec": 28,
+  "trained_at": "castillo"
+ },
+ "tech_tree": {
+  "monasterio": {
+   "fervor": true,
+   "teocracia": true,
+   "monje": true,
+   "herejia": true,
+   "iluminacion": true,
+   "santidad": true,
+   "redencion": true
+  },
+  "castillo": {
+   "cargador_virotes": true,
+   "guardia_pluma": true,
+   "serpiente_enroscada": true,
+   "carro_guerra": true
+  },
+  "cuartel": {
+   "milicia": true,
+   "lancero": true,
+   "piquero": true,
+   "campeon": true,
+   "espadachin_mandoble": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hombre_de_armas": true
+  },
+  "establo": {
+   "caballero": false,
+   "husar": true,
+   "jinete": true,
+   "camello_pesado": true,
+   "paladin": false,
+   "caballeria_ligera": true,
+   "camello": true
+  },
+  "taller_asedio": {
+   "mangana": true,
+   "escorpion_pesado": true,
+   "escorpion": true,
+   "trabuquete": true,
+   "onagro": true,
+   "ariete": true,
+   "ariete_blindado": true,
+   "canon_artillado": true
+  },
+  "herreria": {
+   "forja": true,
+   "armadura_arq_2": true,
+   "ataque_arq_1": true,
+   "alto_horno": true,
+   "armadura_inf_3": true,
+   "ataque_cab_3": true,
+   "ataque_cab_1": true,
+   "ataque_arq_3": true,
+   "ataque_arq_2": true,
+   "armadura_arq_3": true,
+   "hierro_fundido": true,
+   "armadura_cab_2": true,
+   "armadura_inf_2": true,
+   "armadura_cab_3": true,
+   "armadura_arq_1": true,
+   "ataque_cab_2": true,
+   "armadura_inf_1": true,
+   "armadura_cab_1": true
+  },
+  "arqueria": {
+   "guerrillero": true,
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true
+  },
+  "universidad": {
+   "torre_guardia": true,
+   "torre_vigilancia": true,
+   "muralla_fortificada": true,
+   "balistica": true,
+   "quimica": true,
+   "albanileria": true,
+   "arquitectura": true
+  },
+  "no_disponible_resumen": [
+   "caballero",
+   "paladin"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galeon": true,
+   "galera_guerra": true,
+   "brulote": true
+  }
+ }
 }

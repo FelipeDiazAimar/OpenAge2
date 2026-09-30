@@ -1,212 +1,212 @@
-{
-  "debilidades": [
-    "Roster con huecos en Imperial",
-    "Roster con huecos en Imperial"
-  ],
-  "team_bonus": {
-    "id": "universidad_rapida_80",
-    "descripcion": "Universidades trabajan 80% más rápido (aliados)",
-    "efecto": {
-      "velocidad_universidad": 0.8
-    }
-  },
-  "id": "malienses",
-  "bonus": [
-    {
-      "descripcion": "Edificios -15% madera, excepto granjas y TC inicial (duplicado en effects como tag:edificio x0.85; excluir granja/TC en motor)",
-      "id": "edificios_madera_15",
-      "efecto": {
-        "descuento_madera_edificios": 0.15,
-        "excluye": [
-          "granja",
-          "centro_urbano_inicial"
-        ]
-      }
-    },
-    {
-      "descripcion": "Infantería de cuartel +1/+2/+3 armadura perforante en Feudal/Castillos/Imperial",
-      "id": "infanteria_pierce_edad",
-      "efecto": {
-        "pierce_armor_feudal": 1,
-        "pierce_armor_castillos": 2,
-        "pierce_armor_imperial": 3,
-        "aplica_a": [
-          "milicia",
-          "hombre_de_armas",
-          "espadachin_mandoble",
-          "campeon",
-          "lancero",
-          "piquero",
-          "alabardero"
-        ]
-      }
-    },
-    {
-      "descripcion": "Aldeanos entregan +10% oro en mina (wiki DE: drop-off bonus)",
-      "id": "oro_extra_10",
-      "efecto": {
-        "bonus_entrega_oro": 0.1
-      }
-    }
-  ],
-  "roof_color": "#2e7d32",
-  "name": "Malienses",
-  "descripcion": "Malienses: Edificios -15% madera, excepto granjas y TC inicial (duplicado en effects como tag:edificio x0.85; excluir granja/TC en motor) Infantería de cuartel +1/+2/+3 armadura perforante en Feudal/Castillos/Imperial",
-  "unique_techs": [
-    {
-      "id": "tigui",
-      "nombre": "Tigui",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "food": 200,
-        "wood": 150
-      },
-      "tiempo_sec": 40,
-      "descripcion": "Centros urbanos disparan +8 flechas aun sin guarecer.",
-      "efectos": {
-        "flechas_tc_sin_guarecer": 8,
-        "aplica_a": [
-          "centro_urbano"
-        ]
-      }
-    },
-    {
-      "id": "farimba",
-      "nombre": "Farimba",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "food": 650,
-        "gold": 250
-      },
-      "tiempo_sec": 60,
-      "descripcion": "Caballería +5 ataque cuerpo a cuerpo.",
-      "efectos": {}
-    }
-  ],
-  "ventajas": [
-    "Edificios -15% madera, excepto granjas y TC inicial (dupl...",
-    "Infantería de cuartel +1/+2/+3 armadura perforante en Feu...",
-    "Aldeanos entregan +10% oro en mina (wiki DE: drop-off bonus)"
-  ],
-  "unique_unit": {
-    "train_time_sec": 17,
-    "id": "gbeto",
-    "armor_pierce": 0,
-    "attack_elite": 12,
-    "cost": {
-      "gold": 40,
-      "food": 50
-    },
-    "trained_at": "castillo",
-    "attack": 10,
-    "armor_melee": 0,
-    "name": "Gbeto",
-    "hp": 40,
-    "hp_elite": 60
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": true,
-      "alabardero": true,
-      "huscarle": false,
-      "hachero_franco": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": true,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": true,
-      "arquero_tiro_largo": true,
-      "hachero_franco": false
-    },
-    "establo": {
-      "jinete": true,
-      "caballeria_ligera": true,
-      "husar": true,
-      "caballero": true,
-      "paladin": true,
-      "paladin_franco": false,
-      "camello": true,
-      "camello_pesado": true,
-      "catafracta": true
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": true,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": true,
-      "fervor": true,
-      "santidad": true,
-      "iluminacion": false,
-      "teocracia": true,
-      "herejia": true
-    },
-    "castillo": {
-      "gbeto": true,
-      "tigui": true,
-      "farimba": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": false,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": false,
-      "armadura_arq_1": true,
-      "armadura_arq_2": true,
-      "armadura_arq_3": true,
-      "ataque_cab_1": true,
-      "ataque_cab_2": true,
-      "ataque_cab_3": true,
-      "armadura_cab_1": true,
-      "armadura_cab_2": true,
-      "armadura_cab_3": true
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": true,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": false,
-      "arquitectura": true,
-      "muralla_fortificada": false,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "alto_horno",
-      "ataque_arq_3",
-      "hachero_franco",
-      "huscarle",
-      "iluminacion",
-      "muralla_fortificada",
-      "paladin_franco",
-      "torre_muralla"
-    ]
+﻿{
+ "debilidades": [
+  "Roster con huecos en Imperial",
+  "Roster con huecos en Imperial"
+ ],
+ "team_bonus": {
+  "id": "universidad_rapida_80",
+  "descripcion": "Universidades trabajan 80% más rápido (aliados)",
+  "efecto": {
+   "velocidad_universidad": 0.8
   }
+ },
+ "id": "malienses",
+ "bonus": [
+  {
+   "descripcion": "Edificios -15% madera, excepto granjas y TC inicial (duplicado en effects como tag:edificio x0.85; excluir granja/TC en motor)",
+   "id": "edificios_madera_15",
+   "efecto": {
+    "descuento_madera_edificios": 0.15,
+    "excluye": [
+     "granja",
+     "centro_urbano_inicial"
+    ]
+   }
+  },
+  {
+   "descripcion": "Infantería de cuartel +1/+2/+3 armadura perforante en Feudal/Castillos/Imperial",
+   "id": "infanteria_pierce_edad",
+   "efecto": {
+    "pierce_armor_feudal": 1,
+    "pierce_armor_castillos": 2,
+    "pierce_armor_imperial": 3,
+    "aplica_a": [
+     "milicia",
+     "hombre_de_armas",
+     "espadachin_mandoble",
+     "campeon",
+     "lancero",
+     "piquero",
+     "alabardero"
+    ]
+   }
+  },
+  {
+   "descripcion": "Aldeanos entregan +10% oro en mina (wiki DE: drop-off bonus)",
+   "id": "oro_extra_10",
+   "efecto": {
+    "bonus_entrega_oro": 0.1
+   }
+  }
+ ],
+ "roof_color": "#2e7d32",
+ "name": "Malienses",
+ "descripcion": "Malienses: Edificios -15% madera, excepto granjas y TC inicial (duplicado en effects como tag:edificio x0.85; excluir granja/TC en motor) Infantería de cuartel +1/+2/+3 armadura perforante en Feudal/Castillos/Imperial",
+ "unique_techs": [
+  {
+   "id": "tigui",
+   "nombre": "Tigui",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "food": 200,
+    "wood": 150
+   },
+   "tiempo_sec": 40,
+   "descripcion": "Centros urbanos disparan +8 flechas aun sin guarecer.",
+   "efectos": {
+    "flechas_tc_sin_guarecer": 8,
+    "aplica_a": [
+     "centro_urbano"
+    ]
+   }
+  },
+  {
+   "id": "farimba",
+   "nombre": "Farimba",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "food": 650,
+    "gold": 250
+   },
+   "tiempo_sec": 60,
+   "descripcion": "Caballería +5 ataque cuerpo a cuerpo.",
+   "efectos": {}
+  }
+ ],
+ "ventajas": [
+  "Edificios -15% madera, excepto granjas y TC inicial (dupl...",
+  "Infantería de cuartel +1/+2/+3 armadura perforante en Feu...",
+  "Aldeanos entregan +10% oro en mina (wiki DE: drop-off bonus)"
+ ],
+ "unique_unit": {
+  "train_time_sec": 17,
+  "id": "gbeto",
+  "armor_pierce": 0,
+  "attack_elite": 12,
+  "cost": {
+   "gold": 40,
+   "food": 50
+  },
+  "trained_at": "castillo",
+  "attack": 10,
+  "armor_melee": 0,
+  "name": "Gbeto",
+  "hp": 40,
+  "hp_elite": 60
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hachero_franco": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true,
+   "arquero_tiro_largo": true,
+   "hachero_franco": false
+  },
+  "establo": {
+   "jinete": true,
+   "caballeria_ligera": true,
+   "husar": true,
+   "caballero": true,
+   "paladin": true,
+   "paladin_franco": false,
+   "camello": true,
+   "camello_pesado": true,
+   "catafracta": true
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": true,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": true,
+   "fervor": true,
+   "santidad": true,
+   "iluminacion": false,
+   "teocracia": true,
+   "herejia": true
+  },
+  "castillo": {
+   "gbeto": true,
+   "tigui": true,
+   "farimba": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": false,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": false,
+   "armadura_arq_1": true,
+   "armadura_arq_2": true,
+   "armadura_arq_3": true,
+   "ataque_cab_1": true,
+   "ataque_cab_2": true,
+   "ataque_cab_3": true,
+   "armadura_cab_1": true,
+   "armadura_cab_2": true,
+   "armadura_cab_3": true
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": true,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": false,
+   "arquitectura": true,
+   "muralla_fortificada": false,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "alto_horno",
+   "ataque_arq_3",
+   "hachero_franco",
+   "huscarle",
+   "iluminacion",
+   "muralla_fortificada",
+   "paladin_franco",
+   "torre_muralla"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true
+  }
+ }
 }

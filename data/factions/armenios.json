@@ -1,199 +1,199 @@
 ﻿{
-    "debilidades":  [
-                        "Sin Paladin",
-                        "Caballeria pesada limitada"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Infanteria +2 LDV (aliados)",
-                       "id":  "armenios_equipo",
-                       "efecto":  {
-                                      "vision_infanteria":  2
-                                  }
-                   },
-    "id":  "armenios",
-    "bonus":  [
-                  {
-                      "descripcion":  "Carretas mula -25% coste; sus tecnologías 40% más efectivas",
-                      "id":  "carreta_mula_25",
-                      "efecto":  {
-                                     "descuento_carreta_mula":  0.25,
-                                     "bonus_tecs_carreta_mula":  0.4
-                                 }
-                  },
-                  {
-                      "descripcion":  "Mejoras de milicia y lancero disponibles una edad antes (excepto hombre de armas)",
-                      "id":  "cuartel_adelantado",
-                      "efecto":  {
-                                     "edad_antes":  1,
-                                     "aplica_a":  [
-                                                      "espadachin_mandoble",
-                                                      "campeon",
-                                                      "lancero",
-                                                      "piquero",
-                                                      "alabardero"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Primera iglesia fortificada recibe reliquia gratis",
-                      "id":  "iglesia_reliquia",
-                      "efecto":  {
-                                     "reliquia_gratis_primera_iglesia":  1
-                                 }
-                  },
-                  {
-                      "descripcion":  "Galeras y dromones disparan 1 proyectil adicional",
-                      "id":  "galera_doble_proyectil",
-                      "efecto":  {
-                                     "proyectil_extra":  1,
-                                     "aplica_a":  [
-                                                      "galera",
-                                                      "dromon"
-                                                  ]
-                                 }
-                  }
-              ],
-    "roof_color":  "#4682b4",
-    "name":  "Armenios",
-    "descripcion":  "Armenios: Carretas mula -25% coste; sus tecnologías 40% más efectivas Mejoras de milicia y lancero disponibles una edad antes (excepto hombre de armas)",
-    "unique_techs":  [
-                         {
-                             "id":  "flota_cilicia",
-                             "nombre":  "Flota cilicia (Cilician Fleet)",
-                             "descripcion":  "Galeras y dromones +1 alcance; brulotes +area.",
-                             "edificio":  "castillo",
-                             "edad":  "castillos",
-                             "efectos":  {
-                                             "area_demoricion":  true,
-                                             "alcance_galera":  1,
-                                             "aplica_a":  [
-                                                              "galera",
-                                                              "dromon"
-                                                          ]
-                                         }
-                         },
-                         {
-                             "id":  "fereteres",
-                             "nombre":  "Fereteres (Fereters)",
-                             "descripcion":  "Infanteria (no lanceros) +30 HP; sacerdotes curan mas rapido.",
-                             "edificio":  "castillo",
-                             "edad":  "imperial",
-                             "efectos":  {
-                                             "hp_infanteria":  30,
-                                             "cura_sacerdote":  true
-                                         }
-                         }
-                     ],
-    "ventajas":  [
-                     "Carretas mula -25% coste; sus tecnologías 40% más efectivas",
-                     "Mejoras de milicia y lancero disponibles una edad antes (...",
-                     "Primera iglesia fortificada recibe reliquia gratis"
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  10,
-                        "id":  "arquero_compuesto",
-                        "armor_pierce":  0,
-                        "attack_elite":  6,
-                        "cost":  {
-                                     "gold":  45,
-                                     "food":  60
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  4,
-                        "armor_melee":  2,
-                        "name":  "Arquero Compuesto",
-                        "hp":  50,
-                        "hp_elite":  70
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-                                         "fervor":  true,
-                                         "teocracia":  true,
-                                         "monje":  true,
-                                         "herejia":  true,
-                                         "iluminacion":  true,
-                                         "santidad":  true,
-                                         "redencion":  true
-                                     },
-                      "castillo":  {
-                                       "flota_cilicia":  true,
-                                       "arquero_compuesto":  true,
-                                       "fereteres":  true,
-                                       "sacerdote_guerrero":  true
-                                   },
-                      "cuartel":  {
-                                      "milicia":  true,
-                                      "lancero":  true,
-                                      "piquero":  true,
-                                      "campeon":  true,
-                                      "espadachin_mandoble":  true,
-                                      "alabardero":  true,
-                                      "huscarle":  false,
-                                      "hombre_de_armas":  true
-                                  },
-                      "establo":  {
-                                      "caballero":  true,
-                                      "husar":  true,
-                                      "jinete":  true,
-                                      "camello_pesado":  true,
-                                      "paladin":  false,
-                                      "caballeria_ligera":  true,
-                                      "camello":  true
-                                  },
-                      "taller_asedio":  {
-                                            "mangana":  true,
-                                            "escorpion_pesado":  true,
-                                            "escorpion":  true,
-                                            "trabuquete":  true,
-                                            "onagro":  true,
-                                            "ariete":  true,
-                                            "ariete_blindado":  true,
-                                            "canon_artillado":  true
-                                        },
-                      "puerto":  {
-                                     "barco_pesquero":  true,
-                                     "galeon":  true,
-                                     "galera_guerra":  true,
-                                     "brulote":  true
-                                 },
-                      "herreria":  {
-                                       "forja":  true,
-                                       "armadura_arq_2":  true,
-                                       "ataque_arq_1":  true,
-                                       "alto_horno":  true,
-                                       "armadura_inf_3":  true,
-                                       "ataque_cab_3":  true,
-                                       "ataque_cab_1":  true,
-                                       "ataque_arq_3":  true,
-                                       "ataque_arq_2":  true,
-                                       "armadura_arq_3":  true,
-                                       "hierro_fundido":  true,
-                                       "armadura_cab_2":  true,
-                                       "armadura_inf_2":  true,
-                                       "armadura_cab_3":  true,
-                                       "armadura_arq_1":  true,
-                                       "ataque_cab_2":  true,
-                                       "armadura_inf_1":  true,
-                                       "armadura_cab_1":  true
-                                   },
-                      "arqueria":  {
-                                       "guerrillero":  true,
-                                       "arquero":  true,
-                                       "ballestero":  true,
-                                       "guerrillero_elite":  true,
-                                       "artillero_manual":  true
-                                   },
-                      "universidad":  {
-                                          "torre_guardia":  true,
-                                          "torre_vigilancia":  true,
-                                          "muralla_fortificada":  true,
-                                          "balistica":  true,
-                                          "quimica":  true,
-                                          "albanileria":  true,
-                                          "arquitectura":  true
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "paladin"
-                                                ]
-                  }
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "descripcion": "Infanteria +2 LDV (aliados)",
+  "id": "armenios_equipo",
+  "efecto": {
+   "vision_infanteria": 2
+  }
+ },
+ "id": "armenios",
+ "bonus": [
+  {
+   "descripcion": "Carretas mula -25% coste; sus tecnologías 40% más efectivas",
+   "id": "carreta_mula_25",
+   "efecto": {
+    "descuento_carreta_mula": 0.25,
+    "bonus_tecs_carreta_mula": 0.4
+   }
+  },
+  {
+   "descripcion": "Mejoras de milicia y lancero disponibles una edad antes (excepto hombre de armas)",
+   "id": "cuartel_adelantado",
+   "efecto": {
+    "edad_antes": 1,
+    "aplica_a": [
+     "espadachin_mandoble",
+     "campeon",
+     "lancero",
+     "piquero",
+     "alabardero"
+    ]
+   }
+  },
+  {
+   "descripcion": "Primera iglesia fortificada recibe reliquia gratis",
+   "id": "iglesia_reliquia",
+   "efecto": {
+    "reliquia_gratis_primera_iglesia": 1
+   }
+  },
+  {
+   "descripcion": "Galeras y dromones disparan 1 proyectil adicional",
+   "id": "galera_doble_proyectil",
+   "efecto": {
+    "proyectil_extra": 1,
+    "aplica_a": [
+     "galera",
+     "dromon"
+    ]
+   }
+  }
+ ],
+ "roof_color": "#4682b4",
+ "name": "Armenios",
+ "descripcion": "Armenios: Carretas mula -25% coste; sus tecnologías 40% más efectivas Mejoras de milicia y lancero disponibles una edad antes (excepto hombre de armas)",
+ "unique_techs": [
+  {
+   "id": "flota_cilicia",
+   "nombre": "Flota cilicia (Cilician Fleet)",
+   "descripcion": "Galeras y dromones +1 alcance; brulotes +area.",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "efectos": {
+    "area_demoricion": true,
+    "alcance_galera": 1,
+    "aplica_a": [
+     "galera",
+     "dromon"
+    ]
+   }
+  },
+  {
+   "id": "fereteres",
+   "nombre": "Fereteres (Fereters)",
+   "descripcion": "Infanteria (no lanceros) +30 HP; sacerdotes curan mas rapido.",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "efectos": {
+    "hp_infanteria": 30,
+    "cura_sacerdote": true
+   }
+  }
+ ],
+ "ventajas": [
+  "Carretas mula -25% coste; sus tecnologías 40% más efectivas",
+  "Mejoras de milicia y lancero disponibles una edad antes (...",
+  "Primera iglesia fortificada recibe reliquia gratis"
+ ],
+ "unique_unit": {
+  "train_time_sec": 10,
+  "id": "arquero_compuesto",
+  "armor_pierce": 0,
+  "attack_elite": 6,
+  "cost": {
+   "gold": 45,
+   "food": 60
+  },
+  "trained_at": "castillo",
+  "attack": 4,
+  "armor_melee": 2,
+  "name": "Arquero Compuesto",
+  "hp": 50,
+  "hp_elite": 70
+ },
+ "tech_tree": {
+  "monasterio": {
+   "fervor": true,
+   "teocracia": true,
+   "monje": true,
+   "herejia": true,
+   "iluminacion": true,
+   "santidad": true,
+   "redencion": true
+  },
+  "castillo": {
+   "flota_cilicia": true,
+   "arquero_compuesto": true,
+   "fereteres": true,
+   "sacerdote_guerrero": true
+  },
+  "cuartel": {
+   "milicia": true,
+   "lancero": true,
+   "piquero": true,
+   "campeon": true,
+   "espadachin_mandoble": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hombre_de_armas": true
+  },
+  "establo": {
+   "caballero": true,
+   "husar": true,
+   "jinete": true,
+   "camello_pesado": true,
+   "paladin": false,
+   "caballeria_ligera": true,
+   "camello": true
+  },
+  "taller_asedio": {
+   "mangana": true,
+   "escorpion_pesado": true,
+   "escorpion": true,
+   "trabuquete": true,
+   "onagro": true,
+   "ariete": true,
+   "ariete_blindado": true,
+   "canon_artillado": true
+  },
+  "herreria": {
+   "forja": true,
+   "armadura_arq_2": true,
+   "ataque_arq_1": true,
+   "alto_horno": true,
+   "armadura_inf_3": true,
+   "ataque_cab_3": true,
+   "ataque_cab_1": true,
+   "ataque_arq_3": true,
+   "ataque_arq_2": true,
+   "armadura_arq_3": true,
+   "hierro_fundido": true,
+   "armadura_cab_2": true,
+   "armadura_inf_2": true,
+   "armadura_cab_3": true,
+   "armadura_arq_1": true,
+   "ataque_cab_2": true,
+   "armadura_inf_1": true,
+   "armadura_cab_1": true
+  },
+  "arqueria": {
+   "guerrillero": true,
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true
+  },
+  "universidad": {
+   "torre_guardia": true,
+   "torre_vigilancia": true,
+   "muralla_fortificada": true,
+   "balistica": true,
+   "quimica": true,
+   "albanileria": true,
+   "arquitectura": true
+  },
+  "no_disponible_resumen": [
+   "paladin"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galeon": true,
+   "galera_guerra": true,
+   "brulote": true
+  }
+ }
 }

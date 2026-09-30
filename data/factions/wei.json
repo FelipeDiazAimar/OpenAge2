@@ -1,185 +1,185 @@
 ﻿{
-    "debilidades":  [
-                        "Sin Paladin",
-                        "Caballeria pesada limitada"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Caballeria pesada +HP en equipo (aliados ganan +vision caballeria)",
-                       "id":  "wei_equipo",
-                       "efecto":  {
-                                      "vision_caballeria":  2
-                                  }
-                   },
-    "id":  "wei",
-    "bonus":  [
-                  {
-                      "descripcion":  "Un aldeano gratis por cada tecnología económica investigada",
-                      "id":  "aldeano_por_tec_eco",
-                      "efecto":  {
-                                     "aldeanos_gratis_por_tec_eco":  1
-                                 }
-                  },
-                  {
-                      "descripcion":  "Caballería Hei Guang y Jinete Xianbei +20%/30% HP en Castillos/Imperial",
-                      "id":  "caballeria_pesada_hp",
-                      "efecto":  {
-                                     "hp_bonus_castillos":  0.2,
-                                     "hp_bonus_imperial":  0.3,
-                                     "aplica_a":  [
-                                                      "caballeria_hei_guang",
-                                                      "jinete_xianbei"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Trabuquetes de tracción y Lou Chuan -25% coste",
-                      "id":  "asedio_barato",
-                      "efecto":  {
-                                     "descuento_asedio":  0.25,
-                                     "aplica_a":  [
-                                                      "trabuquete_traccion",
-                                                      "lou_chuan"
-                                                  ]
-                                 }
-                  }
-              ],
-    "roof_color":  "#2e5fa3",
-    "name":  "Wei",
-    "descripcion":  "Wei: Un aldeano gratis por cada tecnología económica investigada Caballería Hei Guang y Jinete Xianbei +20%/30% HP en Castillos/Imperial",
-    "unique_techs":  [
-                         {
-                             "id":  "tuntian",
-                             "nombre":  "Tuntian",
-                             "descripcion":  "Granjas y economia militar mas eficaces de Wei.",
-                             "edificio":  "castillo",
-                             "edad":  "castillos",
-                             "efectos":  {
-                                             "mejora_eco_wei":  true
-                                         }
-                         },
-                         {
-                             "id":  "armadura_ming_guang",
-                             "nombre":  "Armadura Ming Guang",
-                             "descripcion":  "Caballeria Hei Guang +armadura.",
-                             "edificio":  "castillo",
-                             "edad":  "imperial",
-                             "efectos":  {
-                                             "armadura_hei_guang":  true,
-                                             "aplica_a":  [
-                                                              "caballeria_hei_guang"
-                                                          ]
-                                         }
-                         }
-                     ],
-    "ventajas":  [
-                     "Un aldeano gratis por cada tecnología económica investigada",
-                     "Caballería Hei Guang y Jinete Xianbei +20%/30% HP en Cast...",
-                     "Trabuquetes de tracción y Lou Chuan -25% coste"
-                 ],
-    "unique_unit":  {
-                        "id":  "caballeria_tigre",
-                        "name":  "Caballería Tigre",
-                        "hp":  115,
-                        "attack":  11,
-                        "armor_melee":  0,
-                        "armor_pierce":  4,
-                        "cost":  {
-                                     "food":  60,
-                                     "gold":  80
-                                 },
-                        "train_time_sec":  15,
-                        "trained_at":  "castillo"
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-                                         "fervor":  true,
-                                         "teocracia":  true,
-                                         "monje":  true,
-                                         "herejia":  true,
-                                         "iluminacion":  true,
-                                         "santidad":  true,
-                                         "redencion":  true
-                                     },
-                      "castillo":  {
-                                       "caballeria_tigre":  true,
-                                       "armadura_ming_guang":  true,
-                                       "jinete_xianbei":  true,
-                                       "tuntian":  true
-                                   },
-                      "cuartel":  {
-                                      "milicia":  true,
-                                      "lancero":  true,
-                                      "piquero":  true,
-                                      "campeon":  true,
-                                      "espadachin_mandoble":  true,
-                                      "alabardero":  true,
-                                      "huscarle":  false,
-                                      "hombre_de_armas":  true
-                                  },
-                      "establo":  {
-                                      "caballero":  false,
-                                      "husar":  true,
-                                      "jinete":  true,
-                                      "camello_pesado":  true,
-                                      "paladin":  false,
-                                      "caballeria_ligera":  true,
-                                      "camello":  true
-                                  },
-                      "taller_asedio":  {
-                                            "mangana":  true,
-                                            "escorpion_pesado":  true,
-                                            "escorpion":  true,
-                                            "trabuquete":  true,
-                                            "onagro":  true,
-                                            "ariete":  true,
-                                            "ariete_blindado":  true,
-                                            "canon_artillado":  true
-                                        },
-                      "puerto":  {
-                                     "barco_pesquero":  true,
-                                     "galeon":  true,
-                                     "galera_guerra":  true,
-                                     "brulote":  true
-                                 },
-                      "herreria":  {
-                                       "forja":  true,
-                                       "armadura_arq_2":  true,
-                                       "ataque_arq_1":  true,
-                                       "alto_horno":  true,
-                                       "armadura_inf_3":  true,
-                                       "ataque_cab_3":  true,
-                                       "ataque_cab_1":  true,
-                                       "ataque_arq_3":  true,
-                                       "ataque_arq_2":  true,
-                                       "armadura_arq_3":  true,
-                                       "hierro_fundido":  true,
-                                       "armadura_cab_2":  true,
-                                       "armadura_inf_2":  true,
-                                       "armadura_cab_3":  true,
-                                       "armadura_arq_1":  true,
-                                       "ataque_cab_2":  true,
-                                       "armadura_inf_1":  true,
-                                       "armadura_cab_1":  true
-                                   },
-                      "arqueria":  {
-                                       "guerrillero":  true,
-                                       "arquero":  true,
-                                       "ballestero":  true,
-                                       "guerrillero_elite":  true,
-                                       "artillero_manual":  true
-                                   },
-                      "universidad":  {
-                                          "torre_guardia":  true,
-                                          "torre_vigilancia":  true,
-                                          "muralla_fortificada":  true,
-                                          "balistica":  true,
-                                          "quimica":  true,
-                                          "albanileria":  true,
-                                          "arquitectura":  true
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "caballero",
-                                                    "paladin"
-                                                ]
-                  }
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "descripcion": "Caballeria pesada +HP en equipo (aliados ganan +vision caballeria)",
+  "id": "wei_equipo",
+  "efecto": {
+   "vision_caballeria": 2
+  }
+ },
+ "id": "wei",
+ "bonus": [
+  {
+   "descripcion": "Un aldeano gratis por cada tecnología económica investigada",
+   "id": "aldeano_por_tec_eco",
+   "efecto": {
+    "aldeanos_gratis_por_tec_eco": 1
+   }
+  },
+  {
+   "descripcion": "Caballería Hei Guang y Jinete Xianbei +20%/30% HP en Castillos/Imperial",
+   "id": "caballeria_pesada_hp",
+   "efecto": {
+    "hp_bonus_castillos": 0.2,
+    "hp_bonus_imperial": 0.3,
+    "aplica_a": [
+     "caballeria_hei_guang",
+     "jinete_xianbei"
+    ]
+   }
+  },
+  {
+   "descripcion": "Trabuquetes de tracción y Lou Chuan -25% coste",
+   "id": "asedio_barato",
+   "efecto": {
+    "descuento_asedio": 0.25,
+    "aplica_a": [
+     "trabuquete_traccion",
+     "lou_chuan"
+    ]
+   }
+  }
+ ],
+ "roof_color": "#2e5fa3",
+ "name": "Wei",
+ "descripcion": "Wei: Un aldeano gratis por cada tecnología económica investigada Caballería Hei Guang y Jinete Xianbei +20%/30% HP en Castillos/Imperial",
+ "unique_techs": [
+  {
+   "id": "tuntian",
+   "nombre": "Tuntian",
+   "descripcion": "Granjas y economia militar mas eficaces de Wei.",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "efectos": {
+    "mejora_eco_wei": true
+   }
+  },
+  {
+   "id": "armadura_ming_guang",
+   "nombre": "Armadura Ming Guang",
+   "descripcion": "Caballeria Hei Guang +armadura.",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "efectos": {
+    "armadura_hei_guang": true,
+    "aplica_a": [
+     "caballeria_hei_guang"
+    ]
+   }
+  }
+ ],
+ "ventajas": [
+  "Un aldeano gratis por cada tecnología económica investigada",
+  "Caballería Hei Guang y Jinete Xianbei +20%/30% HP en Cast...",
+  "Trabuquetes de tracción y Lou Chuan -25% coste"
+ ],
+ "unique_unit": {
+  "id": "caballeria_tigre",
+  "name": "Caballería Tigre",
+  "hp": 115,
+  "attack": 11,
+  "armor_melee": 0,
+  "armor_pierce": 4,
+  "cost": {
+   "food": 60,
+   "gold": 80
+  },
+  "train_time_sec": 15,
+  "trained_at": "castillo"
+ },
+ "tech_tree": {
+  "monasterio": {
+   "fervor": true,
+   "teocracia": true,
+   "monje": true,
+   "herejia": true,
+   "iluminacion": true,
+   "santidad": true,
+   "redencion": true
+  },
+  "castillo": {
+   "caballeria_tigre": true,
+   "armadura_ming_guang": true,
+   "jinete_xianbei": true,
+   "tuntian": true
+  },
+  "cuartel": {
+   "milicia": true,
+   "lancero": true,
+   "piquero": true,
+   "campeon": true,
+   "espadachin_mandoble": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hombre_de_armas": true
+  },
+  "establo": {
+   "caballero": false,
+   "husar": true,
+   "jinete": true,
+   "camello_pesado": true,
+   "paladin": false,
+   "caballeria_ligera": true,
+   "camello": true
+  },
+  "taller_asedio": {
+   "mangana": true,
+   "escorpion_pesado": true,
+   "escorpion": true,
+   "trabuquete": true,
+   "onagro": true,
+   "ariete": true,
+   "ariete_blindado": true,
+   "canon_artillado": true
+  },
+  "herreria": {
+   "forja": true,
+   "armadura_arq_2": true,
+   "ataque_arq_1": true,
+   "alto_horno": true,
+   "armadura_inf_3": true,
+   "ataque_cab_3": true,
+   "ataque_cab_1": true,
+   "ataque_arq_3": true,
+   "ataque_arq_2": true,
+   "armadura_arq_3": true,
+   "hierro_fundido": true,
+   "armadura_cab_2": true,
+   "armadura_inf_2": true,
+   "armadura_cab_3": true,
+   "armadura_arq_1": true,
+   "ataque_cab_2": true,
+   "armadura_inf_1": true,
+   "armadura_cab_1": true
+  },
+  "arqueria": {
+   "guerrillero": true,
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true
+  },
+  "universidad": {
+   "torre_guardia": true,
+   "torre_vigilancia": true,
+   "muralla_fortificada": true,
+   "balistica": true,
+   "quimica": true,
+   "albanileria": true,
+   "arquitectura": true
+  },
+  "no_disponible_resumen": [
+   "caballero",
+   "paladin"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galeon": true,
+   "galera_guerra": true,
+   "brulote": true
+  }
+ }
 }

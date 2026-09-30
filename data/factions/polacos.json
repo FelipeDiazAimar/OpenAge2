@@ -1,190 +1,190 @@
 ﻿{
-    "debilidades":  [
-                        "Sin Paladin",
-                        "Caballeria pesada limitada"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Scouts +1 ataque vs arqueros (aliados)",
-                       "id":  "polacos_equipo",
-                       "efecto":  {
-                                      "ataque_scout_vs_arquero":  1
-                                  }
-                   },
-    "id":  "polacos",
-    "bonus":  [
-                  {
-                      "descripcion":  "Aldeanos regeneran 10/15/20 PV por minuto en Feudal/Castillos/Imperial",
-                      "id":  "aldeanos_regeneran",
-                      "efecto":  {
-                                     "regen_feudal":  10,
-                                     "regen_castillos":  15,
-                                     "regen_imperial":  20
-                                 }
-                  },
-                  {
-                      "descripcion":  "Folwark (mejora gratis de molino): +5 población y 10% comida de granjas adyacentes; mineros de piedra generan +33% oro además de piedra",
-                      "id":  "folwark_y_piedra_oro",
-                      "efecto":  {
-                                     "folwark_pop":  5,
-                                     "folwark_comida_granjas":  0.1,
-                                     "oro_extra_piedra":  0.33
-                                 }
-                  },
-                  {
-                      "descripcion":  "Pura sangre y mejoras de línea scout cuestan -50% comida",
-                      "id":  "sangre_scout_barato",
-                      "efecto":  {
-                                     "descuento_comida":  0.5,
-                                     "aplica_a":  [
-                                                      "pureza_sangre",
-                                                      "scout",
-                                                      "jinete"
-                                                  ]
-                                 }
-                  }
-              ],
-    "roof_color":  "#888888",
-    "name":  "Polacos",
-    "descripcion":  "Polacos: Aldeanos regeneran 10/15/20 PV por minuto en Feudal/Castillos/Imperial Folwark (mejora gratis de molino): +5 población y 10% comida de granjas adyacentes; mineros de piedra generan +33% oro además de piedra",
-    "unique_techs":  [
-                         {
-                             "id":  "privilegios_szlachta",
-                             "nombre":  "Privilegios Szlachta (Szlachta Privileges)",
-                             "descripcion":  "Linea del caballero -60% coste de oro.",
-                             "edificio":  "castillo",
-                             "edad":  "castillos",
-                             "efectos":  {
-                                             "descuento_oro_caballero":  0.6,
-                                             "aplica_a":  [
-                                                              "caballero"
-                                                          ]
-                                         }
-                         },
-                         {
-                             "id":  "legado_lechitico",
-                             "nombre":  "Legado lechitico (Lechitic Legacy)",
-                             "descripcion":  "Linea scout causa dano por arrollamiento.",
-                             "edificio":  "castillo",
-                             "edad":  "imperial",
-                             "efectos":  {
-                                             "dano_arrollamiento":  true,
-                                             "aplica_a":  [
-                                                              "scout",
-                                                              "jinete",
-                                                              "caballeria_ligera",
-                                                              "husar_alado"
-                                                          ]
-                                         }
-                         }
-                     ],
-    "ventajas":  [
-                     "Aldeanos regeneran 10/15/20 PV por minuto en Feudal/Casti...",
-                     "Folwark (mejora gratis de molino): +5 población y 10% com...",
-                     "Pura sangre y mejoras de línea scout cuestan -50% comida"
-                 ],
-    "unique_unit":  {
-                        "id":  "obuch",
-                        "name":  "Obuch",
-                        "hp":  80,
-                        "attack":  8,
-                        "armor_melee":  2,
-                        "armor_pierce":  2,
-                        "cost":  {
-                                     "food":  55,
-                                     "gold":  20
-                                 },
-                        "train_time_sec":  12,
-                        "trained_at":  "castillo"
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-                                         "fervor":  true,
-                                         "teocracia":  true,
-                                         "monje":  true,
-                                         "herejia":  true,
-                                         "iluminacion":  true,
-                                         "santidad":  true,
-                                         "redencion":  true
-                                     },
-                      "castillo":  {
-                                       "obuch":  true,
-                                       "privilegios_szlachta":  true,
-                                       "husar_alado":  true,
-                                       "legado_lechitico":  true
-                                   },
-                      "cuartel":  {
-                                      "milicia":  true,
-                                      "lancero":  true,
-                                      "piquero":  true,
-                                      "campeon":  true,
-                                      "espadachin_mandoble":  true,
-                                      "alabardero":  true,
-                                      "huscarle":  false,
-                                      "hombre_de_armas":  true
-                                  },
-                      "establo":  {
-                                      "caballero":  true,
-                                      "husar":  true,
-                                      "jinete":  true,
-                                      "camello_pesado":  true,
-                                      "paladin":  false,
-                                      "caballeria_ligera":  true,
-                                      "camello":  true
-                                  },
-                      "taller_asedio":  {
-                                            "mangana":  true,
-                                            "escorpion_pesado":  true,
-                                            "escorpion":  true,
-                                            "trabuquete":  true,
-                                            "onagro":  true,
-                                            "ariete":  true,
-                                            "ariete_blindado":  true,
-                                            "canon_artillado":  true
-                                        },
-                      "puerto":  {
-                                     "barco_pesquero":  true,
-                                     "galeon":  true,
-                                     "galera_guerra":  true,
-                                     "brulote":  true
-                                 },
-                      "herreria":  {
-                                       "forja":  true,
-                                       "armadura_arq_2":  true,
-                                       "ataque_arq_1":  true,
-                                       "alto_horno":  true,
-                                       "armadura_inf_3":  true,
-                                       "ataque_cab_3":  true,
-                                       "ataque_cab_1":  true,
-                                       "ataque_arq_3":  true,
-                                       "ataque_arq_2":  true,
-                                       "armadura_arq_3":  true,
-                                       "hierro_fundido":  true,
-                                       "armadura_cab_2":  true,
-                                       "armadura_inf_2":  true,
-                                       "armadura_cab_3":  true,
-                                       "armadura_arq_1":  true,
-                                       "ataque_cab_2":  true,
-                                       "armadura_inf_1":  true,
-                                       "armadura_cab_1":  true
-                                   },
-                      "arqueria":  {
-                                       "guerrillero":  true,
-                                       "arquero":  true,
-                                       "ballestero":  true,
-                                       "guerrillero_elite":  true,
-                                       "artillero_manual":  true
-                                   },
-                      "universidad":  {
-                                          "torre_guardia":  true,
-                                          "torre_vigilancia":  true,
-                                          "muralla_fortificada":  true,
-                                          "balistica":  true,
-                                          "quimica":  true,
-                                          "albanileria":  true,
-                                          "arquitectura":  true
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "paladin"
-                                                ]
-                  }
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "descripcion": "Scouts +1 ataque vs arqueros (aliados)",
+  "id": "polacos_equipo",
+  "efecto": {
+   "ataque_scout_vs_arquero": 1
+  }
+ },
+ "id": "polacos",
+ "bonus": [
+  {
+   "descripcion": "Aldeanos regeneran 10/15/20 PV por minuto en Feudal/Castillos/Imperial",
+   "id": "aldeanos_regeneran",
+   "efecto": {
+    "regen_feudal": 10,
+    "regen_castillos": 15,
+    "regen_imperial": 20
+   }
+  },
+  {
+   "descripcion": "Folwark (mejora gratis de molino): +5 población y 10% comida de granjas adyacentes; mineros de piedra generan +33% oro además de piedra",
+   "id": "folwark_y_piedra_oro",
+   "efecto": {
+    "folwark_pop": 5,
+    "folwark_comida_granjas": 0.1,
+    "oro_extra_piedra": 0.33
+   }
+  },
+  {
+   "descripcion": "Pura sangre y mejoras de línea scout cuestan -50% comida",
+   "id": "sangre_scout_barato",
+   "efecto": {
+    "descuento_comida": 0.5,
+    "aplica_a": [
+     "pureza_sangre",
+     "scout",
+     "jinete"
+    ]
+   }
+  }
+ ],
+ "roof_color": "#888888",
+ "name": "Polacos",
+ "descripcion": "Polacos: Aldeanos regeneran 10/15/20 PV por minuto en Feudal/Castillos/Imperial Folwark (mejora gratis de molino): +5 población y 10% comida de granjas adyacentes; mineros de piedra generan +33% oro además de piedra",
+ "unique_techs": [
+  {
+   "id": "privilegios_szlachta",
+   "nombre": "Privilegios Szlachta (Szlachta Privileges)",
+   "descripcion": "Linea del caballero -60% coste de oro.",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "efectos": {
+    "descuento_oro_caballero": 0.6,
+    "aplica_a": [
+     "caballero"
+    ]
+   }
+  },
+  {
+   "id": "legado_lechitico",
+   "nombre": "Legado lechitico (Lechitic Legacy)",
+   "descripcion": "Linea scout causa dano por arrollamiento.",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "efectos": {
+    "dano_arrollamiento": true,
+    "aplica_a": [
+     "scout",
+     "jinete",
+     "caballeria_ligera",
+     "husar_alado"
+    ]
+   }
+  }
+ ],
+ "ventajas": [
+  "Aldeanos regeneran 10/15/20 PV por minuto en Feudal/Casti...",
+  "Folwark (mejora gratis de molino): +5 población y 10% com...",
+  "Pura sangre y mejoras de línea scout cuestan -50% comida"
+ ],
+ "unique_unit": {
+  "id": "obuch",
+  "name": "Obuch",
+  "hp": 80,
+  "attack": 8,
+  "armor_melee": 2,
+  "armor_pierce": 2,
+  "cost": {
+   "food": 55,
+   "gold": 20
+  },
+  "train_time_sec": 12,
+  "trained_at": "castillo"
+ },
+ "tech_tree": {
+  "monasterio": {
+   "fervor": true,
+   "teocracia": true,
+   "monje": true,
+   "herejia": true,
+   "iluminacion": true,
+   "santidad": true,
+   "redencion": true
+  },
+  "castillo": {
+   "obuch": true,
+   "privilegios_szlachta": true,
+   "husar_alado": true,
+   "legado_lechitico": true
+  },
+  "cuartel": {
+   "milicia": true,
+   "lancero": true,
+   "piquero": true,
+   "campeon": true,
+   "espadachin_mandoble": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hombre_de_armas": true
+  },
+  "establo": {
+   "caballero": true,
+   "husar": true,
+   "jinete": true,
+   "camello_pesado": true,
+   "paladin": false,
+   "caballeria_ligera": true,
+   "camello": true
+  },
+  "taller_asedio": {
+   "mangana": true,
+   "escorpion_pesado": true,
+   "escorpion": true,
+   "trabuquete": true,
+   "onagro": true,
+   "ariete": true,
+   "ariete_blindado": true,
+   "canon_artillado": true
+  },
+  "herreria": {
+   "forja": true,
+   "armadura_arq_2": true,
+   "ataque_arq_1": true,
+   "alto_horno": true,
+   "armadura_inf_3": true,
+   "ataque_cab_3": true,
+   "ataque_cab_1": true,
+   "ataque_arq_3": true,
+   "ataque_arq_2": true,
+   "armadura_arq_3": true,
+   "hierro_fundido": true,
+   "armadura_cab_2": true,
+   "armadura_inf_2": true,
+   "armadura_cab_3": true,
+   "armadura_arq_1": true,
+   "ataque_cab_2": true,
+   "armadura_inf_1": true,
+   "armadura_cab_1": true
+  },
+  "arqueria": {
+   "guerrillero": true,
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true
+  },
+  "universidad": {
+   "torre_guardia": true,
+   "torre_vigilancia": true,
+   "muralla_fortificada": true,
+   "balistica": true,
+   "quimica": true,
+   "albanileria": true,
+   "arquitectura": true
+  },
+  "no_disponible_resumen": [
+   "paladin"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galeon": true,
+   "galera_guerra": true,
+   "brulote": true
+  }
+ }
 }

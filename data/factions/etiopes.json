@@ -1,214 +1,214 @@
-{
-  "debilidades": [
-    "Roster con huecos en Imperial",
-    "Roster con huecos en Imperial"
-  ],
-  "team_bonus": {
-    "id": "puestos_los_piedra",
-    "descripcion": "Puestos avanzados +3 LOS y sin coste de piedra (aliados)",
-    "efecto": {
-      "los_puesto_avanzado": 3,
-      "coste_piedra_puesto": 0
-    }
-  },
-  "id": "etiopes",
-  "bonus": [
-    {
-      "descripcion": "Línea de arqueros a pie dispara 18% más rápido",
-      "id": "arqueros_18_rapido",
-      "efecto": {
-        "velocidad_disparo_arqueros": 0.18,
-        "aplica_a": [
-          "arquero",
-          "ballestero",
-          "guerrillero"
-        ]
-      }
-    },
-    {
-      "descripcion": "+100 comida +100 oro al avanzar de edad",
-      "id": "recursos_por_edad",
-      "efecto": {
-        "comida_por_edad": 100,
-        "oro_por_edad": 100
-      }
-    },
-    {
-      "descripcion": "Mejora Piquero gratis e instantánea",
-      "id": "piquero_gratis",
-      "efecto": {
-        "piquero_coste": 0,
-        "piquero_tiempo_sec": 0
-      }
-    }
-  ],
-  "roof_color": "#6a1b1b",
-  "name": "Etíopes",
-  "descripcion": "Etíopes: Línea de arqueros a pie dispara 18% más rápido +100 comida +100 oro al avanzar de edad",
-  "unique_techs": [
-    {
-      "id": "herederos_reales",
-      "nombre": "Herederos reales (Royal Heirs)",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "wood": 300,
-        "gold": 200
-      },
-      "tiempo_sec": 40,
-      "descripcion": "Shotels y camellos reciben -3 daño de unidades montadas.",
-      "efectos": {
-        "reduccion_dano_montado": 3,
-        "aplica_a": [
-          "shotel",
-          "camello",
-          "camello_pesado"
-        ]
-      }
-    },
-    {
-      "id": "motores_torsion",
-      "nombre": "Motores de torsión (Torsion Engines)",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "wood": 750,
-        "gold": 350
-      },
-      "tiempo_sec": 60,
-      "descripcion": "Unidades de taller de asedio +área de daño (blast radius).",
-      "efectos": {
-        "area_asedio_bonus": 1.0,
-        "aplica_a": [
-          "ariete",
-          "onagro",
-          "escorpion",
-          "bombarda",
-          "trabuquete"
-        ]
-      }
-    }
-  ],
-  "ventajas": [
-    "Línea de arqueros a pie dispara 18% más rápido",
-    "+100 comida +100 oro al avanzar de edad",
-    "Mejora Piquero gratis e instantánea"
-  ],
-  "unique_unit": {
-    "train_time_sec": 8,
-    "id": "shotel",
-    "armor_pierce": 0,
-    "attack_elite": 18,
-    "cost": {
-      "gold": 30,
-      "food": 50
-    },
-    "trained_at": "castillo",
-    "attack": 16,
-    "armor_melee": 0,
-    "name": "Shotel",
-    "hp": 45,
-    "hp_elite": 65
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": true,
-      "alabardero": true,
-      "huscarle": false,
-      "hachero_franco": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": true,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": true,
-      "arquero_tiro_largo": true,
-      "hachero_franco": false
-    },
-    "establo": {
-      "jinete": true,
-      "caballeria_ligera": true,
-      "husar": true,
-      "caballero": true,
-      "paladin": true,
-      "paladin_franco": false,
-      "camello": true,
-      "camello_pesado": true,
-      "catafracta": true
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": true,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": false,
-      "fervor": true,
-      "santidad": true,
-      "iluminacion": false,
-      "teocracia": true,
-      "herejia": true
-    },
-    "castillo": {
-      "shotel": true,
-      "herederos_reales": true,
-      "motores_torsion": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": true,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": true,
-      "armadura_arq_1": true,
-      "armadura_arq_2": true,
-      "armadura_arq_3": true,
-      "ataque_cab_1": true,
-      "ataque_cab_2": true,
-      "ataque_cab_3": true,
-      "armadura_cab_1": true,
-      "armadura_cab_2": true,
-      "armadura_cab_3": true
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": true,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": false,
-      "arquitectura": true,
-      "muralla_fortificada": true,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "hachero_franco",
-      "huscarle",
-      "iluminacion",
-      "paladin_franco",
-      "redencion",
-      "torre_muralla"
-    ]
+﻿{
+ "debilidades": [
+  "Roster con huecos en Imperial",
+  "Roster con huecos en Imperial"
+ ],
+ "team_bonus": {
+  "id": "puestos_los_piedra",
+  "descripcion": "Puestos avanzados +3 LOS y sin coste de piedra (aliados)",
+  "efecto": {
+   "los_puesto_avanzado": 3,
+   "coste_piedra_puesto": 0
   }
+ },
+ "id": "etiopes",
+ "bonus": [
+  {
+   "descripcion": "Línea de arqueros a pie dispara 18% más rápido",
+   "id": "arqueros_18_rapido",
+   "efecto": {
+    "velocidad_disparo_arqueros": 0.18,
+    "aplica_a": [
+     "arquero",
+     "ballestero",
+     "guerrillero"
+    ]
+   }
+  },
+  {
+   "descripcion": "+100 comida +100 oro al avanzar de edad",
+   "id": "recursos_por_edad",
+   "efecto": {
+    "comida_por_edad": 100,
+    "oro_por_edad": 100
+   }
+  },
+  {
+   "descripcion": "Mejora Piquero gratis e instantánea",
+   "id": "piquero_gratis",
+   "efecto": {
+    "piquero_coste": 0,
+    "piquero_tiempo_sec": 0
+   }
+  }
+ ],
+ "roof_color": "#6a1b1b",
+ "name": "Etíopes",
+ "descripcion": "Etíopes: Línea de arqueros a pie dispara 18% más rápido +100 comida +100 oro al avanzar de edad",
+ "unique_techs": [
+  {
+   "id": "herederos_reales",
+   "nombre": "Herederos reales (Royal Heirs)",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "wood": 300,
+    "gold": 200
+   },
+   "tiempo_sec": 40,
+   "descripcion": "Shotels y camellos reciben -3 daño de unidades montadas.",
+   "efectos": {
+    "reduccion_dano_montado": 3,
+    "aplica_a": [
+     "shotel",
+     "camello",
+     "camello_pesado"
+    ]
+   }
+  },
+  {
+   "id": "motores_torsion",
+   "nombre": "Motores de torsión (Torsion Engines)",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "wood": 750,
+    "gold": 350
+   },
+   "tiempo_sec": 60,
+   "descripcion": "Unidades de taller de asedio +área de daño (blast radius).",
+   "efectos": {
+    "area_asedio_bonus": 1.0,
+    "aplica_a": [
+     "ariete",
+     "onagro",
+     "escorpion",
+     "bombarda",
+     "trabuquete"
+    ]
+   }
+  }
+ ],
+ "ventajas": [
+  "Línea de arqueros a pie dispara 18% más rápido",
+  "+100 comida +100 oro al avanzar de edad",
+  "Mejora Piquero gratis e instantánea"
+ ],
+ "unique_unit": {
+  "train_time_sec": 8,
+  "id": "shotel",
+  "armor_pierce": 0,
+  "attack_elite": 18,
+  "cost": {
+   "gold": 30,
+   "food": 50
+  },
+  "trained_at": "castillo",
+  "attack": 16,
+  "armor_melee": 0,
+  "name": "Shotel",
+  "hp": 45,
+  "hp_elite": 65
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hachero_franco": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true,
+   "arquero_tiro_largo": true,
+   "hachero_franco": false
+  },
+  "establo": {
+   "jinete": true,
+   "caballeria_ligera": true,
+   "husar": true,
+   "caballero": true,
+   "paladin": true,
+   "paladin_franco": false,
+   "camello": true,
+   "camello_pesado": true,
+   "catafracta": true
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": true,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": false,
+   "fervor": true,
+   "santidad": true,
+   "iluminacion": false,
+   "teocracia": true,
+   "herejia": true
+  },
+  "castillo": {
+   "shotel": true,
+   "herederos_reales": true,
+   "motores_torsion": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": true,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": true,
+   "armadura_arq_1": true,
+   "armadura_arq_2": true,
+   "armadura_arq_3": true,
+   "ataque_cab_1": true,
+   "ataque_cab_2": true,
+   "ataque_cab_3": true,
+   "armadura_cab_1": true,
+   "armadura_cab_2": true,
+   "armadura_cab_3": true
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": true,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": false,
+   "arquitectura": true,
+   "muralla_fortificada": true,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "hachero_franco",
+   "huscarle",
+   "iluminacion",
+   "paladin_franco",
+   "redencion",
+   "torre_muralla"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true
+  }
+ }
 }

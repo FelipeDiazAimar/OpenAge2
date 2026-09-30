@@ -1,226 +1,226 @@
-{
-  "debilidades": [
-    "Sin Paladin",
-    "Caballeria pesada limitada"
-  ],
-  "team_bonus": {
-    "id": "reliquias_oro_33",
-    "descripcion": "Reliquias generan +33% oro (aliados)",
-    "efecto": {
-      "oro_reliquia_bonus": 0.33
-    }
-  },
-  "id": "aztecas",
-  "bonus": [
-    {
-      "descripcion": "Unidades militares 15% más rápidas de entrenar (train_time x0.85: milicia 21s -> 17.9s)",
-      "id": "milicia_rapida_15",
-      "efecto": {
-        "train_time_factor": 0.85,
-        "aplica_a": "tag:militar"
-      }
-    },
-    {
-      "descripcion": "Empiezan con +50 oro",
-      "id": "oro_inicial_50",
-      "efecto": {
-        "oro_inicial_extra": 50
-      }
-    },
-    {
-      "descripcion": "Monjes +5 HP por cada tecnología de monasterio investigada (hasta ~100 HP a pleno)",
-      "id": "monjes_hp_monasterio",
-      "efecto": {
-        "hp_monje_por_tech": 5
-      }
-    },
-    {
-      "descripcion": "Empiezan con explorador águila en vez de scout a caballo (scout deshabilitado)",
-      "id": "explorador_aguila",
-      "efecto": {
-        "explorador_inicial": "guerrero_aguila"
-      }
-    }
-  ],
-  "roof_color": "#d35400",
-  "name": "Aztecas",
-  "descripcion": "Aztecas: Unidades militares 15% más rápidas de entrenar (train_time x0.85: milicia 21s -> 17.9s) Empiezan con +50 oro",
-  "unique_techs": [
-    {
-      "id": "atlatl",
-      "nombre": "Átlatl (Atlatl)",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "food": 300,
-        "gold": 200
-      },
-      "tiempo_sec": 40,
-      "descripcion": "Guerrilleros +1 ataque, +1 alcance.",
-      "efectos": {
-        "ataque_guerrillero": 1,
-        "alcance_guerrillero": 1,
-        "aplica_a": [
-          "guerrillero"
-        ]
-      }
-    },
-    {
-      "id": "guerras_floridas",
-      "nombre": "Guerras floridas (Garland Wars)",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "food": 450,
-        "gold": 750
-      },
-      "tiempo_sec": 60,
-      "descripcion": "Infantería +4 ataque.",
-      "efectos": {
-        "ataque_infanteria": 4,
-        "aplica_a": [
-          "milicia",
-          "hombre_armas",
-          "espadachin_mandoble",
-          "campeon",
-          "lancero",
-          "piquero",
-          "guerrero_jaguar",
-          "guerrero_aguila"
-        ]
-      }
-    }
-  ],
-  "ventajas": [
-    "Unidades militares 15% más rápidas de entrenar (train_tim...",
-    "Empiezan con +50 oro",
-    "Monjes +5 HP por cada tecnología de monasterio investigad..."
-  ],
-  "unique_unit": {
-    "train_time_sec": 12,
-    "id": "jaguar",
-    "armor_pierce": 1,
-    "attack_elite": 12,
-    "cost": {
-      "gold": 30,
-      "food": 60
-    },
-    "trained_at": "castillo",
-    "attack": 10,
-    "armor_melee": 1,
-    "name": "Guerrero Jaguar",
-    "hp": 50,
-    "hp_elite": 70
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": false,
-      "alabardero": false,
-      "huscarle": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": true,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": false,
-      "arquero_tiro_largo": false
-    },
-    "establo": {
-      "jinete": false,
-      "caballeria_ligera": false,
-      "husar": false,
-      "caballero": false,
-      "paladin": false,
-      "camello": false,
-      "camello_pesado": false,
-      "catafracta": false
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": false,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": true,
-      "fervor": true,
-      "santidad": true,
-      "iluminacion": true,
-      "teocracia": true,
-      "herejia": true
-    },
-    "castillo": {
-      "jaguar": true,
-      "atlatl": true,
-      "guerras_floridas": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": true,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": true,
-      "armadura_arq_1": true,
-      "armadura_arq_2": true,
-      "armadura_arq_3": false,
-      "ataque_cab_1": false,
-      "ataque_cab_2": false,
-      "ataque_cab_3": false,
-      "armadura_cab_1": false,
-      "armadura_cab_2": false,
-      "armadura_cab_3": false
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": false,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": true,
-      "arquitectura": true,
-      "muralla_fortificada": true,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "alabardero",
-      "armadura_arq_3",
-      "armadura_cab_1",
-      "armadura_cab_2",
-      "armadura_cab_3",
-      "artillero_manual",
-      "ataque_cab_1",
-      "ataque_cab_2",
-      "ataque_cab_3",
-      "caballeria_ligera",
-      "caballero",
-      "camello",
-      "camello_pesado",
-      "canon_artillado",
-      "husar",
-      "jinete",
-      "paladin",
-      "piquero",
-      "quimica"
-    ]
+﻿{
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "id": "reliquias_oro_33",
+  "descripcion": "Reliquias generan +33% oro (aliados)",
+  "efecto": {
+   "oro_reliquia_bonus": 0.33
   }
+ },
+ "id": "aztecas",
+ "bonus": [
+  {
+   "descripcion": "Unidades militares 15% más rápidas de entrenar (train_time x0.85: milicia 21s -> 17.9s)",
+   "id": "milicia_rapida_15",
+   "efecto": {
+    "train_time_factor": 0.85,
+    "aplica_a": "tag:militar"
+   }
+  },
+  {
+   "descripcion": "Empiezan con +50 oro",
+   "id": "oro_inicial_50",
+   "efecto": {
+    "oro_inicial_extra": 50
+   }
+  },
+  {
+   "descripcion": "Monjes +5 HP por cada tecnología de monasterio investigada (hasta ~100 HP a pleno)",
+   "id": "monjes_hp_monasterio",
+   "efecto": {
+    "hp_monje_por_tech": 5
+   }
+  },
+  {
+   "descripcion": "Empiezan con explorador águila en vez de scout a caballo (scout deshabilitado)",
+   "id": "explorador_aguila",
+   "efecto": {
+    "explorador_inicial": "guerrero_aguila"
+   }
+  }
+ ],
+ "roof_color": "#d35400",
+ "name": "Aztecas",
+ "descripcion": "Aztecas: Unidades militares 15% más rápidas de entrenar (train_time x0.85: milicia 21s -> 17.9s) Empiezan con +50 oro",
+ "unique_techs": [
+  {
+   "id": "atlatl",
+   "nombre": "Átlatl (Atlatl)",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "food": 300,
+    "gold": 200
+   },
+   "tiempo_sec": 40,
+   "descripcion": "Guerrilleros +1 ataque, +1 alcance.",
+   "efectos": {
+    "ataque_guerrillero": 1,
+    "alcance_guerrillero": 1,
+    "aplica_a": [
+     "guerrillero"
+    ]
+   }
+  },
+  {
+   "id": "guerras_floridas",
+   "nombre": "Guerras floridas (Garland Wars)",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "food": 450,
+    "gold": 750
+   },
+   "tiempo_sec": 60,
+   "descripcion": "Infantería +4 ataque.",
+   "efectos": {
+    "ataque_infanteria": 4,
+    "aplica_a": [
+     "milicia",
+     "hombre_armas",
+     "espadachin_mandoble",
+     "campeon",
+     "lancero",
+     "piquero",
+     "guerrero_jaguar",
+     "guerrero_aguila"
+    ]
+   }
+  }
+ ],
+ "ventajas": [
+  "Unidades militares 15% más rápidas de entrenar (train_tim...",
+  "Empiezan con +50 oro",
+  "Monjes +5 HP por cada tecnología de monasterio investigad..."
+ ],
+ "unique_unit": {
+  "train_time_sec": 12,
+  "id": "jaguar",
+  "armor_pierce": 1,
+  "attack_elite": 12,
+  "cost": {
+   "gold": 30,
+   "food": 60
+  },
+  "trained_at": "castillo",
+  "attack": 10,
+  "armor_melee": 1,
+  "name": "Guerrero Jaguar",
+  "hp": 50,
+  "hp_elite": 70
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": false,
+   "alabardero": false,
+   "huscarle": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": false,
+   "arquero_tiro_largo": false
+  },
+  "establo": {
+   "jinete": false,
+   "caballeria_ligera": false,
+   "husar": false,
+   "caballero": false,
+   "paladin": false,
+   "camello": false,
+   "camello_pesado": false,
+   "catafracta": false
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": false,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": true,
+   "fervor": true,
+   "santidad": true,
+   "iluminacion": true,
+   "teocracia": true,
+   "herejia": true
+  },
+  "castillo": {
+   "jaguar": true,
+   "atlatl": true,
+   "guerras_floridas": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": true,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": true,
+   "armadura_arq_1": true,
+   "armadura_arq_2": true,
+   "armadura_arq_3": false,
+   "ataque_cab_1": false,
+   "ataque_cab_2": false,
+   "ataque_cab_3": false,
+   "armadura_cab_1": false,
+   "armadura_cab_2": false,
+   "armadura_cab_3": false
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": false,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": true,
+   "arquitectura": true,
+   "muralla_fortificada": true,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "alabardero",
+   "armadura_arq_3",
+   "armadura_cab_1",
+   "armadura_cab_2",
+   "armadura_cab_3",
+   "artillero_manual",
+   "ataque_cab_1",
+   "ataque_cab_2",
+   "ataque_cab_3",
+   "caballeria_ligera",
+   "caballero",
+   "camello",
+   "camello_pesado",
+   "canon_artillado",
+   "husar",
+   "jinete",
+   "paladin",
+   "piquero",
+   "quimica"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true
+  }
+ }
 }

@@ -1,203 +1,203 @@
 ﻿{
-    "debilidades":  [
-                        "Sin equivalente en repo (sin ID): sin Húsar, sin Cañón de bombardeo...",
-                        "Sin Paladin"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Barcos transporte +5 LDV y -50% coste (aliados)",
-                       "id":  "sicilianos_equipo",
-                       "efecto":  {
-                                      "descuento_transporte":  0.5,
-                                      "vision_transporte":  5
-                                  }
-                   },
-    "id":  "sicilianos",
-    "bonus":  [
-                  {
-                      "descripcion":  "+100 piedra tras completar el primer Centro Urbano",
-                      "id":  "piedra_inicial_100",
-                      "efecto":  {
-                                     "piedra_inicial":  100
-                                 }
-                  },
-                  {
-                      "descripcion":  "Fortificaciones +50% velocidad de construcción, Centros Urbanos +100%",
-                      "id":  "construccion_rapida",
-                      "efecto":  {
-                                     "velocidad_fortificaciones":  0.5,
-                                     "velocidad_centro_urbano":  1.0
-                                 }
-                  },
-                  {
-                      "descripcion":  "Unidades militares terrestres (no asedio) reciben -40% daño bonus",
-                      "id":  "resistencia_bonus_40",
-                      "efecto":  {
-                                     "reduccion_dano_bonus":  0.4,
-                                     "excluye":  [
-                                                     "asedio",
-                                                     "monje"
-                                                 ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Mejoras de granja +125% comida adicional (rotación: 1019 comida)",
-                      "id":  "granjas_125",
-                      "efecto":  {
-                                     "comida_granja_bonus":  1.25
-                                 }
-                  }
-              ],
-    "roof_color":  "#1f8ac8",
-    "name":  "Sicilianos",
-    "descripcion":  "Sicilianos: +100 piedra tras completar el primer Centro Urbano Fortificaciones +50% velocidad de construcción, Centros Urbanos +100%",
-    "unique_techs":  [
-                         {
-                             "id":  "primera_cruzada",
-                             "descripcion":  "Hasta 5 Centros Urbanos generan Serjeants; unidades mas resistentes a conversion.",
-                             "efectos":  {
-                                             "resistencia_conversion":  true,
-                                             "genera_serjeant":  true
-                                         },
-                             "nombre":  "Primera cruzada (First Crusade)",
-                             "edificio":  "castillo",
-                             "tiempo_sec":  60,
-                             "coste":  {
-                                           "gold":  400,
-                                           "food":  300
-                                       },
-                             "edad":  "castillos"
-                         },
-                         {
-                             "id":  "hauberk",
-                             "descripcion":  "Linea del caballero +1/+2 armadura.",
-                             "efectos":  {
-                                             "armadura_caballeria_pierce":  2,
-                                             "armadura_caballeria_melee":  1,
-                                             "aplica_a":  [
-                                                              "caballero",
-                                                              "cavalier"
-                                                          ]
-                                         },
-                             "nombre":  "Hauberk",
-                             "edificio":  "castillo",
-                             "tiempo_sec":  45,
-                             "coste":  {
-                                           "gold":  700,
-                                           "food":  600
-                                       },
-                             "edad":  "imperial"
-                         }
-                     ],
-    "ventajas":  [
-                     "+100 piedra tras completar el primer Centro Urbano",
-                     "Fortificaciones +50% velocidad de construcción, Centros U...",
-                     "Unidades militares terrestres (no asedio) reciben -40% da..."
-                 ],
-    "unique_unit":  {
-                        "id":  "serjeant",
-                        "name":  "Serjeant",
-                        "hp":  65,
-                        "attack":  8,
-                        "armor_melee":  3,
-                        "armor_pierce":  3,
-                        "cost":  {
-                                     "food":  60,
-                                     "gold":  35
-                                 },
-                        "train_time_sec":  20,
-                        "trained_at":  "castillo"
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-                                         "fervor":  true,
-                                         "teocracia":  true,
-                                         "monje":  true,
-                                         "herejia":  true,
-                                         "iluminacion":  true,
-                                         "santidad":  true,
-                                         "redencion":  true
-                                     },
-                      "castillo":  {
-                                       "hauberk":  true,
-                                       "donjon":  true,
-                                       "primera_cruzada":  true,
-                                       "serjeant":  true
-                                   },
-                      "cuartel":  {
-                                      "milicia":  true,
-                                      "lancero":  true,
-                                      "piquero":  true,
-                                      "campeon":  true,
-                                      "espadachin_mandoble":  true,
-                                      "alabardero":  true,
-                                      "huscarle":  false,
-                                      "hombre_de_armas":  true
-                                  },
-                      "establo":  {
-                                      "caballero":  true,
-                                      "husar":  false,
-                                      "jinete":  true,
-                                      "camello_pesado":  true,
-                                      "paladin":  false,
-                                      "caballeria_ligera":  true,
-                                      "camello":  true
-                                  },
-                      "taller_asedio":  {
-                                            "mangana":  true,
-                                            "escorpion_pesado":  true,
-                                            "escorpion":  true,
-                                            "trabuquete":  true,
-                                            "onagro":  true,
-                                            "ariete":  true,
-                                            "ariete_blindado":  true,
-                                            "canon_artillado":  false
-                                        },
-                      "puerto":  {
-                                     "barco_pesquero":  true,
-                                     "galeon":  true,
-                                     "galera_guerra":  true,
-                                     "brulote":  true
-                                 },
-                      "herreria":  {
-                                       "forja":  true,
-                                       "armadura_arq_2":  true,
-                                       "ataque_arq_1":  true,
-                                       "alto_horno":  true,
-                                       "armadura_inf_3":  true,
-                                       "ataque_cab_3":  true,
-                                       "ataque_cab_1":  true,
-                                       "ataque_arq_3":  true,
-                                       "ataque_arq_2":  true,
-                                       "armadura_arq_3":  true,
-                                       "hierro_fundido":  true,
-                                       "armadura_cab_2":  true,
-                                       "armadura_inf_2":  true,
-                                       "armadura_cab_3":  true,
-                                       "armadura_arq_1":  true,
-                                       "ataque_cab_2":  true,
-                                       "armadura_inf_1":  true,
-                                       "armadura_cab_1":  true
-                                   },
-                      "arqueria":  {
-                                       "guerrillero":  true,
-                                       "arquero":  true,
-                                       "ballestero":  true,
-                                       "guerrillero_elite":  true,
-                                       "artillero_manual":  true
-                                   },
-                      "universidad":  {
-                                          "torre_guardia":  true,
-                                          "torre_vigilancia":  true,
-                                          "muralla_fortificada":  true,
-                                          "balistica":  true,
-                                          "quimica":  true,
-                                          "albanileria":  true,
-                                          "arquitectura":  true
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "paladin",
-                                                    "husar",
-                                                    "canon_artillado"
-                                                ]
-                  }
+ "debilidades": [
+  "Sin equivalente en repo (sin ID): sin Húsar, sin Cañón de bombardeo...",
+  "Sin Paladin"
+ ],
+ "team_bonus": {
+  "descripcion": "Barcos transporte +5 LDV y -50% coste (aliados)",
+  "id": "sicilianos_equipo",
+  "efecto": {
+   "descuento_transporte": 0.5,
+   "vision_transporte": 5
+  }
+ },
+ "id": "sicilianos",
+ "bonus": [
+  {
+   "descripcion": "+100 piedra tras completar el primer Centro Urbano",
+   "id": "piedra_inicial_100",
+   "efecto": {
+    "piedra_inicial": 100
+   }
+  },
+  {
+   "descripcion": "Fortificaciones +50% velocidad de construcción, Centros Urbanos +100%",
+   "id": "construccion_rapida",
+   "efecto": {
+    "velocidad_fortificaciones": 0.5,
+    "velocidad_centro_urbano": 1.0
+   }
+  },
+  {
+   "descripcion": "Unidades militares terrestres (no asedio) reciben -40% daño bonus",
+   "id": "resistencia_bonus_40",
+   "efecto": {
+    "reduccion_dano_bonus": 0.4,
+    "excluye": [
+     "asedio",
+     "monje"
+    ]
+   }
+  },
+  {
+   "descripcion": "Mejoras de granja +125% comida adicional (rotación: 1019 comida)",
+   "id": "granjas_125",
+   "efecto": {
+    "comida_granja_bonus": 1.25
+   }
+  }
+ ],
+ "roof_color": "#1f8ac8",
+ "name": "Sicilianos",
+ "descripcion": "Sicilianos: +100 piedra tras completar el primer Centro Urbano Fortificaciones +50% velocidad de construcción, Centros Urbanos +100%",
+ "unique_techs": [
+  {
+   "id": "primera_cruzada",
+   "descripcion": "Hasta 5 Centros Urbanos generan Serjeants; unidades mas resistentes a conversion.",
+   "efectos": {
+    "resistencia_conversion": true,
+    "genera_serjeant": true
+   },
+   "nombre": "Primera cruzada (First Crusade)",
+   "edificio": "castillo",
+   "tiempo_sec": 60,
+   "coste": {
+    "gold": 400,
+    "food": 300
+   },
+   "edad": "castillos"
+  },
+  {
+   "id": "hauberk",
+   "descripcion": "Linea del caballero +1/+2 armadura.",
+   "efectos": {
+    "armadura_caballeria_pierce": 2,
+    "armadura_caballeria_melee": 1,
+    "aplica_a": [
+     "caballero",
+     "cavalier"
+    ]
+   },
+   "nombre": "Hauberk",
+   "edificio": "castillo",
+   "tiempo_sec": 45,
+   "coste": {
+    "gold": 700,
+    "food": 600
+   },
+   "edad": "imperial"
+  }
+ ],
+ "ventajas": [
+  "+100 piedra tras completar el primer Centro Urbano",
+  "Fortificaciones +50% velocidad de construcción, Centros U...",
+  "Unidades militares terrestres (no asedio) reciben -40% da..."
+ ],
+ "unique_unit": {
+  "id": "serjeant",
+  "name": "Serjeant",
+  "hp": 65,
+  "attack": 8,
+  "armor_melee": 3,
+  "armor_pierce": 3,
+  "cost": {
+   "food": 60,
+   "gold": 35
+  },
+  "train_time_sec": 20,
+  "trained_at": "castillo"
+ },
+ "tech_tree": {
+  "monasterio": {
+   "fervor": true,
+   "teocracia": true,
+   "monje": true,
+   "herejia": true,
+   "iluminacion": true,
+   "santidad": true,
+   "redencion": true
+  },
+  "castillo": {
+   "hauberk": true,
+   "donjon": true,
+   "primera_cruzada": true,
+   "serjeant": true
+  },
+  "cuartel": {
+   "milicia": true,
+   "lancero": true,
+   "piquero": true,
+   "campeon": true,
+   "espadachin_mandoble": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hombre_de_armas": true
+  },
+  "establo": {
+   "caballero": true,
+   "husar": false,
+   "jinete": true,
+   "camello_pesado": true,
+   "paladin": false,
+   "caballeria_ligera": true,
+   "camello": true
+  },
+  "taller_asedio": {
+   "mangana": true,
+   "escorpion_pesado": true,
+   "escorpion": true,
+   "trabuquete": true,
+   "onagro": true,
+   "ariete": true,
+   "ariete_blindado": true,
+   "canon_artillado": false
+  },
+  "herreria": {
+   "forja": true,
+   "armadura_arq_2": true,
+   "ataque_arq_1": true,
+   "alto_horno": true,
+   "armadura_inf_3": true,
+   "ataque_cab_3": true,
+   "ataque_cab_1": true,
+   "ataque_arq_3": true,
+   "ataque_arq_2": true,
+   "armadura_arq_3": true,
+   "hierro_fundido": true,
+   "armadura_cab_2": true,
+   "armadura_inf_2": true,
+   "armadura_cab_3": true,
+   "armadura_arq_1": true,
+   "ataque_cab_2": true,
+   "armadura_inf_1": true,
+   "armadura_cab_1": true
+  },
+  "arqueria": {
+   "guerrillero": true,
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true
+  },
+  "universidad": {
+   "torre_guardia": true,
+   "torre_vigilancia": true,
+   "muralla_fortificada": true,
+   "balistica": true,
+   "quimica": true,
+   "albanileria": true,
+   "arquitectura": true
+  },
+  "no_disponible_resumen": [
+   "paladin",
+   "husar",
+   "canon_artillado"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galeon": true,
+   "galera_guerra": true,
+   "brulote": true
+  }
+ }
 }

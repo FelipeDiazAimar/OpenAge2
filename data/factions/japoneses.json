@@ -1,242 +1,242 @@
-{
-  "debilidades": [
-    "Ausencias clave: sin paladin, sin husar, sin armadura de caballeria...",
-    "Sin Paladin"
-  ],
-  "team_bonus": {
-    "descripcion": "Galeras +4 linea de vision (aliados).",
-    "efecto": {
-      "aplica_a": [
-        "galera"
-      ],
-      "vision_galera": 4
-    },
-    "id": "galeras_vision"
+﻿{
+ "debilidades": [
+  "Ausencias clave: sin paladin, sin husar, sin armadura de caballeria...",
+  "Sin Paladin"
+ ],
+ "team_bonus": {
+  "descripcion": "Galeras +4 linea de vision (aliados).",
+  "efecto": {
+   "aplica_a": [
+    "galera"
+   ],
+   "vision_galera": 4
   },
-  "id": "japoneses",
-  "bonus": [
-    {
-      "descripcion": "Pesqueros 2x HP, +2 armadura perforante, trabajan 5%/10%/15%/20% mas rapido (Oscura/Feudal/Castillos/Imperial).",
-      "id": "pesca_superior",
-      "efecto": {
-        "hp_x2": true,
-        "armadura_perforante": 2,
-        "ritmo": [
-          0.05,
-          0.1,
-          0.15,
-          0.2
-        ],
-        "aplica_a": [
-          "barco_pesquero"
-        ]
-      }
-    },
-    {
-      "descripcion": "Infanteria ataca 33% mas rapido desde Feudal (incluye bonus de dano).",
-      "id": "infanteria_rapida",
-      "efecto": {
-        "velocidad_ataque_infanteria": 0.33,
-        "desde_edad": "feudal"
-      }
-    },
-    {
-      "descripcion": "Arqueros a caballo +2 ataque vs arqueros (excepto guerrilleros).",
-      "id": "ac_vs_arqueros",
-      "efecto": {
-        "ataque_vs_arqueros": 2,
-        "aplica_a": [
-          "arquero_caballo"
-        ]
-      }
-    },
-    {
-      "descripcion": "UU Samurai: 45F/30O, 9s, HP 70/80, atk 10/12 (+10/+12 vs UU), arm 1/1, vel 1.0, cadencia 1.9s, carga +25% vel. Elite: 750F/650O.",
-      "id": "uu_samurai",
-      "efecto": {
-        "coste": {
-          "oro": 30,
-          "comida": 45
-        },
-        "elite_coste": {
-          "oro": 650,
-          "comida": 750
-        },
-        "hp": [
-          70,
-          80
-        ],
-        "ataque": [
-          10,
-          12
-        ],
-        "bonus_vs_uu": [
-          10,
-          12
-        ],
-        "unidad": "samurai"
-      }
-    }
-  ],
-  "roof_color": "#d5d8dc",
-  "name": "Japoneses",
-  "descripcion": "Japoneses: Pesqueros 2x HP, +2 armadura perforante, trabajan 5%/10%/15%/20% mas rapido (Oscura/Feudal/Castillos/Imperial). Infanteria ataca 33% mas rapido desde Feudal (incluye bonus de dano).",
-  "unique_techs": [
-    {
-      "id": "yasama",
-      "nombre": "Yasama",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "food": 300,
-        "wood": 300
-      },
-      "tiempo_sec": 40,
-      "descripcion": "Torres disparan 2 flechas adicionales.",
-      "efectos": {
-        "aplica_a": [
-          "torre_vigia"
-        ],
-        "flechas_extra_torres": 2
-      }
-    },
-    {
-      "id": "kataparuto",
-      "nombre": "Kataparuto",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "gold": 300,
-        "wood": 550
-      },
-      "tiempo_sec": 60,
-      "descripcion": "Trabuquetes empaquetan/desempaquetan ~4x mas rapido (11s -> 3s) y disparan 33% mas rapido.",
-      "efectos": {
-        "aplica_a": [
-          "trebuchet"
-        ],
-        "cadencia_trabuquete": 0.33,
-        "empaque_trabuquete_sec": 3
-      }
-    }
-  ],
-  "ventajas": [
-    "Pesqueros 2x HP, +2 armadura perforante, trabajan 5%/10%/...",
-    "Infanteria ataca 33% mas rapido desde Feudal (incluye bon...",
-    "Arqueros a caballo +2 ataque vs arqueros (excepto guerril..."
-  ],
-  "unique_unit": {
-    "train_time_sec": 9,
-    "id": "samurai",
-    "armor_pierce": 1,
-    "attack_elite": 10,
-    "cost": {
-      "gold": 30,
-      "food": 60
-    },
-    "trained_at": "castillo",
-    "attack": 8,
-    "armor_melee": 1,
-    "name": "Samurai",
-    "hp": 60,
-    "hp_elite": 80
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": true,
-      "alabardero": true,
-      "huscarle": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": true,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": false,
-      "arquero_tiro_largo": false
-    },
-    "establo": {
-      "jinete": true,
-      "caballeria_ligera": true,
-      "husar": true,
-      "caballero": true,
-      "paladin": false,
-      "camello": true,
-      "camello_pesado": true,
-      "catafracta": false
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": false,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": true,
-      "fervor": true,
-      "santidad": true,
-      "iluminacion": true,
-      "teocracia": true,
-      "herejia": false
-    },
-    "castillo": {
-      "samurai": true,
-      "yasama": true,
-      "kataparuto": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": true,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": true,
-      "armadura_arq_1": true,
-      "armadura_arq_2": true,
-      "armadura_arq_3": true,
-      "ataque_cab_1": true,
-      "ataque_cab_2": true,
-      "ataque_cab_3": true,
-      "armadura_cab_1": true,
-      "armadura_cab_2": true,
-      "armadura_cab_3": false
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": true,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": false,
-      "arquitectura": true,
-      "muralla_fortificada": true,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "armadura_cab_3",
-      "artillero_manual",
-      "canon_artillado",
-      "herejia",
-      "paladin",
-      "torre_muralla"
+  "id": "galeras_vision"
+ },
+ "id": "japoneses",
+ "bonus": [
+  {
+   "descripcion": "Pesqueros 2x HP, +2 armadura perforante, trabajan 5%/10%/15%/20% mas rapido (Oscura/Feudal/Castillos/Imperial).",
+   "id": "pesca_superior",
+   "efecto": {
+    "hp_x2": true,
+    "armadura_perforante": 2,
+    "ritmo": [
+     0.05,
+     0.1,
+     0.15,
+     0.2
+    ],
+    "aplica_a": [
+     "barco_pesquero"
     ]
+   }
+  },
+  {
+   "descripcion": "Infanteria ataca 33% mas rapido desde Feudal (incluye bonus de dano).",
+   "id": "infanteria_rapida",
+   "efecto": {
+    "velocidad_ataque_infanteria": 0.33,
+    "desde_edad": "feudal"
+   }
+  },
+  {
+   "descripcion": "Arqueros a caballo +2 ataque vs arqueros (excepto guerrilleros).",
+   "id": "ac_vs_arqueros",
+   "efecto": {
+    "ataque_vs_arqueros": 2,
+    "aplica_a": [
+     "arquero_caballo"
+    ]
+   }
+  },
+  {
+   "descripcion": "UU Samurai: 45F/30O, 9s, HP 70/80, atk 10/12 (+10/+12 vs UU), arm 1/1, vel 1.0, cadencia 1.9s, carga +25% vel. Elite: 750F/650O.",
+   "id": "uu_samurai",
+   "efecto": {
+    "coste": {
+     "oro": 30,
+     "comida": 45
+    },
+    "elite_coste": {
+     "oro": 650,
+     "comida": 750
+    },
+    "hp": [
+     70,
+     80
+    ],
+    "ataque": [
+     10,
+     12
+    ],
+    "bonus_vs_uu": [
+     10,
+     12
+    ],
+    "unidad": "samurai"
+   }
   }
+ ],
+ "roof_color": "#d5d8dc",
+ "name": "Japoneses",
+ "descripcion": "Japoneses: Pesqueros 2x HP, +2 armadura perforante, trabajan 5%/10%/15%/20% mas rapido (Oscura/Feudal/Castillos/Imperial). Infanteria ataca 33% mas rapido desde Feudal (incluye bonus de dano).",
+ "unique_techs": [
+  {
+   "id": "yasama",
+   "nombre": "Yasama",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "food": 300,
+    "wood": 300
+   },
+   "tiempo_sec": 40,
+   "descripcion": "Torres disparan 2 flechas adicionales.",
+   "efectos": {
+    "aplica_a": [
+     "torre_vigia"
+    ],
+    "flechas_extra_torres": 2
+   }
+  },
+  {
+   "id": "kataparuto",
+   "nombre": "Kataparuto",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "gold": 300,
+    "wood": 550
+   },
+   "tiempo_sec": 60,
+   "descripcion": "Trabuquetes empaquetan/desempaquetan ~4x mas rapido (11s -> 3s) y disparan 33% mas rapido.",
+   "efectos": {
+    "aplica_a": [
+     "trebuchet"
+    ],
+    "cadencia_trabuquete": 0.33,
+    "empaque_trabuquete_sec": 3
+   }
+  }
+ ],
+ "ventajas": [
+  "Pesqueros 2x HP, +2 armadura perforante, trabajan 5%/10%/...",
+  "Infanteria ataca 33% mas rapido desde Feudal (incluye bon...",
+  "Arqueros a caballo +2 ataque vs arqueros (excepto guerril..."
+ ],
+ "unique_unit": {
+  "train_time_sec": 9,
+  "id": "samurai",
+  "armor_pierce": 1,
+  "attack_elite": 10,
+  "cost": {
+   "gold": 30,
+   "food": 60
+  },
+  "trained_at": "castillo",
+  "attack": 8,
+  "armor_melee": 1,
+  "name": "Samurai",
+  "hp": 60,
+  "hp_elite": 80
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": true,
+   "alabardero": true,
+   "huscarle": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": false,
+   "arquero_tiro_largo": false
+  },
+  "establo": {
+   "jinete": true,
+   "caballeria_ligera": true,
+   "husar": true,
+   "caballero": true,
+   "paladin": false,
+   "camello": true,
+   "camello_pesado": true,
+   "catafracta": false
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": false,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": true,
+   "fervor": true,
+   "santidad": true,
+   "iluminacion": true,
+   "teocracia": true,
+   "herejia": false
+  },
+  "castillo": {
+   "samurai": true,
+   "yasama": true,
+   "kataparuto": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": true,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": true,
+   "armadura_arq_1": true,
+   "armadura_arq_2": true,
+   "armadura_arq_3": true,
+   "ataque_cab_1": true,
+   "ataque_cab_2": true,
+   "ataque_cab_3": true,
+   "armadura_cab_1": true,
+   "armadura_cab_2": true,
+   "armadura_cab_3": false
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": true,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": false,
+   "arquitectura": true,
+   "muralla_fortificada": true,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "armadura_cab_3",
+   "artillero_manual",
+   "canon_artillado",
+   "herejia",
+   "paladin",
+   "torre_muralla"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true
+  }
+ }
 }

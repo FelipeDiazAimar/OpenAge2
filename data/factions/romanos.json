@@ -1,208 +1,208 @@
 ﻿{
-    "debilidades":  [
-                        "Sin Paladin",
-                        "Caballeria pesada limitada"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Escorpiones -rango minimo (aliados)",
-                       "id":  "romanos_equipo",
-                       "efecto":  {
-                                      "rango_minimo_escorpion_reducido":  true
-                                  }
-                   },
-    "id":  "romanos",
-    "bonus":  [
-                  {
-                      "descripcion":  "Aldeanos 5% más rápidos: recolectan, construyen y reparan 5% más rápido",
-                      "id":  "aldeanos_5",
-                      "efecto":  {
-                                     "velocidad_aldeano_bonus":  0.05
-                                 }
-                  },
-                  {
-                      "descripcion":  "Galeras y dromones +1/+1 armadura",
-                      "id":  "galera_blindada_1",
-                      "efecto":  {
-                                     "armadura_galera_melee":  1,
-                                     "armadura_galera_pierce":  1,
-                                     "aplica_a":  [
-                                                      "galera",
-                                                      "dromon"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Infantería recibe doble efecto de mejoras de armadura de herrería",
-                      "id":  "herreria_doble_infanteria",
-                      "efecto":  {
-                                     "factor_armadura_herreria_infanteria":  2.0
-                                 }
-                  },
-                  {
-                      "descripcion":  "Escorpiones -50% coste de oro",
-                      "id":  "escorpion_oro_50",
-                      "efecto":  {
-                                     "descuento_escorpion_oro":  0.5,
-                                     "aplica_a":  [
-                                                      "escorpion",
-                                                      "escorpion_pesado"
-                                                  ]
-                                 }
-                  }
-              ],
-    "roof_color":  "#b22222",
-    "name":  "Romanos",
-    "descripcion":  "Romanos: Aldeanos 5% más rápidos: recolectan, construyen y reparan 5% más rápido Galeras y dromones +1/+1 armadura",
-    "unique_techs":  [
-                         {
-                             "id":  "balistas",
-                             "descripcion":  "Escorpiones atacan +33% mas rapido; galeras +2 ataque.",
-                             "efectos":  {
-                                             "cadencia_escorpion":  0.33,
-                                             "ataque_galera":  2
-                                         },
-                             "nombre":  "Balistas (Ballistas)",
-                             "edificio":  "castillo",
-                             "tiempo_sec":  45,
-                             "coste":  {
-                                           "gold":  300,
-                                           "food":  400
-                                       },
-                             "edad":  "castillos"
-                         },
-                         {
-                             "id":  "comitatenses",
-                             "descripcion":  "Milicia, caballero y centurion +50% velocidad de creacion y ataque de carga.",
-                             "efectos":  {
-                                             "ataque_carga":  true,
-                                             "velocidad_creacion":  0.5,
-                                             "aplica_a":  [
-                                                              "milicia",
-                                                              "caballero",
-                                                              "centurion"
-                                                          ]
-                                         },
-                             "nombre":  "Comitatenses",
-                             "edificio":  "castillo",
-                             "tiempo_sec":  60,
-                             "coste":  {
-                                           "gold":  800,
-                                           "food":  700
-                                       },
-                             "edad":  "imperial"
-                         }
-                     ],
-    "ventajas":  [
-                     "Aldeanos 5% más rápidos: recolectan, construyen y reparan...",
-                     "Galeras y dromones +1/+1 armadura",
-                     "Infantería recibe doble efecto de mejoras de armadura de ..."
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  14,
-                        "id":  "legionario",
-                        "armor_pierce":  1,
-                        "attack_elite":  14,
-                        "cost":  {
-                                     "gold":  20,
-                                     "food":  50
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  12,
-                        "armor_melee":  1,
-                        "name":  "Legionario",
-                        "hp":  75,
-                        "hp_elite":  95
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-                                         "fervor":  true,
-                                         "teocracia":  true,
-                                         "monje":  true,
-                                         "herejia":  true,
-                                         "iluminacion":  true,
-                                         "santidad":  true,
-                                         "redencion":  true
-                                     },
-                      "castillo":  {
-                                       "balistas":  true,
-                                       "legionario":  true,
-                                       "comitatenses":  true,
-                                       "centurion":  true
-                                   },
-                      "cuartel":  {
-                                      "milicia":  true,
-                                      "lancero":  true,
-                                      "piquero":  true,
-                                      "campeon":  true,
-                                      "espadachin_mandoble":  true,
-                                      "alabardero":  true,
-                                      "huscarle":  false,
-                                      "hombre_de_armas":  true
-                                  },
-                      "establo":  {
-                                      "caballero":  true,
-                                      "husar":  true,
-                                      "jinete":  true,
-                                      "camello_pesado":  true,
-                                      "paladin":  false,
-                                      "caballeria_ligera":  true,
-                                      "camello":  true
-                                  },
-                      "taller_asedio":  {
-                                            "mangana":  true,
-                                            "escorpion_pesado":  true,
-                                            "escorpion":  true,
-                                            "trabuquete":  true,
-                                            "onagro":  true,
-                                            "ariete":  true,
-                                            "ariete_blindado":  true,
-                                            "canon_artillado":  true
-                                        },
-                      "puerto":  {
-                                     "barco_pesquero":  true,
-                                     "galeon":  true,
-                                     "galera_guerra":  true,
-                                     "brulote":  true
-                                 },
-                      "herreria":  {
-                                       "forja":  true,
-                                       "armadura_arq_2":  true,
-                                       "ataque_arq_1":  true,
-                                       "alto_horno":  true,
-                                       "armadura_inf_3":  true,
-                                       "ataque_cab_3":  true,
-                                       "ataque_cab_1":  true,
-                                       "ataque_arq_3":  true,
-                                       "ataque_arq_2":  true,
-                                       "armadura_arq_3":  true,
-                                       "hierro_fundido":  true,
-                                       "armadura_cab_2":  true,
-                                       "armadura_inf_2":  true,
-                                       "armadura_cab_3":  true,
-                                       "armadura_arq_1":  true,
-                                       "ataque_cab_2":  true,
-                                       "armadura_inf_1":  true,
-                                       "armadura_cab_1":  true
-                                   },
-                      "arqueria":  {
-                                       "ballestero":  false,
-                                       "artillero_manual":  true,
-                                       "arquero":  true,
-                                       "guerrillero_elite":  true,
-                                       "guerrillero":  true
-                                   },
-                      "universidad":  {
-                                          "torre_guardia":  true,
-                                          "torre_vigilancia":  true,
-                                          "muralla_fortificada":  true,
-                                          "balistica":  true,
-                                          "quimica":  true,
-                                          "albanileria":  true,
-                                          "arquitectura":  true
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "paladin",
-                                                    "ballestero"
-                                                ]
-                  }
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "descripcion": "Escorpiones -rango minimo (aliados)",
+  "id": "romanos_equipo",
+  "efecto": {
+   "rango_minimo_escorpion_reducido": true
+  }
+ },
+ "id": "romanos",
+ "bonus": [
+  {
+   "descripcion": "Aldeanos 5% más rápidos: recolectan, construyen y reparan 5% más rápido",
+   "id": "aldeanos_5",
+   "efecto": {
+    "velocidad_aldeano_bonus": 0.05
+   }
+  },
+  {
+   "descripcion": "Galeras y dromones +1/+1 armadura",
+   "id": "galera_blindada_1",
+   "efecto": {
+    "armadura_galera_melee": 1,
+    "armadura_galera_pierce": 1,
+    "aplica_a": [
+     "galera",
+     "dromon"
+    ]
+   }
+  },
+  {
+   "descripcion": "Infantería recibe doble efecto de mejoras de armadura de herrería",
+   "id": "herreria_doble_infanteria",
+   "efecto": {
+    "factor_armadura_herreria_infanteria": 2.0
+   }
+  },
+  {
+   "descripcion": "Escorpiones -50% coste de oro",
+   "id": "escorpion_oro_50",
+   "efecto": {
+    "descuento_escorpion_oro": 0.5,
+    "aplica_a": [
+     "escorpion",
+     "escorpion_pesado"
+    ]
+   }
+  }
+ ],
+ "roof_color": "#b22222",
+ "name": "Romanos",
+ "descripcion": "Romanos: Aldeanos 5% más rápidos: recolectan, construyen y reparan 5% más rápido Galeras y dromones +1/+1 armadura",
+ "unique_techs": [
+  {
+   "id": "balistas",
+   "descripcion": "Escorpiones atacan +33% mas rapido; galeras +2 ataque.",
+   "efectos": {
+    "cadencia_escorpion": 0.33,
+    "ataque_galera": 2
+   },
+   "nombre": "Balistas (Ballistas)",
+   "edificio": "castillo",
+   "tiempo_sec": 45,
+   "coste": {
+    "gold": 300,
+    "food": 400
+   },
+   "edad": "castillos"
+  },
+  {
+   "id": "comitatenses",
+   "descripcion": "Milicia, caballero y centurion +50% velocidad de creacion y ataque de carga.",
+   "efectos": {
+    "ataque_carga": true,
+    "velocidad_creacion": 0.5,
+    "aplica_a": [
+     "milicia",
+     "caballero",
+     "centurion"
+    ]
+   },
+   "nombre": "Comitatenses",
+   "edificio": "castillo",
+   "tiempo_sec": 60,
+   "coste": {
+    "gold": 800,
+    "food": 700
+   },
+   "edad": "imperial"
+  }
+ ],
+ "ventajas": [
+  "Aldeanos 5% más rápidos: recolectan, construyen y reparan...",
+  "Galeras y dromones +1/+1 armadura",
+  "Infantería recibe doble efecto de mejoras de armadura de ..."
+ ],
+ "unique_unit": {
+  "train_time_sec": 14,
+  "id": "legionario",
+  "armor_pierce": 1,
+  "attack_elite": 14,
+  "cost": {
+   "gold": 20,
+   "food": 50
+  },
+  "trained_at": "castillo",
+  "attack": 12,
+  "armor_melee": 1,
+  "name": "Legionario",
+  "hp": 75,
+  "hp_elite": 95
+ },
+ "tech_tree": {
+  "monasterio": {
+   "fervor": true,
+   "teocracia": true,
+   "monje": true,
+   "herejia": true,
+   "iluminacion": true,
+   "santidad": true,
+   "redencion": true
+  },
+  "castillo": {
+   "balistas": true,
+   "legionario": true,
+   "comitatenses": true,
+   "centurion": true
+  },
+  "cuartel": {
+   "milicia": true,
+   "lancero": true,
+   "piquero": true,
+   "campeon": true,
+   "espadachin_mandoble": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hombre_de_armas": true
+  },
+  "establo": {
+   "caballero": true,
+   "husar": true,
+   "jinete": true,
+   "camello_pesado": true,
+   "paladin": false,
+   "caballeria_ligera": true,
+   "camello": true
+  },
+  "taller_asedio": {
+   "mangana": true,
+   "escorpion_pesado": true,
+   "escorpion": true,
+   "trabuquete": true,
+   "onagro": true,
+   "ariete": true,
+   "ariete_blindado": true,
+   "canon_artillado": true
+  },
+  "herreria": {
+   "forja": true,
+   "armadura_arq_2": true,
+   "ataque_arq_1": true,
+   "alto_horno": true,
+   "armadura_inf_3": true,
+   "ataque_cab_3": true,
+   "ataque_cab_1": true,
+   "ataque_arq_3": true,
+   "ataque_arq_2": true,
+   "armadura_arq_3": true,
+   "hierro_fundido": true,
+   "armadura_cab_2": true,
+   "armadura_inf_2": true,
+   "armadura_cab_3": true,
+   "armadura_arq_1": true,
+   "ataque_cab_2": true,
+   "armadura_inf_1": true,
+   "armadura_cab_1": true
+  },
+  "arqueria": {
+   "ballestero": false,
+   "artillero_manual": true,
+   "arquero": true,
+   "guerrillero_elite": true,
+   "guerrillero": true
+  },
+  "universidad": {
+   "torre_guardia": true,
+   "torre_vigilancia": true,
+   "muralla_fortificada": true,
+   "balistica": true,
+   "quimica": true,
+   "albanileria": true,
+   "arquitectura": true
+  },
+  "no_disponible_resumen": [
+   "paladin",
+   "ballestero"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galeon": true,
+   "galera_guerra": true,
+   "brulote": true
+  }
+ }
 }

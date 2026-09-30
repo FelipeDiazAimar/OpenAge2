@@ -1,218 +1,218 @@
-{
-  "debilidades": [
-    "Sin Paladin",
-    "Roster con huecos en Imperial"
-  ],
-  "team_bonus": {
-    "id": "genitour_equipo",
-    "descripcion": "Genitour disponible en Galería de tiro desde Castillos (aliados)",
-    "efecto": {
-      "desbloquea_genitour_equipo": true,
-      "edad": "castillos",
-      "edificio": "galeria_tiro"
-    }
-  },
-  "id": "bereberes",
-  "bonus": [
-    {
-      "descripcion": "Aldeanos +5% velocidad en Alta Edad Media, +10% desde Feudal",
-      "id": "aldeanos_rapidos_10",
-      "efecto": {
-        "velocidad_aldeano_dark": 0.05,
-        "velocidad_aldeano_feudal_mas": 0.1
-      }
-    },
-    {
-      "descripcion": "Unidades de establo -15% coste en Castillos / -20% en Imperial",
-      "id": "establo_barato_15_20",
-      "efecto": {
-        "descuento_establo_castillos": 0.15,
-        "descuento_establo_imperial": 0.2,
-        "aplica_a": [
-          "jinete",
-          "caballero",
-          "camello",
-          "caballeria_ligera",
-          "husar",
-          "arquero_camello",
-          "genitour"
-        ]
-      }
-    },
-    {
-      "descripcion": "Barcos +10% velocidad (duplicado en effects como tag:barco_guerra x1.1)",
-      "id": "barcos_rapidos_10",
-      "efecto": {
-        "velocidad_barcos": 0.1
-      }
-    }
-  ],
-  "roof_color": "#c8862a",
-  "name": "Bereberes",
-  "descripcion": "Bereberes: Aldeanos +5% velocidad en Alta Edad Media, +10% desde Feudal Unidades de establo -15% coste en Castillos / -20% en Imperial",
-  "unique_techs": [
-    {
-      "id": "kasbah",
-      "nombre": "Kasbah",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "food": 250,
-        "gold": 200
-      },
-      "tiempo_sec": 40,
-      "descripcion": "Castillos del equipo trabajan 25% más rápido.",
-      "efectos": {
-        "velocidad_castillo_equipo": 0.25,
-        "aplica_a": [
-          "castillo"
-        ]
-      }
-    },
-    {
-      "id": "camellos_magrebies",
-      "nombre": "Camellos magrebíes (Maghrebi Camels)",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "wood": 200,
-        "gold": 300
-      },
-      "tiempo_sec": 60,
-      "descripcion": "Unidades camello regeneran 15 HP/min.",
-      "efectos": {
-        "regen_camellos_hp_min": 15,
-        "aplica_a": [
-          "camello",
-          "camello_pesado",
-          "arquero_camello"
-        ]
-      }
-    }
-  ],
-  "ventajas": [
-    "Aldeanos +5% velocidad en Alta Edad Media, +10% desde Feudal",
-    "Unidades de establo -15% coste en Castillos / -20% en Imp...",
-    "Barcos +10% velocidad (duplicado en effects como tag:barc..."
-  ],
-  "unique_unit": {
-    "train_time_sec": 25,
-    "id": "arquero_camello",
-    "armor_pierce": 1,
-    "attack_elite": 9,
-    "cost": {
-      "gold": 60,
-      "food": 60
-    },
-    "trained_at": "castillo",
-    "attack": 7,
-    "armor_melee": 0,
-    "name": "Arquero en Camello",
-    "hp": 55,
-    "hp_elite": 75
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": true,
-      "alabardero": true,
-      "huscarle": false,
-      "hachero_franco": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": false,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": true,
-      "arquero_tiro_largo": true,
-      "hachero_franco": false
-    },
-    "establo": {
-      "jinete": true,
-      "caballeria_ligera": true,
-      "husar": true,
-      "caballero": true,
-      "paladin": false,
-      "paladin_franco": false,
-      "camello": true,
-      "camello_pesado": true,
-      "catafracta": true
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": true,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": true,
-      "fervor": true,
-      "santidad": false,
-      "iluminacion": true,
-      "teocracia": true,
-      "herejia": true
-    },
-    "castillo": {
-      "arquero_camello": true,
-      "kasbah": true,
-      "camellos_magrebies": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": true,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": false,
-      "armadura_arq_1": true,
-      "armadura_arq_2": true,
-      "armadura_arq_3": true,
-      "ataque_cab_1": true,
-      "ataque_cab_2": true,
-      "ataque_cab_3": true,
-      "armadura_cab_1": true,
-      "armadura_cab_2": true,
-      "armadura_cab_3": true
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": true,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": false,
-      "arquitectura": false,
-      "muralla_fortificada": true,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "arquitectura",
-      "ataque_arq_3",
-      "ballestero",
-      "hachero_franco",
-      "huscarle",
-      "paladin",
-      "paladin_franco",
-      "santidad",
-      "torre_muralla"
-    ]
+﻿{
+ "debilidades": [
+  "Sin Paladin",
+  "Roster con huecos en Imperial"
+ ],
+ "team_bonus": {
+  "id": "genitour_equipo",
+  "descripcion": "Genitour disponible en Galería de tiro desde Castillos (aliados)",
+  "efecto": {
+   "desbloquea_genitour_equipo": true,
+   "edad": "castillos",
+   "edificio": "galeria_tiro"
   }
+ },
+ "id": "bereberes",
+ "bonus": [
+  {
+   "descripcion": "Aldeanos +5% velocidad en Alta Edad Media, +10% desde Feudal",
+   "id": "aldeanos_rapidos_10",
+   "efecto": {
+    "velocidad_aldeano_dark": 0.05,
+    "velocidad_aldeano_feudal_mas": 0.1
+   }
+  },
+  {
+   "descripcion": "Unidades de establo -15% coste en Castillos / -20% en Imperial",
+   "id": "establo_barato_15_20",
+   "efecto": {
+    "descuento_establo_castillos": 0.15,
+    "descuento_establo_imperial": 0.2,
+    "aplica_a": [
+     "jinete",
+     "caballero",
+     "camello",
+     "caballeria_ligera",
+     "husar",
+     "arquero_camello",
+     "genitour"
+    ]
+   }
+  },
+  {
+   "descripcion": "Barcos +10% velocidad (duplicado en effects como tag:barco_guerra x1.1)",
+   "id": "barcos_rapidos_10",
+   "efecto": {
+    "velocidad_barcos": 0.1
+   }
+  }
+ ],
+ "roof_color": "#c8862a",
+ "name": "Bereberes",
+ "descripcion": "Bereberes: Aldeanos +5% velocidad en Alta Edad Media, +10% desde Feudal Unidades de establo -15% coste en Castillos / -20% en Imperial",
+ "unique_techs": [
+  {
+   "id": "kasbah",
+   "nombre": "Kasbah",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "food": 250,
+    "gold": 200
+   },
+   "tiempo_sec": 40,
+   "descripcion": "Castillos del equipo trabajan 25% más rápido.",
+   "efectos": {
+    "velocidad_castillo_equipo": 0.25,
+    "aplica_a": [
+     "castillo"
+    ]
+   }
+  },
+  {
+   "id": "camellos_magrebies",
+   "nombre": "Camellos magrebíes (Maghrebi Camels)",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "wood": 200,
+    "gold": 300
+   },
+   "tiempo_sec": 60,
+   "descripcion": "Unidades camello regeneran 15 HP/min.",
+   "efectos": {
+    "regen_camellos_hp_min": 15,
+    "aplica_a": [
+     "camello",
+     "camello_pesado",
+     "arquero_camello"
+    ]
+   }
+  }
+ ],
+ "ventajas": [
+  "Aldeanos +5% velocidad en Alta Edad Media, +10% desde Feudal",
+  "Unidades de establo -15% coste en Castillos / -20% en Imp...",
+  "Barcos +10% velocidad (duplicado en effects como tag:barc..."
+ ],
+ "unique_unit": {
+  "train_time_sec": 25,
+  "id": "arquero_camello",
+  "armor_pierce": 1,
+  "attack_elite": 9,
+  "cost": {
+   "gold": 60,
+   "food": 60
+  },
+  "trained_at": "castillo",
+  "attack": 7,
+  "armor_melee": 0,
+  "name": "Arquero en Camello",
+  "hp": 55,
+  "hp_elite": 75
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hachero_franco": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": false,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true,
+   "arquero_tiro_largo": true,
+   "hachero_franco": false
+  },
+  "establo": {
+   "jinete": true,
+   "caballeria_ligera": true,
+   "husar": true,
+   "caballero": true,
+   "paladin": false,
+   "paladin_franco": false,
+   "camello": true,
+   "camello_pesado": true,
+   "catafracta": true
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": true,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": true,
+   "fervor": true,
+   "santidad": false,
+   "iluminacion": true,
+   "teocracia": true,
+   "herejia": true
+  },
+  "castillo": {
+   "arquero_camello": true,
+   "kasbah": true,
+   "camellos_magrebies": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": true,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": false,
+   "armadura_arq_1": true,
+   "armadura_arq_2": true,
+   "armadura_arq_3": true,
+   "ataque_cab_1": true,
+   "ataque_cab_2": true,
+   "ataque_cab_3": true,
+   "armadura_cab_1": true,
+   "armadura_cab_2": true,
+   "armadura_cab_3": true
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": true,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": false,
+   "arquitectura": false,
+   "muralla_fortificada": true,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "arquitectura",
+   "ataque_arq_3",
+   "ballestero",
+   "hachero_franco",
+   "huscarle",
+   "paladin",
+   "paladin_franco",
+   "santidad",
+   "torre_muralla"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true
+  }
+ }
 }

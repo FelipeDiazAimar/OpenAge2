@@ -1,224 +1,224 @@
-{
-  "debilidades": [
-    "Caballeria pesada limitada",
-    "Roster con huecos en Imperial"
-  ],
-  "team_bonus": {
-    "id": "empalizadas_resistentes",
-    "descripcion": "Empalizadas +33% puntos de vida (aliados)",
-    "efecto": {
-      "vida_empalizada": 0.33
-    }
-  },
-  "id": "cumanos",
-  "bonus": [
-    {
-      "descripcion": "Segundo Centro Urbano disponible desde la Edad Feudal (tiempo de construcción 270 s)",
-      "id": "centro_urbano_feudal",
-      "efecto": {
-        "tc_extra_feudal": 1,
-        "tiempo_construccion_s": 270
-      }
-    },
-    {
-      "descripcion": "Galerías de tiro y Establos cuestan -75 de madera",
-      "id": "edificios_madera_75",
-      "efecto": {
-        "descuento_madera": 75,
-        "aplica_a": [
-          "galeria_tiro",
-          "establo"
-        ]
-      }
-    },
-    {
-      "descripcion": "Taller de asedio y Ariete disponibles en Feudal; Ariete cubierto disponible en Castillos",
-      "id": "asedio_feudal",
-      "efecto": {
-        "taller_asedio_feudal": true,
-        "ariete_feudal": true,
-        "ariete_cubierto_castillos": true
-      }
-    },
-    {
-      "descripcion": "Unidades montadas +5%/+10%/+15% velocidad en Feudal/Castillos/Imperial",
-      "id": "velocidad_montadas",
-      "efecto": {
-        "velocidad_feudal": 0.05,
-        "velocidad_castillos": 0.1,
-        "velocidad_imperial": 0.15
-      }
-    }
-  ],
-  "roof_color": "#c19a2e",
-  "name": "Cumanos",
-  "descripcion": "Cumanos: Segundo Centro Urbano disponible desde la Edad Feudal (tiempo de construcción 270 s) Galerías de tiro y Establos cuestan -75 de madera",
-  "unique_techs": [
-    {
-      "id": "ganaderia_estepa",
-      "nombre": "Ganadería esteparia (Steppe Husbandry)",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "food": 200,
-        "wood": 300
-      },
-      "tiempo_sec": 40,
-      "descripcion": "Exploradores, lanceros de la estepa y arqueros a caballo se crean 100% más rápido.",
-      "efectos": {
-        "velocidad_creacion": 1.0,
-        "aplica_a": [
-          "scout",
-          "lancero_estepa",
-          "arquero_caballo"
-        ],
-        "nota": "no_afecta_kipchak"
-      }
-    },
-    {
-      "id": "mercenarios_cumanos",
-      "nombre": "Mercenarios cumanos (Cuman Mercenaries)",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "food": 650,
-        "gold": 400
-      },
-      "tiempo_sec": 40,
-      "descripcion": "Todo el equipo puede crear 5 Kipchaks de élite gratis por cada castillo propio.",
-      "efectos": {
-        "kipchaks_gratis_por_castillo": 5,
-        "alcance_equipo": true,
-        "unidad": "kipchak_elite"
-      }
-    }
-  ],
-  "ventajas": [
-    "Segundo Centro Urbano disponible desde la Edad Feudal (ti...",
-    "Galerías de tiro y Establos cuestan -75 de madera",
-    "Taller de asedio y Ariete disponibles en Feudal; Ariete c..."
-  ],
-  "unique_unit": {
-    "train_time_sec": 20,
-    "id": "kipchak",
-    "armor_pierce": 0,
-    "attack_elite": 7,
-    "cost": {
-      "gold": 35,
-      "food": 60
-    },
-    "trained_at": "castillo",
-    "attack": 5,
-    "armor_melee": 0,
-    "name": "Kipchak",
-    "hp": 45,
-    "hp_elite": 65
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": true,
-      "alabardero": true,
-      "huscarle": false,
-      "hachero_franco": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": true,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": true,
-      "arquero_tiro_largo": false,
-      "hachero_franco": false
-    },
-    "establo": {
-      "jinete": true,
-      "caballeria_ligera": true,
-      "husar": true,
-      "caballero": true,
-      "paladin": true,
-      "paladin_franco": false,
-      "camello": true,
-      "camello_pesado": true,
-      "catafracta": false
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": true,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": false,
-      "fervor": true,
-      "santidad": true,
-      "iluminacion": false,
-      "teocracia": false,
-      "herejia": true
-    },
-    "castillo": {
-      "kipchak": true,
-      "ganaderia_estepa": true,
-      "mercenarios_cumanos": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": true,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": true,
-      "armadura_arq_1": true,
-      "armadura_arq_2": true,
-      "armadura_arq_3": true,
-      "ataque_cab_1": true,
-      "ataque_cab_2": true,
-      "ataque_cab_3": true,
-      "armadura_cab_1": true,
-      "armadura_cab_2": true,
-      "armadura_cab_3": true
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": true,
-      "torre_vigilancia": true,
-      "torre_guardia": false,
-      "torre_muralla": false,
-      "arquitectura": false,
-      "muralla_fortificada": false,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "arquero_tiro_largo",
-      "arquitectura",
-      "catafracta",
-      "hachero_franco",
-      "huscarle",
-      "iluminacion",
-      "muralla_fortificada",
-      "paladin_franco",
-      "redencion",
-      "teocracia",
-      "torre_guardia",
-      "torre_muralla"
-    ]
+﻿{
+ "debilidades": [
+  "Caballeria pesada limitada",
+  "Roster con huecos en Imperial"
+ ],
+ "team_bonus": {
+  "id": "empalizadas_resistentes",
+  "descripcion": "Empalizadas +33% puntos de vida (aliados)",
+  "efecto": {
+   "vida_empalizada": 0.33
   }
+ },
+ "id": "cumanos",
+ "bonus": [
+  {
+   "descripcion": "Segundo Centro Urbano disponible desde la Edad Feudal (tiempo de construcción 270 s)",
+   "id": "centro_urbano_feudal",
+   "efecto": {
+    "tc_extra_feudal": 1,
+    "tiempo_construccion_s": 270
+   }
+  },
+  {
+   "descripcion": "Galerías de tiro y Establos cuestan -75 de madera",
+   "id": "edificios_madera_75",
+   "efecto": {
+    "descuento_madera": 75,
+    "aplica_a": [
+     "galeria_tiro",
+     "establo"
+    ]
+   }
+  },
+  {
+   "descripcion": "Taller de asedio y Ariete disponibles en Feudal; Ariete cubierto disponible en Castillos",
+   "id": "asedio_feudal",
+   "efecto": {
+    "taller_asedio_feudal": true,
+    "ariete_feudal": true,
+    "ariete_cubierto_castillos": true
+   }
+  },
+  {
+   "descripcion": "Unidades montadas +5%/+10%/+15% velocidad en Feudal/Castillos/Imperial",
+   "id": "velocidad_montadas",
+   "efecto": {
+    "velocidad_feudal": 0.05,
+    "velocidad_castillos": 0.1,
+    "velocidad_imperial": 0.15
+   }
+  }
+ ],
+ "roof_color": "#c19a2e",
+ "name": "Cumanos",
+ "descripcion": "Cumanos: Segundo Centro Urbano disponible desde la Edad Feudal (tiempo de construcción 270 s) Galerías de tiro y Establos cuestan -75 de madera",
+ "unique_techs": [
+  {
+   "id": "ganaderia_estepa",
+   "nombre": "Ganadería esteparia (Steppe Husbandry)",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "food": 200,
+    "wood": 300
+   },
+   "tiempo_sec": 40,
+   "descripcion": "Exploradores, lanceros de la estepa y arqueros a caballo se crean 100% más rápido.",
+   "efectos": {
+    "velocidad_creacion": 1.0,
+    "aplica_a": [
+     "scout",
+     "lancero_estepa",
+     "arquero_caballo"
+    ],
+    "nota": "no_afecta_kipchak"
+   }
+  },
+  {
+   "id": "mercenarios_cumanos",
+   "nombre": "Mercenarios cumanos (Cuman Mercenaries)",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "food": 650,
+    "gold": 400
+   },
+   "tiempo_sec": 40,
+   "descripcion": "Todo el equipo puede crear 5 Kipchaks de élite gratis por cada castillo propio.",
+   "efectos": {
+    "kipchaks_gratis_por_castillo": 5,
+    "alcance_equipo": true,
+    "unidad": "kipchak_elite"
+   }
+  }
+ ],
+ "ventajas": [
+  "Segundo Centro Urbano disponible desde la Edad Feudal (ti...",
+  "Galerías de tiro y Establos cuestan -75 de madera",
+  "Taller de asedio y Ariete disponibles en Feudal; Ariete c..."
+ ],
+ "unique_unit": {
+  "train_time_sec": 20,
+  "id": "kipchak",
+  "armor_pierce": 0,
+  "attack_elite": 7,
+  "cost": {
+   "gold": 35,
+   "food": 60
+  },
+  "trained_at": "castillo",
+  "attack": 5,
+  "armor_melee": 0,
+  "name": "Kipchak",
+  "hp": 45,
+  "hp_elite": 65
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hachero_franco": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true,
+   "arquero_tiro_largo": false,
+   "hachero_franco": false
+  },
+  "establo": {
+   "jinete": true,
+   "caballeria_ligera": true,
+   "husar": true,
+   "caballero": true,
+   "paladin": true,
+   "paladin_franco": false,
+   "camello": true,
+   "camello_pesado": true,
+   "catafracta": false
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": true,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": false,
+   "fervor": true,
+   "santidad": true,
+   "iluminacion": false,
+   "teocracia": false,
+   "herejia": true
+  },
+  "castillo": {
+   "kipchak": true,
+   "ganaderia_estepa": true,
+   "mercenarios_cumanos": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": true,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": true,
+   "armadura_arq_1": true,
+   "armadura_arq_2": true,
+   "armadura_arq_3": true,
+   "ataque_cab_1": true,
+   "ataque_cab_2": true,
+   "ataque_cab_3": true,
+   "armadura_cab_1": true,
+   "armadura_cab_2": true,
+   "armadura_cab_3": true
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": true,
+   "torre_vigilancia": true,
+   "torre_guardia": false,
+   "torre_muralla": false,
+   "arquitectura": false,
+   "muralla_fortificada": false,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "arquero_tiro_largo",
+   "arquitectura",
+   "catafracta",
+   "hachero_franco",
+   "huscarle",
+   "iluminacion",
+   "muralla_fortificada",
+   "paladin_franco",
+   "redencion",
+   "teocracia",
+   "torre_guardia",
+   "torre_muralla"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true
+  }
+ }
 }

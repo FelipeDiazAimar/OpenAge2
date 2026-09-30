@@ -1,207 +1,207 @@
-{
-  "debilidades": [
-    "Ausencias clave DE: sin Paladín, sin Pureza de sangre, sin última a...",
-    "Sin Paladin"
-  ],
-  "team_bonus": {
-    "id": "taller_asedio_rapido_20",
-    "descripcion": "Talleres de asedio trabajan 20% más rápido (aliados)",
-    "efecto": {
-      "velocidad_taller_asedio": 0.2
-    }
-  },
-  "id": "celtas",
-  "bonus": [
-    {
-      "descripcion": "Leñadores +15% velocidad de recolección",
-      "id": "lenadores_15",
-      "efecto": {
-        "recoleccion_madera_bonus": 0.15
-      }
-    },
-    {
-      "descripcion": "Infantería +5/10/15/20% velocidad en Alta/Feudal/Castillos/Imperial (algunas fuentes dan 15% plano; DE actual escalado por edad)",
-      "id": "infanteria_rapida_edad",
-      "efecto": {
-        "velocidad_infanteria_alta": 0.05,
-        "velocidad_infanteria_feudal": 0.1,
-        "velocidad_infanteria_castillos": 0.15,
-        "velocidad_infanteria_imperial": 0.2
-      }
-    },
-    {
-      "descripcion": "Armas de asedio disparan +25% más rápido (fuentes antiguas: +20%)",
-      "id": "asedio_cadencia_25",
-      "efecto": {
-        "cadencia_asedio_bonus": 0.25
-      }
-    },
-    {
-      "descripcion": "Ovejas/ganado no convertibles si hay 1 unidad celta en línea de visión",
-      "id": "ganado_no_robable",
-      "efecto": {
-        "ganado_no_convertible_en_ldv": true
-      }
-    }
-  ],
-  "roof_color": "#2f9e44",
-  "name": "Celtas",
-  "descripcion": "Celtas: Leñadores +15% velocidad de recolección Infantería +5/10/15/20% velocidad en Alta/Feudal/Castillos/Imperial (algunas fuentes dan 15% plano; DE actual escalado por edad)",
-  "unique_techs": [
-    {
-      "id": "fortaleza",
-      "nombre": "Fortaleza (Stronghold)",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "food": 250,
-        "gold": 200
-      },
-      "tiempo_sec": 30,
-      "descripcion": "Castillos y torres disparan +33%; los castillos curan infantería aliada cercana.",
-      "efectos": {
-        "cadencia_castillos_torres": 0.33,
-        "castillo_cura_infanteria": true,
-        "cura_hp_min": 30,
-        "radio_cura": 7
-      }
-    },
-    {
-      "id": "furor_celta",
-      "nombre": "Furor celta (Furor Celtica)",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "food": 750,
-        "gold": 450
-      },
-      "tiempo_sec": 50,
-      "descripcion": "Armas de asedio +40% puntos de vida.",
-      "efectos": {
-        "hp_asedio_bonus": 0.4,
-        "aplica_a": [
-          "ariete",
-          "catapulta",
-          "trebuchet"
-        ]
-      }
-    }
-  ],
-  "ventajas": [
-    "Leñadores +15% velocidad de recolección",
-    "Infantería +5/10/15/20% velocidad en Alta/Feudal/Castillo...",
-    "Armas de asedio disparan +25% más rápido (fuentes antigua..."
-  ],
-  "unique_unit": {
-    "train_time_sec": 10,
-    "id": "invasor_pastos",
-    "armor_pierce": 1,
-    "attack_elite": 13,
-    "cost": {
-      "gold": 25,
-      "food": 70
-    },
-    "trained_at": "castillo",
-    "attack": 11,
-    "armor_melee": 0,
-    "name": "Invasor de Pastos",
-    "hp": 70,
-    "hp_elite": 90
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": true,
-      "alabardero": true,
-      "huscarle": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": true,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": false,
-      "arquero_tiro_largo": false
-    },
-    "establo": {
-      "jinete": true,
-      "caballeria_ligera": true,
-      "husar": true,
-      "caballero": true,
-      "paladin": false,
-      "camello": true,
-      "camello_pesado": true,
-      "catafracta": false
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": false,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": true,
-      "fervor": true,
-      "santidad": true,
-      "iluminacion": true,
-      "teocracia": true,
-      "herejia": true
-    },
-    "castillo": {
-      "invasor_pastos": true,
-      "fortaleza": true,
-      "furor_celta": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": true,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": true,
-      "armadura_arq_1": true,
-      "armadura_arq_2": true,
-      "armadura_arq_3": true,
-      "ataque_cab_1": true,
-      "ataque_cab_2": true,
-      "ataque_cab_3": true,
-      "armadura_cab_1": true,
-      "armadura_cab_2": true,
-      "armadura_cab_3": false
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": true,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": true,
-      "arquitectura": true,
-      "muralla_fortificada": true,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "armadura_cab_3",
-      "artillero_manual",
-      "canon_artillado",
-      "paladin"
-    ]
+﻿{
+ "debilidades": [
+  "Ausencias clave DE: sin Paladín, sin Pureza de sangre, sin última a...",
+  "Sin Paladin"
+ ],
+ "team_bonus": {
+  "id": "taller_asedio_rapido_20",
+  "descripcion": "Talleres de asedio trabajan 20% más rápido (aliados)",
+  "efecto": {
+   "velocidad_taller_asedio": 0.2
   }
+ },
+ "id": "celtas",
+ "bonus": [
+  {
+   "descripcion": "Leñadores +15% velocidad de recolección",
+   "id": "lenadores_15",
+   "efecto": {
+    "recoleccion_madera_bonus": 0.15
+   }
+  },
+  {
+   "descripcion": "Infantería +5/10/15/20% velocidad en Alta/Feudal/Castillos/Imperial (algunas fuentes dan 15% plano; DE actual escalado por edad)",
+   "id": "infanteria_rapida_edad",
+   "efecto": {
+    "velocidad_infanteria_alta": 0.05,
+    "velocidad_infanteria_feudal": 0.1,
+    "velocidad_infanteria_castillos": 0.15,
+    "velocidad_infanteria_imperial": 0.2
+   }
+  },
+  {
+   "descripcion": "Armas de asedio disparan +25% más rápido (fuentes antiguas: +20%)",
+   "id": "asedio_cadencia_25",
+   "efecto": {
+    "cadencia_asedio_bonus": 0.25
+   }
+  },
+  {
+   "descripcion": "Ovejas/ganado no convertibles si hay 1 unidad celta en línea de visión",
+   "id": "ganado_no_robable",
+   "efecto": {
+    "ganado_no_convertible_en_ldv": true
+   }
+  }
+ ],
+ "roof_color": "#2f9e44",
+ "name": "Celtas",
+ "descripcion": "Celtas: Leñadores +15% velocidad de recolección Infantería +5/10/15/20% velocidad en Alta/Feudal/Castillos/Imperial (algunas fuentes dan 15% plano; DE actual escalado por edad)",
+ "unique_techs": [
+  {
+   "id": "fortaleza",
+   "nombre": "Fortaleza (Stronghold)",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "food": 250,
+    "gold": 200
+   },
+   "tiempo_sec": 30,
+   "descripcion": "Castillos y torres disparan +33%; los castillos curan infantería aliada cercana.",
+   "efectos": {
+    "cadencia_castillos_torres": 0.33,
+    "castillo_cura_infanteria": true,
+    "cura_hp_min": 30,
+    "radio_cura": 7
+   }
+  },
+  {
+   "id": "furor_celta",
+   "nombre": "Furor celta (Furor Celtica)",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "food": 750,
+    "gold": 450
+   },
+   "tiempo_sec": 50,
+   "descripcion": "Armas de asedio +40% puntos de vida.",
+   "efectos": {
+    "hp_asedio_bonus": 0.4,
+    "aplica_a": [
+     "ariete",
+     "catapulta",
+     "trebuchet"
+    ]
+   }
+  }
+ ],
+ "ventajas": [
+  "Leñadores +15% velocidad de recolección",
+  "Infantería +5/10/15/20% velocidad en Alta/Feudal/Castillo...",
+  "Armas de asedio disparan +25% más rápido (fuentes antigua..."
+ ],
+ "unique_unit": {
+  "train_time_sec": 10,
+  "id": "invasor_pastos",
+  "armor_pierce": 1,
+  "attack_elite": 13,
+  "cost": {
+   "gold": 25,
+   "food": 70
+  },
+  "trained_at": "castillo",
+  "attack": 11,
+  "armor_melee": 0,
+  "name": "Invasor de Pastos",
+  "hp": 70,
+  "hp_elite": 90
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": true,
+   "alabardero": true,
+   "huscarle": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": false,
+   "arquero_tiro_largo": false
+  },
+  "establo": {
+   "jinete": true,
+   "caballeria_ligera": true,
+   "husar": true,
+   "caballero": true,
+   "paladin": false,
+   "camello": true,
+   "camello_pesado": true,
+   "catafracta": false
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": false,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": true,
+   "fervor": true,
+   "santidad": true,
+   "iluminacion": true,
+   "teocracia": true,
+   "herejia": true
+  },
+  "castillo": {
+   "invasor_pastos": true,
+   "fortaleza": true,
+   "furor_celta": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": true,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": true,
+   "armadura_arq_1": true,
+   "armadura_arq_2": true,
+   "armadura_arq_3": true,
+   "ataque_cab_1": true,
+   "ataque_cab_2": true,
+   "ataque_cab_3": true,
+   "armadura_cab_1": true,
+   "armadura_cab_2": true,
+   "armadura_cab_3": false
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": true,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": true,
+   "arquitectura": true,
+   "muralla_fortificada": true,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "armadura_cab_3",
+   "artillero_manual",
+   "canon_artillado",
+   "paladin"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true
+  }
+ }
 }

@@ -1,187 +1,187 @@
 ﻿{
-    "debilidades":  [
-                        "Sin Paladin",
-                        "Caballeria pesada limitada"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Reparar edificios -25% coste (aliados)",
-                       "id":  "georgianos_equipo",
-                       "efecto":  {
-                                      "descuento_reparacion":  0.25
-                                  }
-                   },
-    "id":  "georgianos",
-    "bonus":  [
-                  {
-                      "descripcion":  "Empiezan con una Carreta de mulas (sustituye campamentos de madera/minería)",
-                      "id":  "carreta_mula_inicial",
-                      "efecto":  {
-                                     "carreta_mula_inicial":  1
-                                 }
-                  },
-                  {
-                      "descripcion":  "Iglesias fortificadas (sustituyen monasterio) dan +10% ritmo de trabajo a aldeanos en radio de 9 casillas",
-                      "id":  "iglesia_fortificada_trabajo",
-                      "efecto":  {
-                                     "tasa_trabajo_aldeano_bonus":  0.1,
-                                     "radio_casillas":  9
-                                 }
-                  },
-                  {
-                      "descripcion":  "Unidades y edificios reciben -20% de daño en altura (-40% en vez de -25%)",
-                      "id":  "dano_elevacion_reducido",
-                      "efecto":  {
-                                     "reduccion_dano_elevacion":  0.2,
-                                     "dano_final_elevacion":  0.6
-                                 }
-                  },
-                  {
-                      "descripcion":  "Unidades montadas regeneran 2/8/14 HP por minuto en Feudal/Castillos/Imperial",
-                      "id":  "caballeria_regenera",
-                      "efecto":  {
-                                     "regen_caballeria_hp_min":  {
-                                                                     "feudal":  2,
-                                                                     "castillos":  8,
-                                                                     "imperial":  14
-                                                                 }
-                                 }
-                  }
-              ],
-    "roof_color":  "#b03a2e",
-    "name":  "Georgianos",
-    "descripcion":  "Georgianos: Empiezan con una Carreta de mulas (sustituye campamentos de madera/minería) Iglesias fortificadas (sustituyen monasterio) dan +10% ritmo de trabajo a aldeanos en radio de 9 casillas",
-    "unique_techs":  [
-                         {
-                             "id":  "torres_svan",
-                             "nombre":  "Torres svan (Svan Towers)",
-                             "descripcion":  "Fortificaciones +2 ataque; torres dano perforante.",
-                             "edificio":  "castillo",
-                             "edad":  "castillos",
-                             "efectos":  {
-                                             "dano_perforante_torres":  true,
-                                             "ataque_fortificaciones":  2
-                                         }
-                         },
-                         {
-                             "id":  "caballeria_aznauri",
-                             "nombre":  "Caballeria aznauri (Aznauri Cavalry)",
-                             "descripcion":  "Unidades montadas ocupan menos poblacion.",
-                             "edificio":  "castillo",
-                             "edad":  "imperial",
-                             "efectos":  {
-                                             "menos_poblacion_montadas":  true
-                                         }
-                         }
-                     ],
-    "ventajas":  [
-                     "Empiezan con una Carreta de mulas (sustituye campamentos ...",
-                     "Iglesias fortificadas (sustituyen monasterio) dan +10% ri...",
-                     "Unidades y edificios reciben -20% de daño en altura (-40%..."
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  14,
-                        "id":  "monaspa",
-                        "armor_pierce":  2,
-                        "attack_elite":  16,
-                        "cost":  {
-                                     "gold":  45,
-                                     "food":  60
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  14,
-                        "armor_melee":  5,
-                        "name":  "Monaspa",
-                        "hp":  80,
-                        "hp_elite":  100
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-                                         "fervor":  true,
-                                         "teocracia":  true,
-                                         "monje":  true,
-                                         "herejia":  true,
-                                         "iluminacion":  true,
-                                         "santidad":  true,
-                                         "redencion":  true
-                                     },
-                      "castillo":  {
-                                       "torres_svan":  true,
-                                       "monaspa":  true,
-                                       "caballeria_aznauri":  true
-                                   },
-                      "cuartel":  {
-                                      "milicia":  true,
-                                      "lancero":  true,
-                                      "piquero":  true,
-                                      "campeon":  true,
-                                      "espadachin_mandoble":  true,
-                                      "alabardero":  true,
-                                      "huscarle":  false,
-                                      "hombre_de_armas":  true
-                                  },
-                      "establo":  {
-                                      "caballero":  true,
-                                      "husar":  true,
-                                      "jinete":  true,
-                                      "camello_pesado":  true,
-                                      "paladin":  false,
-                                      "caballeria_ligera":  true,
-                                      "camello":  true
-                                  },
-                      "taller_asedio":  {
-                                            "mangana":  true,
-                                            "escorpion_pesado":  true,
-                                            "escorpion":  true,
-                                            "trabuquete":  true,
-                                            "onagro":  true,
-                                            "ariete":  true,
-                                            "ariete_blindado":  true,
-                                            "canon_artillado":  true
-                                        },
-                      "puerto":  {
-                                     "barco_pesquero":  true,
-                                     "galeon":  true,
-                                     "galera_guerra":  true,
-                                     "brulote":  true
-                                 },
-                      "herreria":  {
-                                       "forja":  true,
-                                       "armadura_arq_2":  true,
-                                       "ataque_arq_1":  true,
-                                       "alto_horno":  true,
-                                       "armadura_inf_3":  true,
-                                       "ataque_cab_3":  true,
-                                       "ataque_cab_1":  true,
-                                       "ataque_arq_3":  true,
-                                       "ataque_arq_2":  true,
-                                       "armadura_arq_3":  true,
-                                       "hierro_fundido":  true,
-                                       "armadura_cab_2":  true,
-                                       "armadura_inf_2":  true,
-                                       "armadura_cab_3":  true,
-                                       "armadura_arq_1":  true,
-                                       "ataque_cab_2":  true,
-                                       "armadura_inf_1":  true,
-                                       "armadura_cab_1":  true
-                                   },
-                      "arqueria":  {
-                                       "guerrillero":  true,
-                                       "arquero":  true,
-                                       "ballestero":  true,
-                                       "guerrillero_elite":  true,
-                                       "artillero_manual":  true
-                                   },
-                      "universidad":  {
-                                          "torre_guardia":  true,
-                                          "torre_vigilancia":  true,
-                                          "muralla_fortificada":  true,
-                                          "balistica":  true,
-                                          "quimica":  true,
-                                          "albanileria":  true,
-                                          "arquitectura":  true
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "paladin"
-                                                ]
-                  }
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "descripcion": "Reparar edificios -25% coste (aliados)",
+  "id": "georgianos_equipo",
+  "efecto": {
+   "descuento_reparacion": 0.25
+  }
+ },
+ "id": "georgianos",
+ "bonus": [
+  {
+   "descripcion": "Empiezan con una Carreta de mulas (sustituye campamentos de madera/minería)",
+   "id": "carreta_mula_inicial",
+   "efecto": {
+    "carreta_mula_inicial": 1
+   }
+  },
+  {
+   "descripcion": "Iglesias fortificadas (sustituyen monasterio) dan +10% ritmo de trabajo a aldeanos en radio de 9 casillas",
+   "id": "iglesia_fortificada_trabajo",
+   "efecto": {
+    "tasa_trabajo_aldeano_bonus": 0.1,
+    "radio_casillas": 9
+   }
+  },
+  {
+   "descripcion": "Unidades y edificios reciben -20% de daño en altura (-40% en vez de -25%)",
+   "id": "dano_elevacion_reducido",
+   "efecto": {
+    "reduccion_dano_elevacion": 0.2,
+    "dano_final_elevacion": 0.6
+   }
+  },
+  {
+   "descripcion": "Unidades montadas regeneran 2/8/14 HP por minuto en Feudal/Castillos/Imperial",
+   "id": "caballeria_regenera",
+   "efecto": {
+    "regen_caballeria_hp_min": {
+     "feudal": 2,
+     "castillos": 8,
+     "imperial": 14
+    }
+   }
+  }
+ ],
+ "roof_color": "#b03a2e",
+ "name": "Georgianos",
+ "descripcion": "Georgianos: Empiezan con una Carreta de mulas (sustituye campamentos de madera/minería) Iglesias fortificadas (sustituyen monasterio) dan +10% ritmo de trabajo a aldeanos en radio de 9 casillas",
+ "unique_techs": [
+  {
+   "id": "torres_svan",
+   "nombre": "Torres svan (Svan Towers)",
+   "descripcion": "Fortificaciones +2 ataque; torres dano perforante.",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "efectos": {
+    "dano_perforante_torres": true,
+    "ataque_fortificaciones": 2
+   }
+  },
+  {
+   "id": "caballeria_aznauri",
+   "nombre": "Caballeria aznauri (Aznauri Cavalry)",
+   "descripcion": "Unidades montadas ocupan menos poblacion.",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "efectos": {
+    "menos_poblacion_montadas": true
+   }
+  }
+ ],
+ "ventajas": [
+  "Empiezan con una Carreta de mulas (sustituye campamentos ...",
+  "Iglesias fortificadas (sustituyen monasterio) dan +10% ri...",
+  "Unidades y edificios reciben -20% de daño en altura (-40%..."
+ ],
+ "unique_unit": {
+  "train_time_sec": 14,
+  "id": "monaspa",
+  "armor_pierce": 2,
+  "attack_elite": 16,
+  "cost": {
+   "gold": 45,
+   "food": 60
+  },
+  "trained_at": "castillo",
+  "attack": 14,
+  "armor_melee": 5,
+  "name": "Monaspa",
+  "hp": 80,
+  "hp_elite": 100
+ },
+ "tech_tree": {
+  "monasterio": {
+   "fervor": true,
+   "teocracia": true,
+   "monje": true,
+   "herejia": true,
+   "iluminacion": true,
+   "santidad": true,
+   "redencion": true
+  },
+  "castillo": {
+   "torres_svan": true,
+   "monaspa": true,
+   "caballeria_aznauri": true
+  },
+  "cuartel": {
+   "milicia": true,
+   "lancero": true,
+   "piquero": true,
+   "campeon": true,
+   "espadachin_mandoble": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hombre_de_armas": true
+  },
+  "establo": {
+   "caballero": true,
+   "husar": true,
+   "jinete": true,
+   "camello_pesado": true,
+   "paladin": false,
+   "caballeria_ligera": true,
+   "camello": true
+  },
+  "taller_asedio": {
+   "mangana": true,
+   "escorpion_pesado": true,
+   "escorpion": true,
+   "trabuquete": true,
+   "onagro": true,
+   "ariete": true,
+   "ariete_blindado": true,
+   "canon_artillado": true
+  },
+  "herreria": {
+   "forja": true,
+   "armadura_arq_2": true,
+   "ataque_arq_1": true,
+   "alto_horno": true,
+   "armadura_inf_3": true,
+   "ataque_cab_3": true,
+   "ataque_cab_1": true,
+   "ataque_arq_3": true,
+   "ataque_arq_2": true,
+   "armadura_arq_3": true,
+   "hierro_fundido": true,
+   "armadura_cab_2": true,
+   "armadura_inf_2": true,
+   "armadura_cab_3": true,
+   "armadura_arq_1": true,
+   "ataque_cab_2": true,
+   "armadura_inf_1": true,
+   "armadura_cab_1": true
+  },
+  "arqueria": {
+   "guerrillero": true,
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true
+  },
+  "universidad": {
+   "torre_guardia": true,
+   "torre_vigilancia": true,
+   "muralla_fortificada": true,
+   "balistica": true,
+   "quimica": true,
+   "albanileria": true,
+   "arquitectura": true
+  },
+  "no_disponible_resumen": [
+   "paladin"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galeon": true,
+   "galera_guerra": true,
+   "brulote": true
+  }
+ }
 }

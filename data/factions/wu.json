@@ -1,199 +1,199 @@
 ﻿{
-    "debilidades":  [
-                        "Sin Paladin",
-                        "Caballeria pesada limitada"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Infanteria regenera en equipo (aliados)",
-                       "id":  "wu_equipo",
-                       "efecto":  {
-                                      "regen_infanteria_equipo":  true
-                                  }
-                   },
-    "id":  "wu",
-    "bonus":  [
-                  {
-                      "descripcion":  "Cuartel, Galería, Establo, Taller, Castillo y Muelle dan +55 comida al construirlos",
-                      "id":  "comida_edificios_militares",
-                      "efecto":  {
-                                     "comida_al_construir":  55,
-                                     "aplica_a":  [
-                                                      "cuartel",
-                                                      "galeria_tiro",
-                                                      "establo",
-                                                      "taller_asedio",
-                                                      "castillo",
-                                                      "muelle"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Infantería regenera 10/15/30 HP por minuto en Feudal/Castillos/Imperial",
-                      "id":  "regeneracion_infanteria",
-                      "efecto":  {
-                                     "regen_feudal":  10,
-                                     "regen_castillos":  15,
-                                     "regen_imperial":  30,
-                                     "aplica_a":  "tag:infanteria"
-                                 }
-                  },
-                  {
-                      "descripcion":  "Espadachín Jian y Caballería Hei Guang +2 ataque en Imperial",
-                      "id":  "ataque_jian_heiguang_imperial",
-                      "efecto":  {
-                                     "ataque_bonus":  2,
-                                     "edad":  "imperial",
-                                     "aplica_a":  [
-                                                      "espadachin_jian",
-                                                      "caballeria_hei_guang"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Carenado y Dique seco gratis (solo coste de pasar de edad)",
-                      "id":  "muelle_gratis",
-                      "efecto":  {
-                                     "tecs_gratis":  [
-                                                         "carenado",
-                                                         "dique_seco"
-                                                     ]
-                                 }
-                  }
-              ],
-    "roof_color":  "#2e8b57",
-    "name":  "Wu",
-    "descripcion":  "Wu: Cuartel, Galería, Establo, Taller, Castillo y Muelle dan +55 comida al construirlos Infantería regenera 10/15/30 HP por minuto en Feudal/Castillos/Imperial",
-    "unique_techs":  [
-                         {
-                             "id":  "tacticas_acantilados",
-                             "nombre":  "Tacticas de acantilados (Cliff Tactics)",
-                             "descripcion":  "Jian y arqueros de fuego +resistencia y bonus en altura.",
-                             "edificio":  "castillo",
-                             "edad":  "castillos",
-                             "efectos":  {
-                                             "bonus_altura_wu":  true
-                                         }
-                         },
-                         {
-                             "id":  "tigre_agazapado",
-                             "nombre":  "Tigre agazapado (Crouching Tiger)",
-                             "descripcion":  "Arqueros de fuego y asedio +dano explosivo.",
-                             "edificio":  "castillo",
-                             "edad":  "imperial",
-                             "efectos":  {
-                                             "dano_explosivo_wu":  true
-                                         }
-                         }
-                     ],
-    "ventajas":  [
-                     "Cuartel, Galería, Establo, Taller, Castillo y Muelle dan ...",
-                     "Infantería regenera 10/15/30 HP por minuto en Feudal/Cast...",
-                     "Espadachín Jian y Caballería Hei Guang +2 ataque en Imperial"
-                 ],
-    "unique_unit":  {
-                        "id":  "arquero_fuego",
-                        "name":  "Arquero de Fuego",
-                        "hp":  35,
-                        "attack":  4,
-                        "armor_melee":  0,
-                        "armor_pierce":  0,
-                        "cost":  {
-                                     "wood":  50,
-                                     "gold":  35
-                                 },
-                        "train_time_sec":  9.5,
-                        "trained_at":  "castillo"
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-                                         "fervor":  true,
-                                         "teocracia":  true,
-                                         "monje":  true,
-                                         "herejia":  true,
-                                         "iluminacion":  true,
-                                         "santidad":  true,
-                                         "redencion":  true
-                                     },
-                      "castillo":  {
-                                       "arquero_fuego":  true,
-                                       "tigre_agazapado":  true,
-                                       "tacticas_acantilados":  true,
-                                       "espadachin_jian":  true
-                                   },
-                      "cuartel":  {
-                                      "milicia":  true,
-                                      "lancero":  true,
-                                      "piquero":  true,
-                                      "campeon":  true,
-                                      "espadachin_mandoble":  true,
-                                      "alabardero":  true,
-                                      "huscarle":  false,
-                                      "hombre_de_armas":  true
-                                  },
-                      "establo":  {
-                                      "caballero":  false,
-                                      "husar":  true,
-                                      "jinete":  true,
-                                      "camello_pesado":  true,
-                                      "paladin":  false,
-                                      "caballeria_ligera":  true,
-                                      "camello":  true
-                                  },
-                      "taller_asedio":  {
-                                            "mangana":  true,
-                                            "escorpion_pesado":  true,
-                                            "escorpion":  true,
-                                            "trabuquete":  true,
-                                            "onagro":  true,
-                                            "ariete":  true,
-                                            "ariete_blindado":  true,
-                                            "canon_artillado":  true
-                                        },
-                      "puerto":  {
-                                     "barco_pesquero":  true,
-                                     "galeon":  true,
-                                     "galera_guerra":  true,
-                                     "brulote":  true
-                                 },
-                      "herreria":  {
-                                       "forja":  true,
-                                       "armadura_arq_2":  true,
-                                       "ataque_arq_1":  true,
-                                       "alto_horno":  true,
-                                       "armadura_inf_3":  true,
-                                       "ataque_cab_3":  true,
-                                       "ataque_cab_1":  true,
-                                       "ataque_arq_3":  true,
-                                       "ataque_arq_2":  true,
-                                       "armadura_arq_3":  true,
-                                       "hierro_fundido":  true,
-                                       "armadura_cab_2":  true,
-                                       "armadura_inf_2":  true,
-                                       "armadura_cab_3":  true,
-                                       "armadura_arq_1":  true,
-                                       "ataque_cab_2":  true,
-                                       "armadura_inf_1":  true,
-                                       "armadura_cab_1":  true
-                                   },
-                      "arqueria":  {
-                                       "guerrillero":  true,
-                                       "arquero":  true,
-                                       "ballestero":  true,
-                                       "guerrillero_elite":  true,
-                                       "artillero_manual":  true
-                                   },
-                      "universidad":  {
-                                          "torre_guardia":  true,
-                                          "torre_vigilancia":  true,
-                                          "muralla_fortificada":  true,
-                                          "balistica":  true,
-                                          "quimica":  true,
-                                          "albanileria":  true,
-                                          "arquitectura":  true
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "caballero",
-                                                    "paladin"
-                                                ]
-                  }
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "descripcion": "Infanteria regenera en equipo (aliados)",
+  "id": "wu_equipo",
+  "efecto": {
+   "regen_infanteria_equipo": true
+  }
+ },
+ "id": "wu",
+ "bonus": [
+  {
+   "descripcion": "Cuartel, Galería, Establo, Taller, Castillo y Muelle dan +55 comida al construirlos",
+   "id": "comida_edificios_militares",
+   "efecto": {
+    "comida_al_construir": 55,
+    "aplica_a": [
+     "cuartel",
+     "galeria_tiro",
+     "establo",
+     "taller_asedio",
+     "castillo",
+     "muelle"
+    ]
+   }
+  },
+  {
+   "descripcion": "Infantería regenera 10/15/30 HP por minuto en Feudal/Castillos/Imperial",
+   "id": "regeneracion_infanteria",
+   "efecto": {
+    "regen_feudal": 10,
+    "regen_castillos": 15,
+    "regen_imperial": 30,
+    "aplica_a": "tag:infanteria"
+   }
+  },
+  {
+   "descripcion": "Espadachín Jian y Caballería Hei Guang +2 ataque en Imperial",
+   "id": "ataque_jian_heiguang_imperial",
+   "efecto": {
+    "ataque_bonus": 2,
+    "edad": "imperial",
+    "aplica_a": [
+     "espadachin_jian",
+     "caballeria_hei_guang"
+    ]
+   }
+  },
+  {
+   "descripcion": "Carenado y Dique seco gratis (solo coste de pasar de edad)",
+   "id": "muelle_gratis",
+   "efecto": {
+    "tecs_gratis": [
+     "carenado",
+     "dique_seco"
+    ]
+   }
+  }
+ ],
+ "roof_color": "#2e8b57",
+ "name": "Wu",
+ "descripcion": "Wu: Cuartel, Galería, Establo, Taller, Castillo y Muelle dan +55 comida al construirlos Infantería regenera 10/15/30 HP por minuto en Feudal/Castillos/Imperial",
+ "unique_techs": [
+  {
+   "id": "tacticas_acantilados",
+   "nombre": "Tacticas de acantilados (Cliff Tactics)",
+   "descripcion": "Jian y arqueros de fuego +resistencia y bonus en altura.",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "efectos": {
+    "bonus_altura_wu": true
+   }
+  },
+  {
+   "id": "tigre_agazapado",
+   "nombre": "Tigre agazapado (Crouching Tiger)",
+   "descripcion": "Arqueros de fuego y asedio +dano explosivo.",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "efectos": {
+    "dano_explosivo_wu": true
+   }
+  }
+ ],
+ "ventajas": [
+  "Cuartel, Galería, Establo, Taller, Castillo y Muelle dan ...",
+  "Infantería regenera 10/15/30 HP por minuto en Feudal/Cast...",
+  "Espadachín Jian y Caballería Hei Guang +2 ataque en Imperial"
+ ],
+ "unique_unit": {
+  "id": "arquero_fuego",
+  "name": "Arquero de Fuego",
+  "hp": 35,
+  "attack": 4,
+  "armor_melee": 0,
+  "armor_pierce": 0,
+  "cost": {
+   "wood": 50,
+   "gold": 35
+  },
+  "train_time_sec": 9.5,
+  "trained_at": "castillo"
+ },
+ "tech_tree": {
+  "monasterio": {
+   "fervor": true,
+   "teocracia": true,
+   "monje": true,
+   "herejia": true,
+   "iluminacion": true,
+   "santidad": true,
+   "redencion": true
+  },
+  "castillo": {
+   "arquero_fuego": true,
+   "tigre_agazapado": true,
+   "tacticas_acantilados": true,
+   "espadachin_jian": true
+  },
+  "cuartel": {
+   "milicia": true,
+   "lancero": true,
+   "piquero": true,
+   "campeon": true,
+   "espadachin_mandoble": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hombre_de_armas": true
+  },
+  "establo": {
+   "caballero": false,
+   "husar": true,
+   "jinete": true,
+   "camello_pesado": true,
+   "paladin": false,
+   "caballeria_ligera": true,
+   "camello": true
+  },
+  "taller_asedio": {
+   "mangana": true,
+   "escorpion_pesado": true,
+   "escorpion": true,
+   "trabuquete": true,
+   "onagro": true,
+   "ariete": true,
+   "ariete_blindado": true,
+   "canon_artillado": true
+  },
+  "herreria": {
+   "forja": true,
+   "armadura_arq_2": true,
+   "ataque_arq_1": true,
+   "alto_horno": true,
+   "armadura_inf_3": true,
+   "ataque_cab_3": true,
+   "ataque_cab_1": true,
+   "ataque_arq_3": true,
+   "ataque_arq_2": true,
+   "armadura_arq_3": true,
+   "hierro_fundido": true,
+   "armadura_cab_2": true,
+   "armadura_inf_2": true,
+   "armadura_cab_3": true,
+   "armadura_arq_1": true,
+   "ataque_cab_2": true,
+   "armadura_inf_1": true,
+   "armadura_cab_1": true
+  },
+  "arqueria": {
+   "guerrillero": true,
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true
+  },
+  "universidad": {
+   "torre_guardia": true,
+   "torre_vigilancia": true,
+   "muralla_fortificada": true,
+   "balistica": true,
+   "quimica": true,
+   "albanileria": true,
+   "arquitectura": true
+  },
+  "no_disponible_resumen": [
+   "caballero",
+   "paladin"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galeon": true,
+   "galera_guerra": true,
+   "brulote": true
+  }
+ }
 }

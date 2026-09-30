@@ -1,236 +1,236 @@
-{
-  "id": "bizantinos",
-  "name": "Bizantinos",
-  "roof_color": "#c8a02a",
-  "bonus": [
-    {
-      "id": "edificios_hp_20",
-      "descripcion": "Edificios +20% HP (Centro Urbano 2400->2880, Castillo 4800->5760)",
-      "efecto": {
-        "hp_edificios_bonus": 0.2,
-        "aplica_a": [
-          "centro_urbano",
-          "casa",
-          "cuartel",
-          "arqueria",
-          "establo",
-          "castillo",
-          "muralla",
-          "torre"
-        ]
-      }
-    },
-    {
-      "id": "monjes_curan_2x",
-      "descripcion": "Monjes curan 2x: 2.5 -> 5.0 HP/s",
-      "efecto": {
-        "curacion_monje_factor": 2.0,
-        "tasa_base_hp_s": 2.5,
-        "tasa_final_hp_s": 5.0
-      }
-    },
-    {
-      "id": "contra_unidades_baratas",
-      "descripcion": "Contra-unidades 25% más baratas: guerrillero, piquero, camello, monje",
-      "efecto": {
-        "descuento_contra_unidades": 0.25,
-        "aplica_a": [
-          "guerrillero",
-          "lancero",
-          "piquero",
-          "alabardero",
-          "camello",
-          "camello_pesado",
-          "monje"
-        ]
-      }
-    }
-  ],
-  "unique_unit": {
-    "id": "catafracta",
-    "name": "Catafracta",
-    "hp": 110,
-    "hp_elite": 130,
-    "attack": 9,
-    "attack_elite": 11,
-    "armor_melee": 2,
-    "armor_melee_elite": 3,
-    "armor_pierce": 1,
-    "armor_pierce_elite": 2,
-    "bonus_vs_infanteria": 9,
-    "bonus_vs_infanteria_elite": 12,
-    "pisoteo_base": 0,
-    "pisoteo_con_logistica": 5,
-    "cost": {
-      "food": 70,
-      "gold": 75
-    },
-    "train_time_sec": 22,
-    "trained_at": "castillo",
-    "mejora_elite_cost": {
-      "food": 1600,
-      "gold": 800
-    },
-    "mejora_elite_tiempo_sec": 90
-  },
-  "unique_techs": [
-    {
-      "id": "fuego_griego",
-      "nombre": "Fuego griego",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "food": 400,
-        "gold": 300
-      },
-      "tiempo_sec": 50,
-      "descripcion": "Barcos de fuego y dromones +1 alcance, +2 ataque.",
-      "efectos": {
-        "alcance_barcos_fuego": 1,
-        "ataque_barcos_fuego": 2,
-        "aplica_a": [
-          "brulote",
-          "dromon"
-        ]
-      }
-    },
-    {
-      "id": "logistica",
-      "nombre": "Logística",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "food": 1000,
-        "gold": 600
-      },
-      "tiempo_sec": 70,
-      "descripcion": "Catafracta pisoteo 5 daño en área + infantería aliada? (aquí: catafracta 5 área).",
-      "efectos": {
-        "pisoteo_catafracta": 5,
-        "aplica_a": [
-          "catafracta"
-        ]
-      }
-    }
-  ],
-  "team_bonus": {
-    "id": "monjes_curan_equipo",
-    "descripcion": "Monjes curan +1.5 HP/s extra (aliados): 2.5 -> 4.0 HP/s",
-    "efecto": {
-      "curacion_monje_equipo_hp_s": 1.5,
-      "tasa_base_hp_s": 2.5,
-      "tasa_aliado_hp_s": 4.0
-    }
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": true,
-      "alabardero": true,
-      "huscarle": false,
-      "hachero_franco": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": true,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": true,
-      "arquero_tiro_largo": false,
-      "hachero_franco": false
-    },
-    "establo": {
-      "jinete": true,
-      "caballeria_ligera": true,
-      "husar": true,
-      "caballero": true,
-      "paladin": false,
-      "paladin_franco": false,
-      "camello": true,
-      "camello_pesado": true,
-      "catafracta": true
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": true,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": true,
-      "fervor": true,
-      "santidad": true,
-      "iluminacion": true,
-      "teocracia": true,
-      "herejia": true
-    },
-    "castillo": {
-      "catafracta": true,
-      "fuego_griego": true,
-      "logistica": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": true,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": true,
-      "armadura_arq_1": true,
-      "armadura_arq_2": true,
-      "armadura_arq_3": true,
-      "ataque_cab_1": true,
-      "ataque_cab_2": true,
-      "ataque_cab_3": true,
-      "armadura_cab_1": true,
-      "armadura_cab_2": true,
-      "armadura_cab_3": true
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": true,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": true,
-      "arquitectura": true,
-      "muralla_fortificada": true,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true,
-      "dromon": true
-    },
-    "no_disponible_resumen": [
-      "paladin",
-      "paladin_franco",
-      "arquero_tiro_largo",
-      "huscarle",
-      "hachero_franco"
+﻿{
+ "id": "bizantinos",
+ "name": "Bizantinos",
+ "roof_color": "#c8a02a",
+ "bonus": [
+  {
+   "id": "edificios_hp_20",
+   "descripcion": "Edificios +20% HP (Centro Urbano 2400->2880, Castillo 4800->5760)",
+   "efecto": {
+    "hp_edificios_bonus": 0.2,
+    "aplica_a": [
+     "centro_urbano",
+     "casa",
+     "cuartel",
+     "arqueria",
+     "establo",
+     "castillo",
+     "muralla",
+     "torre"
     ]
+   }
   },
-  "ventajas": [
-    "Edificios con +HP",
-    "Monjes que curan el doble",
-    "Catafracta anti-infantería"
+  {
+   "id": "monjes_curan_2x",
+   "descripcion": "Monjes curan 2x: 2.5 -> 5.0 HP/s",
+   "efecto": {
+    "curacion_monje_factor": 2.0,
+    "tasa_base_hp_s": 2.5,
+    "tasa_final_hp_s": 5.0
+   }
+  },
+  {
+   "id": "contra_unidades_baratas",
+   "descripcion": "Contra-unidades 25% más baratas: guerrillero, piquero, camello, monje",
+   "efecto": {
+    "descuento_contra_unidades": 0.25,
+    "aplica_a": [
+     "guerrillero",
+     "lancero",
+     "piquero",
+     "alabardero",
+     "camello",
+     "camello_pesado",
+     "monje"
+    ]
+   }
+  }
+ ],
+ "unique_unit": {
+  "id": "catafracta",
+  "name": "Catafracta",
+  "hp": 110,
+  "hp_elite": 130,
+  "attack": 9,
+  "attack_elite": 11,
+  "armor_melee": 2,
+  "armor_melee_elite": 3,
+  "armor_pierce": 1,
+  "armor_pierce_elite": 2,
+  "bonus_vs_infanteria": 9,
+  "bonus_vs_infanteria_elite": 12,
+  "pisoteo_base": 0,
+  "pisoteo_con_logistica": 5,
+  "cost": {
+   "food": 70,
+   "gold": 75
+  },
+  "train_time_sec": 22,
+  "trained_at": "castillo",
+  "mejora_elite_cost": {
+   "food": 1600,
+   "gold": 800
+  },
+  "mejora_elite_tiempo_sec": 90
+ },
+ "unique_techs": [
+  {
+   "id": "fuego_griego",
+   "nombre": "Fuego griego",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "food": 400,
+    "gold": 300
+   },
+   "tiempo_sec": 50,
+   "descripcion": "Barcos de fuego y dromones +1 alcance, +2 ataque.",
+   "efectos": {
+    "alcance_barcos_fuego": 1,
+    "ataque_barcos_fuego": 2,
+    "aplica_a": [
+     "brulote",
+     "dromon"
+    ]
+   }
+  },
+  {
+   "id": "logistica",
+   "nombre": "Logística",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "food": 1000,
+    "gold": 600
+   },
+   "tiempo_sec": 70,
+   "descripcion": "Catafracta pisoteo 5 daño en área + infantería aliada? (aquí: catafracta 5 área).",
+   "efectos": {
+    "pisoteo_catafracta": 5,
+    "aplica_a": [
+     "catafracta"
+    ]
+   }
+  }
+ ],
+ "team_bonus": {
+  "id": "monjes_curan_equipo",
+  "descripcion": "Monjes curan +1.5 HP/s extra (aliados): 2.5 -> 4.0 HP/s",
+  "efecto": {
+   "curacion_monje_equipo_hp_s": 1.5,
+   "tasa_base_hp_s": 2.5,
+   "tasa_aliado_hp_s": 4.0
+  }
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hachero_franco": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true,
+   "arquero_tiro_largo": false,
+   "hachero_franco": false
+  },
+  "establo": {
+   "jinete": true,
+   "caballeria_ligera": true,
+   "husar": true,
+   "caballero": true,
+   "paladin": false,
+   "paladin_franco": false,
+   "camello": true,
+   "camello_pesado": true,
+   "catafracta": true
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": true,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": true,
+   "fervor": true,
+   "santidad": true,
+   "iluminacion": true,
+   "teocracia": true,
+   "herejia": true
+  },
+  "castillo": {
+   "catafracta": true,
+   "fuego_griego": true,
+   "logistica": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": true,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": true,
+   "armadura_arq_1": true,
+   "armadura_arq_2": true,
+   "armadura_arq_3": true,
+   "ataque_cab_1": true,
+   "ataque_cab_2": true,
+   "ataque_cab_3": true,
+   "armadura_cab_1": true,
+   "armadura_cab_2": true,
+   "armadura_cab_3": true
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": true,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": true,
+   "arquitectura": true,
+   "muralla_fortificada": true,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "paladin",
+   "paladin_franco",
+   "arquero_tiro_largo",
+   "huscarle",
+   "hachero_franco"
   ],
-  "debilidades": [
-    "Sin paladín",
-    "Economía sin bonus",
-    "Arqueros medios"
-  ]
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true,
+   "dromon": true
+  }
+ },
+ "ventajas": [
+  "Edificios con +HP",
+  "Monjes que curan el doble",
+  "Catafracta anti-infantería"
+ ],
+ "debilidades": [
+  "Sin paladín",
+  "Economía sin bonus",
+  "Arqueros medios"
+ ]
 }

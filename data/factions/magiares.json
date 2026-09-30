@@ -1,216 +1,216 @@
-{
-  "debilidades": [
-    "Caballeria pesada limitada",
-    "Roster con huecos en Imperial"
-  ],
-  "team_bonus": {
-    "id": "arqueros_caballo_rapidos_25",
-    "descripcion": "Arqueros a caballo se crean 25% más rápido (aliados; 34s -> 25.5s)",
-    "efecto": {
-      "velocidad_creacion_arquero_caballo": 0.25
-    }
-  },
-  "id": "magiares",
-  "bonus": [
-    {
-      "descripcion": "Forja, Fundición y Alto Horno gratis (ahorro 150F + 220F/120O + 350F/250O)",
-      "id": "forja_gratis",
-      "efecto": {
-        "tecnologias_gratis": [
-          "forja",
-          "hierro_fundido",
-          "alto_horno"
-        ]
-      }
-    },
-    {
-      "descripcion": "Línea de exploradores 15% más barata (explorador 80F -> 68F)",
-      "id": "exploradores_baratos_15",
-      "efecto": {
-        "descuento_explorador": 0.15,
-        "aplica_a": [
-          "jinete_explorador",
-          "caballeria_ligera",
-          "husar"
-        ]
-      }
-    },
-    {
-      "descripcion": "Aldeanos matan depredadores (lobos) de un golpe",
-      "id": "mata_lobos",
-      "efecto": {
-        "aldeano_vs_depredador_un_golpe": true
-      }
-    }
-  ],
-  "roof_color": "#a03a5a",
-  "name": "Magiares",
-  "descripcion": "Magiares: Forja, Fundición y Alto Horno gratis (ahorro 150F + 220F/120O + 350F/250O) Línea de exploradores 15% más barata (explorador 80F -> 68F)",
-  "unique_techs": [
-    {
-      "id": "ejercito_corvino",
-      "nombre": "Ejército Corvino (Corvinian Army)",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "food": 200,
-        "gold": 300
-      },
-      "tiempo_sec": 40,
-      "descripcion": "Coste de oro del Huszar Magiar reemplazado por comida (35C/45O -> 80C).",
-      "efectos": {
-        "huszar_oro_a_comida": true,
-        "coste_huszar_comida": 80,
-        "coste_huszar_oro": 0,
-        "aplica_a": [
-          "huszar_magiar"
-        ]
-      }
-    },
-    {
-      "id": "arco_recurvo",
-      "nombre": "Arco Recurvo (Recurve Bow)",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "wood": 400,
-        "gold": 600
-      },
-      "tiempo_sec": 60,
-      "descripcion": "Arqueros a caballo +1 ataque, +1 alcance.",
-      "efectos": {
-        "ataque_arquero_caballo": 1,
-        "alcance_arquero_caballo": 1,
-        "aplica_a": [
-          "arquero_caballo",
-          "arquero_caballo_pesado"
-        ]
-      }
-    }
-  ],
-  "ventajas": [
-    "Forja, Fundición y Alto Horno gratis (ahorro 150F + 220F/...",
-    "Línea de exploradores 15% más barata (explorador 80F -> 68F)",
-    "Aldeanos matan depredadores (lobos) de un golpe"
-  ],
-  "unique_unit": {
-    "train_time_sec": 14,
-    "id": "huszar_magiar",
-    "armor_pierce": 2,
-    "attack_elite": 11,
-    "cost": {
-      "gold": 45,
-      "food": 35
-    },
-    "trained_at": "castillo",
-    "attack": 9,
-    "armor_melee": 0,
-    "name": "Húsar Magiar",
-    "hp": 75,
-    "hp_elite": 95
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": true,
-      "alabardero": true,
-      "huscarle": false,
-      "hachero_franco": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": true,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": true,
-      "arquero_tiro_largo": false,
-      "hachero_franco": false
-    },
-    "establo": {
-      "jinete": true,
-      "caballeria_ligera": true,
-      "husar": true,
-      "caballero": true,
-      "paladin": true,
-      "paladin_franco": false,
-      "camello": true,
-      "camello_pesado": true,
-      "catafracta": false
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": true,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": false,
-      "fervor": true,
-      "santidad": true,
-      "iluminacion": false,
-      "teocracia": true,
-      "herejia": true
-    },
-    "castillo": {
-      "huszar_magiar": true,
-      "ejercito_corvino": true,
-      "arco_recurvo": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": true,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": false,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": true,
-      "armadura_arq_1": true,
-      "armadura_arq_2": true,
-      "armadura_arq_3": true,
-      "ataque_cab_1": true,
-      "ataque_cab_2": true,
-      "ataque_cab_3": true,
-      "armadura_cab_1": true,
-      "armadura_cab_2": true,
-      "armadura_cab_3": true
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": true,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": false,
-      "arquitectura": true,
-      "muralla_fortificada": true,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "armadura_inf_3",
-      "arquero_tiro_largo",
-      "catafracta",
-      "hachero_franco",
-      "huscarle",
-      "iluminacion",
-      "paladin_franco",
-      "redencion",
-      "torre_muralla"
-    ]
+﻿{
+ "debilidades": [
+  "Caballeria pesada limitada",
+  "Roster con huecos en Imperial"
+ ],
+ "team_bonus": {
+  "id": "arqueros_caballo_rapidos_25",
+  "descripcion": "Arqueros a caballo se crean 25% más rápido (aliados; 34s -> 25.5s)",
+  "efecto": {
+   "velocidad_creacion_arquero_caballo": 0.25
   }
+ },
+ "id": "magiares",
+ "bonus": [
+  {
+   "descripcion": "Forja, Fundición y Alto Horno gratis (ahorro 150F + 220F/120O + 350F/250O)",
+   "id": "forja_gratis",
+   "efecto": {
+    "tecnologias_gratis": [
+     "forja",
+     "hierro_fundido",
+     "alto_horno"
+    ]
+   }
+  },
+  {
+   "descripcion": "Línea de exploradores 15% más barata (explorador 80F -> 68F)",
+   "id": "exploradores_baratos_15",
+   "efecto": {
+    "descuento_explorador": 0.15,
+    "aplica_a": [
+     "jinete_explorador",
+     "caballeria_ligera",
+     "husar"
+    ]
+   }
+  },
+  {
+   "descripcion": "Aldeanos matan depredadores (lobos) de un golpe",
+   "id": "mata_lobos",
+   "efecto": {
+    "aldeano_vs_depredador_un_golpe": true
+   }
+  }
+ ],
+ "roof_color": "#a03a5a",
+ "name": "Magiares",
+ "descripcion": "Magiares: Forja, Fundición y Alto Horno gratis (ahorro 150F + 220F/120O + 350F/250O) Línea de exploradores 15% más barata (explorador 80F -> 68F)",
+ "unique_techs": [
+  {
+   "id": "ejercito_corvino",
+   "nombre": "Ejército Corvino (Corvinian Army)",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "food": 200,
+    "gold": 300
+   },
+   "tiempo_sec": 40,
+   "descripcion": "Coste de oro del Huszar Magiar reemplazado por comida (35C/45O -> 80C).",
+   "efectos": {
+    "huszar_oro_a_comida": true,
+    "coste_huszar_comida": 80,
+    "coste_huszar_oro": 0,
+    "aplica_a": [
+     "huszar_magiar"
+    ]
+   }
+  },
+  {
+   "id": "arco_recurvo",
+   "nombre": "Arco Recurvo (Recurve Bow)",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "wood": 400,
+    "gold": 600
+   },
+   "tiempo_sec": 60,
+   "descripcion": "Arqueros a caballo +1 ataque, +1 alcance.",
+   "efectos": {
+    "ataque_arquero_caballo": 1,
+    "alcance_arquero_caballo": 1,
+    "aplica_a": [
+     "arquero_caballo",
+     "arquero_caballo_pesado"
+    ]
+   }
+  }
+ ],
+ "ventajas": [
+  "Forja, Fundición y Alto Horno gratis (ahorro 150F + 220F/...",
+  "Línea de exploradores 15% más barata (explorador 80F -> 68F)",
+  "Aldeanos matan depredadores (lobos) de un golpe"
+ ],
+ "unique_unit": {
+  "train_time_sec": 14,
+  "id": "huszar_magiar",
+  "armor_pierce": 2,
+  "attack_elite": 11,
+  "cost": {
+   "gold": 45,
+   "food": 35
+  },
+  "trained_at": "castillo",
+  "attack": 9,
+  "armor_melee": 0,
+  "name": "Húsar Magiar",
+  "hp": 75,
+  "hp_elite": 95
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hachero_franco": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true,
+   "arquero_tiro_largo": false,
+   "hachero_franco": false
+  },
+  "establo": {
+   "jinete": true,
+   "caballeria_ligera": true,
+   "husar": true,
+   "caballero": true,
+   "paladin": true,
+   "paladin_franco": false,
+   "camello": true,
+   "camello_pesado": true,
+   "catafracta": false
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": true,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": false,
+   "fervor": true,
+   "santidad": true,
+   "iluminacion": false,
+   "teocracia": true,
+   "herejia": true
+  },
+  "castillo": {
+   "huszar_magiar": true,
+   "ejercito_corvino": true,
+   "arco_recurvo": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": true,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": false,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": true,
+   "armadura_arq_1": true,
+   "armadura_arq_2": true,
+   "armadura_arq_3": true,
+   "ataque_cab_1": true,
+   "ataque_cab_2": true,
+   "ataque_cab_3": true,
+   "armadura_cab_1": true,
+   "armadura_cab_2": true,
+   "armadura_cab_3": true
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": true,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": false,
+   "arquitectura": true,
+   "muralla_fortificada": true,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "armadura_inf_3",
+   "arquero_tiro_largo",
+   "catafracta",
+   "hachero_franco",
+   "huscarle",
+   "iluminacion",
+   "paladin_franco",
+   "redencion",
+   "torre_muralla"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true
+  }
+ }
 }

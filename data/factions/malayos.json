@@ -1,241 +1,241 @@
-{
-  "debilidades": [
-    "Sin Paladin",
-    "Caballeria pesada limitada"
-  ],
-  "team_bonus": {
-    "id": "muelles_vision_6",
-    "descripcion": "Muelles +6 línea de visión (aliados)",
-    "efecto": {
-      "aplica_a": [
-        "muelle",
-        "puerto"
-      ],
-      "vision_muelle_bonus": 6
-    }
-  },
-  "id": "malayos",
-  "bonus": [
-    {
-      "descripcion": "Avance de edad +66% más rápido (solo 60% del tiempo habitual)",
-      "id": "avance_rapido_66",
-      "efecto": {
-        "aplica_a": [
-          "feudal",
-          "castillos",
-          "imperial"
-        ],
-        "avance_edad_factor": 0.6,
-        "avance_edad_rapidez": 0.66
-      }
-    },
-    {
-      "descripcion": "Trampas de peces 33% más baratas y 3x alimento (715 -> 2145)",
-      "id": "trampas_peces_3x",
-      "efecto": {
-        "alimento_trampa_base": 715,
-        "alimento_trampa_final": 2145,
-        "aplica_a": [
-          "trampa_peces"
-        ],
-        "descuento_trampa_madera": 0.33,
-        "multiplicador_alimento": 3.0
-      }
-    },
-    {
-      "descripcion": "Elefantes de combate 25% más baratos en Castillos, 35% en Imperial",
-      "id": "elefantes_baratos",
-      "efecto": {
-        "aplica_a": [
-          "elefante_combate"
-        ],
-        "descuento_castillos": 0.25,
-        "descuento_imperial": 0.35
-      }
-    },
-    {
-      "descripcion": "Armaduras de infantería gratis (cota malla, cota anillas)",
-      "id": "armadura_inf_gratis",
-      "efecto": {
-        "aplica_a": [
-          "armadura_inf_1",
-          "armadura_inf_2"
-        ],
-        "coste": 0
-      }
-    }
-  ],
-  "roof_color": "#0a7a8a",
-  "name": "Malayos",
-  "descripcion": "Malayos: Avance de edad +66% más rápido (solo 60% del tiempo habitual) Trampas de peces 33% más baratas y 3x alimento (715 -> 2145)",
-  "unique_techs": [
-    {
-      "id": "talasocracia",
-      "nombre": "Talasocracia (Thalassocracy)",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "gold": 250,
-        "wood": 300
-      },
-      "tiempo_sec": 75,
-      "descripcion": "Mejora Muelles a Puertos: disparan flechas y defienden la costa.",
-      "efectos": {
-        "aplica_a": [
-          "muelle"
-        ],
-        "ataque_puerto": 3,
-        "mejora_a": "puerto"
-      }
-    },
-    {
-      "id": "leva_masa",
-      "nombre": "Leva en Masa (Forced Levy)",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "food": 850,
-        "gold": 500
-      },
-      "tiempo_sec": 60,
-      "descripcion": "Línea de milicia: coste de oro reemplazado por +20 comida.",
-      "efectos": {
-        "aplica_a": [
-          "milicia",
-          "hombre_de_armas",
-          "espadachin_mandoble"
-        ],
-        "comida_extra": 20,
-        "oro_a_comida": true
-      }
-    }
-  ],
-  "ventajas": [
-    "Avance de edad +66% más rápido (solo 60% del tiempo habit...",
-    "Trampas de peces 33% más baratas y 3x alimento (715 -> 2145)",
-    "Elefantes de combate 25% más baratos en Castillos, 35% en..."
-  ],
-  "unique_unit": {
-    "train_time_sec": 6,
-    "id": "karambit",
-    "armor_pierce": 1,
-    "attack_elite": 10,
-    "cost": {
-      "gold": 15,
-      "food": 25
-    },
-    "trained_at": "castillo",
-    "attack": 8,
-    "armor_melee": 1,
-    "name": "Karambit",
-    "hp": 40,
-    "hp_elite": 60
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": false,
-      "lancero": true,
-      "piquero": true,
-      "alabardero": true,
-      "huscarle": false,
-      "hachero_franco": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": false,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": true,
-      "arquero_tiro_largo": false,
-      "hachero_franco": false
-    },
-    "establo": {
-      "jinete": true,
-      "caballeria_ligera": true,
-      "husar": true,
-      "caballero": true,
-      "paladin": false,
-      "paladin_franco": false,
-      "camello": true,
-      "camello_pesado": true,
-      "catafracta": false
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": true,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": true,
-      "fervor": true,
-      "santidad": true,
-      "iluminacion": true,
-      "teocracia": true,
-      "herejia": true
-    },
-    "castillo": {
-      "karambit": true,
-      "talasocracia": true,
-      "leva_masa": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": true,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": false,
-      "armadura_arq_1": true,
-      "armadura_arq_2": true,
-      "armadura_arq_3": false,
-      "ataque_cab_1": true,
-      "ataque_cab_2": true,
-      "ataque_cab_3": true,
-      "armadura_cab_1": true,
-      "armadura_cab_2": true,
-      "armadura_cab_3": true
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": true,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": false,
-      "arquitectura": true,
-      "muralla_fortificada": false,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "armadura_arq_3",
-      "arquero_tiro_largo",
-      "ataque_arq_3",
-      "ballestero",
-      "campeon",
-      "catafracta",
-      "hachero_franco",
-      "huscarle",
-      "muralla_fortificada",
-      "paladin",
-      "paladin_franco",
-      "torre_muralla"
-    ]
+﻿{
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "id": "muelles_vision_6",
+  "descripcion": "Muelles +6 línea de visión (aliados)",
+  "efecto": {
+   "aplica_a": [
+    "muelle",
+    "puerto"
+   ],
+   "vision_muelle_bonus": 6
   }
+ },
+ "id": "malayos",
+ "bonus": [
+  {
+   "descripcion": "Avance de edad +66% más rápido (solo 60% del tiempo habitual)",
+   "id": "avance_rapido_66",
+   "efecto": {
+    "aplica_a": [
+     "feudal",
+     "castillos",
+     "imperial"
+    ],
+    "avance_edad_factor": 0.6,
+    "avance_edad_rapidez": 0.66
+   }
+  },
+  {
+   "descripcion": "Trampas de peces 33% más baratas y 3x alimento (715 -> 2145)",
+   "id": "trampas_peces_3x",
+   "efecto": {
+    "alimento_trampa_base": 715,
+    "alimento_trampa_final": 2145,
+    "aplica_a": [
+     "trampa_peces"
+    ],
+    "descuento_trampa_madera": 0.33,
+    "multiplicador_alimento": 3.0
+   }
+  },
+  {
+   "descripcion": "Elefantes de combate 25% más baratos en Castillos, 35% en Imperial",
+   "id": "elefantes_baratos",
+   "efecto": {
+    "aplica_a": [
+     "elefante_combate"
+    ],
+    "descuento_castillos": 0.25,
+    "descuento_imperial": 0.35
+   }
+  },
+  {
+   "descripcion": "Armaduras de infantería gratis (cota malla, cota anillas)",
+   "id": "armadura_inf_gratis",
+   "efecto": {
+    "aplica_a": [
+     "armadura_inf_1",
+     "armadura_inf_2"
+    ],
+    "coste": 0
+   }
+  }
+ ],
+ "roof_color": "#0a7a8a",
+ "name": "Malayos",
+ "descripcion": "Malayos: Avance de edad +66% más rápido (solo 60% del tiempo habitual) Trampas de peces 33% más baratas y 3x alimento (715 -> 2145)",
+ "unique_techs": [
+  {
+   "id": "talasocracia",
+   "nombre": "Talasocracia (Thalassocracy)",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "gold": 250,
+    "wood": 300
+   },
+   "tiempo_sec": 75,
+   "descripcion": "Mejora Muelles a Puertos: disparan flechas y defienden la costa.",
+   "efectos": {
+    "aplica_a": [
+     "muelle"
+    ],
+    "ataque_puerto": 3,
+    "mejora_a": "puerto"
+   }
+  },
+  {
+   "id": "leva_masa",
+   "nombre": "Leva en Masa (Forced Levy)",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "food": 850,
+    "gold": 500
+   },
+   "tiempo_sec": 60,
+   "descripcion": "Línea de milicia: coste de oro reemplazado por +20 comida.",
+   "efectos": {
+    "aplica_a": [
+     "milicia",
+     "hombre_de_armas",
+     "espadachin_mandoble"
+    ],
+    "comida_extra": 20,
+    "oro_a_comida": true
+   }
+  }
+ ],
+ "ventajas": [
+  "Avance de edad +66% más rápido (solo 60% del tiempo habit...",
+  "Trampas de peces 33% más baratas y 3x alimento (715 -> 2145)",
+  "Elefantes de combate 25% más baratos en Castillos, 35% en..."
+ ],
+ "unique_unit": {
+  "train_time_sec": 6,
+  "id": "karambit",
+  "armor_pierce": 1,
+  "attack_elite": 10,
+  "cost": {
+   "gold": 15,
+   "food": 25
+  },
+  "trained_at": "castillo",
+  "attack": 8,
+  "armor_melee": 1,
+  "name": "Karambit",
+  "hp": 40,
+  "hp_elite": 60
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": false,
+   "lancero": true,
+   "piquero": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hachero_franco": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": false,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true,
+   "arquero_tiro_largo": false,
+   "hachero_franco": false
+  },
+  "establo": {
+   "jinete": true,
+   "caballeria_ligera": true,
+   "husar": true,
+   "caballero": true,
+   "paladin": false,
+   "paladin_franco": false,
+   "camello": true,
+   "camello_pesado": true,
+   "catafracta": false
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": true,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": true,
+   "fervor": true,
+   "santidad": true,
+   "iluminacion": true,
+   "teocracia": true,
+   "herejia": true
+  },
+  "castillo": {
+   "karambit": true,
+   "talasocracia": true,
+   "leva_masa": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": true,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": false,
+   "armadura_arq_1": true,
+   "armadura_arq_2": true,
+   "armadura_arq_3": false,
+   "ataque_cab_1": true,
+   "ataque_cab_2": true,
+   "ataque_cab_3": true,
+   "armadura_cab_1": true,
+   "armadura_cab_2": true,
+   "armadura_cab_3": true
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": true,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": false,
+   "arquitectura": true,
+   "muralla_fortificada": false,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "armadura_arq_3",
+   "arquero_tiro_largo",
+   "ataque_arq_3",
+   "ballestero",
+   "campeon",
+   "catafracta",
+   "hachero_franco",
+   "huscarle",
+   "muralla_fortificada",
+   "paladin",
+   "paladin_franco",
+   "torre_muralla"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true
+  }
+ }
 }

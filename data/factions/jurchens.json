@@ -1,196 +1,196 @@
 ﻿{
-    "debilidades":  [
-                        "Sin Paladin",
-                        "Caballeria pesada limitada"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Unidades montadas +velocidad de ataque en equipo (aliados)",
-                       "id":  "jurchens_equipo",
-                       "efecto":  {
-                                      "cadencia_montadas_equipo":  true
-                                  }
-                   },
-    "id":  "jurchens",
-    "bonus":  [
-                  {
-                      "descripcion":  "La carne de caza y ganado no decae (ciervo, jabalí, oveja, etc. conservan el 100% de su alimento)",
-                      "id":  "carne_sin_decaer",
-                      "efecto":  {
-                                     "decaimiento_carne":  0.0
-                                 }
-                  },
-                  {
-                      "descripcion":  "Unidades montadas y Lanceros de fuego atacan 25% más rápido desde Feudal",
-                      "id":  "caballeria_rapida_25",
-                      "efecto":  {
-                                     "cadencia_bonus":  0.25,
-                                     "desde_edad":  "feudal",
-                                     "aplica_a":  [
-                                                      "tag:caballeria",
-                                                      "lancero_fuego"
-                                                  ]
-                                 }
-                  },
-                  {
-                      "descripcion":  "Ingenieros de asedio disponible en Castillos (una edad antes)",
-                      "id":  "ingenieros_castillos",
-                      "efecto":  {
-                                     "ingenieros_asedio_edad":  "castillos"
-                                 }
-                  },
-                  {
-                      "descripcion":  "Tecnologías de asedio y fortificación cuestan -75% madera y se investigan 100% más rápido",
-                      "id":  "asedio_barato_rapido",
-                      "efecto":  {
-                                     "descuento_madera":  0.75,
-                                     "velocidad_investigacion":  1.0,
-                                     "aplica_a":  [
-                                                      "tag:tec_asedio",
-                                                      "tag:tec_fortificacion"
-                                                  ]
-                                 }
-                  }
-              ],
-    "roof_color":  "#8b5a2b",
-    "name":  "Yurchenios",
-    "descripcion":  "Yurchenios: La carne de caza y ganado no decae (ciervo, jabalí, oveja, etc. conservan el 100% de su alimento) Unidades montadas y Lanceros de fuego atacan 25% más rápido desde Feudal",
-    "unique_techs":  [
-                         {
-                             "id":  "bastiones_fortificados",
-                             "nombre":  "Bastiones fortificados (Fortified Bastions)",
-                             "descripcion":  "Fortificaciones regeneran HP.",
-                             "edificio":  "castillo",
-                             "edad":  "castillos",
-                             "efectos":  {
-                                             "regen_fortificaciones":  true
-                                         }
-                         },
-                         {
-                             "id":  "bombas_trueno",
-                             "nombre":  "Bombas trueno (Thunderclap Bombs)",
-                             "descripcion":  "Granaderos, carros cohete y Lou Chuan explotan al caer y proyectiles secundarios.",
-                             "edificio":  "castillo",
-                             "edad":  "imperial",
-                             "efectos":  {
-                                             "explosion_secundaria":  true,
-                                             "aplica_a":  [
-                                                              "granadero",
-                                                              "carro_cohete",
-                                                              "lou_chuan"
-                                                          ]
-                                         }
-                         }
-                     ],
-    "ventajas":  [
-                     "La carne de caza y ganado no decae (ciervo, jabalí, oveja...",
-                     "Unidades montadas y Lanceros de fuego atacan 25% más rápi...",
-                     "Ingenieros de asedio disponible en Castillos (una edad an..."
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  14,
-                        "id":  "pagoda_hierro",
-                        "armor_pierce":  3,
-                        "attack_elite":  15,
-                        "cost":  {
-                                     "gold":  55,
-                                     "food":  80
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  13,
-                        "armor_melee":  2,
-                        "name":  "Pagoda de Hierro",
-                        "hp":  140,
-                        "hp_elite":  160
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-                                         "fervor":  true,
-                                         "teocracia":  true,
-                                         "monje":  true,
-                                         "herejia":  true,
-                                         "iluminacion":  true,
-                                         "santidad":  true,
-                                         "redencion":  true
-                                     },
-                      "castillo":  {
-                                       "bombas_trueno":  true,
-                                       "granadero":  true,
-                                       "bastiones_fortificados":  true,
-                                       "pagoda_hierro":  true
-                                   },
-                      "cuartel":  {
-                                      "milicia":  true,
-                                      "lancero":  true,
-                                      "piquero":  true,
-                                      "campeon":  true,
-                                      "espadachin_mandoble":  true,
-                                      "alabardero":  true,
-                                      "huscarle":  false,
-                                      "hombre_de_armas":  true
-                                  },
-                      "establo":  {
-                                      "caballero":  true,
-                                      "husar":  true,
-                                      "jinete":  true,
-                                      "camello_pesado":  true,
-                                      "paladin":  false,
-                                      "caballeria_ligera":  true,
-                                      "camello":  true
-                                  },
-                      "taller_asedio":  {
-                                            "mangana":  true,
-                                            "escorpion_pesado":  true,
-                                            "escorpion":  true,
-                                            "trabuquete":  true,
-                                            "onagro":  true,
-                                            "ariete":  true,
-                                            "ariete_blindado":  true,
-                                            "canon_artillado":  true
-                                        },
-                      "puerto":  {
-                                     "barco_pesquero":  true,
-                                     "galeon":  true,
-                                     "galera_guerra":  true,
-                                     "brulote":  true
-                                 },
-                      "herreria":  {
-                                       "forja":  true,
-                                       "armadura_arq_2":  true,
-                                       "ataque_arq_1":  true,
-                                       "alto_horno":  true,
-                                       "armadura_inf_3":  true,
-                                       "ataque_cab_3":  true,
-                                       "ataque_cab_1":  true,
-                                       "ataque_arq_3":  true,
-                                       "ataque_arq_2":  true,
-                                       "armadura_arq_3":  true,
-                                       "hierro_fundido":  true,
-                                       "armadura_cab_2":  true,
-                                       "armadura_inf_2":  true,
-                                       "armadura_cab_3":  true,
-                                       "armadura_arq_1":  true,
-                                       "ataque_cab_2":  true,
-                                       "armadura_inf_1":  true,
-                                       "armadura_cab_1":  true
-                                   },
-                      "arqueria":  {
-                                       "guerrillero":  true,
-                                       "arquero":  true,
-                                       "ballestero":  true,
-                                       "guerrillero_elite":  true,
-                                       "artillero_manual":  true
-                                   },
-                      "universidad":  {
-                                          "torre_guardia":  true,
-                                          "torre_vigilancia":  true,
-                                          "muralla_fortificada":  true,
-                                          "balistica":  true,
-                                          "quimica":  true,
-                                          "albanileria":  true,
-                                          "arquitectura":  true
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "paladin"
-                                                ]
-                  }
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "descripcion": "Unidades montadas +velocidad de ataque en equipo (aliados)",
+  "id": "jurchens_equipo",
+  "efecto": {
+   "cadencia_montadas_equipo": true
+  }
+ },
+ "id": "jurchens",
+ "bonus": [
+  {
+   "descripcion": "La carne de caza y ganado no decae (ciervo, jabalí, oveja, etc. conservan el 100% de su alimento)",
+   "id": "carne_sin_decaer",
+   "efecto": {
+    "decaimiento_carne": 0.0
+   }
+  },
+  {
+   "descripcion": "Unidades montadas y Lanceros de fuego atacan 25% más rápido desde Feudal",
+   "id": "caballeria_rapida_25",
+   "efecto": {
+    "cadencia_bonus": 0.25,
+    "desde_edad": "feudal",
+    "aplica_a": [
+     "tag:caballeria",
+     "lancero_fuego"
+    ]
+   }
+  },
+  {
+   "descripcion": "Ingenieros de asedio disponible en Castillos (una edad antes)",
+   "id": "ingenieros_castillos",
+   "efecto": {
+    "ingenieros_asedio_edad": "castillos"
+   }
+  },
+  {
+   "descripcion": "Tecnologías de asedio y fortificación cuestan -75% madera y se investigan 100% más rápido",
+   "id": "asedio_barato_rapido",
+   "efecto": {
+    "descuento_madera": 0.75,
+    "velocidad_investigacion": 1.0,
+    "aplica_a": [
+     "tag:tec_asedio",
+     "tag:tec_fortificacion"
+    ]
+   }
+  }
+ ],
+ "roof_color": "#8b5a2b",
+ "name": "Yurchenios",
+ "descripcion": "Yurchenios: La carne de caza y ganado no decae (ciervo, jabalí, oveja, etc. conservan el 100% de su alimento) Unidades montadas y Lanceros de fuego atacan 25% más rápido desde Feudal",
+ "unique_techs": [
+  {
+   "id": "bastiones_fortificados",
+   "nombre": "Bastiones fortificados (Fortified Bastions)",
+   "descripcion": "Fortificaciones regeneran HP.",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "efectos": {
+    "regen_fortificaciones": true
+   }
+  },
+  {
+   "id": "bombas_trueno",
+   "nombre": "Bombas trueno (Thunderclap Bombs)",
+   "descripcion": "Granaderos, carros cohete y Lou Chuan explotan al caer y proyectiles secundarios.",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "efectos": {
+    "explosion_secundaria": true,
+    "aplica_a": [
+     "granadero",
+     "carro_cohete",
+     "lou_chuan"
+    ]
+   }
+  }
+ ],
+ "ventajas": [
+  "La carne de caza y ganado no decae (ciervo, jabalí, oveja...",
+  "Unidades montadas y Lanceros de fuego atacan 25% más rápi...",
+  "Ingenieros de asedio disponible en Castillos (una edad an..."
+ ],
+ "unique_unit": {
+  "train_time_sec": 14,
+  "id": "pagoda_hierro",
+  "armor_pierce": 3,
+  "attack_elite": 15,
+  "cost": {
+   "gold": 55,
+   "food": 80
+  },
+  "trained_at": "castillo",
+  "attack": 13,
+  "armor_melee": 2,
+  "name": "Pagoda de Hierro",
+  "hp": 140,
+  "hp_elite": 160
+ },
+ "tech_tree": {
+  "monasterio": {
+   "fervor": true,
+   "teocracia": true,
+   "monje": true,
+   "herejia": true,
+   "iluminacion": true,
+   "santidad": true,
+   "redencion": true
+  },
+  "castillo": {
+   "bombas_trueno": true,
+   "granadero": true,
+   "bastiones_fortificados": true,
+   "pagoda_hierro": true
+  },
+  "cuartel": {
+   "milicia": true,
+   "lancero": true,
+   "piquero": true,
+   "campeon": true,
+   "espadachin_mandoble": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hombre_de_armas": true
+  },
+  "establo": {
+   "caballero": true,
+   "husar": true,
+   "jinete": true,
+   "camello_pesado": true,
+   "paladin": false,
+   "caballeria_ligera": true,
+   "camello": true
+  },
+  "taller_asedio": {
+   "mangana": true,
+   "escorpion_pesado": true,
+   "escorpion": true,
+   "trabuquete": true,
+   "onagro": true,
+   "ariete": true,
+   "ariete_blindado": true,
+   "canon_artillado": true
+  },
+  "herreria": {
+   "forja": true,
+   "armadura_arq_2": true,
+   "ataque_arq_1": true,
+   "alto_horno": true,
+   "armadura_inf_3": true,
+   "ataque_cab_3": true,
+   "ataque_cab_1": true,
+   "ataque_arq_3": true,
+   "ataque_arq_2": true,
+   "armadura_arq_3": true,
+   "hierro_fundido": true,
+   "armadura_cab_2": true,
+   "armadura_inf_2": true,
+   "armadura_cab_3": true,
+   "armadura_arq_1": true,
+   "ataque_cab_2": true,
+   "armadura_inf_1": true,
+   "armadura_cab_1": true
+  },
+  "arqueria": {
+   "guerrillero": true,
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true
+  },
+  "universidad": {
+   "torre_guardia": true,
+   "torre_vigilancia": true,
+   "muralla_fortificada": true,
+   "balistica": true,
+   "quimica": true,
+   "albanileria": true,
+   "arquitectura": true
+  },
+  "no_disponible_resumen": [
+   "paladin"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galeon": true,
+   "galera_guerra": true,
+   "brulote": true
+  }
+ }
 }

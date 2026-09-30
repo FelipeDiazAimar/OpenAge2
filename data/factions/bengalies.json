@@ -1,177 +1,177 @@
 ﻿{
-    "debilidades":  [
-                        "Sin Paladin",
-                        "Caballeria pesada limitada"
-                    ],
-    "team_bonus":  {
-                       "descripcion":  "Unidades elefante +ataque vs edificios (aliados)",
-                       "id":  "bengalies_equipo",
-                       "efecto":  {
-                                      "bonus_elefante_edificios":  true
-                                  }
-                   },
-    "id":  "bengalies",
-    "bonus":  [
-                  {
-                      "descripcion":  "Elefantes reciben -25% daño bonus y resisten mejor la conversión; TCs generan 2 aldeanos al avanzar de edad",
-                      "id":  "elefantes_duros_poblamiento",
-                      "efecto":  {
-                                     "reduccion_dano_bonus_elefante":  0.25,
-                                     "resistencia_conversion":  true,
-                                     "aldeanos_por_edad":  2
-                                 }
-                  },
-                  {
-                      "descripcion":  "Caballería +2 ataque vs guerrilleros; barcos regeneran 15 PV/min; monjes +3/+3 armadura",
-                      "id":  "caballeria_barcos_monjes",
-                      "efecto":  {
-                                     "ataque_cab_vs_guerrillero":  2,
-                                     "regen_barcos_min":  15,
-                                     "armadura_monje_melee":  3,
-                                     "armadura_monje_perforante":  3
-                                 }
-                  }
-              ],
-    "roof_color":  "#888888",
-    "name":  "Bengalíes",
-    "descripcion":  "Bengalíes: Elefantes reciben -25% daño bonus y resisten mejor la conversión; TCs generan 2 aldeanos al avanzar de edad Caballería +2 ataque vs guerrilleros; barcos regeneran 15 PV/min; monjes +3/+3 armadura",
-    "unique_techs":  [
-                         {
-                             "id":  "paiks",
-                             "nombre":  "Paiks",
-                             "descripcion":  "Ratha y elefantes mas rapidos y resistentes.",
-                             "edificio":  "castillo",
-                             "edad":  "castillos",
-                             "efectos":  {
-                                             "mejora_ratha_elefante":  true,
-                                             "aplica_a":  [
-                                                              "ratha",
-                                                              "elefante"
-                                                          ]
-                                         }
-                         },
-                         {
-                             "id":  "mahayana",
-                             "nombre":  "Mahayana",
-                             "descripcion":  "Aldeanos y monjes mas eficaces; mas aldeanos por avance.",
-                             "edificio":  "castillo",
-                             "edad":  "imperial",
-                             "efectos":  {
-                                             "mejora_aldeanos_monjes":  true
-                                         }
-                         }
-                     ],
-    "ventajas":  [
-                     "Elefantes reciben -25% daño bonus y resisten mejor la con...",
-                     "Caballería +2 ataque vs guerrilleros; barcos regeneran 15...",
-                     "Unidad unica versatil"
-                 ],
-    "unique_unit":  {
-                        "train_time_sec":  18,
-                        "id":  "ratha",
-                        "armor_pierce":  3,
-                        "attack_elite":  14,
-                        "cost":  {
-                                     "gold":  60,
-                                     "food":  60
-                                 },
-                        "trained_at":  "castillo",
-                        "attack":  12,
-                        "armor_melee":  3,
-                        "name":  "Ratha",
-                        "hp":  115,
-                        "hp_elite":  135
-                    },
-    "tech_tree":  {
-                      "monasterio":  {
-                                         "fervor":  true,
-                                         "teocracia":  true,
-                                         "monje":  true,
-                                         "herejia":  true,
-                                         "iluminacion":  true,
-                                         "santidad":  true,
-                                         "redencion":  true
-                                     },
-                      "castillo":  {
-                                       "ratha":  true,
-                                       "mahayana":  true,
-                                       "paiks":  true
-                                   },
-                      "cuartel":  {
-                                      "milicia":  true,
-                                      "lancero":  true,
-                                      "piquero":  true,
-                                      "campeon":  true,
-                                      "espadachin_mandoble":  true,
-                                      "alabardero":  true,
-                                      "huscarle":  false,
-                                      "hombre_de_armas":  true
-                                  },
-                      "establo":  {
-                                      "caballero":  false,
-                                      "husar":  true,
-                                      "jinete":  true,
-                                      "camello_pesado":  true,
-                                      "paladin":  false,
-                                      "caballeria_ligera":  true,
-                                      "camello":  true
-                                  },
-                      "taller_asedio":  {
-                                            "mangana":  true,
-                                            "escorpion_pesado":  true,
-                                            "escorpion":  true,
-                                            "trabuquete":  true,
-                                            "onagro":  true,
-                                            "ariete":  true,
-                                            "ariete_blindado":  true,
-                                            "canon_artillado":  true
-                                        },
-                      "puerto":  {
-                                     "barco_pesquero":  true,
-                                     "galeon":  true,
-                                     "galera_guerra":  true,
-                                     "brulote":  true
-                                 },
-                      "herreria":  {
-                                       "forja":  true,
-                                       "armadura_arq_2":  true,
-                                       "ataque_arq_1":  true,
-                                       "alto_horno":  true,
-                                       "armadura_inf_3":  false,
-                                       "ataque_cab_3":  true,
-                                       "ataque_cab_1":  true,
-                                       "ataque_arq_3":  true,
-                                       "ataque_arq_2":  true,
-                                       "armadura_arq_3":  true,
-                                       "hierro_fundido":  true,
-                                       "armadura_cab_2":  true,
-                                       "armadura_inf_2":  true,
-                                       "armadura_cab_3":  true,
-                                       "armadura_arq_1":  true,
-                                       "ataque_cab_2":  true,
-                                       "armadura_inf_1":  true,
-                                       "armadura_cab_1":  true
-                                   },
-                      "arqueria":  {
-                                       "guerrillero":  true,
-                                       "arquero":  true,
-                                       "ballestero":  true,
-                                       "guerrillero_elite":  true,
-                                       "artillero_manual":  true
-                                   },
-                      "universidad":  {
-                                          "torre_guardia":  true,
-                                          "torre_vigilancia":  true,
-                                          "muralla_fortificada":  true,
-                                          "balistica":  true,
-                                          "quimica":  true,
-                                          "albanileria":  true,
-                                          "arquitectura":  true
-                                      },
-                      "no_disponible_resumen":  [
-                                                    "caballero",
-                                                    "paladin",
-                                                    "armadura_inf_3"
-                                                ]
-                  }
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "descripcion": "Unidades elefante +ataque vs edificios (aliados)",
+  "id": "bengalies_equipo",
+  "efecto": {
+   "bonus_elefante_edificios": true
+  }
+ },
+ "id": "bengalies",
+ "bonus": [
+  {
+   "descripcion": "Elefantes reciben -25% daño bonus y resisten mejor la conversión; TCs generan 2 aldeanos al avanzar de edad",
+   "id": "elefantes_duros_poblamiento",
+   "efecto": {
+    "reduccion_dano_bonus_elefante": 0.25,
+    "resistencia_conversion": true,
+    "aldeanos_por_edad": 2
+   }
+  },
+  {
+   "descripcion": "Caballería +2 ataque vs guerrilleros; barcos regeneran 15 PV/min; monjes +3/+3 armadura",
+   "id": "caballeria_barcos_monjes",
+   "efecto": {
+    "ataque_cab_vs_guerrillero": 2,
+    "regen_barcos_min": 15,
+    "armadura_monje_melee": 3,
+    "armadura_monje_perforante": 3
+   }
+  }
+ ],
+ "roof_color": "#888888",
+ "name": "Bengalíes",
+ "descripcion": "Bengalíes: Elefantes reciben -25% daño bonus y resisten mejor la conversión; TCs generan 2 aldeanos al avanzar de edad Caballería +2 ataque vs guerrilleros; barcos regeneran 15 PV/min; monjes +3/+3 armadura",
+ "unique_techs": [
+  {
+   "id": "paiks",
+   "nombre": "Paiks",
+   "descripcion": "Ratha y elefantes mas rapidos y resistentes.",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "efectos": {
+    "mejora_ratha_elefante": true,
+    "aplica_a": [
+     "ratha",
+     "elefante"
+    ]
+   }
+  },
+  {
+   "id": "mahayana",
+   "nombre": "Mahayana",
+   "descripcion": "Aldeanos y monjes mas eficaces; mas aldeanos por avance.",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "efectos": {
+    "mejora_aldeanos_monjes": true
+   }
+  }
+ ],
+ "ventajas": [
+  "Elefantes reciben -25% daño bonus y resisten mejor la con...",
+  "Caballería +2 ataque vs guerrilleros; barcos regeneran 15...",
+  "Unidad unica versatil"
+ ],
+ "unique_unit": {
+  "train_time_sec": 18,
+  "id": "ratha",
+  "armor_pierce": 3,
+  "attack_elite": 14,
+  "cost": {
+   "gold": 60,
+   "food": 60
+  },
+  "trained_at": "castillo",
+  "attack": 12,
+  "armor_melee": 3,
+  "name": "Ratha",
+  "hp": 115,
+  "hp_elite": 135
+ },
+ "tech_tree": {
+  "monasterio": {
+   "fervor": true,
+   "teocracia": true,
+   "monje": true,
+   "herejia": true,
+   "iluminacion": true,
+   "santidad": true,
+   "redencion": true
+  },
+  "castillo": {
+   "ratha": true,
+   "mahayana": true,
+   "paiks": true
+  },
+  "cuartel": {
+   "milicia": true,
+   "lancero": true,
+   "piquero": true,
+   "campeon": true,
+   "espadachin_mandoble": true,
+   "alabardero": true,
+   "huscarle": false,
+   "hombre_de_armas": true
+  },
+  "establo": {
+   "caballero": false,
+   "husar": true,
+   "jinete": true,
+   "camello_pesado": true,
+   "paladin": false,
+   "caballeria_ligera": true,
+   "camello": true
+  },
+  "taller_asedio": {
+   "mangana": true,
+   "escorpion_pesado": true,
+   "escorpion": true,
+   "trabuquete": true,
+   "onagro": true,
+   "ariete": true,
+   "ariete_blindado": true,
+   "canon_artillado": true
+  },
+  "herreria": {
+   "forja": true,
+   "armadura_arq_2": true,
+   "ataque_arq_1": true,
+   "alto_horno": true,
+   "armadura_inf_3": false,
+   "ataque_cab_3": true,
+   "ataque_cab_1": true,
+   "ataque_arq_3": true,
+   "ataque_arq_2": true,
+   "armadura_arq_3": true,
+   "hierro_fundido": true,
+   "armadura_cab_2": true,
+   "armadura_inf_2": true,
+   "armadura_cab_3": true,
+   "armadura_arq_1": true,
+   "ataque_cab_2": true,
+   "armadura_inf_1": true,
+   "armadura_cab_1": true
+  },
+  "arqueria": {
+   "guerrillero": true,
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": true
+  },
+  "universidad": {
+   "torre_guardia": true,
+   "torre_vigilancia": true,
+   "muralla_fortificada": true,
+   "balistica": true,
+   "quimica": true,
+   "albanileria": true,
+   "arquitectura": true
+  },
+  "no_disponible_resumen": [
+   "caballero",
+   "paladin",
+   "armadura_inf_3"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galeon": true,
+   "galera_guerra": true,
+   "brulote": true
+  }
+ }
 }

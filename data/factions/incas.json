@@ -1,241 +1,241 @@
-{
-  "debilidades": [
-    "Sin Paladin",
-    "Caballeria pesada limitada"
-  ],
-  "team_bonus": {
-    "id": "llama_gratis",
-    "descripcion": "Empiezan con una llama gratis (aliados)",
-    "efecto": {
-      "unidad_inicial_extra": "llama"
-    }
-  },
-  "id": "incas",
-  "bonus": [
-    {
-      "descripcion": "Unidades militares cuestan -15%/-20%/-25%/-30% comida en Oscura/Feudal/Castillos/Imperial",
-      "id": "descuento_comida_militar_edad",
-      "efecto": {
-        "descuento_oscura": 0.15,
-        "descuento_feudal": 0.2,
-        "descuento_castillos": 0.25,
-        "descuento_imperial": 0.3,
-        "aplica_a": "tag:militar"
-      }
-    },
-    {
-      "descripcion": "Aldeanos se benefician de tecnologías de infantería de herrería desde Castillos",
-      "id": "aldeanos_herreria_inf",
-      "efecto": {
-        "aldeano_herreria_desde": "castillos",
-        "aplica_a": [
-          "forja",
-          "armadura_inf_1",
-          "armadura_inf_2",
-          "armadura_inf_3"
-        ]
-      }
-    },
-    {
-      "descripcion": "Casas albergan 10 población (base 5 -> 10)",
-      "id": "casas_10_pop",
-      "efecto": {
-        "pop_casa": 10,
-        "pop_casa_base": 5
-      }
-    },
-    {
-      "descripcion": "Edificios de piedra -15% piedra (no aplica al CU inicial)",
-      "id": "piedra_edificios_15",
-      "efecto": {
-        "descuento_piedra": 0.15,
-        "aplica_a": [
-          "castillo",
-          "muro",
-          "puerta",
-          "torre_vigia",
-          "torre_guardia"
-        ]
-      }
-    }
-  ],
-  "roof_color": "#7d3c98",
-  "name": "Incas",
-  "descripcion": "Incas: Unidades militares cuestan -15%/-20%/-25%/-30% comida en Oscura/Feudal/Castillos/Imperial Aldeanos se benefician de tecnologías de infantería de herrería desde Castillos",
-  "unique_techs": [
-    {
-      "id": "honda_andina",
-      "nombre": "Honda andina (Andean Sling)",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "food": 200,
-        "gold": 150
-      },
-      "tiempo_sec": 40,
-      "descripcion": "Honderos +1 ataque; honderos y guerrilleros sin alcance mínimo.",
-      "efectos": {
-        "ataque_hondero": 1,
-        "alcance_minimo_hondero": 0,
-        "alcance_minimo_guerrillero": 0,
-        "aplica_a": [
-          "hondero",
-          "guerrillero"
-        ]
-      }
-    },
-    {
-      "id": "escudos_tela",
-      "nombre": "Escudos de tela (Fabric Shields)",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "food": 600,
-        "gold": 500
-      },
-      "tiempo_sec": 60,
-      "descripcion": "Kamayuks y honderos +1/+1 armadura.",
-      "efectos": {
-        "armadura_melee": 1,
-        "armadura_perforante": 1,
-        "aplica_a": [
-          "kamayuk",
-          "hondero"
-        ]
-      }
-    }
-  ],
-  "ventajas": [
-    "Unidades militares cuestan -15%/-20%/-25%/-30% comida en ...",
-    "Aldeanos se benefician de tecnologías de infantería de he...",
-    "Casas albergan 10 población (base 5 -> 10)"
-  ],
-  "unique_unit": {
-    "train_time_sec": 15,
-    "id": "kamayuk",
-    "armor_pierce": 0,
-    "attack_elite": 9,
-    "cost": {
-      "gold": 30,
-      "food": 60
-    },
-    "trained_at": "castillo",
-    "attack": 7,
-    "armor_melee": 0,
-    "name": "Kamayuk",
-    "hp": 60,
-    "hp_elite": 80
-  },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": false,
-      "alabardero": false,
-      "huscarle": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": true,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": false,
-      "arquero_tiro_largo": false
-    },
-    "establo": {
-      "jinete": false,
-      "caballeria_ligera": false,
-      "husar": false,
-      "caballero": false,
-      "paladin": false,
-      "camello": false,
-      "camello_pesado": false,
-      "catafracta": false
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": false,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": true,
-      "fervor": false,
-      "santidad": true,
-      "iluminacion": true,
-      "teocracia": true,
-      "herejia": true
-    },
-    "castillo": {
-      "kamayuk": true,
-      "honda_andina": true,
-      "escudos_tela": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": true,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": true,
-      "armadura_arq_1": true,
-      "armadura_arq_2": true,
-      "armadura_arq_3": true,
-      "ataque_cab_1": false,
-      "ataque_cab_2": false,
-      "ataque_cab_3": false,
-      "armadura_cab_1": false,
-      "armadura_cab_2": false,
-      "armadura_cab_3": false
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": false,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": true,
-      "arquitectura": false,
-      "muralla_fortificada": true,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "alabardero",
-      "armadura_cab_1",
-      "armadura_cab_2",
-      "armadura_cab_3",
-      "arquitectura",
-      "artillero_manual",
-      "ataque_cab_1",
-      "ataque_cab_2",
-      "ataque_cab_3",
-      "caballeria_ligera",
-      "caballero",
-      "camello",
-      "camello_pesado",
-      "canon_artillado",
-      "fervor",
-      "husar",
-      "jinete",
-      "paladin",
-      "piquero",
-      "quimica"
-    ]
+﻿{
+ "debilidades": [
+  "Sin Paladin",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "id": "llama_gratis",
+  "descripcion": "Empiezan con una llama gratis (aliados)",
+  "efecto": {
+   "unidad_inicial_extra": "llama"
   }
+ },
+ "id": "incas",
+ "bonus": [
+  {
+   "descripcion": "Unidades militares cuestan -15%/-20%/-25%/-30% comida en Oscura/Feudal/Castillos/Imperial",
+   "id": "descuento_comida_militar_edad",
+   "efecto": {
+    "descuento_oscura": 0.15,
+    "descuento_feudal": 0.2,
+    "descuento_castillos": 0.25,
+    "descuento_imperial": 0.3,
+    "aplica_a": "tag:militar"
+   }
+  },
+  {
+   "descripcion": "Aldeanos se benefician de tecnologías de infantería de herrería desde Castillos",
+   "id": "aldeanos_herreria_inf",
+   "efecto": {
+    "aldeano_herreria_desde": "castillos",
+    "aplica_a": [
+     "forja",
+     "armadura_inf_1",
+     "armadura_inf_2",
+     "armadura_inf_3"
+    ]
+   }
+  },
+  {
+   "descripcion": "Casas albergan 10 población (base 5 -> 10)",
+   "id": "casas_10_pop",
+   "efecto": {
+    "pop_casa": 10,
+    "pop_casa_base": 5
+   }
+  },
+  {
+   "descripcion": "Edificios de piedra -15% piedra (no aplica al CU inicial)",
+   "id": "piedra_edificios_15",
+   "efecto": {
+    "descuento_piedra": 0.15,
+    "aplica_a": [
+     "castillo",
+     "muro",
+     "puerta",
+     "torre_vigia",
+     "torre_guardia"
+    ]
+   }
+  }
+ ],
+ "roof_color": "#7d3c98",
+ "name": "Incas",
+ "descripcion": "Incas: Unidades militares cuestan -15%/-20%/-25%/-30% comida en Oscura/Feudal/Castillos/Imperial Aldeanos se benefician de tecnologías de infantería de herrería desde Castillos",
+ "unique_techs": [
+  {
+   "id": "honda_andina",
+   "nombre": "Honda andina (Andean Sling)",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "food": 200,
+    "gold": 150
+   },
+   "tiempo_sec": 40,
+   "descripcion": "Honderos +1 ataque; honderos y guerrilleros sin alcance mínimo.",
+   "efectos": {
+    "ataque_hondero": 1,
+    "alcance_minimo_hondero": 0,
+    "alcance_minimo_guerrillero": 0,
+    "aplica_a": [
+     "hondero",
+     "guerrillero"
+    ]
+   }
+  },
+  {
+   "id": "escudos_tela",
+   "nombre": "Escudos de tela (Fabric Shields)",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "food": 600,
+    "gold": 500
+   },
+   "tiempo_sec": 60,
+   "descripcion": "Kamayuks y honderos +1/+1 armadura.",
+   "efectos": {
+    "armadura_melee": 1,
+    "armadura_perforante": 1,
+    "aplica_a": [
+     "kamayuk",
+     "hondero"
+    ]
+   }
+  }
+ ],
+ "ventajas": [
+  "Unidades militares cuestan -15%/-20%/-25%/-30% comida en ...",
+  "Aldeanos se benefician de tecnologías de infantería de he...",
+  "Casas albergan 10 población (base 5 -> 10)"
+ ],
+ "unique_unit": {
+  "train_time_sec": 15,
+  "id": "kamayuk",
+  "armor_pierce": 0,
+  "attack_elite": 9,
+  "cost": {
+   "gold": 30,
+   "food": 60
+  },
+  "trained_at": "castillo",
+  "attack": 7,
+  "armor_melee": 0,
+  "name": "Kamayuk",
+  "hp": 60,
+  "hp_elite": 80
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": false,
+   "alabardero": false,
+   "huscarle": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": false,
+   "arquero_tiro_largo": false
+  },
+  "establo": {
+   "jinete": false,
+   "caballeria_ligera": false,
+   "husar": false,
+   "caballero": false,
+   "paladin": false,
+   "camello": false,
+   "camello_pesado": false,
+   "catafracta": false
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": false,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": true,
+   "fervor": false,
+   "santidad": true,
+   "iluminacion": true,
+   "teocracia": true,
+   "herejia": true
+  },
+  "castillo": {
+   "kamayuk": true,
+   "honda_andina": true,
+   "escudos_tela": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": true,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": true,
+   "armadura_arq_1": true,
+   "armadura_arq_2": true,
+   "armadura_arq_3": true,
+   "ataque_cab_1": false,
+   "ataque_cab_2": false,
+   "ataque_cab_3": false,
+   "armadura_cab_1": false,
+   "armadura_cab_2": false,
+   "armadura_cab_3": false
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": false,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": true,
+   "arquitectura": false,
+   "muralla_fortificada": true,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "alabardero",
+   "armadura_cab_1",
+   "armadura_cab_2",
+   "armadura_cab_3",
+   "arquitectura",
+   "artillero_manual",
+   "ataque_cab_1",
+   "ataque_cab_2",
+   "ataque_cab_3",
+   "caballeria_ligera",
+   "caballero",
+   "camello",
+   "camello_pesado",
+   "canon_artillado",
+   "fervor",
+   "husar",
+   "jinete",
+   "paladin",
+   "piquero",
+   "quimica"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true
+  }
+ }
 }

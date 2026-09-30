@@ -1,223 +1,223 @@
-{
-  "debilidades": [
-    "Ausencias clave: sin redencion, sin ingenieros de asedio, sin canon...",
-    "Caballeria pesada limitada"
-  ],
-  "team_bonus": {
-    "descripcion": "Granjas y pastos +10% comida (aliados).",
-    "efecto": {
-      "aplica_a": [
-        "granja"
-      ],
-      "comida_granja": 0.1
-    },
-    "id": "granjas_comida"
+﻿{
+ "debilidades": [
+  "Ausencias clave: sin redencion, sin ingenieros de asedio, sin canon...",
+  "Caballeria pesada limitada"
+ ],
+ "team_bonus": {
+  "descripcion": "Granjas y pastos +10% comida (aliados).",
+  "efecto": {
+   "aplica_a": [
+    "granja"
+   ],
+   "comida_granja": 0.1
   },
-  "id": "chinos",
-  "bonus": [
-    {
-      "descripcion": "Empieza con +3 aldeanos pero -200 comida, -50 madera.",
-      "id": "inicio_aldeanos",
-      "efecto": {
-        "aldeanos_extra": 3,
-        "comida_inicial": -200,
-        "madera_inicial": -50
-      }
-    },
-    {
-      "descripcion": "Centros urbanos sostienen 15 de poblacion (+10) y +7 linea de vision.",
-      "id": "tc_poblacion",
-      "efecto": {
-        "pop_tc": 15,
-        "vision_tc": 7,
-        "aplica_a": [
-          "centro_urbano"
-        ]
-      }
-    },
-    {
-      "descripcion": "Tecnologias 5%/10%/15% mas baratas en Feudal/Castillos/Imperial.",
-      "id": "tecnologias_descuento",
-      "efecto": {
-        "descuento_feudal": 0.05,
-        "descuento_castillos": 0.1,
-        "descuento_imperial": 0.15
-      }
-    },
-    {
-      "descripcion": "Linea de galera de fuego y lanceros de fuego +5%/+10% velocidad en Castillos/Imperial.",
-      "id": "fuego_rapido",
-      "efecto": {
-        "vel_castillos": 0.05,
-        "vel_imperial": 0.1,
-        "aplica_a": [
-          "galera_fuego",
-          "lancero_fuego"
-        ]
-      }
-    }
-  ],
-  "roof_color": "#b7950b",
-  "name": "Chinos",
-  "descripcion": "Chinos: Empieza con +3 aldeanos pero -200 comida, -50 madera. Centros urbanos sostienen 15 de poblacion (+10) y +7 linea de vision.",
-  "unique_techs": [
-    {
-      "id": "gran_muralla",
-      "nombre": "Gran Muralla (Great Wall)",
-      "edificio": "castillo",
-      "edad": "castillos",
-      "coste": {
-        "stone": 200,
-        "wood": 400
-      },
-      "tiempo_sec": 40,
-      "descripcion": "Muros y torres +30% puntos de golpe.",
-      "efectos": {
-        "aplica_a": [
-          "muro",
-          "torre_vigia"
-        ],
-        "hp_muros_torres": 0.3
-      }
-    },
-    {
-      "id": "coheteria",
-      "nombre": "Coheteria (Rocketry)",
-      "edificio": "castillo",
-      "edad": "imperial",
-      "coste": {
-        "food": 1100,
-        "gold": 900
-      },
-      "tiempo_sec": 60,
-      "descripcion": "Escorpiones, carros cohete y Lou Chuan +25% ataque; Lou Chuan dispara cohetes con dano en area.",
-      "efectos": {
-        "aplica_a": [
-          "escorpion",
-          "carro_cohete",
-          "lou_chuan"
-        ],
-        "ataque_asedio_cohetes": 0.25,
-        "lou_chuan_cohetes_area": true
-      }
-    }
-  ],
-  "ventajas": [
-    "Empieza con +3 aldeanos pero -200 comida, -50 madera.",
-    "Centros urbanos sostienen 15 de poblacion (+10) y +7 line...",
-    "Tecnologias 5%/10%/15% mas baratas en Feudal/Castillos/Im..."
-  ],
-  "unique_unit": {
-    "train_time_sec": 16,
-    "id": "chu_ko_nu",
-    "armor_pierce": 0,
-    "attack_elite": 10,
-    "cost": {
-      "gold": 35,
-      "food": 60
-    },
-    "trained_at": "castillo",
-    "attack": 8,
-    "armor_melee": 0,
-    "name": "Chu Ko Nu",
-    "hp": 45,
-    "hp_elite": 65
+  "id": "granjas_comida"
+ },
+ "id": "chinos",
+ "bonus": [
+  {
+   "descripcion": "Empieza con +3 aldeanos pero -200 comida, -50 madera.",
+   "id": "inicio_aldeanos",
+   "efecto": {
+    "aldeanos_extra": 3,
+    "comida_inicial": -200,
+    "madera_inicial": -50
+   }
   },
-  "tech_tree": {
-    "cuartel": {
-      "milicia": true,
-      "hombre_de_armas": true,
-      "espadachin_mandoble": true,
-      "campeon": true,
-      "lancero": true,
-      "piquero": true,
-      "alabardero": true,
-      "huscarle": false
-    },
-    "arqueria": {
-      "arquero": true,
-      "ballestero": true,
-      "guerrillero": true,
-      "guerrillero_elite": true,
-      "artillero_manual": false,
-      "arquero_tiro_largo": false
-    },
-    "establo": {
-      "jinete": true,
-      "caballeria_ligera": true,
-      "husar": true,
-      "caballero": true,
-      "paladin": false,
-      "camello": true,
-      "camello_pesado": true,
-      "catafracta": false
-    },
-    "taller_asedio": {
-      "ariete": true,
-      "ariete_blindado": true,
-      "escorpion": true,
-      "escorpion_pesado": true,
-      "mangana": true,
-      "onagro": true,
-      "canon_artillado": false,
-      "trabuquete": true
-    },
-    "monasterio": {
-      "monje": true,
-      "redencion": false,
-      "fervor": true,
-      "santidad": true,
-      "iluminacion": true,
-      "teocracia": true,
-      "herejia": true
-    },
-    "castillo": {
-      "chu_ko_nu": true,
-      "gran_muralla": true,
-      "coheteria": true
-    },
-    "herreria": {
-      "forja": true,
-      "hierro_fundido": true,
-      "alto_horno": true,
-      "armadura_inf_1": true,
-      "armadura_inf_2": true,
-      "armadura_inf_3": true,
-      "ataque_arq_1": true,
-      "ataque_arq_2": true,
-      "ataque_arq_3": true,
-      "armadura_arq_1": true,
-      "armadura_arq_2": true,
-      "armadura_arq_3": true,
-      "ataque_cab_1": true,
-      "ataque_cab_2": true,
-      "ataque_cab_3": true,
-      "armadura_cab_1": true,
-      "armadura_cab_2": true,
-      "armadura_cab_3": true
-    },
-    "universidad": {
-      "balistica": true,
-      "quimica": true,
-      "torre_vigilancia": true,
-      "torre_guardia": true,
-      "torre_muralla": false,
-      "arquitectura": true,
-      "muralla_fortificada": true,
-      "albanileria": true
-    },
-    "puerto": {
-      "barco_pesquero": true,
-      "galera_guerra": true,
-      "galeon": true,
-      "brulote": true
-    },
-    "no_disponible_resumen": [
-      "artillero_manual",
-      "canon_artillado",
-      "paladin",
-      "redencion",
-      "torre_muralla"
+  {
+   "descripcion": "Centros urbanos sostienen 15 de poblacion (+10) y +7 linea de vision.",
+   "id": "tc_poblacion",
+   "efecto": {
+    "pop_tc": 15,
+    "vision_tc": 7,
+    "aplica_a": [
+     "centro_urbano"
     ]
+   }
+  },
+  {
+   "descripcion": "Tecnologias 5%/10%/15% mas baratas en Feudal/Castillos/Imperial.",
+   "id": "tecnologias_descuento",
+   "efecto": {
+    "descuento_feudal": 0.05,
+    "descuento_castillos": 0.1,
+    "descuento_imperial": 0.15
+   }
+  },
+  {
+   "descripcion": "Linea de galera de fuego y lanceros de fuego +5%/+10% velocidad en Castillos/Imperial.",
+   "id": "fuego_rapido",
+   "efecto": {
+    "vel_castillos": 0.05,
+    "vel_imperial": 0.1,
+    "aplica_a": [
+     "galera_fuego",
+     "lancero_fuego"
+    ]
+   }
   }
+ ],
+ "roof_color": "#b7950b",
+ "name": "Chinos",
+ "descripcion": "Chinos: Empieza con +3 aldeanos pero -200 comida, -50 madera. Centros urbanos sostienen 15 de poblacion (+10) y +7 linea de vision.",
+ "unique_techs": [
+  {
+   "id": "gran_muralla",
+   "nombre": "Gran Muralla (Great Wall)",
+   "edificio": "castillo",
+   "edad": "castillos",
+   "coste": {
+    "stone": 200,
+    "wood": 400
+   },
+   "tiempo_sec": 40,
+   "descripcion": "Muros y torres +30% puntos de golpe.",
+   "efectos": {
+    "aplica_a": [
+     "muro",
+     "torre_vigia"
+    ],
+    "hp_muros_torres": 0.3
+   }
+  },
+  {
+   "id": "coheteria",
+   "nombre": "Coheteria (Rocketry)",
+   "edificio": "castillo",
+   "edad": "imperial",
+   "coste": {
+    "food": 1100,
+    "gold": 900
+   },
+   "tiempo_sec": 60,
+   "descripcion": "Escorpiones, carros cohete y Lou Chuan +25% ataque; Lou Chuan dispara cohetes con dano en area.",
+   "efectos": {
+    "aplica_a": [
+     "escorpion",
+     "carro_cohete",
+     "lou_chuan"
+    ],
+    "ataque_asedio_cohetes": 0.25,
+    "lou_chuan_cohetes_area": true
+   }
+  }
+ ],
+ "ventajas": [
+  "Empieza con +3 aldeanos pero -200 comida, -50 madera.",
+  "Centros urbanos sostienen 15 de poblacion (+10) y +7 line...",
+  "Tecnologias 5%/10%/15% mas baratas en Feudal/Castillos/Im..."
+ ],
+ "unique_unit": {
+  "train_time_sec": 16,
+  "id": "chu_ko_nu",
+  "armor_pierce": 0,
+  "attack_elite": 10,
+  "cost": {
+   "gold": 35,
+   "food": 60
+  },
+  "trained_at": "castillo",
+  "attack": 8,
+  "armor_melee": 0,
+  "name": "Chu Ko Nu",
+  "hp": 45,
+  "hp_elite": 65
+ },
+ "tech_tree": {
+  "cuartel": {
+   "milicia": true,
+   "hombre_de_armas": true,
+   "espadachin_mandoble": true,
+   "campeon": true,
+   "lancero": true,
+   "piquero": true,
+   "alabardero": true,
+   "huscarle": false
+  },
+  "arqueria": {
+   "arquero": true,
+   "ballestero": true,
+   "guerrillero": true,
+   "guerrillero_elite": true,
+   "artillero_manual": false,
+   "arquero_tiro_largo": false
+  },
+  "establo": {
+   "jinete": true,
+   "caballeria_ligera": true,
+   "husar": true,
+   "caballero": true,
+   "paladin": false,
+   "camello": true,
+   "camello_pesado": true,
+   "catafracta": false
+  },
+  "taller_asedio": {
+   "ariete": true,
+   "ariete_blindado": true,
+   "escorpion": true,
+   "escorpion_pesado": true,
+   "mangana": true,
+   "onagro": true,
+   "canon_artillado": false,
+   "trabuquete": true
+  },
+  "monasterio": {
+   "monje": true,
+   "redencion": false,
+   "fervor": true,
+   "santidad": true,
+   "iluminacion": true,
+   "teocracia": true,
+   "herejia": true
+  },
+  "castillo": {
+   "chu_ko_nu": true,
+   "gran_muralla": true,
+   "coheteria": true
+  },
+  "herreria": {
+   "forja": true,
+   "hierro_fundido": true,
+   "alto_horno": true,
+   "armadura_inf_1": true,
+   "armadura_inf_2": true,
+   "armadura_inf_3": true,
+   "ataque_arq_1": true,
+   "ataque_arq_2": true,
+   "ataque_arq_3": true,
+   "armadura_arq_1": true,
+   "armadura_arq_2": true,
+   "armadura_arq_3": true,
+   "ataque_cab_1": true,
+   "ataque_cab_2": true,
+   "ataque_cab_3": true,
+   "armadura_cab_1": true,
+   "armadura_cab_2": true,
+   "armadura_cab_3": true
+  },
+  "universidad": {
+   "balistica": true,
+   "quimica": true,
+   "torre_vigilancia": true,
+   "torre_guardia": true,
+   "torre_muralla": false,
+   "arquitectura": true,
+   "muralla_fortificada": true,
+   "albanileria": true
+  },
+  "no_disponible_resumen": [
+   "artillero_manual",
+   "canon_artillado",
+   "paladin",
+   "redencion",
+   "torre_muralla"
+  ],
+  "muelle": {
+   "barco_pesquero": true,
+   "galera_guerra": true,
+   "galeon": true,
+   "brulote": true
+  }
+ }
 }
