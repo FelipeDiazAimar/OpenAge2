@@ -1,0 +1,8 @@
+{
+  "name": "Isla (propia)",
+  "size_tiles": [72, 72],
+  "terrain": "grass",
+  "start_resources": {"wood_patches": 6, "gold_piles": 4, "stone_piles": 3, "forage": 3, "boars": 2, "shore_fish": 6},
+  "water": true,
+  "relics": 3
+}
