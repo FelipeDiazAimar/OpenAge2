@@ -2,7 +2,7 @@
  "source": "u_arc_crossbowman_decayA_x1",
  "dirs": 16,
  "per_dir": 30,
- "kept_per_dir": 15,
+ "kept_per_dir": 10,
  "step": 2,
  "size": [
   140,

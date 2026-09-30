@@ -2,7 +2,7 @@
  "source": "u_shp_fishing_ship_destruction_x1",
  "dirs": 16,
  "per_dir": 120,
- "kept_per_dir": 60,
+ "kept_per_dir": 50,
  "step": 2,
  "size": [
   100,
