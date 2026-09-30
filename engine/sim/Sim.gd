@@ -488,13 +488,23 @@ func state_hash() -> String:
 
 
 func queue_command(pid: int, type: String, payload: Dictionary) -> void:
+	queue_command_at(world.tick, pid, type, payload)
+
+
+## Orden emitida en el tick `issued` (en esta PC o en otra, por la red): se
+## aplica en issued + INPUT_DELAY en todas las PC. false si ya es tarde (el
+## lockstep nunca deja que pase).
+func queue_command_at(issued: int, pid: int, type: String, payload: Dictionary) -> bool:
+	var t := issued + INPUT_DELAY
+	if t <= world.tick:
+		return false
 	if on_command.is_valid():
-		on_command.call(world.tick, pid, type, payload) # registro de la partida
-	var t := world.tick + INPUT_DELAY
+		on_command.call(issued, pid, type, payload) # registro de la partida
 	if not _pending.has(t):
 		_pending[t] = []
 	_pending[t].append({"pid": pid, "seq": _seq, "type": type, "payload": payload})
 	_seq += 1
+	return true
 
 
 ## Diagnóstico (no afecta la simulación): quién recibe cada orden encolada y
