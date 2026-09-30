@@ -53,6 +53,15 @@ func _cargar_civs() -> void:
 		var d: Variant = JSON.parse_string(texto)
 		if not (d is Dictionary):
 			continue
+		var tb: Variant = (d as Dictionary).get("team_bonus", "")
+		var team_txt := str((tb as Dictionary).get("descripcion", "")) if tb is Dictionary else str(tb)
+		var team_fx := {}
+		if tb is Dictionary and (tb as Dictionary).get("efecto") is Dictionary:
+			team_fx = (tb as Dictionary)["efecto"]
+		var tt: Variant = (d as Dictionary).get("tech_tree", {})
+		var faltan: Array = []
+		if tt is Dictionary and (tt as Dictionary).get("no_disponible_resumen") is Array:
+			faltan = (tt as Dictionary)["no_disponible_resumen"]
 		_civs.append({
 			"id": str(d.get("id", nombre.get_basename())),
 			"nombre": str(d.get("name", d.get("id", "?"))),
@@ -61,6 +70,10 @@ func _cargar_civs() -> void:
 			"ventajas": d.get("ventajas", []),
 			"debilidades": d.get("debilidades", []),
 			"unique": d.get("unique_unit", {}),
+			"descripcion": str(d.get("descripcion", "")),
+			"team": team_txt,
+			"team_fx": team_fx,
+			"faltan": faltan,
 		})
 	_civs.sort_custom(func(a: Variant, b: Variant) -> bool: return str((a as Dictionary)["nombre"]) < str((b as Dictionary)["nombre"]))
 
@@ -141,12 +154,14 @@ func _construir() -> void:
 	var scroll_izq := ScrollContainer.new()
 	scroll_izq.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll_izq.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll_izq.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	cols.add_child(scroll_izq)
 	_grid = GridContainer.new()
 	_grid.columns = 2
 	_grid.add_theme_constant_override("h_separation", 10)
 	_grid.add_theme_constant_override("v_separation", 10)
 	_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_grid.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	scroll_izq.add_child(_grid)
 	for civ in _civs:
 		_grid.add_child(_tarjeta(civ))
@@ -156,9 +171,12 @@ func _construir() -> void:
 	cols.add_child(marco_der)
 	var scroll_der := ScrollContainer.new()
 	scroll_der.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll_der.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll_der.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	marco_der.add_child(scroll_der)
 	_lado_der = VBoxContainer.new()
 	_lado_der.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_lado_der.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	_lado_der.add_theme_constant_override("separation", 8)
 	scroll_der.add_child(_lado_der)
 
@@ -180,6 +198,7 @@ func _tarjeta(civ: Dictionary) -> PanelContainer:
 	t.name = "Civ_" + id
 	t.set_meta("civ", id)
 	t.custom_minimum_size = Vector2(300, 0)
+	t.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	t.add_theme_stylebox_override("panel", _marco(color if not _sel.has(id) else ORO))
 	var m := MarginContainer.new()
 	m.add_theme_constant_override("margin_left", 10)
@@ -205,6 +224,9 @@ func _tarjeta(civ: Dictionary) -> PanelContainer:
 	nom.text = str(civ.get("nombre", id))
 	nom.add_theme_font_size_override("font_size", 22)
 	nom.add_theme_color_override("font_color", color.lightened(0.35))
+	nom.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	nom.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	nom.clip_text = true
 	nom.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	fila.add_child(nom)
 	for v in _primeros(civ.get("ventajas", []), 3):
@@ -240,6 +262,7 @@ func _linea(texto: String, color: Color, tam: int) -> Label:
 	l.add_theme_font_size_override("font_size", tam)
 	l.add_theme_color_override("font_color", color)
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	l.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	l.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return l
 
@@ -293,15 +316,14 @@ func _actualizar_lado() -> void:
 
 
 func _detalle(civ: Dictionary) -> void:
-	# Ficha completa: bonus, UU con stats, cartas.
+	# Ficha completa: descripcion, bonus, equipo, UU, tech-resumen, cartas.
 	if civ.is_empty():
 		return
 	var color := Color.html(str(civ.get("color", "#73706a")))
-	var tit := Label.new()
-	tit.text = str(civ.get("nombre", "?"))
-	tit.add_theme_font_size_override("font_size", 26)
-	tit.add_theme_color_override("font_color", color.lightened(0.35))
+	var tit := _linea(str(civ.get("nombre", "?")), color.lightened(0.35), 26)
 	_lado_der.add_child(tit)
+	if str(civ.get("descripcion", "")) != "":
+		_lado_der.add_child(_linea(_corta(str(civ.get("descripcion", "")), 220), PERGAMINO, 13))
 	_lado_der.add_child(_linea("VENTAJAS", ORO, 14))
 	for v in (civ.get("ventajas", []) as Array):
 		_lado_der.add_child(_linea("✔ " + str(v), VERDE, 14))
@@ -310,13 +332,18 @@ func _detalle(civ: Dictionary) -> void:
 		_lado_der.add_child(_linea("✕ " + str(w), ROJO, 14))
 	_lado_der.add_child(_linea("BONUS COMPLETOS", ORO, 14))
 	for b in (civ.get("bonus", []) as Array):
-		_lado_der.add_child(_linea("• " + str(b), PERGAMINO, 13))
+		_lado_der.add_child(_linea("• " + _desc_bonus(b), PERGAMINO, 13))
+	if str(civ.get("team", "")) != "":
+		_lado_der.add_child(_linea("BONO EQUIPO", ORO, 14))
+		_lado_der.add_child(_linea(_corta(str(civ.get("team", "")) + _fx_corto(civ.get("team_fx", {})), 160), PERGAMINO, 13))
 	var uu: Dictionary = civ.get("unique", {})
 	if not uu.is_empty():
 		_lado_der.add_child(_linea("UNIDAD ÚNICA", ORO, 14))
 		_lado_der.add_child(_linea("%s · HP %s · ATK %s · %s" % [
 			str(uu.get("name", uu.get("id", "?"))), str(uu.get("hp", "?")),
 			str(uu.get("attack", "?")), _coste_corto(uu.get("cost", {}))], PERGAMINO, 14))
+	_lado_der.add_child(_linea("TECH (faltan %d)" % (civ.get("faltan", []) as Array).size(), ORO, 14))
+	_lado_der.add_child(_linea(_tec_corto(civ.get("faltan", [])), PERGAMINO, 13))
 	var propias := int(_propias.get(str(civ.get("id", "")).to_lower(), 0))
 	_lado_der.add_child(_linea("Cartas: %d propias + %d neutrales" % [propias, _neutrales], Color(0.95, 0.90, 0.78), 14))
 
@@ -336,6 +363,11 @@ func _comparar(a: Dictionary, b: Dictionary) -> void:
 		_bullets(a.get("debilidades", []), "✕ "), _bullets(b.get("debilidades", []), "✕ "), ROJO)
 	_fila_comp(col_tit, col_a, col_b, "UU",
 		_uu_corto(a.get("unique", {})), _uu_corto(b.get("unique", {})), PERGAMINO)
+	_fila_comp(col_tit, col_a, col_b, "Equipo",
+		_corta(str(a.get("team", "")) + _fx_corto(a.get("team_fx", {})), 90),
+		_corta(str(b.get("team", "")) + _fx_corto(b.get("team_fx", {})), 90), PERGAMINO)
+	_fila_comp(col_tit, col_a, col_b, "Tec",
+		_tec_corto(a.get("faltan", [])), _tec_corto(b.get("faltan", [])), PERGAMINO)
 	_fila_comp(col_tit, col_a, col_b, "Cartas",
 		str(int(_propias.get(str(a.get("id", "")).to_lower(), 0))),
 		str(int(_propias.get(str(b.get("id", "")).to_lower(), 0))), PERGAMINO)
@@ -358,12 +390,40 @@ func _fila_comp(col_tit: VBoxContainer, col_a: VBoxContainer, col_b: VBoxContain
 	col_b.add_child(_linea(vb if not vb.is_empty() else "—", color, 13))
 
 
-func _bullets(v: Variant, marca: String) -> String:
+func _bullets(v: Variant, marca: String, max_n: int = 3, max_c: int = 90) -> String:
 	var partes: Array[String] = []
 	if v is Array:
 		for x in (v as Array):
-			partes.append(marca + str(x))
+			if partes.size() >= max_n:
+				break
+			partes.append(marca + _corta(str(x), max_c))
 	return "\n".join(partes)
+
+
+func _corta(t: String, n: int) -> String:
+	return t if t.length() <= n else t.left(n - 1) + "…"
+
+
+func _desc_bonus(b: Variant) -> String:
+	if b is Dictionary:
+		return _corta(str((b as Dictionary).get("descripcion", str(b))), 140)
+	return _corta(str(b), 140)
+
+
+func _fx_corto(fx: Variant) -> String:
+	if not (fx is Dictionary) or (fx as Dictionary).is_empty():
+		return ""
+	return _corta(" [" + _coste_corto(fx) + "]", 80)
+
+
+func _tec_corto(faltan: Variant) -> String:
+	if not (faltan is Array) or (faltan as Array).is_empty():
+		return "completo"
+	var f: Array = faltan as Array
+	var primeros: Array[String] = []
+	for i in mini(6, f.size()):
+		primeros.append(str(f[i]))
+	return "Faltan %d: %s%s" % [f.size(), ", ".join(primeros), "…" if f.size() > 6 else ""]
 
 
 func _uu_corto(uu: Variant) -> String:

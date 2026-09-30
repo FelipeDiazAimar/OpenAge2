@@ -14,12 +14,14 @@ const RUTA_WIDGET_GD := "res://ui/decks/CardWidget.gd"
 
 const MAX_CARTAS := 25
 const COLUMNAS_REJILLA := 8
+const PAGE_SIZE := 96 # 8 cols x 12 filas: nunca 900 nodos de golpe.
 
 var _civ: String = "britones"
 var _mazo = null
 var _todas: Array = []
 var _filtro_edad: int = 0
 var _texto_busqueda: String = ""
+var _pagina: int = 0
 var _listo: bool = false
 # Arrastre manual (drag & drop sin la API de Godot, más predecible).
 var _arrastrando_desde := Vector2.ZERO
@@ -56,6 +58,7 @@ func set_civ(civ_nueva: String) -> void:
 	if limpia.is_empty():
 		return
 	_civ = limpia
+	_pagina = 0
 	if not _listo:
 		return
 	_nuevo_mazo(false)
@@ -221,7 +224,10 @@ func _on_loseta(id_carta: Variant, en_mazo: bool) -> void:
 
 func _refrescar_inventario() -> void:
 	_limpiar(_filas_inv)
-	var grupos := _por_edad(_filtradas())
+	var todo := _filtradas()
+	var pags := maxi(1, int(ceil(todo.size() / float(PAGE_SIZE))))
+	_pagina = clampi(_pagina, 0, pags - 1)
+	var grupos := _por_edad(todo.slice(_pagina * PAGE_SIZE, _pagina * PAGE_SIZE + PAGE_SIZE))
 	var hay := false
 	for e in [1, 2, 3, 4]:
 		if (grupos[e] as Array).is_empty():
@@ -229,9 +235,13 @@ func _refrescar_inventario() -> void:
 		hay = true
 		_fila_edad(_filas_inv, e, grupos[e], false)
 	if not hay:
-		var l := Label.new()
-		l.text = "Sin cartas para este filtro."
-		_filas_inv.add_child(l)
+		var l := Label.new(); l.text = "Sin cartas para este filtro."; _filas_inv.add_child(l); return
+	if pags > 1:
+		var bar := HBoxContainer.new(); var a := Button.new(); var n := Button.new(); var t := Label.new()
+		a.text = "◀"; a.disabled = _pagina == 0; a.pressed.connect(func(): _pagina -= 1; _refrescar_inventario())
+		t.text = "Pág %d/%d (%d)" % [_pagina + 1, pags, todo.size()]
+		n.text = "▶"; n.disabled = _pagina >= pags - 1; n.pressed.connect(func(): _pagina += 1; _refrescar_inventario())
+		bar.add_child(a); bar.add_child(t); bar.add_child(n); _filas_inv.add_child(bar); _scroll_inv.scroll_vertical = 0
 
 
 func _refrescar_mazo() -> void:
@@ -312,11 +322,13 @@ func _on_mazo_elegido(_indice: int) -> void:
 
 func _on_buscar(texto: String) -> void:
 	_texto_busqueda = texto.strip_edges().to_lower()
+	_pagina = 0
 	_refrescar_inventario()
 
 
 func _on_edad(indice: int) -> void:
 	_filtro_edad = _opt_edad.get_item_id(indice)
+	_pagina = 0
 	_refrescar_inventario()
 
 
@@ -393,6 +405,7 @@ func _on_cargar() -> void:
 		return
 	_mazo = tmp
 	_civ = str(_mazo.civ)
+	_pagina = 0
 	_etiqueta_civ.text = "Civ: %s" % _civ
 	_refrescar_todo_nombre()
 	_refrescar_inventario()
