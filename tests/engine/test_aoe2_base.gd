@@ -13,7 +13,7 @@ func _reg() -> Registry:
 func test_aoe2_base_loads_without_errors() -> void:
 	var r := _reg()
 	assert_eq(r.errors, [])
-	assert_eq(r.ids_of_type("unit").size(), 132)
+	assert_eq(r.ids_of_type("unit").size(), 133)
 	assert_eq(r.ids_of_type("building").size(), 20)
 	assert_eq(r.ids_of_type("resource").size(), 25)
 	assert_eq(r.ids_of_type("age").size(), 4)
