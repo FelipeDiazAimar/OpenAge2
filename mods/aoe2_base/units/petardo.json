@@ -29,7 +29,8 @@
     "edificio": 500
    },
    "range": 0,
-   "reload": 5.0
+   "reload": 5.0,
+   "area_radius": 1.5
   },
   "Demolish": {}
  }
