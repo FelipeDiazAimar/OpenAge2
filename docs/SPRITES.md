@@ -137,3 +137,9 @@ move assets\sprites\tmp\u_inf_militia_idleA_x1 assets\sprites\militia\idle
 - Fauna/deco: packs listos en `animals/` y `nature/`; colocacion pendiente (sim).
 - Presets: `game/cards/presets/*.json` (50 civis).
 - Cartas: loader recursivo (1092 visibles); `effect` se valida pero no se ejecuta en partida (pendiente runtime sim).
+
+## Turno 2026-09-30 — verificado (sin Godot)
+- Agua control2: `TerrainLayer.build_control2` get_terrain 1/2/3→agua/playa/bajios, nieve por ruido; sin metodo=ceros; orden fijo 0-7.
+- CardSystem: ver `docs/CARDS_FACTIONS.md §4` (existe `play_card`, sin wrapper/hook UI).
+- Decays: sin reindex este turno (cableados en 23e16fc, 53 unidades).
+- Matacanes/partas: ya estaban (techs 7c062c7 + cableado b1b2eba); sin cambio este turno.
