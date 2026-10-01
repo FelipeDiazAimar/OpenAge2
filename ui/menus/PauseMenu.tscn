@@ -5,5 +5,6 @@
 ; Pausa medieval: marco de madera con remaches, pergamino en opciones,
 ; botones de hierro con hover dorado y slider con pomo dorado.
 ; El StyleBox completo lo construye PauseMenu.gd de forma procedural.
+process_mode = 3
 layer = 100
 script = ExtResource("1")
