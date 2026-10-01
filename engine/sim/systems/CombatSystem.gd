@@ -281,7 +281,17 @@ static func apply_damage(sim, atk: Dictionary, t: int, attacker: int = -1) -> vo
 	var hp: Dictionary = w.comp(t, "Hitpoints")
 	hp["hp"] = int(hp["hp"]) - damage(atk, sim.def_for(t), armor)
 	if attacker >= 0 and w.entities.has(attacker) and w.has_ability(attacker, "Demolish"):
+		var center: Vector2i = w.entities[t]["pos"]
+		var area := FP.from_data(float(w.comp(attacker, "Attack")["params"].get("area_radius", 1.5)))
+		var owner := int(w.entities[attacker]["owner"])
 		sim.kill(attacker) # petardo: tras impactar, muere (aunque remate o golpee aldeano)
+		for c in w.spatial.query_radius(center, area):
+			if c != t and w.has_ability(c, "Hitpoints") and sim.is_enemy(owner, int(w.entities[c]["owner"])):
+				var atk2: Dictionary = atk.duplicate()
+				if FP.dist(center, w.entities[c]["pos"]) > area / 2:
+					for k in atk2:
+						atk2[k] = float(atk2[k]) / 2.0
+				apply_damage(sim, atk2, c, -1)
 	if int(hp["hp"]) <= 0:
 		sim.kill(t)
 		return
