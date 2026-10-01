@@ -22,12 +22,13 @@ const SHORE_FISH := 6
 const DEEP_FISH := 4
 
 
-static func generate(sim, p_seed: int, starts: Array[Vector2i], lake: bool = true) -> void:
+static func generate(sim, p_seed: int, starts: Array[Vector2i], lake: bool = true, cfg: Dictionary = {}) -> void:
 	var rng := Rng.new(p_seed)
 	# El azar de la partida (conversiones) sale de la semilla del mapa.
 	sim.rng = Rng.new(p_seed ^ 0x5EED1234)
 	if lake:
 		_lake(sim, rng, Vector2i(sim.grid.width / 2, sim.grid.height / 2), LAKE_R, starts)
+	_terrain(sim, p_seed, cfg.get("terrain_override", {}))
 	var reserved := {}
 	for s in starts:
 		for dy in range(-CLEAR_R - 1, CLEAR_R + 2):
@@ -99,6 +100,41 @@ static func _lake(sim, rng, c: Vector2i, r: int, starts: Array[Vector2i]) -> voi
 			var t: Vector2i = tiles[rng.range_i(0, tiles.size() - 1)]
 			tiles.erase(t)
 			sim.spawn(str(spec[1]), -1, t)
+
+
+## Terreno por casilla para el render (ids Grid.T_*): playa en costa,
+## nieve por ruido, override por rect/lista. Determinista (solo p_seed).
+static func _terrain(sim, p_seed: int, ov: Variant) -> void:
+	var g = sim.grid
+	if not g.has_method("set_terrain"):
+		return
+	var n := FastNoiseLite.new()
+	n.seed = p_seed + 203
+	n.frequency = 0.06
+	for i in g.width * g.height:
+		var t := Vector2i(i % g.width, i / g.width)
+		if g.is_water(t):
+			continue
+		for d in [Vector2i(1, 0), Vector2i(-1, 0), Vector2i(0, 1), Vector2i(0, -1)]:
+			if g.is_water(t + d):
+				g.set_terrain(t, 2)
+				break
+		if g.get_terrain(t) == 0 and n.get_noise_2d(float(t.x), float(t.y)) > 0.5:
+			g.set_terrain(t, 3)
+	var rs: Array = []
+	if ov is Array:
+		rs = ov
+	elif ov is Dictionary and (ov as Dictionary).has("x"):
+		rs.append(ov)
+	var ids := {"agua": 1, "playa": 2, "nieve": 3}
+	for r in rs:
+		if not (r is Dictionary):
+			continue
+		var rd: Dictionary = r
+		for yy in range(int(rd.get("y", 0)), int(rd.get("y", 0)) + int(rd.get("h", 0))):
+			for xx in range(int(rd.get("x", 0)), int(rd.get("x", 0)) + int(rd.get("w", 0))):
+				var tv: Variant = rd.get("terrain", 2)
+				g.set_terrain(Vector2i(xx, yy), int(ids.get(str(tv), tv)) if tv is String else int(tv))
 
 
 ## Grupo de n animales alrededor de un punto a `dist` casillas de c (±2).

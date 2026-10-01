@@ -16,12 +16,30 @@ var relabel_count := 0
 ## Grilla de los barcos (null en la propia grilla naval).
 var naval = null
 var _water := PackedByteArray()
+const T_AUTO := 0
+const T_WATER := 1
+const T_BEACH := 2
+const T_SNOW := 3
+var _terrain := PackedByteArray()
 
 
 func _init(w: int, h: int) -> void:
 	width = w
 	height = h
 	_blocked.resize(w * h)
+	_terrain.resize(w * h)
+
+
+## Terreno por casilla para el render (0=auto). Solo lectura visual.
+func get_terrain(c: Vector2i) -> int:
+	if not in_bounds(c) or _terrain.is_empty():
+		return T_AUTO
+	return _terrain[c.y * width + c.x]
+
+
+func set_terrain(c: Vector2i, v: int) -> void:
+	if in_bounds(c) and not _terrain.is_empty():
+		_terrain[c.y * width + c.x] = v
 
 
 ## Crea la grilla naval (todo bloqueado hasta que haya agua).

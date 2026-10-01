@@ -129,29 +129,25 @@ static func build_control(sim, p_seed: int) -> Image:
 	return img
 
 
-## Pesos 4-7 (RGBA): duck-typing get_terrain 1/2/3->R/G/B; nieve ruido; sin metodo = hoy.
+## Pesos 4-7 (RGBA): get_terrain 1/2/3->R/G/B; nieve ruido; sin metodo = ceros.
 static func build_control2(sim, p_seed: int, layers: Array) -> Image:
 	var w: int = sim.grid.width
 	var h: int = sim.grid.height
 	var img := Image.create(w, h, false, Image.FORMAT_RGBA8)
-	var has_t: bool = sim.grid.has_method("get_terrain")
-	var ns: Array = []
-	for i in 4:
-		var n := FastNoiseLite.new()
-		n.seed = p_seed + 201 + i * 17
-		n.frequency = 0.045 + float(i) * 0.005
-		ns.append(n)
+	if not sim.grid.has_method("get_terrain"):
+		return img
+	var sn := FastNoiseLite.new()
+	sn.seed = p_seed + 252
+	sn.frequency = 0.06
 	for y in h:
 		for x in w:
-			var t: int = int(sim.grid.call("get_terrain", x, y)) if has_t else 0
-			var r := 0.0
-			var g := 0.0
-			var b := 0.0
+			var t: int = int(sim.grid.call("get_terrain", x, y))
+			var r := (1.0 if t == 1 else 0.0) if layers.size() > 4 and str(layers[4]) == "agua" else 0.0
+			var g := (1.0 if t == 2 else 0.0) if layers.size() > 5 and str(layers[5]) == "playa" else 0.0
+			var b := (1.0 if t == 3 else 0.0) if layers.size() > 6 and str(layers[6]) == "bajios" else 0.0
 			var a := 0.0
-			if layers.size() > 4 and str(layers[4]) == "agua": r = (1.0 if t == 1 else 0.0) if has_t else smoothstep(0.55, 0.75, (ns[0] as FastNoiseLite).get_noise_2d(x, y))
-			if layers.size() > 5 and str(layers[5]) == "playa": g = (1.0 if t == 2 else 0.0) if has_t else smoothstep(0.45, 0.65, (ns[1] as FastNoiseLite).get_noise_2d(x, y)) * (1.0 - r)
-			if layers.size() > 6 and str(layers[6]) == "bajios": b = (1.0 if t == 3 else 0.0) if has_t else smoothstep(0.5, 0.7, (ns[2] as FastNoiseLite).get_noise_2d(x, y)) * (1.0 - r)
-			if layers.size() > 7 and str(layers[7]) == "nieve": a = smoothstep(0.55, 0.75, (ns[3] as FastNoiseLite).get_noise_2d(x, y))
+			if layers.size() > 7 and str(layers[7]) == "nieve":
+				a = smoothstep(0.55, 0.75, sn.get_noise_2d(x, y))
 			img.set_pixel(x, y, Color(r, g, b, a))
 	return img
 
